@@ -67,38 +67,45 @@ class Auth extends React.Component {
     const {uuid,item} = this.props
     const {address} = this.state;
     return (
-      <div>
-        <NavBar
-          className="bg-white"
-          mode="light"
-        >
-          <div className="color-black-1">
-            {intl.get('signIn.title')}
+      <div className="bg-white" style={{height:'100vh'}}>
+        
+        <div className="pt50 pb25 pl15 pr15">
+          <div className="text-center">
+            <img style={{height:'4rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
+            <div className="text-primary fs24 font-weight-bold mt5 mb15">UP DEX</div>
           </div>
-        </NavBar>
-        <div className="divider 1px zb-b-t"></div>
-        <div className="p15">
-          <List className="selectable">
+          <List className="no-border am-list-bg-none ">
             <InputItem
               onChange={this.amountChange}
               moneyKeyboardAlign="left"
               value={address}
-              className=" h-default"
+              className="circle h-default"
             >
-              {intl.get('signIn.pre')}
+              <div className="color-black">{intl.get('signIn.pre')}</div>
             </InputItem>
           </List>
-          <Button onClick={this.authByAddress} className="m10" type="primary"> {intl.get('signIn.title')}</Button>
+          <Button onClick={this.authByAddress} className="mt15" type="primary"> {intl.get('signIn.title')}</Button>
         </div>
-        <div className="bg-white" style={{position: 'absolute', left: '0', bottom: '0', width: '100%'}}>
+        <div className="">
           <div className="divider 1px zb-b-t"></div>
-          <div className="p10">
+          <div className="pt15 pb5">
             <div className="fs16 color-black-2 text-center">{intl.get('signIn.tp_title')}</div>
           </div>
-          <div className="divider 1px zb-b-t"></div>
           <div className="row pt15 pb15 align-items-center justify-content-center ml0 mr0">
-            <div className="col-3">
+            <div className="col-auto">
               <div className="text-center" onClick={() => this.authByThirdPartyWallet('loopr-ios')}>
+                <div className="d-inline-block color-black-1 text-center" style={{
+                  width: '40px',
+                  height: '40px',
+                }}>
+                  <img width="100%" src={require('../assets/images/up-logo-notext.png')}
+                       alt=""/>
+                </div>
+                <div className="pt5 fs14 color-black-3">UP Wallet</div>
+              </div>
+            </div>
+            <div className="col-auto">
+              <div className="text-center" onClick={() => {}}>
                 <div className="d-inline-block color-black-1 text-center" style={{
                   width: '40px',
                   height: '40px',
@@ -108,8 +115,8 @@ class Auth extends React.Component {
                 <div className="pt5 fs14  color-black-3">Loopr</div>
               </div>
             </div>
-            <div className="col-3">
-              <div className="text-center" onClick={() => {}}>
+            <div className="col-auto">
+              <div className="text-center" onClick={() => {Toast.alert('Coming Soon！')}}>
                 <div className="d-inline-block color-black-1 text-center" style={{
                   width: '40px',
                   height: '40px',
@@ -117,36 +124,10 @@ class Auth extends React.Component {
                   <img style={{borderRadius: '50em'}} width="100%" src={require('../assets/images/imtoken.png')}
                        alt=""/>
                 </div>
-                <div className="pt5 fs14 color-black-3">Imtoken</div>
+                <div className="pt5 fs14 color-black-3">imToken</div>
               </div>
             </div>
-            <div className="col-3">
-              <div className="text-center" onClick={() => {}}>
-                <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '40px',
-                  height: '40px',
-                }}>
-                  <img style={{borderRadius: '50em'}} width="100%" src={require('../assets/images/imtoken.png')}
-                       alt=""/>
-                </div>
-                <div className="pt5 fs14 color-black-3">火币钱包</div>
-              </div>
-            </div>
-            <div className="col-3">
-              <div className="text-center" onClick={() => {}}>
-                <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '40px',
-                  height: '40px',
-                }}>
-                  <img style={{borderRadius: '50em'}} width="100%" src={require('../assets/images/imtoken.png')}
-                       alt=""/>
-                </div>
-                <div className="pt5 fs14 color-black-3">Kcash</div>
-              </div>
-            </div>
-
           </div>
-          <div className="divider 1px zb-b-t"></div>
         </div>
       </div>
     )
