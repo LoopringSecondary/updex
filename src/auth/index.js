@@ -68,7 +68,6 @@ class Auth extends React.Component {
     const {address} = this.state;
     return (
       <div className="bg-white" style={{height:'100vh'}}>
-        
         <div className="pt50 pb25 pl15 pr15">
           <div className="text-center">
             <img style={{height:'4rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
@@ -77,11 +76,11 @@ class Auth extends React.Component {
           <List className="no-border am-list-bg-none ">
             <InputItem
               onChange={this.amountChange}
-              moneyKeyboardAlign="left"
               value={address}
               className="circle h-default"
+              placeholder="ETH Address"
+              updatePlaceholder={true}
             >
-              <div className="color-black">{intl.get('signIn.pre')}</div>
             </InputItem>
           </List>
           <Button onClick={this.authByAddress} className="mt15" type="primary"> {intl.get('signIn.title')}</Button>
@@ -101,22 +100,22 @@ class Auth extends React.Component {
                   <img width="100%" src={require('../assets/images/up-logo-notext.png')}
                        alt=""/>
                 </div>
-                <div className="pt5 fs14 color-black-3">UP Wallet</div>
+                <div className="pt10 fs13 color-black-4">UP Wallet</div>
               </div>
             </div>
             <div className="col-auto">
-              <div className="text-center" onClick={() => {}}>
+              <div className="text-center" onClick={() => {Toast.info('Coming Soon！',3,null,false)}}>
                 <div className="d-inline-block color-black-1 text-center" style={{
                   width: '40px',
                   height: '40px',
                 }}>
                   <img style={{borderRadius: '50em'}} width="100%" src={require('../assets/images/loopr.png')} alt=""/>
                 </div>
-                <div className="pt5 fs14  color-black-3">Loopr</div>
+                <div className="pt10 fs13  color-black-4">Loopr</div>
               </div>
             </div>
             <div className="col-auto">
-              <div className="text-center" onClick={() => {Toast.alert('Coming Soon！')}}>
+              <div className="text-center" onClick={() => {Toast.info('Coming Soon！',3,null,false)}}>
                 <div className="d-inline-block color-black-1 text-center" style={{
                   width: '40px',
                   height: '40px',
@@ -124,7 +123,7 @@ class Auth extends React.Component {
                   <img style={{borderRadius: '50em'}} width="100%" src={require('../assets/images/imtoken.png')}
                        alt=""/>
                 </div>
-                <div className="pt5 fs14 color-black-3">imToken</div>
+                <div className="pt10 fs13 color-black-4">imToken</div>
               </div>
             </div>
           </div>
