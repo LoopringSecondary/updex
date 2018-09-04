@@ -89,6 +89,8 @@ const validation_messages = {
 
 const notifications = {
   title: {
+    invalid_address_tip:"Please input valid Ethereum address",
+    log_in_suc:"Log In Successfully",
     place_order_failed: "Whoops, order submission somehow failed!",
     place_order_success: "Order placed successfully.",
     place_order_warn: "Your order can not be fully filled.",
@@ -613,5 +615,10 @@ export default {
     description_3: "and",
     description_4: "Privacy Policy",
     agree: "I Agree"
+  },
+  signIn:{
+    title:'Sign In',
+    tp_title:"Sign in by third party wallet",
+    pre:'Address'
   }
 }

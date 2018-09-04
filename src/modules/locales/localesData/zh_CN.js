@@ -91,8 +91,10 @@ const validation_messages = {
 
 const notifications = {
   title: {
-    place_order_failed: '订单提交失败 !',
-    place_order_success: '下单成功!',
+    invalid_address_tip:"请输入合法的地址",
+    log_in_suc:"登录成功",
+    place_order_failed: "订单提交失败 !",
+    place_order_success: "下单成功!",
     place_order_warn: '您的订单只能被部分撮合',
     unlock_suc: '解锁成功',
     unlock_fail: '解锁失败',
@@ -612,12 +614,17 @@ export default {
     tab_fills: '成交'
   },
   imtoken: {
-    welcome: '欢迎来到 路印 去中心化交易所',
-    description_1: '您即将进入的dApp是一个运行在以太坊区块链上去中心化交易所。通过点击"我同意"，即表示您同意我们的',
-    description_2: '用户服务协议',
-    description_3: '和',
-    description_4: '用户隐私政策',
-    agree: '我同意'
+    welcome: "欢迎来到 路印 去中心化交易所",
+    description_1: "您即将进入的dApp是一个运行在以太坊区块链上去中心化交易所。通过点击\"我同意\"，即表示您同意我们的",
+    description_2: "用户服务协议",
+    description_3: "和",
+    description_4: "用户隐私政策",
+    agree: "我同意"
+  },
+  signIn:{
+    title:'登录',
+    tp_title:"第三钱包登录",
+    pre:"地址"
   }
 }
 

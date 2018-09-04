@@ -4,6 +4,7 @@ import config from 'common/config'
 import storage from '../storage/'
 import {toBig, toFixed} from 'LoopringJS/common/formatter'
 
+
 const updateItems = (items,id)=>{
   const dispatch = require('../../index.js').default._store.dispatch
   dispatch({
@@ -241,8 +242,41 @@ const transfromers = {
       }
       updateItems(items,id)
     },
-  }
-
+  },
+  addressUnlock: {
+    queryTransformer: (payload) => {
+      const {extra} = payload
+      return JSON.stringify({
+        "uuid": extra.uuid,
+      })
+    },
+    resTransformer: (id, res) => {
+      if (!res) return null
+      res = JSON.parse(res)
+      let item = {}
+      if (!res.error && res.data) {
+        item = {...res.data}
+      }
+      updateItem(item,id)
+    },
+  },
+  circulrNotify: {
+    queryTransformer: (payload) => {
+      const {extra} = payload;
+      return JSON.stringify({
+        owner: storage.wallet.getUnlockedAddress()||extra.hash,
+      })
+    },
+    resTransformer: (id, res) => {
+      if (!res) return null
+      res = JSON.parse(res)
+      let item = {}
+      if (!res.error && res.data && res.data.body) {
+        item = {...res.data.body}
+      }
+      updateItem(item, id)
+    },
+  },
 }
 const getQueryTransformer = (id)=>{
   if(transfromers[id] && transfromers[id].queryTransformer){
@@ -262,6 +296,7 @@ const getResTransformer = (id)=>{
 const emitEvent = (payload)=>{
   let {id,socket} = payload
   const transfromer = getQueryTransformer(id)
+  console.log(id)
   socket.emit(`${id}_req`,transfromer(payload))
 }
 const onEvent = (payload)=>{
