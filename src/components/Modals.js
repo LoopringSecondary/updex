@@ -2,7 +2,7 @@ import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
 import HelperOfGas from './HelperOfGas'
-import SignByThirdWallet from './SignByThirdWallet'
+import HelperOfSignByThirdWallet from './HelperOfSignByThirdWallet'
 function Modals(props) {
   return (
     <div>
@@ -13,7 +13,7 @@ function Modals(props) {
       </Containers.Layers>
       <Containers.Layers id="helperOfSign">
         <UiContainers.Popups id="helperOfSign">
-          <SignByThirdWallet />
+          <HelperOfSignByThirdWallet />
         </UiContainers.Popups>
       </Containers.Layers>
     </div>
