@@ -78,11 +78,11 @@ class Auth extends React.Component {
             <InputItem
               onChange={this.amountChange}
               value={address}
-              className="circle h-default"
+              className="circle h-default color-black"
               updatePlaceholder={true}
               extra={<Icon type="scan" />}
             >
-              <div className="fs16  color-black-3">ETH Address</div>
+              <div className="fs16  color-black-3 mr5">ETH Address</div>
             </InputItem>
           </List>
           <Button onClick={this.authByAddress} className="mt15" type="primary"> {intl.get('signIn.title')}</Button>
