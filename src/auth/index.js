@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
 import routeActions from 'common/utils/routeActions'
 import { connect } from 'dva'
+import { Icon } from 'antd'
 import storage from 'modules/storage'
 import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
@@ -71,16 +72,17 @@ class Auth extends React.Component {
         <div className="pt50 pb25 pl15 pr15">
           <div className="text-center">
             <img style={{height:'4rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
-            <div className="text-primary fs24 font-weight-bold mt5 mb15">UP DEX</div>
+            <div className="text-primary fs20 font-weight-bold mt5 mb25">UP DEX</div>
           </div>
           <List className="no-border am-list-bg-none ">
             <InputItem
               onChange={this.amountChange}
               value={address}
               className="circle h-default"
-              placeholder="ETH Address"
               updatePlaceholder={true}
+              extra={<Icon type="scan" />}
             >
+              <div className="fs16  color-black-3">ETH Address</div>
             </InputItem>
           </List>
           <Button onClick={this.authByAddress} className="mt15" type="primary"> {intl.get('signIn.title')}</Button>
@@ -97,8 +99,7 @@ class Auth extends React.Component {
                   width: '40px',
                   height: '40px',
                 }}>
-                  <img width="100%" src={require('../assets/images/up-logo-notext.png')}
-                       alt=""/>
+                  <img width="100%" src={require('../assets/images/up-logo-notext.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13 color-black-4">UP Wallet</div>
               </div>
@@ -109,7 +110,7 @@ class Auth extends React.Component {
                   width: '40px',
                   height: '40px',
                 }}>
-                  <img style={{borderRadius: '50em'}} width="100%" src={require('../assets/images/loopr.png')} alt=""/>
+                  <img style={{borderRadius: '6px'}} width="100%" src={require('../assets/images/loopr.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13  color-black-4">Loopr</div>
               </div>
@@ -120,8 +121,7 @@ class Auth extends React.Component {
                   width: '40px',
                   height: '40px',
                 }}>
-                  <img style={{borderRadius: '50em'}} width="100%" src={require('../assets/images/imtoken.png')}
-                       alt=""/>
+                  <img style={{borderRadius: '6px'}} width="100%" src={require('../assets/images/imtoken.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13 color-black-4">imToken</div>
               </div>
