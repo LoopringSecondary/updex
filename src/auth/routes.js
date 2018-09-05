@@ -16,13 +16,14 @@ const UnLogged = ()=>{
   // }else{
     return (
       <Switch>
+         <Route path={`/`} exact component={Auth} />
          <Route path={`/auth`} exact component={Auth} />
          { false && <Route path={`/auth/tpwallet`} exact component={AuthByTPWallet} /> }
          { false && <Route path={`/auth/mock`} exact component={AuthByMock} /> }
          { false && <Route path={`/auth/loopr`} exact component={AuthByLoopr} /> }
          { false && <Route path={`/auth/imtoken`} exact component={AuthByImtoken} /> }
          <Route path={`/auth/terms`} exact component={Terms} />
-        <Route path={`/auth/privacy`} exact component={Privacy} />
+         <Route path={`/auth/privacy`} exact component={Privacy} />
        </Switch>
     )
   // }
@@ -42,7 +43,7 @@ export default class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path={`/auth`}  component={UnLogged} />
+        <Route path={`/`}  component={UnLogged} />
       </Switch>
     );
   }
