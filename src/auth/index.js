@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
+import { Button, NavBar, Modal,List,InputItem,TextareaItem,Toast } from 'antd-mobile'
 import routeActions from 'common/utils/routeActions'
 import { connect } from 'dva'
 import { Icon } from 'antd'
@@ -67,22 +67,24 @@ class Auth extends React.Component {
   render () {
     const {uuid,item} = this.props
     const {address} = this.state;
+    const _this = this
     return (
       <div className="bg-white" style={{height:'100vh'}}>
         <div className="pt50 pb25 pl15 pr15">
-          <div className="text-center">
+          <div className="text-center pb30 d-flex align-items-center justify-content-center">
             <img style={{height:'4rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
-            <div className="text-primary fs20 font-weight-bold mt5 mb25">UP DEX</div>
+            <span className="text-primary fs20 font-weight-bold ml10">UP DEX</span>
           </div>
-          <List className="no-border am-list-bg-none ">
+          <List className="no-border am-list-bg-none selectable">
             <InputItem
+              type="text"
               onChange={this.amountChange}
               value={address}
-              className="circle h-default color-black"
-              updatePlaceholder={true}
+              className="circle h-default color-black-2 fs13"
+              placeholder="ETH Address"
               extra={<Icon type="scan" />}
+              clear
             >
-              <div className="fs16  color-black-3 mr5">ETH Address</div>
             </InputItem>
           </List>
           <Button onClick={this.authByAddress} className="mt15" type="primary"> {intl.get('signIn.title')}</Button>
