@@ -70,10 +70,10 @@ class Auth extends React.Component {
     const _this = this
     return (
       <div className="bg-white" style={{height:'100vh'}}>
-        <div className="pt50 pb25 pl15 pr15">
-          <div className="text-center pb30 d-flex align-items-center justify-content-center">
-            <img style={{height:'4rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
-            <span className="text-primary fs20 font-weight-bold ml10">UP DEX</span>
+        <div className="pt50 pb35 pl15 pr15">
+          <div className="text-center pb30">
+            <img style={{height:'5rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
+            <div className="text-primary fs20 font-weight-bold mt5 mb5">UP DEX</div>
           </div>
           <List className="no-border am-list-bg-none selectable">
             <InputItem
@@ -91,37 +91,38 @@ class Auth extends React.Component {
         </div>
         <div className="">
           <div className="divider 1px zb-b-t"></div>
-          <div className="pt15 pb5">
+          <div className="pt20">
             <div className="fs16 color-black-2 text-center">{intl.get('signIn.tp_title')}</div>
           </div>
           <div className="row pt15 pb15 align-items-center justify-content-center ml0 mr0">
-            <div className="col-auto">
+            <div className="col-auto pl20 pr20">
               <div className="text-center" onClick={() => this.authByThirdPartyWallet('loopr-ios')}>
                 <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '32px',
+                  height: '36px',
+                  lineHeight:'36px',
                 }}>
                   <img width="100%" src={require('../assets/images/up-logo-notext.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13 color-black-4">UP Wallet</div>
               </div>
             </div>
-            <div className="col-auto">
+            <div className="col-auto pl20 pr20">
               <div className="text-center" onClick={() => {Toast.info('Coming Soon！',3,null,false)}}>
                 <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '36px',
+                  height: '36px',
                 }}>
                   <img style={{borderRadius: '6px'}} width="100%" src={require('../assets/images/loopr.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13  color-black-4">Loopr</div>
               </div>
             </div>
-            <div className="col-auto">
+            <div className="col-auto pl20 pr20">
               <div className="text-center" onClick={() => {Toast.info('Coming Soon！',3,null,false)}}>
                 <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '40px',
-                  height: '40px',
+                  width: '36px',
+                  height: '36px',
                 }}>
                   <img style={{borderRadius: '6px'}} width="100%" src={require('../assets/images/imtoken.png')} alt=""/>
                 </div>
