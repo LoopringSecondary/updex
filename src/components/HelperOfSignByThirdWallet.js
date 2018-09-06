@@ -23,7 +23,7 @@ class SignByThirdWallet extends React.Component {
             <Icon className="color-black-4" type="left" />
           </div>
           <div className="col text-cennter">
-           <div className="fs18 color-black-1 text-center">选择钱包进行签名</div>
+           <div className="fs18 color-black-1 text-center">Select Wallet To Sign</div>
           </div>
           <div className="col-auto text-right">
             <Icon className="color-black-4" type="close" />

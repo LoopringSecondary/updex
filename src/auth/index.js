@@ -82,7 +82,7 @@ class Auth extends React.Component {
               value={address}
               className="circle h-default color-black-2 fs13"
               placeholder="ETH Address"
-              extra={<Icon type="scan" />}
+              extra={<Icon hidden type="scan" />}
               clear
             >
             </InputItem>
