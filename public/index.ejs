@@ -16,21 +16,6 @@
     <meta name="format-detection"content="telephone=no, email=no" />
     <script src="https://as.alipayobjects.com/g/component/fastclick/1.0.6/fastclick.js"></script>
     <script>
-      window.onload=function () {  
-          document.addEventListener('touchstart',function (event) {  
-              if(event.touches.length>1){  
-                  event.preventDefault();  
-              }  
-          })  
-          var lastTouchEnd=0;  
-          document.addEventListener('touchend',function (event) {  
-              var now=(new Date()).getTime();  
-              if(now-lastTouchEnd<=300){  
-                  event.preventDefault();  
-              }  
-              lastTouchEnd=now;  
-          },false)  
-      }
       if ('addEventListener' in document) {
         document.addEventListener('DOMContentLoaded', function() {
           FastClick.attach(document.body);
