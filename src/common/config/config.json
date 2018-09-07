@@ -42,7 +42,7 @@
   ],
   "relays": [
     {
-      "value": "http://relay1.loopr.io",
+      "value": "https://relay1.loopr.io",
       "name": "Default Loopring Relay"
     },
     {
