@@ -114,6 +114,7 @@ const notifications = {
     enable_suc: '授权成功',
     enable_fail: '授权失败',
     place_order_price_confirm:'您确定要继续下单吗?',
+    open_safari:"请在Safari 浏览器中打开"
   },
   message: {
     place_order_price_high:"您当前的价格高于市场价20%",

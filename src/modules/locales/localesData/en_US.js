@@ -112,6 +112,7 @@ const notifications = {
     enable_suc:'Enable Successfully',
     enable_fail:'Enable failed',
     place_order_price_confirm:"Are you sure you want to continue ?",
+    open_safari:"Please open in safari"
   },
   message: {
     place_order_price_high:"Your price is 20% higher than the market price.",

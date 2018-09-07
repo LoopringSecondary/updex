@@ -2,7 +2,7 @@ import '@babel/polyfill'
 import dva from 'dva'
 import { models } from './modules'
 import { message } from 'antd'
-import { Toast } from 'antd-mobile'
+import { Toast,Modal } from 'antd-mobile'
 import './assets/css/index.less'
 import {setLocale} from "./common/utils/localeSetting";
 import storage from './modules/storage';
@@ -12,6 +12,7 @@ import Notification from 'LoopringUI/components/Notification'
 import intl from 'react-intl-universal'
 import {configs} from './common/config/data'
 import config from "./common/config";
+import isWeixin from '../public/isWechat'
 
 const latestVersion = Number(configs.localStorageVersion)
 const oldVersion = Number(storage.getLocalStorageVersion())
@@ -69,6 +70,10 @@ config.getRemoteConfig().then(res=>{
     type:'error'
   })
 })
+
+if(isWeixin()){
+  Modal.alert(intl.get('notifications.title.open_safari'))
+}
 
 // STORE is available when current route has rendered
 // Becarefull to use STORE in render funtion
