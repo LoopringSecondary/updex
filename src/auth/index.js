@@ -1,12 +1,12 @@
 import React from 'react'
 import { Button, NavBar, Modal,List,InputItem,TextareaItem,Toast } from 'antd-mobile'
 import routeActions from 'common/utils/routeActions'
+import UserAgent from 'common/utils/useragent'
 import { connect } from 'dva'
 import { Icon } from 'antd'
 import storage from 'modules/storage'
 import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
-
 
 
 class Auth extends React.Component {
@@ -32,15 +32,21 @@ class Auth extends React.Component {
   }
 
   authByThirdPartyWallet = (wallet) => {
-    const {dispatch} = this.props
-    const uuid = uuidv4().substring(0, 8)
-    dispatch({
-      type: 'sockets/extraChange',
-      payload: {id: 'addressUnlock', extra: {uuid}}
-    })
-    dispatch({type:'sockets/fetch',payload:{id:'addressUnlock'}});
-    const data = {type: 'UUID', value: uuid}
-    window.location = `${wallet}://${JSON.stringify(data)}`
+    const ua = new UserAgent()
+    if(ua.isWechat()){
+      Modal.alert('Open Wallet in Safari','Please click top-right corner button')
+    }else{
+      const {dispatch} = this.props
+      const uuid = uuidv4().substring(0, 8)
+      dispatch({
+        type: 'sockets/extraChange',
+        payload: {id: 'addressUnlock', extra: {uuid}}
+      })
+      dispatch({type:'sockets/fetch',payload:{id:'addressUnlock'}});
+      const data = {type: 'UUID', value: uuid}
+      window.location = `${wallet}://${JSON.stringify(data)}`
+    }
+    
   }
 
   authByAddress = () => {
@@ -67,6 +73,8 @@ class Auth extends React.Component {
   render () {
     const {uuid,item} = this.props
     const {address} = this.state;
+    
+
     const _this = this
     return (
       <div className="bg-white" style={{height:'100vh'}}>

@@ -71,9 +71,6 @@ config.getRemoteConfig().then(res=>{
   })
 })
 
-if(isWeixin()){
-  Modal.alert(intl.get('notifications.title.open_safari'))
-}
 
 // STORE is available when current route has rendered
 // Becarefull to use STORE in render funtion
