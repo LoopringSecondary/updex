@@ -12,7 +12,6 @@ import Notification from 'LoopringUI/components/Notification'
 import intl from 'react-intl-universal'
 import {configs} from './common/config/data'
 import config from "./common/config";
-import isWeixin from '../public/isWechat'
 
 const latestVersion = Number(configs.localStorageVersion)
 const oldVersion = Number(storage.getLocalStorageVersion())
