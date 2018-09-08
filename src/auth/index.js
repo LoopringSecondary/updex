@@ -138,7 +138,7 @@ class Auth extends React.Component {
               </div>
             </div>
             <div className="p510 pb10 text-center"style={{position:'absolute',bottom:'0',left:'0',right:'0'}}>
-              <div className="fs12 color-black-4">v1.0.1</div>
+              <div className="fs12 color-black-4">v1.0.2</div>
             </div>
           </div>
         </div>
