@@ -129,6 +129,7 @@ class Convert extends React.Component {
           })
           showLayer({id: 'helperOfSign', type: 'convert', data: {type: 'convert', value: hash}})
         }
+        this.setState({loading: false})
       })
     }
 
@@ -175,7 +176,7 @@ class Convert extends React.Component {
                     className="circle h-default"
                   >
                   </InputItem>
-                  <List.Item  
+                  <List.Item
                     className="circle h-default mt15"
                     arrow={false}
                     onClick={setGas}
