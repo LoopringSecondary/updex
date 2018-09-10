@@ -128,15 +128,6 @@ class PlaceOrderForm extends React.Component {
         priceChange(price)
       }
 
-
-      if(!storage.wallet.getUnlockedAddress()) {
-        Notification.open({
-          message: intl.get('notifications.title.place_order_failed'),
-          type: "error",
-          description: intl.get('notifications.message.wallet_locked')
-        });
-        return
-      }
       if(!balance || !marketcap) {
         Notification.open({
           message:intl.get('notifications.title.place_order_failed'),
@@ -268,7 +259,7 @@ class PlaceOrderForm extends React.Component {
                 <div style={{width:'auto',textAlign:'right'}}>
                   <WebIcon className="text-primary mr10" type="question-circle-o" style={{padding:'2px 0px 5px'}} onClick={showAmountHelper} />
                   <span className="color-black-3">{tokens.left}</span>
-                  
+
                 </div>
               }
             ><div className="fs14 color-black-3 pr5">{intl.get("common.amount")}</div></InputItem>
