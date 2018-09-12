@@ -252,7 +252,7 @@ class HelperOfMyOrders extends React.Component {
           {
             orders.items && orders.items.length === 0 &&
             <tr>
-              <td className="zb-b-b pt10 pb10 pl5 pr5 text-center color-black-3 fs13" colSpan='100'>
+              <td className="zb-b-b pt10 pb10 pl5 pr5 text-center color-black-4 fs13" colSpan='100'>
                 {intl.get('common.list.no_data')}
               </td>
             </tr>
@@ -261,7 +261,7 @@ class HelperOfMyOrders extends React.Component {
         </table>
         <div className="">
           <div className="" onClick={routeActions.gotoPath.bind(this, '/dex/usercenter/orders')}>
-            <div className="row color-black-3 fs13 ml0 mr0 no-gutters pl10 pr10 pt10 pb10 align-items-center">
+            <div className="row color-black-4 fs13 ml0 mr0 no-gutters pl10 pr10 pt10 pb10 align-items-center">
               <div className="col text-center">
                 <WebIcon className="mr5" type="exclamation-circle-o"/>
                 <span>当前仅显示您的{market}订单</span>
