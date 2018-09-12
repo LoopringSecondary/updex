@@ -263,26 +263,28 @@ class PlaceOrderForm extends React.Component {
                 </div>
               }
             ><div className="fs14 color-black-3 pr5">{intl.get("common.amount")}</div></InputItem>
-            {
-              side === 'sell' &&
-              <Button onClick={toConfirm} className={`w-100 d-block mt15 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
-                <div className="row ml0 mr0 no-gutters unselectable">
-                  <div className="col">{amount ? amount : 0} {tokens.left}</div>
-                  <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                  <div className="col">{total} {tokens.right}</div>
-                </div>
-              </Button>
-            }
-            {
-              side === 'buy' &&
-              <Button onClick={toConfirm} className={`w-100 d-block mt15 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
-                <div className="row ml0 mr0 no-gutters unselectable">
-                  <div className="col">{total} {tokens.right}</div>
-                  <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                  <div className="col">{amount ? amount : 0} {tokens.left}</div>
-                </div>
-              </Button>
-            }
+            <Affix>
+              {
+                side === 'sell' &&
+                <Button onClick={toConfirm} className={`w-100 d-block mt15 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
+                  <div className="row ml0 mr0 no-gutters">
+                    <div className="col">{amount ? amount : 0} {tokens.left}</div>
+                    <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
+                    <div className="col">{total} {tokens.right}</div>
+                  </div>
+                </Button>
+              }
+              {
+                side === 'buy' &&
+                <Button onClick={toConfirm} className={`w-100 d-block mt15 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
+                  <div className="row ml0 mr0 no-gutters">
+                    <div className="col">{total} {tokens.right}</div>
+                    <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
+                    <div className="col">{amount ? amount : 0} {tokens.left}</div>
+                  </div>
+                </Button>
+              }
+            </Affix>
           </List>
         </div>
         <div className="divider 1px zb-b-t"></div>
