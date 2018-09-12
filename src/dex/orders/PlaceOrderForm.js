@@ -263,7 +263,6 @@ class PlaceOrderForm extends React.Component {
                 </div>
               }
             ><div className="fs14 color-black-3 pr5">{intl.get("common.amount")}</div></InputItem>
-            <Affix>
               {
                 side === 'sell' &&
                 <Button onClick={toConfirm} className={`w-100 d-block mt15 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
@@ -284,7 +283,6 @@ class PlaceOrderForm extends React.Component {
                   </div>
                 </Button>
               }
-            </Affix>
           </List>
         </div>
         <div className="divider 1px zb-b-t"></div>

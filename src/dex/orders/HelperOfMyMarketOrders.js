@@ -272,7 +272,6 @@ class HelperOfMyOrders extends React.Component {
           <div className="divider 1px zb-b-t"></div>
         </div>
       </div>
-
     )
   }
 
