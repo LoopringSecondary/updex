@@ -7,6 +7,7 @@ const words = {
   sides: '方向',
   market: '市场',
   markets: '市场',
+  volume: '成交量',
   amount: '数量',
   type: '类型',
   types: '类型',
@@ -91,8 +92,10 @@ const validation_messages = {
 
 const notifications = {
   title: {
-    place_order_failed: '订单提交失败 !',
-    place_order_success: '下单成功!',
+    invalid_address_tip:"请输入合法的地址",
+    log_in_suc:"登录成功",
+    place_order_failed: "订单提交失败 !",
+    place_order_success: "下单成功!",
     place_order_warn: '您的订单只能被部分撮合',
     unlock_suc: '解锁成功',
     unlock_fail: '解锁失败',
@@ -112,10 +115,11 @@ const notifications = {
     enable_suc: '授权成功',
     enable_fail: '授权失败',
     place_order_price_confirm:'您确定要继续下单吗?',
+    open_safari:"请在Safari 浏览器中打开"
   },
   message: {
-    place_order_price_high:"您当前的价格高于市场价20%",
-    place_order_price_low:"您当前的价格低于市场价20%",
+    place_order_price_high:"您当前的价格高于市场价5%",
+    place_order_price_low:"您当前的价格低于市场价5%",
     wallet_locked: '您的钱包还未解锁，请先解锁后再继续操作',
     failed_fetch_data_from_server: '从服务器获取数据失败, 请稍后在尝试',
     eth_is_required_when_place_order: '由于需要支付ETH油费, 根据您当前订单需要发送的以太坊交易计算，还需要 {required} ETH',
@@ -615,12 +619,17 @@ export default {
     tab_fills: '成交'
   },
   imtoken: {
-    welcome: '欢迎来到 路印 去中心化交易所',
-    description_1: '您即将进入的dApp是一个运行在以太坊区块链上去中心化交易所。通过点击"我同意"，即表示您同意我们的',
-    description_2: '用户服务协议',
-    description_3: '和',
-    description_4: '用户隐私政策',
-    agree: '我同意'
+    welcome: "欢迎来到 路印 去中心化交易所",
+    description_1: "您即将进入的dApp是一个运行在以太坊区块链上去中心化交易所。通过点击\"我同意\"，即表示您同意我们的",
+    description_2: "用户服务协议",
+    description_3: "和",
+    description_4: "用户隐私政策",
+    agree: "我同意"
+  },
+  signIn:{
+    title:'登录',
+    tp_title:"第三钱包登录",
+    pre:"地址"
   }
 }
 

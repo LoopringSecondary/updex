@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'dva/router'
 import Pages from './pages'
 import Orders from './orders'
 import Tokens from './tokens'
+import Account from './account'
 import Markets from './tickers/Markets'
 import MarketsSearch from './tickers/ListSearchTickers'
 import MarketDetail from './tickers/Detail'
@@ -25,7 +26,8 @@ const UnLogged = ()=>{
   }
 }
 const Logged = ()=>{
-  const isLogged =  !!storage.wallet.getUnlockedAddress()
+  // const isLogged =  !!storage.wallet.getUnlockedAddress() 
+  const isLogged =  true
   if(isLogged){
     return (
       <div>
@@ -46,6 +48,7 @@ const Logged = ()=>{
         <CommonModals />
         <Orders.Modals />
         <Tokens.Modals />
+        <Account.Modals />
       </div>
     )
   }else{

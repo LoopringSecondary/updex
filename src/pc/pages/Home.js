@@ -6,7 +6,7 @@ import { TabBar,NavBar,Icon } from 'antd-mobile';
 import { Icon as WebIcon } from 'antd';
 import UserCenter from '../account/UserCenter';
 import Markets from '../tickers/Markets';
-import PlaceOrder from '../orders/PlaceOrderPage';
+import PlaceOrder from '../../dex/orders/PlaceOrderPage';
 import HelperOfDepth from '../orders/HelperOfDepth';
 
 class Home extends React.Component {

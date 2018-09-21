@@ -1,10 +1,10 @@
 import React from 'react'
-import { Button, Icon, InputItem, List, NavBar, Toast, Popover } from 'antd-mobile'
+import { Button, Icon, InputItem, List, NavBar, Toast, Modal } from 'antd-mobile'
 import { Icon as WebIcon, Input, InputNumber } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
-import { toBig, toHex, toNumber } from '../../common/loopringjs/src/common/formatter'
-import Contracts from '../../common/loopringjs/src/ethereum/contracts/Contracts'
+import { toBig, toHex, toNumber } from 'LoopringJS/common/formatter'
+import Contracts from 'LoopringJS/ethereum/contracts/Contracts'
 import TokenFormatter, { getBalanceBySymbol, isValidNumber } from '../../modules/tokens/TokenFm'
 import config from '../../common/config'
 import intl from 'react-intl-universal'
@@ -12,13 +12,24 @@ import storage from 'modules/storage'
 import Worth from 'modules/settings/Worth'
 import { signTx } from '../../common/utils/signUtils'
 import ConvertHelperOfBalance from './ConvertHelperOfBalance'
+import { keccakHash } from 'LoopringJS/common/utils'
 
 const WETH = Contracts.WETH
 
 class Convert extends React.Component {
   state = {
     token: 'ETH',
-    loading:false
+    loading: false,
+    hash: ''
+  }
+
+  componentWillReceiveProps (newProps) {
+    const {auth} = newProps
+    const {hash} = this.state
+    if (hash === auth.hash && auth.status === 'accept') {
+      Modal.alert(intl.get('notifications.title.convert_suc'))
+      this.setState({hash: ''})
+    }
   }
 
   componentDidMount () {
@@ -30,7 +41,7 @@ class Convert extends React.Component {
 
   render () {
     const {dispatch, balance, amount, gas} = this.props
-    const {token,loading} = this.state
+    const {token, loading} = this.state
     const address = storage.wallet.getUnlockedAddress()
     const assets = getBalanceBySymbol({balances: balance.items, symbol: token, toUnit: true})
     const other_assets = getBalanceBySymbol({balances: balance.items, symbol: token.toUpperCase() === 'ETH' ? 'WETH' : 'ETH', toUnit: true})
@@ -69,13 +80,17 @@ class Convert extends React.Component {
       dispatch({type: 'convert/setMax', payload: {amount: max, amount1: max}})
     }
     const gotoConfirm = async () => {
+      this.setState({loading: true})
+      const _this = this
       if (!isValidNumber(amount)) {
         Toast.info(intl.get('notifications.title.invalid_number'), 1, null, false)
+        this.setState({loading: false})
         return
       }
-
-      if ((token.toUpperCase() === 'ETH'&& toBig(amount).plus(gasFee).gt(assets.balance)) || (token.toUpperCase() === 'WETH' && toBig(amount).gt(assets.balance))) {
+      const owner = storage.wallet.getUnlockedAddress()
+      if (owner && ((token.toLowerCase() === 'eth' && toBig(amount).plus(gasFee).gt(assets.balance)) ||(token.toLowerCase() === 'weth' && toBig(amount).gt(assets.balance)))) {
         Toast.info(intl.get('convert.not_enough_tip', {token}), 1, null, false)
+        this.setState({loading: false})
         return
       }
       let data = ''
@@ -94,33 +109,32 @@ class Convert extends React.Component {
         to,
         gasPrice: toHex(toBig(gasPrice).times(1e9)),
         chainId: config.getChainId(),
-        value,
-        nonce: toHex((await window.RELAY.account.getNonce(address)).result)
+        value
       }
-
-      signTx(tx).then(res => {
-        if (res.result) {
-          window.ETH.sendRawTransaction(res.result).then(resp => {
-            if (resp.result) {
-              window.RELAY.account.notifyTransactionSubmitted({
-                txHash: resp.result,
-                rawTx: tx,
-                from: address
-              })
-              Toast.success(intl.get('notifications.title.convert_suc'), 3, null, false)
-              hideLayer({id: 'convertToken'})
-              routeActions.gotoPath('/dex/todos');
-            } else {
-              Toast.fail(intl.get('notifications.title.convert_fail') + ':' + resp.error.message, 3, null, false)
-            }
+      if (owner) {
+        tx.nonce = toHex((await window.RELAY.account.getNonce(address)).result)
+      }
+      const hash = keccakHash(JSON.stringify(tx))
+      const temData = {hash, tx}
+      if (owner) {
+        temData.owner = storage.wallet.getUnlockedAddress()
+      }
+      window.RELAY.order.setTempStore(hash, JSON.stringify(temData)).then(res => {
+        _this.setState({hash})
+        if (!res.error) {
+          // hideLayer({id: 'placeOrderSteps'})
+          dispatch({
+            type: 'sockets/queryChange',
+            payload: {id: 'circulrNotify', extra: {hash}}
           })
-        } else {
-          Toast.fail(intl.get('notifications.title.convert_fail') + ':' + res.error.message, 3, null, false)
+          showLayer({id: 'helperOfSign', type: 'convert', data: {type: 'convert', value: hash}})
         }
+        this.setState({loading: false})
       })
     }
+
     const amountChange = (value) => {
-      dispatch({type: 'convert/amountChange', payload: {amount:value }})
+      dispatch({type: 'convert/amountChange', payload: {amount: value}})
     }
     const swap = () => {
       const {token} = this.state
@@ -152,17 +166,18 @@ class Convert extends React.Component {
           <div className="p15 ">
             <div className="row ml0 mr0 no-gutters align-items-stretch justify-content-center" style={{}}>
               <div className="col text-right no-border am-list-bg-none">
-                <List  className="selectable">
+                <List className="selectable">
                   <InputItem
                     type="money"
                     onChange={amountChange}
                     moneyKeyboardAlign="left"
-                    value={amount}
+                    value={amount>0 ? amount : null}
                     extra={<div className="fs14 color-black-3">{fromToken}</div>}
                     className="circle h-default"
+                    placeholder={intl.get('common.amount')}
                   >
                   </InputItem>
-                  <List.Item  
+                  <List.Item
                     className="circle h-default mt15"
                     arrow={false}
                     onClick={setGas}
@@ -176,11 +191,14 @@ class Convert extends React.Component {
                 </List>
               </div>
             </div>
-            <Button className="b-block w-100 mt15" size="large" onClick={gotoConfirm} type="primary" loading={loading} disabled={loading}>
+            <Button className="b-block w-100 mt15" size="large" onClick={gotoConfirm} type="primary" loading={loading}
+                    disabled={loading}>
               <div className="row ml0 mr0 no-gutters fs16 align-items-center">
-                <div className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span className="fs14">{fromToken}</span></div>
-                <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                <div className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span className="fs14">{toToken}</span></div>
+                <div hidden className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span className="fs14">{fromToken}</span></div>
+                <div className="col fs18" style={{}}>
+                  {intl.get('common.convert')}
+                </div>
+                <div hidden className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span className="fs14">{toToken}</span></div>
               </div>
             </Button>
           </div>
@@ -192,12 +210,15 @@ class Convert extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
+function
+
+mapStateToProps (state) {
   return {
     balance: state.sockets.balance,
     prices: state.sockets.marketcap.items,
     amount: state.convert.amount,
-    gas: state.gas
+    gas: state.gas,
+    auth: state.sockets.circulrNotify.item
   }
 }
 

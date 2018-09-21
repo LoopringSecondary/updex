@@ -6,9 +6,8 @@ export default class UserAgent {
   }
 
   isMobile() {
-    return !!this.useragent.match(/AppleWebKit.*Mobile.*/)
+    return !!this.ua.match(/AppleWebKit.*Mobile.*/)
   }
-
   getLanguage() {
     const language = window.navigator.browserLanguage || window.navigator.language
     if (language.startsWith('zh')) {
@@ -16,7 +15,6 @@ export default class UserAgent {
     } else if (language.startsWith('en')) {
       return 'en-US'
     }
-
     return 'en-US'
   }
 
@@ -34,5 +32,8 @@ export default class UserAgent {
 
   getOS() {
     return this.ua.platform
+  }
+  isWechat() {
+    return window.navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1
   }
 }
