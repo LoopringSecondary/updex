@@ -38,7 +38,11 @@ const TokenListComp = (props)=>{
         <thead>
           <tr className="">
             <th className="text-left zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.token')}</th>
-            <th className="text-left zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.balance')}</th>
+            <th onClick={()=>{console.log('toggle small balance')}} className="hover-default text-left zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4">
+              {intl.get('common.balance')}
+              {true && <WebIcon className="ml5"  type="eye-o"/> }
+              {false && <WebIcon className="ml5 text-primary"  type="eye"/> }
+            </th>
             <th className="text-right zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.actions')}</th>
           </tr>
         </thead>
@@ -61,7 +65,7 @@ const TokenListComp = (props)=>{
                         token.symbol === 'WETH' &&
                         <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block" size="small" onClick={() => showConvert('WETH')}>{intl.get('common.convert')}</Button>
                       }
-                      <Button type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml10" size="small" onClick={() => showActions(token.symbol)}>
+                      <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml10 bg-primary-light border-none text-primary" size="small" onClick={() => showActions(token.symbol)}>
                         <WebIcon type="ellipsis" />
                       </Button>
                     </td>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'dva'
-import {TickersFm,TickerFm,sorterByMarket,sorterByPirce,sorterByChange} from 'modules/tickers/formatters'
+import {TickersFm,TickerFm,sorterByMarket,sorterByVolume,sorterByPirce,sorterByChange} from 'modules/tickers/formatters'
 import storage from '../../modules/storage'
 import intl from 'react-intl-universal'
 import routeActions from 'common/utils/routeActions'
@@ -11,12 +11,28 @@ import Worth from 'modules/settings/Worth'
 import {formatPrice} from 'modules/orders/formatters'
 import markets from 'modules/storage/markets'
 
+export const Sorter = ({className,style={},isActive,direction})=>{
+  return (
+    <div className={`${className}`} style={{paddingLeft:'1px',...style}}>
+      <div style={{position:'absolute',top:'0.3rem'}} className={`lh10 fs7 ${isActive && direction=== 'up' ? 'text-primary' : ''}`} >▲</div>
+      <div style={{position:'absolute',top:'1.0rem'}} className={`lh10 fs7 ${isActive && direction=== 'down' ? 'text-primary': ''}`}>▼</div>
+    </div>
+  )
+  // return (
+  //   <div className={`${className} ${active}`}>
+  //     <Icon hidden type="up" style={{position:'absolute',top:'2px'}} className="lh10" ></Icon>
+  //     <Icon hidden type="down" style={{position:'absolute',top:'12px'}} className="lh10"></Icon>
+  //     <Icon type={`arrow-${direction}`} className=""></Icon>
+  //   </div>
+  // )
+
+}
 export const TickerHeader = ({sort,dispatch})=>{
   const sortByType = (type) => {
     dispatch({
       type:'sockets/extraChange',
       payload:{
-        id:'loopringTickers',
+        id:'tickersOfSource',
         extra:{
           sort: {
             sortBy:type ,
@@ -26,22 +42,31 @@ export const TickerHeader = ({sort,dispatch})=>{
       }
     })
   }
+  let direction
+  if(sort.orderBy === 'ASC'){direction = 'up'}
+  if(sort.orderBy === 'DESC'){direction = 'down'}
+  if(!sort.sortBy){
+    sort.sortBy = 'volume'
+    direction = 'down'
+  }
   return (
-    <div className="row ml0 mr0 pt5 pb5 pl10 pr10 align-items-center no-gutters">
-      <div className="col-4 fs13 color-black-4 text-left" onClick={sortByType.bind(this, 'market')}>
-        {intl.get('common.market')}{sort.sortBy === 'market' && <Icon type={sort.orderBy === 'ASC' ? 'up' : 'down'} />}
+    <div className="row ml0 mr0 pl10 pr10 align-items-center no-gutters">
+      <div className="col-4 fs13 color-black-4 text-left hover-default pt5 pb5" onClick={sortByType.bind(this, 'volume')}>
+        <span className="position-relative">
+        {intl.get('common.volume')} <Sorter className="d-inline-block" isActive={sort.sortBy === 'volume'} direction={direction}></Sorter>
+        </span>
       </div>
-      <div className="col-auto pr10 fs16">
-        <Icon type="star" className="color-black-4" style={{opacity:0}}/>
+      <div className="col-auto pr10 fs16 pt5 pb5">
+        <Icon type="star-o" className="color-black-4" style={{opacity:0}}/>
       </div>
-      <div className="col text-left pr10">
-        <div className="fs13 color-black-4 " onClick={sortByType.bind(this, 'price')}>
-          {intl.get('common.price')}{sort.sortBy === 'price' && <Icon type={sort.orderBy === 'ASC' ? 'up' : 'down'} />}
+      <div className="col text-left pl5 pr10 hover-default pt5 pb5" onClick={sortByType.bind(this, 'price')}>
+        <div className="fs13 color-black-4 position-relative">
+          {intl.get('common.price')} <Sorter className="d-inline-block" isActive={sort.sortBy === 'price'} direction={direction}></Sorter>
         </div>
       </div>
-      <div className="col-3 text-right">
-        <div className="fs13 color-black-4" onClick={sortByType.bind(this, 'change')}>
-          {intl.get('ticker.change')}{sort.sortBy === 'change' && <Icon type={sort.orderBy === 'ASC' ? 'up' : 'down'} />}
+      <div className="col-3 text-right hover-default pt5 pb5" onClick={sortByType.bind(this, 'change')}>
+        <div className="fs13 color-black-4 mr5 position-relative">
+          {intl.get('ticker.change')} <Sorter className="d-inline-block" isActive={sort.sortBy === 'change'} direction={direction}></Sorter>
         </div>
       </div>
     </div>
@@ -62,7 +87,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
       dispatch({
         type:'sockets/extraChange',
         payload:{
-          id:'loopringTickers',
+          id:'tickersOfSource',
           extra:{
             favored:{...favored,[item]:!favored[item]},
           }
@@ -72,26 +97,26 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
     }
     return (
       <div className="row ml0 mr0 p10 align-items-center no-gutters hover-default zb-b-b" onClick={gotoDetail}>
-        <div className="col-auto pr10 fs16" onClick={toggleTickerFavored.bind(this, item.market)}>
+        <div className="col-auto pr10 fs14" onClick={toggleTickerFavored.bind(this, item.market)}>
           {
             favored[item.market] &&
-            <Icon type="star" className="text-primary"/>
+            <i type="star" className="text-primary icon-star"/>
           }
           {
             !favored[item.market] &&
-            <Icon type="star-o" className="color-black-4"/>
+            <i className="color-black-4 icon-star-o"/>
           }
         </div>
         <div className="col-4 text-left">
           <div className="fs16 lh15">
             <span className="fs16 color-black-1">{tokens.left}</span>
-            <span className="fs14 color-black-4"> / {tokens.right}</span>
+            <span className="fs16 color-black-4"> / {tokens.right}</span>
           </div>
           <div className="fs12" style={{marginTop:'2px'}}>
-              <span className="fs12 color-black-4">Vol {tickerFm.getVol()}</span>
+              <span className="fs12 color-black-4">{tickerFm.getVol()} {tokens.right}</span>
           </div>
         </div>
-        <div className="col text-left pr10">
+        <div className="col text-left pr10 pl5">
           <div className="fs16 color-black-1 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
           <div className="fs12 color-black-4" style={{marginTop:'2px'}}><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
         </div>
@@ -129,6 +154,12 @@ export const TickerList = ({items,loading,dispatch, tickersList})=>{
           sortedItems.reverse()
         }
         break;
+      case 'volume':
+        sortedItems.sort(sorterByVolume)
+        if(sort.orderBy === 'DESC') {
+          sortedItems.reverse()
+        }
+        break;
       case 'price':
         sortedItems.sort(sorterByPirce)
         if(sort.orderBy === 'DESC') {
@@ -145,7 +176,7 @@ export const TickerList = ({items,loading,dispatch, tickersList})=>{
   }
 
   return (
-    <div className="">
+    <div className="" style={{minHeight:'50vh'}}>
       <Spin spinning={loading}>
         {!loading && items.length > 0 &&
           <div>
@@ -169,23 +200,12 @@ class ListMarketTickers extends React.Component {
     super(props);
   }
   render(){
-      const {loopringTickers:list,dispatch} = this.props
+      const {tickersOfSource:list,dispatch} = this.props
       const tickersFm = new TickersFm(list)
-      const {extra:{favored={},keywords}} = list
-      let newMarkets = []
-      const confs = storage.settings.getConfigs()
-      if(confs && confs.newMarkets) {
-        newMarkets = confs.newMarkets
-      }
-      const isInNewMarket = (market) => {
-        const m = market.toLowerCase().split('-')
-        return newMarkets.find((i)=> {
-          return (i.tokenx.toLowerCase() === m[0] && i.tokeny.toLowerCase() === m[1]) || (i.tokeny.toLowerCase() === m[0] && i.tokenx.toLowerCase() === m[1])
-        })
-      }
-      const allTickers = tickersFm.getAllTickers().filter(item=>!isInNewMarket(item.market))
-      const newMarktsTickers = tickersFm.getAllTickers().filter(item=>isInNewMarket(item.market))
-      const favoredTickers = tickersFm.getFavoredTickers()
+      const allTickers = tickersFm.getAllTickers().filter(item=>item.label === 'whitelist')
+      const favoredTickers = tickersFm.getFavoredTickers().filter(item=> {
+        return allTickers.find((n)=>n.market === item.market)
+      })
       const recentTickers = tickersFm.getRecentTickers()
       const sorter = (a,b)=>{
         if(a.vol === b.vol ){
@@ -199,20 +219,43 @@ class ListMarketTickers extends React.Component {
         }
       }
       allTickers.sort(sorter)
-      newMarktsTickers.sort(sorter)
+      const marketGroups = {}
+      allTickers.forEach(item=>{
+        const market = item.market.split('-')
+        let group = marketGroups[market[1]]
+        if(group){
+          group.push(item)
+        } else {
+          group = [item]
+        }
+        marketGroups[market[1]] = group
+      })
       favoredTickers.sort(sorter)
-      const tabs = [
-        { title: <div className="fs16">{intl.get('ticker_list.title_favorites')}</div> },
-        { title: <div className="fs16">WETH</div> },
-        { title: <div className="fs16">LRC</div> },
-        { title: <div className="fs16">USDT</div> },
-        { title: <div className="fs16">TUSD</div> },
-        // { title: <div className="fs16">{intl.get('ticker_list.title_innovation')}</div> },
-      ]
-      if(newMarkets && newMarkets.length > 0){
-        tabs.push({ title: <div className="fs16">{intl.get('ticker_list.title_innovation')}</div> })
+      const tabs = []
+      const tickerItems = []
+      if(marketGroups && Object.keys(marketGroups).length > 0) {
+        tabs.push({ title: <div className="fs16">{intl.get('ticker_list.title_favorites')}</div> })
+        tickerItems.push(<TickerList key={'fav'} items={favoredTickers} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
+        const keys = Object.keys(marketGroups)
+        const wethIndex = keys.findIndex(item=> item === 'WETH')
+        if(wethIndex > -1) {
+          keys.splice(wethIndex, 1);
+          tabs.push({title: <div className="fs16">{'WETH'}</div>})
+          tickerItems.push(<TickerList key={'WETH'} items={getMarketTickersBySymbol('WETH',allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
+        }
+        const lrcIndex = keys.findIndex(item=> item === 'LRC')
+        if(lrcIndex > -1) {
+          keys.splice(lrcIndex, 1);
+          tabs.push({title: <div className="fs16">{'LRC'}</div>})
+          tickerItems.push(<TickerList key={'LRC'} items={getMarketTickersBySymbol('LRC',allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
+        }
+        keys.forEach(item => {
+          tabs.push({title: <div className="fs16">{item}</div>})
+          tickerItems.push(<TickerList key={item} items={getMarketTickersBySymbol(item,allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
+        })
       }
       return (
+        <Spin spinning={list.loading} className="pt50">
           <Tabs
             tabs={tabs}
             tabBarTextStyle={{}}
@@ -221,18 +264,13 @@ class ListMarketTickers extends React.Component {
             onChange={(tab, index) => {}}
             onTabClick={(tab, index) => { }}
           >
-            <TickerList items={favoredTickers} loading={list.loading} dispatch={dispatch} tickersList={list}/>
-            <TickerList items={getMarketTickersBySymbol("WETH",allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>
-            <TickerList items={getMarketTickersBySymbol("LRC",allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>
-            <TickerList items={getMarketTickersBySymbol("USDT",allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>
-            <TickerList items={getMarketTickersBySymbol("TUSD",allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>
-            <TickerList items={newMarktsTickers} loading={list.loading} dispatch={dispatch} tickersList={list}/>
-            <TickerList items={[]} loading={list.loading} dispatch={dispatch} />
+            {tickerItems}
           </Tabs>
+        </Spin>
       )
   }
 }
 export default connect(
-  ({sockets:{loopringTickers}})=>({loopringTickers})
+  ({sockets:{tickersOfSource}})=>({tickersOfSource})
 )(ListMarketTickers)
 

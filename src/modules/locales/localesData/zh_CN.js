@@ -7,6 +7,7 @@ const words = {
   sides: '方向',
   market: '市场',
   markets: '市场',
+  volume: '成交量',
   amount: '数量',
   type: '类型',
   types: '类型',
@@ -117,8 +118,8 @@ const notifications = {
     open_safari:"请在Safari 浏览器中打开"
   },
   message: {
-    place_order_price_high:"您当前的价格高于市场价20%",
-    place_order_price_low:"您当前的价格低于市场价20%",
+    place_order_price_high:"您当前的价格高于市场价5%",
+    place_order_price_low:"您当前的价格低于市场价5%",
     wallet_locked: '您的钱包还未解锁，请先解锁后再继续操作',
     failed_fetch_data_from_server: '从服务器获取数据失败, 请稍后在尝试',
     eth_is_required_when_place_order: '由于需要支付ETH油费, 根据您当前订单需要发送的以太坊交易计算，还需要 {required} ETH',

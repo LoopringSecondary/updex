@@ -1,4 +1,5 @@
 import React from 'react'
+import {connect} from 'dva'
 import { NavBar, NoticeBar, Tabs } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import { Link, Redirect, Route, Switch } from 'dva/router'
@@ -14,7 +15,7 @@ import intl from 'react-intl-universal'
 
 class UserCenter extends React.Component {
   render() {
-    const {match,location} = this.props;
+    const {match,location,dispatch} = this.props;
     const {url} = match;
     const {pathname} = location;
     const changeTab = (path) => {
@@ -25,27 +26,42 @@ class UserCenter extends React.Component {
         return true
       }
     }
+    const showSettings = ()=>{
+      dispatch({
+        type:'layers/showLayer',
+        payload:{
+          id:'settings',
+        }
+      })
+    }
+    const address = storage.wallet.getUnlockedAddress()
     return (
       <LayoutDexHome {...this.props}>
         <div className="0">
-          <NavBar
-              className="bg-white"
-              mode="light"
-              leftContent={null && [
-                <span className="" key="1"><WebIcon type="home" /></span>,
-              ]}
-              rightContent={null && [
-                <span className="" key="1" onClick={()=>window.Toast.info('Coming Soon', 1, null, false)}><i className="icon-cog-o"></i></span>
-              ]}
-          >
-            <div className="text-center color-black">
-              {false && intl.get('usercenter.page_title')}
-              {getShortAddress(storage.wallet.getUnlockedAddress())}
-            </div>
-          </NavBar>
-          <div className="bg-white">
-            <div className="divider 1px zb-b-t "></div>
+          <div className="bg-white position-fixed w-100" style={{zIndex:'1000'}}>
+            <NavBar
+                className="zb-b-b" 
+                mode="light"
+                leftContent={null && [
+                  <span className="" key="1"><WebIcon type="home" /></span>,
+                ]}
+                rightContent={[
+                  <span className="" key="1" onClick={showSettings}><i className="icon-cog-o"></i></span>
+                ]}
+            >
+              <div className="text-center color-black">
+                {intl.get('usercenter.page_title')}
+              </div>
+            </NavBar>
           </div>
+          <div className="pt40 bg-white"></div>
+          <div className="bg-white pt30 pb30 text-center">
+            <div className="color-black-2 text-center fs16">{getShortAddress(address)}</div>
+            <div className="text-center mt5">
+              <span target="_blank" onClick={routeActions.gotoHref.bind(this,`https://etherscan.io/address/${address}`)} className="d-inline-block cursor-pointer fs12 lh25 pl10 pr10 bg-white-light color-black-4 radius-circle">etherscan.io</span>
+            </div>
+          </div>
+          <div className="bg-white"><div className="divider 1px zb-b-t "></div></div>
           <div className="height-auto tabs-no-border">
             <Tabs
               tabs={
@@ -80,19 +96,6 @@ class UserCenter extends React.Component {
                   </div>
                 )
               }} />
-              {
-                false &&
-                <Route path={`${url}/fills`} exact render={()=>{
-                  return (
-                    <div>
-                      <div className="divider 1px zb-b-b"></div>
-                      <Containers.Fills id="MyFills" alias="fills" initstate={{}}>
-                        <ListMyFills />
-                      </Containers.Fills>
-                    </div>
-                  )
-                }} />
-              }
               <Redirect path={`${match.url}/`} to={`${match.url}/assets`}/>
             </Switch>
             <div className="pb50"></div>
@@ -104,7 +107,7 @@ class UserCenter extends React.Component {
     );
   }
 }
-export default UserCenter
+export default connect()(UserCenter)
 
 
 
