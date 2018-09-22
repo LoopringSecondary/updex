@@ -20,6 +20,7 @@ function RouterConfig({ history }) {
             <DexRoutes />
             <PCRoutes />
             <TestRoutes />
+            <Face2FaceRoutes />
           </div>
         </Router>
       </Locales>

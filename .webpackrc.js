@@ -6,7 +6,7 @@ export default {
   disableCSSModules: true,
   hash:true,
 	"alias":{
-    "LoopringJS":`${__dirname}/src/common/loopringjs/src`,
+    "LoopringJS":`loopring.js/lib`,
     "LoopringUI":`${__dirname}/src/common/loopringui/`,
     "common":`${__dirname}/src/common`,
     "modules":`${__dirname}/src/modules`,
@@ -14,7 +14,7 @@ export default {
   "theme": {
     // "@font-family-no-number"  : "Roboto ,PingFang SC",
     // "@font-family"            : "@font-family-no-number",
-    "@primary-color": "#1c60ff",
+    "@primary-color": "#C59949",
     "@link-color": "#1c60ff",
     "@border-radius-base": "0px",
     "@line-height-base" : 1.6,
