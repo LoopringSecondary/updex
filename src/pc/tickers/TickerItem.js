@@ -30,7 +30,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
         <div className="col-auto pr30 zb-b-r pl30 d-flex align-items-center" style={{background:"rgba(0,0,0,0.2)"}} >
           <div className={`fs18 color-black-1`}>
             {tokens.left} / {tokens.right}
-            <WebIcon type="caret-down" className="ml20 fs16" />
+            <WebIcon type="caret-down" className="ml20 fs14 text-primary" />
           </div>
         </div>
         <div className="col-auto pl20 pr25 d-flex align-items-center">
@@ -41,7 +41,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
                 <Worth amount={price} symbol={tokens.right}/>
               </span>
             </div>
-            <div className="color-black-4 fs12">
+            <div className="color-black-4 fs12 lh10">
               {intl.get('ticker.last')}
             </div>
           </div>
@@ -51,7 +51,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
             <div className={`${color}`}>
               {prefix}{tickerFm.getChange()}
             </div>
-            <div className="color-black-4 fs12">
+            <div className="color-black-4 fs12 lh10">
               {intl.get('ticker.change')}
             </div>
           </div>
@@ -61,7 +61,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
             <div className="color-black-1">
               {tickerFm.getHigh()}
             </div>
-            <div className="color-black-4 fs12">
+            <div className="color-black-4 fs12 lh10">
               {intl.get('ticker.high')}
             </div>
           </div>
@@ -71,7 +71,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
             <div className="color-black-1">
               {tickerFm.getLow()}
             </div>
-            <div className="color-black-4 fs12">
+            <div className="color-black-4 fs12 lh10">
               {intl.get('ticker.low')}
             </div>
           </div>
@@ -81,7 +81,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
             <div className="color-black-1">
               {tickerFm.getVol()} {tokens.right}
             </div>
-            <div className="color-black-4 fs12">
+            <div className="color-black-4 fs12 lh10">
               {intl.get('ticker.vol')}
             </div>
           </div>

@@ -35,18 +35,18 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
-        <div className="" style={{height:'6vh'}}>
+        <div className="pl5 pr5" style={{height:'7vh',paddingTop:'0.8rem'}}>
          <Header />
         </div>
         <div className="row no-gutters ml0 mr0">
-          <div hidden className="col-auto p5 pr0" style={{height:'94vh',width:'35rem'}}>
+          <div hidden className="col-auto p5 pr0" style={{height:'93vh',width:'35rem'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Markets" />
               <div className="divider 1px zb-b-t"></div>
               <MarketTitckers />
             </div>
           </div>
-          <div className="col-auo p5 pr0" style={{height:'94vh',width:'42rem'}}>
+          <div className="col-auo p5 pr0" style={{height:'93vh',width:'42rem'}}>
             <div className="bg-white" style={{overflow:'auto',height:'auto'}}>
               <PanelHeader title="Place Order" />
               <div className="divider 1px zb-b-t"></div>
@@ -77,20 +77,20 @@ class Home extends React.Component {
               </Tabs>
             </div>
           </div>
-          <div className="col-auto p5 pr0" style={{height:'94vh',width:'20vw'}}>
+          <div className="col-auto p5 pr0" style={{height:'93vh',width:'20vw'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Order Book" />
               <div className="divider 1px zb-b-t"></div>
               <HelperOfDepth />
             </div>
           </div>
-          <div className="col p5 pr0" style={{height:'94vh'}}>
+          <div className="col p5 pr0" style={{height:'93vh'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Kline Chart" />
               <div className="divider 1px zb-b-t"></div>
             </div>
           </div>
-          <div className="col-auto p5" style={{height:'94vh',width:'20vw'}}>
+          <div className="col-auto p5" style={{height:'93vh',width:'20vw'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Trade History" />
               <div className="divider 1px zb-b-t"></div>

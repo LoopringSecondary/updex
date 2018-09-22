@@ -20,12 +20,12 @@ class Header extends React.Component {
       <div className="row no-gutters ml0 mr0 bg-white align-items-stretch" style={{height:'100%'}}>
         {
           false &&
-          <div className="col-auo d-flex align-items-center  pl20" style={{width:'35rem'}}>
+          <div className="col-auo d-flex align-items-center pl20" style={{width:'35rem'}}>
             <img style={{height:'3.5vh'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>
         }
-        <div className="col d-flex align-items-center text-left pl15 zb-b-l ml5">
+        <div className="col d-flex align-items-center text-left ">
           <TickerItem />
         </div>
         <div onClick={showLayer.bind(this,'help')} className="col-auto d-flex align-items-center zb-b-l pl30 pr30">
