@@ -39,7 +39,7 @@ class Home extends React.Component {
          <Header />
         </div>
         <div className="row no-gutters ml0 mr0">
-          <div className="col-auto p5 pr0" style={{height:'94vh',width:'35rem'}}>
+          <div hidden className="col-auto p5 pr0" style={{height:'94vh',width:'35rem'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Markets" />
               <div className="divider 1px zb-b-t"></div>
