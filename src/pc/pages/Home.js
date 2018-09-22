@@ -37,7 +37,7 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="row no-gutters ml0 mr0">
-          <div className="col-auo p5 pr0" style={{height:'93vh',width:'23vw'}}>
+          <div className="col-auo p5 pr0" style={{height:'93vh',minWidth:'37.5rem',width:'25vw'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PlaceOrder location={location} match={match} />
             </div>
@@ -61,7 +61,7 @@ class Home extends React.Component {
               <HelperOfDepth />
             </div>
           </div>
-          <div className="col-auto p5 pr0" style={{height:'93vh',width:'37vw'}}>
+          <div className="col p5 pr0" style={{height:'93vh'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <NavBar
                 className="bg-white"
