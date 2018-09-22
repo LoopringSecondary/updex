@@ -218,7 +218,7 @@ class PlaceOrderForm extends React.Component {
     const menu2 = `${intl.get("common.sell")} ${tokens.left}`
     return (
       <div>
-        <div className="bg-white p10">
+        <div className="bg-white p15">
           <div className="segmented-fs16">
             <SegmentedControl
               values={[menu1, menu2]}
@@ -234,7 +234,7 @@ class PlaceOrderForm extends React.Component {
               placeholder={`0.${'0'.repeat(marketConfig.pricePrecision)}`}
               value={price ? price : null}
               clear={false}
-              className="circle h-default mt12"
+              className="circle h-default mt15"
               extra={
                 <div style={{width:'auto',textAlign:'right'}}>
                   {
@@ -252,7 +252,7 @@ class PlaceOrderForm extends React.Component {
               value={amount ? amount : null}
               clear={false}
               onChange={amountChange}
-              className="circle h-default mt12"
+              className="circle h-default mt15"
               extra={
                 <div onClick={showAmountHelper} style={{width:'auto',textAlign:'right'}}>
                   <WebIcon className="color-black-4 fs12" type="question-circle-o" style={{padding:'2px 0px 5px'}} />
@@ -266,33 +266,14 @@ class PlaceOrderForm extends React.Component {
               placeholder={amountPrecision > 0 ? `0.${'0'.repeat(amountPrecision)}` : '0'}
               value={total ? total : null}
               clear={false}
-              className="circle h-default mt12"
+              className="circle h-default mt15"
               extra={
                 <div style={{width:'auto',textAlign:'right'}}>
                   <span className="color-black-3 d-inline-block" style={{width:'35px',marginLeft:'7px'}}>{tokens.right}</span>
                 </div>
               }
             ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
-
-
-            {
-              false &&
-              <List.Item  
-                className="mt0 mb0"
-                arrow={false}
-                extra={
-                  <div className="fs12" style={{width:'auto',textAlign:'right'}}>
-                    <span className="color-black-4 ml5">{total ? total : '0.00'}</span>
-                    <span className="color-black-4 d-inline-block ml5" style={{width:'35px'}}>{tokens.right}</span>
-                  </div>
-                }
-              >
-                <div className="">
-                  <span className="d-inline-block mr5 fs12 color-black-4" style={{width:'50px'}}>{intl.get("common.total")}</span>
-                </div>
-              </List.Item>
-            }
-              <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt12 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
+              <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
                <div className="lh20">
                  <div className="lh20">{intl.get(`common.${side}`)}  {amount>0 ? amount : null} {tokens.left} </div>
                  {
@@ -303,29 +284,8 @@ class PlaceOrderForm extends React.Component {
                  }
                </div>
               </Button>
-              {
-                false && side === 'sell' &&
-                <Button onClick={toConfirm} className={`w-100 d-block mt12 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
-                  <div className="row ml0 mr0 no-gutters">
-                    <div className="col">{amount ? amount : 0} {tokens.left}</div>
-                    <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                    <div className="col">{total} {tokens.right}</div>
-                  </div>
-                </Button>
-              }
-              {
-                false && side === 'buy' &&
-                <Button onClick={toConfirm} className={`w-100 d-block mt12 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
-                  <div className="row ml0 mr0 no-gutters">
-                    <div className="col">{total} {tokens.right}</div>
-                    <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                    <div className="col">{amount ? amount : 0} {tokens.left}</div>
-                  </div>
-                </Button>
-              }
           </List>
         </div>
-        <div className="divider 1px zb-b-t"></div>
       </div>
     )
   }

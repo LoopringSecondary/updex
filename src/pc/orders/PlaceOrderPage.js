@@ -90,7 +90,6 @@ class PlaceOrderPage extends React.Component {
                 [
                   { title: <div className="am-tabs-item-bak-wrapper"><div className="fs16 am-tabs-item-bak">{intl.get('place_order.orders')}</div></div>, tab:'orders' },
                   { title: <div className="am-tabs-item-bak-wrapper"><div className="fs16 am-tabs-item-bak">{intl.get('place_order.assets')}</div></div>, tab:'assets' },
-                  { title: <div className="am-tabs-item-bak-wrapper"><div className="fs16 am-tabs-item-bak">{intl.get('place_order.help')}</div></div>, tab:'help' },
                 ]
               }
               initialPage={0}
@@ -105,10 +104,6 @@ class PlaceOrderPage extends React.Component {
               <div className="">
                 <div className="divider 1px zb-b-t"></div>
                 <HelperOfBalance />
-              </div>
-              <div className="">
-                <div className="divider 1px zb-b-t"></div>
-                <HelperOfFAQ />
               </div>
             </Tabs>
           </div>
