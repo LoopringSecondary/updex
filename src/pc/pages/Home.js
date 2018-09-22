@@ -6,7 +6,7 @@ import { TabBar,NavBar,Icon } from 'antd-mobile';
 import { Icon as WebIcon } from 'antd';
 import UserCenter from '../account/UserCenter';
 import Markets from '../tickers/Markets';
-import PlaceOrder from '../../dex/orders/PlaceOrderPage';
+import PlaceOrder from '../orders/PlaceOrderPage';
 import HelperOfDepth from '../orders/HelperOfDepth';
 
 class Home extends React.Component {
@@ -37,12 +37,12 @@ class Home extends React.Component {
           </div>
         </div>
         <div className="row no-gutters ml0 mr0">
-          <div className="col-auo p5 pr0" style={{height:'93vh',width:'22vw'}}>
+          <div className="col-auo p5 pr0" style={{height:'93vh',width:'23vw'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PlaceOrder location={location} match={match} />
             </div>
           </div>
-          <div className="col-auto p5 pr0" style={{height:'93vh',width:'22vw'}}>
+          <div className="col-auto p5 pr0" style={{height:'93vh',width:'20vw'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <NavBar
                 className="bg-white"
@@ -61,7 +61,7 @@ class Home extends React.Component {
               <HelperOfDepth />
             </div>
           </div>
-          <div className="col-auto p5 pr0" style={{height:'93vh',width:'34vw'}}>
+          <div className="col-auto p5 pr0" style={{height:'93vh',width:'37vw'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <NavBar
                 className="bg-white"
@@ -80,7 +80,7 @@ class Home extends React.Component {
               
             </div>
           </div>
-          <div className="col-auto p5" style={{height:'93vh',width:'22vw'}}>
+          <div className="col-auto p5" style={{height:'93vh',width:'20vw'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <NavBar
                 className="bg-white"
