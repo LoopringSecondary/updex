@@ -33,6 +33,7 @@ const Logged = ()=>{
       <div>
         <Switch>
           <Route path={`/pc/trade/:market`} component={Pages.Home} />
+          <Route path={`/pc/trade2/:market`} component={Pages.Trade2} />
           <Redirect from="/pc" to="/pc/trade" />
         </Switch>
         <CommonModals />
