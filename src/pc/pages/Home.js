@@ -13,8 +13,8 @@ import HelperOfDepth from '../orders/HelperOfDepth';
 import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
 import HelperOfBalance from 'mobile/orders/HelperOfBalance';
 import MarketTitckers from 'mobile/tickers/ListMarketTickers';
-import Header from './Header'
-import PanelHeader from './PanelHeader'
+import Body from './Body'
+import Sidebar from './Sidebar'
 
 class Home extends React.Component {
   constructor(props) {
@@ -35,69 +35,13 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
-        <div className="pl5 pr5" style={{height:'7vh',paddingTop:'0.8rem'}}>
-         <Header />
-        </div>
         <div className="row no-gutters ml0 mr0">
-          <div hidden className="col-auto p5 pr0" style={{height:'93vh',width:'35rem'}}>
-            <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
-              <PanelHeader title="Markets" />
-              <div className="divider 1px zb-b-t"></div>
-              <MarketTitckers />
-            </div>
+          <div className="col-auto" style={{height:'100vh',width:'6rem'}}>
+            <Sidebar />
           </div>
-          <div className="col-auo p5 pr0" style={{height:'93vh',width:'42rem'}}>
-            <div className="bg-white" style={{overflow:'auto',height:'auto'}}>
-              <PanelHeader title="Place Order" />
-              <div className="divider 1px zb-b-t"></div>
-              <div className="pt10 pb10">
-                <PlaceOrderForm location={location} match={match} />
-              </div>
-            </div>
-            <div className="bg-white mt5" style={{overflow:'auto',height:'auto'}}>
-              <Tabs
-                tabs={
-                  [
-                    { title: <div className="am-tabs-item-bak-wrapper"><div className="fs16 am-tabs-item-bak">{intl.get('place_order.assets')}</div></div>, tab:'assets' },
-                    { title: <div className="am-tabs-item-bak-wrapper"><div className="fs16 am-tabs-item-bak">{intl.get('place_order.orders')}</div></div>, tab:'orders' },
-                  ]
-                }
-                initialPage={0}
-                swipeable={false}
-                onChange={(tab, index) => {}}
-                onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
-              >
-                <div className="">
-                  <div className="divider 1px zb-b-t"></div>
-                  <HelperOfBalance />
-                </div>
-                <div className="">
-                  <div className="divider 1px zb-b-t"></div>
-                </div>
-              </Tabs>
-            </div>
+          <div className="col p5 pr0 pl0 pt0" style={{height:'100vh'}}>
+            <Body location={location} match={match} />
           </div>
-          <div className="col-auto p5 pr0" style={{height:'93vh',width:'20vw'}}>
-            <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
-              <PanelHeader title="Order Book" />
-              <div className="divider 1px zb-b-t"></div>
-              <HelperOfDepth />
-            </div>
-          </div>
-          <div className="col p5 pr0" style={{height:'93vh'}}>
-            <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
-              <PanelHeader title="Kline Chart" />
-              <div className="divider 1px zb-b-t"></div>
-            </div>
-          </div>
-          <div className="col-auto p5" style={{height:'93vh',width:'20vw'}}>
-            <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
-              <PanelHeader title="Trade History" />
-              <div className="divider 1px zb-b-t"></div>
-              <HelperOfDepth />
-            </div>
-          </div>
-
         </div>
       </div>
     )
