@@ -26,11 +26,12 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
   }
 
   return (
-      <div className="row ml0 mr0 no-gutters align-items-stretch fs16" style={{height:'100%'}}>
-        <div className="col-auto zb-b-r pl15 d-flex align-items-center" style={{backgroundBak:"rgba(0,0,0,0)",widthBakBak:'41.7rem'}} >
+      <div className="row ml0 mr0 no-gutters align-items-stretch fs18" style={{height:'100%'}}>
+        <div className="col-auto zb-b-r pl15 d-flex align-items-center" style={{backgroundBak:"rgba(0,0,0,0)"}} >
            <div className={``}>
-            <i className="icon-star color-black-4 fs18 mr20"></i>
-            <span className="fs20 color-black-1 ">{tokens.left} / {tokens.right}</span>
+            { false && <i className="icon-star color-black-4 fs18 mr20"></i> }
+            { true && <i className="icon-star text-primary fs18 mr20"></i> }
+            <span className="fs24 color-black-1 ">{tokens.left} / {tokens.right}</span>
             <WebIcon type="caret-down" className="ml30 mr20 color-black-4" />
           </div>
         </div>
@@ -39,7 +40,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
           <div>
             <div className={`${color}`}>
               {price}
-              <span className="color-black-4 ml5">
+              <span className="ml5">
                 <Worth amount={price} symbol={tokens.right}/>
               </span>
             </div>

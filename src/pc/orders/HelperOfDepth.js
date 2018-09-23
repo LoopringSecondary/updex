@@ -81,13 +81,6 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
           </div>
           <div className="col-12">
               <table className="w-100 fs13">
-                <thead>
-                  <tr className="">
-                    <th className="zb-b-b text-left pl15 pr10 pt5 pb5 text-nowrap font-weight-normal color-black-3">{intl.get("common.price")}</th>
-                    <th className="zb-b-b text-right pl10 pr10 pt5 pb5 text-nowrap font-weight-normal color-black-3">{intl.get("common.amount")} / {tokens.left}</th>
-                    <th className="zb-b-b text-right pl10 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-3">{intl.get("common.total")} / {tokens.right}</th>
-                  </tr>
-                </thead>
                 <tbody className="">
                     <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                     {
