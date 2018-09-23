@@ -14,8 +14,7 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
       <table className="w-100 fs12" style={{overflow:'auto'}}>
         <thead>
           <tr className="">
-            <th className="zb-b-b text-left pl15 pr5 pt5 pb5 font-weight-normal color-black-3 ">{intl.get("common.side")}</th>
-            <th className="zb-b-b text-left pl5 pr5 pt5 pb5 font-weight-normal color-black-3 ">{intl.get("common.price")}</th>
+            <th className="zb-b-b text-left pl15 pr5 pt5 pb5 font-weight-normal color-black-3 ">{intl.get("common.price")}</th>
             <th className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-3 ">{intl.get("common.amount")}</th>
             <th hidden className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-3 ">Fee</th>
             <th className="zb-b-b text-right pl5 pr15 pt5 pb5 font-weight-normal color-black-3 ">{intl.get("common.time")}</th>
@@ -28,15 +27,7 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                 // const fillFm = new FillFm({...item,market})
                 return (
                   <tr key={index}>
-                    <td className="lh20 border-none pl15 pr5 text-left align-middle ">
-                      {
-                        index%2 === 0 && <span className="color-error">{intl.get("common.sell")}</span>
-                      }
-                      {
-                        index%2 === 1 && <span className="color-success">{intl.get("common.buy")}</span>
-                      }
-                    </td>
-                    <td className="lh20 border-none pl5 pr5 text-left align-middle">
+                    <td className="lh20 border-none pl15 pr5 text-left align-middle">
                       {
                         index%2 === 0 && <span className="color-error">{item.price}</span>
                       }

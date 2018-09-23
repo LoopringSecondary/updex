@@ -31,7 +31,7 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
-        <div className="pl5 pr5" style={{height:'6.5rem',paddingTop:'0rem'}}>
+        <div className="pl5 pr0" style={{height:'6.5rem',paddingTop:'0rem'}}>
          <Header />
         </div>
         <div className="row no-gutters ml0 mr0">
@@ -65,7 +65,7 @@ class Home extends React.Component {
             </div>
 
           </div>
-          <div className="col-auto p5 pr0" style={{height:'94vh',width:'37.5rem'}}>
+          <div className="col-auto p5 pr0" style={{height:'94vh',width:'32.5rem'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Order Book" />
               <div className="divider 1px zb-b-t"></div>
@@ -78,7 +78,7 @@ class Home extends React.Component {
               <div className="divider 1px zb-b-t"></div>
             </div>
           </div>
-          <div className="col-auto p5" style={{height:'94vh',width:'37.5rem'}}>
+          <div className="col-auto p5 pr0" style={{height:'94vh',width:'32.5rem'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Trade History" />
               <div className="divider 1px zb-b-t"></div>
