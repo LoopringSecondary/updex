@@ -254,8 +254,7 @@ class PlaceOrderForm extends React.Component {
               onChange={amountChange}
               className="circle h-default mt15"
               extra={
-                <div onClick={showAmountHelper} style={{width:'auto',textAlign:'right'}}>
-                  <WebIcon className="color-black-4 fs12" type="question-circle-o" style={{padding:'2px 0px 5px'}} />
+                <div style={{width:'auto',textAlign:'right'}}>
                   <span className="color-black-3 d-inline-block" style={{width:'35px',marginLeft:'7px'}}>{tokens.left}</span>
                 </div>
               }

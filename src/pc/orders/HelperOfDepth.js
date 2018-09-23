@@ -44,17 +44,18 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
                   </tr>
                 </thead>
                 <tbody className="">
+                    <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                     {
                       depth.item && depth.item.buy && depth.item.buy.slice(0,15).map((item,index)=>
                         <tr key={index} >
-                          <td className="hover-default pl15 pr10 pt5 text-left color-success align-top" onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
+                          <td className="hover-default pl15 pr10 lh20 text-left color-success align-top" onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
                             {Number(item[0]).toFixed(8)}
                             <span className="fs12 color-black-4 ml5"><Worth amount={Number(item[0]).toFixed(8)} symbol={tokens.right}/></span>
                           </td>
-                          <td className="hover-default pl10 pr10 pt5 color-black-2 text-right align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
+                          <td className="hover-default pl10 pr10 lh20 color-black-2 text-right align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                             {Number(item[1]).toFixed(4)}
                           </td>
-                          <td className="hover-default pl10 pr15 pt5 color-black-2 text-right align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
+                          <td className="hover-default pl10 pr15 lh20 color-black-2 text-right align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                             {Number(item[2]).toFixed(4)}
                           </td>
                         </tr>
@@ -68,6 +69,7 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
                           </td>
                         </tr>
                     }
+                    <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                 </tbody>
               </table>
           </div>
@@ -81,23 +83,24 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
               <table className="w-100 fs13">
                 <thead hidden>
                   <tr className="">
-                    <th className="zb-b-b text-left pl15 pr10 pt5 pb5 font-weight-normal color-black-3">{intl.get("common.sell")}</th>
-                    <th className="zb-b-b text-left pl10 pr10 pt5 pb5 font-weight-normal color-black-3">{intl.get("common.amount")}</th>
-                    <th className="zb-b-b text-right pl10 pr15 pt5 pb5 font-weight-normal color-black-3">{intl.get("common.total")}</th>
+                    <th className="zb-b-b text-left pl15 pr10 pb5 font-weight-normal color-black-3">{intl.get("common.sell")}</th>
+                    <th className="zb-b-b text-left pl10 pr10 pb5 font-weight-normal color-black-3">{intl.get("common.amount")}</th>
+                    <th className="zb-b-b text-right pl10 pr15 pb5 font-weight-normal color-black-3">{intl.get("common.total")}</th>
                   </tr>
                 </thead>
                   <tbody>
+                      <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                       {
                         sell && sell.slice(0,15).map((item,index)=>
                           <tr key={index}>
-                            <td className="hover-default pl15 pr10 pt5 text-left color-error align-top" onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
+                            <td className="hover-default pl15 pr10 lh20 text-left color-error align-top" onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
                               {Number(item[0]).toFixed(8)}
                               <span className="fs12 color-black-4 ml5"><Worth amount={Number(item[0]).toFixed(8)} symbol={tokens.right}/></span>
                             </td>
-                            <td className="hover-default pl10 pr10 pt5 color-black-2 text-left align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
+                            <td className="hover-default pl10 pr10 lh20 color-black-2 text-left align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                               {Number(item[1]).toFixed(4)}
                             </td>
-                            <td className="hover-default pl10 pr15 pt5 color-black-2 text-right align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
+                            <td className="hover-default pl10 pr15 lh20 color-black-2 text-right align-top" onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                               {Number(item[2]).toFixed(4)}
                             </td>
                           </tr>
@@ -111,6 +114,7 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
                             </td>
                           </tr>
                       }
+                      <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                   </tbody>
               </table>
           </div>

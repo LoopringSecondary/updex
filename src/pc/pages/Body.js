@@ -11,7 +11,8 @@ import PlaceOrderForm from '../orders/PlaceOrderForm';
 import PlaceOrder from 'mobile/orders/PlaceOrderPage';
 import HelperOfDepth from '../orders/HelperOfDepth';
 import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
-import HelperOfBalance from 'mobile/orders/HelperOfBalance';
+import ListMarketFills from '../fills/ListMarketFills';
+import HelperOfBalance from '../orders/HelperOfBalance';
 import MarketTitckers from 'mobile/tickers/ListMarketTickers';
 import Header from './Header'
 import PanelHeader from './PanelHeader'
@@ -44,7 +45,7 @@ class Home extends React.Component {
               </div>
             </div>
           }
-          <div className="col-auo p5 pr0" style={{height:'94vh',width:'42rem'}}>
+          <div className="col-auo p5 pr0" style={{height:'94vh',width:'40rem'}}>
             <div className="bg-white" style={{overflow:'auto',height:'auto'}}>
               <PanelHeader title="Place Order" />
               <div className="divider 1px zb-b-t"></div>
@@ -53,29 +54,18 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="bg-white mt5" style={{overflow:'auto',height:'auto'}}>
-              <Tabs
-                tabs={
-                  [
-                    { title: <div className="am-tabs-item-bak-wrapper"><div className="fs16 am-tabs-item-bak">{intl.get('place_order.assets')}</div></div>, tab:'assets' },
-                    { title: <div className="am-tabs-item-bak-wrapper"><div className="fs16 am-tabs-item-bak">{intl.get('place_order.orders')}</div></div>, tab:'orders' },
-                  ]
-                }
-                initialPage={0}
-                swipeable={false}
-                onChange={(tab, index) => {}}
-                onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
-              >
-                <div className="">
-                  <div className="divider 1px zb-b-t"></div>
-                  <HelperOfBalance />
-                </div>
-                <div className="">
-                  <div className="divider 1px zb-b-t"></div>
-                </div>
-              </Tabs>
+              <PanelHeader title="Balances" />
+              <div className="divider 1px zb-b-t"></div>
+              <HelperOfBalance />
             </div>
+            <div className="bg-white mt5" style={{overflow:'auto',height:'auto'}}>
+              <PanelHeader title="Orders" extra={"All"}/>
+              <div className="divider 1px zb-b-t"></div>
+              <HelperOfMyMarketOrders/>
+            </div>
+
           </div>
-          <div className="col-auto p5 pr0" style={{height:'94vh',width:'20vw'}}>
+          <div className="col-auto p5 pr0" style={{height:'94vh',width:'37.5rem'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Order Book" />
               <div className="divider 1px zb-b-t"></div>
@@ -88,11 +78,11 @@ class Home extends React.Component {
               <div className="divider 1px zb-b-t"></div>
             </div>
           </div>
-          <div className="col-auto p5" style={{height:'94vh',width:'20vw'}}>
+          <div className="col-auto p5" style={{height:'94vh',width:'37.5rem'}}>
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Trade History" />
               <div className="divider 1px zb-b-t"></div>
-              <HelperOfDepth />
+              <ListMarketFills />
             </div>
           </div>
 
