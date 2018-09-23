@@ -6,9 +6,9 @@ class Header extends React.Component {
     super(props);
   }
   render(){
-    const {title} = this.props
+    const {title,style={},className=''} = this.props
     return (
-      <div className="row no-gutters ml0 mr0 bg-white" style={{height:'auto'}}>
+      <div className={`row no-gutters ml0 mr0 bg-white ${className}`} style={{height:'auto',...style}}>
         <div className="col-auo d-flex align-items-center fs16 pl15 color-black-1 pt10 pb10" style={{height:'auto'}}>
           {title}
         </div>

@@ -32,7 +32,7 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
             { false && <i className="icon-star color-black-4 fs18 mr20"></i> }
             { true && <i className="icon-star text-primary fs18 mr20"></i> }
             <span className="fs24 color-black-1 ">{tokens.left} / {tokens.right}</span>
-            <WebIcon type="caret-down" className="ml30 mr20 color-black-4" />
+            <WebIcon type="caret-down" className="ml40 mr30 color-black-4" />
           </div>
         </div>
 

@@ -22,10 +22,8 @@ class Header extends React.Component {
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>
-          <div className="" style={{flex:'1',overflow:'hidden'}}>
-            <div className="bg-white mt5">
-              <ListTokens />
-            </div>
+          <div className="bg-white mt5 pb5" style={{flex:'1',overflow:'auto'}}>
+            <ListTokens />
           </div>
 
       </div>
