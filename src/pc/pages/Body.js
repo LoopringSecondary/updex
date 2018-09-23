@@ -65,11 +65,12 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-          <div className="col-auto p5 pr0" style={{height:'94vh',width:'32.5rem'}}>
-            <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
-              <PanelHeader title="Order Book" />
-              <div className="divider 1px zb-b-t"></div>
-              <HelperOfDepth />
+          <div className="col-auto p5 pr0" style={{height:'94vh',width:'37.5rem'}}>
+            <div className="bg-white position-relative d-flex flex-column" style={{height:'100%'}}>
+              <PanelHeader title="Order Book" style={{position:'absolute',left:0,right:0,top:0}}/>
+              <div className="zb-b-t mt45 pt5" style={{flex:1,overflow:'auto'}}>
+                <HelperOfDepth />
+              </div>
             </div>
           </div>
           <div className="col p5 pr0" style={{height:'94vh'}}>
@@ -79,10 +80,11 @@ class Home extends React.Component {
             </div>
           </div>
           <div className="col-auto p5 pr0" style={{height:'94vh',width:'32.5rem'}}>
-            <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
-              <PanelHeader title="Trade History" />
-              <div className="divider 1px zb-b-t"></div>
-              <ListMarketFills />
+            <div className="bg-white pb5 position-relative d-flex flex-column" style={{height:'100%'}}>
+              <PanelHeader title="Trade History" style={{position:'absolute',left:0,right:0,top:0}}/>
+              <div className="zb-b-t mt45 pt5 pb5" style={{flex:1,overflow:'auto'}}>
+                <ListMarketFills />
+              </div>
             </div>
           </div>
 
