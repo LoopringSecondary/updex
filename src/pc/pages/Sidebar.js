@@ -17,7 +17,7 @@ class Header extends React.Component {
       })
     }
     return (
-      <div className="ml5" style={{height:'100%',width:'6.5rem'}}>
+      <div className="" style={{height:'100%',width:'6.5rem'}}>
           <div className="text-center pt10 pb10 bg-white" style={{height:'6.5rem',background:"rgba(0,0,0,0.15)"}}>
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>

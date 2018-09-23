@@ -48,7 +48,7 @@ class Home extends React.Component {
             <div className="bg-white" style={{overflow:'auto',height:'auto'}}>
               <PanelHeader title="Place Order" />
               <div className="divider 1px zb-b-t"></div>
-              <div className="pt10 pb10">
+              <div className="pt5 pb5">
                 <PlaceOrderForm location={location} match={match} />
               </div>
             </div>
