@@ -18,13 +18,6 @@ class Header extends React.Component {
     }
     return (
       <div className="row no-gutters ml0 mr0 bg-white align-items-stretch" style={{height:'100%'}}>
-        {
-          false &&
-          <div className="col-auo d-flex align-items-center pl20" style={{width:'35rem'}}>
-            <img style={{height:'3.5vh'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
-            <span className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
-          </div>
-        }
         <div className="col d-flex align-items-center text-left ">
           <TickerItem />
         </div>

@@ -36,7 +36,7 @@ class Home extends React.Component {
     return (
       <div style={{height:'100vh',overflow:'none' }}>
         <div className="row no-gutters ml0 mr0">
-          <div className="col-auto" style={{height:'100vh',width:'6rem'}}>
+          <div className="col-auto" style={{height:'100vh'}}>
             <Sidebar />
           </div>
           <div className="col p5 pr0 pl0 pt0" style={{height:'100vh'}}>

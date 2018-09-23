@@ -26,11 +26,11 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
   }
 
   return (
-      <div className="row ml0 mr0 no-gutters align-items-stretch fs14" style={{height:'100%'}}>
-        <div className="col-auto pr30 zb-b-r pl30 d-flex align-items-center" style={{background:"rgba(0,0,0,0.13)"}} >
+      <div className="row ml0 mr0 no-gutters align-items-stretch fs16" style={{height:'100%'}}>
+        <div className="col-auto zb-b-r pl15 d-flex align-items-center" style={{backgroundBak:"rgba(0,0,0,0)"}} >
           <div className={`fs18 color-black-1`}>
             {tokens.left} / {tokens.right}
-            <WebIcon type="caret-down" className="ml20 fs14 text-primary" />
+            <WebIcon type="caret-down" className="ml40 fs14 mr20" />
           </div>
         </div>
         <div className="col-auto pl20 pr25 d-flex align-items-center">

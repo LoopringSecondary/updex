@@ -30,7 +30,7 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
-        <div className="pl5 pr5" style={{height:'6rem',paddingTop:'0rem'}}>
+        <div className="pl5 pr5" style={{height:'6.5rem',paddingTop:'0rem'}}>
          <Header />
         </div>
         <div className="row no-gutters ml0 mr0">

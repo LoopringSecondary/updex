@@ -17,11 +17,15 @@ class Header extends React.Component {
       })
     }
     return (
-      <div className="bg-white" style={{height:'100%',width:'100%'}}>
-          <div className="text-center pt10 pb10" style={{height:'6rem',background:"rgba(0,0,0,0.13)"}}>
+      <div className="ml5" style={{height:'100%',width:'6.5rem'}}>
+          <div className="text-center pt10 pb10 bg-white" style={{height:'6.5rem',background:"rgba(0,0,0,0.15)"}}>
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>
+          <div className="text-center pt10 pb10 bg-white mt5" style={{height:'90vh',background:"rgba(0,0,0,0.15)"}}>
+            
+          </div>
+
       </div>
     )
   }
