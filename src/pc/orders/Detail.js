@@ -12,6 +12,7 @@ import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions'
 import {OrderFm} from 'modules/orders/OrderFm';
 import DetailFills from './DetailFills'
+import CardHeader from '../common/CardHeader'
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -23,6 +24,40 @@ const OrderMetaItem = (props) => {
       <div className="col-auto text-right">
         <div className="fs14 color-black-2 text-wrap text-left">{value}</div>
       </div>
+    </div>
+  )
+}
+const Tips = ()=>{
+  return (
+    <div>
+      { false &&
+      <NoticeBar onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-error s-lg" icon={<Icon type="close-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>Enable Order<Icon type="right" /></span>}>
+        订单无法进行撮合
+      </NoticeBar>
+      }
+      { false &&
+      <NoticeBar onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-error s-lg" icon={<Icon type="close-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>Enable Order<Icon type="right" /></span>}>
+        余额为0，订单无法进行撮合
+      </NoticeBar>
+      }
+      {
+        false &&
+        <NoticeBar  onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-error s-lg" icon={<Icon type="exclamation-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>查看详情<Icon type="right" /></span>}>
+          余额不足，订单无法全部被撮合
+        </NoticeBar>
+      }
+      {
+        false &&
+        <NoticeBar  onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-info s-lg" mode="link" marqueeProps={{ loop: true}} action={<span>查看日志<Icon type="right" /></span>}>
+          该订单正在进行撮合
+        </NoticeBar>
+      }
+      {
+        false &&
+        <NoticeBar  className="text-left t-info s-lg" icon={<Icon type="question-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>查看原因<Icon type="right" /></span>}>
+          为什么订单没有撮合成交？
+        </NoticeBar>
+      }
     </div>
   )
 }
@@ -74,38 +109,23 @@ function OrderDetail(props) {
     }
   }
   return (
-    <div className="bg-white no-underline">
-      <div className="bg-white" style={{overflow:'auto'}}>
-        <div className="divider 1px zb-b-t"></div>
-        <div className="">
-          { false &&
-          <NoticeBar onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-error s-lg" icon={<Icon type="close-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>Enable Order<Icon type="right" /></span>}>
-            订单无法进行撮合
-          </NoticeBar>
-          }
-          { false &&
-          <NoticeBar onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-error s-lg" icon={<Icon type="close-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>Enable Order<Icon type="right" /></span>}>
-            余额为0，订单无法进行撮合
-          </NoticeBar>
-          }
-          {
-            false &&
-            <NoticeBar  onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-error s-lg" icon={<Icon type="exclamation-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>查看详情<Icon type="right" /></span>}>
-              余额不足，订单无法全部被撮合
-            </NoticeBar>
-          }
-          {
-            false &&
-            <NoticeBar  onClick={routeActions.gotoPath.bind(this,'/dex/todos')} className="text-left t-info s-lg" mode="link" marqueeProps={{ loop: true}} action={<span>查看日志<Icon type="right" /></span>}>
-              该订单正在进行撮合
-            </NoticeBar>
-          }
-          {
-            false &&
-            <NoticeBar  className="text-left t-info s-lg" icon={<Icon type="question-circle"/>} mode="link" marqueeProps={{ loop: true}} action={<span>查看原因<Icon type="right" /></span>}>
-              为什么订单没有撮合成交？
-            </NoticeBar>
-          }
+    <div className="bg-fill position-relative" style={{height:"100%"}}>
+      <NavBar
+        className="bg-fill position-absolute w-100"
+        mode="light"
+        icon={<Icon type="close" />}
+        onLeftClick={() => console.log('onLeftClick')}
+        leftContent={[
+        ]}
+        rightContent={[
+        ]}
+      >
+        <div className="fs16 color-black-1">Order Detail</div>
+      </NavBar>
+      <div className="pt50"></div>
+      <div className="m15 bg-white mb0 mt0" style={{borderRadius:'0.5rem'}}>
+        <CardHeader title="Order Info" />
+        <div className="" style={{borderRadius:'0.5rem'}}>
           <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
           <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
           <OrderMetaItem label={intl.get('order.price')} value={`${orderFm.getPrice()} ${orderFm.getMarketPair()}`}/>
@@ -115,11 +135,16 @@ function OrderDetail(props) {
           <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
         </div>
       </div>
-      <div className="bg-white" style={{overflow:'auto'}}>
-        <div className="divider 1px zb-b-t"></div>
-        <DetailFills order={order}/>
+      <div className="m15 bg-white" style={{borderRadius:'0.5rem'}}>
+        <CardHeader title="Order Fills" />
+        <div className="bg-white" style={{minHeight:'10rem'}}>
+          <DetailFills order={order}/>  
+        </div>
       </div>
+      <div className="pt50"></div>
     </div>
   )
 }
 export default connect()(OrderDetail)
+
+

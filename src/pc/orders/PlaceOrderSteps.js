@@ -19,10 +19,10 @@ const OrderMetaItem = (props) => {
   return (
     <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-t no-gutters" style={{padding:'7px 0px'}}>
       <div className="col">
-        <div className="fs14 color-black-2 lh30 text-left">{label}</div>
+        <div className="fs14 color-black-1 lh30 text-left">{label}</div>
       </div>
       <div className="col-auto text-right">
-        <div className="fs14 color-black-1 text-wrap lh30 text-left">{value}</div>
+        <div className="fs14 color-black-2 text-wrap lh30 text-left">{value}</div>
       </div>
       {
         !!showArrow &&
@@ -181,21 +181,10 @@ function PlaceOrderSteps(props) {
     }
   }
   return (
-    <div className="bg-white">
+    <div className="bg-white  p50">
         <Pages active="order">
           <Page id="order" render={({page})=>
             <div>
-              <div hidden className="p15 color-black-1 fs18 zb-b-b text-center">
-                <div className="row">
-                  <div className="col-auto text-left" onClick={hideLayer.bind(this,{id:'placeOrderSteps'})}>
-                    <Icon type="close" />
-                  </div>
-                  <div className="col">{intl.get('place_order.title')}</div>
-                  <div className="col-auto color-white">
-                    <Icon type="close" />
-                  </div>
-                </div>
-              </div>
               <div className="p15 bg-white">
                 <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
                   <div className="col-auto">
@@ -228,9 +217,9 @@ function PlaceOrderSteps(props) {
                 }
                 <OrderMetaItem label={intl.get("common.price")} value={`${priceInput} ${pair}`} />
                 <OrderMetaItem showArrow={false} onClick={()=>window.Toast.info('Coming Soon', 1, null, false)} label={intl.get('common.lrc_fee')} value={`${lrcFeeValue} LRC`} />
-                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}  />
+                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<span className="text-primary">{validSince.format('MM-DD HH:mm')} ~ {validUntil.format('MM-DD HH:mm')}</span>}  />
                 <div className="divider 1px zb-b-t"></div>
-                <div className="pt15 pb15 clor-black-3 fs12">
+                <div className="pt15 pb15 color-black-3 fs12 text-center">
                   <Icon className="mr5" type="exclamation-circle-o" />{intl.get('place_order_confirm.no_cost_gas')}
                 </div>
                 <Button type="primary" className="fs18" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>

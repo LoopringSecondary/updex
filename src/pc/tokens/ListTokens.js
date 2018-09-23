@@ -18,7 +18,7 @@ const TokenItem = ({item={},actions,key,index})=>{
     return (
       <div className="row ml0 mr0 pt15 align-items-center no-gutters" onClick={gotoDetail}>
         <div className="col text-center">
-            <i className={`icon-token-${item.symbol} fs20 d-block m-auto bg-primary-light text-primary`} style={{width:'36px',height:'36px',lineHeight:'36px',borderRadius:'50em'}}></i>
+            <i className={`icon-token-${item.symbol} fs20 d-block m-auto bg-primary color-black-1`} style={{width:'36px',height:'36px',lineHeight:'36px',borderRadius:'50em'}}></i>
         </div>
         <div hidden className="col text-left">
           <div>

@@ -1,8 +1,8 @@
 import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
-import OrderDetail from '../orders/Detail'
-import PlaceOrderSteps from 'mobile/orders/PlaceOrderSteps'
+import OrderDetail from './Detail'
+import PlaceOrderSteps from './PlaceOrderSteps'
 import HelperOfAdvance from './HelperOfAdvance'
 import HelperOfPrice from './HelperOfPrice'
 import HelperOfAmount from './HelperOfAmount'
@@ -15,9 +15,9 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="orderDetail" wrapClassName="modal-wrapper">
-        <UiContainers.Modals id="orderDetail">
+        <UiContainers.Popups id="orderDetail">
           <OrderDetail />
-        </UiContainers.Modals>
+        </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="placeOrderSteps" className="" wrapClassName="modal-wrapper">
         <UiContainers.Modals id="placeOrderSteps">

@@ -71,8 +71,8 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
       </div>
       <div className="zb-b-t">
         <div className="text-left pl15 pr15 pt10 pb10 zb-b-b">
-          <span className="text-primary fs18">0.00044278</span>
-          <span className="color-black-4 fs14 ml10">≈ 0.88</span>
+          <span className="color-error fs18">0.00044278</span>
+          <span className="color-black-4 fs14 ml10">≈ $0.88</span>
         </div>
       </div>
       <div className="" style={{flex:"1",overflow:'auto'}}>

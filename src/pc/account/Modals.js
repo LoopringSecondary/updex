@@ -9,9 +9,9 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="settings">
-        <UiContainers.Panels position="right" id="settings" wrapClassName="modal-wrapper">
+        <UiContainers.Popups position="right" id="settings" wrapClassName="modal-wrapper">
           <Settings />
-        </UiContainers.Panels>
+        </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="usercenter">
         <UiContainers.Panels position="right" id="usercenter">
