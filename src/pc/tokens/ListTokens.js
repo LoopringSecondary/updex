@@ -8,35 +8,27 @@ import { ListView,Button,Tabs,NavBar,Icon,SegmentedControl,Grid } from 'antd-mob
 import { Switch,Icon as WebIcon,Badge} from 'antd'
 import TokensFm from 'modules/tokens/TokensFm'
 
-const TokenItem = ({item={},actions,key,index})=>{
-    // if(!item){ return null }
-    // const tickerFm = new TickerFm(item)
-    console.log('todo item',item)
-    const gotoDetail = ()=>{
-      routeActions.gotoPath('/tokenDetail')
-    }
+const TokenItem = ({item={},actions,key,index,collapsed,loading})=>{
+    if(!item){ return null }
     return (
-      <div className="row ml0 mr0 pt15 align-items-center no-gutters" onClick={gotoDetail}>
-        <div className="col text-center">
+      <div className="row ml0 mr0 pt10 pb10 zb-b-b align-items-center justify-content-center no-gutters" onClick={()=>{}}>
+        <div className="col-auto text-center pl10 pr10">
             <i className={`icon-token-${item.symbol} fs20 d-block m-auto bg-primary color-black-1`} style={{width:'36px',height:'36px',lineHeight:'36px',borderRadius:'50em'}}></i>
         </div>
-        <div hidden className="col text-left">
+        <div hidden={collapsed} className="col text-left">
           <div>
-            <div className="fs16 color-black-2">
+            <div className="fs16 color-black-1">
               {item.symbol}
             </div>
             <div hidden className="fs14 color-black-3">
               {item.name}
             </div>
-
           </div>
         </div>
-        <div hidden className="col-auto text-right">
-          <div className="color-black-2 fs16">
-            0.000000
-          </div>
-          <div className="fs14 color-black-3">
-            $ 0.0000
+        <div hidden={collapsed} className="col-auto text-right pr15">
+          <div className="color-black-3 fs16">
+            {!loading && item.balance.toFixed(5)}
+            {loading && <span className="fs12">Loading</span>}
           </div>
         </div>
       </div>
@@ -45,7 +37,7 @@ const TokenItem = ({item={},actions,key,index})=>{
 
 
 const TokenListComp = (props)=>{
-  const {tokens,balance,marketcap, dispatch} = props
+  const {tokens,balance,marketcap, dispatch,collapsed} = props
   const tokensFm = new TokensFm({tokens, marketcap, balance})
   const formatedTokens = tokensFm.getList()
 
@@ -68,13 +60,13 @@ const TokenListComp = (props)=>{
   const showActions = (symbol) => {
     dispatch({type: 'layers/showLayer', payload: {id: 'helperOfTokenActions',symbol,hideBuy:false}});
   }
-
+  console.log("tokens",tokens)
   return (
     <div className="fs20">
       {
         formatedTokens.map((token,index)=>{
           return (
-            <TokenItem item={token} key={index}/>
+            <TokenItem item={token} key={index} collapsed={collapsed} loading={tokens.loading}/>
           )
         })
       }
