@@ -139,9 +139,9 @@ class Convert extends React.Component {
           <NavBar
             className="zb-b-b"
             mode="light"
-            onLeftClick={() => routeActions.goBack()}
+            onLeftClick={() => hideLayer({id: 'convertToken'})}
             leftContent={[
-              <Icon type="left" key='1'/>,
+              <Icon type="cross" key='1'/>,
             ]}
             rightContent={[
               <Button size="small" type="primary" onClick={swap} key='1' ><WebIcon type="swap"/></Button>,
