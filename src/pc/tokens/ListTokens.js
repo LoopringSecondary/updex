@@ -15,7 +15,7 @@ const TokenItem = ({item={},actions,key,index,collapsed,loading})=>{
         <div className="col-auto text-center pl10 pr10">
             <i className={`icon-token-${item.symbol} fs20 d-block m-auto bg-primary color-black-1`} style={{width:'36px',height:'36px',lineHeight:'36px',borderRadius:'50em'}}></i>
         </div>
-        <div hidden={collapsed} className="col text-left">
+        <div className="col text-left" style={{display:collapsed ? 'none' : 'block'}}>
           <div>
             <div className="fs16 color-black-1">
               {item.symbol}
@@ -25,13 +25,14 @@ const TokenItem = ({item={},actions,key,index,collapsed,loading})=>{
             </div>
           </div>
         </div>
-        <div hidden={collapsed} className="col-auto text-right pr15">
+        <div className="col-auto text-right pr15" style={{display:collapsed ? 'none' : 'block'}}>
           <div className="color-black-3 fs16">
             {!loading && item.balance.toFixed(5)}
             {loading && <span className="fs12">Loading</span>}
           </div>
         </div>
       </div>
+      
     )
 }
 
