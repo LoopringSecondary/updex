@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
-import { Button } from 'antd-mobile'
+import { Button,NavBar } from 'antd-mobile'
 import { clearHexPrefix, toBig, toHex } from 'LoopringJS/common/formatter'
 import config from 'common/config'
 import intl from 'react-intl-universal'
@@ -181,12 +181,25 @@ function PlaceOrderSteps(props) {
     }
   }
   return (
-    <div className="bg-white  p50">
+    <div className="bg-fill position-relative" style={{height:'100%'}}>
+        <NavBar
+          className="bg-fill"
+          mode="light"
+          icon={<Icon type="close" />}
+          onLeftClick={() => hideLayer({id:'placeOrderSteps'})}
+          leftContent={[
+          ]}
+          rightContent={[
+          ]}
+        >
+          <div className="fs16 color-black-1">Order Confirm</div>
+        </NavBar>
+        <div className="divider 1px zb-b-t"></div>
         <Pages active="order">
           <Page id="order" render={({page})=>
             <div>
-              <div className="p15 bg-white">
-                <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
+              <div className="pl15 pr15">
+                <div className="pb30 pt30 row ml0 mr0 no-gutters align-items-center justify-content-center">
                   <div className="col-auto">
                     <div className="radius-circle bg-primary color-white d-inline-flex justify-content-center align-items-center" style={{width:"40px",height:'40px'}}>
                       <i className={`icon-token-${side === 'buy' ? tokens.right : tokens.left} fs24`}/>

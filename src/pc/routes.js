@@ -7,6 +7,7 @@ import Account from './account'
 import Markets from './tickers/Markets'
 import MarketsSearch from './tickers/ListSearchTickers'
 import MarketDetail from './tickers/Detail'
+import MarketModals from './tickers/Modals'
 import Convert from './tokens/ConvertForm'
 import PlaceOrder from './orders/PlaceOrderPage'
 import UserCenter from './account/UserCenter'
@@ -40,6 +41,7 @@ const Logged = ()=>{
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
+        <MarketModals />
       </div>
     )
   }else{

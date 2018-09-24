@@ -110,38 +110,42 @@ function OrderDetail(props) {
   }
   return (
     <div className="bg-fill position-relative" style={{height:"100%"}}>
-      <NavBar
-        className="bg-fill position-absolute w-100"
-        mode="light"
-        icon={<Icon type="close" />}
-        onLeftClick={() => console.log('onLeftClick')}
-        leftContent={[
-        ]}
-        rightContent={[
-        ]}
-      >
-        <div className="fs16 color-black-1">Order Detail</div>
-      </NavBar>
-      <div className="pt50"></div>
-      <div className="m15 bg-white mb0 mt0" style={{borderRadius:'0.5rem'}}>
-        <CardHeader title="Order Info" />
-        <div className="" style={{borderRadius:'0.5rem'}}>
-          <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
-          <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
-          <OrderMetaItem label={intl.get('order.price')} value={`${orderFm.getPrice()} ${orderFm.getMarketPair()}`}/>
-          <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
-          <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
-          <OrderMetaItem label={intl.get('order.LRCFee')} value={orderFm.getLRCFee()}/>
-          <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
+      <div className="position-absolute w-100" style={{zIndex:'1000'}}>
+        <NavBar
+          className="bg-fill"
+          mode="light"
+          onLeftClick={()=>hideLayer({id:'orderDetail'})}
+          leftContent={[
+            <span key='1' className=""><Icon type="close"/></span>,
+          ]}
+          rightContent={null && [
+            <Icon key="1" type="question-circle-o"/>,
+          ]}
+        >
+          <div className="color-black">Order Info</div>
+        </NavBar>
+        <div className="divider 1px zb-b-t"></div>
+      </div>
+      <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
+        <div className="ml0 mr0 mb15 mt15">
+          <div className="ml15 fs14 text-primary text-left mb5">Order Detail</div>
+          <div className="bg-white" style={{borderRadius:'0.0rem'}}>
+            <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
+            <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
+            <OrderMetaItem label={intl.get('order.price')} value={`${orderFm.getPrice()} ${orderFm.getMarketPair()}`}/>
+            <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
+            <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
+            <OrderMetaItem label={intl.get('order.LRCFee')} value={orderFm.getLRCFee()}/>
+            <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
+          </div>
+        </div>
+        <div className="ml0 mr0 mb15">
+          <div className="ml15 fs14 text-primary text-left mb5">Fills</div>
+          <div className="bg-white" style={{borderRadius:'0.0rem'}}>
+            <DetailFills order={order}/>  
+          </div>
         </div>
       </div>
-      <div className="m15 bg-white" style={{borderRadius:'0.5rem'}}>
-        <CardHeader title="Order Fills" />
-        <div className="bg-white" style={{minHeight:'10rem'}}>
-          <DetailFills order={order}/>  
-        </div>
-      </div>
-      <div className="pt50"></div>
     </div>
   )
 }

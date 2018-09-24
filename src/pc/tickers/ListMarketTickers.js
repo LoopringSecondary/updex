@@ -142,6 +142,7 @@ export const TickerList = ({items,loading,dispatch, tickersList})=>{
 
   return (
     <div className="">
+      <div className="divider 1px zb-b-t"></div>
       <Spin spinning={loading}>
         {!loading && items.length > 0 &&
           <div>
@@ -209,6 +210,7 @@ class ListMarketTickers extends React.Component {
         tabs.push({ title: <div className="fs16">{intl.get('ticker_list.title_innovation')}</div> })
       }
       return (
+        <div className="bg-white">
           <Tabs
             tabs={tabs}
             tabBarTextStyle={{}}
@@ -225,6 +227,7 @@ class ListMarketTickers extends React.Component {
             <TickerList items={newMarktsTickers} loading={list.loading} dispatch={dispatch} tickersList={list}/>
             <TickerList items={[]} loading={list.loading} dispatch={dispatch} />
           </Tabs>
+        </div>
       )
   }
 }

@@ -24,10 +24,18 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
   if(direction === 'none'){
     color = "text-primary"
   }
+  const showLayer = (id)=>{
+    dispatch({
+      type:'layers/showLayer',
+      payload:{
+        id
+      }
+    })
+  }
 
   return (
       <div className="row ml0 mr0 no-gutters align-items-stretch fs18" style={{height:'100%'}}>
-        <div className="col-auto zb-b-r pl15 d-flex align-items-center" style={{backgroundBak:"rgba(0,0,0,0)"}} >
+        <div onClick={showLayer.bind(this,'ListMarketTickers')} className="cursor-pointer col-auto zb-b-r pl15 d-flex align-items-center" style={{backgroundBak:"rgba(0,0,0,0)"}} >
            <div className={``}>
             { true && <i className="icon-star color-black-4 fs18 mr20"></i> }
             { false && <i className="icon-star text-primary fs18 mr20"></i> }

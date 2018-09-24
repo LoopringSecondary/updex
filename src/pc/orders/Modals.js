@@ -19,10 +19,10 @@ function Modals(props) {
           <OrderDetail />
         </UiContainers.Popups>
       </Containers.Layers>
-      <Containers.Layers id="placeOrderSteps" className="" wrapClassName="modal-wrapper">
-        <UiContainers.Modals id="placeOrderSteps">
+      <Containers.Layers id="placeOrderSteps" className="">
+        <UiContainers.Popups id="placeOrderSteps">
           <PlaceOrderSteps />
-        </UiContainers.Modals>
+        </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfAdvance">
         <UiContainers.Popups id="helperOfAdvance">
