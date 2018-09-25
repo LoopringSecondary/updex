@@ -1,6 +1,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'dva/router';
 import DexRoutes from './dex/routes';
+import PCRoutes from './pc/routes';
 import AuthRoutes from './auth/routes';
 import TestRoutes from './test/routes'
 import Face2FaceRoutes from './face2face/routes';
@@ -17,6 +18,7 @@ function RouterConfig({ history }) {
           <div>
             <AuthRoutes />
             <DexRoutes />
+            <PCRoutes />
             <TestRoutes />
             <Face2FaceRoutes />
           </div>
