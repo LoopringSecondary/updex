@@ -305,6 +305,14 @@
     border:none !important;
   }
 }
+.am-list-item.overflow-visible{
+  .am-list-content{
+    overflow:visible !important;
+  }
+  .am-list-line{
+    overflow:visible !important;
+  }
+}
 .settings{
   .am-list-body{
     background: @bg-white !important;
@@ -424,24 +432,4 @@
     background:@brand-primary !important;
   }
 
-}
-.modal-wrapper{
-  .ant-modal-content{
-    .ant-modal-body{
-      padding:0px !important;  
-    }
-  }
-}
-.am-modal-popup {
-  width:100%;
-  max-width:640px;
-  top:0;
-  bottom:0;
-  left:0;
-  right:0;
-  margin:0 auto;
-  .am-modal-content{
-    background: transparent;
-    background: @fill-body !important;
-  }
 }
