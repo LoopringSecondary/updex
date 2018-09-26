@@ -14,15 +14,15 @@ import HelperOfLRCFee from './HelperOfLRCFee'
 function Modals(props) {
   return (
     <div>
-      <Containers.Layers position="right" id="orderDetail" style={{width:'480px',height:'100%'}}>
-        <UiContainers.Panels id="orderDetail">
+      <Containers.Layers id="orderDetail">
+        <UiContainers.Panels position="left" id="orderDetail" style={{width:'480px',height:'100%'}}>
           <OrderDetail />
         </UiContainers.Panels>
       </Containers.Layers>
-      <Containers.Layers id="placeOrderSteps" className="h100" style={{width:'480px',margin:'0 auto'}}>
-        <UiContainers.Popups id="placeOrderSteps">
+      <Containers.Layers id="placeOrderSteps" >
+        <UiContainers.Panels position="left" id="placeOrderSteps" className="h100" style={{width:'540px',margin:'0 auto',height:'100%'}}>
           <PlaceOrderSteps />
-        </UiContainers.Popups>
+        </UiContainers.Panels>
       </Containers.Layers>
       <Containers.Layers id="helperOfAdvance">
         <UiContainers.Popups id="helperOfAdvance">

@@ -148,7 +148,7 @@ class Convert extends React.Component {
     const fromToken = token
     const toToken = token.toLowerCase() === 'eth' ? 'WETH' : 'ETH'
     return (
-      <div className="">
+      <div className="h100 bg-white">
         <div className="bg-white">
           <NavBar
             className="zb-b-b"

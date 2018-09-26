@@ -18,10 +18,10 @@ function MarketPage(props) {
   }
 
   return (
-    <div className="bg-fill position-relative" style={{height:'100%'}}>
+    <div className="bg-white position-relative" style={{height:'100%'}}>
       <div className="position-absolute w-100" style={{zIndex:'1000'}}>
         <NavBar
-          className="bg-fill"
+          className="bg-white"
           mode="light"
           onLeftClick={()=>hideLayer({id:'ListMarketTickers'})}
           leftContent={[
