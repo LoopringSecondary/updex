@@ -7,12 +7,15 @@ import Containers from 'modules/containers'
 import routeActions from 'common/utils/routeActions'
 import storage from 'modules/storage'
 import intl from 'react-intl-universal'
+import TVChartContainer from './TVChartContainer/index';
 
 class Kline extends React.Component {
   render() {
     return (
       <div className="p15">
-          <div className="fs16 color-black-4">Kline Chart</div>
+          <div className="fs16 color-black-4">
+            <TVChartContainer />
+          </div>
       </div>
     );
   }

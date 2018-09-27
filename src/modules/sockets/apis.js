@@ -24,6 +24,10 @@ const isArray = (obj)=>{
   return Object.prototype.toString.call(obj) === '[object Array]'
 }
 
+const sorter = (a, b)=>{
+  return a.start - b.start;
+}
+
 const updateEstimateGasPrice = (item,id)=>{
   const dispatch = require('../../index.js').default._store.dispatch
   if(item.value) {
@@ -133,6 +137,42 @@ const transfromers = {
         item ={ ...res.data.depth }
       }
       updateItem(item,id)
+    },
+  },
+  trends: {
+    queryTransformer: (payload) => {
+      const {filters} = payload
+      return JSON.stringify({
+        "delegateAddress": config.getDelegateAddress(),
+        "market": filters.market,
+        "interval": '1Hr',
+      })
+    },
+    resTransformer: (id, res) => {
+      if (!res) return null
+      res = JSON.parse(res)
+      // console.log(id,'res',res)
+      let items = []
+      if (!res.error && res.data && isArray(res.data)) {
+        items = [...res.data]
+      }
+      updateItems(items, id)
+      if(window.TrendCallBack) {
+        console.log('trends socket callback...')
+        const sorted = items.sort(sorter)
+        const last = sorted[sorted.length - 1]
+        const data = {
+          close:last.close,
+          high:last.high,
+          //isBarClosed: true,
+          //isLastBar: false,
+          low:last.low,
+          open:last.open,
+          time:last.start * 1000,
+          volume:last.vol
+        }
+        window.TrendCallBack(data)
+      }
     },
   },
   trades:{
