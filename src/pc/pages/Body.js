@@ -38,8 +38,6 @@ class Home extends React.Component {
         <div className="row no-gutters ml0 mr0">
           <div className="col-auo p5 pr0 pb0 d-flex flex-column" style={{height:'94vh',width:'40rem'}}>
             <div className="bg-white">
-              <PanelHeader title="Place Order" />
-              <div className="divider 1px zb-b-t"></div>
               <div className="pt5 pb5">
                 <PlaceOrderForm location={location} match={match} />
               </div>
