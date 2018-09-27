@@ -47,22 +47,22 @@ class Home extends React.Component {
               </div>
             </div>
           </div>
-          <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'42rem'}}>
+          <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
             <div className="bg-white position-relative d-flex flex-column" style={{flex:1}}>
               <PanelHeader title="Order Book" style={{position:'absolute',left:0,right:0,top:0}}/>
-              <div className="zb-b-t mt45 pt5" style={{flex:1,overflow:'auto'}}>
+              <div className="zb-b-t mt45 " style={{flex:1,overflow:'auto',paddingBottom:'8px'}}>
                 <HelperOfDepth />
               </div>
             </div>
             <div className="bg-white mt5" style={{flex:'none',overflow:'auto',height:'365px'}}>
-              <PanelHeader title="Place Order" />
+              <PanelHeader title="Buy" />
               <div className="divider 1px zb-b-t"></div>
               <div className="pt5 pb5">
                 <PlaceOrderForm location={location} match={match} />
               </div>
             </div>
           </div>
-          <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
+          <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'32.5rem'}}>
             <div className="bg-white pb5 position-relative d-flex flex-column" style={{flex:1}}>
               <PanelHeader title="Trade History" style={{position:'absolute',left:0,right:0,top:0}}/>
               <div className="zb-b-t mt45 pt5 pb5" style={{flex:1,overflow:'auto'}}>
@@ -70,11 +70,20 @@ class Home extends React.Component {
               </div>
             </div>
             <div className="bg-white mt5" style={{flex:'none',overflow:'auto',height:'365px'}}>
-              <PanelHeader title="Balances" />
+              <PanelHeader title="Sell" />
               <div className="divider 1px zb-b-t"></div>
-              <HelperOfBalance />
+              <div className="pt5 pb5">
+                <PlaceOrderForm location={location} match={match} />
+              </div>
             </div>
-            
+            {
+              false &&
+              <div className="bg-white mt5" style={{flex:'none',overflow:'auto',height:'365px'}}>
+                <PanelHeader title="Balances" />
+                <div className="divider 1px zb-b-t"></div>
+                <HelperOfBalance />
+              </div>
+            }
           </div>
 
         </div>

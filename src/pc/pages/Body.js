@@ -35,16 +35,6 @@ class Home extends React.Component {
          <Header />
         </div>
         <div className="row no-gutters ml0 mr0">
-          {
-            false &&
-            <div className="col-auto p5 pr0" style={{height:'94vh',width:'35rem'}}>
-              <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
-                <PanelHeader title="Markets" />
-                <div className="divider 1px zb-b-t"></div>
-                <MarketTitckers />
-              </div>
-            </div>
-          }
           <div className="col-auo p5 pr0 pb0 d-flex flex-column" style={{height:'94vh',width:'40rem'}}>
             <div className="bg-white">
               <PanelHeader title="Place Order" />

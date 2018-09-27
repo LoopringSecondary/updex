@@ -68,6 +68,18 @@
 .bg-fill-light{
   background:fade(@fill-body,40%) !important;
 }
+.hover-bg-primary:hover{
+  background:@brand-primary !important;
+  .text-primary{
+    &:extend(.color-black-1);
+  }
+}
+.bg-primary:hover{
+  background:@brand-primary !important;
+  .text-primary{
+    &:extend(.color-black-1);
+  }
+}
 
 .radius-4{
   border-radius:4px !important;

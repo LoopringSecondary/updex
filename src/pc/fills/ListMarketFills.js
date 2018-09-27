@@ -27,21 +27,21 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                 // const fillFm = new FillFm({...item,market})
                 return (
                   <tr key={index}>
-                    <td className="lh25 border-none pl15 pr5 text-left align-middle">
+                    <td className="lh20 border-none pl15 pr5 text-left align-middle">
                       {
-                        index%2 === 0 && <span className="color-error">{item.price}</span>
+                        index%2 === 0 && <span className="color-error">{item.price.toFixed(8)}</span>
                       }
                       {
-                        index%2 === 1 && <span className="color-success">{item.price}</span>
+                        index%2 === 1 && <span className="color-success">{item.price.toFixed(8)}</span>
                       }
                     </td>
-                    <td className="lh25 border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap">
-                      {item.amount}
+                    <td className="lh20 border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap">
+                      {item.amount.toFixed(4)}
                     </td>
-                    <td hidden className="lh25 border-none pl5 pr5 text-right color-black-2 align-middle text-nowrap">
+                    <td hidden className="lh20 border-none pl5 pr5 text-right color-black-2 align-middle text-nowrap">
                       {item.lrcFee}
                     </td>
-                    <td className="lh25 border-none pl5 pr15 color-black-2 text-right align-middle text-nowrap">
+                    <td className="lh20 border-none pl5 pr15 color-black-2 text-right align-middle text-nowrap">
                       {getFormatTime(toNumber(item.createTime) * 1e3,'MM-DD HH:mm')}
                     </td>
                   </tr>

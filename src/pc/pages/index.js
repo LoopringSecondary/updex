@@ -1,8 +1,8 @@
 import Home from './Home'
 import Todo from './Todo'
-import Trade2 from './Trade2'
+import Home2 from './Home2'
 export default {
   Home,
   Todo,
-  Trade2,
+  Home2,
 }
