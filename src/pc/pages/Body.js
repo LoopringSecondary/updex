@@ -14,6 +14,7 @@ import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
 import ListMarketFills from '../fills/ListMarketFills';
 import HelperOfBalance from '../orders/HelperOfBalance';
 import MarketTitckers from 'mobile/tickers/ListMarketTickers';
+import Kline from 'mobile/charts/Kline';
 import Header from './Header'
 import PanelHeader from './PanelHeader'
 
@@ -67,6 +68,7 @@ class Home extends React.Component {
             <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
               <PanelHeader title="Kline Chart" />
               <div className="divider 1px zb-b-t"></div>
+              <Kline />
             </div>
           </div>
           <div className="col-auto p5 pr0" style={{height:'94vh',width:'32.5rem'}}>

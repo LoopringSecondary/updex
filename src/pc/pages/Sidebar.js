@@ -8,7 +8,7 @@ class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
-      collapsed:false,
+      collapsed:true,
       defaultCollapsed:true,
     }
   }
@@ -31,8 +31,8 @@ class Sidebar extends React.Component {
           </div>
           <div className="bg-white mt5 pt5 pb5 d-flex flex-column" style={{flex:'1'}}>
             <div style={{flex:'1',overflow:'auto'}}>
-              {false && <ListTokens collapsed={collapsed}/>}
-              {true && <MarketTitckers  />}
+              {true && <ListTokens collapsed={collapsed}/>}
+              {false && <MarketTitckers  />}
             </div>
           </div>
       </div>
