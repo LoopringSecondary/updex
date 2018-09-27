@@ -2,6 +2,7 @@ import * as React from 'react';
 import './index.css';
 import {connect} from "dva";
 import historyProvider from "./api/historyProvider";
+import {getOverides} from './theme.js'
 
 function getLanguageFromURL() {
 	const regex = new RegExp('[\\?&]lang=([^&#]*)');
@@ -123,7 +124,7 @@ class TVChartContainer extends React.PureComponent {
       },
       interval: '60',
       timeframe: '60',
-      toolbar_bg: "#1d2337",
+      toolbar_bg: "red",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
 			locale: getLanguageFromURL() || 'en',
@@ -147,25 +148,26 @@ class TVChartContainer extends React.PureComponent {
 			client_id: 'tradingview.com',
 			user_id: 'public_user_id',
       width: '100%',
-      height: '60%',
+      height: '100%',
 			fullscreen: false,
 			autosize:false,
       loading_screen: {
-        backgroundColor: "#08274c"
+        backgroundColor: "#000"
       },
-      overrides: {
-        "volumePaneSize": "small",
-				"mainSeriesProperties.showCountdown": true,
-				"paneProperties.background": "#08274c",
-				"paneProperties.vertGridProperties.color": "#363c4e",
-				"paneProperties.horzGridProperties.color": "#363c4e",
-				"symbolWatermarkProperties.transparency": 90,
-				"scalesProperties.textColor" : "#AAA",
-				"mainSeriesProperties.candleStyle.wickUpColor": '#336854',
-				"mainSeriesProperties.candleStyle.wickDownColor": '#7f323f',
-        //"paneProperties.topMargin": 20,
-        //"paneProperties.bottomMargin": 40,
-      },
+      // ...getOverides(),
+      //   overrides: {
+      //     "volumePaneSize": "large",
+  				// "mainSeriesProperties.showCountdown": true,
+  				// "paneProperties.background": "#08274c",
+  				// "paneProperties.vertGridProperties.color": "#363c4e",
+  				// "paneProperties.horzGridProperties.color": "#363c4e",
+  				// "symbolWatermarkProperties.transparency": 90,
+  				// "scalesProperties.textColor" : "#AAA",
+  				// "mainSeriesProperties.candleStyle.wickUpColor": '#336854',
+  				// "mainSeriesProperties.candleStyle.wickDownColor": '#7f323f',
+      //     //"paneProperties.topMargin": 20,
+      //     //"paneProperties.bottomMargin": 40,
+      //   },
 		};
     const tvWidget = new window.TradingView.widget(widgetOptions);
     this.tvWidget = tvWidget

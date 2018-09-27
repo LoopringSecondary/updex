@@ -12,10 +12,8 @@ import TVChartContainer from './TVChartContainer/index';
 class Kline extends React.Component {
   render() {
     return (
-      <div className="p15">
-          <div className="fs16 color-black-4">
-            <TVChartContainer />
-          </div>
+      <div className="position-relative">
+        <TVChartContainer />
       </div>
     );
   }
