@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, InputItem, List, SegmentedControl, Toast ,Modal} from 'antd-mobile'
+import { Button, InputItem, List, SegmentedControl, Toast ,Modal,Slider} from 'antd-mobile'
 import { Icon as WebIcon,Affix } from 'antd'
 import { connect } from 'dva'
 import { getTokensByMarket } from 'modules/formatter/common'
@@ -240,7 +240,7 @@ class PlaceOrderForm extends React.Component {
                   {
                     price>0 && <span className="color-black-4 fs12">≈ <Worth amount={price} symbol={tokens.right}/></span>
                   }
-                  <span className="color-black-3 d-inline-block" style={{width:'35px',marginLeft:'7px'}}>{tokens.right}</span>
+                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.right}</span>
                   <WebIcon hidden className="text-primary" type="question-circle-o" style={{padding:'2px 0px 5px'}} onClick={showAmountHelper} />
                 </div>
               }
@@ -255,10 +255,20 @@ class PlaceOrderForm extends React.Component {
               className="circle h-default mt15"
               extra={
                 <div style={{width:'auto',textAlign:'right'}}>
-                  <span className="color-black-3 d-inline-block" style={{width:'35px',marginLeft:'7px'}}>{tokens.left}</span>
+                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.left}</span>
                 </div>
               }
             ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
+            {
+              false &&
+              <Item
+                className="overflow-visible"
+              >
+                <div className="pl0 pr0">
+                  <Slider />
+                </div>
+              </Item>
+            }
             <InputItem
               type="text"
               disabled={true}
@@ -268,21 +278,22 @@ class PlaceOrderForm extends React.Component {
               className="circle h-default mt15"
               extra={
                 <div style={{width:'auto',textAlign:'right'}}>
-                  <span className="color-black-3 d-inline-block" style={{width:'35px',marginLeft:'7px'}}>{tokens.right}</span>
+                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.right}</span>
                 </div>
               }
             ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
-              <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
+
+            <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
                <div className="lh20">
                  <div className="lh20">{intl.get(`common.${side}`)}  {amount>0 ? amount : null} {tokens.left} </div>
                  {
-                  total>0 &&
+                  false && total>0 &&
                    <div className="fs12 lh10" style={{opacity:'0.45',paddingTop:'0.3rem'}}>
                      {total} {tokens.right}
                    </div>
                  }
                </div>
-              </Button>
+            </Button>
           </List>
         </div>
       </div>

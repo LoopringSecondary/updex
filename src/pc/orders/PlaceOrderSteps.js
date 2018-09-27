@@ -192,7 +192,7 @@ function PlaceOrderSteps(props) {
           rightContent={[
           ]}
         >
-          <div className="fs16 color-black-1">Order Confirm</div>
+          <div className="fs16 color-black-1">Place Order</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
         <Pages active="order">

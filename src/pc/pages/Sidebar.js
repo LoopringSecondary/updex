@@ -3,7 +3,7 @@ import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import ListTokens from '../tokens/ListTokens';
-
+import MarketTitckers from 'mobile/tickers/ListMarketTickers';
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -22,7 +22,7 @@ class Sidebar extends React.Component {
     }
     
     const collapsed = this.state.collapsed
-    const collapsedWidth = collapsed ? '6.5rem' : '28rem'
+    const collapsedWidth = collapsed ? '6.5rem' : '37.5rem'
     return (
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0.3s'}}>
           <div className="text-center bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6.5rem'}}>
@@ -31,7 +31,8 @@ class Sidebar extends React.Component {
           </div>
           <div className="bg-white mt5 pt5 pb5 d-flex flex-column" style={{flex:'1'}}>
             <div style={{flex:'1',overflow:'auto'}}>
-              <ListTokens collapsed={collapsed}/>  
+              {true && <ListTokens collapsed={collapsed}/>}
+              {false && <MarketTitckers  />}
             </div>
           </div>
       </div>

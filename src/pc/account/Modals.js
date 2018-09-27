@@ -9,7 +9,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="settings">
-        <UiContainers.Panels position="right" id="settings" style={{width:'480px',height:'100%'}}>
+        <UiContainers.Panels position="right" id="settings" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
           <Settings />
         </UiContainers.Panels>
       </Containers.Layers>
