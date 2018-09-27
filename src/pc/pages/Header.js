@@ -17,7 +17,7 @@ class Header extends React.Component {
       })
     }
     return (
-      <div className="row no-gutters ml0 mr0 bg-white align-items-stretch" style={{height:'100%'}}>
+      <div className="row no-gutters ml0 mr0 bg-white-light align-items-stretch" style={{height:'100%'}}>
         <div className="col d-flex align-items-center text-left ">
           <TickerItem />
         </div>

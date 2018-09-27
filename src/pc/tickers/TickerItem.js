@@ -35,10 +35,10 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
 
   return (
       <div className="row ml0 mr0 no-gutters align-items-stretch fs18" style={{height:'100%'}}>
-        <div onClick={showLayer.bind(this,'ListMarketTickers')} className="cursor-pointer col-auto zb-b-r hover-bg-primary pl15 d-flex align-items-center" >
-           <div className={``}>
-            <WebIcon type="menu-fold" className="fs24 mr20 text-primary" />
-            <span className="fs24 text-primary mr30">{tokens.left} / {tokens.right}</span>
+        <div onClick={showLayer.bind(this,'ListMarketTickers')} className="cursor-pointer col-auto zb-b-r hover-bg-primary d-flex align-items-center" >
+           <div className={`pl20`}>
+            <WebIcon type="menu-fold" className="fs20 mr20 text-primary font-weight-bold" />
+            <span className="fs20 font-weight-bold text-primary mr30">{tokens.left} / {tokens.right}</span>
             { false && <WebIcon type="caret-down" className="mr30 text-primary" /> }
             { false && <i className="icon-star color-black-4 fs18 mr30"></i> }
             { false && <i className="icon-star color-black fs18 mr30"></i> }
