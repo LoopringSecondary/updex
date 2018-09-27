@@ -3,12 +3,12 @@ import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import ListTokens from '../tokens/ListTokens';
-import MarketTitckers from 'mobile/tickers/ListMarketTickers';
+import MarketTitckers from '../tickers/ListMarketTickers';
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
     this.state ={
-      collapsed:true,
+      collapsed:false,
       defaultCollapsed:true,
     }
   }
@@ -22,17 +22,17 @@ class Sidebar extends React.Component {
     }
     
     const collapsed = this.state.collapsed
-    const collapsedWidth = collapsed ? '6.5rem' : '37.5rem'
+    const collapsedWidth = collapsed ? '6.5rem' : '34rem'
     return (
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0.3s'}}>
-          <div className="bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6.5rem'}}>
+          <div className="bg-white-light d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6.5rem'}}>
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden={collapsed} className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>
-          <div className="bg-white mt5 pt5 pb5 d-flex flex-column" style={{flex:'1'}}>
+          <div className="bg-white-light mt5 d-flex flex-column" style={{flex:'1'}}>
             <div style={{flex:'1',overflow:'auto'}}>
-              {true && <ListTokens collapsed={collapsed}/>}
-              {false && <MarketTitckers  />}
+              {false && <ListTokens collapsed={collapsed}/>}
+              {true && <MarketTitckers  />}
             </div>
           </div>
       </div>
