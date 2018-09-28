@@ -8,7 +8,7 @@ class Header extends React.Component {
   render(){
     const {title,style={},className=''} = this.props
     return (
-      <div className={`bg-white d-flex flex-column pb10 ${className}`} style={{...style,borderRadius:'6px'}}>
+      <div className={`bg-white d-flex flex-column pb10 ${className}`} style={{...style,borderRadius:'0px',margin:'5px'}}>
         {this.props.children}
       </div>
       

@@ -33,49 +33,39 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
-        <div className="pl5 pr0" style={{height:'6.5rem',paddingTop:'0rem'}}>
-         <Header />
+        <div className="d-flex flex-column mt0 mb5 ml5" style={{height:'6.5rem'}}>
+          <Header />
         </div>
-        <div className="row no-gutters ml0 mr0">
-          <div className="col p5 pr0 d-flex flex-column" style={{flex:'1'}}>
+        <div className="row no-gutters">
+          <div className="col d-flex flex-column" style={{flex:'1'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Kline Chart" />
               <Kline />
             </PanelWrapper>
           </div>
-          <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'40rem'}}>
+          <div className="col-auto d-flex flex-column" style={{height:'94vh',width:'40rem'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
             </PanelWrapper>
-            <PanelWrapper className="mt5" style={{height:'365px'}}>
+            <PanelWrapper className="" style={{height:'365px'}}>
               <PanelHeader title="Place Order" />
               <div className="pt10"></div>
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
-            
           </div>
-          <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
+          <div className="col-auto d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Trade History" />
               <ListMarketFills />
             </PanelWrapper>
-            <PanelWrapper className="mt5" style={{height:'365px'}}>
+            <PanelWrapper className="" style={{height:'365px'}}>
               <PanelHeader title="Orders" />
               <div style={{flex:'1',overflow:'auto'}}>
                 <HelperOfMyMarketOrders />
               </div>
             </PanelWrapper>
-            {
-              false &&
-              <div className="bg-white mt5" style={{flex:'none',overflow:'auto',height:'365px'}}>
-                <PanelHeader title="Balances" />
-                <div className="divider 1px zb-b-t"></div>
-                <HelperOfBalance />
-              </div>
-            }
           </div>
-
         </div>
       </div>
     )

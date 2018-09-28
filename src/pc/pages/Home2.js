@@ -39,7 +39,7 @@ class Home extends React.Component {
           <div className="col-auto" style={{height:'100vh'}}>
             <Sidebar />
           </div>
-          <div className="col p5 pr0 pl0 pt0" style={{height:'100vh'}}>
+          <div className="col" style={{height:'100vh'}}>
             <Body2 location={location} match={match} />
           </div>
         </div>
