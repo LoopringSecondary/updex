@@ -18,8 +18,13 @@ class Sidebar extends React.Component {
         payload:{id}
       })
     }
-    
-    const collapsed = sidebar && !sidebar.visible
+    console.log('sidebar',sidebar)
+    let collapsed 
+    if(sidebar){
+      collapsed = !sidebar.visible
+    }else{
+      collapsed = true
+    }
     const collapsedWidth = collapsed ? '6.5rem' : '37.5rem'
     return (
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0.3s'}}>
