@@ -17,6 +17,7 @@ import MarketTitckers from 'mobile/tickers/ListMarketTickers';
 import Kline from 'mobile/charts/Kline';
 import Header from './Header'
 import PanelHeader from './PanelHeader'
+import PanelWrapper from './PanelWrapper'
 
 class Home extends React.Component {
   constructor(props) {
@@ -37,41 +38,34 @@ class Home extends React.Component {
         </div>
         <div className="row no-gutters ml0 mr0">
           <div className="col p5 pr0 d-flex flex-column" style={{flex:'1'}}>
-            <div className="bg-white pb5" style={{overflow:'auto',height:'100%'}}>
+            <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Kline Chart" />
-              <div className="divider 1px zb-b-t"></div>
               <Kline />
-            </div>
-            
+            </PanelWrapper>
           </div>
           <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'40rem'}}>
-            <div className="bg-white position-relative d-flex flex-column" style={{flex:1}}>
-              <PanelHeader title="Order Book" style={{position:'absolute',left:0,right:0,top:0}}/>
-              <div className="zb-b-t mt45 " style={{flex:1,overflow:'auto',paddingBottom:'8px'}}>
-                <HelperOfDepth />
-              </div>
-            </div>
-            <div className="bg-white mt5" style={{flex:'none',overflow:'auto',height:'365px'}}>
+            <PanelWrapper style={{flex:'1'}}>
+              <PanelHeader title="Order Book" />
+              <HelperOfDepth />
+            </PanelWrapper>
+            <PanelWrapper className="mt5" style={{height:'365px'}}>
               <PanelHeader title="Place Order" />
-              <div className="divider 1px zb-b-t"></div>
-              <div className="pt5 pb5">
-                <PlaceOrderForm location={location} match={match} />
-              </div>
-            </div>
+              <div className="pt10"></div>
+              <PlaceOrderForm location={location} match={match} />
+            </PanelWrapper>
+            
           </div>
           <div className="col-auto p5 pr0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
-            <div className="bg-white pb5 position-relative d-flex flex-column" style={{flex:1}}>
-              <PanelHeader title="Trade History" style={{position:'absolute',left:0,right:0,top:0}}/>
-              <div className="zb-b-t mt45 pt5 pb5" style={{flex:1,overflow:'auto'}}>
-                <ListMarketFills />
-              </div>
-            </div>
-            <div className="bg-white mt5 position-relative d-flex flex-column" style={{flex:'none',height:'365px'}}>
-              <PanelHeader title="Orders" style={{position:'absolute',left:0,right:0,top:0}}/>
-              <div className="zb-b-t mt45 pt5 pb5" style={{flex:1,overflow:'auto'}}>
+            <PanelWrapper style={{flex:'1'}}>
+              <PanelHeader title="Trade History" />
+              <ListMarketFills />
+            </PanelWrapper>
+            <PanelWrapper className="mt5" style={{height:'365px'}}>
+              <PanelHeader title="Orders" />
+              <div style={{flex:'1',overflow:'auto'}}>
                 <HelperOfMyMarketOrders />
               </div>
-            </div>
+            </PanelWrapper>
             {
               false &&
               <div className="bg-white mt5" style={{flex:'none',overflow:'auto',height:'365px'}}>

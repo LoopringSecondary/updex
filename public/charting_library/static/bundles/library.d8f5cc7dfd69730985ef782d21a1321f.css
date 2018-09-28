@@ -10038,8 +10038,8 @@ html.theme-dark .context-menu .action-separator td {
 }
 
 .chart-header {
-  background-color: #fff;
-  border-bottom: 1px solid gray;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
   color: #fff
 }
 
@@ -10088,7 +10088,7 @@ td.chart-markup-table {
   border-collapse: collapse;
   margin: 0;
   padding: 0;
-  background-color: #fff;
+  background-color: transparent;
   text-align: left;
   color: #4a4a4a
 }
@@ -19852,7 +19852,8 @@ html.theme-dark .custom-select .items .item.selected {
 }
 
 .price-axis {
-  cursor: default
+  cursor: default;
+  display: none !important;
 }
 
 .price-axis--cursor-grabbing {

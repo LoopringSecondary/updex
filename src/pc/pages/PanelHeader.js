@@ -8,9 +8,9 @@ class Header extends React.Component {
   render(){
     const {title,style={},className=''} = this.props
     return (
-      <div className="bg-white">
+      <div className="bg-white-light" style={{borderRadius:'6px 6px 0px 0px'}}>
         <div className={`row no-gutters ml0 mr0  ${className}`} style={{height:'auto',...style}}>
-          <div className="col-auo d-flex align-items-center fs16 text-primary pt10 pb10 pl15 pr15" style={{height:'auto'}}>
+          <div className="col-auo d-flex align-items-center fs16 color-black-2 pt10 pb10 pl15 pr15" style={{height:'auto'}}>
             {title}
           </div>
           <div className="col" style={{height:'auto'}}>

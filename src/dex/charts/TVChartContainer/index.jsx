@@ -121,8 +121,8 @@ class TVChartContainer extends React.PureComponent {
           console.log('=====getServerTime running')
         }
       },
-      interval: '1D',
-      timeframe: '1M',
+      interval: 60,
+      timeframe: 3600,
       toolbar_bg: "transparent",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
@@ -178,7 +178,7 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.borderDownColor": "#c2185b",
         "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
 
-        "paneProperties.background": "#33333D", // 背景色彩
+        "paneProperties.background": "transparent", // 背景色彩
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
 
@@ -191,7 +191,7 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.showCountdown": true,
         "symbolWatermarkProperties.transparency": 20,
         "paneProperties.topMargin": 10,
-        "paneProperties.bottomMargin": 10,
+        "paneProperties.bottomMargin": '10px',
       },
       studies_overrides: {
         //--------------------volume
