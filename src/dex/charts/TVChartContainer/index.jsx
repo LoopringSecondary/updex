@@ -2,7 +2,6 @@ import * as React from 'react';
 import './index.css';
 import {connect} from "dva";
 import historyProvider from "./api/historyProvider";
-import {getOverides} from './theme.js'
 
 function getLanguageFromURL() {
 	const regex = new RegExp('[\\?&]lang=([^&#]*)');
@@ -122,9 +121,9 @@ class TVChartContainer extends React.PureComponent {
           console.log('=====getServerTime running')
         }
       },
-      interval: 3600*24*30,
-      timeframe: '60',
-      toolbar_bg: "red",
+      interval: '1D',
+      timeframe: '1M',
+      toolbar_bg: "transparent",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
 			locale: getLanguageFromURL() || 'en',
@@ -152,7 +151,7 @@ class TVChartContainer extends React.PureComponent {
 			fullscreen: false,
 			autosize:false,
       loading_screen: {
-        backgroundColor: "#000"
+        backgroundColor: "transparent"
       },
       // ...getOverides(),
       //   overrides: {
@@ -169,6 +168,7 @@ class TVChartContainer extends React.PureComponent {
       //     //"paneProperties.bottomMargin": 40,
       //   },
       overrides: {
+        editorFontsList: ['Roboto', 'Times New Roman', 'Arial'] ,
         // 蜡烛图
         "mainSeriesProperties.candleStyle.upColor": '#558b2f',
         "mainSeriesProperties.candleStyle.borderUpColor": '#558b2f',
@@ -180,11 +180,11 @@ class TVChartContainer extends React.PureComponent {
 
         "paneProperties.background": "#33333D", // 背景色彩
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
-        "paneProperties.horzGridProperties.color": "rgba(255,255,255,0..02)", // 背景网格颜色
+        "paneProperties.horzGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
 
         // x,y周
-        "scalesProperties.lineColor": "rgba(255,255,255,0.1)", // x,y坐标轴的颜色
-        "scalesProperties.textColor": "rgba(255,255,255,0.1)", // x,y坐标轴字体的颜色
+        "scalesProperties.lineColor": "rgba(255,255,255,0.05)", // x,y坐标轴的颜色
+        "scalesProperties.textColor": "rgba(255,255,255,0.3)", // x,y坐标轴字体的颜色
         "scalesProperties.backgroundColor" : "#558b2f",
 
         "volumePaneSize": "large",
@@ -193,6 +193,11 @@ class TVChartContainer extends React.PureComponent {
         "paneProperties.topMargin": 10,
         "paneProperties.bottomMargin": 10,
       },
+      studies_overrides: {
+        //--------------------volume
+        "volume.volume.color.0": "#558b2f",
+        "volume.volume.color.1": "#c2185b",
+      }
 		};
     const tvWidget = new window.TradingView.widget(widgetOptions);
     this.tvWidget = tvWidget
