@@ -122,7 +122,7 @@ class TVChartContainer extends React.PureComponent {
           console.log('=====getServerTime running')
         }
       },
-      interval: '60',
+      interval: 3600*24*30,
       timeframe: '60',
       toolbar_bg: "red",
 			container_id: this.state.containerId,
@@ -168,6 +168,31 @@ class TVChartContainer extends React.PureComponent {
       //     //"paneProperties.topMargin": 20,
       //     //"paneProperties.bottomMargin": 40,
       //   },
+      overrides: {
+        // 蜡烛图
+        "mainSeriesProperties.candleStyle.upColor": '#558b2f',
+        "mainSeriesProperties.candleStyle.borderUpColor": '#558b2f',
+        "mainSeriesProperties.candleStyle.wickUpColor": '#558b2f',
+
+        "mainSeriesProperties.candleStyle.downColor": "#c2185b",// "#c2185b",
+        "mainSeriesProperties.candleStyle.borderDownColor": "#c2185b",
+        "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
+
+        "paneProperties.background": "#33333D", // 背景色彩
+        "paneProperties.vertGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
+        "paneProperties.horzGridProperties.color": "rgba(255,255,255,0..02)", // 背景网格颜色
+
+        // x,y周
+        "scalesProperties.lineColor": "rgba(255,255,255,0.1)", // x,y坐标轴的颜色
+        "scalesProperties.textColor": "rgba(255,255,255,0.1)", // x,y坐标轴字体的颜色
+        "scalesProperties.backgroundColor" : "#558b2f",
+
+        "volumePaneSize": "large",
+        "mainSeriesProperties.showCountdown": true,
+        "symbolWatermarkProperties.transparency": 20,
+        "paneProperties.topMargin": 10,
+        "paneProperties.bottomMargin": 10,
+      },
 		};
     const tvWidget = new window.TradingView.widget(widgetOptions);
     this.tvWidget = tvWidget
@@ -180,6 +205,7 @@ class TVChartContainer extends React.PureComponent {
 		return (
 			<div
 				id={ this.state.containerId }
+        style={{height:'100%'}}
 				className={ 'TVChartContainer' }
 			/>
 		);

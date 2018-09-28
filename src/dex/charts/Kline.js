@@ -12,7 +12,7 @@ import TVChartContainer from './TVChartContainer/index';
 class Kline extends React.Component {
   render() {
     return (
-      <div className="position-relative">
+      <div className="position-relative" style={{height:'100%'}}>
         <TVChartContainer />
       </div>
     );

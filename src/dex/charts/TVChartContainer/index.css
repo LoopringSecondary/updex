@@ -1,11 +1,7 @@
 .TVChartContainer {
 	/*height: calc(100vh - 80px);*/
 }
-
 iframe{
 	border:none !important;
 	border-color:transparent !important ;
-}
-.chart-page{
-	background: transparent !important;
 }
