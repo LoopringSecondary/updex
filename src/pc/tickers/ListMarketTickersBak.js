@@ -54,26 +54,24 @@ export const TickerHeader = ({sort,dispatch})=>{
       <th className="pl5 fs12 pt5 pb5 font-weight-normal">
       </th>
       <th className="pl5 fs12 color-black-4 text-left hover-default pt5 pb5 font-weight-normal" onClick={sortByType.bind(this, 'market')}>
-        <div className="fs12 color-black-4 mr5 position-relative">
-          {intl.get('common.volume')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'volume'} direction={direction}></Sorter>
+        <div className="fs12 color-black-4 position-relative">
+          {intl.get('common.market')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'market'} direction={direction}></Sorter>
         </div>
-        {
-          false &&
-          <div className="fs12 color-black-4 position-relative">
-            {intl.get('common.market')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'market'} direction={direction}></Sorter>
-          </div>  
-        }
       </th>
       <th className="text-right pl5 pr20 hover-default pt5 pb5 font-weight-normal" onClick={sortByType.bind(this, 'price')}>
         <div className="fs12 color-black-4 position-relative">
           {intl.get('common.price')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'price'} direction={direction}></Sorter>
         </div>
-        {
-          false &&
-          <div className="fs12 color-black-4 mr5 position-relative">
-            Change <Sorter className="d-inline-block " isActive={sort.sortBy === 'change'} direction={direction}></Sorter>
-          </div>
-        }
+      </th>
+      <th className="text-right hover-default pt5 pb5 font-weight-normal" onClick={sortByType.bind(this, 'change')}>
+        <div className="fs12 color-black-4 mr5 position-relative">
+          Change <Sorter className="d-inline-block " isActive={sort.sortBy === 'change'} direction={direction}></Sorter>
+        </div>
+      </th>
+      <th className="text-right hover-default pt5 pb5 pr15 font-weight-normal" onClick={sortByType.bind(this, 'volume')}>
+        <div className="fs12 color-black-4 mr5 position-relative">
+          {intl.get('common.volume')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'volume'} direction={direction}></Sorter>
+        </div>
       </th>
     </tr>
   )
@@ -107,15 +105,13 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
           { favored[item.market] && <i type="star" className="text-primary icon-star"/> }
           { !favored[item.market] && <i className="color-black-4 icon-star-o"/> }
         </td>
-        <td className="pl10 fs14 pt10 pb10" onClick={toggleTickerFavored.bind(this, item.market)}>
-          <i className={`color-black-4 icon-token-${tokens.left}`}/>
-        </td>
         <td className="text-left pl5 pt10 pb10">
-            <div className="fs12 color-black">{tokens.left} / {tokens.right} </div>
-            <div className="fs12 color-black-4">{tickerFm.getVol()} {false && tokens.right}</div>
+            <span className="fs12 color-black-2">{tokens.left} / {tokens.right} </span>
         </td>
-        <td className="text-right pr20 pt10 pb10">
+        <td className="text-right pl5 pr15 pt10 pb10">
           <div className="fs12 color-black-2 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
+        </td>
+        <td className="text-right pl5 pt10 pb10">
           {
             direction === 'up' &&
             <div className="fs12 color-success">
@@ -135,6 +131,10 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
             </div>
           }
         </td>
+        <td className="text-right pl5 pr15 pt10 pb10">
+          <span className="fs12 color-black-2">{tickerFm.getVol()} {false && tokens.right}</span>
+        </td>
+
       </tr>
     )
 }
