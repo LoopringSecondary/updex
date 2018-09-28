@@ -44,7 +44,7 @@ class Home extends React.Component {
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
             <PanelWrapper className="mt5">
-              <PanelHeader title="My Wallet" />
+              <PanelHeader title="Wallet Balances" />
               <HelperOfBalance />
             </PanelWrapper>
             <PanelWrapper className="mt5" style={{flex:'1'}}>
@@ -66,7 +66,7 @@ class Home extends React.Component {
               <Kline />
             </PanelWrapper>
           </div>
-          <div className="col-auto m5 mr0 mb0  d-flex flex-column" style={{height:'94vh',width:'32.5rem'}}>
+          <div className="col-auto m5 mr0 mb0  d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Trade History" />
               <ListMarketFills />

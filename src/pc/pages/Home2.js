@@ -19,6 +19,9 @@ import Sidebar from './Sidebar'
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      sidebarCollapsed:false,
+    }
   }
   render(){
     const {match,location,dispatch} = this.props;
@@ -33,14 +36,19 @@ class Home extends React.Component {
         payload:{id}
       })
     }
+    const toggleSidebar = ()=>{
+      this.setState({
+        sidebarCollapsed:!this.state.sidebarCollapsed
+      })
+    }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
         <div className="row no-gutters ml0 mr0">
           <div className="col-auto" style={{height:'100vh'}}>
-            <Sidebar />
+            <Sidebar collapsed={this.state.sidebarCollapsed} toggleSidebar={toggleSidebar}/>
           </div>
           <div className="col" style={{height:'100vh'}}>
-            <Body2 location={location} match={match} />
+            <Body2 location={location} match={match} collapsed={this.state.sidebarCollapsed} toggleSidebar={toggleSidebar} />
           </div>
         </div>
       </div>

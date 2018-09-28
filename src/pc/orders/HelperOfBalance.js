@@ -73,11 +73,11 @@ const HelperOfBalance = (props)=>{
             {
               relatedTokens.map((token,index)=>
                 <tr key={index} onClick={()=>{}}>
-                  <td className="pl15 pr15 pt10 pb10 zb-b-b color-black-2 text-left">
+                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-left">
                     {token.symbol}
                     <span hidden className="color-black-3 ml5">{token.name}</span>
                   </td>
-                  <td className="pl15 pr15 pt10 pb10 zb-b-b color-black-2 text-left">{toFixed(token.balance, 8)}</td>
+                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-left">{toFixed(token.balance, 8)}</td>
                   <td hidden className="pl15 pr15 pt10 pb10 zb-b-b color-black-2 text-left">
                     {
                       token.symbol !== 'ETH' && index === 0 && <Switch size="small" loading={true} />
@@ -86,8 +86,8 @@ const HelperOfBalance = (props)=>{
                       token.symbol !== 'ETH' && index === 1 && <Switch size="small" loading={false} checked={true} />
                     }
                   </td>
-                  <td hidden className="pl15 pr15 pt10 pb10 zb-b-b color-black-2 text-left">0.00</td>
-                  <td className="pl15 pr15 pt10 pb10 zb-b-b color-black-2 text-right text-nowrap">
+                  <td hidden className="pl15 pr15 pt10 pb10 color-black-2 text-left">0.00</td>
+                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-right text-nowrap">
                     {
                       true && token.symbol === 'ETH' &&
                       <Button onClick={gotoConvert.bind(this,{token:"ETH"})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block border-none bg-fill-light text-primary" size="small">{intl.get('common.convert')}</Button>

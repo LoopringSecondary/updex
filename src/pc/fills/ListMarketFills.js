@@ -1,6 +1,6 @@
 import React from 'react';
 import {FillFm} from 'modules/fills/formatters'
-import {getFormatTime} from "modules/formatter/common";
+import {getFormatTime,getTokensByMarket} from "modules/formatter/common";
 import {connect} from 'dva'
 import {toBig, toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
@@ -8,15 +8,17 @@ import intl from 'react-intl-universal'
 const ListMarketFills = ({trades={},maxRows=5})=>{
   // const maxHeight = (60*maxRows+32) + 'px'
   const market = trades.filters.market || 'LRC-WETH'
+  const tokens = getTokensByMarket(market)
   const maxHeight = 'auto'
+  console.log('ListMarketFills',trades)
   return (
     <div style={{height:maxHeight,overflow:'auto'}}>
       <table className="w-100 fs12" style={{overflow:'auto'}}>
         <thead>
           <tr className="">
-            <th className="zb-b-b text-left pl15 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.price")}</th>
-            <th className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.amount")}</th>
-            <th hidden className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">Fee</th>
+            <th className="zb-b-b text-left pl15 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.price")} </th>
+            <th className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.amount")} / {tokens.left}</th>
+            <th hidden className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.LRCFee")} / LRC</th>
             <th className="zb-b-b text-right pl5 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.time")}</th>
           </tr>
         </thead>

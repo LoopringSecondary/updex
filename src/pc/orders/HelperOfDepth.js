@@ -60,7 +60,7 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
                   {
                     depth.item && depth.item.sell && depth.item.sell.length === 0 &&
                       <tr className="">
-                        <td colSpan="10" className="p10 zb-b-b text-center align-top color-black-4 fs12">
+                        <td colSpan="10" className="p10 text-center align-top color-black-4 fs12">
                           {intl.get('common.list.no_data_custom',{title:intl.get('common.depth')})}
                         </td>
                       </tr>
@@ -98,7 +98,7 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
                 {
                   depth.item && depth.item.buy && depth.item.buy.length === 0 &&
                     <tr>
-                      <td colSpan="10" className="p10 zb-b-b text-center align-top color-black-4 fs12">
+                      <td colSpan="10" className="p10 text-center align-top color-black-4 fs12">
                         {intl.get('common.list.no_data_custom',{title:intl.get('common.depth')})}
                       </td>
                     </tr>

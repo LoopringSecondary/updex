@@ -3,7 +3,7 @@ import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import ListTokens from '../tokens/ListTokens';
-import MarketTitckers from '../tickers/ListMarketTickers';
+import MarketTitckers from 'mobile/tickers/ListMarketTickers';
 import PanelHeader from './PanelHeader'
 import PanelWrapper from './PanelWrapper'
 class Sidebar extends React.Component {
@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
     }
     
     const collapsed = this.state.collapsed
-    const collapsedWidth = collapsed ? '6.5rem' : '34rem'
+    const collapsedWidth = collapsed ? '6.5rem' : '37.5rem'
     return (
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0.3s'}}>
           <div className="bg-white-light d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6.5rem'}}>
@@ -39,9 +39,13 @@ class Sidebar extends React.Component {
                 { !this.state.collapsed && <MarketTitckers  />}
               </div>
             </PanelWrapper>
-            <PanelWrapper className="mt5">
-              <PanelHeader title="My Wallet" />
-            </PanelWrapper>
+            {
+              false &&
+              <PanelWrapper className="mt5">
+                <PanelHeader title="My Wallet" />
+              </PanelWrapper>  
+            }
+            
           </div>
       </div>
     )
