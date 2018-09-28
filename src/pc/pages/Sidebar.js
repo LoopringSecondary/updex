@@ -4,6 +4,8 @@ import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import ListTokens from '../tokens/ListTokens';
 import MarketTitckers from '../tickers/ListMarketTickers';
+import PanelHeader from './PanelHeader'
+import PanelWrapper from './PanelWrapper'
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -29,11 +31,17 @@ class Sidebar extends React.Component {
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden={collapsed} className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>
-          <div className="bg-white-light mt5 d-flex flex-column" style={{flex:'1'}}>
-            <div style={{flex:'1',overflow:'auto'}}>
-              {false && <ListTokens collapsed={collapsed}/>}
-              { !this.state.collapsed && <MarketTitckers  />}
-            </div>
+          <div className="mt5 d-flex flex-column" style={{flex:'1'}}>
+            <PanelWrapper style={{flex:'1'}}>
+              <PanelHeader title="Markets" />
+              <div className="bg-white" style={{flex:'1',overflow:'auto'}}>
+                {false && <ListTokens collapsed={collapsed}/>}
+                { !this.state.collapsed && <MarketTitckers  />}
+              </div>
+            </PanelWrapper>
+            <PanelWrapper className="mt5">
+              <PanelHeader title="My Wallet" />
+            </PanelWrapper>
           </div>
       </div>
     )

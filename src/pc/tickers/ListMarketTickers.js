@@ -50,10 +50,10 @@ export const TickerHeader = ({sort,dispatch})=>{
     direction = 'down'
   }
   return (
-    <tr className="">
+    <tr className="zb-b-b">
       <th hidden className="pl5 fs12 pt5 pb5 font-weight-normal">
       </th>
-      <th className="pl20 fs12 color-black-4 text-left hover-default pt5 pb5 font-weight-normal" onClick={sortByType.bind(this, 'market')}>
+      <th className="pl15 fs12 color-black-4 text-left hover-default pt5 pb5 font-weight-normal" onClick={sortByType.bind(this, 'market')}>
         <div className="fs12 color-black-4 mr5 position-relative">
           {intl.get('common.volume')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'volume'} direction={direction}></Sorter>
         </div>
@@ -107,10 +107,10 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
           { favored[item.market] && <i type="star" className="text-primary icon-star"/> }
           { !favored[item.market] && <i className="color-black-4 icon-star-o"/> }
         </td>
-        <td className="text-left pl20 pt10 pb10">
+        <td className="text-left pl15 pt10 pb10">
             <div className="row no-gutters">
               <div className="col-auto pr15">
-                <i className={`d-block text-center bg-primary-light text-primary fs18 font-weight-bold icon-token-${tokens.left}`} style={{height:'36px',width:'36px',lineHeight:'36px',borderRadius:'50em'}}/>
+                <i className={`d-block text-center bg-fill-light text-primary fs18 font-weight-bold icon-token-${tokens.left}`} style={{height:'36px',width:'36px',lineHeight:'36px',borderRadius:'50em'}}/>
               </div>
               <div className="col">
                 <div className="fs14 color-black">{tokens.left} / {tokens.right} </div>
@@ -180,11 +180,12 @@ export const TickerList = ({items,loading,dispatch, tickersList})=>{
 
   return (
     <div className="" style={{minHeight:'50vh'}}>
+      <div className="divider 1px zb-b-b"></div>
       <Spin spinning={loading}>
 
         {!loading && items.length > 0 &&
           <table className="w-100">
-            <TickerHeader sort={sort} dispatch={dispatch}/>
+            { false && <TickerHeader sort={sort} dispatch={dispatch}/> }
             {sortedItems.map((item, index) => <TickerItem key={index} item={item} dispatch={dispatch} tickersList={tickersList}/>)}
           </table>
         }
