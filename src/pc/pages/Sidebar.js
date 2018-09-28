@@ -9,13 +9,9 @@ import PanelWrapper from './PanelWrapper'
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
-    this.state ={
-      collapsed:false,
-      defaultCollapsed:true,
-    }
   }
   render(){
-    const {match,location,dispatch} = this.props;
+    const {match,location,dispatch,sidebar} = this.props;
     const showLayer = (id)=>{
       dispatch({
         type:"layers/showLayer",
@@ -23,7 +19,7 @@ class Sidebar extends React.Component {
       })
     }
     
-    const collapsed = this.state.collapsed
+    const collapsed = sidebar && !sidebar.visible
     const collapsedWidth = collapsed ? '6.5rem' : '37.5rem'
     return (
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0.3s'}}>
@@ -36,7 +32,7 @@ class Sidebar extends React.Component {
               <PanelHeader title="Markets" />
               <div className="bg-white" style={{flex:'1',overflow:'auto'}}>
                 {false && <ListTokens collapsed={collapsed}/>}
-                { !this.state.collapsed && <MarketTitckers  />}
+                { !collapsed && <MarketTitckers  />}
               </div>
             </PanelWrapper>
             {
@@ -45,11 +41,14 @@ class Sidebar extends React.Component {
                 <PanelHeader title="My Wallet" />
               </PanelWrapper>  
             }
-            
           </div>
       </div>
     )
   }
 }
 
-export default connect()(Sidebar)
+export default connect(({layers})=>{
+  return {
+    sidebar:layers && layers.SidebarOfMarkets
+  }
+})(Sidebar)
