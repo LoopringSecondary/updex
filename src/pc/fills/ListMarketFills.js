@@ -4,6 +4,7 @@ import {getFormatTime,getTokensByMarket} from "modules/formatter/common";
 import {connect} from 'dva'
 import {toBig, toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
+import Worth from 'modules/settings/Worth'
 
 const ListMarketFills = ({trades={},maxRows=5})=>{
   // const maxHeight = (60*maxRows+32) + 'px'
@@ -31,10 +32,10 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                   <tr key={index}>
                     <td className="lh20 border-none pl15 pr5 text-left align-middle">
                       {
-                        index%2 === 0 && <span className="color-error">{item.price.toFixed(8)}</span>
+                        index%2 === 0 && <span className="color-error">{item.price.toFixed(8)} <span className="fs12 color-black-4"><Worth amount={item.price.toFixed(8)} symbol={tokens.right}/></span></span>
                       }
                       {
-                        index%2 === 1 && <span className="color-success">{item.price.toFixed(8)}</span>
+                        index%2 === 1 && <span className="color-success">{item.price.toFixed(8)} <span className="fs12 color-black-4"><Worth amount={item.price.toFixed(8)} symbol={tokens.right}/></span></span>
                       }
                     </td>
                     <td className="lh20 border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap">

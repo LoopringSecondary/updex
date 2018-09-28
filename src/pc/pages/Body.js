@@ -24,7 +24,7 @@ class Home extends React.Component {
     super(props);
   }
   render(){
-    const {match,location,dispatch} = this.props;
+    const {match,location,dispatch,collapsed} = this.props;
     const showLayer = (id)=>{
       dispatch({
         type:"layers/showLayer",
@@ -59,6 +59,14 @@ class Home extends React.Component {
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
             </PanelWrapper>
+            { !collapsed &&
+              <div className="mt5">
+                <PanelWrapper style={{height:'40vh'}}>
+                  <PanelHeader title="Trade History" />
+                  <ListMarketFills />
+                </PanelWrapper>
+              </div>
+            }
           </div>
           <div className="col m5 mr0 mb0  d-flex flex-column" style={{height:'94vh'}}>
             <PanelWrapper style={{flex:'1'}}>
@@ -66,17 +74,29 @@ class Home extends React.Component {
               <Kline />
             </PanelWrapper>
           </div>
-          <div className="col-auto m5 mr0 mb0  d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
-            <PanelWrapper style={{flex:'1'}}>
-              <PanelHeader title="Trade History" />
-              <ListMarketFills />
-            </PanelWrapper>
-          </div>
-
+          { collapsed &&
+            <div className="col-auto m5 mr0 mb0  d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
+              <PanelWrapper style={{flex:'1'}}>
+                <PanelHeader title="Trade History" />
+                <ListMarketFills />
+              </PanelWrapper>
+            </div>
+          }
+         
         </div>
       </div>
     )
   }
 }
 
-export default connect()(Home)
+export default connect(({layers})=>{
+  let collapsed 
+  if(layers.SidebarOfMarkets){
+    collapsed = !layers.SidebarOfMarkets.visible
+  }else{
+    collapsed = true // default value
+  }
+  return {
+    collapsed
+  }
+})(Home)

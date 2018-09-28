@@ -30,12 +30,9 @@ class Header extends React.Component {
         <div onClick={showLayer.bind(this,'settings')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <i className="icon-cog fs20 text-primary"></i>
         </div>
-        {
-          false &&
-          <div onClick={showLayer.bind(this,'usercenter')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
-            <i className="icon-user fs20 text-primary"></i>
-          </div>
-        }
+        <div onClickBak={showLayer.bind(this,'usercenter')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
+          <i className="icon-user fs20 text-primary"></i>
+        </div>
       </div>
     )
   }
