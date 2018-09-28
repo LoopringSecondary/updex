@@ -35,8 +35,9 @@ class Sidebar extends React.Component {
               </PanelWrapper>
             }
             {collapsed &&
-              <PanelWrapper style={{flex:'1'}}>
-              </PanelWrapper>
+              <div className="bg-white-light" style={{flex:1,overflow:'auto'}}>
+                <ListTokens collapsed={collapsed} />
+              </div>
             }
           </div>
       </div>
