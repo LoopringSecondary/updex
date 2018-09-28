@@ -50,10 +50,10 @@ export const TickerHeader = ({sort,dispatch})=>{
     direction = 'down'
   }
   return (
-    <tr className="zb-b-b">
-      <th className="pl5 fs12 pt5 pb5 font-weight-normal">
+    <tr className="">
+      <th hidden className="pl5 fs12 pt5 pb5 font-weight-normal">
       </th>
-      <th className="pl5 fs12 color-black-4 text-left hover-default pt5 pb5 font-weight-normal" onClick={sortByType.bind(this, 'market')}>
+      <th className="pl20 fs12 color-black-4 text-left hover-default pt5 pb5 font-weight-normal" onClick={sortByType.bind(this, 'market')}>
         <div className="fs12 color-black-4 mr5 position-relative">
           {intl.get('common.volume')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'volume'} direction={direction}></Sorter>
         </div>
@@ -103,34 +103,42 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
     }
     return (
       <tr className="hover-default zb-b-b" onClick={gotoDetail}>
-        <td className="pl10 fs14 pt10 pb10" onClick={toggleTickerFavored.bind(this, item.market)}>
+        <td hidden className="pl10 fs14 pt10 pb10" onClick={toggleTickerFavored.bind(this, item.market)}>
           { favored[item.market] && <i type="star" className="text-primary icon-star"/> }
           { !favored[item.market] && <i className="color-black-4 icon-star-o"/> }
         </td>
-        <td className="pl10 fs14 pt10 pb10" onClick={toggleTickerFavored.bind(this, item.market)}>
-          <i className={`color-black-4 icon-token-${tokens.left}`}/>
-        </td>
-        <td className="text-left pl5 pt10 pb10">
-            <div className="fs12 color-black">{tokens.left} / {tokens.right} </div>
-            <div className="fs12 color-black-4">{tickerFm.getVol()} {false && tokens.right}</div>
+        <td className="text-left pl20 pt10 pb10">
+            <div className="row no-gutters">
+              <div className="col-auto pr15">
+                <i className={`d-block text-center bg-primary-light text-primary fs18 font-weight-bold icon-token-${tokens.left}`} style={{height:'36px',width:'36px',lineHeight:'36px',borderRadius:'50em'}}/>
+              </div>
+              <div className="col">
+                <div className="fs14 color-black">{tokens.left} / {tokens.right} </div>
+                <div className="fs12 color-black-4">{tickerFm.getVol()} {tokens.right}</div>
+              </div>
+            </div>
+            
         </td>
         <td className="text-right pr20 pt10 pb10">
-          <div className="fs12 color-black-2 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
+          
           {
             direction === 'up' &&
             <div className="fs12 color-success">
+              <div className="fs12 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
              +{tickerFm.getChange()}
             </div>
           }
           {
             direction === 'down' &&
             <div className="fs12 color-error">
+              <div className="fs12 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
              {tickerFm.getChange()}
             </div>
           }
           {
             direction === 'none' &&
             <div className="fs12 text-primary">
+              <div className="fs12 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
              {tickerFm.getChange()}
             </div>
           }
