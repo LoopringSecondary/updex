@@ -2,9 +2,9 @@ import React from 'react'
 import {Containers} from 'modules'
 import UiContianers from 'LoopringUI/containers'
 import Receive from './Receive'
-import Convert from 'mobile/tokens/ConvertForm'
+import Convert from './ConvertForm'
 import HelperOfEnable from './HelperOfEnable'
-import HelperOfTokenActions from './HelperOfTokenActions'
+import HelperOfTokenActions from 'mobile/tokens/HelperOfTokenActions'
 
 function Modals(props) {
   return (
@@ -20,9 +20,9 @@ function Modals(props) {
           </UiContianers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfTokenActions">
-          <UiContianers.Popups id="helperOfTokenActions">
+          <UiContianers.Panels id="helperOfTokenActions" className="rs h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
             <HelperOfTokenActions />
-          </UiContianers.Popups>
+          </UiContianers.Panels>
       </Containers.Layers>
       <Containers.Layers id="convertToken" >
         <UiContianers.Panels id="convertToken" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
