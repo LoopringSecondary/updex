@@ -3,7 +3,7 @@ import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import ListTokens from '../tokens/ListTokens';
-import MarketTitckers from 'mobile/tickers/ListMarketTickers';
+import MarketTitckers from '../tickers/ListMarketTickers';
 import PanelHeader from './PanelHeader'
 import PanelWrapper from './PanelWrapper'
 class Sidebar extends React.Component {
