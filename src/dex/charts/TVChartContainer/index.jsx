@@ -20,7 +20,7 @@ class TVChartContainer extends React.PureComponent {
 
   componentDidMount() {
     //const param = location.pathname.replace(`${match.path}/`, '')
-    const symbol = window.location.hash.replace('#/pc/trade2/', '')
+    const symbol = window.location.hash.split('/')[3]
 	  this.initChart(symbol)
   }
 
@@ -96,21 +96,21 @@ class TVChartContainer extends React.PureComponent {
           console.log('=====subscribeBars runnning')
           window.TrendCallBack = onRealtimeCallback
           //TODO mock
-          let time = 1536745511000
-          setInterval(() => {
-            const mock = {
-              close:0.0012,
-              high:0.004,
-              //isBarClosed: true,
-              //isLastBar: false,
-              low:0.0011,
-              open:0.0012,
-              time:time,
-              volume:12
-            }
-            time = time + 3600000
-            //onRealtimeCallback(mock)
-          }, 1000)
+          // let time = 1536745511000
+          // setInterval(() => {
+          //   const mock = {
+          //     close:0.0012,
+          //     high:0.004,
+          //     //isBarClosed: true,
+          //     //isLastBar: false,
+          //     low:0.0011,
+          //     open:0.0012,
+          //     time:time,
+          //     volume:12
+          //   }
+          //   time = time + 3600000
+          //   //onRealtimeCallback(mock)
+          // }, 1000)
           //stream.subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscribeUID, onResetCacheNeededCallback)
         },
         unsubscribeBars: subscriberUID => {
@@ -178,7 +178,7 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.borderDownColor": "#c2185b",
         "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
 
-        "paneProperties.background": "transparent", // 背景色彩
+        //"paneProperties.background": "transparent", // 背景色彩
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
 
@@ -191,7 +191,7 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.showCountdown": true,
         "symbolWatermarkProperties.transparency": 20,
         "paneProperties.topMargin": 10,
-        "paneProperties.bottomMargin": '10px',
+        "paneProperties.bottomMargin": 10,
       },
       studies_overrides: {
         //--------------------volume
