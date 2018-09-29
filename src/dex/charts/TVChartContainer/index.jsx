@@ -122,8 +122,8 @@ class TVChartContainer extends React.PureComponent {
         }
       },
       interval: 60,
-      timeframe: 3600,
-      toolbar_bg: "transparent",
+      timeframe: '1M',
+      // toolbar_bg: "rgba(0,0,0,0)",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
 			locale: getLanguageFromURL() || 'en',
@@ -133,7 +133,7 @@ class TVChartContainer extends React.PureComponent {
         "context_menus",
         "edit_buttons_in_legend",
         "border_around_the_chart",
-        // "control_bar",
+        "control_bar",
         "timeframes_toolbar",
         "left_toolbar",
         "volume_force_overlay"
@@ -151,7 +151,7 @@ class TVChartContainer extends React.PureComponent {
 			fullscreen: false,
 			autosize:false,
       loading_screen: {
-        backgroundColor: "transparent"
+        backgroundColor: "rgba(0,0,0,0)"
       },
       // ...getOverides(),
       //   overrides: {
@@ -168,7 +168,7 @@ class TVChartContainer extends React.PureComponent {
       //     //"paneProperties.bottomMargin": 40,
       //   },
       overrides: {
-        editorFontsList: ['Roboto', 'Times New Roman', 'Arial'] ,
+        editorFontsList: ['Times New Roman', 'Arial'] ,
         // 蜡烛图
         "mainSeriesProperties.candleStyle.upColor": '#558b2f',
         "mainSeriesProperties.candleStyle.borderUpColor": '#558b2f',
@@ -178,9 +178,9 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.borderDownColor": "#c2185b",
         "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
 
-        "paneProperties.background": "transparent", // 背景色彩
-        "paneProperties.vertGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
-        "paneProperties.horzGridProperties.color": "rgba(255,255,255,0.02)", // 背景网格颜色
+        "paneProperties.background": "rgba(0,0,0,0)", // 背景色彩
+        "paneProperties.vertGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
+        "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
 
         // x,y周
         "scalesProperties.lineColor": "rgba(255,255,255,0.05)", // x,y坐标轴的颜色
@@ -189,9 +189,11 @@ class TVChartContainer extends React.PureComponent {
 
         "volumePaneSize": "large",
         "mainSeriesProperties.showCountdown": true,
-        "symbolWatermarkProperties.transparency": 20,
+        "symbolWatermarkProperties.transparency": 0,
         "paneProperties.topMargin": 10,
-        "paneProperties.bottomMargin": '10px',
+        "paneProperties.bottomMargin":10,
+        "paneProperties.rightMargin":10,
+        "paneProperties.leftMargin":10,
       },
       studies_overrides: {
         //--------------------volume
