@@ -59,7 +59,7 @@ class Home extends React.Component {
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
             </PanelWrapper>
-            { !collapsed &&
+            { false && !collapsed &&
               <div className="mt5">
                 <PanelWrapper style={{height:'40vh'}}>
                   <PanelHeader title="Trade History" />
