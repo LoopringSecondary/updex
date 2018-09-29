@@ -1,4 +1,5 @@
 @color-text-placeholder:rgba(255,255,255,0.25) ;
+
 .bg-white{
   background:@bg-white !important;
 }
@@ -8,19 +9,23 @@
 .bg-fill{
   background:@fill-body !important;
 }
+
 .bg-grey-500{
   background:rgba(0,0,0,0.15) !important;
   background:@brand-primary !important;
 }
 .am-tabs-default-bar{
-  // &:extend(.bg-white);
-  background: transparent !important;
+  &:extend(.bg-white);
+  // background: transparent !important;
 }
 .color-black{
   color:#fff !important;
+  // color:#FFFDE7 !important;
+  // color:#C5CAE9 !important;
 }
 .color-black-1{
   color:rgba(255,255,255,0.9) !important;
+  // color:#C5CAE9 !important;
 }
 .color-black-2{
   color:rgba(255,255,255,0.55) !important;
