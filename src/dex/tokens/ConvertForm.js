@@ -1,6 +1,6 @@
 import React from 'react'
-import { Button, Icon, InputItem, List, NavBar, Toast, Modal } from 'antd-mobile'
-import { Icon as WebIcon, Input, InputNumber } from 'antd'
+import { Button, Icon, InputItem, List, NavBar, Toast,Modal } from 'antd-mobile'
+import { Icon as WebIcon } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import { toBig, toHex, toNumber } from 'LoopringJS/common/formatter'
