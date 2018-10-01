@@ -110,6 +110,10 @@ class PlaceOrderSteps extends React.Component {
       // hideLayer({id:'placeOrderSteps'})
       showLayer({id: 'helperOfTTL'})
     }
+    const showLRCFee = () => {
+      // hideLayer({id:'placeOrderSteps'})
+      showLayer({id:'settings'})
+    }
     const next = async (page) => {
       let order = {}
       const owner = storage.wallet.getUnlockedAddress()
@@ -200,8 +204,8 @@ class PlaceOrderSteps extends React.Component {
                   </div>
                 }
                 <OrderMetaItem label={intl.get("common.price")} value={`${priceInput} ${pair}`} />
-                <OrderMetaItem showArrow={false} onClick={()=>window.Toast.info('Coming Soon', 1, null, false)} label={intl.get('common.lrc_fee')} value={`${lrcFeeValue} LRC(${settings.trading.lrcFee/10}%)`} />
-                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}  />
+                <OrderMetaItem showArrow={true} onClick={()=>showLRCFee()} label={intl.get('common.lrc_fee')} value={<div className="text-primary">{lrcFeeValue} LRC({settings.trading.lrcFee/10}%)</div>} />
+                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary">{validSince.format('MM-DD HH:mm')} ~ {validUntil.format('MM-DD HH:mm')}</div>}  />
                 <div className="divider 1px zb-b-t"></div>
                 <div className="pt15 pb15 clor-black-3 fs12">
                   <Icon className="mr5" type="exclamation-circle-o" />{intl.get('place_order_confirm.no_cost_gas')}
