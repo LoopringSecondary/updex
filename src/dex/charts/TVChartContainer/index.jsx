@@ -190,9 +190,22 @@ class TVChartContainer extends React.PureComponent {
         "volumePaneSize": "large",
         "mainSeriesProperties.showCountdown": true,
         // "symbolWatermarkProperties.transparency": 0,
+        "symbolWatermarkProperties.color": "rgba(0, 0, 0, 0.00)",
         // 边际（百分比） 用于自动缩放。
         "paneProperties.topMargin": 10,
         "paneProperties.bottomMargin":0,
+        "mainSeriesProperties.baselineStyle.baselineColor": "rgba( 117, 134, 150, 1)",
+        "mainSeriesProperties.baselineStyle.topFillColor1": "rgba( 83, 185, 135, 0.1)",
+        "mainSeriesProperties.baselineStyle.topFillColor2": "rgba( 83, 185, 135, 0.1)",
+        "mainSeriesProperties.baselineStyle.bottomFillColor1": "rgba( 235, 77, 92, 0.1)",
+        "mainSeriesProperties.baselineStyle.bottomFillColor2": "rgba( 235, 77, 92, 0.1)",
+        "mainSeriesProperties.baselineStyle.topLineColor": "rgba( 83, 185, 135, 1)",
+        "mainSeriesProperties.baselineStyle.bottomLineColor": "rgba( 235, 77, 92, 1)",
+        "mainSeriesProperties.baselineStyle.topLineWidth": 1,
+        "mainSeriesProperties.baselineStyle.bottomLineWidth": 1,
+        "mainSeriesProperties.baselineStyle.priceSource": "close",
+        "mainSeriesProperties.baselineStyle.transparency": 50,
+        "mainSeriesProperties.baselineStyle.baseLevelPercentage": 50,
       },
       studies_overrides: {
         //--------------------volume
