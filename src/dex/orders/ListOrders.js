@@ -38,6 +38,11 @@ async function fetchOrders(page) {
           total: res.result.total,
         }
       }
+    }else{
+      return {
+        items:[],
+        page:{},
+      }
     }
   })
 }
