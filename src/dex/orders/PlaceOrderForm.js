@@ -303,11 +303,11 @@ class PlaceOrderForm extends React.Component {
               </List.Item>
             }
               <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
-               <div className="lh20">
-                 <div className="lh20">{intl.get(`common.${side}`)}  {amount>0 ? amount : null} {tokens.left} </div>
+               <div className="">
+                 <div className="lh20 fs16">{intl.get(`common.${side}`)}  {amount>0 ? amount : null} {tokens.left} </div>
                  {
                   total>0 &&
-                   <div className="fs12 lh10" style={{opacity:'0.45',paddingTop:'0.3rem'}}>
+                   <div className="fs12 lh10" style={{opacity:'0.6',paddingTop:'0.5rem'}}>
                      {total} {tokens.right}
                    </div>
                  }
