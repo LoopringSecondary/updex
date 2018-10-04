@@ -129,7 +129,7 @@ class TVChartContainer extends React.PureComponent {
 			locale: getLanguageFromURL() || 'zh',
       disabled_features: [
         "use_localstorage_for_settings",
-        // "header_widget",
+        "header_widget",
         "context_menus",
         "edit_buttons_in_legend",
         // "border_around_the_chart",
@@ -149,7 +149,7 @@ class TVChartContainer extends React.PureComponent {
       width: '100%',
       height: '100%',
 			fullscreen: false,
-			autosize:true,
+			// autosize:true,
       loading_screen: {
         backgroundColor: "rgba(0,0,0,0)"
       },
