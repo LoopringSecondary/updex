@@ -122,7 +122,11 @@
 }
 
 a:hover,a:active{
-	&:extend(.color-black-1);
+	// &:extend(.color-black-1);
+	// color:inherit !important;
+	&.am-button-primary{
+		color:#fff !important;
+	}
 }
 
 .am-list-item .am-input-clear{

@@ -126,14 +126,14 @@ class TVChartContainer extends React.PureComponent {
       // toolbar_bg: "rgba(0,0,0,0)",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
-			locale: getLanguageFromURL() || 'en',
+			locale: getLanguageFromURL() || 'zh',
       disabled_features: [
         "use_localstorage_for_settings",
-        "header_widget",
+        // "header_widget",
         "context_menus",
         "edit_buttons_in_legend",
-        "border_around_the_chart",
-        "control_bar",
+        // "border_around_the_chart",
+        // "control_bar",
         "timeframes_toolbar",
         "left_toolbar",
         "volume_force_overlay"
@@ -149,26 +149,12 @@ class TVChartContainer extends React.PureComponent {
       width: '100%',
       height: '100%',
 			fullscreen: false,
-			autosize:false,
+			autosize:true,
       loading_screen: {
         backgroundColor: "rgba(0,0,0,0)"
       },
-      // ...getOverides(),
-      //   overrides: {
-      //     "volumePaneSize": "large",
-  				// "mainSeriesProperties.showCountdown": true,
-  				// "paneProperties.background": "#08274c",
-  				// "paneProperties.vertGridProperties.color": "#363c4e",
-  				// "paneProperties.horzGridProperties.color": "#363c4e",
-  				// "symbolWatermarkProperties.transparency": 90,
-  				// "scalesProperties.textColor" : "#AAA",
-  				// "mainSeriesProperties.candleStyle.wickUpColor": '#336854',
-  				// "mainSeriesProperties.candleStyle.wickDownColor": '#7f323f',
-      //     //"paneProperties.topMargin": 20,
-      //     //"paneProperties.bottomMargin": 40,
-      //   },
       overrides: {
-        editorFontsList: ['Times New Roman', 'Arial'] ,
+        editorFontsList: ['RobotoCondensed','Times New Roman', 'Arial'] ,
         // 蜡烛图
         "mainSeriesProperties.candleStyle.upColor": '#558b2f',
         "mainSeriesProperties.candleStyle.borderUpColor": '#558b2f',
@@ -178,34 +164,21 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.borderDownColor": "#c2185b",
         "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
 
-        "paneProperties.background": "rgba(0,0,0,0)", // 背景色彩
+        "paneProperties.background": "#242443", // 背景色彩，如果带透明度会出bug
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
 
-        // x,y周
+        // // x,y周
         "scalesProperties.lineColor": " #3E3E59 ", // x,y坐标轴的颜色
         "scalesProperties.textColor": " #3E3E59 ", // x,y坐标轴字体的颜色
-        "scalesProperties.backgroundColor" : "#558b2f",
 
         "volumePaneSize": "large",
         "mainSeriesProperties.showCountdown": true,
-        // "symbolWatermarkProperties.transparency": 0,
+        "symbolWatermarkProperties.transparency": 0,
         "symbolWatermarkProperties.color": "rgba(0, 0, 0, 0.00)",
-        // 边际（百分比） 用于自动缩放。
+        // // 边际（百分比） 用于自动缩放。
         "paneProperties.topMargin": 10,
         "paneProperties.bottomMargin":0,
-        "mainSeriesProperties.baselineStyle.baselineColor": "rgba( 117, 134, 150, 1)",
-        "mainSeriesProperties.baselineStyle.topFillColor1": "rgba( 83, 185, 135, 0.1)",
-        "mainSeriesProperties.baselineStyle.topFillColor2": "rgba( 83, 185, 135, 0.1)",
-        "mainSeriesProperties.baselineStyle.bottomFillColor1": "rgba( 235, 77, 92, 0.1)",
-        "mainSeriesProperties.baselineStyle.bottomFillColor2": "rgba( 235, 77, 92, 0.1)",
-        "mainSeriesProperties.baselineStyle.topLineColor": "rgba( 83, 185, 135, 1)",
-        "mainSeriesProperties.baselineStyle.bottomLineColor": "rgba( 235, 77, 92, 1)",
-        "mainSeriesProperties.baselineStyle.topLineWidth": 1,
-        "mainSeriesProperties.baselineStyle.bottomLineWidth": 1,
-        "mainSeriesProperties.baselineStyle.priceSource": "close",
-        "mainSeriesProperties.baselineStyle.transparency": 50,
-        "mainSeriesProperties.baselineStyle.baseLevelPercentage": 50,
       },
       studies_overrides: {
         //--------------------volume
