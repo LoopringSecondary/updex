@@ -3,9 +3,10 @@
 @brand-primary: #C59949;
 @brand-error: darken(#C2185B,0); 
 @brand-success: darken(#558B2F,0); 
-@fill-body: lighten(#20203C,5%);
 @bg-white: lighten(#15152D,1%);
-@bg-white-light: #20203C;
+@bg-white-light: lighten(#15152D,2.5%);
+@fill-body: #20203C;
+@bg-fill-light: lighten(@fill-body,3.5%);
 
 // @fill-body: lighten(#15152D,0%);
 // @bg-white: lighten(#20203C,2%);
@@ -52,7 +53,6 @@
 // @import './theme-light.less';
 // @border-color:rgba(0,0,0,0.05);
 
-@bg-fill-light: lighten(@fill-body,5%);
 @brand-primary-light: fade(@brand-primary,10%);
 @brand-primary-tap: fade(@brand-primary,95%);
 @brand-important: @brand-error; // hot dot

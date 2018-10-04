@@ -8,6 +8,57 @@
 .bg-fill{
   background:@fill-body !important;
 }
+.bg-fill-light{
+  background:@bg-fill-light !important;
+}
+.text-primary{
+  color:@brand-primary !important;
+}
+.border-primary{
+  border:1px solid @brand-primary !important;
+}
+
+.color-success{
+  color:@brand-success !important;
+}
+.color-primary-light{
+  color:@brand-primary-light !important;
+}
+
+.color-error{
+  color:@brand-error !important;
+}
+.bg-success{
+  background:@brand-success !important;
+}
+.bg-error{
+  background:@brand-error !important;
+}
+
+
+.bg-primary{
+  background:@brand-primary !important;
+}
+.bg-primary-light{
+  background:@brand-primary-light !important;
+}
+.bg-primary-dark{
+  background:darken(@brand-primary,8%) !important;
+}
+.hover-bg-primary:hover{
+  background:@brand-primary !important;
+  .text-primary{
+    color:#fff !important;
+  }
+}
+.bg-primary:hover{
+  background:@brand-primary !important;
+  .text-primary{
+    color:#fff !important;
+  }
+}
+
+
 .am-tabs-default-bar{
   &:extend(.bg-white);
   // background: transparent !important;

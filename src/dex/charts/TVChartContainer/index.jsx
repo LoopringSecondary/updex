@@ -148,8 +148,8 @@ class TVChartContainer extends React.PureComponent {
 			user_id: 'public_user_id',
       width: '100%',
       height: '100%',
-			fullscreen: true,
-			// autosize:true,
+			fullscreen: false,
+			autosize:true,
       loading_screen: {
         backgroundColor: "rgba(0,0,0,0)"
       },
@@ -165,16 +165,14 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
 
         "paneProperties.background": "#1A1A37", // 背景色彩，如果带透明度会出bug
-        "paneProperties.background": "#fff", // 背景色彩，如果带透明度会出bug
+        "paneProperties.background": "#20203C", // 背景色彩，如果带透明度会出bug
         // "paneProperties.background": "rgba(255,255,255,0)", // 背景色彩，如果带透明度会出bug
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
 
         // // x,y周
-        "scalesProperties.lineColor": "#3E3E59", // x,y坐标轴的颜色
-        "scalesProperties.textColor": "#3E3E59", // x,y坐标轴字体的颜色
-        "scalesProperties.lineColor": "#5F5F63", // x,y坐标轴的颜色
-        "scalesProperties.textColor": "#5F5F63 ", // x,y坐标轴字体的颜色
+        "scalesProperties.lineColor": "#384161", // x,y坐标轴的颜色
+        "scalesProperties.textColor": "#384161 ", // x,y坐标轴字体的颜色
 
         "volumePaneSize": "large",
         "mainSeriesProperties.showCountdown": true,
