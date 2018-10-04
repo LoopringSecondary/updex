@@ -170,8 +170,10 @@ class TVChartContainer extends React.PureComponent {
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
 
         // // x,y周
-        "scalesProperties.lineColor": " #3E3E59 ", // x,y坐标轴的颜色
-        "scalesProperties.textColor": " #3E3E59 ", // x,y坐标轴字体的颜色
+        "scalesProperties.lineColor": "#3E3E59", // x,y坐标轴的颜色
+        "scalesProperties.textColor": "#3E3E59", // x,y坐标轴字体的颜色
+        "scalesProperties.lineColor": "#5F5F63", // x,y坐标轴的颜色
+        "scalesProperties.textColor": "#5F5F63 ", // x,y坐标轴字体的颜色
 
         "volumePaneSize": "large",
         "mainSeriesProperties.showCountdown": true,
