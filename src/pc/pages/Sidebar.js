@@ -18,10 +18,10 @@ class Sidebar extends React.Component {
         payload:{id}
       })
     }
-    const collapsedWidth = collapsed ? '6rem' : '37.5rem'
+    const collapsedWidth = collapsed ? '6.5rem' : '37.5rem'
     return (
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0s'}}>
-          <div className="bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6rem'}}>
+          <div className="bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6.5rem'}}>
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden={collapsed} className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>

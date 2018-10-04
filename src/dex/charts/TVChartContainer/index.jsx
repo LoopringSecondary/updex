@@ -55,9 +55,9 @@ class TVChartContainer extends React.PureComponent {
           window.SYMBOLE_CHANGE = onSymbolResolvedCallback
           setTimeout(() => {
             onSymbolResolvedCallback({
-              name: symbolName,
-              ticker: symbolName,
-              description: symbolName,
+              name: symbolName.toUpperCase(),
+              ticker: symbolName.toUpperCase(),
+              description: symbolName.toUpperCase(),
               has_intraday: true,
               timezone: 'Asia/Shanghai',
               minmov: '1',
@@ -130,7 +130,7 @@ class TVChartContainer extends React.PureComponent {
       disabled_features: [
         "use_localstorage_for_settings",
         "header_widget",
-        "context_menus",
+        // "context_menus",
         "edit_buttons_in_legend",
         // "border_around_the_chart",
         // "control_bar",
@@ -139,8 +139,8 @@ class TVChartContainer extends React.PureComponent {
         "volume_force_overlay"
       ],
 			enabled_features: [
-			  'move_logo_to_main_pane',
-        'hide_last_na_study_output'
+			  // 'move_logo_to_main_pane',
+        // 'hide_last_na_study_output'
       ],
 			charts_storage_url: 'https://saveload.tradingview.com',
 			charts_storage_api_version: '1.1',
@@ -148,7 +148,7 @@ class TVChartContainer extends React.PureComponent {
 			user_id: 'public_user_id',
       width: '100%',
       height: '100%',
-			fullscreen: false,
+			fullscreen: true,
 			// autosize:true,
       loading_screen: {
         backgroundColor: "rgba(0,0,0,0)"
@@ -165,7 +165,8 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
 
         "paneProperties.background": "#1A1A37", // 背景色彩，如果带透明度会出bug
-        "paneProperties.background": "rgba(255,255,255,0)", // 背景色彩，如果带透明度会出bug
+        "paneProperties.background": "#fff", // 背景色彩，如果带透明度会出bug
+        // "paneProperties.background": "rgba(255,255,255,0)", // 背景色彩，如果带透明度会出bug
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
 

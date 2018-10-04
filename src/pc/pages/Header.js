@@ -9,7 +9,7 @@ class Header extends React.Component {
     super(props);
   }
   render(){
-    const {match,location,dispatch} = this.props;
+    const {match,location,dispatch,className} = this.props;
     const showLayer = (id)=>{
       dispatch({
         type:"layers/showLayer",
@@ -17,7 +17,7 @@ class Header extends React.Component {
       })
     }
     return (
-      <div className="bg-white row no-gutters ml0 mr0 align-items-stretch" style={{height:'100%'}}>
+      <div className={`bg-white row no-gutters d-flex align-items-stretch ${className}`} style={{height:'100%'}}>
         <div className="col d-flex align-items-center text-left ">
           <TickerItem />
         </div>

@@ -32,12 +32,12 @@ class Home extends React.Component {
       })
     }
     return (
-      <div style={{height:'100vh',overflow:'none' }}>
-        <div className="mpanel mr0 mt0 mb0" style={{height:'6rem',paddingTop:'0rem'}}>
+      <div style={{height:'100vh',overflow:'none' }}  className="d-flex flex-column">
+        <div className="mlpanel" style={{height:'6.5rem',paddingTop:'0rem'}}>
          <Header className="" />
         </div>
-        <div className="row no-gutters ml0 mr0">
-          <div className="col-auo d-flex flex-column mpanel mr0 mb0" style={{height:'94vh',width:'40rem'}}>
+        <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
+          <div className="col-auo d-flex flex-column mpanel mr0 mb0" style={{width:'37.5rem'}}>
             <PanelWrapper className="pb5">
               <PanelHeader title="Place Order" />
               <div className="pt5"></div>
@@ -54,7 +54,7 @@ class Home extends React.Component {
               </div>
             </PanelWrapper>
           </div>
-          <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
+          <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{width:'32.5rem'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
@@ -68,14 +68,14 @@ class Home extends React.Component {
               </div>
             }
           </div>
-          <div className="col mpanel mr0 mb0 d-flex flex-column" style={{height:'94vh'}}>
+          <div className="col mpanel mr0 mb0 d-flex flex-column" style={{}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Charts" />
               <Kline />
             </PanelWrapper>
           </div>
           { collapsed &&
-            <div className="col-auto mpanel mr0 mb0  d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
+            <div className="col-auto mpanel mr0 mb0  d-flex flex-column" style={{width:'32.5rem'}}>
               <PanelWrapper style={{flex:'1'}}>
                 <PanelHeader title="Trade History" />
                 <ListMarketFills />

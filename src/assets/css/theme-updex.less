@@ -35,20 +35,28 @@
 
 // huobi
 
-@brand-primary:#488AEA;
-@brand-error: darken(#d95468,6%); 
-@brand-success: darken(#1EB980,6%); 
-@fill-body: #252A42;
-@bg-white: #181B2A;
-@bg-white-light: lighten(@fill-body,5%);
+// @brand-primary:#488AEA;
+// @brand-error: darken(#d95468,6%); 
+// @brand-success: darken(#1EB980,6%); 
+// @fill-body: #252A42;
+// @bg-white: #181B2A;
+// @bg-white-light: lighten(@fill-body,5%);
+@import '../../common/loopringui/assets/style/index.less';
 
+@border-color:rgba(255,255,255,0.05);
+@import './theme-dark.less';
+
+// @fill-body: #EDEFF1;
+// @bg-white: #fff;
+// @bg-white-light: #fff;
+// @import './theme-light.less';
+// @border-color:rgba(0,0,0,0.05);
 
 @bg-fill-light: lighten(@fill-body,5%);
 @brand-primary-light: fade(@brand-primary,10%);
 @brand-primary-tap: fade(@brand-primary,95%);
 @brand-important: @brand-error; // hot dot
 // @border-color:@fill-body;
-@border-color:rgba(255,255,255,0.05);
 // @border-color:rgba(0,0,0,0.2);
 
 @radius-xs: 50em;
@@ -59,8 +67,7 @@
 @button-height: 44 * @hd;
 @color-link:@brand-primary;
 
-@import '../../common/loopringui/assets/style/index.less';
-@import './theme-dark.less';
+
 @import './theme-common.less';
 @import './components';
 @import '../fonts/index.less';

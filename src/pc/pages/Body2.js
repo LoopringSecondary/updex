@@ -32,34 +32,34 @@ class Home extends React.Component {
       })
     }
     return (
-      <div style={{height:'100vh',overflow:'none' }}>
-        <div className="d-flex flex-column" style={{height:'6rem'}}>
-          <Header />
+      <div style={{height:'100vh',overflow:'none' }} className="d-flex flex-column">
+        <div className="d-flex flex-column mlpanel" style={{height:'6.5rem'}}>
+          <Header className="" />
         </div>
-        <div className="row no-gutters">
-          <div className="col p5 pb0 pr0 d-flex flex-column" style={{flex:'1'}}>
-            <PanelWrapper style={{flex:'1'}}>
+        <div className="row no-gutters" style={{flex:'1'}}>
+          <div className="col d-flex flex-column" style={{flex:'1'}}>
+            <PanelWrapper style={{flex:'1'}} className="mpanel mr0 mb0">
               <PanelHeader title="Kline Chart" />
               <Kline />
             </PanelWrapper>
           </div>
-          <div className="col-auto p5 pb0 pr0 d-flex flex-column" style={{height:'94vh',width:'40rem'}}>
-            <PanelWrapper style={{flex:'1'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'40rem'}}>
+            <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
             </PanelWrapper>
-            <PanelWrapper className="mt5" style={{height:'365px'}}>
+            <PanelWrapper className="mtpanel pb5" style={{height:'365px'}}>
               <PanelHeader title="Place Order" />
               <div className="pt10"></div>
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
           </div>
-          <div className="col-auto p5 pb0 pr0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
-            <PanelWrapper style={{flex:'1'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'37.5rem'}}>
+            <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="pb10">
               <PanelHeader title="Trade History" />
               <ListMarketFills />
             </PanelWrapper>
-            <PanelWrapper className="mt5" style={{height:'365px'}}>
+            <PanelWrapper className="mtpanel" style={{height:'365px'}}>
               <PanelHeader title="Orders" />
               <div style={{flex:'1',overflow:'auto'}}>
                 <HelperOfMyMarketOrders />
