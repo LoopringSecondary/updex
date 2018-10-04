@@ -20,9 +20,9 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="placeOrderSteps" >
-        <UiContainers.Panels position="right" id="placeOrderSteps" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
+        <UiContainers.Drawer position="right" id="placeOrderSteps" width="480px" level={null} style={{margin:'0 auto',height:'100%'}}>
           <PlaceOrderSteps />
-        </UiContainers.Panels>
+        </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="helperOfAdvance">
         <UiContainers.Popups id="helperOfAdvance">

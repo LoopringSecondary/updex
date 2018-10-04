@@ -2,7 +2,6 @@ import React from 'react'
 import Drawer from 'rc-drawer'
 import 'rc-drawer/assets/index.css';
 
-console.log('Drawer',Drawer)
 const DrawerWrapper = (props)=>{
   const {
     children,id,
@@ -27,7 +26,7 @@ const DrawerWrapper = (props)=>{
     showMask,
     level,
     open:module.visible,
-    // onClose:module.hideLayer && module.hideLayer.bind(this),
+    onMaskClick:module.hideLayer && module.hideLayer.bind(this),
   }
   const childProps = {...rest}
   return (
