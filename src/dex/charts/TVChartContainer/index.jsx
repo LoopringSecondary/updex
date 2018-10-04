@@ -164,7 +164,8 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.borderDownColor": "#c2185b",
         "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
 
-        "paneProperties.background": "#242443", // 背景色彩，如果带透明度会出bug
+        "paneProperties.background": "#1A1A37", // 背景色彩，如果带透明度会出bug
+        "paneProperties.background": "rgba(255,255,255,0)", // 背景色彩，如果带透明度会出bug
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
 

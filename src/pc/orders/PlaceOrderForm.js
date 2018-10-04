@@ -218,7 +218,7 @@ class PlaceOrderForm extends React.Component {
     const menu2 = `${intl.get("common.sell")} ${tokens.left}`
     return (
       <div>
-        <div className="bg-white p15">
+        <div className="p15">
           <div className="segmented-fs16">
             <SegmentedControl
               values={[menu1, menu2]}
