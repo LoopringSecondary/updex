@@ -33,7 +33,7 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
-        <div className="d-flex flex-column m5 mt0 mr0 mb0" style={{height:'6rem'}}>
+        <div className="d-flex flex-column" style={{height:'6rem'}}>
           <Header />
         </div>
         <div className="row no-gutters">

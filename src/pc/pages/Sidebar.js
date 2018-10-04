@@ -25,7 +25,7 @@ class Sidebar extends React.Component {
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden={collapsed} className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>
-          <div className="mt5 d-flex flex-column" style={{flex:'1'}}>
+          <div className="d-flex flex-column mtpanel" style={{flex:'1'}}>
             {!collapsed &&
               <PanelWrapper style={{flex:'1'}}>
                 <PanelHeader title="Markets" />

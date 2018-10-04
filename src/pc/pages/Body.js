@@ -33,34 +33,34 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}>
-        <div className="pl5 pr0" style={{height:'6rem',paddingTop:'0rem'}}>
-         <Header />
+        <div className="mpanel mr0 mt0 mb0" style={{height:'6rem',paddingTop:'0rem'}}>
+         <Header className="" />
         </div>
         <div className="row no-gutters ml0 mr0">
-          <div className="col-auo m5 mr0 mb0 d-flex flex-column" style={{height:'94vh',width:'40rem'}}>
-            <PanelWrapper>
+          <div className="col-auo d-flex flex-column mpanel mr0 mb0" style={{height:'94vh',width:'40rem'}}>
+            <PanelWrapper className="pb5">
               <PanelHeader title="Place Order" />
               <div className="pt5"></div>
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
-            <PanelWrapper className="mt5">
+            <PanelWrapper className="mtpanel">
               <PanelHeader title="Wallet Balances" />
               <HelperOfBalance />
             </PanelWrapper>
-            <PanelWrapper className="mt5" style={{flex:'1'}}>
+            <PanelWrapper className="mtpanel" style={{flex:'1'}}>
               <PanelHeader title="My Orders" />
               <div style={{flex:'1',overflow:'auto'}}>
                 <HelperOfMyMarketOrders />
               </div>
             </PanelWrapper>
           </div>
-          <div className="col-auto m5 mr0 mb0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
+          <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
             </PanelWrapper>
             { false && !collapsed &&
-              <div className="mt5">
+              <div className="mtpanel">
                 <PanelWrapper style={{height:'40vh'}}>
                   <PanelHeader title="Trade History" />
                   <ListMarketFills />
@@ -68,14 +68,14 @@ class Home extends React.Component {
               </div>
             }
           </div>
-          <div className="col m5 mr0 mb0  d-flex flex-column" style={{height:'94vh'}}>
+          <div className="col mpanel mr0 mb0 d-flex flex-column" style={{height:'94vh'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Charts" />
               <Kline />
             </PanelWrapper>
           </div>
           { collapsed &&
-            <div className="col-auto m5 mr0 mb0  d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
+            <div className="col-auto mpanel mr0 mb0  d-flex flex-column" style={{height:'94vh',width:'37.5rem'}}>
               <PanelWrapper style={{flex:'1'}}>
                 <PanelHeader title="Trade History" />
                 <ListMarketFills />
