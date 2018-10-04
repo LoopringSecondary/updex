@@ -9,23 +9,23 @@
   "theme": "./theme.js",
   "dependencies": {
     "@babel/polyfill": "7.0.0-beta.46",
-    "antd": "3.2.2",
+    "antd": "^3.10.0",
     "antd-mobile": "2.2.2",
     "async": "2.6.0",
     "copy-to-clipboard": "3.0.8",
     "dva": "2.1.0",
     "lodash": "4.17.5",
+    "loopring.js": "1.0.8",
     "moment": "2.20.1",
     "qrcode.react": "0.7.2",
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-intl-universal": "1.11.2",
-    "socket.io-client": "2.0.4",
-    "useragent.js": "0.5.6",
-    "uuid": "3.3.2",
     "request": "2.85.0",
     "request-promise": "4.2.2",
-    "loopring.js": "1.0.8"
+    "socket.io-client": "2.0.4",
+    "useragent.js": "0.5.6",
+    "uuid": "3.3.2"
   },
   "devDependencies": {
     "babel-plugin-dva-hmr": "0.4.1",
