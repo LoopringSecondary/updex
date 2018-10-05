@@ -1,5 +1,6 @@
 import React from 'react'
 import {Drawer} from 'antd'
+import './Drawer.less'
 
 const DrawerWrapper = (props)=>{
   const {
@@ -21,6 +22,7 @@ const DrawerWrapper = (props)=>{
     height,
     placement:position,
     maskClosable:showMask,
+    maskClosable,
     // level,
     visible:module.visible,
     onClose:module.hideLayer && module.hideLayer.bind(this),

@@ -10,27 +10,9 @@ import intl from 'react-intl-universal'
 
 
 class Auth extends React.Component {
-
-
   state={
     address:''
   }
-
-  componentWillReceiveProps(newProps){
-    const {uuid,item} = newProps
-    if(uuid === item.uuid){
-      Modal.alert(intl.get('notifications.title.log_in_suc'))
-      storage.wallet.storeUnlockedAddress('address', item.owner)
-      window.RELAY.account.register(item.address)
-       routeActions.gotoPath('/dex')
-      this.props.dispatch({
-        type: 'sockets/extraChange',
-        payload: {id: 'addressUnlock', extra: {uuid:""}}
-      })
-      this.props.dispatch({type: 'sockets/unlocked'});
-    }
-  }
-
   authByThirdPartyWallet = (wallet) => {
     const ua = new UserAgent()
     if(ua.isWechat()){
@@ -55,7 +37,7 @@ class Auth extends React.Component {
     if(address && re.test(address)){
       storage.wallet.storeUnlockedAddress('address', address)
       window.RELAY.account.register(address)
-      routeActions.gotoPath('/dex')
+      // routeActions.gotoPath('/pc/trade/lrc-weth')
       this.props.dispatch({
         type: 'sockets/extraChange',
         payload: {id: 'addressUnlock', extra: {uuid:""}}
