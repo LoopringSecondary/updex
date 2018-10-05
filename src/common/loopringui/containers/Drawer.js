@@ -1,13 +1,11 @@
 import React from 'react'
-import Drawer from 'rc-drawer'
-import 'rc-drawer/assets/index.css';
+import {Drawer} from 'antd'
 
 const DrawerWrapper = (props)=>{
   const {
     children,id,
     width='auto',
     height='100vh',
-    handler=false,
     position='left',
     showMask=true,
     level='all', // all, null, className, id, tagName, array
@@ -22,11 +20,11 @@ const DrawerWrapper = (props)=>{
     width,
     height,
     placement:position,
-    handler,
-    showMask,
-    level,
-    open:module.visible,
-    onMaskClick:module.hideLayer && module.hideLayer.bind(this),
+    maskClosable:showMask,
+    // level,
+    visible:module.visible,
+    onClose:module.hideLayer && module.hideLayer.bind(this),
+    destroyOnClose:true,
   }
   const childProps = {...rest}
   return (

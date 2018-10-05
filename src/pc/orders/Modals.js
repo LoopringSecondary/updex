@@ -20,7 +20,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="placeOrderSteps" >
-        <UiContainers.Drawer position="right" id="placeOrderSteps" width="480px" level={null} style={{margin:'0 auto',height:'100%'}}>
+        <UiContainers.Drawer position="right" wrapperClassName="orderConfirm" id="placeOrderSteps" level={'all'} width="480px" style={{margin:'0 auto',height:'100%'}}>
           <PlaceOrderSteps />
         </UiContainers.Drawer>
       </Containers.Layers>

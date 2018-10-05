@@ -1,7 +1,6 @@
 import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
-import Settings from 'mobile/account/Settings'
 import { Icon } from 'antd'
 import { Button,Modal,Toast} from 'antd-mobile'
 import { toBig, toHex, clearHexPrefix } from 'LoopringJS/common/formatter'
@@ -14,6 +13,7 @@ import { connect } from 'dva'
 import config from 'common/config'
 import storage from 'modules/storage'
 import { keccakHash } from 'LoopringJS/common/utils'
+
 
 const OrderMetaItem = (props) => {
   const {label, value, showArrow = false, onClick = () => {}} = props
@@ -114,7 +114,7 @@ class PlaceOrderSteps extends React.Component {
     }
     const showLRCFee = () => {
       // hideLayer({id:'placeOrderSteps'})
-      showLayer({id:'settingsInOrder'})
+      showLayer({id:'settings'})
     }
     const next = async (page) => {
       let order = {}
@@ -249,12 +249,8 @@ class PlaceOrderSteps extends React.Component {
             </div>
           }/>
         </Pages>
-        <Containers.Layers id="settingsInOrder">
-          <UiContainers.Drawer position="right" id="settingsInOrder" level={'.orderConfirm'} levelMove={'120px'} width="360px"  style={{margin:'0 auto',height:'100%'}}>
-            <Settings />
-          </UiContainers.Drawer>
-        </Containers.Layers>
-    </div>
+        
+      </div>
     )
   }
 }

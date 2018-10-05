@@ -1,5 +1,5 @@
 export default {
-    selected:'up_white',
+    selected:'up_blue',
     up_grey:{
         red:"#D54359",
         green:"#19A774",
