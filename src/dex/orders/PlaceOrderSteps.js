@@ -207,7 +207,7 @@ class PlaceOrderSteps extends React.Component {
                 <OrderMetaItem showArrow={true} onClick={()=>showLRCFee()} label={intl.get('common.lrc_fee')} value={<div className="text-primary">{lrcFeeValue} LRC({settings.trading.lrcFee/10}%)</div>} />
                 <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary">{validSince.format('MM-DD HH:mm')} ~ {validUntil.format('MM-DD HH:mm')}</div>}  />
                 <div className="divider 1px zb-b-t"></div>
-                <div className="pt15 pb15 clor-black-3 fs12">
+                <div className="pt15 pb15 color-black-3 fs12 text-center">
                   <Icon className="mr5" type="exclamation-circle-o" />{intl.get('place_order_confirm.no_cost_gas')}
                 </div>
                 <Button type="primary" className="fs18" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>

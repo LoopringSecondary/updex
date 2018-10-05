@@ -1,0 +1,23 @@
+export default {
+    selected:'up_white',
+    up_grey:{
+        red:"#D33C52",
+        green:"#189F6E",
+        bg:'#3B3B47',
+    },
+    up_purple:{
+        red:"#C1195B",
+        green:"#558B2F",
+        bg:'#272749',
+    },
+    up_blue:{
+        red:"#D33C52",
+        green:"#189F6E",
+        bg:'#2E3552',
+    },
+    up_white:{
+        red:"#D33C52",
+        green:"#189F6E",
+        bg:'#fff',
+    },
+}

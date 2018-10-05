@@ -44,11 +44,11 @@ class Home extends React.Component {
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
             <PanelWrapper className="mtpanel">
-              <PanelHeader title="Wallet Balances" />
+              <PanelHeader title="Wallet" />
               <HelperOfBalance />
             </PanelWrapper>
             <PanelWrapper className="mtpanel" style={{flex:'1'}}>
-              <PanelHeader title="My Orders" />
+              <PanelHeader title="Orders" />
               <div style={{flex:'1',overflow:'auto'}}>
                 <HelperOfMyMarketOrders />
               </div>

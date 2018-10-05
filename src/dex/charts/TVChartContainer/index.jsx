@@ -2,6 +2,9 @@ import * as React from 'react';
 import './index.css';
 import {connect} from "dva";
 import historyProvider from "./api/historyProvider";
+import themes from "./themes.js";
+
+const theme = themes[themes.selected]
 
 function getLanguageFromURL() {
 	const regex = new RegExp('[\\?&]lang=([^&#]*)');
@@ -156,25 +159,24 @@ class TVChartContainer extends React.PureComponent {
       overrides: {
         editorFontsList: ['RobotoCondensed','Times New Roman', 'Arial'] ,
         // 蜡烛图
-        "mainSeriesProperties.candleStyle.upColor": '#558b2f',
-        "mainSeriesProperties.candleStyle.borderUpColor": '#558b2f',
-        "mainSeriesProperties.candleStyle.wickUpColor": '#558b2f',
+        "mainSeriesProperties.candleStyle.upColor": theme.green,
+        "mainSeriesProperties.candleStyle.borderUpColor": theme.green,
+        "mainSeriesProperties.candleStyle.wickUpColor": theme.green,
 
-        "mainSeriesProperties.candleStyle.downColor": "#c2185b",// "#c2185b",
-        "mainSeriesProperties.candleStyle.borderDownColor": "#c2185b",
-        "mainSeriesProperties.candleStyle.wickDownColor": "#c2185b",
+        "mainSeriesProperties.candleStyle.downColor": theme.red,// theme.red,
+        "mainSeriesProperties.candleStyle.borderDownColor": theme.red,
+        "mainSeriesProperties.candleStyle.wickDownColor": theme.red,
 
-        "paneProperties.background": "#1A1A37", // 背景色彩，如果带透明度会出bug
-        "paneProperties.background": "#1E1E39", // 背景色彩，如果带透明度会出bug
-        // "paneProperties.background": "rgba(255,255,255,0)", // 背景色彩，如果带透明度会出bug
+        "paneProperties.background":theme.bg, // 背景色彩，如果带透明度会出bug
+        // "paneProperties.background": "rgba(0,0,0,0.001)", // 背景色彩，如果带透明度会出bug
         "paneProperties.vertGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
         "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
 
         // // x,y周
-        "scalesProperties.lineColor": "#384161", // x,y坐标轴的颜色
-        "scalesProperties.textColor": "#384161 ", // x,y坐标轴字体的颜色
+        "scalesProperties.lineColor": "rgba(255,255,255,0.05)", // x,y坐标轴的颜色,背景无bug时正常显示
+        "scalesProperties.textColor": "rgba(255,255,255,0.2) ", // x,y坐标轴字体的颜色,背景无bug时正常显示
 
-        "volumePaneSize": "large",
+        "volumePaneSize": "small",
         "mainSeriesProperties.showCountdown": true,
         "symbolWatermarkProperties.transparency": 0,
         "symbolWatermarkProperties.color": "rgba(0, 0, 0, 0.00)",
@@ -184,8 +186,8 @@ class TVChartContainer extends React.PureComponent {
       },
       studies_overrides: {
         //--------------------volume
-        "volume.volume.color.0": "#558b2f",
-        "volume.volume.color.1": "#c2185b",
+        "volume.volume.color.0": theme.red,
+        "volume.volume.color.1": theme.green,
       }
 		};
     const tvWidget = new window.TradingView.widget(widgetOptions);

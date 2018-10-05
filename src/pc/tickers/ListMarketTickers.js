@@ -292,6 +292,7 @@ class ListMarketTickers extends React.Component {
             placeholder="Search"
             onChange={()=>{}}
             className="bg-none"
+            style={{marginTop:'0.2rem',marginBottom:'0.1rem'}}
             showCancelButton={false}
           />
           <div className="divider 1px zb-b-t"></div>
