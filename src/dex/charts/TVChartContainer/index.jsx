@@ -143,7 +143,7 @@ class TVChartContainer extends React.PureComponent {
       ],
 			enabled_features: [
 			  // 'move_logo_to_main_pane',
-        // 'hide_last_na_study_output'
+        'hide_last_na_study_output'
       ],
 			charts_storage_url: 'https://saveload.tradingview.com',
 			charts_storage_api_version: '1.1',
@@ -168,16 +168,15 @@ class TVChartContainer extends React.PureComponent {
         "mainSeriesProperties.candleStyle.wickDownColor": theme.red,
 
         "paneProperties.background":theme.bg, // 背景色彩，如果带透明度会出bug
-        // "paneProperties.background": "rgba(0,0,0,0.001)", // 背景色彩，如果带透明度会出bug
-        "paneProperties.vertGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
-        "paneProperties.horzGridProperties.color": "rgba(255,255,255,0)", // 背景网格颜色
+        "paneProperties.vertGridProperties.color": theme.grid, // 背景网格颜色
+        "paneProperties.horzGridProperties.color": theme.grid, // 背景网格颜色
 
         // // x,y周
-        "scalesProperties.lineColor": "rgba(255,255,255,0.05)", // x,y坐标轴的颜色,背景无bug时正常显示
-        "scalesProperties.textColor": "rgba(255,255,255,0.2) ", // x,y坐标轴字体的颜色,背景无bug时正常显示
+        "scalesProperties.lineColor": theme.line, // x,y坐标轴的颜色,背景无bug时正常显示
+        "scalesProperties.textColor": theme.text, // x,y坐标轴字体的颜色,背景无bug时正常显示
 
-        "volumePaneSize": "small",
-        "mainSeriesProperties.showCountdown": true,
+        "volumePaneSize": "medium",
+        "mainSeriesProperties.showCountdown": false,
         "symbolWatermarkProperties.transparency": 0,
         "symbolWatermarkProperties.color": "rgba(0, 0, 0, 0.00)",
         // // 边际（百分比） 用于自动缩放。
