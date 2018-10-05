@@ -4,7 +4,7 @@ import {TickersFm,TickerFm,sorterByMarket,sorterByVolume,sorterByPirce,sorterByC
 import storage from '../../modules/storage'
 import intl from 'react-intl-universal'
 import routeActions from 'common/utils/routeActions'
-import { ListView,Button,Tabs } from 'antd-mobile'
+import { ListView,Button,Tabs,NavBar,SearchBar } from 'antd-mobile'
 import { Spin,Icon } from 'antd'
 import { getMarketTickersBySymbol } from './formatters'
 import Worth from 'modules/settings/Worth'
@@ -129,26 +129,26 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
               <span className="fs12 color-black-4">{intl.get('common.volume')} {tickerFm.getVol()} {false && tokens.right}</span>
           </div>
         </div>
-        <div className="col text-left pr10 pl5">
+        <div className="col text-left pr15 pl5">
           <div className="fs16 color-black-1 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
           <div className="fs12 color-black-4" style={{marginTop:'2px'}}><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
         </div>
         <div className="col-3 text-right">
           {
             direction === 'up' &&
-            <Button style={{height:'36px',lineHeight:'36px'}} className="border-none radius-4 pl10 pr10 fs16 bg-success color-white">
+            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-inline-block pl5 pr5 fs14 bg-success color-white">
              +{tickerFm.getChange()}
             </Button>
           }
           {
             direction === 'down' &&
-            <Button style={{height:'36px',lineHeight:'36px'}} className="border-none radius-4 pl10 pr10 fs16 bg-error color-white">
+            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-inline-block pl5 pr5 fs14 bg-error color-white">
              {tickerFm.getChange()}
             </Button>
           }
           {
             direction === 'none' &&
-            <Button style={{height:'36px',lineHeight:'36px'}} className="border-none radius-4 pl10 pr10 fs16 bg-grey-500 color-white">
+            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-inline-block pl5 pr5 fs14 bg-grey-500 color-white">
              {tickerFm.getChange()}
             </Button>
           }
@@ -269,18 +269,46 @@ class ListMarketTickers extends React.Component {
         })
       }
       return (
-        <Spin spinning={list.loading} className="pt50">
-          <Tabs
-            tabs={tabs}
-            tabBarTextStyle={{}}
-            initialPage={1}
-            swipeable={false}
-            onChange={(tab, index) => {}}
-            onTabClick={(tab, index) => { }}
-          >
-            {tickerItems}
-          </Tabs>
-        </Spin>
+        <div>
+          {
+            false &&
+            <NavBar
+              className="bg-white"
+              mode="light"
+              icon={null && <Icon type="left" />}
+              onLeftClick={() => console.log('onLeftClick')}
+              leftContent={[
+              ]}
+              rightContent={[
+                <Icon type="search" />
+              ]}
+            >
+              <div className="color-black">{intl.get('common.market')}</div>
+            </NavBar>
+          }
+          
+          <div hidden className="divider 1px zb-b-t"></div>
+          <SearchBar
+            placeholder="Search"
+            onChange={()=>{}}
+            className="bg-none"
+            showCancelButton={false}
+          />
+          <div className="divider 1px zb-b-t"></div>
+          <Spin spinning={list.loading} className="pt50">
+            <Tabs
+              tabs={tabs}
+              tabBarTextStyle={{}}
+              initialPage={1}
+              swipeable={false}
+              onChange={(tab, index) => {}}
+              onTabClick={(tab, index) => { }}
+            >
+              {tickerItems}
+            </Tabs>
+          </Spin>
+        </div>
+        
       )
   }
 }

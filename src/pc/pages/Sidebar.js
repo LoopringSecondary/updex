@@ -25,19 +25,25 @@ class Sidebar extends React.Component {
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/> 
             <span hidden={collapsed} className="text-primary ml10 fs20 font-weight-bold">UP DEX</span>
           </div>
-          <div className="d-flex flex-column mtpanel" style={{flex:'1'}}>
+          <div className="d-flex flex-column mtpanel bg-white" style={{flex:'1'}}>
             {!collapsed &&
-              <PanelWrapper style={{flex:'1'}}>
-                <PanelHeader title="Markets" />
-                <div className="bg-white-light" style={{flex:'1',overflow:'auto'}}>
-                  <MarketTitckers  />
-                </div>
-              </PanelWrapper>
+              <div className="" style={{flex:'1',overflow:'auto'}}>
+                <MarketTitckers  />
+              </div>
             }
             {collapsed &&
               <div className="bg-white" style={{flex:1,overflow:'auto'}}>
                 <ListTokens collapsed={collapsed} />
               </div>
+            }
+            {
+              false &&
+              <PanelWrapper style={{flex:'1'}}>
+                <PanelHeader title="Markets" />
+                <div className="" style={{flex:'1',overflow:'auto'}}>
+                  <MarketTitckers  />
+                </div>
+              </PanelWrapper>
             }
           </div>
       </div>
