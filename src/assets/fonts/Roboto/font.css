@@ -36,6 +36,7 @@
   font-weight:700;
 }*/
 
+@import './RobotoMono/font.css'
 @font-face {
   font-family: "RobotoCondensed";
   src: url('RobotoCondensed-Bold.ttf');
