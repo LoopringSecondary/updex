@@ -1,5 +1,5 @@
 export default {
-    selected:'up_black',
+    selected:'up_white',
     up_grey:{
         red:"#D54359",
         green:"#19A774",
@@ -40,7 +40,7 @@ export default {
         line:'rgba(0,0,0,0.06)',
         grid:'rgba(0,0,0,0.04)',
     },
-    up_black:{
+    up_wd_black:{
         red:"#f44336",
         green:"#4caf50",
         bg:'#202124',
@@ -48,5 +48,12 @@ export default {
         line:'rgba(255,255,255,0.06)',
         grid:'rgba(255,255,255,0.02)',
     },
-
+    up_white:{
+        red:"#f44336",
+        green:"#4caf50",
+        bg:'#fff',
+        text:'rgba(0,0,0,0.35)',
+        line:'rgba(0,0,0,0.06)',
+        grid:'rgba(0,0,0,0.04)',
+    },
 }

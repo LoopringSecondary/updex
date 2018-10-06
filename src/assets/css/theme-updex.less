@@ -1,8 +1,11 @@
 @import "~antd-mobile/dist/antd-mobile.less";
 @import '../../common/loopringui/assets/style/index.less';
-
+@fontfamily: "RobotoCondensed","Helvetica Neue", Helvetica,sans-serif;
+@fontfamily: "RobotoMono","Helvetica Neue", Helvetica,sans-serif;
 // purple
 @brand-primary: #C59949;
+
+
 // @brand-error: darken(#C2185B,0); 
 // @brand-success: darken(#558B2F,0); 
 // @bg-white: lighten(#15152D,1%);
@@ -38,6 +41,7 @@
 
 // black
 @brand-primary: #f9a825;
+// @brand-primary: #ffd600;
 @brand-error: #f44336; 
 @brand-success: #4caf50; 
 @fill-body: #000;
@@ -48,18 +52,19 @@
 
 
 // dark
-@border-color:rgba(255,255,255,0.06);
-@import './theme-dark.less';
+// @border-color:rgba(255,255,255,0.06);
+// @import './theme-dark.less';
 
 // white light
 // @brand-error: darken(#d95468,4%); 
 // @brand-success: darken(#1EB980,4%); 
-// @fill-body: #EDEFF1;
-// @bg-white: #fff;
-// @bg-white-light: #fff;
-// @bg-fill-light: #fff;
-// @border-color:rgba(0,0,0,0.05);
-// @import './theme-light.less';
+@fill-body: #EDEFF1;
+@bg-white: #fff;
+@bg-white-light: #fff;
+@bg-fill-light: #fff;
+@border-color:rgba(0,0,0,0.05);
+@import './theme-light.less';
+
 
 @brand-primary-light: fade(@brand-primary,10%);
 @brand-primary-tap: fade(@brand-primary,95%);
