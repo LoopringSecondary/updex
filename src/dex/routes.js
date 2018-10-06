@@ -27,8 +27,7 @@ const UnLogged = ()=>{
   }
 }
 const Logged = ()=>{
-  // const isLogged =  !!storage.wallet.getUnlockedAddress()
-  const isLogged = true
+  const isLogged =  !!storage.wallet.getUnlockedAddress()
   const ua = new UserAgent()
   const isMobile = ua.isMobile() 
   if(isMobile){
