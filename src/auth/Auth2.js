@@ -61,7 +61,7 @@ class Auth extends React.Component {
     return (
       <div className="bg-white" style={{height:'100vh'}}>
         <NavBar
-          className="bg-white"
+          className="bg-white d-none"
           mode="light"
           leftContent={null &&[
             <span onClick={()=>{}} className="color-black-1" key="1"><Icon type="left" /></span>,
@@ -86,19 +86,20 @@ class Auth extends React.Component {
               onChange={this.amountChange}
               value={address}
               className="circle h-default color-black-2 fs13"
-              placeholder="Paste your ETH address"
+              placeholder="Paste ETH address"
               extra={<Icon hidden type="scan" />}
               clear
             >
             </InputItem>
           </List>
-          <Button onClick={this.authByAddress} className="mt15" type="primary"> {intl.get('signIn.title')}</Button>
+          <Button onClick={this.authByAddress} className="mt20 fs18" type="primary">Log In By Address</Button>
+          <Button hidden onClick={()=>{}} className="mt20 fs16" type="ghost">Skip to Log In</Button>
         </div>
         <div className="">
           <div className="divider 1px zb-b-t"></div>
           <div className="pt20">
-            <div className="fs16 color-black-2 text-center">
-            {intl.get('signIn.tp_title')}
+            <div className="fs14 color-black-4 text-left pl25">
+            Log In By Wallet
             </div>
           </div>
           <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
@@ -161,6 +162,10 @@ class Auth extends React.Component {
               </div>
             </div>
           </div>
+
+        </div>
+        <div className="pt10 pb15 text-center"style={{position:'absolute',bottom:'0',left:'0',right:'0'}}>
+          <div className="fs13 text-primary">Skip to Log In</div>
         </div>
       </div>
     )
