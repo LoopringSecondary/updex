@@ -132,7 +132,7 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
   }
   const orderStatus = (item) => {
     if (item.status === 'ORDER_OPENED' || item.status === 'ORDER_WAIT_SUBMIT_RING') {
-      return <Button onClick={cancelOrder.bind(this, item)} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml5" size="small">{intl.get('common.cancel')}</Button>
+      return <Button onClick={cancelOrder.bind(this, item)} type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml5 bg-primary-light text-primary border-none fs12" size="small">{intl.get('common.cancel')}</Button>
     }
 
     if (item.status === 'ORDER_FINISHED') {
@@ -203,7 +203,7 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
           <th className="text-center pl10 pr10 pt5 pb5 font-weight-normal color-black-4 zb-b-b text-nowrap">
             {
               orders.items && orders.items.length > 0 &&
-              <Button onClick={cancelOrderByTokenPair.bind(this)} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml5" size="small">
+              <Button onClick={cancelOrderByTokenPair.bind(this)} type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml5 bg-primary-light text-primary border-none" size="small">
                 {intl.get('common.cancel')}
               </Button>
             }
