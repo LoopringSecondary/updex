@@ -4,9 +4,10 @@ export default class UserAgent {
   constructor() {
     this.ua = Useragent.analyze(window.navigator.userAgent)
   }
-
   isMobile() {
-    return !!this.ua.match(/AppleWebKit.*Mobile.*/)
+    // return !!this.ua.match(/AppleWebKit.*Mobile.*/)
+    const isMobile = window.navigator.userAgent.match(/AppleWebKit.*Mobile.*/)
+    return !!isMobile
   }
   getLanguage() {
     const language = window.navigator.browserLanguage || window.navigator.language

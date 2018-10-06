@@ -14,6 +14,7 @@ import Notifications from './notifications/Notifications'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
 import storage from 'modules/storage'
+import UserAgent from 'common/utils/useragent'
 
 const UnLogged = ()=>{
   const isLogged = !!storage.wallet.getUnlockedAddress()
@@ -26,33 +27,39 @@ const UnLogged = ()=>{
   }
 }
 const Logged = ()=>{
-  // const isLogged =  !!storage.wallet.getUnlockedAddress() 
-  const isLogged =  true
-  if(isLogged){
-    return (
-      <div>
-        <Switch>
-          <Route path={`/dex/markets`} exact component={Markets} />
-          <Route path={`/dex/markets/search/:type`} exact component={MarketsSearch} />
-          <Route path={`/dex/markets/:market`} component={MarketDetail} />
-          <Route path={`/dex/placeOrder`} exact component={PlaceOrder} />
-          <Route path={`/dex/placeOrder/:market`} exact component={PlaceOrder} />
-          <Route path={`/dex/usercenter`} component={UserCenter} />
-          <Route path={`/dex/convert/:token`} component={Convert} />
-          <Route path={`/dex/notifications`} component={Notifications} />
-          <Route path={`/dex/todos`} exact component={ListTodos} />
-          <Route path={`/dex/messages`} exact component={Pages.Todo} />
-          <Route path={`/dex/settings`} exact component={Pages.Todo} />
-          <Redirect from="/dex" to="/dex/markets" />
-        </Switch>
-        <CommonModals />
-        <Orders.Modals />
-        <Tokens.Modals />
-        <Account.Modals />
-      </div>
-    )
+  // const isLogged =  !!storage.wallet.getUnlockedAddress()
+  const isLogged = true
+  const ua = new UserAgent()
+  const isMobile = ua.isMobile() 
+  if(isMobile){
+    if(isLogged){
+      return (
+        <div>
+          <Switch>
+            <Route path={`/dex/markets`} exact component={Markets} />
+            <Route path={`/dex/markets/search/:type`} exact component={MarketsSearch} />
+            <Route path={`/dex/markets/:market`} component={MarketDetail} />
+            <Route path={`/dex/placeOrder`} exact component={PlaceOrder} />
+            <Route path={`/dex/placeOrder/:market`} exact component={PlaceOrder} />
+            <Route path={`/dex/usercenter`} component={UserCenter} />
+            <Route path={`/dex/convert/:token`} component={Convert} />
+            <Route path={`/dex/notifications`} component={Notifications} />
+            <Route path={`/dex/todos`} exact component={ListTodos} />
+            <Route path={`/dex/messages`} exact component={Pages.Todo} />
+            <Route path={`/dex/settings`} exact component={Pages.Todo} />
+            <Redirect from="/dex" to="/dex/markets" />
+          </Switch>
+          <CommonModals />
+          <Orders.Modals />
+          <Tokens.Modals />
+          <Account.Modals />
+        </div>
+      )
+    }else{
+      return <Redirect to="/auth" />
+    }
   }else{
-    return <Redirect to="/auth" />
+    return <Redirect to="/pc/trade/LRC-WETH" />
   }
 }
 

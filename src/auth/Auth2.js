@@ -64,7 +64,7 @@ class Auth extends React.Component {
 
     const _this = this
     return (
-      <div className="bg-white" style={{height:'100vh'}}>
+      <div className="bg-white" style={{height:'100vh',overflow:'auto'}}>
         <NavBar
           className="bg-white d-none"
           mode="light"
@@ -169,7 +169,7 @@ class Auth extends React.Component {
           </div>
 
         </div>
-        <div className="pt10 pb15 text-center"style={{position:'absolute',bottom:'0',left:'0',right:'0'}}>
+        <div hidden className="pt10 pb15 text-center"style={{position:'absolute',bottom:'0',left:'0',right:'0'}}>
           <div className="fs13 text-primary">Skip to Log In</div>
         </div>
       </div>

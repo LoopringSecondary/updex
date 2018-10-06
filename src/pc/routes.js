@@ -16,6 +16,7 @@ import Notifications from './notifications/Notifications'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
 import storage from 'modules/storage'
+import UserAgent from 'common/utils/useragent'
 
 const UnLogged = ()=>{
   const isLogged = !!storage.wallet.getUnlockedAddress()
@@ -29,8 +30,10 @@ const UnLogged = ()=>{
 }
 const Logged = ()=>{
   // const isLogged =  !!storage.wallet.getUnlockedAddress()
-  const isLogged =  true
-  if(isLogged){
+  const isLogged = true
+  const ua = new UserAgent()
+  const isMobile = ua.isMobile()
+  if(!isMobile){
     return (
       <div>
         <Switch>
