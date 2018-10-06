@@ -42,7 +42,12 @@ class Auth extends React.Component {
         type: 'sockets/extraChange',
         payload: {id: 'addressUnlock', extra: {uuid:""}}
       })
+      this.props.dispatch({
+        type: 'layers/hideLayer',
+        payload: {id: 'auth2'}
+      })
       this.props.dispatch({type: 'sockets/unlocked'});
+      Modal.alert(intl.get('notifications.title.log_in_suc'))
     }else{
       Toast.fail(intl.get("notifications.title.invalid_address_tip"))
     }

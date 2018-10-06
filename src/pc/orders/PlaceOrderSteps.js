@@ -4,7 +4,7 @@ import UiContainers from 'LoopringUI/containers'
 import Settings from 'mobile/account/Settings'
 import HelperOfSignPC from '../../components/HelperOfSignByThirdWalletPC'
 import { Icon } from 'antd'
-import { Button,Modal,Toast} from 'antd-mobile'
+import { Button,Modal,Toast,NavBar} from 'antd-mobile'
 import { toBig, toHex, clearHexPrefix } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import { createWallet } from 'LoopringJS/ethereum/account'
@@ -158,9 +158,24 @@ class PlaceOrderSteps extends React.Component {
     }
   return (
     <div className="bg-white" style={{height:'100%'}}>
+        <NavBar
+          className="bg-white"
+          mode="light"
+          leftContent={null &&[
+            <span onClick={()=>{}} className="color-black-1" key="1"><Icon type="left" /></span>,
+          ]}
+          rightContent={null && [
+            <span className="color-black-1" key="1"  onClick={()=>{}}><Icon type="question-circle-o" /></span>
+          ]}
+        >
+          <div className="color-black-1 fs16">
+            Order Confirm
+          </div>
+        </NavBar>
+        <div className="divider 1px zb-b-t"></div>
         <Pages active="order">
           <Page id="order" render={({page}) =>
-            <div>
+            <div className="p15">
               <div hidden className="p15 color-black-1 fs18 zb-b-b text-center">
                 <div className="row">
                   <div className="col-auto text-left" onClick={hideLayer.bind(this, {id: 'placeOrderSteps'})}>
