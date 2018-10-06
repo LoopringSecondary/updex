@@ -1,5 +1,5 @@
 export default {
-    selected:'up_purple_reverse',
+    selected:'up_purple',
     up_grey:{
         red:"#D54359",
         green:"#19A774",

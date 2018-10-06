@@ -23,7 +23,7 @@ class TVChartContainer extends React.PureComponent {
 
   componentDidMount() {
     //const param = location.pathname.replace(`${match.path}/`, '')
-    const symbol = window.location.hash.split('/')[3]
+    const symbol = window.location.hash.split('/')[3] || 'LRC-WETH'
 	  this.initChart(symbol)
   }
 

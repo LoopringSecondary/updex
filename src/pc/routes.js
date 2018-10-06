@@ -37,10 +37,10 @@ const Logged = ()=>{
     return (
       <div>
         <Switch>
-          <Route path={`/pc/trade`} component={Pages.Home} />
-          <Route path={`/pc/trade2`} component={Pages.Home2} />
-          <Route path={`/pc/trade3`} component={Pages.Home3} />
-          <Redirect from="/pc" to="/pc/trade" />
+          <Route path={`/trade`} component={Pages.Home} />
+          <Route path={`/trade2`} component={Pages.Home2} />
+          <Route path={`/trade3`} component={Pages.Home3} />
+          <Redirect from="/" to="/trade" />
         </Switch>
         <CommonModals />
         <Orders.Modals />
@@ -62,7 +62,7 @@ export default class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path={`/pc`}  component={Logged} />
+        <Route path={`/`}  component={Logged} />
       </Switch>
     );
   }

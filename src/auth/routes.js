@@ -44,7 +44,7 @@ export default class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path={`/`}  component={UnLogged} />
+        <Route path={`/auth`}  component={UnLogged} />
       </Switch>
     );
   }
