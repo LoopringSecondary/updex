@@ -2,6 +2,7 @@ import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
 import Settings from 'mobile/account/Settings'
+import HelperOfSignPC from '../../components/HelperOfSignByThirdWalletPC'
 import { Icon } from 'antd'
 import { Button,Modal,Toast} from 'antd-mobile'
 import { toBig, toHex, clearHexPrefix } from 'LoopringJS/common/formatter'
@@ -146,12 +147,12 @@ class PlaceOrderSteps extends React.Component {
       window.RELAY.order.setTempStore(hash, JSON.stringify([{type:"order",data:order}])).then(res => {
         _this.setState({hash})
         if (!res.error) {
-          hideLayer({id: 'placeOrderSteps'})
+          // hideLayer({id: 'placeOrderSteps'})
           dispatch({
             type: 'sockets/queryChange',
             payload: {id: 'circulrNotify', extra: {hash}}
           })
-          showLayer({id: 'helperOfSign', type: 'order', data: {type: 'sign', value: hash}})
+          showLayer({id: 'selectWalletInOrder', type: 'order', data: {type: 'sign', value: hash}})
         }
       })
     }
@@ -250,10 +251,16 @@ class PlaceOrderSteps extends React.Component {
           }/>
         </Pages>
         <Containers.Layers id="settingsInOrder">
-          <UiContainers.Drawer position="right" id="settingsInOrder" level={'.orderConfirm'} levelMove={'120px'} width="360px"  style={{margin:'0 auto',height:'100%'}}>
+          <UiContainers.Drawer position="right" id="settingsInOrder" width="480px"  style={{margin:'0 auto',height:'100%'}}>
             <Settings />
           </UiContainers.Drawer>
         </Containers.Layers>
+        <Containers.Layers id="selectWalletInOrder">
+          <UiContainers.Drawer position="right" id="selectWalletInOrder" width="480px"  style={{margin:'0 auto',height:'100%'}}>
+            <HelperOfSignPC />
+          </UiContainers.Drawer>
+        </Containers.Layers>
+
     </div>
     )
   }
