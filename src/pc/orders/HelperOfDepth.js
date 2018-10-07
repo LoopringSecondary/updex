@@ -76,7 +76,14 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
         </div>
       </div>
       <div className="" style={{flex:"1",overflow:'auto'}}>
-          <table className="w-100 fs13">
+          <table className="w-100 fs12">
+            <thead>
+              <tr className="">
+                <th className="zb-b-b text-left pl15 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.price")}</th>
+                <th className="zb-b-b text-right pl5 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")}/{tokens.left}</th>
+                <th className="zb-b-b text-right pl5 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
+              </tr>
+            </thead>
             <tbody className="">
                 <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                 {

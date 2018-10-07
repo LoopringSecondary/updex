@@ -192,10 +192,10 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
             <span hidden className="color-black-4 ml5 fs10">{tokens.right}</span>
           </th>
           <th className="text-left pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">
-            {intl.get("common.price")}<span className="fs10">/{tokens.right}</span>
+            {intl.get("common.price")}/{tokens.right}
           </th>
           <th className="text-left pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">
-            {intl.get("common.amount")}<span className="fs10">/{tokens.left}</span>
+            {intl.get("common.amount")}/{tokens.left}
           </th>
           <th hidden className="text-right pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">Fee</th>
           <th className="text-left pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">{intl.get('order.filled')}</th>
