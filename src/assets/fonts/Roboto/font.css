@@ -37,7 +37,7 @@
 }*/
 
 @import './RobotoMono/font.css'
-@font-face {
+/*@font-face {
   font-family: "RobotoCondensed";
   src: url('RobotoCondensed-Bold.ttf');
   src: url('RobotoCondensed-Bold.ttf') format('truetype'), url('RobotoCondensed-Bold.ttf') format('svg');
@@ -55,7 +55,7 @@
   src: url('RobotoCondensed-Regular.ttf') format('truetype'), url('RobotoCondensed-Regular.ttf') format('svg');
   font-weight:400;
 }
-
+*/
 
 
 

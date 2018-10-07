@@ -1,5 +1,5 @@
 export default {
-    selected:'up_wd_black',
+    selected:'up_white',
     up_grey:{
         red:"#D54359",
         green:"#19A774",

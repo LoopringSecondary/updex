@@ -1,31 +1,31 @@
 @font-face {
   font-family: "RobotoMono";
-  src: url('RobotoMono-Thin.woff');
-  src: url('RobotoMono-Thin.woff') format('truetype'), url('RobotoMono-Thin.woff') format('svg');
+  src: url('RobotoMono-Thin.ttf');
+  src: url('RobotoMono-Thin.ttf') format('truetype'), url('RobotoMono-Thin.ttf') format('svg');
   font-weight:200;
 }
 @font-face {
   font-family: "RobotoMono";
-  src: url('RobotoMono-Light.woff');
-  src: url('RobotoMono-Light.woff') format('truetype'), url('RobotoMono-Light.woff') format('svg');
+  src: url('RobotoMono-Light.ttf');
+  src: url('RobotoMono-Light.ttf') format('truetype'), url('RobotoMono-Light.ttf') format('svg');
   font-weight:300;
 }
 @font-face {
   font-family: "RobotoMono";
-  src: url('RobotoMono-Regular.woff');
-  src: url('RobotoMono-Regular.woff') format('truetype'), url('RobotoMono-Regular.woff') format('svg');
+  src: url('RobotoMono-Regular.ttf');
+  src: url('RobotoMono-Regular.ttf') format('truetype'), url('RobotoMono-Regular.ttf') format('svg');
   font-weight:400;
 }
 @font-face {
   font-family: "RobotoMono";
-  src: url('RobotoMono-Medium.woff');
-  src: url('RobotoMono-Medium.woff') format('truetype'), url('RobotoMono-Medium.woff') format('svg');
+  src: url('RobotoMono-Medium.ttf');
+  src: url('RobotoMono-Medium.ttf') format('truetype'), url('RobotoMono-Medium.ttf') format('svg');
   font-weight:500;
 }
 @font-face {
   font-family: "RobotoMono";
-  src: url('RobotoMono-Bold.woff');
-  src: url('RobotoMono-Bold.woff') format('truetype'), url('RobotoMono-Bold.woff') format('svg');
+  src: url('RobotoMono-Bold.ttf');
+  src: url('RobotoMono-Bold.ttf') format('truetype'), url('RobotoMono-Bold.ttf') format('svg');
   font-weight:600;
 }
 
