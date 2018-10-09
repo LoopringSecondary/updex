@@ -126,14 +126,15 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
             <span className="fs12 color-black-4"> / {tokens.right}</span>
           </div>
           <div className="fs12" style={{marginTop:'2px'}}>
-              <span className="fs12 color-black-4">{intl.get('common.volume')} {tickerFm.getVol()} {false && tokens.right}</span>
+              <span className="fs12 color-black-4">{intl.get('common.volume')} </span>
+              <span className="fs12 color-black-4 text-number">{tickerFm.getVol()} {false && tokens.right}</span>
           </div>
         </div>
-        <div className="col text-left pr15 pl5">
+        <div className="col text-left pr15 pl5 text-number">
           <div className="fs16 color-black-1 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
           <div className="fs12 color-black-4" style={{marginTop:'2px'}}><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
         </div>
-        <div className="col-3 text-right">
+        <div className="col-3 text-right text-number">
           {
             direction === 'up' &&
             <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-inline-block pl5 pr5 fs14 bg-success color-white">

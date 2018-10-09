@@ -3,6 +3,8 @@ import './index.css';
 import {connect} from "dva";
 import historyProvider from "./api/historyProvider";
 import themes from "./themes.js";
+import {Button} from "antd-mobile";
+
 
 const theme = themes[themes.selected]
 
@@ -151,15 +153,14 @@ class TVChartContainer extends React.PureComponent {
         "timeframes_toolbar",
         "left_toolbar",
         "volume_force_overlay",
-
         // 'hide_left_toolbar_by_default',
         // 'go_to_date',
-        // 'save_chart_properties_to_local_storage',
-        // 'main_series_scale_menu',
-        // 'adaptive_logo',
-        // 'show_logo_on_all_charts',
-        // 'display_market_status',
-        // 'chart_property_page_background',
+        'save_chart_properties_to_local_storage',
+        'main_series_scale_menu',
+        'adaptive_logo',
+        'show_logo_on_all_charts',
+        'display_market_status',
+        'chart_property_page_background',
       ],
 			enabled_features: [
 			  // 'move_logo_to_main_pane',
@@ -172,12 +173,12 @@ class TVChartContainer extends React.PureComponent {
       width: '100%',
       height: '100%',
 			fullscreen: false,
-			autosize:true,
+			autosize:false,
       loading_screen: {
         backgroundColor: "rgba(0,0,0,0)"
       },
       overrides: {
-        editorFontsList: ['RobotoCondensed','Times New Roman', 'Arial'] ,
+        editorFontsList: ['Times New Roman', 'Arial'] ,
         // 蜡烛图
         "mainSeriesProperties.candleStyle.upColor": theme.green,
         "mainSeriesProperties.candleStyle.borderUpColor": theme.green,
@@ -200,7 +201,7 @@ class TVChartContainer extends React.PureComponent {
         "symbolWatermarkProperties.transparency": 0,
         "symbolWatermarkProperties.color": "rgba(0, 0, 0, 0.00)",
         // // 边际（百分比） 用于自动缩放。
-        "paneProperties.topMargin": 10,
+        "paneProperties.topMargin": 5,
         "paneProperties.bottomMargin":0,
       },
       studies_overrides: {
@@ -221,21 +222,19 @@ class TVChartContainer extends React.PureComponent {
       this.tvWidget.chart().setResolution(value, () => {})
     }
 		return (
-		  <div style={{height:'100%'}}>
-        <div>
-          <ul>
-            <li onClick={() => resolutionChange('60')}>1H</li>
-            <li onClick={() => resolutionChange('120')}>2H</li>
-            <li onClick={() => resolutionChange('240')}>4H</li>
-            <li onClick={() => resolutionChange('D')}>1D</li>
-            <li onClick={() => resolutionChange('W')}>1W</li>
-          </ul>
+		  <div style={{flex:1}} className="d-flex flex-column">
+        <div className="mb5 zb-b-b">
+          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block text-primary" onClick={() => resolutionChange('60')}>1H</a>
+          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('120')}>2H</a>
+          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('240')}>4H</a>
+          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('D')}>1D</a>
+          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('W')}>1W</a>
         </div>
         <div
           id={ this.state.containerId }
-          style={{height:'100%'}}
+          style={{flex:1}}
           className={ 'TVChartContainer' }
-        />
+        />      
       </div>
 		);
 	}
