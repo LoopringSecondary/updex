@@ -45,7 +45,6 @@ class TVChartContainer extends React.PureComponent {
   }
 
 	initChart(symbol) {
-    console.log(11111, storage.settings.get().preference.language)
 	  const _this = this
 		const widgetOptions = {
 			debug: false,
