@@ -17,7 +17,7 @@ class TVChartContainer extends React.PureComponent {
 	state = {
     containerId: 'tv_chart_container',
 	  barsLoaded: false,
-    resolution:' 60'
+    resolution: '60'
   }
 
   tvWidget = null;
@@ -77,7 +77,7 @@ class TVChartContainer extends React.PureComponent {
         },
         getBars: function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
           console.log('=====getBars running', _this.state.barsLoaded, _this.state.resolution)
-          if(_this.state.resolution === resolution) {
+          if(_this.state.barsLoaded && _this.state.resolution === resolution) {
             setTimeout(() => {
               onHistoryCallback([], {noData: true})
             }, 0)
