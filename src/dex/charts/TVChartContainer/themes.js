@@ -46,7 +46,7 @@ export default {
         bg:'#202124',
         text:'rgba(255,255,255,0.2)',
         line:'rgba(255,255,255,0.06)',
-        grid:'rgba(255,255,255,0.02)',
+        grid:'rgba(255,255,255,0.01)',
     },
     up_white:{
         red:"#f44336",
