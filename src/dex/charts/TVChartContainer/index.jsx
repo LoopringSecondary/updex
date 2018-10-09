@@ -3,6 +3,7 @@ import './index.css';
 import {connect} from "dva";
 import historyProvider from "./api/historyProvider";
 import themes from "./themes.js";
+import storage from "../../../modules/storage";
 
 const theme = themes[themes.selected]
 
@@ -140,7 +141,7 @@ class TVChartContainer extends React.PureComponent {
       // toolbar_bg: "rgba(0,0,0,0)",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
-			locale: getLanguageFromURL() || 'zh',
+			locale: storage.settings.get().preference.language === 'en-US' ? 'en' : 'zh',
       disabled_features: [
         "use_localstorage_for_settings",
         "header_widget",
