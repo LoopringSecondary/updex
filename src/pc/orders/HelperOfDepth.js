@@ -39,7 +39,7 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
                 <th className="zb-b-b text-right pl5 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
               </tr>
             </thead>
-              <tbody>
+              <tbody className="text-number">
                   <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                   {
                     sell && sell.map((item,index)=>
@@ -84,7 +84,7 @@ const HelperOfDepth = ({depth={},pair,maxRows=15,dispatch})=>{
                 <th className="zb-b-b text-right pl5 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
               </tr>
             </thead>
-            <tbody className="">
+            <tbody className="text-number">
                 <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
                 {
                   depth.item && depth.item.buy && depth.item.buy.map((item,index)=>

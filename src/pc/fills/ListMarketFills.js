@@ -23,7 +23,7 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
             <th className="zb-b-b text-right pl5 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.time")}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="text-number">
             <tr className=""><td className="lh10 pt5" colSpan="10"></td></tr>
             {
               trades.items && trades.items.map((item,index)=>{
