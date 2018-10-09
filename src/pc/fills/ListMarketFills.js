@@ -18,8 +18,8 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
         <thead>
           <tr className="">
             <th className="zb-b-b text-left pl15 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.price")} </th>
-            <th className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.amount")}/{tokens.left}</th>
-            <th hidden className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.LRCFee")}/LRC</th>
+            <th className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.amount")} {tokens.left}</th>
+            <th hidden className="zb-b-b text-right pl5 pr5 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.LRCFee")} LRC</th>
             <th className="zb-b-b text-right pl5 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.time")}</th>
           </tr>
         </thead>
@@ -32,10 +32,10 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                   <tr key={index}>
                     <td className="lh20 border-none pl15 pr5 text-left align-middle">
                       {
-                        index%2 === 0 && <span className="color-error">{item.price.toFixed(8)} <span className="fs12 color-black-4"><Worth amount={item.price.toFixed(8)} symbol={tokens.right}/></span></span>
+                        index%2 === 0 && <span className="color-error">{item.price.toFixed(8)}</span>
                       }
                       {
-                        index%2 === 1 && <span className="color-success">{item.price.toFixed(8)} <span className="fs12 color-black-4"><Worth amount={item.price.toFixed(8)} symbol={tokens.right}/></span></span>
+                        index%2 === 1 && <span className="color-success">{item.price.toFixed(8)}</span>
                       }
                     </td>
                     <td className="lh20 border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap">
