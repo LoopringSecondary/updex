@@ -45,6 +45,7 @@ class TVChartContainer extends React.PureComponent {
   }
 
 	initChart(symbol) {
+    console.log(11111, storage.settings.get().preference.language)
 	  const _this = this
 		const widgetOptions = {
 			debug: false,
@@ -141,7 +142,7 @@ class TVChartContainer extends React.PureComponent {
       // toolbar_bg: "rgba(0,0,0,0)",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
-			locale: storage.settings.get().preference.language === 'en-US' ? 'en' : 'zh',
+			locale: storage.settings.get().preference.language === 'zh-CN' ? 'zh' : 'en',
       disabled_features: [
         "use_localstorage_for_settings",
         "header_widget",
