@@ -6,7 +6,7 @@ import intl from 'react-intl-universal'
 import routeActions from 'common/utils/routeActions'
 import { ListView,Button,Tabs,NavBar,SearchBar } from 'antd-mobile'
 import { Spin,Icon } from 'antd'
-import { getMarketTickersBySymbol } from './formatters'
+import { getMarketTickersBySymbol, searchMarkets } from './formatters'
 import Worth from 'modules/settings/Worth'
 import {formatPrice} from 'modules/orders/formatters'
 import markets from 'modules/storage/markets'
@@ -212,6 +212,9 @@ export const TickerList = ({items,loading,dispatch, tickersList})=>{
 class ListMarketTickers extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      keyword: ''
+    }
   }
   render(){
       const {tickersOfSource:list,dispatch} = this.props
@@ -244,9 +247,9 @@ class ListMarketTickers extends React.Component {
         }
         marketGroups[market[1]] = group
       })
-      favoredTickers.sort(sorter)
       const tabs = []
       const tickerItems = []
+      favoredTickers.sort(sorter)
       if(marketGroups && Object.keys(marketGroups).length > 0) {
         tabs.push({ title: <div className="fs16">{intl.get('ticker_list.title_favorites')}</div> })
         tickerItems.push(<TickerList key={'fav'} items={favoredTickers} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
@@ -267,6 +270,10 @@ class ListMarketTickers extends React.Component {
           tabs.push({title: <div className="fs16">{item}</div>})
           tickerItems.push(<TickerList key={item} items={getMarketTickersBySymbol(item,allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
         })
+      }
+
+      const search = (keyword) => {
+        this.setState({keyword})
       }
       return (
         <div>
@@ -290,24 +297,29 @@ class ListMarketTickers extends React.Component {
           <div hidden className="divider 1px zb-b-t"></div>
           <SearchBar
             placeholder="Search"
-            onChange={()=>{}}
+            onChange={(keyword)=>search(keyword)}
             className="bg-none"
             style={{marginTop:'0.2rem',marginBottom:'0.1rem'}}
             showCancelButton={false}
           />
           <div className="divider 1px zb-b-t"></div>
-          <Spin spinning={list.loading} className="pt50">
-            <Tabs
-              tabs={tabs}
-              tabBarTextStyle={{}}
-              initialPage={1}
-              swipeable={false}
-              onChange={(tab, index) => {}}
-              onTabClick={(tab, index) => { }}
-            >
-              {tickerItems}
-            </Tabs>
-          </Spin>
+          {this.state.keyword &&
+            <TickerList key={'search'} items={searchMarkets(this.state.keyword,tickersFm.getAllTickers())} loading={list.loading} dispatch={dispatch} tickersList={list}/>
+          }
+          {!this.state.keyword &&
+            <Spin spinning={list.loading} className="pt50">
+              <Tabs
+                tabs={tabs}
+                tabBarTextStyle={{}}
+                initialPage={1}
+                swipeable={false}
+                onChange={(tab, index) => {}}
+                onTabClick={(tab, index) => { }}
+              >
+                {tickerItems}
+              </Tabs>
+            </Spin>
+          }
         </div>
         
       )
