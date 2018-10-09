@@ -24,8 +24,16 @@ class TVChartContainer extends React.PureComponent {
 
   componentDidMount() {
     //const param = location.pathname.replace(`${match.path}/`, '')
-    const symbol = window.location.hash.split('/')[3] || 'LRC-WETH'
-	  this.initChart(symbol)
+    const {pair} = this.props
+	  this.initChart(pair)
+  }
+
+  componentWillReceiveProps(newProps) {
+    const {pair} = newProps
+    if (this.tvWidget !== null && this.tvWidget._ready) {
+      this.setState({barsLoaded: false})
+      this.tvWidget.chart().setSymbol(pair, () => {})
+    }
   }
 
   componentWillUnmount() {
@@ -76,7 +84,7 @@ class TVChartContainer extends React.PureComponent {
           }, 0)
         },
         getBars: function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
-          console.log('=====getBars running', _this.state.barsLoaded, _this.state.resolution)
+          console.log('=====getBars running', symbolInfo.name)
           if(_this.state.barsLoaded && _this.state.resolution === resolution) {
             setTimeout(() => {
               onHistoryCallback([], {noData: true})
@@ -236,6 +244,7 @@ class TVChartContainer extends React.PureComponent {
 function mapToProps(state) {
   return {
     trends:state.sockets.trends.items,
+    pair:state.placeOrder.pair
   }
 }
 
