@@ -16,15 +16,24 @@ class TVChartContainer extends React.PureComponent {
 
 	state = {
     containerId: 'tv_chart_container',
-	  barsLoaded: false
+	  barsLoaded: false,
+    resolution: '60'
   }
 
   tvWidget = null;
 
   componentDidMount() {
     //const param = location.pathname.replace(`${match.path}/`, '')
-    const symbol = window.location.hash.split('/')[3] || 'LRC-WETH'
-	  this.initChart(symbol)
+    const {pair} = this.props
+	  this.initChart(pair)
+  }
+
+  componentWillReceiveProps(newProps) {
+    const {pair} = newProps
+    if (this.tvWidget !== null && this.tvWidget._ready) {
+      this.setState({barsLoaded: false})
+      this.tvWidget.chart().setSymbol(pair, () => {})
+    }
   }
 
   componentWillUnmount() {
@@ -48,7 +57,7 @@ class TVChartContainer extends React.PureComponent {
             supports_marks: true,
             exchanges: [],
             symbolsTypes: [],
-            supported_resolutions: ["1", "15", "60", "240", "D"]
+            supported_resolutions: ['60', '120', '240', "D", "W"]
           }), 0)
         },
         searchSymbols: (userInput, exchange, symbolType, onResultReadyCallback) => {
@@ -75,45 +84,47 @@ class TVChartContainer extends React.PureComponent {
           }, 0)
         },
         getBars: function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
-          console.log('=====getBars running', _this.state.barsLoaded)
-          if (_this.state.barsLoaded) {
+          console.log('=====getBars running', symbolInfo.name)
+          if(_this.state.barsLoaded && _this.state.resolution === resolution) {
             setTimeout(() => {
               onHistoryCallback([], {noData: true})
             }, 0)
           } else {
             historyProvider.getLoopringBars(symbolInfo, resolution, from, to, firstDataRequest)
               .then(bars => {
-                _this.setState({barsLoaded: true})
+                _this.setState({barsLoaded: true, resolution})
                 if (bars.length) {
                   onHistoryCallback(bars, {noData: false})
                 } else {
                   onHistoryCallback(bars, {noData: true})
                 }
               }).catch(err => {
-                console.log({err})
-                onErrorCallback(err)
-              })
+              console.log({err})
+              onErrorCallback(err)
+            })
           }
+          // if (_this.state.barsLoaded) {
+          //   setTimeout(() => {
+          //     onHistoryCallback([], {noData: true})
+          //   }, 0)
+          // } else {
+          //   historyProvider.getLoopringBars(symbolInfo, resolution, from, to, firstDataRequest)
+          //     .then(bars => {
+          //       _this.setState({barsLoaded: true})
+          //       if (bars.length) {
+          //         onHistoryCallback(bars, {noData: true})
+          //       } else {
+          //         onHistoryCallback(bars, {noData: true})
+          //       }
+          //     }).catch(err => {
+          //       console.log({err})
+          //       onErrorCallback(err)
+          //     })
+          // }
         },
         subscribeBars: (symbolInfo, resolution, onRealtimeCallback, subscribeUID, onResetCacheNeededCallback) => {
           console.log('=====subscribeBars runnning')
           window.TrendCallBack = onRealtimeCallback
-          //TODO mock
-          // let time = 1536745511000
-          // setInterval(() => {
-          //   const mock = {
-          //     close:0.0012,
-          //     high:0.004,
-          //     //isBarClosed: true,
-          //     //isLastBar: false,
-          //     low:0.0011,
-          //     open:0.0012,
-          //     time:time,
-          //     volume:12
-          //   }
-          //   time = time + 3600000
-          //   //onRealtimeCallback(mock)
-          // }, 1000)
           //stream.subscribeBars(symbolInfo, resolution, onRealtimeCallback, subscribeUID, onResetCacheNeededCallback)
         },
         unsubscribeBars: subscriberUID => {
@@ -139,7 +150,16 @@ class TVChartContainer extends React.PureComponent {
         // "control_bar",
         "timeframes_toolbar",
         "left_toolbar",
-        "volume_force_overlay"
+        "volume_force_overlay",
+
+        // 'hide_left_toolbar_by_default',
+        // 'go_to_date',
+        // 'save_chart_properties_to_local_storage',
+        // 'main_series_scale_menu',
+        // 'adaptive_logo',
+        // 'show_logo_on_all_charts',
+        // 'display_market_status',
+        // 'chart_property_page_background',
       ],
 			enabled_features: [
 			  // 'move_logo_to_main_pane',
@@ -197,12 +217,26 @@ class TVChartContainer extends React.PureComponent {
 	}
 
 	render() {
+    const resolutionChange = (value) => {
+      this.tvWidget.chart().setResolution(value, () => {})
+    }
 		return (
-			<div
-				id={ this.state.containerId }
-        style={{height:'100%'}}
-				className={ 'TVChartContainer' }
-			/>
+		  <div style={{height:'100%'}}>
+        <div>
+          <ul>
+            <li onClick={() => resolutionChange('60')}>1H</li>
+            <li onClick={() => resolutionChange('120')}>2H</li>
+            <li onClick={() => resolutionChange('240')}>4H</li>
+            <li onClick={() => resolutionChange('D')}>1D</li>
+            <li onClick={() => resolutionChange('W')}>1W</li>
+          </ul>
+        </div>
+        <div
+          id={ this.state.containerId }
+          style={{height:'100%'}}
+          className={ 'TVChartContainer' }
+        />
+      </div>
 		);
 	}
 }
@@ -210,6 +244,7 @@ class TVChartContainer extends React.PureComponent {
 function mapToProps(state) {
   return {
     trends:state.sockets.trends.items,
+    pair:state.placeOrder.pair
   }
 }
 
