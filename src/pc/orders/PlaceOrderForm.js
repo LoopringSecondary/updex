@@ -234,7 +234,7 @@ class PlaceOrderForm extends React.Component {
               placeholder={`0.${'0'.repeat(marketConfig.pricePrecision)}`}
               value={price ? price : null}
               clear={false}
-              className="circle h-default mt15"
+              className="circle h-default mt15 text-number"
               extra={
                 <div style={{width:'auto',textAlign:'right'}}>
                   {
@@ -245,20 +245,20 @@ class PlaceOrderForm extends React.Component {
                 </div>
               }
               onChange={priceChange}
-            ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
+            ><div className="fs14 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
             <InputItem
               type="text"
               placeholder={amountPrecision > 0 ? `0.${'0'.repeat(amountPrecision)}` : '0'}
               value={amount ? amount : null}
               clear={false}
               onChange={amountChange}
-              className="circle h-default mt15"
+              className="circle h-default mt15 text-number"
               extra={
                 <div style={{width:'auto',textAlign:'right'}}>
                   <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.left}</span>
                 </div>
               }
-            ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
+            ><div className="fs14 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
             {
               false &&
               <Item
@@ -275,24 +275,22 @@ class PlaceOrderForm extends React.Component {
               placeholder={amountPrecision > 0 ? `0.${'0'.repeat(amountPrecision)}` : '0'}
               value={total ? total : null}
               clear={false}
-              className="circle h-default mt15"
+              className="circle h-default mt15 text-number"
               extra={
                 <div style={{width:'auto',textAlign:'right'}}>
                   <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.right}</span>
                 </div>
               }
-            ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
+            ><div className="fs14 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
 
             <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
-               <div className="lh20">
-                 <div className="lh20">{intl.get(`common.${side}`)}  {amount>0 ? amount : null} {tokens.left} </div>
-                 {
-                  false && total>0 &&
-                   <div className="fs12 lh10" style={{opacity:'0.45',paddingTop:'0.3rem'}}>
-                     {total} {tokens.right}
-                   </div>
-                 }
-               </div>
+                <div className="lh20">
+                  {intl.get(`common.${side}`)}
+                  &nbsp;
+                  {amount>0 ?  <span className="text-number">{amount}</span> : null}
+                  &nbsp;
+                  {tokens.left} 
+                </div>
             </Button>
           </List>
         </div>
