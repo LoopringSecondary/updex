@@ -187,7 +187,6 @@ export const TickerList = ({items,loading,dispatch, tickersList})=>{
         break;
     }
   }
-  console.log(3333, sortedItems)
 
   return (
     <div className="" style={{minHeight:'50vh'}}>
