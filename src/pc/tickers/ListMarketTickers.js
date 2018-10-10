@@ -50,14 +50,14 @@ export const TickerHeader = ({sort,dispatch})=>{
     direction = 'down'
   }
   return (
-    <div className="row ml0 mr0 pl10 pr10 align-items-center no-gutters">
+    <div className="row ml0 mr0 pl10 pr10 align-items-center no-gutters fs12">
       <div className="col-4 fs12 color-black-4 text-left hover-default pt5 pb5" onClick={sortByType.bind(this, 'volume')}>
         <span className="position-relative">
         {intl.get('common.volume')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'volume'} direction={direction}></Sorter>
         </span>
       </div>
-      <div className="col-auto pr10 fs16 pt5 pb5">
-        <Icon type="star-o" className="color-black-4" style={{opacity:0}}/>
+      <div className="col-auto pr10 pt5 pb5">
+        <Icon type="star-o" className="color-black-4 fs16" style={{opacity:0}}/>
       </div>
       <div className="col text-left pl5 pr10 hover-default pt5 pb5" onClick={sortByType.bind(this, 'price')}>
         <div className="fs12 color-black-4 position-relative">
@@ -110,45 +110,46 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
     }
     return (
       <div className="row ml0 mr0 p10 align-items-center no-gutters hover-default zb-b-b" onClick={gotoDetail}>
-        <div className="col-auto pr10 fs14" onClick={toggleTickerFavored.bind(this, item.market)}>
+        <div className="col-auto pr10" onClick={toggleTickerFavored.bind(this, item.market)}>
           {
             favored[item.market] &&
-            <i type="star" className="text-primary icon-star"/>
+            <i type="star" className="text-primary icon-star fs14"/>
           }
           {
             !favored[item.market] &&
-            <i className="color-black-4 icon-star-o"/>
+            <i className="color-black-4 icon-star-o fs14"/>
           }
         </div>
         <div className="col-4 text-left">
-          <div className="fs16 lh15">
+          <div className="">
             <span className="fs12 color-black-1">{tokens.left} / {tokens.right}</span>
           </div>
-          <div className="fs12" style={{marginTop:'2px'}}>
-              <span className="fs12 color-black-4">{intl.get('common.volume')} </span>
-              <span className="fs12 color-black-4 text-number">{tickerFm.getVol()} {false && tokens.right}</span>
+          <div className="fs12">
+              <span hidden className="fs12 color-black-4">{intl.get('common.volume')} </span>
+              <span className="fs12 color-black-4 text-number">{tickerFm.getVol()}</span>
+              <span className="fs12 color-black-4"> {tokens.right}</span>
           </div>
         </div>
         <div className="col text-left pr15 pl5 text-number">
-          <div className="fs12 color-black-1 lh15">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
-          <div className="fs12 color-black-4" style={{marginTop:'2px'}}><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
+          <div className="fs12 color-black-1">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
+          <div className="fs12 color-black-4"><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
         </div>
-        <div className="col-3 text-right text-number">
+        <div className="col-auto text-right text-number">
           {
             direction === 'up' &&
-            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-inline-block pl5 pr5 fs14 bg-success color-white">
+            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-success color-white">
              +{tickerFm.getChange()}
             </Button>
           }
           {
             direction === 'down' &&
-            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-inline-block pl5 pr5 fs14 bg-error color-white">
+            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-error color-white">
              {tickerFm.getChange()}
             </Button>
           }
           {
             direction === 'none' &&
-            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-inline-block pl5 pr5 fs14 bg-grey-500 color-white">
+            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-grey-500 color-white">
              {tickerFm.getChange()}
             </Button>
           }

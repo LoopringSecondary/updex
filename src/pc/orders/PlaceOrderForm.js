@@ -282,7 +282,7 @@ class PlaceOrderForm extends React.Component {
               }
             ><div className="fs13 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
 
-            <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
+            <Button onClick={toConfirm} className={`fs16 p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
                 <div className="lh20">
                   {intl.get(`common.${side}`)}
                   &nbsp;

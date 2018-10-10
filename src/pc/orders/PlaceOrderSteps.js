@@ -19,7 +19,7 @@ import { keccakHash } from 'LoopringJS/common/utils'
 const OrderMetaItem = (props) => {
   const {label, value, showArrow = false, onClick = () => {}} = props
   return (
-    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-t no-gutters" style={{padding: '7px 0px'}}>
+    <div onClick={onClick} className="row ml0 mr0 zb-b-t no-gutters" style={{padding: '10px 15px'}}>
       <div className="col">
         <div className="fs14 color-black-2 lh30 text-left">{label}</div>
       </div>
@@ -51,19 +51,19 @@ const WalletItem = (props) => {
     )
   } else {
     return (
-      <div className="row pt15 pb15 pl10 pr10 ml0 mr0 align-items-center zb-b-b no-gutters">
-        <div className="col-auto pr5 text-center color-black-1 fs24" style={{minWidth: '40px'}}>
+      <div className="row pt15 pb15 ml0 mr0 align-items-center zb-b-b no-gutters">
+        <div className="col-auto pr5 text-center color-black-1 fs24 pl15" style={{minWidth: '40px'}}>
           {typeof icon === 'string' &&
           <i className={`icon-${icon}`}></i>
           }
           {typeof icon !== 'string' && icon}
         </div>
-        <div className="col pl10">
+        <div className="col pl15">
           <div className="fs16 color-black-1 text-wrap text-left">{title}</div>
           {description && <div className="fs14 color-black-3 text-left">{description}</div>}
         </div>
         {showArrow &&
-        <div className="col-auto text-right color-black-3">
+        <div className="col-auto text-right color-black-3 pr15">
           <Icon type="right"/>
         </div>
         }
@@ -175,20 +175,9 @@ class PlaceOrderSteps extends React.Component {
         <div className="divider 1px zb-b-t"></div>
         <Pages active="order">
           <Page id="order" render={({page}) =>
-            <div className="p15">
-              <div hidden className="p15 color-black-1 fs18 zb-b-b text-center">
-                <div className="row">
-                  <div className="col-auto text-left" onClick={hideLayer.bind(this, {id: 'placeOrderSteps'})}>
-                    <Icon type="close"/>
-                  </div>
-                  <div className="col">{intl.get('place_order.title')}</div>
-                  <div className="col-auto color-white">
-                    <Icon type="close"/>
-                  </div>
-                </div>
-              </div>
-              <div className="p15 bg-white">
-                <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
+            <div className="">
+              <div className="bg-white">
+                <div className="pt40 pb40 row ml0 mr0 no-gutters align-items-center justify-content-center">
                   <div className="col-auto">
                     <div
                       className="radius-circle bg-primary color-white d-inline-flex justify-content-center align-items-center"
@@ -228,7 +217,7 @@ class PlaceOrderSteps extends React.Component {
                 <div className="pt15 pb15 color-black-3 fs12 text-center">
                   <Icon className="mr5" type="exclamation-circle-o" />{intl.get('place_order_confirm.no_cost_gas')}
                 </div>
-                <Button type="primary" className="fs18" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
+                <Button type="primary" className="fs18 ml15 mr15" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
               </div>
             </div>
           }/>
