@@ -59,7 +59,7 @@ const HelperOfBalance = (props)=>{
 
   return (
     <div className="fs20">
-      <table className="w-100 fs13">
+      <table className="w-100 fs12">
         <thead hidden>
           <tr className="">
             <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-3 text-nowrap">{intl.get('common.token')}</th>
@@ -69,16 +69,17 @@ const HelperOfBalance = (props)=>{
             <th className="text-right zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.actions')}</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className="">
+            <tr><td className="pt5"></td></tr>
             {
               relatedTokens.map((token,index)=>
                 <tr key={index} onClick={()=>{}}>
-                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-left">
+                  <td className="pl15 pr15 pt5 pb5 color-black-2 text-left">
                     {token.symbol}
                     <span hidden className="color-black-3 ml5">{token.name}</span>
                   </td>
-                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-left">{toFixed(token.balance, 8)}</td>
-                  <td hidden className="pl15 pr15 pt10 pb10 zb-b-b color-black-2 text-left">
+                  <td className="pl15 pr15 pt5 pb5 color-black-2 text-left">{toFixed(token.balance, 8)}</td>
+                  <td hidden className="pl15 pr15 pt5 pb5 zb-b-b color-black-2 text-left">
                     {
                       token.symbol !== 'ETH' && index === 0 && <Switch size="small" loading={true} />
                     }
@@ -86,17 +87,17 @@ const HelperOfBalance = (props)=>{
                       token.symbol !== 'ETH' && index === 1 && <Switch size="small" loading={false} checked={true} />
                     }
                   </td>
-                  <td hidden className="pl15 pr15 pt10 pb10 color-black-2 text-left">0.00</td>
-                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-right text-nowrap">
+                  <td hidden className="pl15 pr15 pt5 pb5 color-black-2 text-left">0.00</td>
+                  <td className="pl15 pr15 pt5 pb5 color-black-2 text-right text-nowrap">
                     {
                       true && token.symbol === 'ETH' &&
-                      <Button onClick={gotoConvert.bind(this,{token:"ETH"})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
+                      <Button onClick={gotoConvert.bind(this,{token:"ETH"})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
                     }
                     {
                       true && token.symbol === 'WETH' &&
-                      <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
+                      <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
                     }
-                    <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml10 border-none bg-primary-light" size="small">
+                    <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="ghost" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block ml10 border-none bg-primary-light" size="small">
                       <WebIcon type="ellipsis" />
                     </Button>
                   </td>

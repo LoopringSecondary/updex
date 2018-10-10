@@ -236,16 +236,15 @@ class PlaceOrderForm extends React.Component {
               clear={false}
               className="circle h-default mt15 text-number"
               extra={
-                <div style={{width:'auto',textAlign:'right'}}>
+                <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
                   {
-                    price>0 && <span className="color-black-4 fs12">≈ <Worth amount={price} symbol={tokens.right}/></span>
+                    price>0 && <span className="color-black-4 fs12">≈<Worth amount={price} symbol={tokens.right}/></span>
                   }
-                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.right}</span>
-                  <WebIcon hidden className="text-primary" type="question-circle-o" style={{padding:'2px 0px 5px'}} onClick={showAmountHelper} />
+                  <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.right}</span>
                 </div>
               }
               onChange={priceChange}
-            ><div className="fs14 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
+            ><div className="fs13 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
             <InputItem
               type="text"
               placeholder={amountPrecision > 0 ? `0.${'0'.repeat(amountPrecision)}` : '0'}
@@ -254,11 +253,11 @@ class PlaceOrderForm extends React.Component {
               onChange={amountChange}
               className="circle h-default mt15 text-number"
               extra={
-                <div style={{width:'auto',textAlign:'right'}}>
-                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.left}</span>
+                <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
+                  <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.left}</span>
                 </div>
               }
-            ><div className="fs14 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
+            ><div className="fs13 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
             {
               false &&
               <Item
@@ -277,11 +276,11 @@ class PlaceOrderForm extends React.Component {
               clear={false}
               className="circle h-default mt15 text-number"
               extra={
-                <div style={{width:'auto',textAlign:'right'}}>
-                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.right}</span>
+                <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
+                  <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.right}</span>
                 </div>
               }
-            ><div className="fs14 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
+            ><div className="fs13 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
 
             <Button onClick={toConfirm} style={{height:'auto'}} className={`p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side=='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
                 <div className="lh20">
