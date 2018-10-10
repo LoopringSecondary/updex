@@ -177,7 +177,7 @@ class TVChartContainer extends React.PureComponent {
         backgroundColor: "rgba(0,0,0,0)"
       },
       overrides: {
-        editorFontsList: ['Times New Roman', 'Arial'] ,
+        editorFontsList: ['Roboto','Times New Roman', 'Arial'] ,
         // 蜡烛图
         "mainSeriesProperties.candleStyle.upColor": theme.green,
         "mainSeriesProperties.candleStyle.borderUpColor": theme.green,

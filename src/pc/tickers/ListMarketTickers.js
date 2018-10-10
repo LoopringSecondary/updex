@@ -50,8 +50,8 @@ export const TickerHeader = ({sort,dispatch})=>{
     direction = 'down'
   }
   return (
-    <div className="row ml0 mr0 pl10 pr10 align-items-center no-gutters fs12">
-      <div className="col-4 fs12 color-black-4 text-left hover-default pt5 pb5" onClick={sortByType.bind(this, 'volume')}>
+    <div className="row ml0 mr0 align-items-center no-gutters fs12">
+      <div className="col-4 fs12 color-black-4 text-left hover-default pt5 pb5 pl15" onClick={sortByType.bind(this, 'volume')}>
         <span className="position-relative">
         {intl.get('common.volume')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'volume'} direction={direction}></Sorter>
         </span>
@@ -64,7 +64,7 @@ export const TickerHeader = ({sort,dispatch})=>{
           {intl.get('common.price')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'price'} direction={direction}></Sorter>
         </div>
       </div>
-      <div className="col-3 text-right hover-default pt5 pb5" onClick={sortByType.bind(this, 'change')}>
+      <div className="col-3 text-right hover-default pt5 pb5 pr15" onClick={sortByType.bind(this, 'change')}>
         <div className="fs12 color-black-4 mr5 position-relative">
           {intl.get('ticker.change')} <Sorter className="d-inline-block " isActive={sort.sortBy === 'change'} direction={direction}></Sorter>
         </div>
@@ -109,7 +109,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
       markets.toggleFavor(item)
     }
     return (
-      <div className="row ml0 mr0 p10 align-items-center no-gutters hover-default zb-b-b" onClick={gotoDetail}>
+      <div style={{paddingTop:'0.7rem',paddingBottom:'0.7rem'}} className="row ml0 mr0 pl15 pr15 align-items-center no-gutters hover-default zb-b-b" onClick={gotoDetail}>
         <div className="col-auto pr10" onClick={toggleTickerFavored.bind(this, item.market)}>
           {
             favored[item.market] &&
@@ -124,7 +124,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
           <div className="">
             <span className="fs12 color-black-1">{tokens.left} / {tokens.right}</span>
           </div>
-          <div className="fs12">
+          <div className="fs12 lh15">
               <span hidden className="fs12 color-black-4">{intl.get('common.volume')} </span>
               <span className="fs12 color-black-4 text-number">{tickerFm.getVol()}</span>
               <span className="fs12 color-black-4"> {tokens.right}</span>
@@ -132,7 +132,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
         </div>
         <div className="col text-left pr15 pl5 text-number">
           <div className="fs12 color-black-1">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
-          <div className="fs12 color-black-4"><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
+          <div className="fs12 color-black-4 lh15"><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
         </div>
         <div className="col-auto text-right text-number">
           {
