@@ -1,10 +1,86 @@
+// https://github.com/ant-design/ant-design-mobile/blob/master/components/style/themes/default.less
+// https://github.com/ant-design/ant-design-mobile/wiki/%E8%AE%BE%E8%AE%A1%E5%8F%98%E9%87%8F%E8%A1%A8%E5%8F%8A%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83
 @import "~antd-mobile/dist/antd-mobile.less";
-@import './variables-basic.less';
-@import './variables-updex.less';
 @import '../../common/loopringui/assets/style/index.less';
-@import './theme-dark.less';
-@import './theme-common.less';
+@fontfamily: "RobotoMono","Helvetica Neue", Helvetica,sans-serif;
+@fontfamily: "Roboto","Helvetica Neue", Helvetica,sans-serif;
+@fontfamily_number: "RobotoMono","Helvetica Neue", Helvetica,sans-serif;
 
+// purple
+@brand-primary: #C59949;
+
+// @brand-error: darken(#C2185B,0); 
+// @brand-success: darken(#558B2F,0); 
+// @bg-white: lighten(#15152D,1%);
+// @fill-body: lighten(#20203C,0%);
+// @bg-white-light: lighten(@bg-white,2.5%);
+// @bg-fill-light: lighten(@fill-body,4%);
+
+// purple-reverse
+// @brand-primary: #C59949;
+@brand-error: darken(#C2185B,0); 
+@brand-success: darken(#558B2F,0); 
+@bg-white: lighten(#20203C,2%);
+@fill-body: lighten(#15152D,2%);
+@bg-white-light: lighten(@fill-body,2.5%);
+@bg-fill-light: lighten(@bg-white,0%);
+
+
+// grey
+@brand-error: darken(#d95468,4%); 
+@brand-success: darken(#1EB980,4%); 
+@fill-body: #33333D;
+@bg-white: #27272F;
+@bg-white-light: lighten(@bg-white,3.5%);
+@bg-fill-light: lighten(@fill-body,3.5%);
+
+// blue
+// @brand-error: darken(#d95468,4%); 
+// @brand-success: darken(#1EB980,4%); 
+// @fill-body: #252A42;
+// @bg-white: #181B2A;
+// @bg-white-light: lighten(@bg-white,5%);
+// @bg-fill-light: lighten(@fill-body,5%);
+
+// black
+// @brand-primary: #f9a825;
+// @brand-primary: #ffd600;
+// @brand-error: #f44336; 
+// @brand-success: #4caf50; 
+// @fill-body: #111;
+// @bg-white: #202124;
+// @bg-white-light: #202124;
+// @bg-fill-light: #202124;
+
+// dark
+// @border-color:rgba(255,255,255,0.06);
+// @import './theme-dark.less';
+
+// white light
+@brand-error: #f44336; 
+@brand-success: #4caf50; 
+@fill-body: #EDEFF1;
+@bg-white: #fff;
+@bg-white-light: #fff;
+@bg-fill-light: #fff;
+@border-color:rgba(0,0,0,0.05);
+@import './theme-light.less';
+
+
+@brand-primary-light: fade(@brand-primary,10%);
+@brand-primary-tap: fade(@brand-primary,95%);
+@brand-important: @brand-error; // hot dot
+@radius-xs: 50em;
+@radius-sm: 50em;
+@radius-md: 50em;
+@radius-lg: 7 * @hd;
+@radius-circle: 50%;
+@button-height: 44 * @hd;
+@color-link:@brand-primary;
+
+
+@import './theme-common.less';
 @import './components';
+@import './theme-wd.less';
 @import '../fonts/index.less';
 

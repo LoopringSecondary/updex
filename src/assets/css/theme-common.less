@@ -1,4 +1,15 @@
 
+html, body {
+    font-family: @fontfamily !important;
+    font-weight: 400;
+}
+.text-number {
+    font-family: @fontfamily_number !important;
+}
+.text-default {
+    font-family: @fontfamily !important;
+}
+
 .bg-white{
   background:@bg-white !important;
 }
@@ -8,6 +19,57 @@
 .bg-fill{
   background:@fill-body !important;
 }
+.bg-fill-light{
+  background:@bg-fill-light !important;
+}
+.text-primary{
+  color:@brand-primary !important;
+}
+.border-primary{
+  border:1px solid @brand-primary !important;
+}
+
+.color-success{
+  color:@brand-success !important;
+}
+.color-primary-light{
+  color:@brand-primary-light !important;
+}
+
+.color-error{
+  color:@brand-error !important;
+}
+.bg-success{
+  background:@brand-success !important;
+}
+.bg-error{
+  background:@brand-error !important;
+}
+
+
+.bg-primary{
+  background:@brand-primary !important;
+}
+.bg-primary-light{
+  background:@brand-primary-light !important;
+}
+.bg-primary-dark{
+  background:darken(@brand-primary,8%) !important;
+}
+.hover-bg-primary:hover{
+  background:@brand-primary !important;
+  .text-primary{
+    color:#fff !important;
+  }
+}
+.bg-primary:hover{
+  background:@brand-primary !important;
+  .text-primary{
+    color:#fff !important;
+  }
+}
+
+
 .am-tabs-default-bar{
   &:extend(.bg-white);
   // background: transparent !important;
@@ -36,7 +98,7 @@
 	background: transparent !important;
 }
 .am-tabs-default-bar-tab{
-	&:extend(.color-black-3);
+	&:extend(.color-black-2);
 }
 .am-tabs-default-bar-tab-active{
 	color: @brand-primary !important;
@@ -64,7 +126,7 @@
 	background: transparent !important;
 	&.circle{
 		border-color:transparent !important;
-		background: @bg-white-light !important;
+		background: @fill-body !important;
 		// background: @fill-body !important;
 		// background: transparent !important;
 		// border:1px solid @border-color !important;
@@ -122,7 +184,11 @@
 }
 
 a:hover,a:active{
-	&:extend(.color-black-1);
+	// &:extend(.color-black-1);
+	// color:inherit !important;
+	&.am-button-primary{
+		color:#fff !important;
+	}
 }
 
 .am-list-item .am-input-clear{
