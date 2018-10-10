@@ -18,7 +18,7 @@ class TVChartContainer extends React.PureComponent {
 	state = {
     containerId: 'tv_chart_container',
 	  barsLoaded: false,
-    resolution: '60'
+    resolution: 'D'
   }
 
   tvWidget = null;
@@ -58,7 +58,7 @@ class TVChartContainer extends React.PureComponent {
             supports_marks: true,
             exchanges: [],
             symbolsTypes: [],
-            supported_resolutions: ['60', '120', '240', "D", "W"]
+            supported_resolutions: ['60', '120', '240', "D"]
           }), 0)
         },
         searchSymbols: (userInput, exchange, symbolType, onResultReadyCallback) => {
@@ -85,7 +85,7 @@ class TVChartContainer extends React.PureComponent {
           }, 0)
         },
         getBars: function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
-          console.log('=====getBars running', symbolInfo.name)
+          console.log('=====getBars running', symbolInfo.name, resolution)
           if(_this.state.barsLoaded && _this.state.resolution === resolution) {
             setTimeout(() => {
               onHistoryCallback([], {noData: true})
@@ -136,7 +136,7 @@ class TVChartContainer extends React.PureComponent {
           console.log('=====getServerTime running')
         }
       },
-      interval: 60,
+      interval: this.state.resolution,
       timeframe: '1M',
       // toolbar_bg: "rgba(0,0,0,0)",
 			container_id: this.state.containerId,
@@ -223,11 +223,10 @@ class TVChartContainer extends React.PureComponent {
 		return (
 		  <div style={{flex:1}} className="d-flex flex-column">
         <div className="mb5 zb-b-b">
-          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block text-primary" onClick={() => resolutionChange('60')}>1H</a>
-          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('120')}>2H</a>
-          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('240')}>4H</a>
-          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('D')}>1D</a>
-          <a className="color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block" onClick={() => resolutionChange('W')}>1W</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === '60' ? 'text-primary' : ''}`} onClick={() => resolutionChange('60')}>1H</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === '120' ? 'text-primary' : ''}`} onClick={() => resolutionChange('120')}>2H</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === '240' ? 'text-primary' : ''}`} onClick={() => resolutionChange('240')}>4H</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === 'D' ? 'text-primary' : ''}`} onClick={() => resolutionChange('D')}>1D</a>
         </div>
         <div
           id={ this.state.containerId }
