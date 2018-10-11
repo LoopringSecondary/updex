@@ -3,7 +3,6 @@ import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import TickerItem from '../tickers/TickerItem';
-
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +14,14 @@ class Header extends React.Component {
         type:"layers/showLayer",
         payload:{id}
       })
+    }
+    const clickUser = ()=>{
+      const unlocked = true
+      if(unlocked){
+        showLayer('usercenter')
+      }else{
+        showLayer('auth2')
+      }
     }
     return (
       <div className={`bg-white row no-gutters d-flex align-items-stretch ${className}`} style={{height:'100%'}}>
@@ -30,7 +37,7 @@ class Header extends React.Component {
         <div onClick={showLayer.bind(this,'settings')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <i className="icon-cog fs20 text-primary"></i>
         </div>
-        <div onClick={showLayer.bind(this,'auth2')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
+        <div onClick={clickUser} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <i className="icon-user fs20 text-primary"></i>
         </div>
       </div>
