@@ -81,7 +81,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
     const direction = tickerFm.getChangeDirection()
     const gotoDetail = ()=>{
       // routeActions.gotoPath(`/dex/markets/${item.market}`)
-      
+
       dispatch({
         type:'sockets/marketChange',
         payload:{
@@ -94,6 +94,12 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
           pair:item.market
         }
       })
+      // dispatch({
+      //   type:'layers/toggleLayer',
+      //   payload:{
+      //     id:'SidebarOfMarkets'
+      //   }
+      // })
     }
     const toggleTickerFavored = (item, e)=>{
       e.stopPropagation();
@@ -278,24 +284,6 @@ class ListMarketTickers extends React.Component {
       }
       return (
         <div>
-          {
-            false &&
-            <NavBar
-              className="bg-white"
-              mode="light"
-              icon={null && <Icon type="left" />}
-              onLeftClick={() => console.log('onLeftClick')}
-              leftContent={[
-              ]}
-              rightContent={[
-                <Icon type="search" />
-              ]}
-            >
-              <div className="color-black">{intl.get('common.market')}</div>
-            </NavBar>
-          }
-          
-          <div hidden className="divider 1px zb-b-t"></div>
           <SearchBar
             placeholder="Search"
             onChange={(keyword)=>search(keyword)}
@@ -322,7 +310,7 @@ class ListMarketTickers extends React.Component {
             </Spin>
           }
         </div>
-        
+
       )
   }
 }

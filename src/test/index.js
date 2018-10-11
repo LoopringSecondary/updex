@@ -1,7 +1,6 @@
 import React from 'react';
-import {Card,Form,Input,Button} from 'antd'
-import { List, TextareaItem } from 'antd-mobile';
-import {Modal} from 'antd-mobile'
+import {Button, Card, Form, Input} from 'antd'
+import {Modal, TextareaItem} from 'antd-mobile';
 
 const Item = Form.Item;
 
