@@ -60,17 +60,17 @@ const HelperOfBalance = (props)=>{
   return (
     <div className="fs20">
       <table className="w-100 fs12">
-        <thead hidden>
+        <thead>
           <tr className="">
-            <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-3 text-nowrap">{intl.get('common.token')}</th>
-            <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-3 text-nowrap">{intl.get('common.balance')}</th>
-            <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-3 text-nowrap">交易授权</th>
-            <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-3">{intl.get('helper_of_market_order.selling')}</th>
-            <th className="text-right zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.actions')}</th>
+            <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.token')}</th>
+            <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.balance')}</th>
+            <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">交易授权</th>
+            <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get('helper_of_market_order.selling')}</th>
+            <th className="text-right zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.actions')}</th>
           </tr>
         </thead>
         <tbody className="">
-            <tr><td className="pt5"></td></tr>
+            <div className="pb5"></div>
             {
               relatedTokens.map((token,index)=>
                 <tr key={index} onClick={()=>{}}>

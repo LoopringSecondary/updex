@@ -1,5 +1,5 @@
 export default {
-    selected:'up_wd_black',
+    selected:'up_white',
     up_grey:{
         red:"#D54359",
         green:"#19A774",
@@ -38,7 +38,7 @@ export default {
         bg:'#fff',
         text:'rgba(0,0,0,0.35)',
         line:'rgba(0,0,0,0.06)',
-        grid:'rgba(0,0,0,0.04)',
+        grid:'rgba(0,0,0,0.01)',
     },
     up_wd_black:{
         red:"#f44336",
@@ -54,6 +54,6 @@ export default {
         bg:'#fff',
         text:'rgba(0,0,0,0.35)',
         line:'rgba(0,0,0,0.06)',
-        grid:'rgba(0,0,0,0.04)',
+        grid:'rgba(0,0,0,0.01)',
     },
 }

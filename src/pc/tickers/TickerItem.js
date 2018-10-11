@@ -42,13 +42,13 @@ const TickerItem = connect(({sockets:{tickers}})=>({tickers}))(({tickers,dispatc
   }
   return (
       <div className="row ml0 mr0 no-gutters align-items-stretch fs18 text-number" style={{height:'100%'}}>
-        <div onClick={toggleLayer.bind(this,'SidebarOfMarkets')} className="cursor-pointer col-auto zb-b-r bg-primary-light hover-bg-primary d-flex align-items-center" >
+        <div onClick={toggleLayer.bind(this,'SidebarOfMarkets')} className="cursor-pointer col-auto zb-b-r hover-bg-primary d-flex align-items-center" >
            <div className={`pl20`}>
             <WebIcon type="menu-fold" className="fs20 mr20 text-primary font-weight-bold" />
             <span className="fs24 font-weight-bold text-primary mr30">{tokens.left}/{tokens.right}</span>
             { false && <WebIcon type="caret-down" className="mr30 text-primary" /> }
-            { false && <i className="icon-star color-black-4 fs18 mr30"></i> }
-            { false && <i className="icon-star color-black fs18 mr30"></i> }
+            { true && <i className="icon-star-o text-primary fs18 mr30"></i> }
+            { false && <i className="icon-star text-primary fs18 mr30"></i> }
           </div>
         </div>
         {
