@@ -144,18 +144,17 @@ class Convert extends React.Component {
         this.setState({token: 'ETH'})
       }
     }
-    const _this = this
     const fromToken = token
     const toToken = token.toLowerCase() === 'eth' ? 'WETH' : 'ETH'
     return (
-      <div className="h100 bg-white">
+      <div className="bg-fill h-100 h100">
         <div className="bg-white">
           <NavBar
             className="zb-b-b"
             mode="light"
-            onLeftClick={() => routeActions.goBack()}
+            onLeftClick={() => hideLayer({id: 'convertToken'})}
             leftContent={[
-              <Icon type="left" key='1'/>,
+              <WebIcon type="close" key='1'/>,
             ]}
             rightContent={[
               <Button size="small" type="primary" onClick={swap} key='1' ><WebIcon type="swap"/></Button>,
@@ -170,23 +169,24 @@ class Convert extends React.Component {
                   <InputItem
                     type="money"
                     onChange={amountChange}
-                    moneyKeyboardAlign="left"
-                    value={amount>0 ? amount : null}
-                    extra={<div className="fs14 color-black-3">{fromToken}</div>}
-                    className="circle h-default"
+                    moneyKeyboardAlign="right"
+                    value={amount>=0 ? amount : null}
+                    extra={<div className="fs14 color-black-3 ml5">{fromToken}</div>}
+                    className="circle h-default fs18"
                     placeholder={intl.get('common.amount')}
                   >
+                    <div className="fs14 color-black-1">{intl.get('common.amount')}</div>
                   </InputItem>
                   <List.Item
                     className="circle h-default mt15"
                     arrow={false}
                     onClick={setGas}
-                    extra={<div className="fs14 color-black-3">
-                      <Worth amount={gasFee} symbol='ETh'/> ≈ {tf.toPricisionFixed(toNumber(gasFee))} ETH
-                      <WebIcon hidden className="ml5 text-primary" type="right"/>
+                    extra={<div className="fs14 text-primary">
+                      <Worth amount={gasFee} symbol='ETh'/> ≈ {tf.toPricisionFixed(toNumber(gasFee))}
+                      <span className="color-black-3 ml10">ETH</span>
                     </div>}
                   >
-                    <div className="fs13 color-black-3">{intl.get('common.gas')}</div>
+                    <div className="fs14 color-black-1">{intl.get('common.gas')}</div>
                   </List.Item>
                 </List>
               </div>
@@ -203,7 +203,7 @@ class Convert extends React.Component {
             </Button>
           </div>
         </div>
-        <div className="divider zb-b-b 1px"></div>
+        <div className="divider zb-b-b 1px mb10"></div>
         <ConvertHelperOfBalance dispatch={dispatch} token={{symbol:token,balance:assets.balance,balance2:other_assets.balance}} gasFee={gasFee}/>
       </div>
     )
