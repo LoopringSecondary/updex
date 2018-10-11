@@ -2,7 +2,7 @@ import React from 'react'
 import {Containers} from 'modules'
 import UiContianers from 'LoopringUI/containers'
 import Receive from './Receive'
-import Convert from './ConvertForm'
+import Convert from 'mobile/tokens/ConvertForm'
 import HelperOfEnable from './HelperOfEnable'
 import HelperOfTokenActions from 'mobile/tokens/HelperOfTokenActions'
 
