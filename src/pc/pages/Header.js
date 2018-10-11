@@ -24,7 +24,7 @@ class Header extends React.Component {
         <div onClick={showLayer.bind(this,'help')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <WebIcon type="question-circle" theme="filled" className="fs20 text-primary" />
         </div>
-        <div onClickBak={showLayer.bind(this,'tasks')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
+        <div onClick={showLayer.bind(this,'tasks')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <i className="icon-bell fs20 text-primary"></i>
         </div>
         <div onClick={showLayer.bind(this,'settings')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">

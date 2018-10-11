@@ -14,16 +14,10 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="usercenter">
-        <UiContainers.Panels position="right" id="usercenter">
+        <UiContainers.Panels position="right" id="usercenter" width="48rem"  style={{margin:'0 auto',height:'100%'}}>
           <UserCenter />
         </UiContainers.Panels>
       </Containers.Layers>
-      <Containers.Layers id="tasks">
-        <UiContainers.Panels position="right" id="tasks" wrapClassName="modal-wrapper">
-          <Tasks />
-        </UiContainers.Panels>
-      </Containers.Layers>
-
     </div>
   )
 }
