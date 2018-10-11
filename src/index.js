@@ -11,8 +11,7 @@ import Relay from 'LoopringJS/relay/relay';
 import Notification from 'LoopringUI/components/Notification'
 import intl from 'react-intl-universal'
 import {configs} from './common/config/data'
-import config from "./common/config";
-import {getSupportedToken} from './init'
+
 
 const latestVersion = Number(configs.localStorageVersion)
 const oldVersion = Number(storage.getLocalStorageVersion())
@@ -52,7 +51,7 @@ app.router(require('./router').default)
 // 5. Start
 app.start('#root')
 
-getSupportedToken().then(res=>{
+window.RELAY.market.getSupportedTokens().then(res=>{
   if(res.result) {
     const tokens = []
     tokens.push({
