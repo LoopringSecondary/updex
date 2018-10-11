@@ -16,7 +16,7 @@ class UserCenter extends React.Component {
   render() {
     const address = storage.wallet.getUnlockedAddress()
     return (
-        <div className="bg-fill">
+        <div className="bg-fill" style={{height:'100%'}}>
           <div className="bg-white position-fixed w-100" style={{zIndex:'1000'}}>
             <NavBar
                 className="zb-b-b" 
