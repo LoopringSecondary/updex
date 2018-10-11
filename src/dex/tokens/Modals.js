@@ -25,7 +25,7 @@ function Modals(props) {
           </UiContianers.Popups>
       </Containers.Layers>
       <Containers.Layers id="convertToken" >
-        <UiContianers.Popups id="convertToken">
+        <UiContianers.Popups id="convertToken" style={{height:'100%'}} className="h100">
           <Convert />
         </UiContianers.Popups>
       </Containers.Layers>
