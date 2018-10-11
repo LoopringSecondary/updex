@@ -65,7 +65,7 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
                   <span className="fs12 color-black-4 ml5"><Worth amount={Number(item[0]).toFixed(8)}
                                                                   symbol={tokens.right}/></span>
                 </td>
-                <td className="hover-default pl5 pr5 lh20 color-black-2 text-right align-top"
+                <td className="zb-b-b  hover-default pl5 pr5 lh20 color-black-2 text-right"
                     onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                   {Number(item[1]).toFixed(4)}
                 </td>
@@ -93,14 +93,14 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
       <div className="zb-b-t ">
         {
           trades.items.length > 0 && !isIncrease() && <div className="text-left pl15 pr15 pt10 pb10 zb-b-b">
-          <span className="color-error fs16">{trades.items[0].price}</span>
+          <span className="color-error fs16" onClick={changePrice.bind(this, Number(trades.items[0].price).toFixed(8))}>{trades.items[0].price}</span>
           <span className="color-black-4 fs12 ml10">≈ <Worth amount={Number(trades.items[0].price).toFixed(8)}
                                                              symbol={tokens.right}/></span>
           </div>
         }
         {
           trades.items.length > 0 && isIncrease() && <div className="text-left pl15 pr15 pt10 pb10 zb-b-b">
-            <span className="color-success fs16">{trades.items[0].price}</span>
+            <span className="color-success fs16" onClick={changePrice.bind(this, Number(trades.items[0].price).toFixed(8))}>{trades.items[0].price}</span>
             <span className="color-black-4 fs12 ml10">≈ <Worth amount={Number(trades.items[0].price).toFixed(8)}
                                                                symbol={tokens.right}/></span>
           </div>
