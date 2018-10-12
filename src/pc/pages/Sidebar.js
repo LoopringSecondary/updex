@@ -23,6 +23,12 @@ class Sidebar extends React.Component {
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0s'}}>
           <div className="bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6rem'}}>
             <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/>
+            
+            {!collapsed &&
+              <div className="fs20 text-primary font-weight-bold ml10">
+                UP DEX
+              </div>
+            }
           </div>
           <div className="d-flex flex-column mtpanel bg-white" style={{flex:'1'}}>
             {!collapsed &&

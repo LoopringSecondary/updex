@@ -352,13 +352,13 @@ class Auth extends React.Component {
           </div>
           <Collapse onChange={(v)=>unlockTypeChanged(v)} accordion>
             <Collapse.Panel showArrow={false} header={
-              <div className="row m15 p15 no-gutters align-items-center bg-fill"
+              <div className="row m15 p15 no-gutters align-items-center bg-primary"
                    style={{padding: '7px 0px',borderRadius:'50em'}}>
                 <div className="col-auto text-left pl15 pr20">
                   <img style={{height: '30px'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
                 </div>
                 <div className="col text-left">
-                  <div className="fs16 text-primary text-left">UP Wallet</div>
+                  <div className="fs16 color-black-1 text-left">UP Wallet</div>
                 </div>
                 <div className="col-auto text-right">
                   <div className="fs14 text-wrap text-left">
@@ -381,12 +381,12 @@ class Auth extends React.Component {
               </div>
             </Collapse.Panel>
             <Collapse.Panel showArrow={false} header={
-              <div className="row m15 p15 no-gutters align-items-center bg-fill" style={{padding: '7px 0px',borderRadius:'50em'}}>
+              <div className="row m15 p15 no-gutters align-items-center bg-primary" style={{padding: '7px 0px',borderRadius:'50em'}}>
                 <div className="col-auto text-left pl15 pr20">
-                  <i className="icon-loopr text-primary fs28"></i>
+                  <i className="icon-loopr color-black-1 fs28"></i>
                 </div>
                 <div className="col text-left">
-                  <div className="fs16 text-primary text-left">Loopr Wallet</div>
+                  <div className="fs16 color-black-1 text-left">Loopr Wallet</div>
                 </div>
                 <div className="col-auto text-right">
                   <div className="fs14 text-wrap text-left">
@@ -407,13 +407,13 @@ class Auth extends React.Component {
               }
             </Collapse.Panel>
             <Collapse.Panel showArrow={false} header={
-              <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
+              <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-primary"
                    style={{padding: '7px 0px',borderRadius:'50em'}}>
                 <div className="col-auto text-left pl15 pr20">
-                  <i className="icon-Metamaskwallet text-primary fs26"></i>
+                  <i className="icon-Metamaskwallet color-black-1 fs26"></i>
                 </div>
                 <div className="col text-left">
-                  <div className="fs16 text-primary text-left">MetaMask</div>
+                  <div className="fs16 color-black-1 text-left">MetaMask</div>
                 </div>
                 <div className="col-auto text-right">
                   <div className="fs14 text-wrap text-left">
@@ -481,13 +481,13 @@ class Auth extends React.Component {
             </Collapse.Panel>
           </Collapse>
 
-          <div onClick={this.unlockByLedger} className="row m15 p15 no-gutters align-items-center bg-fill"
+          <div onClick={this.unlockByLedger} className="row m15 p15 no-gutters align-items-center bg-primary"
                style={{padding: '7px 0px',borderRadius:'50em'}}>
             <div className="col-auto text-left pl15 pr20">
-              <i className="icon-ledgerwallet text-primary fs26"></i>
+              <i className="icon-ledgerwallet color-black-1 fs26"></i>
             </div>
             <div className="col text-left">
-              <div className="fs16 text-primary text-left">Ledger</div>
+              <div className="fs16 color-black-1 text-left">Ledger</div>
             </div>
             <div className="col-auto text-right">
               <div className="fs14 text-wrap text-left">
