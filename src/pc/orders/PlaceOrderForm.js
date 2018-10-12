@@ -222,7 +222,6 @@ class PlaceOrderForm extends React.Component {
           <div className="segmented-fs16">
             <SegmentedControl
               values={[menu1, menu2]}
-              style={{height:'40px'}}
               className={`m-auto side-${side}`}
               selectedIndex={side === 'buy' ? 0 : 1}
               onChange={sideChange}

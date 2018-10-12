@@ -31,23 +31,23 @@ class Home extends React.Component {
               <Kline />
             </PanelWrapper>
           </div>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'40rem'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'42.5rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
             </PanelWrapper>
-            <PanelWrapper className="mtpanel pb5" style={{height:'365px'}}>
+            <PanelWrapper className="mtpanel pb5" style={{height:'36.5rem'}}>
               <PanelHeader title="Place Order" />
               <div className="pt10"></div>
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
           </div>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'37.5rem'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'32.5rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="pb10">
               <PanelHeader title="Trade History" />
               <ListMarketFills />
             </PanelWrapper>
-            <PanelWrapper className="mtpanel" style={{height:'365px'}}>
+            <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
               <PanelHeader title="Orders" />
               <div style={{flex:'1',overflow:'auto'}}>
                 <HelperOfMyMarketOrders />

@@ -38,38 +38,34 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
 
   return (
     <div className="d-flex flex-column" style={{height: '100%'}}>
-      <table className="w-100 fs12">
-        <thead>
-        <tr className="">
-          <th
-            className="zb-b-b text-left pl15 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.price")}</th>
-          <th
-            className="zb-b-b text-right pl5 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")}/{tokens.left}</th>
-          <th
-            className="zb-b-b text-right pl5 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
-        </tr>
-        </thead>
-      </table>
       <div className="" style={{flex: 1, overflow: 'auto'}}>
         <table className="w-100 fs12">
+          <thead>
+            <tr className="">
+              <th
+                className="zb-b-b text-left pl15 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.price")}</th>
+              <th
+                className="zb-b-b text-right pl5 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")}/{tokens.left}</th>
+              <th
+                className="zb-b-b text-right pl5 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
+            </tr>
+          </thead>
           <tbody className="text-number">
-          <tr className="">
-            <td className="lh10 pt5" colSpan="10"></td>
-          </tr>
+          <div className="pt5"></div>
           {
             sell && sell.reverse().map((item, index) =>
               <tr key={index}>
-                <td className="hover-default pl15 pr5 lh20 text-left color-error align-top"
+                <td className="hover-default pl15 pr5 text-left color-error align-top" style={{lineHeight:'1.8rem'}}
                     onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
                   {Number(item[0]).toFixed(8)}
                   <span className="fs12 color-black-4 ml5"><Worth amount={Number(item[0]).toFixed(8)}
                                                                   symbol={tokens.right}/></span>
                 </td>
-                <td className="zb-b-b  hover-default pl5 pr5 lh20 color-black-2 text-right"
+                <td className="hover-default pl5 pr5 color-black-2 text-right" style={{lineHeight:'1.8rem'}}
                     onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                   {Number(item[1]).toFixed(4)}
                 </td>
-                <td className="hover-default pl5 pr15 lh20 color-black-2 text-right align-top"
+                <td className="hover-default pl5 pr15 color-black-2 text-right align-top" style={{lineHeight:'1.8rem'}}
                     onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                   {Number(item[2]).toFixed(4)}
                 </td>
@@ -84,23 +80,20 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
               </td>
             </tr>
           }
-          <tr className="">
-            <td className="lh10 pt5" colSpan="10"></td>
-          </tr>
           </tbody>
         </table>
       </div>
-      <div className="zb-b-t ">
+      <div className="zb-b-t">
         {
           trades.items.length > 0 && !isIncrease() && <div className="text-left pl15 pr15 pt10 pb10 zb-b-b">
-          <span className="color-error fs16" onClick={changePrice.bind(this, Number(trades.items[0].price).toFixed(8))}>{trades.items[0].price}</span>
+          <span className="color-error fs14" onClick={changePrice.bind(this, Number(trades.items[0].price).toFixed(8))}>{trades.items[0].price}</span>
           <span className="color-black-4 fs12 ml10">≈ <Worth amount={Number(trades.items[0].price).toFixed(8)}
                                                              symbol={tokens.right}/></span>
           </div>
         }
         {
           trades.items.length > 0 && isIncrease() && <div className="text-left pl15 pr15 pt10 pb10 zb-b-b">
-            <span className="color-success fs16" onClick={changePrice.bind(this, Number(trades.items[0].price).toFixed(8))}>{trades.items[0].price}</span>
+            <span className="color-success fs14" onClick={changePrice.bind(this, Number(trades.items[0].price).toFixed(8))}>{trades.items[0].price}</span>
             <span className="color-black-4 fs12 ml10">≈ <Worth amount={Number(trades.items[0].price).toFixed(8)}
                                                                symbol={tokens.right}/></span>
           </div>
@@ -108,24 +101,32 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
       </div>
       <div className="" style={{flex: "1", overflow: 'auto'}}>
         <table className="w-100 fs12">
+          <thead style={{opacity:'0',lineHeight:'0rem'}}>
+            <tr className="">
+              <th style={{lineHeight:'0rem'}}
+                className="zb-b-b text-left pl15 pr5 text-nowrap font-weight-normal color-black-4">{intl.get("common.price")}</th>
+              <th style={{lineHeight:'0rem'}}
+                className="zb-b-b text-right pl5 pr5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")}/{tokens.left}</th>
+              <th style={{lineHeight:'0rem'}}
+                className="zb-b-b text-right pl5 pr15 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
+            </tr>
+          </thead>
           <tbody className="text-number">
-          <tr className="">
-            <td className="lh10 pt5" colSpan="10"></td>
-          </tr>
+          <div className="pt5"></div>
           {
             depth.item && depth.item.buy && depth.item.buy.map((item, index) =>
               <tr key={index}>
-                <td className="hover-default pl15 pr5 lh20 text-left color-success align-top"
+                <td className="hover-default pl15 pr5 text-left color-success align-top" style={{lineHeight:'1.8rem'}}
                     onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
                   {Number(item[0]).toFixed(8)}
                   <span className="fs12 color-black-4 ml5"><Worth amount={Number(item[0]).toFixed(8)}
                                                                   symbol={tokens.right}/></span>
                 </td>
-                <td className="hover-default pl5 pr5 lh20 color-black-2 text-right align-top"
+                <td className="hover-default pl5 pr5 color-black-2 text-right align-top" style={{lineHeight:'1.8rem'}}
                     onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                   {Number(item[1]).toFixed(4)}
                 </td>
-                <td className="hover-default pl5 pr15 lh20 color-black-2 text-right align-top"
+                <td className="hover-default pl5 pr15 color-black-2 text-right align-top" style={{lineHeight:'1.8rem'}}
                     onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                   {Number(item[2]).toFixed(4)}
                 </td>
@@ -140,9 +141,6 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
               </td>
             </tr>
           }
-          <tr className="">
-            <td className="lh10 pt5" colSpan="10"></td>
-          </tr>
           </tbody>
         </table>
       </div>

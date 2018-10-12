@@ -41,7 +41,7 @@ class Home extends React.Component {
               </div>
             </PanelWrapper>
           </div>
-          <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{width:'32.5rem'}}>
+          <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{width:'35rem'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
