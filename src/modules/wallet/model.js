@@ -1,13 +1,100 @@
 import {register} from "LoopringJS/relay/rpc/account";
-import {LedgerAccount, MetaMaskAccount,} from "LoopringJS/ethereum/account";
+import {
+  AddressAccount,
+  LooprAccount,
+  UpWalletAccount,
+  MetaMaskAccount,
+  LedgerAccount
+} from "common/wallets/account";
+import {mnemonictoPrivatekey} from "LoopringJS/ethereum/mnemonic";
+import {formatKey} from "LoopringJS/common/formatter";
 import storage from '../storage/'
+import intl from 'react-intl-universal';
+import Notification from 'LoopringUI/components/Notification'
+
+const unlockWithAddress = (address) => {
+  if(address) {
+    window.WALLET = new AddressAccount(address);
+  }
+}
+
+const unlockWithLoopr = (address) => {
+  window.WALLET = new LooprAccount(address);
+}
+
+const unlockWithUpWallet = (address) => {
+  window.WALLET = new UpWalletAccount(address);
+}
+
+const unlockWithMetaMask = () => {
+  if (window.web3 && window.web3.eth.accounts[0]) {
+    window.web3.version.getNetwork((err, netId) => {
+      if (netId !== '1') {
+        Notification.open({
+          message:intl.get('notifications.title.unlock_fail'),
+          description:intl.get('wallet_meta.mainnet_tip'),
+          type:'error'
+        })
+        return
+      }
+      window.WALLET = new MetaMaskAccount(window.web3);
+      Notification.open({type:'success',message:intl.get('notifications.title.unlock_suc')});
+    })
+  } else {
+    let content = intl.get('wallet_meta.install_tip')
+    if(window.web3 && !window.web3.eth.accounts[0]) { // locked
+      content = intl.get('wallet_meta.unlock_tip')
+    }
+    Notification.open({
+      message:intl.get('notifications.title.unlock_fail'),
+      description:content,
+      type:'error'
+    })
+  }
+}
 
 let unlockedType = storage.wallet.getUnlockedType()
 let unlockedAddress = storage.wallet.getUnlockedAddress()
-if (unlockedAddress) {
-  unlockedType = 'address'
-} else {
-  unlockedType = ''
+switch(unlockedType) {
+  case 'address':
+    unlockWithAddress(unlockedAddress)
+    break;
+  case 'loopr':
+    unlockWithLoopr(unlockedAddress)
+    break;
+  case 'upWallet':
+    unlockWithUpWallet(unlockedAddress)
+    break;
+  case 'ledger':
+    if(unlockedAddress) {
+      unlockedType = 'address'
+      unlockWithAddress(unlockedAddress)
+      Notification.open({
+        type:'info',
+        message:intl.get('notifications.title.in_watch_only_mode'),
+        description:intl.get('notifications.message.unlock_by_cookie_address')
+      });
+    } else {
+      unlockedType = ''
+    }
+    break;
+  case 'metaMask':
+    if(window.web3 && window.web3.eth.accounts[0] && window.web3.eth.accounts[0] === unlockedAddress) {
+      unlockWithMetaMask()
+    } else {
+      if(unlockedAddress) {
+        unlockedType = 'address'
+        unlockWithAddress(unlockedAddress)
+        Notification.open({
+          type:'info',
+          message:intl.get('notifications.title.in_watch_only_mode'),
+          description:intl.get('notifications.message.unlock_by_cookie_address')
+        });
+      } else {
+        unlockedType = ''
+      }
+    }
+    break;
 }
 
 export default {
@@ -42,9 +129,8 @@ export default {
   effects: {
     * unlockWallet({payload}, {put, call}) {
       const {address, unlockType} = payload;
-      storage.wallet.storeUnlockedAddress(unlockType, address);
-      window.WALLET = {address, unlockType};
-      //yield call(register, {owner:payload.address});
+      // storage.wallet.storeUnlockedAddress(unlockType, address);
+      // yield call(register, {owner:payload.address});
       yield put({type: 'unlock', payload});
       yield put({type: 'placeOrder/unlock'});
     },
@@ -52,10 +138,22 @@ export default {
       const unlockType = 'address';
       yield put({type: 'unlockWallet', payload: {...payload, unlockType}})
     },
+    * unlockLooprWallet({payload}, {put}) {
+      const unlockType = 'loopr';
+      const {address} = payload
+      unlockWithLoopr(address)
+      yield put({type: 'unlockWallet', payload: {...payload, unlockType}})
+    },
+    * unlockUpWallet({payload}, {put}) {
+      const unlockType = 'upWallet';
+      const {address} = payload
+      unlockWithUpWallet(address)
+      yield put({type: 'unlockWallet', payload: {...payload, unlockType}})
+    },
     * unlockMetaMaskWallet({payload}, {put}) {
       const {address} = payload;
       const unlockType = 'metaMask';
-      window.account = new MetaMaskAccount(window.web3);
+      unlockWithMetaMask()
       yield put({type: 'unlockWallet', payload: {address, unlockType}});
     },
     * unlockLedgerWallet({payload}, {put}) {
