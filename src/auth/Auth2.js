@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, NavBar, Modal,List,InputItem,TextareaItem,Toast } from 'antd-mobile'
-import routeActions from 'common/utils/routeActions'
+import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
 import UserAgent from 'common/utils/useragent'
 import { connect } from 'dva'
 import { Icon, Collapse, Steps, Modal as AntdModal } from 'antd'
@@ -11,6 +10,9 @@ import QRCode from 'qrcode.react';
 import CountDown from 'LoopringUI/components/CountDown';
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
+import {getXPubKey as getLedgerPublicKey, connect as connectLedger} from "LoopringJS/ethereum/ledger";
+
+const dpath = "m/44'/60'/0'";
 
 class Auth extends React.Component {
   state={
@@ -190,6 +192,42 @@ class Auth extends React.Component {
       })
       dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
     }
+  }
+
+
+  unlockByLedger = () =>{
+    connectLedger().then(res => {
+      if (!res.error) {
+        const ledger = res.result;
+        getLedgerPublicKey(dpath, ledger).then(resp => {
+          if (!resp.error) {
+            const {chainCode, publicKey} = resp.result;
+            this.props.dispatch({
+              type: "determineWallet/setHardwareWallet",
+              payload: {chainCode, publicKey, dpath, walletType: 'ledger'}
+            });
+            this.props.dispatch({
+              type: 'layers/showLayer',
+              payload: {id: 'chooseLedgerAddress', chooseAddress: this.chooseAddress}
+            });
+          }
+        });
+      }
+    });
+  }
+
+  chooseAddress = (path)=>{
+    connectLedger().then(res => {
+      if (!res.error) {
+        const ledger = res.result;
+        getLedgerPublicKey(path, ledger).then(resp => {
+          if (!resp.error) {
+            const {address} = resp.result;
+           //TODO
+          }
+        });
+      }
+    });
   }
 
   render () {
@@ -443,7 +481,7 @@ class Auth extends React.Component {
             </Collapse.Panel>
           </Collapse>
 
-          <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
+          <div onClick={this.unlockByLedger} className="row m15 p15 no-gutters align-items-center bg-fill"
                style={{padding: '7px 0px',borderRadius:'50em'}}>
             <div className="col-auto text-left pl15 pr20">
               <i className="icon-ledgerwallet text-primary fs26"></i>

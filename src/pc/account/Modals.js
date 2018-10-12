@@ -3,7 +3,7 @@ import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
 import Settings from 'mobile/account/Settings'
 import UserCenter from './UserCenter'
-import Tasks from 'mobile/notifications/ListTodos'
+import ChooseLedgerAddress from './ChooseLedgerAddress'
 
 function Modals(props) {
   return (
@@ -16,6 +16,11 @@ function Modals(props) {
       <Containers.Layers id="usercenter">
         <UiContainers.Panels position="right" id="usercenter" width="48rem"  style={{margin:'0 auto',height:'100%'}}>
           <UserCenter />
+        </UiContainers.Panels>
+      </Containers.Layers>
+      <Containers.Layers id="chooseLedgerAddress">
+        <UiContainers.Panels id="chooseLedgerAddress" position="right">
+          <ChooseLedgerAddress />
         </UiContainers.Panels>
       </Containers.Layers>
     </div>

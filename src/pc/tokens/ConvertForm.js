@@ -130,7 +130,7 @@ class Convert extends React.Component {
           await convertConfirm();
           delete window.jobCallback;
         };
-        showLayer('usercenter')
+        showLayer('auth2')
       } else {
         await convertConfirm()
       }
