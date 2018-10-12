@@ -1,6 +1,5 @@
 import React from 'react'
-import { Button, NavBar, Modal,List,InputItem,TextareaItem,Toast } from 'antd-mobile'
-import routeActions from 'common/utils/routeActions'
+import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
 import UserAgent from 'common/utils/useragent'
 import { connect } from 'dva'
 import { Icon, Collapse, Steps, Modal as AntdModal } from 'antd'
@@ -166,7 +165,6 @@ class Auth extends React.Component {
 
 
   unlockByLedger = () =>{
-
     connectLedger().then(res => {
       if (!res.error) {
         const ledger = res.result;
@@ -187,6 +185,19 @@ class Auth extends React.Component {
     });
   }
 
+  chooseAddress = (path)=>{
+    connectLedger().then(res => {
+      if (!res.error) {
+        const ledger = res.result;
+        getLedgerPublicKey(path, ledger).then(resp => {
+          if (!resp.error) {
+            const {address} = resp.result;
+           //TODO
+          }
+        });
+      }
+    });
+  }
 
   render () {
     const {uuid,item, scanAddress, dispatch} = this.props
@@ -418,7 +429,7 @@ class Auth extends React.Component {
             </Collapse.Panel>
           </Collapse>
 
-          <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
+          <div onClick={this.unlockByLedger} className="row m15 p15 no-gutters align-items-center bg-fill"
                style={{padding: '7px 0px',borderRadius:'50em'}}>
             <div className="col-auto text-left pl15 pr20">
               <i className="icon-ledgerwallet text-primary fs26"></i>
