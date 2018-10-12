@@ -1,36 +1,24 @@
 import React from 'react';
-import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
-import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal';
-import { TabBar,NavBar,Icon,Tabs } from 'antd-mobile';
-import { Icon as WebIcon } from 'antd';
-import UserCenter from '../account/UserCenter';
 import Markets from '../tickers/Markets';
 import PlaceOrderForm from '../orders/PlaceOrderForm';
-import PlaceOrder from 'mobile/orders/PlaceOrderPage';
 import HelperOfDepth from '../orders/HelperOfDepth';
 import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
 import ListMarketFills from '../fills/ListMarketFills';
 import HelperOfBalance from '../orders/HelperOfBalance';
-import MarketTitckers from 'mobile/tickers/ListMarketTickers';
 import Kline from 'mobile/charts/Kline';
 import Header from './Header'
 import PanelHeader from './PanelHeader'
 import PanelWrapper from './PanelWrapper'
+
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
   }
   render(){
-    const {match,location,dispatch} = this.props;
-    const showLayer = (id)=>{
-      dispatch({
-        type:"layers/showLayer",
-        payload:{id}
-      })
-    }
+    const {match,location} = this.props;
     return (
       <div style={{height:'100vh',overflow:'none' }} className="d-flex flex-column">
         <div className="d-flex flex-column mlpanel">
@@ -65,7 +53,7 @@ class Home extends React.Component {
               <PanelHeader title="Trade History" />
               <ListMarketFills />
             </PanelWrapper>
-            <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
+            <PanelWrapper className="mtpanel " style={{height:'36.5rem'}}>
               <PanelHeader title="Wallet" />
               <HelperOfBalance />
             </PanelWrapper>
