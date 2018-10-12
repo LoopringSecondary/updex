@@ -3,16 +3,28 @@ import { Button, NavBar, Modal,List,InputItem,TextareaItem,Toast } from 'antd-mo
 import routeActions from 'common/utils/routeActions'
 import UserAgent from 'common/utils/useragent'
 import { connect } from 'dva'
-import { Icon } from 'antd'
+import { Icon, Collapse } from 'antd'
 import storage from 'modules/storage'
 import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
-
+import QRCode from 'qrcode.react';
+import CountDown from 'LoopringUI/components/CountDown';
+import moment from 'moment'
 
 class Auth extends React.Component {
   state={
     address:''
   }
+  showLayer = (payload = {}) => {
+    const {dispatch} = this.props
+    dispatch({
+      type: 'layers/showLayer',
+      payload: {
+        ...payload
+      }
+    })
+  }
+
   authByThirdPartyWallet = (wallet) => {
     const ua = new UserAgent()
     if(ua.isWechat()){
@@ -57,10 +69,64 @@ class Auth extends React.Component {
     this.setState({address:value})
   }
 
+  unlockTypeChanged = (unlockType) => {
+    switch(unlockType) {
+      case 'loopr': this.unlockByLoopr(); break;
+      case 'upWallet': this.unlockByLoopr(); break;
+      case 'metaMask': break;
+    }
+  }
+
+  unlockByLoopr = () => {
+    const {dispatch} = this.props;
+    const uuid = uuidv4()
+    dispatch({type: 'scanAddress/uuidChanged', payload: {UUID: uuid.substring(0, 8)}})
+    dispatch({
+      type: 'sockets/extraChange',
+      payload: {id: 'addressUnlock', extra: {UUID: uuid.substring(0, 8)}}
+    });
+    dispatch({type: 'sockets/fetch', payload: {id: 'addressUnlock'}});
+  };
+
   render () {
-    const {uuid,item} = this.props
+    const {uuid,item, scanAddress, dispatch} = this.props
     const {address} = this.state;
-    
+    let targetTime = moment().valueOf() + 600000;
+
+    const countDownOnEnd = () => {
+      const uuid = uuidv4();
+      dispatch({type:'scanAddress/uuidChanged', payload:{UUID:uuid.substring(0, 8)}});
+      dispatch({type:'sockets/extraChange',payload:{id:'addressUnlock', extra:{UUID:uuid.substring(0, 8)}}});
+      dispatch({type:'sockets/fetch',payload:{id:'addressUnlock'}});
+      targetTime = moment().valueOf() + 600000;
+    }
+
+    const chromeExtention = {
+      'Opera' : "https://addons.opera.com/extensions/details/metamask/",
+      'Chrome' : "https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn",
+      'Firefox' : "https://addons.mozilla.org/firefox/addon/ether-metamask/"
+    }
+    let browserType = '', browserSupported = false,  metamaskState = '', visible = false
+    var u = navigator.userAgent, app = navigator.appVersion;
+    if(u.indexOf('OPR') > -1) {
+      browserType = 'Opera'
+      browserSupported = true
+    } else if (u.indexOf('Chrome') > -1) {
+      browserType = 'Chrome'
+      browserSupported = true
+    } else if(u.indexOf('Firefox') > -1) {
+      browserType = 'Firefox'
+      browserSupported = true
+    } else {
+      browserType = 'Others'
+    }
+    if(window.web3){
+      if(!window.web3.eth.accounts[0]) { // locked
+        metamaskState = 'locked'
+      }
+    } else { // to install
+      metamaskState = 'notInstalled'
+    }
 
     const _this = this
     return (
@@ -107,51 +173,83 @@ class Auth extends React.Component {
             Log In By Wallet
             </div>
           </div>
-          <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
-               style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 pr20">
-              <img style={{height: '30px'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 text-primary text-left">UP Wallet</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-4 mr5">Scan Qrcode</span>
-                <Icon className="color-black-4" type="right"/>
+          <Collapse onChange={(v)=>this.unlockTypeChanged(v)} accordion>
+            <Collapse.Panel showArrow={false} header={
+              <div className="row m15 p15 no-gutters align-items-center bg-fill"
+                   style={{padding: '7px 0px',borderRadius:'50em'}}>
+                <div className="col-auto text-left pl15 pr20">
+                  <img style={{height: '30px'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
+                </div>
+                <div className="col text-left">
+                  <div className="fs16 text-primary text-left">UP Wallet</div>
+                </div>
+                <div className="col-auto text-right">
+                  <div className="fs14 text-wrap text-left">
+                    <span className="fs13 color-black-4 mr5">Scan QRcode</span>
+                    <Icon className="color-black-4" type="right"/>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
-               style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 pr20">
-              <i className="icon-loopr text-primary fs28"></i>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 text-primary text-left">Loopr Wallet</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-4 mr5">Scan Qrcode</span>
-                <Icon className="color-black-4" type="right"/>
+            } key="upWallet">
+              <div>
+                {
+                  !scanAddress.address &&
+                  <div className="">
+                    <div className="loopr-qrcode">
+                      {scanAddress && scanAddress.UUID && <QRCode value={JSON.stringify({type:'UUID', value:scanAddress.UUID})} size={160} level='H'/>}
+                      <CountDown style={{ fontSize: 20 }} target={targetTime} onEnd={countDownOnEnd}/>
+                    </div>
+                  </div>
+                }
               </div>
-            </div>
-          </div>
-          <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
-               style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 pr20">
-              <i className="icon-Metamaskwallet text-primary fs26"></i>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 text-primary text-left">MetaMask</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-4 mr5">Connect</span>
-                <Icon className="color-black-4" type="right"/>
+            </Collapse.Panel>
+            <Collapse.Panel showArrow={false} header={
+              <div className="row m15 p15 no-gutters align-items-center bg-fill" style={{padding: '7px 0px',borderRadius:'50em'}}>
+                <div className="col-auto text-left pl15 pr20">
+                  <i className="icon-loopr text-primary fs28"></i>
+                </div>
+                <div className="col text-left">
+                  <div className="fs16 text-primary text-left">Loopr Wallet</div>
+                </div>
+                <div className="col-auto text-right">
+                  <div className="fs14 text-wrap text-left">
+                    <span className="fs13 color-black-4 mr5">Scan QRcode</span>
+                    <Icon className="color-black-4" type="right"/>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
+            } key="loopr">
+              {
+                !scanAddress.address &&
+                <div className="">
+                  <div className="loopr-qrcode">
+                    {scanAddress && scanAddress.UUID && <QRCode value={JSON.stringify({type:'UUID', value:scanAddress.UUID})} size={160} level='H'/>}
+                    <CountDown style={{ fontSize: 20 }} target={targetTime} onEnd={countDownOnEnd}/>
+                  </div>
+                </div>
+              }
+            </Collapse.Panel>
+            <Collapse.Panel showArrow={false} header={
+              <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
+                   style={{padding: '7px 0px',borderRadius:'50em'}}>
+                <div className="col-auto text-left pl15 pr20">
+                  <i className="icon-Metamaskwallet text-primary fs26"></i>
+                </div>
+                <div className="col text-left">
+                  <div className="fs16 text-primary text-left">MetaMask</div>
+                </div>
+                <div className="col-auto text-right">
+                  <div className="fs14 text-wrap text-left">
+                    <span className="fs13 color-black-4 mr5">Connect</span>
+                    <Icon className="color-black-4" type="right"/>
+                  </div>
+                </div>
+              </div>
+            } key="metaMask">
+              1111
+            </Collapse.Panel>
+          </Collapse>
+
           <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-fill"
                style={{padding: '7px 0px',borderRadius:'50em'}}>
             <div className="col-auto text-left pl15 pr20">
@@ -181,7 +279,8 @@ class Auth extends React.Component {
 function mapStateToProps (state) {
   return {
     item: state.sockets.addressUnlock.item,
-    uuid:state.sockets.addressUnlock.extra.uuid
+    uuid:state.sockets.addressUnlock.extra.uuid,
+    scanAddress:state.scanAddress
   }
 }
 

@@ -3,7 +3,8 @@ import {store} from '../../index.js'
 import config from 'common/config'
 import storage from '../storage/'
 import {toBig, toFixed} from 'LoopringJS/common/formatter'
-
+import intl from "react-intl-universal";
+import Notification from 'LoopringUI/components/Notification'
 
 const updateItems = (items,id)=>{
   const dispatch = require('../../index.js').default._store.dispatch
@@ -36,6 +37,19 @@ const updateEstimateGasPrice = (item,id)=>{
       type:'gas/estimateGasChange',
       payload:{gasPrice}
     })
+  }
+}
+
+const updateScannedAddress = (item, id) => {
+  if (item && item.owner) {
+    const dispatch = require('../../index.js').default._store.dispatch
+    dispatch({type: 'scanAddress/addressChanged', payload: {address: item.owner}})
+    dispatch({type: "wallet/unlockAddressWallet", payload: {address: item.owner}});
+    Notification.open({type: 'success', message: intl.get('notifications.title.unlock_suc')});
+    dispatch({type: 'sockets/unlocked'});
+    //routeActions.gotoPath('/wallet');
+    dispatch({type: 'layers/hideLayer', payload: {id: 'unlock'}})
+    dispatch({type: 'scanAddress/reset', payload: {}})
   }
 }
 
@@ -318,17 +332,19 @@ const transfromers = {
     queryTransformer: (payload) => {
       const {extra} = payload
       return JSON.stringify({
-        "uuid": extra.uuid,
+        "uuid": extra.UUID,
       })
     },
     resTransformer: (id, res) => {
       if (!res) return null
       res = JSON.parse(res)
+      // console.log(id,'res',res)
       let item = {}
       if (!res.error && res.data) {
         item = {...res.data}
       }
-      updateItem(item,id)
+      // updateItem(item,id)
+      updateScannedAddress(item, id)
     },
   },
   circulrNotify: {
