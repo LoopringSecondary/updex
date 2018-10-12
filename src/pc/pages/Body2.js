@@ -20,7 +20,7 @@ class Home extends React.Component {
   render(){
     const {match,location} = this.props;
     return (
-      <div style={{height:'100vh',overflow:'none' }} className="d-flex flex-column">
+      <div style={{height:'100vh',overflow:'none'}} className="d-flex flex-column">
         <div className="d-flex flex-column mlpanel">
           <Header className="" />
         </div>
@@ -31,7 +31,7 @@ class Home extends React.Component {
               <Kline />
             </PanelWrapper>
           </div>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'42.5rem'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'40rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
@@ -42,7 +42,7 @@ class Home extends React.Component {
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
           </div>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'32.5rem'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'35rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="pb10">
               <PanelHeader title="Trade History" />
               <ListMarketFills />

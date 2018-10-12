@@ -19,7 +19,7 @@ class Home extends React.Component {
   render(){
     const {match,location,collapsed} = this.props;
     return (
-      <div style={{height:'100vh',overflow:'none' }}  className="d-flex flex-column">
+      <div style={{height:'100vh',overflow:'none'}}  className="d-flex flex-column">
         <div className="mlpanel" style={{paddingTop:'0rem'}}>
          <Header className="" />
         </div>
