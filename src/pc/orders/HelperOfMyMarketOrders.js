@@ -79,7 +79,7 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
       dispatch({
         type: 'layers/showLayer',
         payload: {
-          id: 'usercenter',
+          id: 'auth2',
         }
       })
     } else {
@@ -141,7 +141,7 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
       dispatch({
         type: 'layers/showLayer',
         payload: {
-          id: 'usercenter',
+          id: 'auth2',
         }
       })
     } else {
