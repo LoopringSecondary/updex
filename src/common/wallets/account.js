@@ -23,32 +23,6 @@ export function createWallet ()
 }
 
 /**
- * @description Returns the ethereum address  of a given private key
- * @param privateKey
- * @returns {string}
- */
-export function privateKeytoAddress (privateKey)
-{
-    try
-    {
-        if (typeof privateKey === 'string')
-        {
-            validator.validate({value: privateKey, type: 'ETH_KEY'});
-            privateKey = toBuffer(addHexPrefix(privateKey));
-        }
-        else
-        {
-            validator.validate({value: privateKey, type: 'PRIVATE_KEY_BUFFER'});
-        }
-    }
-    catch (e)
-    {
-        throw new Error('Invalid private key');
-    }
-    return formatAddress(privateToAddress(privateKey));
-}
-
-/**
  * @description Returns the ethereum address of a given public key.
  * Accepts "Ethereum public keys" and SEC1 encoded keys.
  * @param publicKey Buffer | string
@@ -81,67 +55,6 @@ export function getAddresses ({publicKey, chainCode, pageSize, pageNum})
         addresses.push(publicKeytoAddress(dkey.publicKey, true));
     }
     return addresses;
-}
-
-/**
- * @description Returns the ethereum public key of a given private key.
- * @param privateKey Buffer | string
- * @returns {string}
- */
-export function privateKeytoPublic (privateKey)
-{
-    try
-    {
-        if (typeof privateKey === 'string')
-        {
-            validator.validate({value: privateKey, type: 'ETH_KEY'});
-            privateKey = toBuffer(addHexPrefix(privateKey));
-        }
-        else
-        {
-            validator.validate({value: privateKey, type: 'PRIVATE_KEY_BUFFER'});
-        }
-    }
-    catch (e)
-    {
-        throw new Error('Invalid private key');
-    }
-    return formatKey(privateToPublic(privateKey));
-}
-
-/**
- * @description Returns Account of given mnemonic, dpath and password
- * @param mnemonic string
- * @param dpath string
- * @param password string
- * @returns {Account}
- */
-export function fromMnemonic (mnemonic, dpath, password)
-{
-    const privateKey = mnemonictoPrivatekey(mnemonic, dpath, password);
-    return fromPrivateKey(privateKey);
-}
-
-/**
- * @description Returns Account of a given private key
- * @param privateKey string | buffer
- * @returns {Account}
- */
-export function fromPrivateKey (privateKey)
-{
-    return new KeyAccount(privateKey);
-}
-
-/**
- * @description Returns Account of the given keystore
- * @param keystore string
- * @param password string
- * @returns {Account}
- */
-export function fromKeystore (keystore, password)
-{
-    const privateKey = decryptKeystoreToPkey(keystore, password);
-    return fromPrivateKey(privateKey);
 }
 
 /**
@@ -209,99 +122,45 @@ export class Account
     }
 }
 
-export class KeyAccount extends Account
+export class AddressAccount extends Account
 {
-    /**
-   * @property
-   * @param privateKey string | Buffer
-   */
-    constructor (privateKey)
+  constructor (address)
+  {
+    super();
+    try
     {
-        super();
-        try
-        {
-            if (typeof privateKey === 'string')
-            {
-                validator.validate({value: privateKey, type: 'ETH_KEY'});
-                privateKey = toBuffer(addHexPrefix(privateKey));
-            }
-            else
-            {
-                validator.validate({value: privateKey, type: 'PRIVATE_KEY_BUFFER'});
-            }
-        }
-        catch (e)
-        {
-            throw new Error('Invalid private key');
-        }
-        this.privateKey = privateKey;
+      validator.validate({value: address, type: 'ETH_ADDRESS'});
+    } catch (e)
+    {
+      throw new Error('Invalid ETH address');
     }
+    this.address = address
+  }
 
-    /**
-   * @description Returns V3 type keystore of this account
-   * @param password
-   * @returns {{version, id, address, crypto}}
-   */
-    toV3Keystore (password)
-    {
-        return pkeyToKeystore(this.privateKey, password);
-    }
+  async getAddress ()
+  {
+    return this.address
+  }
 
-    /**
-   * Returns ethereum public key of this account
-   * @returns {string}
-   */
-    getPublicKey ()
-    {
-        return privateKeytoPublic(this.privateKey);
-    }
+  getUnlockType ()
+  {
+    return 'address'
+  }
 
-    getAddress ()
-    {
-        return privateKeytoAddress(this.privateKey);
-    }
+  async signMessage (message)
+  {
+    //TODO
+  }
 
-    getUnlockType ()
-    {
-        return 'keyStore'
-    }
+  async signEthereumTx (rawTx)
+  {
+    //TODO
+  }
 
-    sign (hash)
-    {
-        hash = toBuffer(hash);
-        const signature = ecsign(hash, this.privateKey);
-        const v = toNumber(signature.v);
-        const r = toHex(signature.r);
-        const s = toHex(signature.s);
-        return {r, s, v};
-    }
-
-    signMessage (message)
-    {
-        const hash = sha3(message);
-        const finalHash = hashPersonalMessage(hash);
-        return this.sign(finalHash);
-    }
-
-    signEthereumTx (rawTx)
-    {
-        validator.validate({type: 'TX', value: rawTx});
-        const ethTx = new EthTransaction(rawTx);
-        ethTx.sign(this.privateKey);
-        return toHex(ethTx.serialize());
-    }
-
-    signOrder (order)
-    {
-        const hash = getOrderHash(order);
-        const signature = ecsign(hashPersonalMessage(hash), this.privateKey);
-        const v = toNumber(signature.v);
-        const r = toHex(signature.r);
-        const s = toHex(signature.s);
-        return {
-            ...order, v, r, s
-        };
-    }
+  async signOrder (order)
+  {
+    //TODO
+  }
 }
 
 export class LooprAccount extends Account

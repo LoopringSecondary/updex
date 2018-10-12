@@ -204,12 +204,15 @@ export default {
     },
     *onEvent({ payload={} }, { call, select, put }) {
       let {id} = payload
-      const {socket,[id]:{page,filters,sort}} = yield select(({ [namespace]:model }) => model )
+      // todo idValidator
+      const {socket,[id]:{page,filters,sort,extra}} = yield select(({ [namespace]:model }) => model )
       if(socket){
-        let new_payload = {page,filters,sort,socket,id}
-        yield call(apis.onEvent, new_payload)
+        let new_payload = {page,filters,sort,socket,id,extra};
+        const hasListener = yield call(apis.hasListener, new_payload);
+        if(!hasListener){
+          yield call(apis.onEvent, new_payload)
+        }
       }else{
-        // console.log('socket is not connected! onEvent',id)
         if(!window.onEvents) window.onEvents = []
         window.onEvents.push({
           type:'onEvent',

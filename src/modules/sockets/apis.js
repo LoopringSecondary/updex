@@ -44,11 +44,19 @@ const updateScannedAddress = (item, id) => {
   if (item && item.owner) {
     const dispatch = require('../../index.js').default._store.dispatch
     dispatch({type: 'scanAddress/addressChanged', payload: {address: item.owner}})
-    dispatch({type: "wallet/unlockAddressWallet", payload: {address: item.owner}});
+    const loopringUnlockWith = storage.wallet.getLoopringUnlockWith()
+    switch(loopringUnlockWith) {
+      case 'loopr':
+        dispatch({type: "wallet/unlockLooprWallet", payload: {address: item.owner}});
+        break;
+      case 'upWallet':
+        dispatch({type: "wallet/unlockUpWallet", payload: {address: item.owner}});
+        break;
+    }
     Notification.open({type: 'success', message: intl.get('notifications.title.unlock_suc')});
     dispatch({type: 'sockets/unlocked'});
     //routeActions.gotoPath('/wallet');
-    dispatch({type: 'layers/hideLayer', payload: {id: 'unlock'}})
+    //dispatch({type: 'layers/hideLayer', payload: {id: 'unlock'}})
     dispatch({type: 'scanAddress/reset', payload: {}})
   }
 }
@@ -386,10 +394,16 @@ const emitEvent = (payload)=>{
   console.log(id)
   socket.emit(`${id}_req`,transfromer(payload))
 }
+
 const onEvent = (payload)=>{
   let {id,socket} = payload
   const transfromer = getResTransformer(id)
   socket.on(`${id}_res`,transfromer.bind(this,id))
+}
+
+const hasListener = (payload) => {
+  const {id, socket} = payload;
+  return socket.hasListeners(`${id}_res`)
 }
 
 const connect = (payload)=>{
@@ -415,6 +429,7 @@ export default {
   onEvent,
   emitEvent,
   connect,
+  hasListener
 }
 
 
