@@ -10,7 +10,7 @@ class Header extends React.Component {
     super(props);
   }
   render(){
-    const {match,location,dispatch,className} = this.props;
+    const {match,location,dispatch,className,address} = this.props;
     const showLayer = (id)=>{
       dispatch({
         type:"layers/showLayer",
@@ -18,8 +18,7 @@ class Header extends React.Component {
       })
     }
     const clickUser = ()=>{
-      const unlocked = true
-      if(unlocked){
+      if(address){
         showLayer('usercenter')
       }else{
         showLayer('auth2')
@@ -48,5 +47,14 @@ class Header extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+
+  return {
+    address:state.wallet.address
+  }
+
+}
+
 
 export default connect()(Header)

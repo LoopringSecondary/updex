@@ -79,23 +79,33 @@ switch(unlockedType) {
     }
     break;
   case 'metaMask':
-    if(window.web3 && window.web3.eth.accounts[0] && window.web3.eth.accounts[0] === unlockedAddress) {
-      unlockWithMetaMask()
+    if(unlockedAddress) {
+      let last = 0
+      var accountInterval = setInterval(function() {
+        if(window.web3 && window.web3.eth.accounts[0] && window.web3.eth.accounts[0] === unlockedAddress) {
+          clearInterval(accountInterval)
+          unlockWithMetaMask()
+          return
+        }
+        last += 100
+        if(last > 2000) {
+          clearInterval(accountInterval)
+          unlockedType = 'address'
+          unlockWithAddress(unlockedAddress)
+          Notification.open({
+            type:'info',
+            message:intl.get('notifications.title.in_watch_only_mode'),
+            description:intl.get('notifications.message.unlock_by_cookie_address')
+          });
+          return
+        }
+      }, 100);
     } else {
-      if(unlockedAddress) {
-        unlockedType = 'address'
-        unlockWithAddress(unlockedAddress)
-        Notification.open({
-          type:'info',
-          message:intl.get('notifications.title.in_watch_only_mode'),
-          description:intl.get('notifications.message.unlock_by_cookie_address')
-        });
-      } else {
-        unlockedType = ''
-      }
+      unlockedType = ''
     }
     break;
 }
+
 
 export default {
   namespace: 'wallet',
@@ -129,7 +139,7 @@ export default {
   effects: {
     * unlockWallet({payload}, {put, call}) {
       const {address, unlockType} = payload;
-      // storage.wallet.storeUnlockedAddress(unlockType, address);
+      storage.wallet.storeUnlockedAddress(unlockType, address);
       // yield call(register, {owner:payload.address});
       yield put({type: 'unlock', payload});
       yield put({type: 'placeOrder/unlock'});

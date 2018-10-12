@@ -11,7 +11,7 @@ const ledgerPaths = ["m/44'/60'/0'/0", "m/44'/60'/0'", "m/44'/61'/0'/0", "m/44'/
 
 const supportPaths = paths.filter(item => !!ledgerPaths.find(dpath => dpath === item.path));
 
-function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses,chooseLedgerAddress,wallet}) {
+function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses,chooseLedgerAddress}) {
 
   const nextPage = () => {
     dispatch({type: 'determineWallet/pageNumChange', payload: {pageNum: pageNum + 1}})
@@ -44,7 +44,7 @@ function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses,ch
   const confirm = (index) => {
     const {chooseAddress} = chooseLedgerAddress;
 
-    if(addresses[index].toLowerCase() !== wallet.address.toLowerCase()){
+    if(window.WALLET && addresses[index].toLowerCase() !== window.WALLET.getAddress().toLowerCase()){
       Notification.open({type:'warning',description:intl.get('notifications.title.dif_address')});
       return;
     }
@@ -116,8 +116,7 @@ function mapStateToProps(state) {
     pageNum: state.determineWallet.pageNum,
     dpath: state.determineWallet.dpath,
     customPath:state.determineWallet.customPath,
-    addresses: state.determineWallet.addresses,
-    wallet:state.wallet
+    addresses: state.determineWallet.addresses
   }
 
 }
