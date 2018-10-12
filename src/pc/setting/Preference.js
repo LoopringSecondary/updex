@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input,Button,Form,Select} from 'antd';
+import {Button, Form, Select} from 'antd';
 import {locales, timezoneArray} from 'common/config/data'
 import intl from 'react-intl-universal';
 

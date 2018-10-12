@@ -1,5 +1,5 @@
 export default {
-    selected:'up_wd_black',
+    selected:'up_purple_reverse',
     up_grey:{
         red:"#D54359",
         green:"#19A774",
@@ -19,10 +19,10 @@ export default {
     up_purple_reverse:{
         red:"#C1195B",
         green:"#558B2F",
-        bg:'#22223F',
+        bg:'#20203C',
         text:'rgba(255,255,255,0.2)',
         line:'rgba(255,255,255,0.06)',
-        grid:'rgba(255,255,255,0.02)',
+        grid:'rgba(255,255,255,0.01)',
     },
     up_blue:{
         red:"#D54359",
