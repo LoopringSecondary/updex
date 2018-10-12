@@ -12,6 +12,7 @@ import Header from './Header'
 import PanelHeader from './PanelHeader'
 import PanelWrapper from './PanelWrapper'
 
+
 class Home extends React.Component {
   constructor(props) {
     super(props);
@@ -24,17 +25,6 @@ class Home extends React.Component {
           <Header className="" />
         </div>
         <div className="row no-gutters" style={{flex:'1'}}>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'40rem'}}>
-            <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
-              <PanelHeader title="Order Book" />
-              <HelperOfDepth />
-            </PanelWrapper>
-            <PanelWrapper className="mtpanel pb5" style={{height:'36.5rem'}}>
-              <PanelHeader title="Place Order" />
-              <div className="pt10"></div>
-              <PlaceOrderForm location={location} match={match} />
-            </PanelWrapper>
-          </div>
           <div className="col d-flex flex-column" style={{flex:'1'}}>
             <PanelWrapper style={{flex:'1'}} className="mpanel mr0 mb0">
               <PanelHeader title="Kline Chart" />
@@ -47,12 +37,23 @@ class Home extends React.Component {
               </div>
             </PanelWrapper>
           </div>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'40rem'}}>
+            <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
+              <PanelHeader title="Order Book" />
+              <HelperOfDepth />
+            </PanelWrapper>
+            <PanelWrapper className="mtpanel pb5" style={{height:'36.5rem'}}>
+              <PanelHeader title="Place Order" />
+              <div className="pt10"></div>
+              <PlaceOrderForm location={location} match={match} />
+            </PanelWrapper>
+          </div>
           <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'37.5rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="pb10">
               <PanelHeader title="Trade History" />
               <ListMarketFills />
             </PanelWrapper>
-            <PanelWrapper className="mtpanel " style={{height:'36.5rem'}}>
+            <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
               <PanelHeader title="Wallet" />
               <HelperOfBalance />
             </PanelWrapper>
@@ -63,4 +64,4 @@ class Home extends React.Component {
   }
 }
 
-export default connect()(Home)
+export default Home
