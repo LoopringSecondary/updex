@@ -14,11 +14,14 @@ import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
 import HelperOfBalance from 'mobile/orders/HelperOfBalance';
 import MarketTitckers from 'mobile/tickers/ListMarketTickers';
 import Body3 from './Body3'
-import Sidebar2 from './Sidebar2'
+import Sidebar from './Sidebar'
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      sidebarCollapsed:false,
+    }
   }
   render(){
     const {match,location,dispatch} = this.props;
@@ -33,14 +36,19 @@ class Home extends React.Component {
         payload:{id}
       })
     }
+    const toggleSidebar = ()=>{
+      this.setState({
+        sidebarCollapsed:!this.state.sidebarCollapsed
+      })
+    }
     return (
-      <div style={{height:'100vh',overflow:'none' }}>
+      <div className="" style={{height:'100vh',overflow:'none' }}>
         <div className="row no-gutters ml0 mr0">
           <div className="col-auto" style={{height:'100vh'}}>
-            <Sidebar2 />
+            <Sidebar collapsed={this.state.sidebarCollapsed} toggleSidebar={toggleSidebar}/>
           </div>
-          <div className="col p5 pr0 pl0 pt0" style={{height:'100vh'}}>
-            <Body3 location={location} match={match} />
+          <div className="col" style={{height:'100vh'}}>
+            <Body3 location={location} match={match} collapsed={this.state.sidebarCollapsed} toggleSidebar={toggleSidebar} />
           </div>
         </div>
       </div>

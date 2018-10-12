@@ -37,8 +37,8 @@ const Logged = ()=>{
     return (
       <div>
         <Switch>
-          <Route path={`/trade`} component={Pages.Home} />
-          <Route path={`/trade2`} component={Pages.Home2} />
+          <Route path={`/trade`} component={Pages.Home2} />
+          <Route path={`/trade2`} component={Pages.Home} />
           <Route path={`/trade3`} component={Pages.Home3} />
           <Redirect from="/" to="/trade" />
         </Switch>

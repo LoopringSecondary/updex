@@ -33,7 +33,7 @@ class Home extends React.Component {
     }
     return (
       <div style={{height:'100vh',overflow:'none' }}  className="d-flex flex-column">
-        <div className="mlpanel" style={{height:'6.5rem',paddingTop:'0rem'}}>
+        <div className="mlpanel" style={{paddingTop:'0rem'}}>
          <Header className="" />
         </div>
         <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
