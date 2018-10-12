@@ -1,5 +1,3 @@
-import {toNumber} from "LoopringJS/common/formatter";
-import validator from 'LoopringJS/ethereum/validator';
 
 const storeUnlockedAddress = (unlockType, address) => {
   localStorage.unlockedType = unlockType;
@@ -19,11 +17,20 @@ const clearUnlockedAddress = () => {
   localStorage.unlockedAddress = ''
 };
 
+const setLoopringUnlockWith = (unlock) => {
+  localStorage.loopringUnlockWith = unlock
+}
+
+const getLoopringUnlockWith = () => {
+  return localStorage.loopringUnlockWith
+}
 
 export default {
   storeUnlockedAddress,
   getUnlockedAddress,
   getUnlockedType,
-  clearUnlockedAddress
+  clearUnlockedAddress,
+  setLoopringUnlockWith,
+  getLoopringUnlockWith
 }
 

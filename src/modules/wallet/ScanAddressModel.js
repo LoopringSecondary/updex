@@ -3,7 +3,8 @@ export default {
   namespace: 'scanAddress',
   state: {
     address: '',
-    UUID: ''
+    UUID: '',
+    unlockWith:'' // loopr || upWallet
   },
   effects: {
     * reset({payload}, {call, select, put}) {
@@ -20,10 +21,11 @@ export default {
       }
     },
     uuidChanged(state, {payload}) {
-      const {UUID} = payload;
+      const {UUID, unlockWith} = payload;
       return {
         ...state,
-        UUID
+        UUID,
+        unlockWith
       }
     },
   }
