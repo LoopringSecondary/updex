@@ -15,7 +15,8 @@ export default [
   require('LoopringUI/modules/LayersModel').default,
   require('LoopringUI/modules/ModalsModel').default,
   require('LoopringUI/modules/TabsModel').default,
-  // require('./wallet/model').default,
+  require('./wallet/model').default,
+  require('./wallet/ScanAddressModel').default,
   require('./settings/gasModel').default,
   require('./settings/ttlModel').default,
 ]
