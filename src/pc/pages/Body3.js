@@ -40,12 +40,22 @@ class Home extends React.Component {
               <PanelHeader title="Kline Chart" />
               <Kline />
             </PanelWrapper>
-            <PanelWrapper className="mpanel mr0 mb0" style={{height:'36.5rem'}}>
-              <PanelHeader title="Orders" />
-              <div style={{flex:'1',overflow:'auto'}}>
-                <HelperOfMyMarketOrders />
+            <div className="row no-gutters ml0 mr0">
+              <div className="col" style={{width:'auto'}}>
+                <PanelWrapper className="mlpanel mtpanel" style={{height:'36.5rem'}}>
+                  <PanelHeader title="Wallet" />
+                  <HelperOfBalance />
+                </PanelWrapper>
               </div>
-            </PanelWrapper>
+              <div className="col">
+                <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
+                  <PanelHeader title="Orders" />
+                  <div style={{flex:'1',overflow:'auto'}}>
+                    <HelperOfMyMarketOrders />
+                  </div>
+                </PanelWrapper>
+              </div>
+            </div>
           </div>
           <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'37.5rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="pb10">

@@ -18,7 +18,7 @@ class Sidebar extends React.Component {
         payload:{id}
       })
     }
-    const collapsedWidth = collapsed ? '6rem' : '37.5rem'
+    const collapsedWidth = collapsed ? '6rem' : '35rem'
     return (
       <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0s'}}>
           <div className="bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6rem'}}>

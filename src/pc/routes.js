@@ -37,10 +37,10 @@ const Logged = ()=>{
     return (
       <div>
         <Switch>
-          <Route path={`/trade`} component={Pages.Home2} />
+          <Route path={`/trade`} component={Pages.Home4} />
           <Route path={`/trade2`} component={Pages.Home} />
           <Route path={`/trade3`} component={Pages.Home3} />
-          <Route path={`/trade4`} component={Pages.Home4} />
+          <Route path={`/trade4`} component={Pages.Home2} />
           <Redirect from="/" to="/trade" />
         </Switch>
         <CommonModals />
