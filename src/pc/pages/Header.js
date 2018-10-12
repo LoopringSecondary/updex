@@ -3,6 +3,8 @@ import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import TickerItem from '../tickers/TickerItem';
+import storage from 'modules/storage'
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -23,6 +25,8 @@ class Header extends React.Component {
         showLayer('auth2')
       }
     }
+
+
     return (
       <div className={`bg-white row no-gutters d-flex align-items-stretch ${className}`} style={{height:'100%'}}>
         <div className="col d-flex align-items-center text-left ">

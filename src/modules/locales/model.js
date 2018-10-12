@@ -21,9 +21,9 @@ export default {
       yield put({type: "localeChange", payload: {locale: payload.locale}});
       yield call(setLocale, payload.locale);
       if (payload.storage) {
-        const settings = window.STORAGE.settings.get();
+        const settings = STORAGE.settings.get();
         settings.preference.language = payload.locale || settings.preference.language
-        window.STORAGE.settings.set(settings);
+        STORAGE.settings.set(settings);
       }
     }
   }
