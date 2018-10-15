@@ -4,17 +4,22 @@ import { Icon as WebIcon } from 'antd'
 import { Link, Redirect, Route, Switch } from 'dva/router'
 import Containers from 'modules/containers'
 import routeActions from 'common/utils/routeActions'
-import LayoutDexHome from '../../layout/LayoutDexHome'
 import { OpenOrderList, PullRefreshOrders } from 'mobile/orders/ListOrders'
 import ListBalance from 'mobile/tokens/ListBalance'
-import ListMyFills from 'mobile/fills/ListMyFills'
 import { getShortAddress } from '../../modules/formatter/common'
 import storage from 'modules/storage'
 import intl from 'react-intl-universal'
+import {connect} from 'dva'
 
 class UserCenter extends React.Component {
   render() {
-    const address = storage.wallet.getUnlockedAddress()
+    const {address} = this.props
+    const logout = () => {
+      const {dispatch} = this.props
+      dispatch({type:"wallet/lock", payload:{}})
+      dispatch({type:"layers/hideLayer", payload:{id:'usercenter'}})
+      dispatch({type:"layers/showLayer", payload:{id:'auth2'}})
+    }
     return (
         <div className="bg-fill" style={{height:'100%'}}>
           <div className="bg-white position-fixed w-100" style={{zIndex:'1000'}}>
@@ -32,6 +37,7 @@ class UserCenter extends React.Component {
           <div className="pt40 bg-white"></div>
           <div className="bg-white pt30 pb30 text-center">
             <div className="color-black-2 text-center fs16">{getShortAddress(address)}</div>
+            <div className="color-black-2 text-center fs16" onClick={() => logout()}>Logout</div>
             <div className="text-center mt5">
               <span target="_blank" onClick={routeActions.gotoHref.bind(this,`https://etherscan.io/address/${address}`)} className="d-inline-block cursor-pointer fs12 lh25 pl10 pr10 bg-primary-light text-primary radius-circle">etherscan.io</span>
             </div>
@@ -69,7 +75,13 @@ class UserCenter extends React.Component {
     );
   }
 }
-export default UserCenter
+
+function mapStateToProps(state) {
+  return {
+    address:state.wallet.address
+  }
+}
+export default connect(mapStateToProps) (UserCenter)
 
 
 

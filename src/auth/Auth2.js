@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
 import UserAgent from 'common/utils/useragent'
+import {unlockWithMetaMask} from 'common/utils/unlock'
 import { connect } from 'dva'
 import { Icon, Collapse, Steps, Modal as AntdModal } from 'antd'
 import storage from 'modules/storage'
@@ -82,6 +83,7 @@ class Auth extends React.Component {
       storage.wallet.storeUnlockedAddress('address', address)
       window.RELAY.account.register(address)
       // routeActions.gotoPath('/pc/trade/lrc-weth')
+      this.props.dispatch({type:'wallet/unlockAddressWallet',payload:{address}});
       this.props.dispatch({
         type: 'sockets/extraChange',
         payload: {id: 'addressUnlock', extra: {uuid:""}}
@@ -135,63 +137,7 @@ class Auth extends React.Component {
     this.checkMetaMaskState()
     const {dispatch} = this.props
     dispatch({type: 'metaMask/setLoading', payload: {loading:true}});
-    if (window.web3 && window.web3.eth.accounts[0]) {
-      window.web3.version.getNetwork((err, netId) => {
-        if (netId !== '1') {
-          Notification.open({
-            message:intl.get('notifications.title.unlock_fail'),
-            description:intl.get('wallet_meta.mainnet_tip'),
-            type:'error'
-          })
-          dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
-          return
-        }
-        let address = window.web3.eth.accounts[0]
-        this.props.dispatch({type:'wallet/unlockMetaMaskWallet',payload:{address}});
-        Notification.open({type:'success',message:intl.get('notifications.title.unlock_suc')});
-        this.props.dispatch({type: 'sockets/unlocked'});
-        dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
-        this.hideLayer({id:'auth2'})
-        let alert = false
-        const _this = this
-        var accountInterval = setInterval(function() {
-          if ((!window.web3 || !window.web3.eth.accounts[0]) && !alert) {
-            alert = true
-            console.log("MetaMask account locked:", address)
-            clearInterval(accountInterval)
-            _this.props.dispatch({type:'wallet/lock'});
-            Notification.open({
-              message:intl.get('wallet_meta.logout_title'),
-              description:intl.get('wallet_meta.logout_tip'),
-              type:'warning'
-            })
-            return
-          }
-          if (window.web3.eth.accounts[0] && window.web3.eth.accounts[0] !== address) {
-            address = window.web3.eth.accounts[0];
-            Notification.open({
-              message:intl.get('wallet_meta.account_change_title'),
-              description:intl.get('wallet_meta.account_change_tip'),
-              type:'info'
-            })
-            console.log("MetaMask account changed to:", address)
-            _this.props.dispatch({type:'wallet/unlockMetaMaskWallet',payload:{address}});
-            _this.props.dispatch({type: 'sockets/unlocked'});
-          }
-        }, 100);
-      })
-    } else {
-      let content = intl.get('wallet_meta.install_tip')
-      if(window.web3 && !window.web3.eth.accounts[0]) { // locked
-        content = intl.get('wallet_meta.unlock_tip')
-      }
-      Notification.open({
-        message:intl.get('notifications.title.unlock_fail'),
-        description:content,
-        type:'error'
-      })
-      dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
-    }
+    unlockWithMetaMask(dispatch)
   }
 
 

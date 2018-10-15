@@ -11,6 +11,7 @@ import {formatKey} from "LoopringJS/common/formatter";
 import storage from '../storage/'
 import intl from 'react-intl-universal';
 import Notification from 'LoopringUI/components/Notification'
+import {unlockWithMetaMask} from 'common/utils/unlock'
 
 const unlockWithAddress = (address) => {
   if(address) {
@@ -24,33 +25,6 @@ const unlockWithLoopr = (address) => {
 
 const unlockWithUpWallet = (address) => {
   window.WALLET = new UpWalletAccount(address);
-}
-
-const unlockWithMetaMask = () => {
-  if (window.web3 && window.web3.eth.accounts[0]) {
-    window.web3.version.getNetwork((err, netId) => {
-      if (netId !== '1') {
-        Notification.open({
-          message:intl.get('notifications.title.unlock_fail'),
-          description:intl.get('wallet_meta.mainnet_tip'),
-          type:'error'
-        })
-        return
-      }
-      window.WALLET = new MetaMaskAccount(window.web3);
-      Notification.open({type:'success',message:intl.get('notifications.title.unlock_suc')});
-    })
-  } else {
-    let content = intl.get('wallet_meta.install_tip')
-    if(window.web3 && !window.web3.eth.accounts[0]) { // locked
-      content = intl.get('wallet_meta.unlock_tip')
-    }
-    Notification.open({
-      message:intl.get('notifications.title.unlock_fail'),
-      description:content,
-      type:'error'
-    })
-  }
 }
 
 let unlockedType = storage.wallet.getUnlockedType()
@@ -79,33 +53,9 @@ switch(unlockedType) {
     }
     break;
   case 'metaMask':
-    if(unlockedAddress) {
-      let last = 0
-      var accountInterval = setInterval(function() {
-        if(window.web3 && window.web3.eth.accounts[0] && window.web3.eth.accounts[0] === unlockedAddress) {
-          clearInterval(accountInterval)
-          unlockWithMetaMask()
-          return
-        }
-        last += 100
-        if(last > 2000) {
-          clearInterval(accountInterval)
-          unlockedType = 'address'
-          unlockWithAddress(unlockedAddress)
-          Notification.open({
-            type:'info',
-            message:intl.get('notifications.title.in_watch_only_mode'),
-            description:intl.get('notifications.message.unlock_by_cookie_address')
-          });
-          return
-        }
-      }, 100);
-    } else {
-      unlockedType = ''
-    }
+    // deal in subscriptions
     break;
 }
-
 
 export default {
   namespace: 'wallet',
@@ -114,6 +64,32 @@ export default {
     unlockType: unlockedType || "locked",
     password: "",
     account: null
+  },
+  subscriptions: {
+    setup({ dispatch, history }) {
+      if(unlockedType === 'metaMask' && unlockedAddress){
+        let last = 0
+        var accountInterval = setInterval(function() {
+          if(window.web3 && window.web3.eth.accounts[0] && window.web3.eth.accounts[0] === unlockedAddress) {
+            clearInterval(accountInterval)
+            unlockWithMetaMask(dispatch)
+            return
+          }
+          last += 100
+          if(last > 2000) {
+            clearInterval(accountInterval)
+            unlockedType = 'address'
+            unlockWithAddress(unlockedAddress)
+            Notification.open({
+              type:'info',
+              message:intl.get('notifications.title.in_watch_only_mode'),
+              description:intl.get('notifications.message.unlock_by_cookie_address')
+            });
+            return
+          }
+        }, 100);
+      }
+    }
   },
   reducers: {
     unlock(state, {payload}) {
@@ -146,6 +122,7 @@ export default {
     },
     * unlockAddressWallet({payload}, {put}) {
       const unlockType = 'address';
+      unlockWithAddress(payload.address)
       yield put({type: 'unlockWallet', payload: {...payload, unlockType}})
     },
     * unlockLooprWallet({payload}, {put}) {
@@ -163,7 +140,6 @@ export default {
     * unlockMetaMaskWallet({payload}, {put}) {
       const {address} = payload;
       const unlockType = 'metaMask';
-      unlockWithMetaMask()
       yield put({type: 'unlockWallet', payload: {address, unlockType}});
     },
     * unlockLedgerWallet({payload}, {put}) {

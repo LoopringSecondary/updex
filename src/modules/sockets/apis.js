@@ -56,7 +56,7 @@ const updateScannedAddress = (item, id) => {
     Notification.open({type: 'success', message: intl.get('notifications.title.unlock_suc')});
     dispatch({type: 'sockets/unlocked'});
     //routeActions.gotoPath('/wallet');
-    //dispatch({type: 'layers/hideLayer', payload: {id: 'unlock'}})
+    dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
     dispatch({type: 'scanAddress/reset', payload: {}})
   }
 }
