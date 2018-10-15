@@ -4,6 +4,7 @@ import UiContainers from 'LoopringUI/containers'
 import HelperOfGas from './HelperOfGas'
 import HelperOfSignByThirdWallet from './HelperOfSignByThirdWallet'
 import HelperOfSignByThirdWalletPC from './HelperOfSignByThirdWalletPC'
+import HelperOfSignStepPC from './HelperOfSignStepPC'
 function Modals(props) {
   return (
     <div>
@@ -22,7 +23,11 @@ function Modals(props) {
           <HelperOfSignByThirdWalletPC />
         </UiContainers.Drawer>
       </Containers.Layers>
-
+      <Containers.Layers id="helperOfSignStepPC">
+        <UiContainers.Drawer id="helperOfSignStepPC" position="right" width="480px" style={{height:'100%'}}>
+          <HelperOfSignStepPC />
+        </UiContainers.Drawer>
+      </Containers.Layers>
     </div>
   )
 }

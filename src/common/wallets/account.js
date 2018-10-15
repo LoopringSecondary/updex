@@ -12,6 +12,8 @@ import * as Trezor from 'LoopringJS/ethereum/trezor';
 import * as Ledger from 'LoopringJS/ethereum/ledger';
 import * as MetaMask from 'LoopringJS/ethereum/metaMask';
 import Wallet from 'ethereumjs-wallet';
+import { keccakHash } from 'LoopringJS/common/utils'
+import moment from 'moment'
 
 const wallets = require('LoopringJS/config/wallets.json');
 const LoopringWallet = wallets.find(wallet => trimAll(wallet.name).toLowerCase() === 'loopringwallet');
@@ -193,7 +195,17 @@ export class LooprAccount extends Account
 
   async signOrder (order)
   {
-    //TODO
+    const hash = keccakHash(JSON.stringify([{type:"order",data:order}]))
+    window.RELAY.order.setTempStore(hash, JSON.stringify([{type:"order",data:order}])).then(res => {
+      const signWith = window.WALLET.getUnlockType()
+      const qrcode = JSON.stringify({type:'sign', value:hash})
+      const time = moment().valueOf()
+      window.STORE.dispatch({type:'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
+      if (!res.error) {
+        window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
+        window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
+      }
+    })
   }
 }
 
@@ -227,7 +239,17 @@ export class UpWalletAccount extends Account
 
   async signOrder (order)
   {
-    //TODO
+    const hash = keccakHash(JSON.stringify([{type:"order",data:order}]))
+    window.RELAY.order.setTempStore(hash, JSON.stringify([{type:"order",data:order}])).then(res => {
+      const signWith = window.WALLET.getUnlockType()
+      const qrcode = JSON.stringify({type:'sign', value:hash})
+      const time = moment().valueOf()
+      window.STORE.dispatch({type:'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
+      if (!res.error) {
+        window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
+        window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
+      }
+    })
   }
 }
 

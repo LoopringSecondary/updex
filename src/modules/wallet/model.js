@@ -14,9 +14,7 @@ import Notification from 'LoopringUI/components/Notification'
 import {unlockWithMetaMask} from 'common/utils/unlock'
 
 const unlockWithAddress = (address) => {
-  if(address) {
-    window.WALLET = new AddressAccount(address);
-  }
+  window.WALLET = new AddressAccount(address);
 }
 
 const unlockWithLoopr = (address) => {
@@ -27,67 +25,64 @@ const unlockWithUpWallet = (address) => {
   window.WALLET = new UpWalletAccount(address);
 }
 
-let unlockedType = storage.wallet.getUnlockedType()
-let unlockedAddress = storage.wallet.getUnlockedAddress()
-switch(unlockedType) {
-  case 'address':
-    unlockWithAddress(unlockedAddress)
-    break;
-  case 'loopr':
-    unlockWithLoopr(unlockedAddress)
-    break;
-  case 'upWallet':
-    unlockWithUpWallet(unlockedAddress)
-    break;
-  case 'ledger':
-    if(unlockedAddress) {
-      unlockedType = 'address'
-      unlockWithAddress(unlockedAddress)
-      Notification.open({
-        type:'info',
-        message:intl.get('notifications.title.in_watch_only_mode'),
-        description:intl.get('notifications.message.unlock_by_cookie_address')
-      });
-    } else {
-      unlockedType = ''
-    }
-    break;
-  case 'metaMask':
-    // deal in subscriptions
-    break;
-}
-
 export default {
   namespace: 'wallet',
   state: {
-    address: unlockedAddress || "",
-    unlockType: unlockedType || "locked",
+    address: "",
+    unlockType: "locked",
     password: "",
     account: null
   },
   subscriptions: {
     setup({ dispatch, history }) {
-      if(unlockedType === 'metaMask' && unlockedAddress){
-        let last = 0
-        var accountInterval = setInterval(function() {
-          if(window.web3 && window.web3.eth.accounts[0] && window.web3.eth.accounts[0] === unlockedAddress) {
-            clearInterval(accountInterval)
-            unlockWithMetaMask(dispatch)
-            return
-          }
-          last += 100
-          if(last > 2000) {
-            clearInterval(accountInterval)
+      let unlockedType = storage.wallet.getUnlockedType()
+      let unlockedAddress = storage.wallet.getUnlockedAddress()
+      if(unlockedType && unlockedAddress) {
+        switch(unlockedType) {
+          case 'address':
+            dispatch({type:'wallet/unlockAddressWallet', payload:{address:unlockedAddress}})
+            dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+            break;
+          case 'loopr':
+            dispatch({type:'wallet/unlockLooprWallet', payload:{address:unlockedAddress}})
+            dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+            break;
+          case 'upWallet':
+            dispatch({type:'wallet/unlockUpWallet', payload:{address:unlockedAddress}})
+            dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+            break;
+          case 'ledger':
             unlockedType = 'address'
-            unlockWithAddress(unlockedAddress)
+            dispatch({type:'wallet/unlockAddressWallet', payload:{address:unlockedAddress}})
             Notification.open({
               type:'info',
               message:intl.get('notifications.title.in_watch_only_mode'),
               description:intl.get('notifications.message.unlock_by_cookie_address')
             });
-            return
-          }
-        }, 100);
+            break;
+          case 'metaMask':
+            let last = 0
+            var accountInterval = setInterval(function() {
+              if(window.web3 && window.web3.eth.accounts[0] && window.web3.eth.accounts[0] === unlockedAddress) {
+                clearInterval(accountInterval)
+                unlockWithMetaMask(dispatch)
+                return
+              }
+              last += 100
+              if(last > 2000) {
+                clearInterval(accountInterval)
+                unlockedType = 'address'
+                dispatch({type:'wallet/unlockAddressWallet', payload:{address:unlockedAddress}})
+                Notification.open({
+                  type:'info',
+                  message:intl.get('notifications.title.in_watch_only_mode'),
+                  description:intl.get('notifications.message.unlock_by_cookie_address')
+                });
+                return
+              }
+            }, 100);
+            break;
+        }
       }
     }
   },

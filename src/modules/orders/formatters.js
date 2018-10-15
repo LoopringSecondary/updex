@@ -395,6 +395,13 @@ async function generateSignData({tradeInfo, order, completeOrder, address}) {
   return unsigned
 }
 
+export function getSocketAuthorizationByHash(hash, circulrNotify) {
+  if (hash && circulrNotify.item && circulrNotify.item.hash === hash) {
+    return circulrNotify.item
+  }
+  return null
+}
+
 export function getMarketPrice(items, token, mToken) {
 
   const tPrice = items.find(item => item.symbol.toUpperCase() === token.toUpperCase());
