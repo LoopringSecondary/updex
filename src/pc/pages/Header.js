@@ -57,4 +57,4 @@ function mapStateToProps(state) {
 }
 
 
-export default connect()(Header)
+export default connect(mapStateToProps)(Header)
