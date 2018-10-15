@@ -141,19 +141,9 @@ class PlaceOrderSteps extends React.Component {
       const authAccount = createWallet()
       order.authAddr = authAccount.getAddressString()
       order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString())
-      dispatch({type: 'placeOrder/rawOrderChange', payload: {rawOrder: order}})
-      const hash = keccakHash(JSON.stringify([{type:"order",data:order}]))
-      const _this = this
-      window.RELAY.order.setTempStore(hash, JSON.stringify([{type:"order",data:order}])).then(res => {
-        _this.setState({hash})
-        if (!res.error) {
-          // hideLayer({id: 'placeOrderSteps'})
-          dispatch({
-            type: 'sockets/queryChange',
-            payload: {id: 'circulrNotify', extra: {hash}}
-          })
-          showLayer({id: 'selectWalletInOrder', type: 'order', data: {type: 'sign', value: hash}})
-        }
+      dispatch({
+        type: 'task/setTask',
+        payload: {task: 'placeOrder', data: order}
       })
     }
   return (

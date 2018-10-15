@@ -89,4 +89,5 @@ window.RELAY.market.getSupportedTokens().then(res=>{
 // window.STORE = app._store
 
 export const store = app._store
+window.STORE = store
 export default app

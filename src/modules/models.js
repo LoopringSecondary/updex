@@ -5,6 +5,7 @@ export default [
   require('./orders/PlaceOrderModel').default,
   require('./orders/PlaceOrderHelperModel').default,
   require('./orders/P2POrderModel').default,
+  require('./orders/PlaceOrderStepsModel').default,
   require('./fills/ListModel').default,
   require('./tokens/ListModel').default,
   require('./tokens/TransferModel').default,
@@ -21,6 +22,7 @@ export default [
   require('./wallet/determineWalletModel').default,
   require('./settings/gasModel').default,
   require('./settings/ttlModel').default,
+  require('./task/TaskModel').default,
 ]
 
 

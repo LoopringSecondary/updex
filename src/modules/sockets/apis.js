@@ -5,6 +5,7 @@ import storage from '../storage/'
 import {toBig, toFixed} from 'LoopringJS/common/formatter'
 import intl from "react-intl-universal";
 import Notification from 'LoopringUI/components/Notification'
+import {LooprAccount, UpWalletAccount} from "common/wallets/account";
 
 const updateItems = (items,id)=>{
   const dispatch = require('../../index.js').default._store.dispatch
@@ -47,15 +48,17 @@ const updateScannedAddress = (item, id) => {
     const loopringUnlockWith = storage.wallet.getLoopringUnlockWith()
     switch(loopringUnlockWith) {
       case 'loopr':
+        window.WALLET = new LooprAccount(item.owner);
         dispatch({type: "wallet/unlockLooprWallet", payload: {address: item.owner}});
         break;
       case 'upWallet':
+        window.WALLET = new UpWalletAccount(item.owner);
         dispatch({type: "wallet/unlockUpWallet", payload: {address: item.owner}});
         break;
     }
+    window.RELAY.account.register(item.owner)
     Notification.open({type: 'success', message: intl.get('notifications.title.unlock_suc')});
     dispatch({type: 'sockets/unlocked'});
-    //routeActions.gotoPath('/wallet');
     dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
     dispatch({type: 'scanAddress/reset', payload: {}})
   }
