@@ -62,6 +62,36 @@ const SignByLoopr = ({placeOrderSteps, dispatch}) => {
 }
 
 class SignSteps extends React.Component {
+
+  generateQRCode(placeOrderSteps, dispatch) {
+    if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0) {
+      const origin = JSON.stringify(placeOrderSteps.unsign)
+      const hash = keccakHash(origin)
+      window.RELAY.order.setTempStore(hash, origin).then(res => {
+        const signWith = window.WALLET.getUnlockType()
+        const qrcode = JSON.stringify({type: 'sign', value: hash})
+        const time = moment().valueOf()
+        dispatch({type: 'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
+        if (!res.error) {
+          window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
+          window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
+        }
+      })
+    }
+  }
+
+  componentDidMount(){
+    const {placeOrderSteps, dispatch} = this.props
+    switch(placeOrderSteps.signWith) {
+      case 'loopr':
+        this.generateQRCode(placeOrderSteps, dispatch)
+        break;
+      case 'upWallet':
+        this.generateQRCode(placeOrderSteps, dispatch)
+        break;
+    }
+  }
+
   render() {
     const {placeOrderSteps, circulrNotify, dispatch} = this.props
     let step = 0
