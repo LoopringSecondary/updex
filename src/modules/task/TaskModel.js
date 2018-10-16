@@ -1,9 +1,3 @@
-import { keccakHash } from 'LoopringJS/common/utils'
-
-const placeOrder = (order) => {
-  const hash = keccakHash(JSON.stringify([{type:"order",data:order}]))
-
-}
 
 const MODULES = 'task'
 export default {
@@ -21,8 +15,7 @@ export default {
       const {task, data} = payload
       switch(task) {
         case 'placeOrder':
-          const res = yield window.WALLET.signOrder(data)
-          console.log(11111, res)
+          yield window.WALLET.signOrder(data)
           break;
       }
     },
