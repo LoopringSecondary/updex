@@ -40,20 +40,20 @@ export default {
       if(unlockedType && unlockedAddress) {
         switch(unlockedType) {
           case 'address':
-            dispatch({type:'wallet/unlockAddressWallet', payload:{address:unlockedAddress}})
+            dispatch({type:'unlockAddressWallet', payload:{address:unlockedAddress}})
             dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
             break;
           case 'loopr':
-            dispatch({type:'wallet/unlockLooprWallet', payload:{address:unlockedAddress}})
+            dispatch({type:'unlockLooprWallet', payload:{address:unlockedAddress}})
             dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
             break;
           case 'upWallet':
-            dispatch({type:'wallet/unlockUpWallet', payload:{address:unlockedAddress}})
+            dispatch({type:'unlockUpWallet', payload:{address:unlockedAddress}})
             dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
             break;
           case 'ledger':
             unlockedType = 'address'
-            dispatch({type:'wallet/unlockAddressWallet', payload:{address:unlockedAddress}})
+            dispatch({type:'unlockAddressWallet', payload:{address:unlockedAddress}})
             Notification.open({
               type:'info',
               message:intl.get('notifications.title.in_watch_only_mode'),
@@ -72,7 +72,7 @@ export default {
               if(last > 2000) {
                 clearInterval(accountInterval)
                 unlockedType = 'address'
-                dispatch({type:'wallet/unlockAddressWallet', payload:{address:unlockedAddress}})
+                dispatch({type:'unlockAddressWallet', payload:{address:unlockedAddress}})
                 Notification.open({
                   type:'info',
                   message:intl.get('notifications.title.in_watch_only_mode'),

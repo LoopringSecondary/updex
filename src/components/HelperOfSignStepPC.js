@@ -7,6 +7,8 @@ import moment from 'moment'
 import CountDown from 'LoopringUI/components/CountDown';
 import {keccakHash} from 'LoopringJS/common/utils'
 import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
+import HelperOfSignOrder from './HelperOfSignOrder'
+import HelperOfPlaceOrderResult from './HelperOfPlaceOrderResult'
 
 const signByLooprStep = (placeOrderSteps, circulrNotify) => {
   const hashItem = getSocketAuthorizationByHash(placeOrderSteps.hash, circulrNotify)
@@ -70,11 +72,11 @@ class SignSteps extends React.Component {
       case 'upWallet':
         step = signByLooprStep(placeOrderSteps, circulrNotify)
         break;
-      case 'meteMask':
-
+      case 'metaMask':
+        step = placeOrderSteps.step
         break;
       case 'ledger':
-
+        step = placeOrderSteps.step
         break;
     }
 
@@ -120,18 +122,26 @@ class SignSteps extends React.Component {
             step === 1 &&
             <div className="mt15">
               <div className="zb-b">
-                <div className="text-center p35">
-                  <Icon type="clock-circle" className="fs36 text-warning" />
-                  <div className="mt15">{intl.get('place_order_by_loopr.waiting_sign')}</div>
-                  {false && <Button className="mt15" type="default"> 返回上一级 </Button>}
-                </div>
+                {
+                  (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
+                  <div className="text-center p35">
+                    <Icon type="clock-circle" className="fs36 text-warning" />
+                    <div className="mt15">{intl.get('place_order_by_loopr.waiting_sign')}</div>
+                  </div>
+                }
+                {
+                  placeOrderSteps.signWith === 'metaMask' &&
+                  <div className="text-center p35">
+                    <HelperOfSignOrder />
+                  </div>
+                }
               </div>
             </div>
           }
           {
             step === 2 &&
             <div className="mt15">
-
+              <HelperOfPlaceOrderResult />
             </div>
           }
         </div>
