@@ -44,6 +44,10 @@ export default {
       yield put({ type: 'signWithChange',payload:{signWith}})
       yield put({ type: 'unsignChange',payload:{unsign}})
       yield put({ type: 'signedChange',payload:{signed:[]}})
+      yield put({ type: 'hashChange',payload:{hash:''}});
+      yield put({ type: 'qrcodeChange',payload:{qrcode:''}});
+      yield put({ type: 'generateTimeChange',payload:{generateTime:null}});
+      yield put({ type: 'overdueChange',payload:{overdue:false}});
       yield put({ type: 'signResultChange',payload:{signResult:0}})
       yield put({ type: 'errorChange',payload:{error:''}});
     },
