@@ -25,6 +25,10 @@ const unlockWithUpWallet = (address) => {
   window.WALLET = new UpWalletAccount(address);
 }
 
+const unlockWithLedger = (ledger, dpath) => {
+  window.WALLET = new LedgerAccount(ledger, dpath);
+}
+
 export default {
   namespace: 'wallet',
   state: {
@@ -138,11 +142,10 @@ export default {
       yield put({type: 'unlockWallet', payload: {address, unlockType}});
     },
     * unlockLedgerWallet({payload}, {put}) {
-      const {ledger, dpath} = payload;
-      const account = new LedgerAccount(ledger, dpath);
-      const address = yield account.getAddress();
+      const {ledger, dpath, address} = payload;
+      unlockWithLedger(ledger, dpath)
       const unlockType = 'ledger';
-      yield put({type: 'unlockWallet', payload: {address, unlockType, account}});
+      yield put({type: 'unlockWallet', payload: {address, unlockType}});
     },
   }
 }

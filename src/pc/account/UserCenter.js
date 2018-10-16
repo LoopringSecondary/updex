@@ -18,6 +18,7 @@ class UserCenter extends React.Component {
       const {dispatch} = this.props
       storage.wallet.clearUnlockedAddress()
       dispatch({type:"wallet/lock", payload:{}})
+      dispatch({type:"placeOrderSteps/reset", payload:{}})
       dispatch({type:"layers/hideLayer", payload:{id:'usercenter'}})
       dispatch({type:"layers/showLayer", payload:{id:'auth2'}})
     }

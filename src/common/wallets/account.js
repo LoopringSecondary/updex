@@ -15,6 +15,8 @@ import Wallet from 'ethereumjs-wallet';
 import { keccakHash } from 'LoopringJS/common/utils'
 import moment from 'moment'
 import {LedgerAccount as LedgerAcc, MetaMaskAccount as MetaMaskAcc} from 'LoopringJS/ethereum/account'
+import intl from "react-intl-universal";
+import Notification from 'LoopringUI/components/Notification'
 
 const wallets = require('LoopringJS/config/wallets.json');
 const LoopringWallet = wallets.find(wallet => trimAll(wallet.name).toLowerCase() === 'loopringwallet');
@@ -140,7 +142,7 @@ export class AddressAccount extends Account
     this.address = address
   }
 
-  async getAddress ()
+  getAddress ()
   {
     return this.address
   }
@@ -150,19 +152,20 @@ export class AddressAccount extends Account
     return 'address'
   }
 
-  async signMessage (message)
+  signMessage (message)
   {
     //TODO
   }
 
-  async signEthereumTx (rawTx)
+  signEthereumTx (rawTx)
   {
     //TODO
   }
 
   async signOrder (order)
   {
-    //TODO
+    window.STORE.dispatch({type:'placeOrderSteps/originOrder', payload: {order, signWith:'address'}})
+    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
   }
 }
 
@@ -259,21 +262,12 @@ export class LedgerAccount extends Account
     constructor (ledger, dpath)
     {
         super();
-        this.ledger = ledger;
-        this.dpath = dpath;
+        this.ledgerAcc = new LedgerAcc(ledger, dpath)
     }
 
     async getAddress ()
     {
-        const result = await Ledger.getXPubKey(this.dpath, this.ledger);
-        if (result.error)
-        {
-            throw new Error(result.error.message);
-        }
-        else
-        {
-            return formatAddress(result.result.address);
-        }
+        return await this.ledgerAcc.getAddress()
     }
 
     getUnlockType ()
@@ -283,43 +277,39 @@ export class LedgerAccount extends Account
 
     async signMessage (message)
     {
-        const hash = clearHexPrefix(toHex(sha3(message)));
-        const result = await Ledger.signMessage(this.dpath, hash, this.ledger);
-        if (result.error)
-        {
-            throw new Error(result.error.message);
-        }
-        else
-        {
-            return result.result;
-        }
+        return await this.ledgerAcc.signMessage(message)
     }
 
     async signEthereumTx (rawTx)
     {
-        const result = await Ledger.signEthereumTx(this.dpath, rawTx, this.ledger);
-        if (result.error)
-        {
-            throw new Error(result.error.message);
-        }
-        else
-        {
-            return result.result;
-        }
+      return await this.ledgerAcc.signEthereumTx(rawTx)
     }
 
     async signOrder (order)
     {
-        const hash = getOrderHash(order);
-        const result = await Ledger.signMessage(this.dpath, clearHexPrefix(toHex(hash)), this.ledger);
-        if (result.error)
-        {
-            throw new Error(result.error.message);
+      Notification.open({
+        message: intl.get('notifications.title.to_confirm'),
+        description: intl.get('notifications.message.confirm_warn_ledger'),
+        type: 'info'
+      })
+      window.STORE.dispatch({type:'placeOrderSteps/originOrder', payload: {order, signWith:'ledger'}})
+      window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
+      this.ledgerAcc.signOrder(order).then(signedOrder => {
+        if(signedOrder.r) {
+          signedOrder.powNonce = 100;
+          return window.RELAY.order.placeOrder(signedOrder)
+        } else {
+          throw new Error('Failed sign order with MetaMask');
         }
-        else
-        {
-            return {...order, ...result.result};
+      }).then(response => {
+        if (response.error) {
+          window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:response.error.message}})
+        } else {
+          window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:1, error:''}})
         }
+      }).catch(e=>{
+        window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:'Failed send signed order to relay, please retry later'}})
+      })
     }
 }
 
@@ -330,16 +320,13 @@ export class MetaMaskAccount extends Account
         super();
         if (web3 && web3.eth.accounts[0])
         {
-            this.web3 = web3;
-            this.account = this.web3.eth.accounts[0];
             this.metaMask = new MetaMaskAcc(web3)
         }
     }
 
     getAddress ()
     {
-        if (this.web3 && this.web3.eth.accounts[0]) return this.web3.eth.accounts[0];
-        else throw new Error('Not found MetaMask');
+        return this.metaMask.getAddress()
     }
 
     getUnlockType ()
@@ -364,6 +351,11 @@ export class MetaMaskAccount extends Account
 
     async signOrder (order)
     {
+      Notification.open({
+        message: intl.get('notifications.title.to_confirm'),
+        description: intl.get('notifications.message.confirm_warn_metamask'),
+        type: 'info'
+      })
       window.STORE.dispatch({type:'placeOrderSteps/originOrder', payload: {order, signWith:'metaMask'}})
       window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
       this.metaMask.signOrder(order).then(signedOrder => {
