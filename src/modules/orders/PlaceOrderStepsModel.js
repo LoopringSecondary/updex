@@ -5,6 +5,8 @@ export default {
     step:0, //0:qrcode/toconnect, 1:signing 2:result
     signWith: '', //address, loopr, upWallet, meteMask, ledger
     originOrder:{},
+    unsign:null, //{type:order, data:{}},{type:tx, data:{}}
+    signed:null,
     signResult:0, //0:signing 1:success 2:failed
     error:'', //sign error message
     hash:'',
@@ -18,7 +20,8 @@ export default {
     },
     *reset({ payload={} }, { put }) {
       yield put({ type: 'stepChange',payload:{step:0}});
-      yield put({ type: 'originOrderChange',payload:{originOrder:{}}})
+      yield put({ type: 'unsignChange',payload:{unsign:null}})
+      yield put({ type: 'signedChange',payload:{signed:null}})
       yield put({ type: 'hashChange',payload:{hash:''}});
       yield put({ type: 'qrcodeChange',payload:{qrcode:''}});
       yield put({ type: 'generateTimeChange',payload:{generateTime:null}});
@@ -28,17 +31,19 @@ export default {
     },
     *qrcodeGenerated({ payload={} }, { put }) {
       const {signWith, order, qrcode, hash, time} = payload
-      yield put({ type: 'originOrderChange',payload:{originOrder:order}})
+      yield put({ type: 'unsignChange',payload:{unsign:[{type:'order', data:order}]}})
+      yield put({ type: 'signedChange',payload:{signed:[]}})
       yield put({ type: 'signWithChange',payload:{signWith}})
       yield put({ type: 'hashChange',payload:{hash}});
       yield put({ type: 'qrcodeChange',payload:{qrcode}});
       yield put({ type: 'generateTimeChange',payload:{generateTime:time}});
     },
-    * originOrder({ payload={} }, { put }) {
-      const {order, signWith} = payload
+    * unsign({ payload={} }, { put }) {
+      const {unsign, signWith} = payload
       yield put({ type: 'stepChange',payload:{step:1}});
       yield put({ type: 'signWithChange',payload:{signWith}})
-      yield put({ type: 'originOrderChange',payload:{originOrder:order}})
+      yield put({ type: 'unsignChange',payload:{unsign}})
+      yield put({ type: 'signedChange',payload:{signed:[]}})
       yield put({ type: 'signResultChange',payload:{signResult:0}})
       yield put({ type: 'errorChange',payload:{error:''}});
     },
@@ -89,12 +94,20 @@ export default {
         step
       }
     },
-    originOrderChange(state, action) {
+    unsignChange(state, action) {
       const {payload} = action
-      let {originOrder} = payload
+      let {unsign} = payload
       return {
         ...state,
-        originOrder
+        unsign
+      }
+    },
+    signedChange(state, action) {
+      const {payload} = action
+      let {signed} = payload
+      return {
+        ...state,
+        signed
       }
     },
     signWithChange(state, action) {

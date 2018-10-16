@@ -282,7 +282,7 @@ class Auth extends React.Component {
             <div className="text-primary fs20 font-weight-bold mt5 mb5">UP DEX</div>
           </div>
           {
-            placeOrderSteps.signWith !== 'address' &&
+            placeOrderSteps.step === 0 &&
               <div>
                 <List className="no-border am-list-bg-none selectable">
                   <InputItem

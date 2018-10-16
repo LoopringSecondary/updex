@@ -164,8 +164,15 @@ export class AddressAccount extends Account
 
   async signOrder (order)
   {
-    window.STORE.dispatch({type:'placeOrderSteps/originOrder', payload: {order, signWith:'address'}})
+    const unsign = [{type:'order', data:order}]
+    window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {unsign, signWith:'address'}})
+    window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
     window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
+  }
+
+  async signOrderHelper (order)
+  {
+    return await this.signOrder(order)
   }
 }
 
@@ -287,29 +294,7 @@ export class LedgerAccount extends Account
 
     async signOrder (order)
     {
-      Notification.open({
-        message: intl.get('notifications.title.to_confirm'),
-        description: intl.get('notifications.message.confirm_warn_ledger'),
-        type: 'info'
-      })
-      window.STORE.dispatch({type:'placeOrderSteps/originOrder', payload: {order, signWith:'ledger'}})
-      window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
-      this.ledgerAcc.signOrder(order).then(signedOrder => {
-        if(signedOrder.r) {
-          signedOrder.powNonce = 100;
-          return window.RELAY.order.placeOrder(signedOrder)
-        } else {
-          throw new Error('Failed sign order with MetaMask');
-        }
-      }).then(response => {
-        if (response.error) {
-          window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:response.error.message}})
-        } else {
-          window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:1, error:''}})
-        }
-      }).catch(e=>{
-        window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:'Failed send signed order to relay, please retry later'}})
-      })
+      return await this.ledgerAcc.signOrder(order)
     }
 }
 
@@ -351,28 +336,6 @@ export class MetaMaskAccount extends Account
 
     async signOrder (order)
     {
-      Notification.open({
-        message: intl.get('notifications.title.to_confirm'),
-        description: intl.get('notifications.message.confirm_warn_metamask'),
-        type: 'info'
-      })
-      window.STORE.dispatch({type:'placeOrderSteps/originOrder', payload: {order, signWith:'metaMask'}})
-      window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
-      this.metaMask.signOrder(order).then(signedOrder => {
-        if(signedOrder.r) {
-          signedOrder.powNonce = 100;
-          return window.RELAY.order.placeOrder(signedOrder)
-        } else {
-          throw new Error('Failed sign order with MetaMask');
-        }
-      }).then(response => {
-        if (response.error) {
-          window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:response.error.message}})
-        } else {
-          window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:1, error:''}})
-        }
-      }).catch(e=>{
-        window.STORE.dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:'Failed send signed order to relay, please retry later'}})
-      })
+      return this.metaMask.signOrder(order)
     }
 }
