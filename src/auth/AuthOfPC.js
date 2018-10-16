@@ -169,7 +169,14 @@ class Auth extends React.Component {
         getLedgerPublicKey(path, ledger).then(resp => {
           if (!resp.error) {
             const {address} = resp.result;
-           //TODO
+            window.RELAY.account.register(address)
+            // routeActions.gotoPath('/pc/trade/lrc-weth')
+            this.props.dispatch({type:'wallet/unlockLedgerWallet',payload:{ledger, dpath:path, address}});
+            this.props.dispatch({
+              type: 'layers/hideLayer',
+              payload: {id: 'auth2'}
+            })
+            this.props.dispatch({type: 'sockets/unlocked'});
           }
         });
       }
@@ -177,7 +184,7 @@ class Auth extends React.Component {
   }
 
   render () {
-    const {uuid,item, scanAddress, metaMask, dispatch} = this.props
+    const {uuid,item, scanAddress, metaMask, placeOrderSteps, dispatch} = this.props
     const {address} = this.state;
     let targetTime = moment().valueOf() + 600000;
 
@@ -274,20 +281,25 @@ class Auth extends React.Component {
             <img style={{height:'5rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
             <div className="text-primary fs20 font-weight-bold mt5 mb5">UP DEX</div>
           </div>
-          <List className="no-border am-list-bg-none selectable">
-            <InputItem
-              type="text"
-              onChange={this.amountChange}
-              value={address}
-              className="circle h-default color-black-2 fs13"
-              placeholder="Paste ETH address"
-              extra={<Icon hidden type="scan" />}
-              clear
-            >
-            </InputItem>
-          </List>
-          <Button onClick={this.authByAddress} className="mt20 fs18" type="primary">Log In By Address</Button>
-          <Button hidden onClick={()=>{}} className="mt20 fs16" type="ghost">Skip to Log In</Button>
+          {
+            placeOrderSteps.signWith !== 'address' &&
+              <div>
+                <List className="no-border am-list-bg-none selectable">
+                  <InputItem
+                    type="text"
+                    onChange={this.amountChange}
+                    value={address}
+                    className="circle h-default color-black-2 fs13"
+                    placeholder="Paste ETH address"
+                    extra={<Icon hidden type="scan" />}
+                    clear
+                  >
+                  </InputItem>
+                </List>
+                <Button onClick={this.authByAddress} className="mt20 fs18" type="primary">Log In By Address</Button>
+                <Button hidden onClick={()=>{}} className="mt20 fs16" type="ghost">Skip to Log In</Button>
+              </div>
+          }
         </div>
         <div className="">
           <div className="divider 1px zb-b-t"></div>
@@ -457,7 +469,8 @@ function mapStateToProps (state) {
     item: state.sockets.addressUnlock.item,
     uuid:state.sockets.addressUnlock.extra.uuid,
     scanAddress:state.scanAddress,
-    metaMask:state.metaMask
+    metaMask:state.metaMask,
+    placeOrderSteps:state.placeOrderSteps
   }
 }
 

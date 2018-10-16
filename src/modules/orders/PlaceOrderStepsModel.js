@@ -3,7 +3,7 @@ export default {
   namespace: MODULES,
   state: {
     step:0, //0:qrcode/toconnect, 1:signing 2:result
-    signWith: '', //loopr, upWallet, meteMask, ledger
+    signWith: '', //address, loopr, upWallet, meteMask, ledger
     originOrder:{},
     signResult:0, //0:signing 1:success 2:failed
     error:'', //sign error message

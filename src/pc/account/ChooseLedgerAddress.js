@@ -46,7 +46,7 @@ function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses,ch
 
     if(window.WALLET && addresses[index].toLowerCase() !== window.WALLET.getAddress().toLowerCase()){
       Notification.open({type:'warning',description:intl.get('notifications.title.dif_address')});
-      return;
+      // return;
     }
     if(chooseAddress){
       chooseAddress(dpath.concat(`/${index}`))
