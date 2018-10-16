@@ -349,47 +349,22 @@ export class MetaMaskAccount extends Account
 
     async sign (hash)
     {
-        const result = await MetaMask.sign(this.web3, this.account, hash);
-        if (!result.error)
-        {
-            return result.result;
-        }
-        else
-        {
-            throw new Error(result.error.message);
-        }
+        return this.metaMask.sign(hash)
     }
 
     async signMessage (message)
     {
-        const result = await MetaMask.signMessage(this.web3, this.account, message);
-        if (!result.error)
-        {
-            return result.result;
-        }
-        else
-        {
-            throw new Error(result.error.message);
-        }
+      return this.metaMask.signMessage(message)
     }
 
     async signEthereumTx (rawTx)
     {
-        const result = await MetaMask.signEthereumTx(this.web3, this.account, rawTx);
-        if (!result.error)
-        {
-            return result.result;
-        }
-        else
-        {
-            throw new Error(result.error.message);
-        }
+        return this.metaMask.signEthereumTx(rawTx)
     }
 
     async signOrder (order)
     {
       window.STORE.dispatch({type:'placeOrderSteps/originOrder', payload: {order, signWith:'metaMask'}})
-      // window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
       window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
       this.metaMask.signOrder(order).then(signedOrder => {
         if(signedOrder.r) {

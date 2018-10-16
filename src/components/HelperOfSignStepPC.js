@@ -130,7 +130,7 @@ class SignSteps extends React.Component {
                   </div>
                 }
                 {
-                  placeOrderSteps.signWith === 'metaMask' &&
+                  (placeOrderSteps.signWith === 'metaMask' || placeOrderSteps.signWith === 'ledger') &&
                   <div className="text-center p35">
                     <HelperOfSignOrder />
                   </div>
