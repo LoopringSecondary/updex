@@ -141,6 +141,7 @@ const actions = {
   resend: 'Resend',
   receive: "Receive",
   submit_order: 'Submit Order',
+  submit: 'Submit',
   generate_qrcode: 'Generate QR Code',
   reset: 'Reset',
   continue: 'Continue',
@@ -229,6 +230,15 @@ export default {
     orders: "Orders",
     fills: "Fills",
     help: "Help"
+  },
+  place_order_sign: {
+    unsigned_tx: 'Unsigned Data',
+    signed_tx: 'Signed Data',
+    unsigned: 'Unsigned',
+    signed: 'Signed',
+    type_sign_order: 'Sign Original Order',
+    type_cancel_allowance: 'Cancel {token} Allowance',
+    type_approve: 'Approve {token} Allowance'
   },
   order_cancel: {
     cancel_title: "Do you want to cancel this order?",
