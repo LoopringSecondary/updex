@@ -35,6 +35,14 @@ class UserCenter extends React.Component {
         }
       })
     }
+    const showNotification = ()=>{
+      dispatch({
+        type:'layers/showLayer',
+        payload:{
+          id:'notifications',
+        }
+      })
+    }
     const address = storage.wallet.getUnlockedAddress()
     return (
       <LayoutDexHome {...this.props}>
@@ -43,6 +51,7 @@ class UserCenter extends React.Component {
             <NavBar
                 className="zb-b-b" 
                 mode="light"
+                onLeftClick={showNotification}
                 leftContent={[
                   <NumberOfTodos key="1"><WebIcon type="bell" className="fs18" /></NumberOfTodos>
                 ]}

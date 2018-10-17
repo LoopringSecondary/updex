@@ -37,7 +37,7 @@ class NumberOfTodos extends React.Component {
 
     numberofTodos = numberofTodos + txs.filter(tx => tx.type.toLowerCase() === 'convert_income').length
     if(hasBadge){
-      return <Badge count={numberofTodos+5} className="s-small">{this.props.children}</Badge>
+      return <Badge count={numberofTodos} className="s-small">{this.props.children}</Badge>
     }else{
       return `${numberofTodos}`  
     }

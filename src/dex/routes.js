@@ -11,6 +11,7 @@ import Convert from './tokens/ConvertForm'
 import PlaceOrder from './orders/PlaceOrderPage'
 import UserCenter from './account/UserCenter'
 import Notifications from './notifications/Notifications'
+import NotificationModals from './notifications/Modals'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
 import storage from 'modules/storage'
@@ -51,6 +52,7 @@ const Logged = ()=>{
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
+        <NotificationModals />
       </div>
     )
   }else{
