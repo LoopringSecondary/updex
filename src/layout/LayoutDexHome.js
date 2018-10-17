@@ -13,7 +13,6 @@ class DexHomeLayout extends React.Component {
   }
 
   render () {
-    const {balance, txs, allocates} = this.props
     const url = routeActions.match.getUrl(this.props)
     const pathname = routeActions.location.getPathname(this.props)
     const changeTab = (path) => {
@@ -22,32 +21,6 @@ class DexHomeLayout extends React.Component {
     const isActive = (path) => {
       return pathname.indexOf(path) > -1
     }
-    let todos = 0
-    const lrcFee  = allocates['frozenLrcFee'] || 0 ;
-    const symbols = Object.keys(allocates)
-    if(balance.items.length !== 0){
-      symbols.forEach((symbol, index) => {
-        if(symbol.toLocaleLowerCase() !== "frozenlrcfee"){
-          const value = allocates[symbol]
-          console.log(allocates)
-          const assets = getBalanceBySymbol({balances: balance.items, symbol: symbol})
-          let selling = toBig(value)
-          if (symbol.toUpperCase() === 'LRC') {
-            selling = selling.plus(toBig(lrcFee))
-          }
-          if (selling.gt(assets.balance)) {
-            todos = todos + 1
-          }
-          let allowance = assets.allowance
-          if (selling.gt(allowance)) {
-            todos = todos + 1
-          }
-        }
-      })
-    }
-
-    todos = todos + txs.filter(tx => tx.type.toLowerCase() === 'convert_income').length
-
     return (
       <div style={{}}>
         {this.props.children}
@@ -84,21 +57,6 @@ class DexHomeLayout extends React.Component {
               }}
             />
             <TabBar.Item
-              badge={todos}
-              icon={<i className="icon-bell color-primary-light-bak" style={{position: 'relative', top: '2px'}}/>}
-              selectedIcon={<i className="icon-bell text-primary" style={{position: 'relative', top: '2px'}}/>}
-              title={<span className={isActive('/dex/notifications') ? 'text-primary' : ''}
-                           style={{position: 'relative', top: '0px'}}>
-                            {false && intl.get('todos.tab_title')}
-                            {intl.get('todo_list.todo_list_title')}
-                           </span>}
-              key="Notifications"
-              selected={isActive('/dex/notifications')}
-              onPress={() => {
-                changeTab('notifications')
-              }}
-            />
-            <TabBar.Item
               icon={<i className="icon-user color-primary-light-bak"/>}
               selectedIcon={<i className="icon-user text-primary"/>}
               title={
@@ -118,14 +76,6 @@ class DexHomeLayout extends React.Component {
   }
 }
 
-function mapStateToProps (state) {
-  return {
-    balance: state.sockets.balance,
-    txs: state.sockets.pendingTx.items,
-    allocates: state.sockets.orderAllocateChange.items,
-  }
-}
-
-export default connect(mapStateToProps)(DexHomeLayout)
+export default DexHomeLayout
 
 
