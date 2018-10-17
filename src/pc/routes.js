@@ -53,7 +53,7 @@ const Logged = ()=>{
       </div>
     )
   }else{
-    return <Redirect to="/auth" />
+    return <Redirect to="/dex" />
   }
 }
 

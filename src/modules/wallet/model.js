@@ -44,8 +44,8 @@ export default {
       if(unlockedType && unlockedAddress) {
         switch(unlockedType) {
           case 'address':
-            dispatch({type:'unlockAddressWallet', payload:{address:unlockedAddress}})
-            dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+            // dispatch({type:'unlockAddressWallet', payload:{address:unlockedAddress}})
+            // dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
             break;
           case 'loopr':
             dispatch({type:'unlockLooprWallet', payload:{address:unlockedAddress}})

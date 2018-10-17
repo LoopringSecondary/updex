@@ -31,34 +31,30 @@ const Logged = ()=>{
   const ua = new UserAgent()
   const isMobile = ua.isMobile() 
   if(isMobile){
-    if(isLogged){
-      return (
-        <div>
-          <Switch>
-            <Route path={`/dex/markets`} exact component={Markets} />
-            <Route path={`/dex/markets/search/:type`} exact component={MarketsSearch} />
-            <Route path={`/dex/markets/:market`} component={MarketDetail} />
-            <Route path={`/dex/placeOrder`} exact component={PlaceOrder} />
-            <Route path={`/dex/placeOrder/:market`} exact component={PlaceOrder} />
-            <Route path={`/dex/usercenter`} component={UserCenter} />
-            <Route path={`/dex/convert/:token`} component={Convert} />
-            <Route path={`/dex/notifications`} component={Notifications} />
-            <Route path={`/dex/todos`} exact component={ListTodos} />
-            <Route path={`/dex/messages`} exact component={Pages.Todo} />
-            <Route path={`/dex/settings`} exact component={Pages.Todo} />
-            <Redirect from="/dex" to="/dex/markets" />
-          </Switch>
-          <CommonModals />
-          <Orders.Modals />
-          <Tokens.Modals />
-          <Account.Modals />
-        </div>
-      )
-    }else{
-      return <Redirect to="/auth" />
-    }
+    return (
+      <div>
+        <Switch>
+          <Route path={`/dex/markets`} exact component={Markets} />
+          <Route path={`/dex/markets/search/:type`} exact component={MarketsSearch} />
+          <Route path={`/dex/markets/:market`} component={MarketDetail} />
+          <Route path={`/dex/placeOrder`} exact component={PlaceOrder} />
+          <Route path={`/dex/placeOrder/:market`} exact component={PlaceOrder} />
+          <Route path={`/dex/usercenter`} component={UserCenter} />
+          <Route path={`/dex/convert/:token`} component={Convert} />
+          <Route path={`/dex/notifications`} component={Notifications} />
+          <Route path={`/dex/todos`} exact component={ListTodos} />
+          <Route path={`/dex/messages`} exact component={Pages.Todo} />
+          <Route path={`/dex/settings`} exact component={Pages.Todo} />
+          <Redirect from="/dex" to="/dex/markets" />
+        </Switch>
+        <CommonModals />
+        <Orders.Modals />
+        <Tokens.Modals />
+        <Account.Modals />
+      </div>
+    )
   }else{
-    return <Redirect to="/pc/trade/LRC-WETH" />
+    return <Redirect to="/trade" />
   }
 }
 
