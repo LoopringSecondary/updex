@@ -48,6 +48,7 @@ const PlaceOrderSign = (props) => {
           signResult = {sign:{...cancelOrder, owner, timestamp}, ...item.data};
           break;
         case 'approve':
+        case 'approveZero':
         case 'convert':
         case 'resendTx':
         case 'transfer':
@@ -104,6 +105,7 @@ const PlaceOrderSign = (props) => {
           }
           break;
         case 'approve':
+        case 'approveZero':
         case 'convert':
         case 'resendTx':
         case 'transfer':

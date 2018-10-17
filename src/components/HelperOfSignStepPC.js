@@ -66,7 +66,6 @@ class SignSteps extends React.Component {
   generateQRCode(placeOrderSteps, dispatch) {
     if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0) {
       const origin = JSON.stringify(placeOrderSteps.unsign)
-      // const origin = [{type:'cancelOrder', data:{type:1, orderHash:item.originalOrder.hash, timestamp:Math.floor(moment().valueOf() / 1e3).toString()}}]
       const hash = keccakHash(origin)
       window.RELAY.order.setTempStore(hash, origin).then(res => {
         const signWith = window.WALLET.getUnlockType()
