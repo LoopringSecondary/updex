@@ -141,9 +141,10 @@ class PlaceOrderSteps extends React.Component {
       const authAccount = createWallet()
       order.authAddr = authAccount.getAddressString()
       order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString())
+      const unsign = [{type:'order', data:order}] //[{type:'approveZero', data:tx}, {type:'approve', data:tx}]
       dispatch({
         type: 'task/setTask',
-        payload: {task: 'order', data: order}
+        payload: {task:'sign', unsign}
       })
     }
   return (
