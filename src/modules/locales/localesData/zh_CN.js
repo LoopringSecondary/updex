@@ -589,7 +589,7 @@ no_open_orders: '{market}暂无有效订单',
   user_center: {
     receive: '收款',
     send: '转账',
-    tab_title: '我',
+    tab_title: '我的',
     my_assets: '我的资产',
     my_orders: '我的订单',
     my_fills: '我的成交',

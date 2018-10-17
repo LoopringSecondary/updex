@@ -4,8 +4,6 @@ import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
 import { TabBar } from 'antd-mobile'
 import { connect } from 'dva'
-import { toBig } from 'LoopringJS/common/formatter'
-import { getBalanceBySymbol } from '../modules/tokens/TokenFm'
 
 class DexHomeLayout extends React.Component {
   constructor (props) {

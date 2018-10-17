@@ -1,11 +1,16 @@
 import React from 'react'
-import {connect} from 'react-redux'
-import {toFixed, getDisplaySymbol} from 'LoopringJS/common/formatter'
-import {calculateWorthInLegalCurrency} from '../orders/formatters'
+import { Link, Redirect, Route, Switch } from 'dva/router'
+import routeActions from 'common/utils/routeActions'
+import intl from 'react-intl-universal'
+import { Badge } from 'antd'
+import { connect } from 'dva'
+import { toBig } from 'LoopringJS/common/formatter'
+import { getBalanceBySymbol } from 'modules/tokens/TokenFm'
+
 
 class NumberOfTodos extends React.Component {
   render() {
-    const {balance, txs, allocates} = this.props
+    const {balance, txs, allocates,hasBadge=true} = this.props
     let numberofTodos = 0
     const lrcFee  = allocates['frozenLrcFee'] || 0 ;
     const symbols = Object.keys(allocates)
@@ -31,7 +36,12 @@ class NumberOfTodos extends React.Component {
     }
 
     numberofTodos = numberofTodos + txs.filter(tx => tx.type.toLowerCase() === 'convert_income').length
-    return `${numberofTodos}`
+    if(hasBadge){
+      return <Badge count={numberofTodos+5} className="s-small">{this.props.children}</Badge>
+    }else{
+      return `${numberofTodos}`  
+    }
+    
   }
 }
 export default connect((state)=>({
