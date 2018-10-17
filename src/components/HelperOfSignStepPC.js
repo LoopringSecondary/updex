@@ -76,7 +76,6 @@ class SignSteps extends React.Component {
         const time = moment().valueOf()
         dispatch({type: 'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
         if (!res.error) {
-          window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
           window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
         }
       })
