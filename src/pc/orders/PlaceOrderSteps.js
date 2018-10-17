@@ -142,10 +142,8 @@ class PlaceOrderSteps extends React.Component {
       order.authAddr = authAccount.getAddressString()
       order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString())
       const unsign = [{type:'order', data:order}] //[{type:'approveZero', data:tx}, {type:'approve', data:tx}]
-      dispatch({
-        type: 'task/setTask',
-        payload: {task:'sign', unsign}
-      })
+      dispatch({type: 'task/setTask', payload: {task:'sign', unsign}})
+      dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
     }
   return (
     <div className="bg-white" style={{height:'100%'}}>
