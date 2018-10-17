@@ -69,25 +69,9 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
       {text: intl.get('order_cancel.confirm_no'), onPress: () => {}, style: 'default'},
       {
         text: intl.get('order_cancel.confirm_yes'), onPress: () => {
-          const timestamp = Math.floor(moment().valueOf() / 1e3).toString()
-          signMessage(timestamp).then(res => {
-            if (res.result) {
-              const sig = res.result
-              window.RELAY.order.cancelOrder({
-                sign: {...sig, timestamp, owner: storage.wallet.getUnlockedAddress()},
-                orderHash:item.originalOrder.hash,
-                type:1
-              }).then(response => {
-                if (response.error) {
-                  Toast.fail(`${intl.get('notifications.title.cancel_fail',{type:intl.get('common.order')})}:${response.error.message}`, 3, null, false)
-                } else {
-                  Toast.success(intl.get('notifications.title.cancel_suc',{type:intl.get('common.order')}), 3, null, false)
-                }
-              })
-            } else {
-              Toast.fail(`${intl.get('notifications.title.cancel_fail',{type:intl.get('common.order')})}:${res.error.message}`, 3, null, false)
-            }
-          })
+          const data = {type:1, orderHash:item.originalOrder.hash, timestamp:Math.floor(moment().valueOf() / 1e3).toString(), owner:storage.wallet.getUnlockedAddress()}
+          const unsign = [{type:'cancelOrder', data}]
+          dispatch({type: 'task/setTask', payload: {task:'cancelOrder', unsign}})
         }
       },
     ])
@@ -100,29 +84,12 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
         {text: intl.get('order_cancel.confirm_no'), onPress: () => {}, style: 'default'},
         {
           text: intl.get('order_cancel.confirm_yes'), onPress: () => {
-            const timestamp = Math.floor(moment().valueOf() / 1e3).toString()
-            signMessage(timestamp).then(res => {
-              if (res.result) {
-                const sig = res.result
-                const tokens = market.split('-')
-                const tokenS = config.getTokenBySymbol(tokens[0]).address
-                const tokenB = config.getTokenBySymbol(tokens[1]).address
-                window.RELAY.order.cancelOrder({
-                  sign: {...sig, timestamp, owner: storage.wallet.getUnlockedAddress()},
-                  type:4,
-                  tokenS,
-                  tokenB
-                }).then(response => {
-                  if (response.error) {
-                    Toast.fail(`${intl.get('notifications.title.cancel_fail',{type:intl.get('common.order')})}:${response.error.message}`, 3, null, false)
-                  } else {
-                    Toast.success(intl.get('notifications.title.cancel_suc',{type:intl.get('common.order')}), 3, null, false)
-                  }
-                })
-              } else {
-                Toast.fail(`${intl.get('notifications.title.cancel_fail',{type:intl.get('common.order')})}:${res.error.message}`, 3, null, false)
-              }
-            })
+            const tokens = market.split('-')
+            const tokenS = config.getTokenBySymbol(tokens[0]).address
+            const tokenB = config.getTokenBySymbol(tokens[1]).address
+            const data = {type:4, tokenS, tokenB, timestamp:Math.floor(moment().valueOf() / 1e3).toString(), owner:storage.wallet.getUnlockedAddress()}
+            const unsign = [{type:'cancelOrder', data}]
+            dispatch({type: 'task/setTask', payload: {task:'cancelOrder', unsign}})
           }
         },
       ])
