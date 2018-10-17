@@ -65,7 +65,10 @@ class SignSteps extends React.Component {
 
   generateQRCode(placeOrderSteps, dispatch) {
     if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0) {
-      const origin = JSON.stringify(placeOrderSteps.unsign)
+      if(placeOrderSteps.task !== 'sign' && placeOrderSteps.unsign.length > 1) {
+        throw new Error('Illegal argument : unsign length larger than 1')
+      }
+      const origin = placeOrderSteps.task === 'sign' ? JSON.stringify(placeOrderSteps.unsign) : JSON.stringify(placeOrderSteps.unsign[0].data)
       const hash = keccakHash(origin)
       window.RELAY.order.setTempStore(hash, origin).then(res => {
         const signWith = window.WALLET.getUnlockType()
