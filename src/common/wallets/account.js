@@ -154,12 +154,18 @@ export class AddressAccount extends Account
 
   signMessage (message)
   {
-    //TODO
+    const unsign = [{type:'order', data:{}}]
+    window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {unsign, signWith:'address'}})
+    window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
+    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
   }
 
   signEthereumTx (rawTx)
   {
-    //TODO
+    const unsign = [{type:'order', data:{}}]
+    window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {unsign, signWith:'address'}})
+    window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
+    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
   }
 
   async signOrder (order)
@@ -196,27 +202,28 @@ export class LooprAccount extends Account
 
   async signMessage (message)
   {
-    //TODO
+    throw new Error('Unsupported method')
   }
 
   async signEthereumTx (rawTx)
   {
-    //TODO
+    throw new Error('Unsupported method')
   }
 
   async signOrder (order)
   {
-    const hash = keccakHash(JSON.stringify([{type:"order",data:order}]))
-    window.RELAY.order.setTempStore(hash, JSON.stringify([{type:"order",data:order}])).then(res => {
-      const signWith = window.WALLET.getUnlockType()
-      const qrcode = JSON.stringify({type:'sign', value:hash})
-      const time = moment().valueOf()
-      window.STORE.dispatch({type:'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
-      if (!res.error) {
-        window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
-        window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
-      }
-    })
+    throw new Error('Unsupported method')
+    // const hash = keccakHash(JSON.stringify([{type:"order",data:order}]))
+    // window.RELAY.order.setTempStore(hash, JSON.stringify([{type:"order",data:order}])).then(res => {
+    //   const signWith = window.WALLET.getUnlockType()
+    //   const qrcode = JSON.stringify({type:'sign', value:hash})
+    //   const time = moment().valueOf()
+    //   window.STORE.dispatch({type:'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
+    //   if (!res.error) {
+    //     window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
+    //     window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
+    //   }
+    // })
   }
 }
 
@@ -240,27 +247,17 @@ export class UpWalletAccount extends Account
 
   async signMessage (message)
   {
-    //TODO
+    throw new Error('Unsupported method')
   }
 
   async signEthereumTx (rawTx)
   {
-    //TODO
+    throw new Error('Unsupported method')
   }
 
   async signOrder (order)
   {
-    const hash = keccakHash(JSON.stringify([{type:"order",data:order}]))
-    window.RELAY.order.setTempStore(hash, JSON.stringify([{type:"order",data:order}])).then(res => {
-      const signWith = window.WALLET.getUnlockType()
-      const qrcode = JSON.stringify({type:'sign', value:hash})
-      const time = moment().valueOf()
-      window.STORE.dispatch({type:'placeOrderSteps/qrcodeGenerated', payload: {signWith, order, qrcode, hash, time}})
-      if (!res.error) {
-        window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
-        window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
-      }
-    })
+    throw new Error('Unsupported method')
   }
 }
 
