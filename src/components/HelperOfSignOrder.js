@@ -8,13 +8,14 @@ import * as uiFormatter from 'modules/formatter/common'
 
 const PlaceOrderSign = (props) => {
   const {placeOrderSteps, wallet, dispatch} = props
-  const {step, signWith, unsign, signed} = placeOrderSteps
+  const {unsign, signed} = placeOrderSteps
   let actualSigned = signed && wallet ? signed.filter(item => item !== undefined && item !== null) : []
   let submitDatas = signed && unsign.length === actualSigned.length ? (
     signed.map((item, index) => {
-      return {signed: item, unsigned:unsign[index], index}
+      return {type:item.type, signed: item, unsigned:unsign[index], index}
     })
   ) : new Array()
+
 
   async function sign(item, index, e) {
     e.preventDefault()
@@ -34,18 +35,28 @@ const PlaceOrderSign = (props) => {
           type: 'info'
         })
       }
-      if(item.type === 'order') {
-        const signedOrder = await window.WALLET.signOrder(item.data)
-        if(signedOrder.r) {
-          signedOrder.powNonce = 100;
-          signed[index] = {type: 'order', data:signedOrder};
-        } else {
-          throw new Error('Failed sign order with MetaMask');
-        }
-      } else {
-        const signedTx = await window.WALLET.signEthereumTx(item.data)
-        signed[index] = {type: 'tx', data: signedTx};
+      let signResult = {}
+      switch(item.type) {
+        case 'order':
+          signResult = await window.WALLET.signOrder(item.data)
+          signResult.powNonce = 100;
+          break;
+        case 'cancelOrder':
+          const timestamp = item.data.timestamp
+          const cancelOrder = await window.WALLET.signMessage(timestamp)
+          const owner = await window.WALLET.getAddress()
+          signResult = {sign:{...cancelOrder, owner, timestamp}, ...item.data};
+          break;
+        case 'approve':
+        case 'convert':
+        case 'resendTx':
+        case 'transfer':
+          signResult = await window.WALLET.signEthereumTx(item.data)
+          break;
+        default:
+          throw new Error(`Unsupported sign type:${item.type}`)
       }
+      signed[index] = {type: item.type, data:signResult};
       dispatch({type:'placeOrderSteps/signedChange',payload:{signed}})
     } catch(e) {
       console.error(e)
@@ -74,24 +85,38 @@ const PlaceOrderSign = (props) => {
       const signedItem = item.signed
       const unsignedItem = item.unsigned
       //TODO order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
-      if(signedItem.type === 'tx') {
-        const response = await window.ETH.sendRawTransaction(signedItem.data)
-        // console.log('...tx:', response, signedItem)
-        if (response.error) {
-          callback(new UserError(response.error.message))
-        } else {
-          signed[item.index].txHash = response.result
-          window.RELAY.account.notifyTransactionSubmitted({txHash: response.result, rawTx:unsignedItem.data, from: wallet.address});
-          callback()
-        }
-      } else {
-        const response = await window.RELAY.order.placeOrder(signedItem.data)
-        if (response.error) {
-          callback(new UserError(response.error.message))
-        } else {
-          signed[item.index].orderHash = response.result
-          callback()
-        }
+      switch(item.type) {
+        case 'order':
+          const orderRes = await window.RELAY.order.placeOrder(signedItem.data)
+          if (orderRes.error) {
+            callback(new UserError(orderRes.error.message))
+          } else {
+            signed[item.index].orderHash = orderRes.result
+            callback()
+          }
+          break;
+        case 'cancelOrder':
+          const cancelRes = await window.RELAY.order.cancelOrder(signedItem.data)
+          if (!cancelRes.error) {
+            callback()
+          } else {
+            callback(cancelRes.error)
+          }
+          break;
+        case 'approve':
+        case 'convert':
+        case 'resendTx':
+        case 'transfer':
+          const txRes = await window.ETH.sendRawTransaction(signedItem.data)
+          // console.log('...tx:', response, signedItem)
+          if (txRes.error) {
+            callback(new UserError(txRes.error.message))
+          } else {
+            signed[item.index].txHash = txRes.result
+            window.RELAY.account.notifyTransactionSubmitted({txHash: txRes.result, rawTx:unsignedItem.data, from: wallet.address});
+            callback()
+          }
+          break;
       }
     }, function (error) {
       if(error){

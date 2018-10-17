@@ -3,10 +3,10 @@ export default {
   namespace: MODULES,
   state: {
     step:0, //0:qrcode/toconnect, 1:signing 2:result
+    task: '', //sign, approve, cancelOrder, convert, cancelTx, resendTx, transfer
     signWith: '', //address, loopr, upWallet, meteMask, ledger
-    task:'', //order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
     originOrder:{},
-    unsign:null, //{type:order, data:{}},{type:tx, data:{}}
+    unsign:null, //{type:sign, data:{}},{type:approve, data:{}}
     signed:null,
     signResult:0, //0:signing 1:success 2:failed
     error:'', //sign error message
