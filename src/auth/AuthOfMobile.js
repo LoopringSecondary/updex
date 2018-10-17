@@ -8,14 +8,10 @@ import storage from 'modules/storage'
 import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
 
-
 class Auth extends React.Component {
-
-
   state={
     address:''
   }
-
   componentWillReceiveProps(newProps){
     const {uuid,item} = newProps
     if(uuid === item.uuid){
@@ -30,7 +26,6 @@ class Auth extends React.Component {
       this.props.dispatch({type: 'sockets/unlocked'});
     }
   }
-
   authByThirdPartyWallet = (wallet) => {
     const ua = new UserAgent()
     if(ua.isWechat()){
@@ -71,13 +66,27 @@ class Auth extends React.Component {
   }
 
   render () {
-    const {uuid,item} = this.props
+    const {uuid,item,dispatch} = this.props
     const {address} = this.state;
-    
-
     const _this = this
     return (
       <div className="bg-white" style={{height:'100vh'}}>
+        <NavBar
+          className="bg-white"
+          mode="light"
+          onLeftClick={()=>dispatch({type:'layers/hideLayer',payload:{id:'authOfMobile'}})}
+          leftContent={[
+            <span onClick={()=>{}} className="color-black-1" key="1"><Icon type="close" /></span>,
+          ]}
+          rightContent={null && [
+            <span className="color-black-1" key="1"  onClick={()=>{}}><Icon type="question-circle-o" /></span>
+          ]}
+        >
+          <div className="text-primary fs16">
+            Log In
+          </div>
+        </NavBar>
+        <div className="divider 1px zb-b-t"></div>
         <div className="pt50 pb35 pl15 pr15">
           <div className="text-center pb30">
             <img style={{height:'5rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
@@ -95,7 +104,7 @@ class Auth extends React.Component {
             >
             </InputItem>
           </List>
-          <Button onClick={this.authByAddress} className="mt15" type="primary"> {intl.get('signIn.title')}</Button>
+          <Button onClick={this.authByAddress} className="mt15" type="primary">Login By Address</Button>
         </div>
         <div className="">
           <div className="divider 1px zb-b-t"></div>
