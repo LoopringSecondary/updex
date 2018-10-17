@@ -30,7 +30,7 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                 // const fillFm = new FillFm({...item,market})
                 return (
                   <tr key={index}>
-                    <td className="lh20 border-none pl15 pr5 text-left align-middle">
+                    <td className="border-none pl15 pr5 text-left align-middle"  style={{lineHeight:'1.8rem'}}>
                       {
                         index%2 === 0 && <span className="color-error">{item.price.toFixed(8)}</span>
                       }
@@ -38,13 +38,13 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                         index%2 === 1 && <span className="color-success">{item.price.toFixed(8)}</span>
                       }
                     </td>
-                    <td className="lh20 border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap">
+                    <td className="border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap"  style={{lineHeight:'1.8rem'}}>
                       {item.amount.toFixed(4)}
                     </td>
-                    <td hidden className="lh20 border-none pl5 pr5 text-right color-black-2 align-middle text-nowrap">
+                    <td hidden className="border-none pl5 pr5 text-right color-black-2 align-middle text-nowrap"  style={{lineHeight:'1.8rem'}}>
                       {item.lrcFee}
                     </td>
-                    <td className="lh20 border-none pl5 pr15 color-black-2 text-right align-middle text-nowrap">
+                    <td className="border-none pl5 pr15 color-black-2 text-right align-middle text-nowrap"  style={{lineHeight:'1.8rem'}}>
                       {getFormatTime(toNumber(item.createTime) * 1e3,'MM-DD HH:mm')}
                     </td>
                   </tr>

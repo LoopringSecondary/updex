@@ -229,7 +229,7 @@ const transfromers = {
     },
     resTransformer:(id,res)=>{
       if(!res) return null
-      console.log(res)
+      //console.log(id,'res',res)
       res = JSON.parse(res)
       //console.log(id,'res',res)
       let item = {}

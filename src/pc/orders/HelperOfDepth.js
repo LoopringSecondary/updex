@@ -51,7 +51,7 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
             </tr>
           </thead>
           <tbody className="text-number">
-          <div className="pt5"></div>
+          <tr><td className="pt5"></td></tr>
           {
             sell && sell.reverse().map((item, index) =>
               <tr key={index}>
@@ -112,7 +112,7 @@ const HelperOfDepth = ({depth = {}, pair, maxRows = 15,trades, dispatch}) => {
             </tr>
           </thead>
           <tbody className="text-number">
-          <div className="pt5"></div>
+          <tr><td className="pt5"></td></tr>
           {
             depth.item && depth.item.buy && depth.item.buy.map((item, index) =>
               <tr key={index}>
