@@ -17,7 +17,7 @@ const DrawerWrapper = (props)=>{
   const {[id]:module={}} = props
   const drawerProps = {
     className,
-    wrapClassName,
+    // wrapClassName,
     width,
     height,
     placement:position,

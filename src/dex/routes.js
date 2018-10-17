@@ -12,6 +12,7 @@ import PlaceOrder from './orders/PlaceOrderPage'
 import UserCenter from './account/UserCenter'
 import Notifications from './notifications/Notifications'
 import NotificationModals from './notifications/Modals'
+import AuthModals from '../auth/MobileModals'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
 import storage from 'modules/storage'
@@ -53,6 +54,7 @@ const Logged = ()=>{
         <Tokens.Modals />
         <Account.Modals />
         <NotificationModals />
+        <AuthModals />
       </div>
     )
   }else{

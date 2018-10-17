@@ -12,7 +12,7 @@ const PopupsWrapper = (props)=>{
   const {[id]:module={}} = props
   const modalProps = {
     className,
-    wrapClassName,
+    // wrapClassName,
     popup:true,
     visible:module.visible,
     onClose:module.hideLayer && module.hideLayer.bind(this),

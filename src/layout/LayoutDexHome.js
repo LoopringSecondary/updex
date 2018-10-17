@@ -4,21 +4,39 @@ import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
 import { TabBar } from 'antd-mobile'
 import { connect } from 'dva'
+import storage from 'modules/storage'
 
 class DexHomeLayout extends React.Component {
   constructor (props) {
     super(props)
   }
-
   render () {
+    const address =  storage.wallet.getUnlockedAddress()
     const url = routeActions.match.getUrl(this.props)
     const pathname = routeActions.location.getPathname(this.props)
+    const {dispatch} = this.props
+    const showLayer = (payload = {}) => {
+      dispatch({
+        type: 'layers/showLayer',
+        payload: {...payload}
+      })
+    } 
     const changeTab = (path) => {
-      routeActions.gotoPath(`/dex/${path}`)
+      if( path === 'usercenter'){
+        if(address && address !== 'undefined' &&  address !== 'null'){
+          routeActions.gotoPath(`/dex/${path}`)
+        }else {
+          console.log('changeTab usercenter')
+          showLayer({id:'authOfMobile'})
+        }
+      }else{
+        routeActions.gotoPath(`/dex/${path}`)
+      }
     }
     const isActive = (path) => {
       return pathname.indexOf(path) > -1
     }
+    
     return (
       <div style={{}}>
         {this.props.children}
@@ -74,6 +92,6 @@ class DexHomeLayout extends React.Component {
   }
 }
 
-export default DexHomeLayout
+export default connect()(DexHomeLayout)
 
 
