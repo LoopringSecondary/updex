@@ -69,7 +69,7 @@ class SignSteps extends React.Component {
       const hash = keccakHash(origin)
       window.RELAY.order.setTempStore(hash, origin).then(res => {
         const signWith = window.WALLET.getUnlockType()
-        const qrcode = JSON.stringify({type: placeOrderSteps.task, value: hash})
+        const qrcode = JSON.stringify({type:placeOrderSteps.task, value: hash})
         const time = moment().valueOf()
         dispatch({type: 'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
         if (!res.error) {

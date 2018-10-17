@@ -3,45 +3,19 @@ const MODULES = 'task'
 export default {
   namespace: MODULES,
   state: {
-    task:'', //placeOrder, cancelOrder
+    task:'',
     data:{}
   },
   effects:{
     *init({ payload={} }, { put }) {
-      yield put({ type: 'pairChangeEffects',payload});
+      yield put({ type: 'taskChange',payload:{task:'', data:{}}});
     },
     *setTask({ payload={} }, { call, put }) {
       yield put({ type: 'taskChange', payload});
-      const {task, data} = payload
+      const {task, unsign} = payload
       if(window.WALLET && window.WALLET.getUnlockType() !== 'address') {
-        const unsign = [{type:task, data}]
         window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {task, unsign, signWith:window.WALLET.getUnlockType()}})
         window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
-        // switch(task) {
-        //   case 'order':
-        //     // yield window.WALLET.signOrderHelper(data)
-        //     window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {task, unsign, signWith:window.WALLET.getUnlockType()}})
-        //     window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
-        //     break;
-        //   case 'approve':
-        //
-        //     break;
-        //   case 'cancelOrder':
-        //
-        //     break;
-        //   case 'convert':
-        //
-        //     break;
-        //   case 'cancelTx':
-        //
-        //     break;
-        //   case 'resendTx':
-        //
-        //     break;
-        //   case 'transfer':
-        //
-        //     break;
-        // }
       } else {
         window.STORE.dispatch({type:'placeOrderSteps/stepChange', payload: {step:1}})
         //window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
@@ -55,7 +29,8 @@ export default {
       let {task, data} = payload
       return {
         ...state,
-        task, data
+        task,
+        data
       }
     },
   },
