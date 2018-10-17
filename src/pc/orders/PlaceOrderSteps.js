@@ -143,7 +143,7 @@ class PlaceOrderSteps extends React.Component {
       order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString())
       dispatch({
         type: 'task/setTask',
-        payload: {task: 'placeOrder', data: order}
+        payload: {task: 'order', data: order}
       })
     }
   return (
