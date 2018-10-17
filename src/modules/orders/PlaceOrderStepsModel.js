@@ -6,7 +6,7 @@ export default {
     task: '', //sign, approve, approveZero, cancelOrder, convert, cancelTx, resendTx, transfer
     signWith: '', //address, loopr, upWallet, meteMask, ledger
     originOrder:{},
-    unsign:null, //{type:sign, data:{}},{type:approve, data:{}}
+    unsign:null, //{type:order, data:{}},{type:approve, data:{}}  type:[order, approve, approveZero, cancelOrder, convert, cancelTx, resendTx, transfer]
     signed:null,
     signResult:0, //0:signing 1:success 2:failed
     error:'', //sign error message
