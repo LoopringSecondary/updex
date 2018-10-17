@@ -124,15 +124,6 @@ class Auth extends React.Component {
     this.loopringUnlock()
   };
 
-  refresh = () => {
-    if (window.web3 && window.web3.eth.accounts[0]) {
-      this.connectToMetamask()
-    } else {
-      storage.wallet.storeUnlockedAddress('MetaMask', '')
-      window.location.reload()
-    }
-  }
-
   connectToMetamask = () => {
     this.checkMetaMaskState()
     const {dispatch} = this.props
@@ -234,7 +225,6 @@ class Auth extends React.Component {
       if (window.web3 && window.web3.eth.accounts[0]) {
         this.connectToMetamask()
       } else {
-        storage.wallet.storeUnlockedAddress('MetaMask', '')
         window.location.reload()
       }
     }
@@ -399,7 +389,7 @@ class Auth extends React.Component {
                                 description={
                                   <div>
                                     <div>{intl.get('wallet_meta.unlock_step_refresh_content')}</div>
-                                    <Button onClick={this.refresh} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
+                                    <Button onClick={() => refresh} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
                                   </div>
                                 }
                     />
