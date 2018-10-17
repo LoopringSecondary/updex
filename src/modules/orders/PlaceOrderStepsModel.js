@@ -4,6 +4,7 @@ export default {
   state: {
     step:0, //0:qrcode/toconnect, 1:signing 2:result
     signWith: '', //address, loopr, upWallet, meteMask, ledger
+    task:'', //order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
     originOrder:{},
     unsign:null, //{type:order, data:{}},{type:tx, data:{}}
     signed:null,
@@ -20,6 +21,7 @@ export default {
     },
     *reset({ payload={} }, { put }) {
       yield put({ type: 'stepChange',payload:{step:0}});
+      yield put({ type: 'taskChange',payload:{task:''}});
       yield put({ type: 'unsignChange',payload:{unsign:null}})
       yield put({ type: 'signedChange',payload:{signed:null}})
       yield put({ type: 'hashChange',payload:{hash:''}});
@@ -39,8 +41,9 @@ export default {
       yield put({ type: 'generateTimeChange',payload:{generateTime:time}});
     },
     * unsign({ payload={} }, { put }) {
-      const {unsign, signWith} = payload
+      const {task, unsign, signWith} = payload
       yield put({ type: 'stepChange',payload:{step:1}});
+      yield put({ type: 'taskChange',payload:{task}});
       yield put({ type: 'signWithChange',payload:{signWith}})
       yield put({ type: 'unsignChange',payload:{unsign}})
       yield put({ type: 'signedChange',payload:{signed:[]}})
@@ -96,6 +99,14 @@ export default {
       return {
         ...state,
         step
+      }
+    },
+    taskChange(state, action) {
+      const {payload} = action
+      let {task} = payload
+      return {
+        ...state,
+        task
       }
     },
     unsignChange(state, action) {

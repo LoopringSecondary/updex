@@ -73,6 +73,7 @@ const PlaceOrderSign = (props) => {
     eachLimit(submitDatas, 1, async function (item, callback) {
       const signedItem = item.signed
       const unsignedItem = item.unsigned
+      //TODO order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
       if(signedItem.type === 'tx') {
         const response = await window.ETH.sendRawTransaction(signedItem.data)
         // console.log('...tx:', response, signedItem)
