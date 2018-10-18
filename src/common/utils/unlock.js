@@ -34,7 +34,6 @@ export const unlockWithMetaMask = (dispatch) => {
       dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
       return
     }
-    window.WALLET = new MetaMaskAccount(window.web3);
     let address = window.web3.eth.accounts[0]
     addressUnlocked(dispatch, address)
     dispatch({type: 'sockets/unlocked'});
