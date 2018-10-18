@@ -152,9 +152,8 @@ class Convert extends React.Component {
               <div className="col text-right no-border am-list-bg-none">
                 <List className="selectable">
                   <InputItem
-                    type="money"
+                    type="text"
                     onChange={amountChange}
-                    moneyKeyboardAlign="right"
                     value={amount>=0 ? amount : null}
                     extra={<div className="fs14 color-black-3 ml5">{fromToken}</div>}
                     className="circle h-default fs18"

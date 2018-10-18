@@ -29,8 +29,8 @@ const TodoItem = (props) => {
     const assets = getBalanceBySymbol({balances: balance.items, symbol: item.symbol})
     const delegateAddress = config.getDelegateAddress()
     const token = config.getTokenBySymbol(item.symbol)
-    const amount = toHex(toBig('9223372036854775806').times('1e' + token.digits || 18))
-    const txs = []
+    const amount = '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff';
+    const txs = [];
     let allowance = assets.allowance
     if (isApproving(pendingTxs, item.symbol)) {
       allowance = isApproving(pendingTxs, item.symbol)
@@ -56,34 +56,12 @@ const TodoItem = (props) => {
       value: '0x0',
       nonce: toHex(nonce)
     })
-    eachLimit(txs, 1, async (tx, callback) => {
-      signTx(tx, true).then(res => {
-        if (res.result) {
-          window.ETH.sendRawTransaction(res.result).then(resp => {
-            if (resp.result) {
-              window.RELAY.account.notifyTransactionSubmitted({
-                txHash: resp.result,
-                rawTx: tx,
-                from: storage.wallet.getUnlockedAddress()
-              }).then(response => {
-                callback()
-              })
-            } else {
-              callback(resp.error)
-            }
-          })
-        } else {
-          callback(res.error)
-        }
-      })
-    }, function (error) {
-      if (error) {
-        Toast.fail(intl.get('notifications.title.enable_failed') + ':' + error.message, 3, null, false)
-      } else {
-        Toast.success(intl.get('notifications.title.enable_suc'), 3, null, false)
-      }
-    })
 
+    if(txs.length > 1){
+      dispatch({type: 'task/setTask', payload: {task:'sign', unsign:[{type:'approveZero',data:{...txs[0]}},{type:'approve',data:{...txs[1]}}]}})
+    }else{
+      dispatch({type: 'task/setTask', payload: {task:'sign', unsign:[{type:'approve',data:{...(txs[0])}}]}})
+    }
   }
 
   const loading = () => {

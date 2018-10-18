@@ -5,6 +5,7 @@ import intl from 'react-intl-universal';
 import config from '../../common/config'
 import routeActions from 'common/utils/routeActions'
 
+
 function HelperOfTokenActions(props) {
   const {helperOfTokenActions,dispatch} = props
   const {symbol,hideBuy} = helperOfTokenActions
@@ -77,16 +78,6 @@ function HelperOfTokenActions(props) {
           {
             symbol === 'ETH' &&
             <Button onClick={gotoTrading} className="mt10" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
-          }
-          {
-            false && symbol !== 'ETH' &&
-            <List.Item arrow="horizontal" extra="5" disabled>
-              View {symbol} Orders
-            </List.Item>
-          }
-          {false &&  <List.Item arrow="horizontal" extra={<div className="fs14">{`wallet's ${symbol} is sufficient`}</div>} disabled>
-            Switch Wallet
-          </List.Item>
           }
         </div>
     </div>
