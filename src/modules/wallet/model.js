@@ -45,15 +45,15 @@ export default {
         switch(unlockedType) {
           case 'address':
             // dispatch({type:'unlockAddressWallet', payload:{address:unlockedAddress}})
-            // dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+            // dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
             break;
           case 'loopr':
             dispatch({type:'unlockLooprWallet', payload:{address:unlockedAddress}})
-            dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+            dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
             break;
           case 'upWallet':
             dispatch({type:'unlockUpWallet', payload:{address:unlockedAddress}})
-            dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+            dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
             break;
           case 'ledger':
             unlockedType = 'address'

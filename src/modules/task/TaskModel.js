@@ -19,7 +19,7 @@ export default {
       } else {
         window.STORE.dispatch({type:'placeOrderSteps/stepChange', payload: {step:1}})
         //window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
-        window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
+        window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'authOfPC'}})
       }
     },
   },

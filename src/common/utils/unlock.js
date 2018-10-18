@@ -30,7 +30,7 @@ export const unlockWithMetaMask = (dispatch) => {
     dispatch({type:'wallet/unlockMetaMaskWallet',payload:{address}});
     dispatch({type: 'sockets/unlocked'});
     dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
-    dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+    dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
     Notification.open({type:'success',message:intl.get('notifications.title.unlock_suc')});
     window.WALLET = new MetaMaskAccount(window.web3);
     window.RELAY.account.register(address)

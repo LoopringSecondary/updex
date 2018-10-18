@@ -59,7 +59,7 @@ const updateScannedAddress = (item, id) => {
     window.RELAY.account.register(item.owner)
     Notification.open({type: 'success', message: intl.get('notifications.title.unlock_suc')});
     dispatch({type: 'sockets/unlocked'});
-    dispatch({type:"layers/hideLayer", payload:{id:'auth2'}})
+    dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
     dispatch({type: 'scanAddress/reset', payload: {}})
   }
 }

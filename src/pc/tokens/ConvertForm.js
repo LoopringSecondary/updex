@@ -1,50 +1,42 @@
 import React from 'react'
-import { Button, Icon, InputItem, List, NavBar, Toast,Modal } from 'antd-mobile'
-import { Icon as WebIcon } from 'antd'
-import { connect } from 'dva'
+import {Button, Icon, InputItem, List, NavBar, Toast} from 'antd-mobile'
+import {Icon as WebIcon} from 'antd'
+import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions'
-import { toBig, toHex, toNumber } from 'LoopringJS/common/formatter'
+import {toBig, toHex, toNumber} from 'LoopringJS/common/formatter'
 import Contracts from 'LoopringJS/ethereum/contracts/Contracts'
-import TokenFormatter, { getBalanceBySymbol, isValidNumber } from '../../modules/tokens/TokenFm'
+import TokenFormatter, {getBalanceBySymbol, isValidNumber} from '../../modules/tokens/TokenFm'
 import config from '../../common/config'
 import intl from 'react-intl-universal'
 import storage from 'modules/storage'
 import Worth from 'modules/settings/Worth'
-import { signTx } from '../../common/utils/signUtils'
 import ConvertHelperOfBalance from './ConvertHelperOfBalance'
-import { keccakHash } from 'LoopringJS/common/utils'
 
 const WETH = Contracts.WETH
 
 class Convert extends React.Component {
   state = {
     token: 'ETH',
-    loading: false,
-    hash: ''
+    loading: false
   }
 
-  componentWillReceiveProps (newProps) {
-    const {auth} = newProps
-    const {hash} = this.state
-    if (hash === auth.hash && auth.status === 'accept') {
-      Modal.alert(intl.get('notifications.title.convert_suc'))
-      this.setState({hash: ''})
-    }
-  }
-
-  componentDidMount () {
+  componentDidMount() {
     const {match} = this.props
     if (match && match.params && match.params.token) {
       this.setState({token: match.params.token})
     }
   }
 
-  render () {
+  render() {
     const {dispatch, balance, amount, gas} = this.props
     const {token, loading} = this.state
     const address = storage.wallet.getUnlockedAddress()
     const assets = getBalanceBySymbol({balances: balance.items, symbol: token, toUnit: true})
-    const other_assets = getBalanceBySymbol({balances: balance.items, symbol: token.toUpperCase() === 'ETH' ? 'WETH' : 'ETH', toUnit: true})
+    const other_assets = getBalanceBySymbol({
+      balances: balance.items,
+      symbol: token.toUpperCase() === 'ETH' ? 'WETH' : 'ETH',
+      toUnit: true
+    })
     const gasPrice = gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current
     const gasLimit = token.toLowerCase() === 'eth' ? config.getGasLimitByType('deposit').gasLimit : config.getGasLimitByType('withdraw').gasLimit
     const tf = new TokenFormatter({symbol: token})
@@ -79,20 +71,9 @@ class Convert extends React.Component {
       }
       dispatch({type: 'convert/setMax', payload: {amount: max, amount1: max}})
     }
-    const gotoConfirm = async () => {
-      this.setState({loading: true})
-      const _this = this
-      if (!isValidNumber(amount)) {
-        Toast.info(intl.get('notifications.title.invalid_number'), 1, null, false)
-        this.setState({loading: false})
-        return
-      }
-      const owner = storage.wallet.getUnlockedAddress()
-      if (owner && ((token.toLowerCase() === 'eth' && toBig(amount).plus(gasFee).gt(assets.balance)) ||(token.toLowerCase() === 'weth' && toBig(amount).gt(assets.balance)))) {
-        Toast.info(intl.get('convert.not_enough_tip', {token}), 1, null, false)
-        this.setState({loading: false})
-        return
-      }
+
+    const convertConfirm = async () => {
+
       let data = ''
       let value = ''
       if (token.toLowerCase() === 'eth') {
@@ -109,15 +90,33 @@ class Convert extends React.Component {
         to,
         gasPrice: toHex(toBig(gasPrice).times(1e9)),
         chainId: config.getChainId(),
-        value
-      }
-      if (owner) {
-        tx.nonce = toHex((await window.RELAY.account.getNonce(address)).result)
+        value,
+        nonce: toHex((await window.RELAY.account.getNonce(address)).result)
       }
       const unsign = [{type:'convert', data:tx}]
       dispatch({type: 'task/setTask', payload: {task:'convert', unsign}})
     }
 
+    const gotoConfirm = async () => {
+      if (!isValidNumber(amount)) {
+        Toast.info(intl.get('notifications.title.invalid_number'), 1, null, false)
+        return
+      }
+
+      if ((token.toUpperCase() === 'ETH' && toBig(amount).plus(gasFee).gt(assets.balance)) || (token.toUpperCase() === 'WETH' && toBig(amount).gt(assets.balance))) {
+        Toast.info(intl.get('convert.not_enough_tip', {token}), 1, null, false)
+        return
+      }
+      if (!window.WALLET || window.WALLET.getUnlockedType() === 'address') {
+        window.jobCallback = async () => {
+          await convertConfirm();
+          delete window.jobCallback;
+        };
+        showLayer('authOfPC')
+      } else {
+        await convertConfirm()
+      }
+    };
     const amountChange = (value) => {
       dispatch({type: 'convert/amountChange', payload: {amount: value}})
     }
@@ -129,23 +128,25 @@ class Convert extends React.Component {
         this.setState({token: 'ETH'})
       }
     }
+    const _this = this
     const fromToken = token
     const toToken = token.toLowerCase() === 'eth' ? 'WETH' : 'ETH'
     return (
-      <div className="bg-fill h-100 h100">
-        <div className="bg-white">
+      <div className="bg-white" style={{height: '100%'}}>
+        <div className="">
           <NavBar
             className="zb-b-b"
             mode="light"
             onLeftClick={() => hideLayer({id: 'convertToken'})}
             leftContent={[
-              <WebIcon type="close" key='1'/>,
+              <Icon type="cross" key='1'/>,
             ]}
             rightContent={[
-              <Button size="small" type="primary" onClick={swap} key='1' ><WebIcon type="swap"/></Button>,
+              <Button size="small" type="primary" onClick={swap} key='1'><WebIcon type="swap"/></Button>,
             ]}
           >
-            <div className="color-black">{fromToken === 'ETH' ? intl.get('convert.convert_eth_title') : intl.get('convert.convert_weth_title')}</div>
+            <div
+              className="color-black">{fromToken === 'ETH' ? intl.get('convert.convert_eth_title') : intl.get('convert.convert_weth_title')}</div>
           </NavBar>
           <div className="p15 ">
             <div className="row ml0 mr0 no-gutters align-items-stretch justify-content-center" style={{}}>
@@ -154,24 +155,22 @@ class Convert extends React.Component {
                   <InputItem
                     type="money"
                     onChange={amountChange}
-                    moneyKeyboardAlign="right"
-                    value={amount>=0 ? amount : null}
-                    extra={<div className="fs14 color-black-3 ml5">{fromToken}</div>}
-                    className="circle h-default fs18"
-                    placeholder={intl.get('common.amount')}
+                    moneyKeyboardAlign="left"
+                    value={amount}
+                    extra={<div className="fs14 color-black-3">{fromToken}</div>}
+                    className="circle h-default"
                   >
-                    <div className="fs14 color-black-1">{intl.get('common.amount')}</div>
                   </InputItem>
                   <List.Item
                     className="circle h-default mt15"
                     arrow={false}
                     onClick={setGas}
-                    extra={<div className="fs14 text-primary">
-                      <Worth amount={gasFee} symbol='ETh'/> ≈ {tf.toPricisionFixed(toNumber(gasFee))}
-                      <span className="color-black-3 ml10">ETH</span>
+                    extra={<div className="fs14 color-black-3">
+                      <Worth amount={gasFee} symbol='ETh'/> ≈ {tf.toPricisionFixed(toNumber(gasFee))} ETH
+                      <WebIcon hidden className="ml5 text-primary" type="right"/>
                     </div>}
                   >
-                    <div className="fs14 color-black-1">{intl.get('common.gas')}</div>
+                    <div className="fs13 color-black-3">{intl.get('common.gas')}</div>
                   </List.Item>
                 </List>
               </div>
@@ -179,31 +178,30 @@ class Convert extends React.Component {
             <Button className="b-block w-100 mt15" size="large" onClick={gotoConfirm} type="primary" loading={loading}
                     disabled={loading}>
               <div className="row ml0 mr0 no-gutters fs16 align-items-center">
-                <div hidden className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span className="fs14">{fromToken}</span></div>
-                <div className="col fs18" style={{}}>
-                  {intl.get('common.convert')}
-                </div>
-                <div hidden className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span className="fs14">{toToken}</span></div>
+                <div className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span
+                  className="fs14">{fromToken}</span></div>
+                <div className="col-auto" style={{background: 'rgba(0,0,0,0.05)', padding: '0 1.2rem'}}>→</div>
+                <div className="col">{toNumber(tf.toPricisionFixed(toBig(amount)))} <span
+                  className="fs14">{toToken}</span></div>
               </div>
             </Button>
           </div>
         </div>
-        <div className="divider zb-b-b 1px mb10"></div>
-        <ConvertHelperOfBalance dispatch={dispatch} token={{symbol:token,balance:assets.balance,balance2:other_assets.balance}} gasFee={gasFee}/>
+        <div className="divider zb-b-b 1px"></div>
+        <ConvertHelperOfBalance dispatch={dispatch}
+                                token={{symbol: token, balance: assets.balance, balance2: other_assets.balance}}
+                                gasFee={gasFee}/>
       </div>
     )
   }
 }
 
-function
-
-mapStateToProps (state) {
+function mapStateToProps(state) {
   return {
     balance: state.sockets.balance,
     prices: state.sockets.marketcap.items,
     amount: state.convert.amount,
-    gas: state.gas,
-    auth: state.sockets.circulrNotify.item
+    gas: state.gas
   }
 }
 
