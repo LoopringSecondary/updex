@@ -64,12 +64,12 @@ class Home extends React.Component {
           { collapsed &&
             <div className="col-auto mpanel mr0 mb0  d-flex flex-column" style={{width:'32.5rem'}}>
               <PanelWrapper style={{flex:'1'}}>
-                <PanelHeader title="Trade History" />
+                <PanelHeader title={intl.get('fill_list.trade_history')} />
                 <ListMarketFills />
               </PanelWrapper>
             </div>
           }
-         
+
         </div>
       </div>
     )
@@ -77,7 +77,7 @@ class Home extends React.Component {
 }
 
 export default connect(({layers})=>{
-  let collapsed 
+  let collapsed
   if(layers.SidebarOfMarkets){
     collapsed = !layers.SidebarOfMarkets.visible
   }else{
