@@ -9,6 +9,7 @@ import {keccakHash} from 'LoopringJS/common/utils'
 import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
 import HelperOfSignOrder from './HelperOfSignOrder'
 import HelperOfPlaceOrderResult from './HelperOfPlaceOrderResult'
+import storage from 'modules/storage'
 
 const signByLooprStep = (placeOrderSteps, circulrNotify) => {
   const hashItem = getSocketAuthorizationByHash(placeOrderSteps.hash, circulrNotify)
@@ -63,13 +64,39 @@ const SignByLoopr = ({placeOrderSteps, dispatch}) => {
 
 class SignSteps extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      generating: false,
+    };
+  }
+
   generateQRCode(placeOrderSteps, dispatch) {
-    if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0) {
+    if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0 && !this.state.generating) {
       if(placeOrderSteps.task !== 'sign' && placeOrderSteps.unsign.length > 1) {
-        throw new Error('Illegal argument : unsign length larger than 1')
+        throw new Error('Illegal argument : parameter unsign length could larger than 1 only when task equals sign')
       }
-      const origin = placeOrderSteps.task === 'sign' ? JSON.stringify(placeOrderSteps.unsign) : JSON.stringify(placeOrderSteps.unsign[0].data)
+      let origin = {}
+      // [approve, approveZero] use sign instead
+      switch(placeOrderSteps.task) {
+        case 'sign':
+          origin = JSON.stringify(placeOrderSteps.unsign)
+          break;
+        case 'cancelOrder':
+          origin = JSON.stringify(placeOrderSteps.unsign[0].data)
+          break;
+        case 'convert':
+          origin = JSON.stringify({tx:placeOrderSteps.unsign[0].data, owner:storage.wallet.getUnlockedAddress()})
+          break;
+        default:
+          throw new Error(`Unsupported task type:${placeOrderSteps.task}`)
+      }
+      // const origin = placeOrderSteps.task === 'sign' ? JSON.stringify(placeOrderSteps.unsign) : JSON.stringify(placeOrderSteps.unsign[0].data)
       const hash = keccakHash(origin)
+      if(this.state.generating) {
+        return
+      }
+      this.setState({generating:true})
       window.RELAY.order.setTempStore(hash, origin).then(res => {
         const signWith = window.WALLET.getUnlockType()
         const qrcode = JSON.stringify({type:placeOrderSteps.task, value: hash})
@@ -78,20 +105,26 @@ class SignSteps extends React.Component {
         if (!res.error) {
           window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
         }
+        this.setState({generating:false})
+      }).catch(e=>{
+        this.setState({generating:false})
       })
     }
   }
 
-  componentDidMount(){
-    const {placeOrderSteps, dispatch} = this.props
-    switch(placeOrderSteps.signWith) {
-      case 'loopr':
-        this.generateQRCode(placeOrderSteps, dispatch)
-        break;
-      case 'upWallet':
-        this.generateQRCode(placeOrderSteps, dispatch)
-        break;
+  check(props) {
+    const {placeOrderSteps, dispatch} = props
+    if((placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') && !placeOrderSteps.qrcode){
+      this.generateQRCode(placeOrderSteps, dispatch)
     }
+  }
+
+  componentDidMount() {
+    this.check(this.props)
+  }
+
+  componentWillReceiveProps(newProps){
+    this.check(newProps)
   }
 
   render() {
@@ -105,10 +138,14 @@ class SignSteps extends React.Component {
         step = signByLooprStep(placeOrderSteps, circulrNotify)
         break;
       case 'metaMask':
-        step = placeOrderSteps.step
+        if(placeOrderSteps.unsign && placeOrderSteps.signed) {
+          step = placeOrderSteps.step
+        }
         break;
       case 'ledger':
-        step = placeOrderSteps.step
+        if(placeOrderSteps.unsign && placeOrderSteps.signed) {
+          step = placeOrderSteps.step
+        }
         break;
     }
 
