@@ -303,15 +303,15 @@ class Auth extends React.Component {
               <div className="row m15 p15 no-gutters align-items-center bg-primary"
                    style={{padding: '7px 0px',borderRadius:'50em'}}>
                 <div className="col-auto text-left pl15 pr20">
-                  <img style={{height: '30px'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
+                  <img style={{height: '30px'}} src={require('../assets/images/up-logo-notext-white.png')} alt=""/>
                 </div>
                 <div className="col text-left">
                   <div className="fs16 color-black-1 text-left">UP Wallet</div>
                 </div>
                 <div className="col-auto text-right">
                   <div className="fs14 text-wrap text-left">
-                    <span className="fs13 color-black-4 mr5">Scan QRcode</span>
-                    <Icon className="color-black-4" type="right"/>
+                    <span className="fs13 color-black-3 mr5">Scan QRcode</span>
+                    <Icon className="color-black-3" type="right"/>
                   </div>
                 </div>
               </div>
@@ -338,8 +338,8 @@ class Auth extends React.Component {
                 </div>
                 <div className="col-auto text-right">
                   <div className="fs14 text-wrap text-left">
-                    <span className="fs13 color-black-4 mr5">Scan QRcode</span>
-                    <Icon className="color-black-4" type="right"/>
+                    <span className="fs13 color-black-3 mr5">Scan QRcode</span>
+                    <Icon className="color-black-3" type="right"/>
                   </div>
                 </div>
               </div>
@@ -365,8 +365,8 @@ class Auth extends React.Component {
                 </div>
                 <div className="col-auto text-right">
                   <div className="fs14 text-wrap text-left">
-                    <span className="fs13 color-black-4 mr5">Connect</span>
-                    <Icon className="color-black-4" type="right"/>
+                    <span className="fs13 color-black-3 mr5">Connect</span>
+                    <Icon className="color-black-3" type="right"/>
                   </div>
                 </div>
               </div>
@@ -439,8 +439,8 @@ class Auth extends React.Component {
             </div>
             <div className="col-auto text-right">
               <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-4 mr5">Connect</span>
-                <Icon className="color-black-4" type="right"/>
+                <span className="fs13 color-black-3 mr5">Connect</span>
+                <Icon className="color-black-3" type="right"/>
               </div>
             </div>
           </div>

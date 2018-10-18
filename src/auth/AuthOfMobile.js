@@ -70,7 +70,7 @@ class Auth extends React.Component {
     const {address} = this.state;
     const _this = this
     return (
-      <div className="bg-white" style={{height:'100vh'}}>
+      <div className="bg-white" style={{height:'100%',overflow:'auto'}}>
         <NavBar
           className="bg-white"
           mode="light"
@@ -83,14 +83,14 @@ class Auth extends React.Component {
           ]}
         >
           <div className="text-primary fs16">
-            Log In
+            LOG IN
           </div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
         <div className="pt50 pb35 pl15 pr15">
           <div className="text-center pb30">
-            <img style={{height:'5rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
-            <div className="text-primary fs20 font-weight-bold mt5 mb5">UP DEX</div>
+            <img style={{height:'4.5rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
+            <div className="text-primary fs18 font-weight-bold mt5 mb5">UP DEX</div>
           </div>
           <List className="no-border am-list-bg-none selectable">
             <InputItem
@@ -104,14 +104,74 @@ class Auth extends React.Component {
             >
             </InputItem>
           </List>
-          <Button onClick={this.authByAddress} className="mt15" type="primary">Login By Address</Button>
+          <Button onClick={this.authByAddress} className="mt15 fs16" type="primary">Login By Address</Button>
         </div>
         <div className="">
           <div className="divider 1px zb-b-t"></div>
-          <div className="pt20">
-            <div className="fs16 color-black-2 text-center">{intl.get('signIn.tp_title')}</div>
+          <div className="pt20 pl15">
+            <div className="fs12 color-black-3 text-left">{intl.get('signIn.tp_title')}</div>
           </div>
-          <div className="row pt15 pb15 align-items-center justify-content-center ml0 mr0">
+          <div className="row m15 p10 no-gutters align-items-center bg-primary"
+               style={{height:'4.4rem',borderRadius:'50em'}}>
+            <div className="col-auto text-left pl15 pr20">
+              <img style={{height: '20px'}} src={require('../assets/images/up-logo-notext-white.png')} alt=""/>
+            </div>
+            <div className="col text-left">
+              <div className="fs16 color-black text-left">UP Wallet</div>
+            </div>
+            <div className="col-auto text-right">
+              <div className="fs14 text-wrap text-left">
+                <span hidden className="fs13 color-black-3 mr5">Scan QRcode</span>
+                <Icon className="color-black-3" type="right"/>
+              </div>
+            </div>
+          </div>
+          <div className="row m15 p10 no-gutters align-items-center bg-primary" style={{height:'4.4rem',borderRadius:'50em'}}>
+            <div className="col-auto text-left pl15 pr20">
+              <i className="icon-loopr color-black-1 fs22"></i>
+            </div>
+            <div className="col text-left">
+              <div className="fs16 color-black text-left">Loopr Wallet</div>
+            </div>
+            <div className="col-auto text-right">
+              <div className="fs14 text-wrap text-left">
+                <span hidden className="fs13 color-black-3 mr5">Scan QRcode</span>
+                <Icon className="color-black-3" type="right"/>
+              </div>
+            </div>
+          </div>
+
+          <div onClick={()=>{}} className="d-none row m15 p10 no-gutters align-items-center bg-primary"
+               style={{height:'4.4rem',borderRadius:'50em'}}>
+            <div className="col-auto text-left pl15 pr20">
+              <i className="icon-Metamaskwallet color-black-1 fs20"></i>
+            </div>
+            <div className="col text-left">
+              <div className="fs16 color-black text-left">MetaMask</div>
+            </div>
+            <div className="col-auto text-right">
+              <div className="fs14 text-wrap text-left">
+                <span className="fs13 color-black-3 mr5">Connect</span>
+                <Icon className="color-black-3" type="right"/>
+              </div>
+            </div>
+          </div>
+          <div onClick={this.unlockByLedger} className="d-none row m15 p10 no-gutters align-items-center bg-primary"
+               style={{height:'4.4rem',borderRadius:'50em'}}>
+            <div className="col-auto text-left pl15 pr20">
+              <i className="icon-ledgerwallet color-black-1 fs20"></i>
+            </div>
+            <div className="col text-left">
+              <div className="fs16 color-black text-left">Ledger</div>
+            </div>
+            <div className="col-auto text-right">
+              <div className="fs14 text-wrap text-left">
+                <span className="fs13 color-black-3 mr5">Connect</span>
+                <Icon className="color-black-3" type="right"/>
+              </div>
+            </div>
+          </div>
+          <div hidden className="d-none row pt15 pb15 align-items-center justify-content-center ml0 mr0">
             <div className="col-auto pl20 pr20">
               <div className="text-center" onClick={() => this.authByThirdPartyWallet('loopr-ios')}>
                 <div className="d-inline-block color-black-1 text-center" style={{
@@ -146,11 +206,12 @@ class Auth extends React.Component {
                 <div className="pt10 fs13 color-black-4">imToken</div>
               </div>
             </div>
-            <div className="p510 pb10 text-center"style={{position:'absolute',bottom:'0',left:'0',right:'0'}}>
-              <div className="fs12 color-black-4">v1.0.3</div>
-            </div>
+          </div>
+          <div className="p5 pb10 text-center"style={{}}>
+            <div className="fs12 color-black-4">v1.0.3</div>
           </div>
         </div>
+
       </div>
     )
   }
