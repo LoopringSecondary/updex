@@ -68,6 +68,7 @@ const words = {
   set: '设置',
   helper: '助手',
   depth: '深度',
+  order_book:"订单表",
   list: {
     no_data: '暂无数据',
     no_data_custom: '暂无{title}',

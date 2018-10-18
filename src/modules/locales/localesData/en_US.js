@@ -65,6 +65,7 @@ const words = {
   more:'More',
   comingsoon:'Coming Soon',
   depth:'Depth',
+  order_book:'Order Book',
   set:'Set',
   helper:'Helper',
   list:{
