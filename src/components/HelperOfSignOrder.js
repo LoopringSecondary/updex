@@ -62,7 +62,7 @@ const PlaceOrderSign = (props) => {
     } catch(e) {
       console.error(e)
       Notification.open({
-        message: intl.get('trade.place_order_failed'),
+        message: intl.get('sign.signed_failed'),
         type: "error",
         description: e.message
       });
@@ -85,7 +85,7 @@ const PlaceOrderSign = (props) => {
     eachLimit(submitDatas, 1, async function (item, callback) {
       const signedItem = item.signed
       const unsignedItem = item.unsigned
-      //TODO order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
+      // order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
       switch(item.type) {
         case 'order':
           const orderRes = await window.RELAY.order.placeOrder(signedItem.data)
@@ -119,6 +119,8 @@ const PlaceOrderSign = (props) => {
             callback()
           }
           break;
+        default:
+          throw new Error(`Unsupported sign type:${item.type}`)
       }
     }, function (error) {
       if(error){
@@ -132,7 +134,7 @@ const PlaceOrderSign = (props) => {
   async function handelSubmit() {
     if(!signed || unsign.length !== actualSigned.length) {
       Notification.open({
-        message: intl.get('trade.place_order_failed'),
+        message: intl.get('sign.signed_failed'),
         type: "error",
         description: 'to sign'
       });
@@ -140,7 +142,7 @@ const PlaceOrderSign = (props) => {
     }
     if(unsign.length > 0 && unsign.length !== actualSigned.length) {
       Notification.open({
-        message: intl.get('notifications.title.place_order_failed'),
+        message: intl.get('sign.signed_failed'),
         type: "error",
         description: intl.get('notifications.message.some_items_not_signed')
       });
@@ -150,23 +152,27 @@ const PlaceOrderSign = (props) => {
   }
 
   const Description = ({tx}) => {
-    if(tx.type === 'order') {
-      return intl.get('place_order_sign.type_sign_order')
-    } else if(tx.type === 'tx') {
-      if(tx.action === 'CancelAllowance') {
-        return intl.get('place_order_sign.type_cancel_allowance', {token:tx.token})
-      } else if (tx.action === 'ApproveAllowance') {
-        return intl.get('place_order_sign.type_approve', {token:tx.token})
-      }
+    switch(tx.type) {
+      case 'order':
+        return intl.get('sign.type_sign_order')
+      case 'cancelOrder':
+        return intl.get('sign.type_cancel_order')
+      case 'approve':
+        return intl.get('sign.type_approve', {token:tx.token})
+      case 'approveZero':
+        return intl.get('sign.type_cancel_allowance', {token:tx.token})
+      case 'convert':
+        return intl.get('sign.type_convert')
+      default:
+        return ''
     }
-    return ''
   };
 
   const TxHeader = ({tx,index})=>{
     return (
       <div className="row pl0 pr0 align-items-center">
         <div className="col">
-          <div className="fs14 color-black-2">
+          <div className="fs14">
             <Button type="primary" shape="circle" size="small" className="mr10">{index+1}</Button>
             <Description tx={tx}/>
           </div>

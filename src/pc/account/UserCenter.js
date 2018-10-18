@@ -5,7 +5,7 @@ import { Link, Redirect, Route, Switch } from 'dva/router'
 import Containers from 'modules/containers'
 import routeActions from 'common/utils/routeActions'
 import { OpenOrderList, PullRefreshOrders } from 'mobile/orders/ListOrders'
-import ListBalance from 'mobile/tokens/ListBalance'
+import ListBalance from '../tokens/ListBalance'
 import { getShortAddress } from '../../modules/formatter/common'
 import storage from 'modules/storage'
 import intl from 'react-intl-universal'
@@ -25,7 +25,7 @@ class UserCenter extends React.Component {
         <div className="bg-fill" style={{height:'100%'}}>
           <div className="bg-white position-absolute w-100" style={{zIndex:'1000'}}>
             <NavBar
-                className="zb-b-b" 
+                className="zb-b-b"
                 mode="light"
                 onLeftClick={()=>dispatch({type:'layers/hideLayer',payload:{id:'usercenter'}})}
                 leftContent={[

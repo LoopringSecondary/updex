@@ -9,6 +9,7 @@ import {keccakHash} from 'LoopringJS/common/utils'
 import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
 import HelperOfSignOrder from './HelperOfSignOrder'
 import HelperOfPlaceOrderResult from './HelperOfPlaceOrderResult'
+import storage from 'modules/storage'
 
 const signByLooprStep = (placeOrderSteps, circulrNotify) => {
   const hashItem = getSocketAuthorizationByHash(placeOrderSteps.hash, circulrNotify)
@@ -63,13 +64,39 @@ const SignByLoopr = ({placeOrderSteps, dispatch}) => {
 
 class SignSteps extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      generating: false,
+    };
+  }
+
   generateQRCode(placeOrderSteps, dispatch) {
-    if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0) {
+    if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0 && !this.state.generating) {
       if(placeOrderSteps.task !== 'sign' && placeOrderSteps.unsign.length > 1) {
-        throw new Error('Illegal argument : unsign length larger than 1')
+        throw new Error('Illegal argument : parameter unsign length could larger than 1 only when task equals sign')
       }
-      const origin = placeOrderSteps.task === 'sign' ? JSON.stringify(placeOrderSteps.unsign) : JSON.stringify(placeOrderSteps.unsign[0].data)
+      let origin = {}
+      // [approve, approveZero] use sign instead
+      switch(placeOrderSteps.task) {
+        case 'sign':
+          origin = JSON.stringify(placeOrderSteps.unsign)
+          break;
+        case 'cancelOrder':
+          origin = JSON.stringify(placeOrderSteps.unsign[0].data)
+          break;
+        case 'convert':
+          origin = JSON.stringify({tx:placeOrderSteps.unsign[0].data, owner:storage.wallet.getUnlockedAddress()})
+          break;
+        default:
+          throw new Error(`Unsupported task type:${placeOrderSteps.task}`)
+      }
+      // const origin = placeOrderSteps.task === 'sign' ? JSON.stringify(placeOrderSteps.unsign) : JSON.stringify(placeOrderSteps.unsign[0].data)
       const hash = keccakHash(origin)
+      if(this.state.generating) {
+        return
+      }
+      this.setState({generating:true})
       window.RELAY.order.setTempStore(hash, origin).then(res => {
         const signWith = window.WALLET.getUnlockType()
         const qrcode = JSON.stringify({type:placeOrderSteps.task, value: hash})
@@ -78,52 +105,76 @@ class SignSteps extends React.Component {
         if (!res.error) {
           window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSignStepPC'}})
         }
+        this.setState({generating:false})
+      }).catch(e=>{
+        this.setState({generating:false})
       })
     }
   }
 
-  componentDidMount(){
-    const {placeOrderSteps, dispatch} = this.props
-    switch(placeOrderSteps.signWith) {
-      case 'loopr':
-        this.generateQRCode(placeOrderSteps, dispatch)
-        break;
-      case 'upWallet':
-        this.generateQRCode(placeOrderSteps, dispatch)
-        break;
+  check(props) {
+    const {placeOrderSteps, dispatch} = props
+    if((placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') && !placeOrderSteps.qrcode){
+      this.generateQRCode(placeOrderSteps, dispatch)
     }
+  }
+
+  componentDidMount() {
+    this.check(this.props)
+  }
+
+  componentWillReceiveProps(newProps){
+    this.check(newProps)
   }
 
   render() {
     const {placeOrderSteps, circulrNotify, dispatch} = this.props
     let step = 0
+    let step1, step2, step3, title
     switch(placeOrderSteps.signWith) {
       case 'loopr':
         step = signByLooprStep(placeOrderSteps, circulrNotify)
+        title = intl.get('place_order_by_loopr.title')
+        step1 = intl.get('place_order_by_loopr.step_qrcode')
+        step2 = intl.get('place_order_by_loopr.step_sign')
+        step3 = intl.get('place_order_by_loopr.step_result')
         break;
       case 'upWallet':
         step = signByLooprStep(placeOrderSteps, circulrNotify)
+        title = intl.get('place_order_by_upwallet.title')
+        step1 = intl.get('place_order_by_upwallet.step_qrcode')
+        step2 = intl.get('place_order_by_upwallet.step_sign')
+        step3 = intl.get('place_order_by_upwallet.step_result')
         break;
       case 'metaMask':
-        step = placeOrderSteps.step
+        if(placeOrderSteps.unsign && placeOrderSteps.signed) {
+          step = placeOrderSteps.step
+        }
+        title = intl.get('place_order_by_metamask.title')
+        step1 = intl.get('place_order_by_metamask.connect')
+        step2 = intl.get('place_order_by_metamask.step_sign')
+        step3 = intl.get('place_order_by_metamask.step_result')
         break;
       case 'ledger':
-        step = placeOrderSteps.step
+        if(placeOrderSteps.unsign && placeOrderSteps.signed) {
+          step = placeOrderSteps.step
+        }
+        title = intl.get('place_order_by_ledger.title')
+        step1 = intl.get('place_order_by_ledger.connect')
+        step2 = intl.get('place_order_by_ledger.step_sign')
+        step3 = intl.get('place_order_by_ledger.step_result')
         break;
     }
-
     const steps = [{
-      title: intl.get('place_order_by_loopr.step_qrcode'),
-      content: 'First-content',
+      title: step1,
     }, {
-      title: intl.get('place_order_by_loopr.step_sign'),
-      content: 'Second-content',
+      title: step2,
     }, {
-      title: intl.get('place_order_by_loopr.step_result'),
-      content: 'Last-content',
+      title: step3,
     }];
+
     return (
-      <Card className="rs" title={<div className="pl10 ">{intl.get('place_order_by_loopr.title')}</div>}>
+      <Card className="rs" title={<div className="pl10 ">{title}</div>}>
         <div className="p15">
           <div className="mb20 mt15">
             <Steps current={step}>
@@ -139,13 +190,16 @@ class SignSteps extends React.Component {
                     (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
                     <SignByLoopr placeOrderSteps={placeOrderSteps} dispatch={dispatch}/>
                   }
-                  <div className="pt10 pb10 color-black-2 text-left fs12 " style={{width:'320px',margin:'0 auto'}}>
-                    1. {intl.get('place_order_by_loopr.instruction_download')}
-                    <br />
-                    2. {intl.get('place_order_by_loopr.instruction_scan')}
-                    <br />
-                    {intl.get('place_order_by_loopr.instruction_warn')}
-                  </div>
+                  {
+                    (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
+                    <div className="pt10 pb10 text-left fs12 " style={{width:'320px',margin:'0 auto'}}>
+                      1. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_download') : intl.get('place_order_by_upwallet.instruction_download')}
+                      <br />
+                      2. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_scan') : intl.get('place_order_by_upwallet.instruction_scan')}
+                      <br />
+                      {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_warn') : intl.get('place_order_by_upwallet.instruction_warn')}
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -158,7 +212,9 @@ class SignSteps extends React.Component {
                   (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
                   <div className="text-center p35">
                     <Icon type="clock-circle" className="fs36 text-warning" />
-                    <div className="mt15">{intl.get('place_order_by_loopr.waiting_sign')}</div>
+                    <div className="mt15">
+                      {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.waiting_sign') : intl.get('place_order_by_upwallet.waiting_sign')}
+                      </div>
                   </div>
                 }
                 {
