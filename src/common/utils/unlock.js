@@ -1,6 +1,14 @@
 import intl from "react-intl-universal";
 import Notification from 'LoopringUI/components/Notification'
 import {MetaMaskAccount} from "common/wallets/account";
+import storage from 'modules/storage'
+
+const addressUnlocked = (dispatch, address) => {
+  window.RELAY.account.register(address)
+  window.WALLET = new MetaMaskAccount(window.web3);
+  storage.wallet.storeUnlockedAddress('metaMask', address)
+  dispatch({type:'wallet/unlockMetaMaskWallet',payload:{address}});
+}
 
 export const unlockWithMetaMask = (dispatch) => {
   if (!window.web3 || !window.web3.eth.accounts[0]) {
@@ -27,13 +35,11 @@ export const unlockWithMetaMask = (dispatch) => {
       return
     }
     let address = window.web3.eth.accounts[0]
-    dispatch({type:'wallet/unlockMetaMaskWallet',payload:{address}});
+    addressUnlocked(dispatch, address)
     dispatch({type: 'sockets/unlocked'});
     dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
     dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
     Notification.open({type:'success',message:intl.get('notifications.title.unlock_suc')});
-    window.WALLET = new MetaMaskAccount(window.web3);
-    window.RELAY.account.register(address)
     let alert = false
     var accountInterval = setInterval(function() {
       if ((!window.web3 || !window.web3.eth.accounts[0]) && !alert) {
@@ -50,14 +56,14 @@ export const unlockWithMetaMask = (dispatch) => {
       }
       if (window.web3.eth.accounts[0] && window.web3.eth.accounts[0] !== address) {
         address = window.web3.eth.accounts[0];
+        addressUnlocked(dispatch, address)
+        console.log("MetaMask account changed to:", address)
+        dispatch({type: 'sockets/unlocked'});
         Notification.open({
           message:intl.get('wallet_meta.account_change_title'),
           description:intl.get('wallet_meta.account_change_tip'),
           type:'info'
         })
-        console.log("MetaMask account changed to:", address)
-        dispatch({type:'wallet/unlockMetaMaskWallet',payload:{address}});
-        dispatch({type: 'sockets/unlocked'});
       }
     }, 100);
   })
