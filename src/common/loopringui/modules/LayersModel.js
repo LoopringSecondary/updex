@@ -2,7 +2,7 @@ const namespace = 'layers'
 export default {
   namespace,
   state: {
-    'authOfPC':{visible:true}
+    // 'authOfPC':{visible:true}
   },
   effects:{
     *changeLayer({payload},{call, select,put}){

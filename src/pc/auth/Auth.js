@@ -266,7 +266,7 @@ class Auth extends React.Component {
         <div className="divider 1px zb-b-t"></div>
         <div className="pl15 pr15">
           <div className="text-center pt50 pb30">
-            <img style={{height:'5rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
+            <img style={{height:'5rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/>
             <div className="text-primary fs20 font-weight-bold mt5 mb5">UP DEX</div>
           </div>
         </div>
@@ -276,7 +276,7 @@ class Auth extends React.Component {
               <div className="row m15 p15 no-gutters align-items-center bg-primary"
                    style={{padding: '7px 0px',borderRadius:'50em'}}>
                 <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-                  <img style={{height: '30px'}} src={require('../assets/images/up-logo-notext-white.png')} alt=""/>
+                  <img style={{height: '30px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
                 </div>
                 <div className="col text-left">
                   <div className="fs16 color-black-1 text-left">UP Wallet</div>
