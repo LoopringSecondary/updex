@@ -89,7 +89,7 @@ class Auth extends React.Component {
         <div className="divider 1px zb-b-t"></div>
         <div className="pt50 pb35 pl15 pr15">
           <div className="text-center pb30">
-            <img style={{height:'4.5rem'}} src={require('../assets/images/up-logo-notext.png')} alt=""/>
+            <img style={{height:'4.5rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/>
             <div className="text-primary fs18 font-weight-bold mt5 mb5">UP DEX</div>
           </div>
           <List className="no-border am-list-bg-none selectable">
@@ -114,7 +114,7 @@ class Auth extends React.Component {
           <div className="row m15 p10 no-gutters align-items-center bg-primary"
                style={{height:'4.4rem',borderRadius:'50em'}}>
             <div className="col-auto text-left pl15 pr20">
-              <img style={{height: '20px'}} src={require('../assets/images/up-logo-notext-white.png')} alt=""/>
+              <img style={{height: '20px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
             </div>
             <div className="col text-left">
               <div className="fs16 color-black text-left">UP Wallet</div>
@@ -179,7 +179,7 @@ class Auth extends React.Component {
                   height: '36px',
                   lineHeight:'36px',
                 }}>
-                  <img width="100%" src={require('../assets/images/up-logo-notext.png')} alt=""/>
+                  <img width="100%" src={require('../../assets/images/up-logo-notext.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13 color-black-4">UP Wallet</div>
               </div>
@@ -190,7 +190,7 @@ class Auth extends React.Component {
                   width: '36px',
                   height: '36px',
                 }}>
-                  <img style={{borderRadius: '6px'}} width="100%" src={require('../assets/images/loopr.png')} alt=""/>
+                  <img style={{borderRadius: '6px'}} width="100%" src={require('../../assets/images/loopr.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13  color-black-4">Loopr</div>
               </div>
@@ -201,7 +201,7 @@ class Auth extends React.Component {
                   width: '36px',
                   height: '36px',
                 }}>
-                  <img style={{borderRadius: '6px'}} width="100%" src={require('../assets/images/imtoken.png')} alt=""/>
+                  <img style={{borderRadius: '6px'}} width="100%" src={require('../../assets/images/imtoken.png')} alt=""/>
                 </div>
                 <div className="pt10 fs13 color-black-4">imToken</div>
               </div>

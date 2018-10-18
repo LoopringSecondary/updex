@@ -4,8 +4,7 @@ import AuthByLoopr from './loopr/AuthByLoopr'
 import AuthByImtoken from './imtoken/AuthByImtoken'
 import AuthByMock from './mock/AuthByMock'
 import AuthByTPWallet from './tpwallet/AuthByTPWallet'
-import AuthOfMobile from './AuthOfMobile.js'
-import AuthOfPC from './AuthOfPC.js'
+import Auth from './Auth.js'
 import storage from 'modules/storage'
 import Privacy from './terms/Privacy'
 import Terms from './terms/Terms'
@@ -17,7 +16,7 @@ const UnLogged = ()=>{
   // }else{
     return (
       <Switch>
-         <Route path={`/auth`} exact component={AuthOfMobile} />
+         <Route path={`/auth`} exact component={Auth} />
          <Route path={`/auth/terms`} exact component={Terms} />
          <Route path={`/auth/privacy`} exact component={Privacy} />
        </Switch>
