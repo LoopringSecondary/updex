@@ -157,7 +157,7 @@ export class AddressAccount extends Account
     const unsign = [{type:'order', data:{}}]
     window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {unsign, signWith:'address'}})
     window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
-    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
+    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'authOfPC'}})
   }
 
   signEthereumTx (rawTx)
@@ -165,7 +165,7 @@ export class AddressAccount extends Account
     const unsign = [{type:'order', data:{}}]
     window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {unsign, signWith:'address'}})
     window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
-    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
+    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'authOfPC'}})
   }
 
   async signOrder (order)
@@ -173,7 +173,7 @@ export class AddressAccount extends Account
     const unsign = [{type:'order', data:order}]
     window.STORE.dispatch({type:'placeOrderSteps/unsign', payload: {unsign, signWith:'address'}})
     window.STORE.dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
-    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'auth2'}})
+    window.STORE.dispatch({type: 'layers/showLayer', payload: {id: 'authOfPC'}})
   }
 
   async signOrderHelper (order)

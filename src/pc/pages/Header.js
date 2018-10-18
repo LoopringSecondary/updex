@@ -21,7 +21,7 @@ class Header extends React.Component {
       if(address){
         showLayer('usercenter')
       }else{
-        showLayer('auth2')
+        showLayer('authOfPC')
       }
     }
 

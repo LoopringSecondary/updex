@@ -90,7 +90,7 @@ class Auth extends React.Component {
       })
       this.props.dispatch({
         type: 'layers/hideLayer',
-        payload: {id: 'auth2'}
+        payload: {id: 'authOfPC'}
       })
       this.props.dispatch({type: 'sockets/unlocked'});
       Modal.alert(intl.get('notifications.title.log_in_suc'))
@@ -165,7 +165,7 @@ class Auth extends React.Component {
             this.props.dispatch({type:'wallet/unlockLedgerWallet',payload:{ledger, dpath:path, address}});
             this.props.dispatch({
               type: 'layers/hideLayer',
-              payload: {id: 'auth2'}
+              payload: {id: 'authOfPC'}
             })
             this.props.dispatch({type: 'sockets/unlocked'});
           }
@@ -252,17 +252,15 @@ class Auth extends React.Component {
     return (
       <div className="bg-white" style={{height:'100vh',overflow:'auto'}}>
         <NavBar
-          className="bg-white d-none"
+          className="bg-white"
           mode="light"
-          leftContent={null &&[
-            <span onClick={()=>{}} className="color-black-1" key="1"><Icon type="left" /></span>,
+          leftContent={[
+            <span onClick={()=>_this.hideLayer({id:'authOfPC'})} className="text-primary fs14 cursor-pointer" key="1"><Icon type="close" /></span>,
           ]}
-          rightContent={null && [
-            <span className="color-black-1" key="1"  onClick={()=>{}}><Icon type="question-circle-o" /></span>
-          ]}
+          rightContent={[]}
         >
-          <div className="text-primary fs16">
-            Access Your Wallet
+          <div className="color-black-1 fs16">
+            LOG IN
           </div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
