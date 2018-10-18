@@ -14,14 +14,14 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="usercenter">
-        <UiContainers.Panels position="right" id="usercenter" width="48rem"  style={{margin:'0 auto',height:'100%'}}>
+        <UiContainers.Drawer position="right" id="usercenter" width="56rem"  style={{margin:'0 auto',height:'100%'}}>
           <UserCenter />
-        </UiContainers.Panels>
+        </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="chooseLedgerAddress">
-        <UiContainers.Panels id="chooseLedgerAddress" position="right">
+        <UiContainers.Drawer id="chooseLedgerAddress" position="right">
           <ChooseLedgerAddress />
-        </UiContainers.Panels>
+        </UiContainers.Drawer>
       </Containers.Layers>
     </div>
   )

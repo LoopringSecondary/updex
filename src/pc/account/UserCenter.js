@@ -13,9 +13,8 @@ import {connect} from 'dva'
 
 class UserCenter extends React.Component {
   render() {
-    const {address} = this.props
+    const {address,dispatch} = this.props
     const logout = () => {
-      const {dispatch} = this.props
       storage.wallet.clearUnlockedAddress()
       dispatch({type:"wallet/lock", payload:{}})
       dispatch({type:"placeOrderSteps/reset", payload:{}})
@@ -24,12 +23,17 @@ class UserCenter extends React.Component {
     }
     return (
         <div className="bg-fill" style={{height:'100%'}}>
-          <div className="bg-white position-fixed w-100" style={{zIndex:'1000'}}>
+          <div className="bg-white position-absolute w-100" style={{zIndex:'1000'}}>
             <NavBar
                 className="zb-b-b" 
                 mode="light"
-                leftContent={[]}
-                rightContent={[]}
+                onLeftClick={()=>dispatch({type:'layers/hideLayer',payload:{id:'usercenter'}})}
+                leftContent={[
+                  <WebIcon type="close" className="fs14 color-black-1" />
+                ]}
+                rightContent={[
+                  <WebIcon type="poweroff" onClick={() => logout()} className="fs14 color-black-1 text-primary cursor-pointer" />
+                ]}
             >
               <div className="text-center color-black">
                 {intl.get('usercenter.page_title')}
@@ -37,9 +41,8 @@ class UserCenter extends React.Component {
             </NavBar>
           </div>
           <div className="pt40 bg-white"></div>
-          <div className="bg-white pt30 pb30 text-center">
+          <div className="bg-white pt50 pb50 text-center">
             <div className="color-black-2 text-center fs16">{getShortAddress(address)}</div>
-            <div className="color-black-2 text-center fs16" onClick={() => logout()}>Logout</div>
             <div className="text-center mt5">
               <span target="_blank" onClick={routeActions.gotoHref.bind(this,`https://etherscan.io/address/${address}`)} className="d-inline-block cursor-pointer fs12 lh25 pl10 pr10 bg-primary-light text-primary radius-circle">etherscan.io</span>
             </div>
