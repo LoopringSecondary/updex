@@ -101,7 +101,6 @@ class CancelOrderConfirm extends React.Component {
   render() {
     const {cancelOrderConfirm} = this.props;
     const {loading,now} = this.state;
-    console.log(this.props);
     const { type,market,order} = cancelOrderConfirm;
     const title = type === 'cancelOrder' ? intl.get('order.confirm_cancel_order') : intl.get('order.confirm_cancel_all', {pair: market || ''})
     return (
