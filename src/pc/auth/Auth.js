@@ -417,7 +417,7 @@ class Auth extends React.Component {
               </div>
             </div>
           </div>
-          <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-primary"
+          <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="row m15 p15 no-gutters align-items-center bg-primary"
                style={{padding: '7px 0px',borderRadius:'50em'}}>
             <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
               <i className="icon-eye color-black-1 fs22"></i>
@@ -433,25 +433,6 @@ class Auth extends React.Component {
             </div>
           </div>
         </div>
-        {
-          false && placeOrderSteps.step === 0 &&
-            <div>
-              <List className="no-border am-list-bg-none selectable">
-                <InputItem
-                  type="text"
-                  onChange={this.amountChange}
-                  value={address}
-                  className="circle h-default color-black-2 fs13"
-                  placeholder="Paste ETH address"
-                  extra={<Icon hidden type="scan" />}
-                  clear
-                >
-                </InputItem>
-              </List>
-              <Button onClick={this.authByAddress} className="mt20 fs18" type="primary">Log In By Address</Button>
-              <Button hidden onClick={()=>{}} className="mt20 fs16" type="ghost">Skip to Log In</Button>
-            </div>
-        }
       </div>
     )
   }
