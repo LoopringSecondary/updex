@@ -214,7 +214,7 @@ export default {
     my_open_orders: '最近订单',
     my_all_orders: '全部订单',
     order_book: '最新挂单',
-no_open_orders: '{market}暂无有效订单',
+    no_open_orders: '{market}暂无有效订单',
     view_all_orders: '查看全部订单'
   },
   order_detail: {
@@ -233,6 +233,57 @@ no_open_orders: '{market}暂无有效订单',
     orders: '订单',
     fills: '成交',
     help: '帮助'
+  },
+  place_order_confirm: {
+    qrcode_security: '*为了您订单的安全，二维码只会生成一次并且不会保存在任何地方。请确认妥善保存二维码，任何收到您二维码的人都有可能吃掉您的订单。',
+    no_cost_gas: '签名和下单不会消耗油费',
+    sign_and_submit: '签名并下单'
+  },
+  place_order_sign: {
+    unsigned_tx: '未签名信息',
+    signed_tx: '签名后信息',
+    unsigned: '未签名',
+    signed: '已签名',
+    type_sign_order: '签名原始订单',
+    type_cancel_allowance: '取消{token}授权',
+    type_approve: '{token}授权'
+  },
+  place_order_by_loopr: {
+    title: '使用Loopr移动端钱包下单',
+    step_qrcode: '扫描二维码',
+    step_sign: '在设备上签名发送',
+    step_result: '结果',
+    qrcode_overdue: '二维码已过期，请重新下单生成新二维码',
+    instruction_download: '下载Loopr-IOS',
+    instruction_scan: '打开您的Loopr钱包，扫描二维码，确认信息完成签名，并提交订单',
+    instruction_warn: '* 二维码有效时间24小时，请尽快完成扫码操作，过期后请重新下单生成二维码',
+    waiting_sign: '等待手机对订单进行签名提交',
+  },
+  place_order_by_upwallet: {
+    title: '使用UpWallet下单',
+    step_qrcode: '扫描二维码',
+    step_sign: '在设备上签名发送',
+    step_result: '结果',
+    qrcode_overdue: '二维码已过期，请重新下单生成新二维码',
+    instruction_download: '下载UpWallet App',
+    instruction_scan: '打开您的UpWallet，扫描二维码，确认信息完成签名，并提交订单',
+    instruction_warn: '* 二维码有效时间24小时，请尽快完成扫码操作，过期后请重新下单生成二维码',
+    waiting_sign: '等待手机对订单进行签名提交',
+  },
+  place_order_by_ledger: {
+    title: '使用Ledger下单',
+    connect: '连接 Leager',
+    confirm_unlock_address: '请确认解锁地址',
+    step_connect: '连接您的Ledger',
+    step_sign: '在Ledger上确认签名',
+    step_result: '结果'
+  },
+  place_order_by_metamask: {
+    title: '使用 MetaMask 下单',
+    connect: '连接 MetaMask',
+    step_connect: '连接MetaMask',
+    step_sign: '在MetaMask上确认签名',
+    step_result: '结果'
   },
   order_cancel: {
     cancel_title: '您确定要取消当前订单?',
@@ -294,11 +345,6 @@ no_open_orders: '{market}暂无有效订单',
     high: '高',
     tips:"撮合费 必须大于 矿工发送一个以太坊交易所需的油费。"
   },
-  place_order_confirm: {
-    qrcode_security: '*为了您订单的安全，二维码只会生成一次并且不会保存在任何地方。请确认妥善保存二维码，任何收到您二维码的人都有可能吃掉您的订单。',
-    no_cost_gas: '签名和下单不会消耗油费',
-    sign_and_submit: '签名并下单'
-  },
   p2p_order: {
     order_title: '私密点对点交易',
     amounts_placeholder: '卖出数量',
@@ -310,18 +356,17 @@ no_open_orders: '{market}暂无有效订单',
     notice: '* P2P订单双方都不需要支付LRC手续费</br>',
     user_center_p2p: 'P2P 交易'
   },
-  place_order_sign: {
-    unsigned_tx: '未签名信息',
-    signed_tx: '签名后信息',
-    unsigned: '未签名',
-    signed: '已签名',
-    type_sign_order: '签名原始订单',
-    type_cancel_allowance: '取消{token}授权',
-    type_approve: '{token}授权'
-  },
   sign: {
     not_signed: '您还未完成签名',
-    to_sign: '去签名'
+    to_sign: '去签名',
+    signed_failed: '签名失败',
+    type_sign_order: '签名原始订单',
+    type_cancel_allowance: '取消{token}授权',
+    type_approve: '{token}授权',
+    type_cancel_order: '签名取消订单',
+    type_convert: '转换WETH',
+    submit_success: '提交成功！',
+    submit_failed: '提交失败',
   },
   // -----------
   // transaction

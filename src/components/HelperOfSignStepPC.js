@@ -130,37 +130,51 @@ class SignSteps extends React.Component {
   render() {
     const {placeOrderSteps, circulrNotify, dispatch} = this.props
     let step = 0
+    let step1, step2, step3, title
     switch(placeOrderSteps.signWith) {
       case 'loopr':
         step = signByLooprStep(placeOrderSteps, circulrNotify)
+        title = intl.get('place_order_by_loopr.title')
+        step1 = intl.get('place_order_by_loopr.step_qrcode')
+        step2 = intl.get('place_order_by_loopr.step_sign')
+        step3 = intl.get('place_order_by_loopr.step_result')
         break;
       case 'upWallet':
         step = signByLooprStep(placeOrderSteps, circulrNotify)
+        title = intl.get('place_order_by_upwallet.title')
+        step1 = intl.get('place_order_by_upwallet.step_qrcode')
+        step2 = intl.get('place_order_by_upwallet.step_sign')
+        step3 = intl.get('place_order_by_upwallet.step_result')
         break;
       case 'metaMask':
         if(placeOrderSteps.unsign && placeOrderSteps.signed) {
           step = placeOrderSteps.step
         }
+        title = intl.get('place_order_by_metamask.title')
+        step1 = intl.get('place_order_by_metamask.connect')
+        step2 = intl.get('place_order_by_metamask.step_sign')
+        step3 = intl.get('place_order_by_metamask.step_result')
         break;
       case 'ledger':
         if(placeOrderSteps.unsign && placeOrderSteps.signed) {
           step = placeOrderSteps.step
         }
+        title = intl.get('place_order_by_ledger.title')
+        step1 = intl.get('place_order_by_ledger.connect')
+        step2 = intl.get('place_order_by_ledger.step_sign')
+        step3 = intl.get('place_order_by_ledger.step_result')
         break;
     }
-
     const steps = [{
-      title: intl.get('place_order_by_loopr.step_qrcode'),
-      content: 'First-content',
+      title: step1,
     }, {
-      title: intl.get('place_order_by_loopr.step_sign'),
-      content: 'Second-content',
+      title: step2,
     }, {
-      title: intl.get('place_order_by_loopr.step_result'),
-      content: 'Last-content',
+      title: step3,
     }];
+
     return (
-      <Card className="rs" title={<div className="pl10 ">{intl.get('place_order_by_loopr.title')}</div>}>
+      <Card className="rs" title={<div className="pl10 ">{title}</div>}>
         <div className="p15">
           <div className="mb20 mt15">
             <Steps current={step}>
@@ -176,13 +190,16 @@ class SignSteps extends React.Component {
                     (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
                     <SignByLoopr placeOrderSteps={placeOrderSteps} dispatch={dispatch}/>
                   }
-                  <div className="pt10 pb10 color-black-2 text-left fs12 " style={{width:'320px',margin:'0 auto'}}>
-                    1. {intl.get('place_order_by_loopr.instruction_download')}
-                    <br />
-                    2. {intl.get('place_order_by_loopr.instruction_scan')}
-                    <br />
-                    {intl.get('place_order_by_loopr.instruction_warn')}
-                  </div>
+                  {
+                    (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
+                    <div className="pt10 pb10 text-left fs12 " style={{width:'320px',margin:'0 auto'}}>
+                      1. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_download') : intl.get('place_order_by_upwallet.instruction_download')}
+                      <br />
+                      2. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_scan') : intl.get('place_order_by_upwallet.instruction_scan')}
+                      <br />
+                      {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_warn') : intl.get('place_order_by_upwallet.instruction_warn')}
+                    </div>
+                  }
                 </div>
               </div>
             </div>
@@ -195,7 +212,9 @@ class SignSteps extends React.Component {
                   (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
                   <div className="text-center p35">
                     <Icon type="clock-circle" className="fs36 text-warning" />
-                    <div className="mt15">{intl.get('place_order_by_loopr.waiting_sign')}</div>
+                    <div className="mt15">
+                      {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.waiting_sign') : intl.get('place_order_by_upwallet.waiting_sign')}
+                      </div>
                   </div>
                 }
                 {
