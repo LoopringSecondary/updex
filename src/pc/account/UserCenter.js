@@ -29,10 +29,10 @@ class UserCenter extends React.Component {
                 mode="light"
                 onLeftClick={()=>dispatch({type:'layers/hideLayer',payload:{id:'usercenter'}})}
                 leftContent={[
-                  <WebIcon type="close" className="fs14 color-black-1" />
+                  <WebIcon type="close" className="fs14 color-black-1 text-primary cursor-pointer" />
                 ]}
                 rightContent={[
-                  <WebIcon type="poweroff" onClick={() => logout()} className="fs14 color-black-1 text-primary cursor-pointer" />
+                  <WebIcon type="poweroff" onClick={() => logout()} className="fs14 text-primary cursor-pointer" />
                 ]}
             >
               <div className="text-center color-black">

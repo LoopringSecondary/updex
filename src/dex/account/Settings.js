@@ -71,7 +71,7 @@ function Settings(props) {
           mode="light"
           onLeftClick={()=>hideLayer({id:'settings'})}
           leftContent={[
-            <span key='1' className=""><WebIcon type="close"/></span>,
+            <span key='1' className="fs14 cursor-pointer"><WebIcon type="close"/></span>,
           ]}
           rightContent={null && [
             <WebIcon key="1" type="question-circle-o"/>,
