@@ -240,6 +240,43 @@ export default {
     type_cancel_allowance: 'Cancel {token} Allowance',
     type_approve: 'Approve {token} Allowance'
   },
+  place_order_by_loopr: {
+    title: 'Sign With Loopr Wallet',
+    step_qrcode: 'Scan QRcode',
+    step_sign: 'Sign On Mobile',
+    step_result: 'Result',
+    qrcode_overdue: 'QRcode is overdue, please place order again',
+    instruction_download: 'Download Loopr-IOS',
+    instruction_scan: 'Open your Loopr wallet, scan the QRcode and submit',
+    instruction_warn: '* The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
+    waiting_sign: 'Waiting for your operations on Loopr Wallet to sign and submit',
+  },
+  place_order_by_upwallet: {
+    title: 'Sign With UpWallet',
+    step_qrcode: 'Scan QRcode',
+    step_sign: 'Sign On Mobile',
+    step_result: 'Result',
+    qrcode_overdue: 'QRcode is overdue, please place order again',
+    instruction_download: 'Download UpWallet App',
+    instruction_scan: 'Open your UpWallet, scan the QRcode and submit',
+    instruction_warn: '* The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
+    waiting_sign: 'Waiting for your operations on UpWallet to sign and submit',
+  },
+  place_order_by_ledger: {
+    title: 'Sign With Ledger',
+    connect: 'Connect Leager',
+    confirm_unlock_address: 'Please confirm your unlock address',
+    step_connect: 'Connect With Your Ledger',
+    step_sign: 'Sign On Ledger',
+    step_result: 'Result'
+  },
+  place_order_by_metamask: {
+    title: 'Sign With MetaMask',
+    connect: 'Connect with MetaMask',
+    step_connect: 'Connect With MetaMask',
+    step_sign: 'Sign On MetaMask',
+    step_result: 'Result'
+  },
   order_cancel: {
     cancel_title: "Do you want to cancel this order?",
     cancel_all_title: "Cancel all {market} orders ?",
@@ -318,7 +355,15 @@ export default {
   },
   sign: {
     not_signed: "You may have some items not signed",
-    to_sign: "To Sign"
+    to_sign: "To Sign",
+    signed_failed: 'Signed Failed',
+    type_sign_order: 'Sign Original Order',
+    type_cancel_allowance: 'Cancel {token} approval',
+    type_approve: '{token} approval',
+    type_cancel_order: 'Sign Cancel Order',
+    type_convert: 'Convert WETH',
+    submit_success: 'Submit Successfully',
+    submit_failed: 'Submit Failed',
   },
   // -----------
   // transaction
