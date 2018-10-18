@@ -6,6 +6,8 @@ import routeActions from 'common/utils/routeActions'
 import { toFixed } from 'LoopringJS/common/formatter'
 import TokensFm from 'modules/tokens/TokensFm'
 import intl from 'react-intl-universal'
+import HelperOfTokenActions from '../tokens/HelperOfTokenActions'
+import {Popover} from 'antd'
 
 const TokenListComp = (props)=>{
   const {tokens,balance,marketcap, dispatch} = props
@@ -61,9 +63,11 @@ const TokenListComp = (props)=>{
                         token.symbol === 'WETH' &&
                         <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block" size="small" onClick={() => showConvert('WETH')}>{intl.get('common.convert')}</Button>
                       }
-                      <Button type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml10" size="small" onClick={() => showActions(token.symbol)}>
+                      <Popover content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol}}/>}>
+                      <Button type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml10" size="small" >
                         <WebIcon type="ellipsis" />
                       </Button>
+                      </Popover>
                     </td>
                   </tr>
                 )

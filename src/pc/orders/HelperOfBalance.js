@@ -1,12 +1,13 @@
 import React from 'react'
 import { connect } from 'dva'
 import { Button } from 'antd-mobile'
-import { Icon as WebIcon, Switch } from 'antd'
+import { Icon as WebIcon, Switch,Popover } from 'antd'
 import routeActions from 'common/utils/routeActions'
 import { getTokensByMarket } from 'modules/formatter/common'
 import * as tokenFormatter from 'modules/tokens/TokenFm'
 import {toFixed } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
+import HelperOfTokenActions from '../tokens/HelperOfTokenActions'
 
 const HelperOfBalance = (props)=>{
   const {dispatch,pair,balance} = props
@@ -97,9 +98,11 @@ const HelperOfBalance = (props)=>{
                       true && token.symbol === 'WETH' &&
                       <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
                     }
-                    <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="ghost" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block ml10 border-none bg-primary-light" size="small">
+                    <Popover content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol,hideBuy:true}}/>}>
+                    <Button  type="ghost" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block ml10 border-none bg-primary-light" size="small">
                       <WebIcon type="ellipsis" />
                     </Button>
+                    </Popover>
                   </td>
                 </tr>
               )
