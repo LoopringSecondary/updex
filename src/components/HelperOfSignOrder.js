@@ -85,7 +85,7 @@ const PlaceOrderSign = (props) => {
     eachLimit(submitDatas, 1, async function (item, callback) {
       const signedItem = item.signed
       const unsignedItem = item.unsigned
-      //TODO order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
+      // order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
       switch(item.type) {
         case 'order':
           const orderRes = await window.RELAY.order.placeOrder(signedItem.data)
@@ -119,6 +119,8 @@ const PlaceOrderSign = (props) => {
             callback()
           }
           break;
+        default:
+          throw new Error(`Unsupported sign type:${item.type}`)
       }
     }, function (error) {
       if(error){
@@ -153,21 +155,17 @@ const PlaceOrderSign = (props) => {
     switch(tx.type) {
       case 'order':
         return intl.get('sign.type_sign_order')
-        break;
       case 'cancelOrder':
         return intl.get('sign.type_cancel_order')
-        break;
       case 'approve':
         return intl.get('sign.type_approve', {token:tx.token})
-        break;
       case 'approveZero':
         return intl.get('sign.type_cancel_allowance', {token:tx.token})
-        break;
       case 'convert':
         return intl.get('sign.type_convert')
-        break;
+      default:
+        return ''
     }
-    return ''
   };
 
   const TxHeader = ({tx,index})=>{
