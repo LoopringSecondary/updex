@@ -169,15 +169,11 @@ class SignSteps extends React.Component {
           </div>
           {
             step === 0 &&
-            <div className="mt15 bg-fill">
-              <div className="">
-                <div className="text-center">
-                  {
-                    (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
-                    <SignByLoopr placeOrderSteps={placeOrderSteps} dispatch={dispatch}/>
-                  }
-                </div>
-              </div>
+            <div className="mt15">
+              {
+                (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
+                <SignByLoopr placeOrderSteps={placeOrderSteps} dispatch={dispatch}/>
+              }
             </div>
           }
           {
@@ -186,11 +182,11 @@ class SignSteps extends React.Component {
               <div className="">
                 {
                   (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
-                  <div className="text-center p35">
-                    <Icon type="clock-circle" className="fs36 text-warning" />
-                    <div className="mt15">
+                  <div className="text-center pt40 pb40 pl15 pr15 bg-fill">
+                    <Icon type="clock-circle" className="fs36 text-primary" />
+                    <div className="mt15 color-black-1">
                       {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.waiting_sign') : intl.get('place_order_by_upwallet.waiting_sign')}
-                      </div>
+                    </div>
                   </div>
                 }
                 {(placeOrderSteps.signWith === 'metaMask' || placeOrderSteps.signWith === 'ledger') && 

@@ -45,13 +45,14 @@ const Logged = ()=>{
           <Redirect from="/" to="/trade" />
         </Switch>
         <CommonModals />
+        <SignModals />
+        <AuthModals />
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
         <MarketModals />
-        <AuthModals />
-        <SignModals />
         <NotificationModals />
+
       </div>
     )
   }else{

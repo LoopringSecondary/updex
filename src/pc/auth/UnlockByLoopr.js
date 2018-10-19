@@ -81,12 +81,11 @@ class Auth extends React.Component {
                 	<span className="p10 d-inline-block" style={{background:'#fff'}}>
                 		<QRCode value={JSON.stringify({type:'UUID', value:scanAddress.UUID})} size={240} level='H'/>
                 		<div className="mt5 lh10">
-                			<CountDown style={{ fontSize: '1.3rem',color:"rgba(0,0,0,0.4)" }} className="" target={targetTime} onEnd={countDownOnEnd}/>
+                			<CountDown style={{ fontSize: '1.3rem',color:"rgba(0,0,0,0.7)" }} className="" target={targetTime} onEnd={countDownOnEnd}/>
                 		</div>
                 	</span>
                 </div>
-                <div className="bg-fill p15 text-left lh25 mt15">
-
+                <div className="bg-fill p15 text-left lh25 mt15 fs13">
                   1. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_download') : intl.get('unlock_by_upwallet.instruction_download')}
                   <br />
                   2. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_scan') : intl.get('unlock_by_upwallet.instruction_scan')}

@@ -185,10 +185,10 @@ const PlaceOrderSign = (props) => {
   }
   const TxHeader = ({tx,index})=>{
     return (
-      <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center">
+      <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
         <div className="col text-left">
-          <div className="fs14 color-black-1">
-            {index+1}. <Description tx={tx}/>
+          <div className="color-black-1">
+            {index+1}.&nbsp;&nbsp;<Description tx={tx}/>
           </div>
         </div>
         <div className="col-auto ">
@@ -199,7 +199,7 @@ const PlaceOrderSign = (props) => {
           }
           {!signed[index] &&
           <div className="">
-            <a className="text-primary cursor-pointer" onClick={sign.bind(this, tx, index)}>{intl.get('place_order_sign.unsigned')}<Icon className="ml5" type="right"  /></a>
+            <a className="text-primary cursor-pointer" onClick={sign.bind(this, tx, index)}>{intl.get('place_order_sign.unsigned')} <Icon className="" type="right"  /></a>
           </div>
           }
         </div>
@@ -208,7 +208,7 @@ const PlaceOrderSign = (props) => {
   }
   return (
     <div className="">
-      <div className="bg-fill p15" style={{minHeight:'25rem',borderRadius:'0.4rem'}}>
+      <div className="bg-fill p15" style={{minHeight:'25rem',borderRadius:'0rem'}}>
         <div className="color-black-3 fs14 pb10 zb-b-b">You Need To Do </div>
         {
           unsign && unsign.map((item, index)=><TxHeader tx={item} index={index} />)

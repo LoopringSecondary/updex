@@ -55,7 +55,7 @@ class UserInfo extends React.Component {
       <div onClick={clickUser} className="cursor-pointer" style={{height:'100%'}}>
         {
           !address &&
-          <div className="pl25 pr25">
+          <div className="pl25 pr25 d-flex align-items-center" style={{height:'100%'}}>
             <i className="icon-user fs20 text-primary"></i>
           </div>
         }
