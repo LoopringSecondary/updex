@@ -27,8 +27,9 @@ const TokenListComp = (props)=>{
   }
 
   const showConvert = (token) => {
-    routeActions.gotoPath(`/dex/convert/${token}`)
-    // dispatch({type: 'layers/showLayer', payload: {id: 'convertToken',token}});
+    // routeActions.gotoPath(`/dex/convert/${token}`)
+    dispatch({type:'layers/hideLayer',payload:{id:'usercenter'}})
+    dispatch({type: 'layers/showLayer', payload: {id: 'convertToken',token}});
   }
   const showActions = (symbol) => {
     dispatch({type: 'layers/showLayer', payload: {id: 'helperOfTokenActions',symbol,hideBuy:false}});
