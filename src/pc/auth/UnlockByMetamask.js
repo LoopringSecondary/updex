@@ -4,9 +4,7 @@ import {unlockWithMetaMask} from 'common/utils/unlock'
 import { connect } from 'dva'
 import { Icon, Collapse, Steps, Modal as AntdModal } from 'antd'
 import storage from 'modules/storage'
-import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
-import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
 
 const dpath = "m/44'/60'/0'";
@@ -110,15 +108,6 @@ class Auth extends React.Component {
             <div>
               {!browserType || browserType === 'Others' &&
               <div className="btn btn-primary btn-block btn-xxlg">{intl.get('wallet_meta.browser_tip')}</div>
-              }
-              {browserSupported && this.state.metamaskState === 'locked' &&
-              <Button className="btn btn-primary btn-block btn-xxlg" size="large" onClick={openToRefresh}>{intl.get('wallet_meta.unlock_metaMask_tip')}</Button>
-              }
-              {browserSupported && this.state.metamaskState === 'notInstalled' &&
-              <Button className="btn btn-primary btn-block btn-xxlg" size="large" onClick={openToRefresh}>{intl.get('wallet_meta.install_metaMask_tip')}</Button>
-              }
-              {browserSupported && !this.state.metamaskState &&
-              <Button className="btn btn-primary btn-block btn-xxlg" onClick={this.connectToMetamask} size="large"> {intl.get('unlock.actions_connect',{walletType:'MetaMask'})}</Button>
               }
             </div>
             {
