@@ -17,6 +17,7 @@ class Auth extends React.Component {
     address:'',
     metamaskState:'',
     connectingLedger:false,
+    unlockWith:''
   }
 
   checkMetaMaskState() {
@@ -183,7 +184,6 @@ class Auth extends React.Component {
 
   render () {
     const {metaMask, placeOrderSteps, dispatch} = this.props
-    console.log(1111, metaMask)
     const chromeExtention = {
       'Opera' : "https://addons.opera.com/extensions/details/metamask/",
       'Chrome' : "https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn",
@@ -211,12 +211,11 @@ class Auth extends React.Component {
           window.open(chromeExtention[browserType])
         }
       }
-      console.log(345)
       dispatch({type: 'metaMask/setRefreshModalVisible', payload: {refreshModalVisible:true}});
     }
 
     const hideModal = () => {
-      console.log(123)
+      this.setState({unlockWith:''})
       dispatch({type: 'metaMask/setRefreshModalVisible', payload: {refreshModalVisible:false}});
     }
 
@@ -229,6 +228,10 @@ class Auth extends React.Component {
     }
 
     const unlockTypeChanged = (unlockType) => {
+      if(unlockType === 'metaMask' && this.state.unlockWith === unlockType) {
+        return
+      }
+      this.setState({unlockWith:unlockType})
       switch(unlockType) {
         case 'loopr':
           this.unlockByLoopr();
@@ -237,6 +240,7 @@ class Auth extends React.Component {
           this.unlockByUpWallet();
           break;
         case 'metaMask':
+          console.log('metamask')
           const state = this.checkMetaMaskState()
           if(!browserType || browserType === 'Others' || (browserSupported && state === 'notInstalled')) {
             this.showLayer({id:'unlockByMetaMask'})
@@ -323,7 +327,7 @@ class Auth extends React.Component {
                               description={
                                 <div>
                                   <div>{intl.get('wallet_meta.unlock_step_refresh_content')}</div>
-                                  <Button onClick={() => refresh} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
+                                  <Button onClick={() => refresh()} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
                                 </div>
                               }
                   />
