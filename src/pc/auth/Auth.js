@@ -3,7 +3,7 @@ import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
 import UserAgent from 'common/utils/useragent'
 import {unlockWithMetaMask} from 'common/utils/unlock'
 import { connect } from 'dva'
-import { Icon, Steps, Modal as AntdModal } from 'antd'
+import { Icon, Steps, Spin, Modal as AntdModal } from 'antd'
 import storage from 'modules/storage'
 import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
@@ -15,7 +15,8 @@ const dpath = "m/44'/60'/0'";
 class Auth extends React.Component {
   state={
     address:'',
-    metamaskState:''
+    metamaskState:'',
+    connectingLedger:false,
   }
 
   checkMetaMaskState() {
@@ -131,6 +132,7 @@ class Auth extends React.Component {
   }
 
   unlockByLedger = () =>{
+    this.setState({connectingLedger:true})
     connectLedger().then(res => {
       if (!res.error) {
         const ledger = res.result;
@@ -141,40 +143,41 @@ class Auth extends React.Component {
     }).then(resp => {
       if (!resp.error) {
         const {chainCode, publicKey} = resp.result;
-        this.props.dispatch({
-          type: "determineWallet/setHardwareWallet",
-          payload: {chainCode, publicKey, dpath, walletType: 'ledger'}
-        });
-        this.props.dispatch({
-          type: 'layers/showLayer',
-          payload: {id: 'unlockByLedger', chooseAddress: this.chooseAddress}
-        });
+        this.props.dispatch({type: "determineWallet/setHardwareWallet", payload: {chainCode, publicKey, dpath, walletType: 'ledger'}});
+        this.props.dispatch({type: 'layers/showLayer', payload: {id: 'unlockByLedger', chooseAddress: this.chooseAddress}});
+        this.setState({connectingLedger:false})
       } else {
         throw new Error(resp.error)
       }
     }).catch(e=>{
+      this.setState({connectingLedger:false})
       Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
     });
   }
 
   chooseAddress = (path)=>{
+    let ledger = null
     connectLedger().then(res => {
       if (!res.error) {
-        const ledger = res.result;
-        getLedgerPublicKey(path, ledger).then(resp => {
-          if (!resp.error) {
-            const {address} = resp.result;
-            window.RELAY.account.register(address)
-            // routeActions.gotoPath('/pc/trade/lrc-weth')
-            this.props.dispatch({type:'wallet/unlockLedgerWallet',payload:{ledger, dpath:path, address}});
-            this.props.dispatch({
-              type: 'layers/hideLayer',
-              payload: {id: 'authOfPC'}
-            })
-            this.props.dispatch({type: 'sockets/unlocked'});
-          }
-        });
+        ledger = res.result;
+        return getLedgerPublicKey(path, ledger);
+      } else {
+        throw new Error(res.error)
       }
+    }).then(resp => {
+      if (!resp.error) {
+        const {address} = resp.result;
+        window.RELAY.account.register(address)
+        // routeActions.gotoPath('/pc/trade/lrc-weth')
+        this.props.dispatch({type:'wallet/unlockLedgerWallet',payload:{ledger, dpath:path, address}});
+        this.props.dispatch({type: 'layers/hideLayer', payload: {id: 'authOfPC'}})
+        this.props.dispatch({type: 'sockets/unlocked'});
+        Notification.open({type:'success',description:intl.get('notifications.title.unlock_suc')});
+      } else {
+        throw new Error(resp.error)
+      }
+    }).catch(e=>{
+      Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
     });
   }
 
@@ -297,59 +300,63 @@ class Auth extends React.Component {
               </div>
             </div>
           </div>
-          <div onClick={()=>unlockTypeChanged('metaMask')} className="row m15 p15 no-gutters align-items-center bg-primary"
-               style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <AntdModal
-              title={intl.get('wallet_meta.unlock_steps_title')}
-              visible={metaMask.refreshModalVisible}
-              maskClosable={false}
-              onOk={refresh}
-              onCancel={hideModal}
-              okText={null}
-              cancelText={null}
-              footer={null}
-            >
-              <Steps direction="vertical">
-                {this.state.metamaskState === 'notInstalled' && <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_install_title')} description={intl.get('wallet_meta.unlock_step_install_content')} />}
-                <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_unlock_title')} description={intl.get('wallet_meta.unlock_step_unlock_content')} />
-                <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_refresh_title')}
-                            description={
-                              <div>
-                                <div>{intl.get('wallet_meta.unlock_step_refresh_content')}</div>
-                                <Button onClick={() => refresh} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
-                              </div>
-                            }
-                />
-              </Steps>
-            </AntdModal>
-            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-              <i className="icon-Metamaskwallet color-black-1 fs26"></i>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 color-black-1 text-left">MetaMask</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-2 mr5">Unlock</span>
-                <Icon className="color-black-2" type="right"/>
+          <Spin spinning={metaMask.loading}>
+            <div onClick={()=>unlockTypeChanged('metaMask')} className="row m15 p15 no-gutters align-items-center bg-primary"
+                 style={{padding: '7px 0px',borderRadius:'50em'}}>
+              <AntdModal
+                title={intl.get('wallet_meta.unlock_steps_title')}
+                visible={metaMask.refreshModalVisible}
+                maskClosable={false}
+                onOk={refresh}
+                onCancel={hideModal}
+                okText={null}
+                cancelText={null}
+                footer={null}
+              >
+                <Steps direction="vertical">
+                  {this.state.metamaskState === 'notInstalled' && <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_install_title')} description={intl.get('wallet_meta.unlock_step_install_content')} />}
+                  <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_unlock_title')} description={intl.get('wallet_meta.unlock_step_unlock_content')} />
+                  <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_refresh_title')}
+                              description={
+                                <div>
+                                  <div>{intl.get('wallet_meta.unlock_step_refresh_content')}</div>
+                                  <Button onClick={() => refresh} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
+                                </div>
+                              }
+                  />
+                </Steps>
+              </AntdModal>
+              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+                <i className="icon-Metamaskwallet color-black-1 fs26"></i>
+              </div>
+              <div className="col text-left">
+                <div className="fs16 color-black-1 text-left">MetaMask</div>
+              </div>
+              <div className="col-auto text-right">
+                <div className="fs14 text-wrap text-left">
+                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <Icon className="color-black-2" type="right"/>
+                </div>
               </div>
             </div>
-          </div>
-          <div onClick={this.unlockByLedger} className="row m15 p15 no-gutters align-items-center bg-primary"
-               style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-              <i className="icon-ledgerwallet color-black-1 fs26"></i>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 color-black-1 text-left">Ledger</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-2 mr5">Unlock</span>
-                <Icon className="color-black-2" type="right"/>
+          </Spin>
+          <Spin spinning={this.state.connectingLedger}>
+            <div onClick={this.unlockByLedger} className="row m15 p15 no-gutters align-items-center bg-primary"
+                 style={{padding: '7px 0px',borderRadius:'50em'}}>
+              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+                <i className="icon-ledgerwallet color-black-1 fs26"></i>
+              </div>
+              <div className="col text-left">
+                <div className="fs16 color-black-1 text-left">Ledger</div>
+              </div>
+              <div className="col-auto text-right">
+                <div className="fs14 text-wrap text-left">
+                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <Icon className="color-black-2" type="right"/>
+                </div>
               </div>
             </div>
-          </div>
+          </Spin>
           {
             placeOrderSteps.step === 0 &&
             <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="row m15 p15 no-gutters align-items-center bg-primary"

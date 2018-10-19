@@ -39,7 +39,7 @@ export const unlockWithMetaMask = (dispatch) => {
     dispatch({type: 'sockets/unlocked'});
     dispatch({type: 'metaMask/setLoading', payload: {loading:false}});
     dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
-    Notification.open({type:'success',message:intl.get('notifications.title.unlock_suc')});
+    Notification.open({type:'success',description:intl.get('notifications.title.unlock_suc')});
     let alert = false
     var accountInterval = setInterval(function() {
       if ((!window.web3 || !window.web3.eth.accounts[0]) && !alert) {
