@@ -91,6 +91,19 @@ class Auth extends React.Component {
 
     return (
       <div className="bg-white" style={{height:'100vh',overflow:'auto'}}>
+        <NavBar
+          className="bg-white"
+          mode="light"
+          leftContent={[
+            <span onClick={()=>this.hideLayer({id:'unlockByMetaMask'})} className="text-primary fs14 cursor-pointer" key="1"><Icon type="close" /></span>,
+          ]}
+          rightContent={[]}
+        >
+          <div className="color-black-1 fs16">
+            {intl.get('unlock_by_metaMask.title')}
+          </div>
+        </NavBar>
+        <div className="divider 1px zb-b-t"></div>
         {(!browserType || browserType === 'Others' || (browserSupported && this.state.metamaskState === 'notInstalled')) &&
         <div>
           <h2 className="text-center text-primary">{intl.get('wallet.title_connect',{walletType:'MetaMask'})}</h2>

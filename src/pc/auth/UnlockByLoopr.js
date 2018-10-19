@@ -61,7 +61,7 @@ class Auth extends React.Component {
           className="bg-white"
           mode="light"
           leftContent={[
-            <span onClick={()=>_this.hideLayer({id:'unlockByAddress'})} className="text-primary fs14 cursor-pointer" key="1"><Icon type="close" /></span>,
+            <span onClick={()=>_this.hideLayer({id:'unlockByLoopr'})} className="text-primary fs14 cursor-pointer" key="1"><Icon type="close" /></span>,
           ]}
           rightContent={[]}
         >
