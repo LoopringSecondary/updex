@@ -105,10 +105,9 @@ class Auth extends React.Component {
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
         {(!browserType || browserType === 'Others' || (browserSupported && this.state.metamaskState === 'notInstalled')) &&
-        <div>
-          <h2 className="text-center text-primary">{intl.get('wallet.title_connect',{walletType:'MetaMask'})}</h2>
-          <ul className="list list-md text-center">
-            <li>
+        <div className="bg-fill p15 lh25 color-black-1 m15 fs13 mt40">
+          	<div className="">{intl.get('wallet.title_connect',{walletType:'MetaMask'})}</div>
+            <div>
               {!browserType || browserType === 'Others' &&
               <div className="btn btn-primary btn-block btn-xxlg">{intl.get('wallet_meta.browser_tip')}</div>
               }
@@ -121,18 +120,16 @@ class Auth extends React.Component {
               {browserSupported && !this.state.metamaskState &&
               <Button className="btn btn-primary btn-block btn-xxlg" onClick={this.connectToMetamask} size="large"> {intl.get('unlock.actions_connect',{walletType:'MetaMask'})}</Button>
               }
-            </li>
-            <div className="blk-md"/>
+            </div>
             {
               browserType && browserType !== 'Others' &&
-              <li>
+              <div>
                 <a href={chromeExtention[browserType]} target="_blank">
                   <i className="icon-export"/> {intl.get('wallet_meta.actions_get_metaMask',{browser:browserType})}
                 </a>
-              </li>
+              </div>
             }
-            <li><a href="https://metamask.io/" target="_blank"><i className="icon-export"/>{intl.get('wallet_meta.actions_visit_metaMask')}</a></li>
-          </ul>
+            <div><a className="text-primary" href="https://metamask.io/" target="_blank">{intl.get('wallet_meta.actions_visit_metaMask')}</a></div>
         </div>
         }
 
