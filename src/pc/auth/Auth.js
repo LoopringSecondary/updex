@@ -8,6 +8,7 @@ import storage from 'modules/storage'
 import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
 import {getXPubKey as getLedgerPublicKey, connect as connectLedger} from "LoopringJS/ethereum/ledger";
+import Notification from 'LoopringUI/components/Notification'
 
 const dpath = "m/44'/60'/0'";
 
@@ -133,20 +134,26 @@ class Auth extends React.Component {
     connectLedger().then(res => {
       if (!res.error) {
         const ledger = res.result;
-        getLedgerPublicKey(dpath, ledger).then(resp => {
-          if (!resp.error) {
-            const {chainCode, publicKey} = resp.result;
-            this.props.dispatch({
-              type: "determineWallet/setHardwareWallet",
-              payload: {chainCode, publicKey, dpath, walletType: 'ledger'}
-            });
-            this.props.dispatch({
-              type: 'layers/showLayer',
-              payload: {id: 'unlockByLedger', chooseAddress: this.chooseAddress}
-            });
-          }
-        });
+        return getLedgerPublicKey(dpath, ledger)
+      } else {
+        throw new Error(res.error)
       }
+    }).then(resp => {
+      if (!resp.error) {
+        const {chainCode, publicKey} = resp.result;
+        this.props.dispatch({
+          type: "determineWallet/setHardwareWallet",
+          payload: {chainCode, publicKey, dpath, walletType: 'ledger'}
+        });
+        this.props.dispatch({
+          type: 'layers/showLayer',
+          payload: {id: 'unlockByLedger', chooseAddress: this.chooseAddress}
+        });
+      } else {
+        throw new Error(resp.error)
+      }
+    }).catch(e=>{
+      Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
     });
   }
 

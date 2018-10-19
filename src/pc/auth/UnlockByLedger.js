@@ -14,7 +14,6 @@ const supportPaths = paths.filter(item => !!ledgerPaths.find(dpath => dpath === 
 function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses, unlockByLedger}) {
 
   const showLayer = (payload = {}) => {
-    const {dispatch} = this.props
     dispatch({
       type: 'layers/showLayer',
       payload: {
@@ -24,7 +23,6 @@ function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses, u
   }
 
   const hideLayer = (payload = {}) => {
-    const {dispatch} = this.props
     dispatch({
       type:"layers/hideLayer",
       payload:{
@@ -82,13 +80,13 @@ function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses, u
         className="bg-white"
         mode="light"
         leftContent={[
-          <span onClick={() => hideLayer({id: 'unlockByAddress'})} className="text-primary fs14 cursor-pointer"
+          <span onClick={() => hideLayer({id: 'unlockByLedger'})} className="text-primary fs14 cursor-pointer"
                 key="1"><Icon type="close"/></span>,
         ]}
         rightContent={[]}
       >
         <div className="color-black-1 fs16">
-          Unlock With Ledger
+          {intl.get('unlock_by_ledger.title')}
         </div>
       </NavBar>
       <div className="divider 1px zb-b-t"></div>

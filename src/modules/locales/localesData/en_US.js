@@ -135,6 +135,7 @@ const notifications = {
     eth_is_required: 'ETH is required to pay Ethereum transaction fees, calculated with your current order cost that need to send Ethereum transactions, totally required {required} ETH.',
     lrcfee_is_required: 'LRC is required to pay trade fees, added on your history orders need LRC, totally required {required} LRC.',
     unlock_by_cookie_address:'Loopr has switched your account to the watch-only mode, and your private-key is no longer available to the browser.  You\'ll need to unlock your wallet again to perform some operations.',
+    ledger_connect_failed: "Failed to connect with your Ledger device, you could follow these advices and have a try later. 1、Make sure your Ledger device has connected with your computer and unlocked. 2、Set this to 'yes': Settings->Browser support 3、Enter into Ethereum app",
   }
 }
 
@@ -556,6 +557,12 @@ export default {
     instruction_download: 'Download UpWallet',
     instruction_scan: 'Open your Upwallet，scan the QRcode and confirm',
     instruction_warn: '* The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
+  },
+  unlock_by_ledger:{
+    title:'Unlock With Ledger'
+  },
+  unlock_by_metaMask: {
+    title:'Unlock With MetaMask Browser Plug-in'
   },
   password: {
     password_strength_title: 'Password Strength',
