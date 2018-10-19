@@ -229,7 +229,6 @@ class Auth extends React.Component {
     }
 
     const unlockTypeChanged = (unlockType) => {
-      console.log(567, unlockType)
       switch(unlockType) {
         case 'loopr':
           this.unlockByLoopr();
