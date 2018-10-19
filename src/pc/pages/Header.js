@@ -4,28 +4,20 @@ import {connect} from 'dva'
 import { Icon as WebIcon } from 'antd';
 import TickerItem from '../tickers/TickerItem';
 import storage from 'modules/storage'
+import UserInfo from '../account/UserInfo'
 
 class Header extends React.Component {
   constructor(props) {
     super(props);
   }
   render(){
-    const {match,location,dispatch,className,address} = this.props;
+    const {match,location,dispatch,className} = this.props;
     const showLayer = (id)=>{
       dispatch({
         type:"layers/showLayer",
         payload:{id}
       })
     }
-    const clickUser = ()=>{
-      if(address){
-        showLayer('usercenter')
-      }else{
-        showLayer('authOfPC')
-      }
-    }
-
-
     return (
       <div className={`bg-white row no-gutters d-flex align-items-stretch ${className}`} style={{height:'6rem'}}>
         <div className="col d-flex align-items-center text-left ">
@@ -40,21 +32,12 @@ class Header extends React.Component {
         <div onClick={showLayer.bind(this,'settings')} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <i className="icon-cog fs20 text-primary"></i>
         </div>
-        <div onClick={clickUser} className="col-auto d-flex align-items-center zb-b-l pl25 pr25">
-          <i className="icon-user fs20 text-primary"></i>
+        <div className="col-auto d-flex align-items-center zb-b-l">
+          <UserInfo />
         </div>
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-
-  return {
-    address:state.wallet.address
-  }
-
-}
-
-
-export default connect(mapStateToProps)(Header)
+export default connect()(Header)
