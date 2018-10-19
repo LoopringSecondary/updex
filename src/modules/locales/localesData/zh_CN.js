@@ -536,7 +536,6 @@ export default {
     notification_fail_title: '转换{value} {token}失败',
     not_enough_tip: '{token} 余额不足'
   },
-
   unlock: {
     has_not_unlocked: '您的钱包还未解锁',
     to_unlock: '解锁钱包',
@@ -546,6 +545,18 @@ export default {
     connect_ledger_tip: '请连接您的Ledger钱包',
     connect_trezor_tip: '请连接您的TREZOR',
     error_invalid_tip: '信息不合法',
+  },
+  unlock_by_loopr: {
+    title:'使用Loopr钱包扫码登录',
+    instruction_download: '下载Loopr-IOS',
+    instruction_scan: '打开您的Loopr钱包，扫描二维码，确认信息',
+    instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
+  },
+  unlock_by_upwallet: {
+    title:'使用UpWallet扫码登录',
+    instruction_download: '下载UpWallet',
+    instruction_scan: '打开您的UpWallet，扫描二维码，确认信息',
+    instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
   },
   wallet_type: {
     generate: '生成钱包',
@@ -557,7 +568,6 @@ export default {
     trezor: 'TREZOR',
     ledger: 'Ledger 钱包'
   },
-
   password: {
     password_strength_title: '密码强度',
     password_strength: {
@@ -586,13 +596,13 @@ export default {
     unlock_metaMask_tip: '解锁MetaMask',
     install_metaMask_tip: '安装MetaMask',
     unlock_steps_title: '你要做的步骤',
-    unlock_refresh_button: '全做完了？刷新Circular',
+    unlock_refresh_button: '全做完了？刷新',
     unlock_step_install_title: '安装MetaMask',
     unlock_step_install_content: '为你的浏览器安装MetaMask插件',
     unlock_step_unlock_title: '解锁MetaMask',
     unlock_step_unlock_content: '在MetaMask上创建一个账号或解锁已有账号',
-    unlock_step_refresh_title: '刷新Circular',
-    unlock_step_refresh_content: '刷新Circular钱包使MetaMask生效',
+    unlock_step_refresh_title: '刷新',
+    unlock_step_refresh_content: '刷新页面使MetaMask生效',
     mainnet_tip: '在您使用MetaMask解锁时，我们只支持Ethereum main net，请在您的MetaMask切换',
     logout_title: '您已从MetaMask登出',
     logout_tip: '我们检测到您已经从MetaMask登出, 为了您资金安全您的钱包重新锁定',
