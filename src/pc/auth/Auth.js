@@ -240,7 +240,6 @@ class Auth extends React.Component {
           this.unlockByUpWallet();
           break;
         case 'metaMask':
-          console.log('metamask')
           const state = this.checkMetaMaskState()
           if(!browserType || browserType === 'Others' || (browserSupported && state === 'notInstalled')) {
             this.showLayer({id:'unlockByMetaMask'})
