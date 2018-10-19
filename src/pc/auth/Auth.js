@@ -3,14 +3,10 @@ import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
 import UserAgent from 'common/utils/useragent'
 import {unlockWithMetaMask} from 'common/utils/unlock'
 import { connect } from 'dva'
-import { Icon, Collapse, Steps, Modal as AntdModal } from 'antd'
+import { Icon, Steps, Modal as AntdModal } from 'antd'
 import storage from 'modules/storage'
 import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
-import QRCode from 'qrcode.react';
-import CountDown from 'LoopringUI/components/CountDown';
-import moment from 'moment'
-import Notification from 'LoopringUI/components/Notification'
 import {getXPubKey as getLedgerPublicKey, connect as connectLedger} from "LoopringJS/ethereum/ledger";
 
 const dpath = "m/44'/60'/0'";
@@ -117,11 +113,13 @@ class Auth extends React.Component {
   unlockByLoopr = () => {
     storage.wallet.setLoopringUnlockWith('loopr')
     this.loopringUnlock()
+    this.showLayer({id:'unlockByLoopr'})
   };
 
   unlockByUpWallet = () => {
     storage.wallet.setLoopringUnlockWith('upWallet')
     this.loopringUnlock()
+    this.showLayer({id:'unlockByLoopr'})
   };
 
   connectToMetamask = () => {
@@ -130,7 +128,6 @@ class Auth extends React.Component {
     dispatch({type: 'metaMask/setLoading', payload: {loading:true}});
     unlockWithMetaMask(dispatch)
   }
-
 
   unlockByLedger = () =>{
     connectLedger().then(res => {
@@ -145,7 +142,7 @@ class Auth extends React.Component {
             });
             this.props.dispatch({
               type: 'layers/showLayer',
-              payload: {id: 'chooseLedgerAddress', chooseAddress: this.chooseAddress}
+              payload: {id: 'unlockByLedger', chooseAddress: this.chooseAddress}
             });
           }
         });
@@ -175,18 +172,7 @@ class Auth extends React.Component {
   }
 
   render () {
-    const {uuid,item, scanAddress, metaMask, placeOrderSteps, dispatch} = this.props
-    const {address} = this.state;
-    let targetTime = moment().valueOf() + 600000;
-
-    const countDownOnEnd = () => {
-      const uuid = uuidv4();
-      dispatch({type:'scanAddress/uuidChanged', payload:{UUID:uuid.substring(0, 8)}});
-      dispatch({type:'sockets/extraChange',payload:{id:'addressUnlock', extra:{UUID:uuid.substring(0, 8)}}});
-      dispatch({type:'sockets/fetch',payload:{id:'addressUnlock'}});
-      targetTime = moment().valueOf() + 600000;
-    }
-
+    const {metaMask, placeOrderSteps, dispatch} = this.props
     const chromeExtention = {
       'Opera' : "https://addons.opera.com/extensions/details/metamask/",
       'Chrome' : "https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn",
@@ -239,10 +225,14 @@ class Auth extends React.Component {
           break;
         case 'metaMask':
           const state = this.checkMetaMaskState()
-          if(browserSupported && (state === 'locked' || state === 'notInstalled')) {
-            openToRefresh()
+          if(!browserType || browserType === 'Others' || (browserSupported && state === 'notInstalled')) {
+            this.showLayer({id:'unlockByMetaMask'})
           } else {
-            this.connectToMetamask()
+            if(browserSupported && (state === 'locked' || state === 'notInstalled')) {
+              openToRefresh()
+            } else {
+              this.connectToMetamask()
+            }
           }
           break;
       }
@@ -271,137 +261,73 @@ class Auth extends React.Component {
           </div>
         </div>
         <div className="">
-          <Collapse onChange={(v)=>unlockTypeChanged(v)} accordion>
-            <Collapse.Panel showArrow={false} header={
-              <div className="row m15 p15 no-gutters align-items-center bg-primary"
-                   style={{padding: '7px 0px',borderRadius:'50em'}}>
-                <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-                  <img style={{height: '30px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
-                </div>
-                <div className="col text-left">
-                  <div className="fs16 color-black-1 text-left">UP Wallet</div>
-                </div>
-                <div className="col-auto text-right">
-                  <div className="fs14 text-wrap text-left">
-                    <span className="fs13 color-black-2 mr5">Unlock</span>
-                    <Icon className="color-black-2" type="right"/>
-                  </div>
-                </div>
+          <div onClick={()=>unlockTypeChanged('upWallet')} className="row m15 p15 no-gutters align-items-center bg-primary"
+               style={{padding: '7px 0px',borderRadius:'50em'}}>
+            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+              <img style={{height: '30px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
+            </div>
+            <div className="col text-left">
+              <div className="fs16 color-black-1 text-left">UP Wallet</div>
+            </div>
+            <div className="col-auto text-right">
+              <div className="fs14 text-wrap text-left">
+                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <Icon className="color-black-2" type="right"/>
               </div>
-            } key="upWallet">
-              <div>
-                {
-                  !scanAddress.address &&
-                  <div className="">
-                    <div className="loopr-qrcode">
-                      {scanAddress && scanAddress.UUID && <QRCode value={JSON.stringify({type:'UUID', value:scanAddress.UUID})} size={160} level='H'/>}
-                      <CountDown style={{ fontSize: 20 }} target={targetTime} onEnd={countDownOnEnd}/>
-                    </div>
-                  </div>
-                }
+            </div>
+          </div>
+          <div onClick={()=>unlockTypeChanged('loopr')} className="row m15 p15 no-gutters align-items-center bg-primary" style={{padding: '7px 0px',borderRadius:'50em'}}>
+            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+              <i className="icon-loopr color-black-1 fs28"></i>
+            </div>
+            <div className="col text-left">
+              <div className="fs16 color-black-1 text-left">Loopr Wallet</div>
+            </div>
+            <div className="col-auto text-right">
+              <div className="fs14 text-wrap text-left">
+                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <Icon className="color-black-2" type="right"/>
               </div>
-            </Collapse.Panel>
-            <Collapse.Panel showArrow={false} header={
-              <div className="row m15 p15 no-gutters align-items-center bg-primary" style={{padding: '7px 0px',borderRadius:'50em'}}>
-                <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-                  <i className="icon-loopr color-black-1 fs28"></i>
-                </div>
-                <div className="col text-left">
-                  <div className="fs16 color-black-1 text-left">Loopr Wallet</div>
-                </div>
-                <div className="col-auto text-right">
-                  <div className="fs14 text-wrap text-left">
-                    <span className="fs13 color-black-2 mr5">Unlock</span>
-                    <Icon className="color-black-2" type="right"/>
-                  </div>
-                </div>
+            </div>
+          </div>
+          <div onClick={()=>unlockTypeChanged('metaMask')} className="row m15 p15 no-gutters align-items-center bg-primary"
+               style={{padding: '7px 0px',borderRadius:'50em'}}>
+            <AntdModal
+              title={intl.get('wallet_meta.unlock_steps_title')}
+              visible={metaMask.refreshModalVisible}
+              maskClosable={false}
+              onOk={refresh}
+              onCancel={hideModal}
+              okText={null}
+              cancelText={null}
+              footer={null}
+            >
+              <Steps direction="vertical">
+                {this.state.metamaskState === 'notInstalled' && <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_install_title')} description={intl.get('wallet_meta.unlock_step_install_content')} />}
+                <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_unlock_title')} description={intl.get('wallet_meta.unlock_step_unlock_content')} />
+                <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_refresh_title')}
+                            description={
+                              <div>
+                                <div>{intl.get('wallet_meta.unlock_step_refresh_content')}</div>
+                                <Button onClick={() => refresh} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
+                              </div>
+                            }
+                />
+              </Steps>
+            </AntdModal>
+            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+              <i className="icon-Metamaskwallet color-black-1 fs26"></i>
+            </div>
+            <div className="col text-left">
+              <div className="fs16 color-black-1 text-left">MetaMask</div>
+            </div>
+            <div className="col-auto text-right">
+              <div className="fs14 text-wrap text-left">
+                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <Icon className="color-black-2" type="right"/>
               </div>
-            } key="loopr">
-              {
-                !scanAddress.address &&
-                <div className="">
-                  <div className="loopr-qrcode">
-                    {scanAddress && scanAddress.UUID && <QRCode value={JSON.stringify({type:'UUID', value:scanAddress.UUID})} size={160} level='H'/>}
-                    <CountDown style={{ fontSize: 20 }} target={targetTime} onEnd={countDownOnEnd}/>
-                  </div>
-                </div>
-              }
-            </Collapse.Panel>
-            <Collapse.Panel showArrow={false} header={
-              <div onClick={()=>{}} className="row m15 p15 no-gutters align-items-center bg-primary"
-                   style={{padding: '7px 0px',borderRadius:'50em'}}>
-                <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-                  <i className="icon-Metamaskwallet color-black-1 fs26"></i>
-                </div>
-                <div className="col text-left">
-                  <div className="fs16 color-black-1 text-left">MetaMask</div>
-                </div>
-                <div className="col-auto text-right">
-                  <div className="fs14 text-wrap text-left">
-                    <span className="fs13 color-black-2 mr5">Unlock</span>
-                    <Icon className="color-black-2" type="right"/>
-                  </div>
-                </div>
-              </div>
-            } key="metaMask">
-              <div style={{width:"480px"}}>
-                <AntdModal
-                  title={intl.get('wallet_meta.unlock_steps_title')}
-                  visible={metaMask.refreshModalVisible}
-                  maskClosable={false}
-                  onOk={refresh}
-                  onCancel={hideModal}
-                  okText={null}
-                  cancelText={null}
-                  footer={null}
-                >
-                  <Steps direction="vertical">
-                    {this.state.metamaskState === 'notInstalled' && <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_install_title')} description={intl.get('wallet_meta.unlock_step_install_content')} />}
-                    <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_unlock_title')} description={intl.get('wallet_meta.unlock_step_unlock_content')} />
-                    <Steps.Step status="process" title={intl.get('wallet_meta.unlock_step_refresh_title')}
-                                description={
-                                  <div>
-                                    <div>{intl.get('wallet_meta.unlock_step_refresh_content')}</div>
-                                    <Button onClick={() => refresh} type="primary" className="mt5" loading={false}>{intl.get('wallet_meta.unlock_refresh_button')}</Button>
-                                  </div>
-                                }
-                    />
-                  </Steps>
-                </AntdModal>
-                {(!browserType || browserType === 'Others' || (browserSupported && this.state.metamaskState === 'notInstalled')) &&
-                <div>
-                  <h2 className="text-center text-primary">{intl.get('wallet.title_connect',{walletType:'MetaMask'})}</h2>
-                  <ul className="list list-md text-center">
-                    <li>
-                      {!browserType || browserType === 'Others' &&
-                      <Button className="btn btn-primary btn-block btn-xxlg" size="large" disabled>{intl.get('wallet_meta.browser_tip')}</Button>
-                      }
-                      {browserSupported && this.state.metamaskState === 'locked' &&
-                      <Button className="btn btn-primary btn-block btn-xxlg" size="large" onClick={openToRefresh}>{intl.get('wallet_meta.unlock_metaMask_tip')}</Button>
-                      }
-                      {browserSupported && this.state.metamaskState === 'notInstalled' &&
-                      <Button className="btn btn-primary btn-block btn-xxlg" size="large" onClick={openToRefresh}>{intl.get('wallet_meta.install_metaMask_tip')}</Button>
-                      }
-                      {browserSupported && !this.state.metamaskState &&
-                      <Button className="btn btn-primary btn-block btn-xxlg" onClick={this.connectToMetamask} size="large"> {intl.get('unlock.actions_connect',{walletType:'MetaMask'})}</Button>
-                      }
-                    </li>
-                    <div className="blk-md"/>
-                    <li>
-                      {browserType && browserType !== 'Others' &&
-                      <a href={chromeExtention[browserType]} target="_blank">
-                        <i className="icon-export"/> {intl.get('wallet_meta.actions_get_metaMask',{browser:browserType})}
-                      </a>
-                      }
-                    </li>
-                    <li><a href="https://metamask.io/" target="_blank"><i className="icon-export"/>{intl.get('wallet_meta.actions_visit_metaMask')}</a></li>
-                  </ul>
-                </div>
-                }
-              </div>
-            </Collapse.Panel>
-          </Collapse>
-
+            </div>
+          </div>
           <div onClick={this.unlockByLedger} className="row m15 p15 no-gutters align-items-center bg-primary"
                style={{padding: '7px 0px',borderRadius:'50em'}}>
             <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
@@ -417,21 +343,24 @@ class Auth extends React.Component {
               </div>
             </div>
           </div>
-          <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="row m15 p15 no-gutters align-items-center bg-primary"
-               style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-              <i className="icon-eye color-black-1 fs22"></i>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 color-black-1 text-left">Watch-Only Wallet</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-2 mr5">Unlock</span>
-                <Icon className="color-black-2" type="right"/>
+          {
+            placeOrderSteps.step === 0 &&
+            <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="row m15 p15 no-gutters align-items-center bg-primary"
+                 style={{padding: '7px 0px',borderRadius:'50em'}}>
+              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+                <i className="icon-eye color-black-1 fs22"></i>
+              </div>
+              <div className="col text-left">
+                <div className="fs16 color-black-1 text-left">Watch-Only Wallet</div>
+              </div>
+              <div className="col-auto text-right">
+                <div className="fs14 text-wrap text-left">
+                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <Icon className="color-black-2" type="right"/>
+                </div>
               </div>
             </div>
-          </div>
+          }
         </div>
       </div>
     )

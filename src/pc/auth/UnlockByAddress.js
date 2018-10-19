@@ -1,17 +1,9 @@
 import React from 'react'
 import { Button, NavBar, Modal,List,InputItem,Toast } from 'antd-mobile'
-import UserAgent from 'common/utils/useragent'
-import {unlockWithMetaMask} from 'common/utils/unlock'
 import { connect } from 'dva'
 import { Icon, Collapse, Steps, Modal as AntdModal } from 'antd'
 import storage from 'modules/storage'
-import uuidv4 from 'uuid/v4'
 import intl from 'react-intl-universal'
-import QRCode from 'qrcode.react';
-import CountDown from 'LoopringUI/components/CountDown';
-import moment from 'moment'
-import Notification from 'LoopringUI/components/Notification'
-import {getXPubKey as getLedgerPublicKey, connect as connectLedger} from "LoopringJS/ethereum/ledger";
 
 const dpath = "m/44'/60'/0'";
 
@@ -69,10 +61,6 @@ class Auth extends React.Component {
     }
   }
 
-  amountChange = (value) => {
-    this.setState({address:value})
-  }
-
   render () {
     const {dispatch} = this.props
     const {address} = this.state;
@@ -97,7 +85,7 @@ class Auth extends React.Component {
           <List className="no-border am-list-bg-none selectable">
             <InputItem
               type="text"
-              onChange={this.amountChange}
+              onChange={()=>{}}
               value={address}
               className="circle h-default color-black-2 fs13"
               placeholder="Paste ETH address"
