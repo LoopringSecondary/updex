@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, Card, Icon, Steps} from 'antd'
+import {Button, Card, Icon} from 'antd'
+import {Steps,NavBar} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import QRCode from 'qrcode.react';
@@ -9,6 +10,7 @@ import {keccakHash} from 'LoopringJS/common/utils'
 import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
 import HelperOfSignOrder from './HelperOfSignOrder'
 import HelperOfPlaceOrderResult from './HelperOfPlaceOrderResult'
+import SignByLoopr from './SignByLoopr'
 import storage from 'modules/storage'
 
 const signByLooprStep = (placeOrderSteps, circulrNotify) => {
@@ -31,35 +33,6 @@ const signByLooprStep = (placeOrderSteps, circulrNotify) => {
     }
   }
   return step
-}
-
-const SignByLoopr = ({placeOrderSteps, dispatch}) => {
-  let targetTime = moment().valueOf();
-  if(placeOrderSteps.generateTime) {
-    targetTime = placeOrderSteps.generateTime + 86400000;
-  } else {
-    targetTime = moment().valueOf() + 86400000;
-  }
-
-  const overdue = () => {
-    dispatch({type:'placeOrderByLoopr/overdueChange', payload:{overdue:true}})
-  };
-
-  return (
-    <div>
-      {
-        placeOrderSteps.overdue &&
-        <div>{intl.get('place_order_by_loopr.qrcode_overdue')}</div>
-      }
-      {
-        !placeOrderSteps.overdue && placeOrderSteps.qrcode &&
-        <div>
-          <div><QRCode value={placeOrderSteps.qrcode} size={320} level='H'/></div>
-          <div><CountDown style={{ fontSize: 20 }} target={targetTime} onEnd={overdue}/></div>
-        </div>
-      }
-    </div>
-  )
 }
 
 class SignSteps extends React.Component {
@@ -174,31 +147,34 @@ class SignSteps extends React.Component {
     }];
 
     return (
-      <Card className="rs" title={<div className="pl10 ">{title}</div>}>
+      <div className="bg-white" style={{height:'100%'}}>
+        <NavBar
+          className="bg-white"
+          mode="light"
+          leftContent={[
+            <span onClick={()=>dispatch({type:'layers/hideLayer',payload:{id:'helperOfSignStepPC'}})} className="text-primary fs14 cursor-pointer" key="1"><Icon type="close" /></span>,
+          ]}
+          rightContent={[]}
+        >
+          <div className="color-black-1 fs16">
+            {title}
+          </div>
+        </NavBar>
+        <div className="divider 1px zb-b-t"></div>
         <div className="p15">
           <div className="mb20 mt15">
-            <Steps current={step}>
-              {steps.map(item => <Steps.Step key={item.title} title={item.title} />)}
+            <Steps current={step} direction="horizontal">
+              {steps.map(item => <Steps.Step key={item.title} title={<div className="color-black-1 font-weight-normal">{item.title}</div>} />)}
             </Steps>
           </div>
           {
             step === 0 &&
-            <div className="mt15">
-              <div className="zb-b">
-                <div className="text-center p15">
+            <div className="mt15 bg-fill pt15 pb15">
+              <div className="">
+                <div className="text-center">
                   {
                     (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
                     <SignByLoopr placeOrderSteps={placeOrderSteps} dispatch={dispatch}/>
-                  }
-                  {
-                    (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
-                    <div className="pt10 pb10 text-left fs12 " style={{width:'320px',margin:'0 auto'}}>
-                      1. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_download') : intl.get('place_order_by_upwallet.instruction_download')}
-                      <br />
-                      2. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_scan') : intl.get('place_order_by_upwallet.instruction_scan')}
-                      <br />
-                      {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_warn') : intl.get('place_order_by_upwallet.instruction_warn')}
-                    </div>
                   }
                 </div>
               </div>
@@ -206,8 +182,8 @@ class SignSteps extends React.Component {
           }
           {
             step === 1 &&
-            <div className="mt15">
-              <div className="zb-b">
+            <div className="mt15 bg-fill">
+              <div className="">
                 {
                   (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
                   <div className="text-center p35">
@@ -228,12 +204,13 @@ class SignSteps extends React.Component {
           }
           {
             step === 2 &&
-            <div className="mt15">
+            <div className="mt15 bg-fill-light">
               <HelperOfPlaceOrderResult />
             </div>
           }
         </div>
-      </Card>
+      </div>
+      
     )
   }
 

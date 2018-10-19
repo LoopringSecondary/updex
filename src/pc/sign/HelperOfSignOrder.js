@@ -166,15 +166,16 @@ const PlaceOrderSign = (props) => {
       default:
         return ''
     }
+
   };
 
   const TxHeader = ({tx,index})=>{
     return (
-      <div className="row pl0 pr0 align-items-center">
-        <div className="col">
+      <div className="row pl0 pr0 ml0 mr0 no-gutters align-items-center">
+        <div className="col text-left">
           <div className="fs14">
             <Button type="primary" shape="circle" size="small" className="mr10">{index+1}</Button>
-            <Description tx={tx}/>
+            <span className="fs14 color-black-1"><Description tx={tx}/></span>
           </div>
         </div>
         <div className="col-auto pr20">
@@ -208,7 +209,7 @@ const PlaceOrderSign = (props) => {
   }
 
   return (
-    <div className="zb-b">
+    <div className="">
       <Collapse accordion bordered={false} defaultActiveKey={[]}>
         {
           unsign && unsign.map((item, index)=>{
@@ -223,7 +224,6 @@ const PlaceOrderSign = (props) => {
       <div className="p10">
         <Button className="w-100 d-block" size="large" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
       </div>
-
     </div>
   );
 };

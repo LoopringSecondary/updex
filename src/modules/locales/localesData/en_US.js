@@ -273,10 +273,10 @@ export default {
   },
   place_order_by_metamask: {
     title: 'Sign With MetaMask',
-    connect: 'Connect with MetaMask',
-    step_connect: 'Connect With MetaMask',
-    step_sign: 'Sign On MetaMask',
-    step_result: 'Result'
+    connect: 'Connect',
+    step_connect: 'Connect',
+    step_sign: 'Order Sign',
+    step_result: 'Order Submit'
   },
   order_cancel: {
     cancel_title: "Do you want to cancel this order?",
