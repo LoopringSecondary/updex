@@ -236,7 +236,7 @@ export default {
   place_order_sign: {
     unsigned_tx: 'Unsigned Data',
     signed_tx: 'Signed Data',
-    unsigned: 'Unsigned',
+    unsigned: 'Sign',
     signed: 'Signed',
     type_sign_order: 'Sign Original Order',
     type_cancel_allowance: 'Cancel {token} Allowance',

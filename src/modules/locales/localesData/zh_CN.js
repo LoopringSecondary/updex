@@ -243,7 +243,7 @@ export default {
   place_order_sign: {
     unsigned_tx: '未签名信息',
     signed_tx: '签名后信息',
-    unsigned: '未签名',
+    unsigned: '签名',
     signed: '已签名',
     type_sign_order: '签名原始订单',
     type_cancel_allowance: '取消{token}授权',

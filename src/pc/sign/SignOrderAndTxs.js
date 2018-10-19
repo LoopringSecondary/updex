@@ -1,5 +1,6 @@
 import React from 'react';
-import {Button, Collapse, Form, Icon, Input} from 'antd'
+import {Collapse, Form, Icon, Input} from 'antd'
+import {Button} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import Notification from 'LoopringUI/components/Notification'
@@ -173,20 +174,19 @@ const PlaceOrderSign = (props) => {
     return (
       <div className="row pl0 pr0 ml0 mr0 no-gutters align-items-center">
         <div className="col text-left">
-          <div className="fs14">
-            <Button type="primary" shape="circle" size="small" className="mr10">{index+1}</Button>
-            <span className="fs14 color-black-1"><Description tx={tx}/></span>
+          <div className="fs14 color-black-1">
+            {index+1}. <Description tx={tx}/>
           </div>
         </div>
-        <div className="col-auto pr20">
+        <div className="col-auto ">
           {signed[index] &&
-          <div className="text-up">
+          <div className="color-success">
             {intl.get('place_order_sign.signed')} <Icon className="ml5" type="check-circle"  />
           </div>
           }
           {!signed[index] &&
-          <div className="color-black-3">
-            <a onClick={sign.bind(this, tx, index)}>{intl.get('place_order_sign.unsigned')}<Icon className="ml5" type="right"  /></a>
+          <div className="">
+            <a className="text-primary cursor-pointer" onClick={sign.bind(this, tx, index)}>{intl.get('place_order_sign.unsigned')}<Icon className="ml5" type="right"  /></a>
           </div>
           }
         </div>
@@ -207,21 +207,15 @@ const PlaceOrderSign = (props) => {
       </div>
     )
   }
-
   return (
     <div className="">
-      <Collapse accordion bordered={false} defaultActiveKey={[]}>
+      <div className="bg-fill p15" style={{minHeight:'30rem',borderRadius:'0.5rem'}}>
+        <div className="color-black-3 fs14 pb10 zb-b-b mb15">You Need To Do </div>
         {
-          unsign && unsign.map((item, index)=>{
-            return (
-              <Collapse.Panel  header={<TxHeader tx={item} index={index} />} key={index} showArrow={false}>
-                <TxContent tx={item} index={index}/>
-              </Collapse.Panel>
-            )
-          })
+          unsign && unsign.map((item, index)=><TxHeader tx={item} index={index} />)
         }
-      </Collapse>
-      <div className="p10">
+      </div>
+      <div className="mt20">
         <Button className="w-100 d-block" size="large" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
       </div>
     </div>
