@@ -169,10 +169,23 @@ const PlaceOrderSign = (props) => {
     }
 
   };
-
+  const TxContent = ({tx,index})=>{
+    return (
+      <div className="row p5 zb-b-t">
+        <div className="col-6 pr5">
+          <div className="fs12 color-black-2 mt5">{intl.get('place_order_sign.unsigned_tx')}</div>
+          <Input.TextArea disabled placeholder="" className="fs12 lh20 border-none" autosize={{ minRows: 6, maxRows: 10 }} value={JSON.stringify(unsign[index])}/>
+        </div>
+        <div className="col-6 pl5">
+          <div className="fs12 color-black-2 mt5">{intl.get('place_order_sign.signed_tx')}</div>
+          <Input.TextArea disabled placeholder="" className="fs12 lh20 border-none" autosize={{ minRows: 6, maxRows: 10 }} value={signed && signed[index] ? JSON.stringify(signed[index]) : ''}/>
+        </div>
+      </div>
+    )
+  }
   const TxHeader = ({tx,index})=>{
     return (
-      <div className="row pl0 pr0 ml0 mr0 no-gutters align-items-center">
+      <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center">
         <div className="col text-left">
           <div className="fs14 color-black-1">
             {index+1}. <Description tx={tx}/>
@@ -193,24 +206,10 @@ const PlaceOrderSign = (props) => {
       </div>
     )
   }
-  const TxContent = ({tx,index})=>{
-    return (
-      <div className="row p5 zb-b-t">
-        <div className="col-6 pr5">
-          <div className="fs12 color-black-2 mt5">{intl.get('place_order_sign.unsigned_tx')}</div>
-          <Input.TextArea disabled placeholder="" className="fs12 lh20 border-none" autosize={{ minRows: 6, maxRows: 10 }} value={JSON.stringify(unsign[index])}/>
-        </div>
-        <div className="col-6 pl5">
-          <div className="fs12 color-black-2 mt5">{intl.get('place_order_sign.signed_tx')}</div>
-          <Input.TextArea disabled placeholder="" className="fs12 lh20 border-none" autosize={{ minRows: 6, maxRows: 10 }} value={signed && signed[index] ? JSON.stringify(signed[index]) : ''}/>
-        </div>
-      </div>
-    )
-  }
   return (
     <div className="">
-      <div className="bg-fill p15" style={{minHeight:'30rem',borderRadius:'0.5rem'}}>
-        <div className="color-black-3 fs14 pb10 zb-b-b mb15">You Need To Do </div>
+      <div className="bg-fill p15" style={{minHeight:'25rem',borderRadius:'0.4rem'}}>
+        <div className="color-black-3 fs14 pb10 zb-b-b">You Need To Do </div>
         {
           unsign && unsign.map((item, index)=><TxHeader tx={item} index={index} />)
         }

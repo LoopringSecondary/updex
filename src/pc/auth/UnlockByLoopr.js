@@ -76,15 +76,22 @@ class Auth extends React.Component {
             <div className="">
             {
               scanAddress && scanAddress.UUID &&
-              <div className="pt10 pb10 text-left fs12 color-black-1" style={{width:'320px',margin:'0 auto'}}>
-                <div><QRCode value={JSON.stringify({type:'UUID', value:scanAddress.UUID})} size={160} level='H'/></div>
-                <div><CountDown style={{ fontSize: 20 }} target={targetTime} onEnd={countDownOnEnd}/></div>
-                <div>
+              <div className="pt10 pb10 text-center fs12 color-black-1" style={{margin:'0 auto'}}>
+                <div className="p15 " >
+                	<span className="p10 d-inline-block" style={{background:'#fff'}}>
+                		<QRCode value={JSON.stringify({type:'UUID', value:scanAddress.UUID})} size={240} level='H'/>
+                		<div className="mt5 lh10">
+                			<CountDown style={{ fontSize: '1.3rem',color:"rgba(0,0,0,0.4)" }} className="" target={targetTime} onEnd={countDownOnEnd}/>
+                		</div>
+                	</span>
+                </div>
+                <div className="bg-fill p15 text-left lh25 mt15">
+
                   1. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_download') : intl.get('unlock_by_upwallet.instruction_download')}
                   <br />
                   2. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_scan') : intl.get('unlock_by_upwallet.instruction_scan')}
                   <br />
-                  {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_warn') : intl.get('unlock_by_upwallet.instruction_warn')}
+                  3. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_warn') : intl.get('unlock_by_upwallet.instruction_warn')}
                 </div>
               </div>
             }
