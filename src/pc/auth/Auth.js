@@ -183,6 +183,7 @@ class Auth extends React.Component {
 
   render () {
     const {metaMask, placeOrderSteps, dispatch} = this.props
+    console.log(1111, metaMask)
     const chromeExtention = {
       'Opera' : "https://addons.opera.com/extensions/details/metamask/",
       'Chrome' : "https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn",
@@ -210,10 +211,12 @@ class Auth extends React.Component {
           window.open(chromeExtention[browserType])
         }
       }
+      console.log(345)
       dispatch({type: 'metaMask/setRefreshModalVisible', payload: {refreshModalVisible:true}});
     }
 
     const hideModal = () => {
+      console.log(123)
       dispatch({type: 'metaMask/setRefreshModalVisible', payload: {refreshModalVisible:false}});
     }
 
@@ -307,8 +310,8 @@ class Auth extends React.Component {
                 title={intl.get('wallet_meta.unlock_steps_title')}
                 visible={metaMask.refreshModalVisible}
                 maskClosable={false}
-                onOk={refresh}
-                onCancel={hideModal}
+                onOk={()=>refresh()}
+                onCancel={()=>hideModal()}
                 okText={null}
                 cancelText={null}
                 footer={null}

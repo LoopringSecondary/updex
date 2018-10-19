@@ -290,8 +290,6 @@ class PlaceOrderForm extends React.Component {
                   {tokens.left} 
                 </div>
             </Button>
-
-            <div>解锁方式  切换</div>
           </List>
         </div>
       </div>

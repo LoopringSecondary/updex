@@ -21,6 +21,7 @@ export default {
     },
     setRefreshModalVisible(state, {payload}) {
       const {refreshModalVisible} = payload;
+      console.log(9999, refreshModalVisible)
       return {
         ...state,
         refreshModalVisible
