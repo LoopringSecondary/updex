@@ -8,7 +8,7 @@ import moment from 'moment'
 import CountDown from 'LoopringUI/components/CountDown';
 import {keccakHash} from 'LoopringJS/common/utils'
 import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
-import HelperOfSignOrder from './HelperOfSignOrder'
+import SignOrderAndTxs from './SignOrderAndTxs'
 import HelperOfPlaceOrderResult from './HelperOfPlaceOrderResult'
 import SignByLoopr from './SignByLoopr'
 import storage from 'modules/storage'
@@ -162,14 +162,14 @@ class SignSteps extends React.Component {
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
         <div className="p15">
-          <div className="mb20 mt15">
+          <div className="mb20 mt20">
             <Steps current={step} direction="horizontal">
-              {steps.map(item => <Steps.Step key={item.title} title={<div className="color-black-1 font-weight-normal">{item.title}</div>} />)}
+              {steps.map(item => <Steps.Step key={item.title} title={<div className="color-black-1 font-weight-normal fs13 pt5">{item.title}</div>} />)}
             </Steps>
           </div>
           {
             step === 0 &&
-            <div className="mt15 bg-fill pt15 pb15">
+            <div className="mt15 bg-fill">
               <div className="">
                 <div className="text-center">
                   {
@@ -182,7 +182,7 @@ class SignSteps extends React.Component {
           }
           {
             step === 1 &&
-            <div className="mt15 bg-fill">
+            <div className="mt15">
               <div className="">
                 {
                   (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
@@ -193,18 +193,15 @@ class SignSteps extends React.Component {
                       </div>
                   </div>
                 }
-                {
-                  (placeOrderSteps.signWith === 'metaMask' || placeOrderSteps.signWith === 'ledger') &&
-                  <div className="text-center p35">
-                    <HelperOfSignOrder />
-                  </div>
+                {(placeOrderSteps.signWith === 'metaMask' || placeOrderSteps.signWith === 'ledger') && 
+                  <SignOrderAndTxs />
                 }
               </div>
             </div>
           }
           {
             step === 2 &&
-            <div className="mt15 bg-fill-light">
+            <div className="mt15">
               <HelperOfPlaceOrderResult />
             </div>
           }
