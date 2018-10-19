@@ -281,9 +281,9 @@ export default {
   place_order_by_metamask: {
     title: '使用 MetaMask 下单',
     connect: '连接 MetaMask',
-    step_connect: '连接MetaMask',
-    step_sign: '在MetaMask上确认签名',
-    step_result: '结果'
+    step_connect: '钱包解锁',
+    step_sign: '签名订单',
+    step_result: '订单提交'
   },
   order_cancel: {
     cancel_title: '您确定要取消当前订单?',
