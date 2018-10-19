@@ -38,3 +38,5 @@ const SignByLoopr = ({placeOrderSteps, dispatch}) => {
     </div>
   )
 }
+
+export default SignByLoopr
