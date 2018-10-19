@@ -137,6 +137,7 @@ const notifications = {
     eth_is_required: '由于需要支付ETH油费, 根据您当前订单需要发送的以太坊交易计算，还需要 {required} ETH',
     lrcfee_is_required: '由于需要支付LRC油费, 汇总您历史订单所需LRC，还需要 {required} LRC',
     unlock_by_cookie_address: 'Loopr切换您的账户至观察模式，您的私钥对当前网页已失效。当您执行一些操作时可能需要再次解锁钱包。',
+    ledger_connect_failed: "与您的Ledger设备连接失败, 您可以参照以下建议. 1、请确保您的设备与电脑连接并解锁. 2、在设备上将该选项设置为'yes': Settings->Browser support 3、在设备上选择'Ethereum app'并进入",
   }
 }
 
@@ -557,6 +558,12 @@ export default {
     instruction_download: '下载UpWallet',
     instruction_scan: '打开您的UpWallet，扫描二维码，确认信息',
     instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
+  },
+  unlock_by_ledger:{
+    title:'使用Ledger钱包解锁'
+  },
+  unlock_by_metaMask: {
+    title:'使用MetaMask浏览器插件解锁'
   },
   wallet_type: {
     generate: '生成钱包',
