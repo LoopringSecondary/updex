@@ -142,7 +142,7 @@ class Convert extends React.Component {
               <WebIcon type="close" key='1'/>,
             ]}
             rightContent={[
-              <Button size="small" type="primary" onClick={swap} key='1' ><WebIcon type="swap"/></Button>,
+              <WebIcon className="cursor-pointer" onClick={swap} type="swap" />,
             ]}
           >
             <div className="color-black">{fromToken === 'ETH' ? intl.get('convert.convert_eth_title') : intl.get('convert.convert_weth_title')}</div>

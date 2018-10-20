@@ -98,10 +98,10 @@ const HelperOfBalance = (props)=>{
                       true && token.symbol === 'WETH' &&
                       <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
                     }
-                    <Popover content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol,hideBuy:true}}/>}>
-                    <Button  type="ghost" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block ml10 border-none bg-primary-light" size="small">
-                      <WebIcon type="ellipsis" />
-                    </Button>
+                    <Popover className="rs" trigger="click" placement="left" arrowPointAtCenter={true} content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol,hideBuy:true}}/>}>
+                      <Button  type="ghost" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block ml10 border-none bg-primary-light" size="small">
+                        <WebIcon type="ellipsis" />
+                      </Button>
                     </Popover>
                   </td>
                 </tr>

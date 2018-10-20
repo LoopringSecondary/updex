@@ -65,23 +65,19 @@ import { toNumber } from 'LoopringJS/common/formatter'
     const address = storage.wallet.getUnlockedAddress()
     const copyAddress = ()=>{ copy(address) ?  Toast.info(intl.get('notifications.title.copy_suc')) : Toast.fail(intl.get('notifications.title.copy_suc'), 3, null, false) }
     return (
-      <Card>
-        <div className="text-center">
-          <span className="card-header-icon"><i className="icon-arrow-down"></i></span>
-        </div>
+      <div className="p25 pt35">
         <div className="text-center">
          <div className="recommended-tip fs12">{symbol  && toBig(amount).gt(0) && toBig(this.getNeeded()).gt(0) && <div className='color-black-1 text-center'>
             {intl.get('receive.receive_value_tip')} {this.getNeeded()}  {symbol.toUpperCase()}
           </div>}</div>
           <QRCode value={address} size={200} level='H'/>
-
-          <div className="pt10 fs12 text-center" style={{width:'240px',margin:'0 auto',whiteSpace:'wrap',wordBreak:'break-all'}}>
+          <div className="pt10 fs12 text-center" style={{margin:'0 auto',whiteSpace:'wrap',wordBreak:'break-all'}}>
             {address}
-            <Button type="primary" size="" className="d-block w-100 mt10 mb20" onClick={copyAddress}>{intl.get('common.copy')}</Button>
-
+            <Button style={{width:'240px'}} type="primary" size="" className="d-inline-block mt15" onClick={copyAddress}>{intl.get('common.copy')}</Button>
           </div>
+
          </div>
-      </Card>
+      </div>
     )
   }
 }

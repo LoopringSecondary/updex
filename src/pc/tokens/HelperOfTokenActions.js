@@ -50,34 +50,34 @@ function HelperOfTokenActions(props) {
   }
 
   return (
-    <div className="">
+    <div className="p0" style={{width:'24rem'}}>
         <NavBar
-          className="zb-b-b"
+          className="zb-b-b d-none"
           mode="light"
           onLeftClick={() => hideLayer({id:'helperOfTokenActions'})}
-          leftContent={[
+          leftContent={null && [
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          {symbol} {intl.get('common.actions')}
+          <div className="fs14 text-left">{symbol} {intl.get('common.actions')}</div>
         </NavBar>
         <div className="p10">
-          <Button onClick={showReceive} className="" type="primary">{intl.get('common.receive')} {symbol}</Button>
+          <Button size="small" onClick={showReceive} className="fs14" type="primary">{intl.get('common.receive')} {symbol}</Button>
           {
             isSupportedTrading() && !hideBuy &&
-            <Button onClick={gotoTrading} className="mt10" type="primary">{intl.get('common.buy')} {symbol}</Button>
+            <Button size="small" onClick={gotoTrading} className="mt10 fs14" type="primary">{intl.get('common.buy')} {symbol}</Button>
           }
 
           {
             (false && symbol.toUpperCase() !== 'WETH' && symbol.toUpperCase() !== 'ETH') &&
-            <Button onClick={()=>window.toast('ComingSoon')} disabled className="mt10" type="">Enable {symbol}</Button>
+            <Button size="small" onClick={()=>window.toast('ComingSoon')} disabled className="mt10 fs14" type="">Enable {symbol}</Button>
           }
           {symbol === 'WETH' &&
-                <Button className="mt10" type="primary" onClick={() => {showConvert("ETH")}}>{intl.get('convert.convert_eth_title')}</Button>
+                <Button size="small" className="mt10 fs14" type="primary" onClick={() => {showConvert("ETH")}}>{intl.get('convert.convert_eth_title')}</Button>
           }
           {
             symbol === 'ETH' &&
-            <Button onClick={gotoTrading} className="mt10" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
+            <Button size="small" onClick={gotoTrading} className="mt10 fs14" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
           }
         </div>
     </div>
