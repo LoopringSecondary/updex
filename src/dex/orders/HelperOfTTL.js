@@ -30,7 +30,7 @@ class TTLForm extends React.Component {
     }
 
     return (
-      <div className="bg-grey-50">
+      <div className="bg-white" style={{height:'100%'}}>
         <NavBar
           className="zb-b-b"
           mode="light"
@@ -39,9 +39,9 @@ class TTLForm extends React.Component {
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          {intl.get('setting_ttl.title')}
+          <div className="color-black-1">{intl.get('setting_ttl.title')}</div>
         </NavBar>
-        <div className="">
+        <div className="zb-b-b">
           <DatePickerView
             mode="datetime"
             minDate={moment().toDate()}

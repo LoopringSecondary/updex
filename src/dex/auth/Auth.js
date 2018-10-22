@@ -64,7 +64,15 @@ class Auth extends React.Component {
   amountChange = (value) => {
     this.setState({address:value})
   }
-
+  showLayer = (payload = {}) => {
+    const {dispatch} = this.props
+    dispatch({
+      type: 'layers/showLayer',
+      payload: {
+        ...payload
+      }
+    })
+  }
   render () {
     const {uuid,item,dispatch} = this.props
     const {address} = this.state;
@@ -76,58 +84,41 @@ class Auth extends React.Component {
           mode="light"
           onLeftClick={()=>dispatch({type:'layers/hideLayer',payload:{id:'authOfMobile'}})}
           leftContent={[
-            <span onClick={()=>{}} className="color-black-1" key="1"><Icon type="close" /></span>,
+            <span onClick={()=>{}} className="text-primary" key="1"><Icon type="close" /></span>,
           ]}
           rightContent={null && [
             <span className="color-black-1" key="1"  onClick={()=>{}}><Icon type="question-circle-o" /></span>
           ]}
         >
-          <div className="text-primary fs16">
-            LOG IN
+          <div className="color-black-1 fs16">
+            Unlock Wallet
           </div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
-        <div className="pt50 pb35 pl15 pr15">
-          <div className="text-center pb30">
+        <div className="pt30 pb40 pl15 pr15">
+          <div className="text-center">
             <img style={{height:'4.5rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/>
-            <div className="text-primary fs18 font-weight-bold mt5 mb5">UP DEX</div>
+            <div className="text-primary fs18 font-weight-bold mt5">UP DEX</div>
           </div>
-          <List className="no-border am-list-bg-none selectable">
-            <InputItem
-              type="text"
-              onChange={this.amountChange}
-              value={address}
-              className="circle h-default color-black-2 fs13"
-              placeholder="ETH Address"
-              extra={<Icon hidden type="scan" />}
-              clear
-            >
-            </InputItem>
-          </List>
-          <Button onClick={this.authByAddress} className="mt15 fs16" type="primary">Login By Address</Button>
         </div>
         <div className="">
-          <div className="divider 1px zb-b-t"></div>
-          <div className="pt20 pl15">
-            <div className="fs12 color-black-3 text-left">{intl.get('signIn.tp_title')}</div>
-          </div>
-          <div className="row m15 p10 no-gutters align-items-center bg-primary"
-               style={{height:'4.4rem',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 pr20">
-              <img style={{height: '20px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
+          <div className="row ml15 mr15 mb15 p15 no-gutters align-items-center bg-primary"
+               style={{padding: '0px 0px',borderRadius:'50em'}}>
+            <div className="col-auto text-left ml5 mr15" style={{width:'2.5rem'}}>
+              <img style={{height: '24px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
             </div>
             <div className="col text-left">
               <div className="fs16 color-black text-left">UP Wallet</div>
             </div>
             <div className="col-auto text-right">
               <div className="fs14 text-wrap text-left">
-                <span hidden className="fs13 color-black-3 mr5">Scan QRcode</span>
-                <Icon className="color-black-3" type="right"/>
+                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <Icon className="color-black-2" type="right"/>
               </div>
             </div>
           </div>
-          <div className="row m15 p10 no-gutters align-items-center bg-primary" style={{height:'4.4rem',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 pr20">
+          <div className="row ml15 mr15 mb15 p15 no-gutters align-items-center bg-primary" style={{padding: '0px 0px',borderRadius:'50em'}}>
+            <div className="col-auto text-left ml5 mr15" style={{width:'2.5rem'}}>
               <i className="icon-loopr color-black-1 fs22"></i>
             </div>
             <div className="col text-left">
@@ -135,79 +126,27 @@ class Auth extends React.Component {
             </div>
             <div className="col-auto text-right">
               <div className="fs14 text-wrap text-left">
-                <span hidden className="fs13 color-black-3 mr5">Scan QRcode</span>
-                <Icon className="color-black-3" type="right"/>
+                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <Icon className="color-black-2" type="right"/>
               </div>
             </div>
           </div>
-
-          <div onClick={()=>{}} className="d-none row m15 p10 no-gutters align-items-center bg-primary"
-               style={{height:'4.4rem',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 pr20">
-              <i className="icon-Metamaskwallet color-black-1 fs20"></i>
+          <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row ml15 mr15 p15 no-gutters align-items-center bg-primary"
+               style={{padding: '0px 0px',borderRadius:'50em'}}>
+            <div className="col-auto text-left ml5 mr15" style={{width:'2.5rem'}}>
+              <i className="icon-eye color-black-1 fs20"></i>
             </div>
             <div className="col text-left">
-              <div className="fs16 color-black text-left">MetaMask</div>
+              <div className="fs16 color-black-1 text-left">Watch-Only Wallet</div>
             </div>
             <div className="col-auto text-right">
               <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-3 mr5">Connect</span>
-                <Icon className="color-black-3" type="right"/>
+                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <Icon className="color-black-2" type="right"/>
               </div>
             </div>
           </div>
-          <div onClick={this.unlockByLedger} className="d-none row m15 p10 no-gutters align-items-center bg-primary"
-               style={{height:'4.4rem',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 pr20">
-              <i className="icon-ledgerwallet color-black-1 fs20"></i>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 color-black text-left">Ledger</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-3 mr5">Connect</span>
-                <Icon className="color-black-3" type="right"/>
-              </div>
-            </div>
-          </div>
-          <div hidden className="d-none row pt15 pb15 align-items-center justify-content-center ml0 mr0">
-            <div className="col-auto pl20 pr20">
-              <div className="text-center" onClick={() => this.authByThirdPartyWallet('loopr-ios')}>
-                <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '32px',
-                  height: '36px',
-                  lineHeight:'36px',
-                }}>
-                  <img width="100%" src={require('../../assets/images/up-logo-notext.png')} alt=""/>
-                </div>
-                <div className="pt10 fs13 color-black-4">UP Wallet</div>
-              </div>
-            </div>
-            <div className="col-auto pl20 pr20">
-              <div className="text-center" onClick={() => {Toast.info('Coming Soon！',3,null,false)}}>
-                <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '36px',
-                  height: '36px',
-                }}>
-                  <img style={{borderRadius: '6px'}} width="100%" src={require('../../assets/images/loopr.png')} alt=""/>
-                </div>
-                <div className="pt10 fs13  color-black-4">Loopr</div>
-              </div>
-            </div>
-            <div className="col-auto pl20 pr20">
-              <div className="text-center" onClick={() => {Toast.info('Coming Soon！',3,null,false)}}>
-                <div className="d-inline-block color-black-1 text-center" style={{
-                  width: '36px',
-                  height: '36px',
-                }}>
-                  <img style={{borderRadius: '6px'}} width="100%" src={require('../../assets/images/imtoken.png')} alt=""/>
-                </div>
-                <div className="pt10 fs13 color-black-4">imToken</div>
-              </div>
-            </div>
-          </div>
-          <div className="p5 pb10 text-center"style={{}}>
+          <div className="p5 pb10 text-center"style={{position:'absolute',bottom:'0',left:0,right:0}}>
             <div className="fs12 color-black-4">v1.0.3</div>
           </div>
         </div>
