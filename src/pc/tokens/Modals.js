@@ -25,7 +25,7 @@ function Modals(props) {
           </UiContianers.Panels>
       </Containers.Layers>
       <Containers.Layers id="convertToken" >
-        <UiContianers.Drawer id="convertToken" position="right" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
+        <UiContianers.Drawer id="convertToken" closable={false} position="right" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
           <Convert />
         </UiContianers.Drawer>
       </Containers.Layers>

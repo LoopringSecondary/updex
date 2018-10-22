@@ -58,6 +58,60 @@ class Auth extends React.Component {
     })
   }
 
+  authByThirdPartyWallet = (wallet) => {
+    const ua = new UserAgent()
+    if(ua.isWechat()){
+      Modal.alert('Open Wallet in Safari','Please click top-right corner button')
+    }else{
+      const {dispatch} = this.props
+      const uuid = uuidv4().substring(0, 8)
+      dispatch({
+        type: 'sockets/extraChange',
+        payload: {id: 'addressUnlock', extra: {uuid}}
+      })
+      dispatch({type:'sockets/fetch',payload:{id:'addressUnlock'}});
+      const data = {type: 'UUID', value: uuid}
+      window.location = `${wallet}://${JSON.stringify(data)}`
+    }
+  }
+
+  authByAddress = () => {
+    const {address} = this.state;
+    const re = new RegExp("^0x[0-9a-fA-F]{40}$")
+    if(address && re.test(address)){
+      storage.wallet.storeUnlockedAddress('address', address)
+      window.RELAY.account.register(address)
+      // routeActions.gotoPath('/pc/trade/lrc-weth')
+      this.props.dispatch({type:'wallet/unlockAddressWallet',payload:{address}});
+      this.props.dispatch({
+        type: 'sockets/extraChange',
+        payload: {id: 'addressUnlock', extra: {uuid:""}}
+      })
+      this.props.dispatch({
+        type: 'layers/hideLayer',
+        payload: {id: 'authOfPC'}
+      })
+      this.props.dispatch({type: 'sockets/unlocked'});
+      Modal.alert(intl.get('notifications.title.log_in_suc'))
+    }else{
+      Toast.fail(intl.get("notifications.title.invalid_address_tip"))
+    }
+  }
+
+  amountChange = (value) => {
+    this.setState({address:value})
+  }
+
+  loopringUnlock = () => {
+    const {dispatch} = this.props;
+    const uuid = uuidv4()
+    dispatch({type: 'scanAddress/uuidChanged', payload: {UUID: uuid.substring(0, 8)}})
+    dispatch({
+      type: 'sockets/extraChange',
+      payload: {id: 'addressUnlock', extra: {UUID: uuid.substring(0, 8)}}
+    });
+    dispatch({type: 'sockets/fetch', payload: {id: 'addressUnlock'}});
+  }
 
   unlockByLoopr = () => {
     storage.wallet.setLoopringUnlockWith('loopr')
@@ -101,6 +155,7 @@ class Auth extends React.Component {
       Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
     });
   }
+
   chooseAddress = (path)=>{
     let ledger = null
     connectLedger().then(res => {

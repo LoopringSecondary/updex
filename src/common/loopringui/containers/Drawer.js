@@ -10,7 +10,7 @@ const DrawerWrapper = (props)=>{
     position='left',
     showMask=true,
     level='all', // all, null, className, id, tagName, array
-    mask,closable=true,maskClosable=true,apisOnly=false,wrapClassName="",className="",
+    mask,closable=false,maskClosable=true,apisOnly=false,wrapClassName="",className="",
     style,
     ...rest
   } = props
@@ -21,8 +21,9 @@ const DrawerWrapper = (props)=>{
     width,
     height,
     placement:position,
-    maskClosable:showMask,
+    // maskClosable:showMask,
     maskClosable,
+    closable,
     // level,
     visible:module.visible,
     onClose:module.hideLayer && module.hideLayer.bind(this),
