@@ -250,10 +250,10 @@ export default {
     type_approve: '{token}授权'
   },
   place_order_by_loopr: {
-    title: '使用Loopr移动端钱包下单',
+    title: '使用Loopr手机钱包签名',
     step_qrcode: '使用APP扫码',
-    step_sign: '使用APP下单',
-    step_result: '下单结果',
+    step_sign: '使用APP签名',
+    step_result: '签名结果',
     qrcode_overdue: '二维码已过期，请重新下单生成新二维码',
     instruction_download: '下载Loopr-IOS',
     instruction_scan: '打开您的Loopr钱包，扫描二维码，确认信息完成签名，并提交订单',
@@ -261,10 +261,10 @@ export default {
     waiting_sign: '等待手机对订单进行签名提交',
   },
   place_order_by_upwallet: {
-    title: '使用UpWallet下单',
+    title: '使用UpWallet手机版签名',
     step_qrcode: '使用APP扫码',
-    step_sign: '使用APP下单',
-    step_result: '下单结果',
+    step_sign: '使用APP签名',
+    step_result: '签名结果',
     qrcode_overdue: '二维码已过期，请重新下单生成新二维码',
     instruction_download: '下载UpWallet App',
     instruction_scan: '打开您的UpWallet，扫描二维码，确认信息完成签名，并提交订单',
