@@ -34,21 +34,21 @@ class AuthByTPWallet extends React.Component {
             })
             _this.props.dispatch({type: 'sockets/unlocked'})
             _this.props.dispatch({type: 'locales/setLocale', payload: {locale: window.Wallet.language}})
-            window.handleP2POrder = ({value:{hash, auth, ratio},type}) => {
+            window.handleP2POrder = ({value:{Hash, Auth, Ratio},type}) => {
               const dispatch = this.props.dispatch
-              window.RELAY.order.getOrderByHash({orderHash: hash}).then(res => {
+              window.RELAY.order.getOrderByHash({orderHash: Hash}).then(res => {
                 if (res.error) {
                   Toast.fail(res.error.message)
                 } else {
                   const order = res.result
-                  order.originalOrder.authPrivateKey = auth;
+                  order.originalOrder.authPrivateKey = Auth;
                   if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
                     dispatch({
                       type: 'layers/showLayer',
                       payload: {
                         id:'takerConfirm',
                         makerOrder:{
-                          auth, ratio,
+                          auth:Auth, ratio:Ratio,
                           originalOrder:order.originalOrder
                         }
                       }

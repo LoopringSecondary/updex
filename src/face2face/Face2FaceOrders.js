@@ -26,6 +26,14 @@ class Face2FaceOrders extends React.Component {
     const {pageIndex, pageSize} = this.state
     this.fetchOrder(pageIndex,pageSize)
   }
+  componentWillReceiveProps(newProps){
+    console.log(JSON.stringify(newProps))
+    if(newProps.fetchOrder){
+      const {pageIndex, pageSize} = this.state
+      this.fetchOrder(pageIndex,pageSize)
+      newProps.dispatch({type:'p2pOrder/setFetchOrder',payload:{fetchOrder:false}})
+    }
+  }
 
   fetchOrder= (pageIndex, pageSize) => {
     this.setState({loading:true})
@@ -110,7 +118,8 @@ class Face2FaceOrders extends React.Component {
                   if (response.error) {
                     Toast.fail(`${intl.get('notifications.title.cancel_fail', {type: intl.get('common.order')})}:${response.error.message}`, 3, null, false)
                   } else {
-                    this.fetchOrder(pageIndex,pageSize)
+                    storage.orders.deleteP2POrder(item.originalOrder.hash);
+                    this.fetchOrder(pageIndex,pageSize);
                     Toast.success(intl.get('notifications.title.cancel_suc', {type: intl.get('common.order')}), 3, null, false)
                   }
                 })
@@ -208,6 +217,13 @@ class Face2FaceOrders extends React.Component {
   }
 }
 
-export default connect()(Face2FaceOrders)
+function mapStateToProps(state) {
+
+  return {
+    fetchOrder:state.p2pOrder.fetchOrder
+  }
+}
+
+export default connect(mapStateToProps)(Face2FaceOrders)
 
 

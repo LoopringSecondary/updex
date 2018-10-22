@@ -31,7 +31,7 @@ const OrderMetaItem = (props) => {
 function PlaceOrderSteps (props) {
   const {p2pOrder, balance, settings, marketcap, pendingTx, dispatch} = props
   const gasPrice = 10
-  const {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
+  const {tokenS, tokenB, amountS, amountB, ratio = 1} = p2pOrder
   const validSince = p2pOrder.validSince || moment()
   const validUntil = p2pOrder.validUntil || moment().add(1, 'months')
   const price = toFixed(amountS / amountB, 4)
@@ -169,6 +169,7 @@ function PlaceOrderSteps (props) {
           type: 'error'
         })
       } else {
+        dispatch({type:'p2pOrder/setFetchOrder',payload:{fetchOrder:true}});
         Notification.open({
           message: intl.get('notifications.title.place_order_success'),
           description: 'successfully submit order',
@@ -177,16 +178,15 @@ function PlaceOrderSteps (props) {
 
         signedOrder.orderHash = response.result
         dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
-
         const unsignedOrder = unsigned.find(item => item.type === 'order')
         storage.orders.storeP2POrder({
-          authPrivateKey: unsignedOrder.completeOrder.authPrivateKey,
-          orderHash: signedOrder.orderHash,
-          count
+          Auth: unsignedOrder.completeOrder.authPrivateKey,
+          Hash: signedOrder.orderHash,
+          Ratio:ratio
         })
         const qrcode = JSON.stringify({
-          type: 'p2p_order',
-          value: {authPrivateKey: unsignedOrder.completeOrder.authPrivateKey, orderHash: signedOrder.orderHash, count}
+          type: 'P2P',
+          value: {Auth: unsignedOrder.completeOrder.authPrivateKey, Hash: signedOrder.orderHash, Ratio:ratio}
         })
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})

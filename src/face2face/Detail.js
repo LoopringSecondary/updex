@@ -43,7 +43,7 @@ function OrderDetail(props) {
 
   const showQR = (order) => {
    const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
-    showLayer({id:'orderQrcode',order:p2pOrder})
+    showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder}})
   }
 
   const orderStatus = (item) => {

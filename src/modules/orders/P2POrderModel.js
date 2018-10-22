@@ -12,7 +12,8 @@ export default {
     validSince: null,
     validUntil: null,
     loading: false,
-    qrcode: ''
+    qrcode: '',
+    fetchOrder:false
   },
   effects: {
     * init ({payload = {}}, {put}) {
@@ -29,6 +30,7 @@ export default {
         validUntil: null,
         loading: false,
         qrcode: '',
+        fetchOrder:false
       }
     },
     tokenChange (state, action) {
@@ -74,6 +76,13 @@ export default {
         validUntil
       }
     },
+    setFetchOrder(state,{payload}){
+      const {fetchOrder} = payload
+      return {
+        ...state,
+        fetchOrder
+      }
+    }
   },
 }
 
