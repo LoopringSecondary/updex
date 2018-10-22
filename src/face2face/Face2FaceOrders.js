@@ -24,6 +24,11 @@ class Face2FaceOrders extends React.Component {
 
   componentDidMount () {
     const {pageIndex, pageSize} = this.state
+    this.fetchOrder(pageIndex,pageSize)
+  }
+
+  fetchOrder= (pageIndex, pageSize) => {
+    this.setState({loading:true})
     const owner = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
     window.RELAY.order.getOrders({
       owner,
@@ -64,7 +69,7 @@ class Face2FaceOrders extends React.Component {
 
   render () {
     const {dispatch} = this.props
-    const {orders, pageIndex, total} = this.state
+    const {orders, pageIndex,pageSize, total} = this.state
 
     const gotoDetail = (item) => {
       console.log('detail')
@@ -76,8 +81,8 @@ class Face2FaceOrders extends React.Component {
         }
       })
     }
-    const cancelOrder = (item, e) => {
-      e.stopPropagation()
+    const cancelOrder = (item) => {
+      // e.stopPropagation()
       const tokenb = item.originalOrder.tokenB
       const tokens = item.originalOrder.tokenS
       let description = ''
@@ -105,6 +110,7 @@ class Face2FaceOrders extends React.Component {
                   if (response.error) {
                     Toast.fail(`${intl.get('notifications.title.cancel_fail', {type: intl.get('common.order')})}:${response.error.message}`, 3, null, false)
                   } else {
+                    this.fetchOrder(pageIndex,pageSize)
                     Toast.success(intl.get('notifications.title.cancel_suc', {type: intl.get('common.order')}), 3, null, false)
                   }
                 })
@@ -202,11 +208,6 @@ class Face2FaceOrders extends React.Component {
   }
 }
 
-export default connect(({
-                          sockets: {tickers},
-                          orders,
-                        }) => ({
-  orders: orders.MyOpenOrders
-}))(Face2FaceOrders)
+export default connect()(Face2FaceOrders)
 
 

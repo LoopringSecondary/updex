@@ -14,6 +14,7 @@ import Notifications from './notifications/Notifications'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
 import storage from 'modules/storage'
+import Face2FaceModals from '../face2face/Modals'
 
 const UnLogged = ()=>{
   const isLogged = !!storage.wallet.getUnlockedAddress()
@@ -48,6 +49,7 @@ const Logged = ()=>{
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
+        <Face2FaceModals/>
       </div>
     )
   }else{

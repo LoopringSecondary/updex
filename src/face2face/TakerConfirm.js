@@ -1,15 +1,17 @@
 import React from 'react'
 import config from '../common/config'
-import { toHex, toBig, toFixed } from 'LoopringJS/common/formatter'
+import { toHex, toBig, toFixed,clearHexPrefix } from 'LoopringJS/common/formatter'
 import monent from 'moment'
 import { Icon } from 'antd'
 import { Button } from 'antd-mobile'
 import storage from 'modules/storage'
 import Contracts from 'LoopringJS/ethereum/contracts/Contracts'
 import { connect } from 'dva'
-import { signTx } from '../common/utils/signUtils'
+import { signTx,signOrder } from '../common/utils/signUtils'
 import { Toast } from 'antd-mobile/lib/index'
 import intl from 'react-intl-universal'
+import { createWallet } from 'LoopringJS/ethereum/account'
+import Notification from 'LoopringUI/components/Notification'
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -28,7 +30,6 @@ const OrderMetaItem = (props) => {
 class TakerConfirm extends React.Component {
 
   render () {
-
     const {dispatch, takerConfirm, gas} = this.props
     const {makerOrder} = takerConfirm
     const validSince = monent()
@@ -39,10 +40,10 @@ class TakerConfirm extends React.Component {
     order.owner = (window.Wallet && window.Wallet.getAddress()) || storage.wallet.getUnlockedAddress()
     order.tokenB = makerOrder.originalOrder.tokenS
     order.tokenS = makerOrder.originalOrder.tokenB
-    order.amountB = toHex(toBig(makerOrder.originalOrder.amountS).idiv(makerOrder.count))
-    let amountS = toBig(makerOrder.originalOrder.amountB).div(makerOrder.count)
+    order.amountB = toHex(toBig(makerOrder.originalOrder.amountS).idiv(makerOrder.ratio))
+    let amountS = toBig(makerOrder.originalOrder.amountB).div(makerOrder.ratio)
     if (!amountS.isInteger()) {
-      amountS = toBig(makerOrder.originalOrder.amountB).idiv(makerOrder.count).plus(1)
+      amountS = toBig(makerOrder.originalOrder.amountB).idiv(makerOrder.ratio).plus(1)
     }
     order.amountS = toHex(amountS)
     order.lrcFee = '0x0'
@@ -51,8 +52,10 @@ class TakerConfirm extends React.Component {
     order.marginSplitPercentage = 0
     order.buyNoMoreThanAmountB = true
     order.walletAddress = config.getWalletAddress()
-
-    const price = toFixed(order.amountS / order.amountB, 4)
+    const authAccount = createWallet()
+    order.authAddr = authAccount.getAddressString();
+    order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString());
+    const price = toFixed(order.amountS / order.amountB, 4);
     const showLayer = (payload = {}) => {
       dispatch({
         type: 'layers/showLayer',
@@ -73,30 +76,38 @@ class TakerConfirm extends React.Component {
     const submitRing = async () => {
       const address = (window.Wallet && window.Wallet.getAddress()) || storage.wallet.getUnlockedAddress()
       const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current).times(1e9))
-      const tx = {
-        value: '0x0',
-        gasLimit: config.getGasLimitByType('submitRing').gasLimit,
-        chainId: config.getChainId(),
-        to: order.protocol,
-        gasPrice,
-        nonce:toHex((await window.RELAY.account.getNonce(address)).result),
-        data:Contracts.LoopringProtocol.encodeSubmitRing([order,makerOrder.originalOrder],config.getWalletAddress())
-      }
-      signTx(tx).then(res => {
-        if (res.result) {
-          window.RELAY.ring.submitRingForP2P({makerOrderHash:makerOrder.originalOrder.hash,rawTx:res.result,takerOrderHash:window.RELAY.order.getOrderHash(order)}).then(resp => {
-            if (resp.result) {
-              Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
-              hideLayer({id: 'takerConfirm'})
-            } else {
-              Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
-            }
-          })
-        } else {
-          Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + res.error.message, 3, null, false)
+      const sig = await signOrder(order);
+      if(sig.result){
+        const tx = {
+          value: '0x0',
+          gasLimit: config.getGasLimitByType('submitRing').gasLimit,
+          chainId: config.getChainId(),
+          to: order.protocol,
+          gasPrice,
+          nonce:toHex((await window.RELAY.account.getNonce(address)).result),
+          data:Contracts.LoopringProtocol.encodeSubmitRing([{...order,...sig},makerOrder.originalOrder],config.getWalletAddress())
         }
-      })
-
+        signTx(tx).then(res => {
+          if (res.result) {
+            window.RELAY.ring.submitRingForP2P({makerOrderHash:makerOrder.originalOrder.hash,rawTx:res.result,takerOrderHash:window.RELAY.order.getOrderHash(order)}).then(resp => {
+              if (resp.result) {
+                Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
+                hideLayer({id: 'takerConfirm'})
+              } else {
+                Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
+              }
+            })
+          } else {
+            Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + res.error.message, 3, null, false)
+          }
+        })
+      }else{
+        Notification.open({
+          message:intl.get('notifications.title.place_order_failed'),
+          description:sig.error.message,
+          type:'error'
+        })
+      }
     }
 
     return (

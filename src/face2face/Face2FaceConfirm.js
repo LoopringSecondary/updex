@@ -131,8 +131,8 @@ function PlaceOrderSteps (props) {
       }
       const signedOrder = {...order, ...signResult.result}
       signedOrder.powNonce = 100
-      let failed = false
-      eachOfLimit(unsigned.filter(item => item.type = 'tx'), 1, async (item) => {
+      let failed = false;
+      eachOfLimit(unsigned.filter(item => item.type === 'tx'), 1, async (item) => {
         signTx(item.data).then(res => {
           if (res.result) {
             window.ETH.sendRawTransaction(res.result).then(resp => {
@@ -174,6 +174,7 @@ function PlaceOrderSteps (props) {
           description: 'successfully submit order',
           type: 'info'
         })
+
         signedOrder.orderHash = response.result
         dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
 
