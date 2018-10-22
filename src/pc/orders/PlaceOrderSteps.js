@@ -14,6 +14,7 @@ import { connect } from 'dva'
 import config from 'common/config'
 import storage from 'modules/storage'
 import HelperOfTTL from './HelperOfTTL'
+import {HelperOfSignStepsModal} from '../sign/Modals'
 
 const OrderMetaItem = (props) => {
   const {label, value, showArrow = false, onClick = () => {}} = props
@@ -142,15 +143,15 @@ class PlaceOrderSteps extends React.Component {
       order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString())
       const unsign = [{type:'order', data:order}] //[{type:'approveZero', data:tx}, {type:'approve', data:tx}]
       dispatch({type: 'task/setTask', payload: {task:'sign', unsign}})
-      dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
+      // dispatch({type: 'layers/hideLayer', payload: {id: 'placeOrderSteps'}})
     }
   return (
     <div className="bg-white" style={{height:'100%'}}>
         <NavBar
           className="bg-white"
           mode="light"
-          leftContent={null &&[
-            <span onClick={()=>{}} className="color-black-1" key="1"><Icon type="left" /></span>,
+          leftContent={[
+            <span onClick={()=>hideLayer({id:'placeOrderSteps'})} className="text-primary cursor-pointer" key="1"><Icon type="close" /></span>,
           ]}
           rightContent={null && [
             <span className="color-black-1" key="1"  onClick={()=>{}}><Icon type="question-circle-o" /></span>
@@ -209,38 +210,6 @@ class PlaceOrderSteps extends React.Component {
               </div>
             </div>
           }/>
-          <Page id="wallet" render={({page}) =>
-            <div className="div">
-              <div className="p10 color-black-1 fs18 zb-b-b text-center no-gutters">
-                <div className="row">
-                  <div className="col-auto text-left pl20 pr20" onClick={page.gotoPage.bind(this, {id: 'order'})}>
-                    <Icon type="left"/>
-                  </div>
-                  <div className="col">签名方式</div>
-                  <div className="col-auto color-white pl20 pr20">
-                    <Icon type="left"/>
-                  </div>
-                </div>
-              </div>
-              <div>
-                <Button onClick={() => {}} className="m10" type="primary">Loopr 钱包</Button>
-                <Button onClick={() => {}} disabled className="m10" type="">imToken 钱包</Button>
-              </div>
-            </div>
-          }/>
-          <Page id="result" render={({page}) =>
-            <div className="div">
-              <div className="p15 color-black-1 fs22 zb-b-b text-center">
-                <div className="row">
-                  <div className="col text-left">
-                    <Icon type="close"/>
-                  </div>
-                  <div className="col-auto">Result</div>
-                  <div className="col"></div>
-                </div>
-              </div>
-            </div>
-          }/>
         </Pages>
         <Containers.Layers id="settings">
           <UiContainers.Drawer position="right" id="settings" width="480px"  style={{margin:'0 auto',height:'100%'}}>
@@ -252,6 +221,7 @@ class PlaceOrderSteps extends React.Component {
             <HelperOfTTL />
           </UiContainers.Drawer>
         </Containers.Layers>
+        <HelperOfSignStepsModal />
     </div>
     )
   }
