@@ -8,7 +8,6 @@ import Worth from 'modules/settings/Worth'
 import {getTokensByMarket} from 'modules/formatter/common'
 
 class HelperOfDepth extends React.Component {
-
   componentDidMount() {
     const _this = this
     setTimeout(function(){
