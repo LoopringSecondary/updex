@@ -15,7 +15,7 @@ import Convert from './tokens/ConvertForm'
 import PlaceOrder from './orders/PlaceOrderPage'
 import UserCenter from './account/UserCenter'
 import ListTodos from './notifications/ListTodos'
-import CommonModals from '../components/Modals'
+import CommonModals from './common/Modals'
 import storage from 'modules/storage'
 import UserAgent from 'common/utils/useragent'
 

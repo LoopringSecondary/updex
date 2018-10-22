@@ -13,6 +13,7 @@ import Worth from 'modules/settings/Worth'
 import { signTx } from '../../common/utils/signUtils'
 import ConvertHelperOfBalance from './ConvertHelperOfBalance'
 import { keccakHash } from 'LoopringJS/common/utils'
+import {HelperOfGasModal} from '../common/Modals'
 
 const WETH = Contracts.WETH
 
@@ -162,7 +163,7 @@ class Convert extends React.Component {
                     <div className="fs14 color-black-1">{intl.get('common.amount')}</div>
                   </InputItem>
                   <List.Item
-                    className="circle h-default mt15"
+                    className="circle h-default mt15 cursor-pointer"
                     arrow={false}
                     onClick={setGas}
                     extra={<div className="fs14 text-primary">
@@ -189,6 +190,7 @@ class Convert extends React.Component {
         </div>
         <div className="divider zb-b-b 1px mb10"></div>
         <ConvertHelperOfBalance dispatch={dispatch} token={{symbol:token,balance:assets.balance,balance2:other_assets.balance}} gasFee={gasFee}/>
+        <HelperOfGasModal />
       </div>
     )
   }

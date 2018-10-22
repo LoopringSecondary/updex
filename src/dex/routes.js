@@ -14,7 +14,7 @@ import Notifications from './notifications/Notifications'
 import NotificationModals from './notifications/Modals'
 import AuthModals from './auth/Modals'
 import ListTodos from './notifications/ListTodos'
-import CommonModals from '../components/Modals'
+import CommonModals from './common/Modals'
 import storage from 'modules/storage'
 import UserAgent from 'common/utils/useragent'
 
