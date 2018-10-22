@@ -52,7 +52,6 @@ const Logged = ()=>{
         <Account.Modals />
         <MarketModals />
         <NotificationModals />
-
       </div>
     )
   }else{

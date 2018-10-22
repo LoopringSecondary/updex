@@ -44,11 +44,6 @@ function Modals(props) {
           <HelperOfMarket />
         </UiContainers.Popups>
       </Containers.Layers>
-      <Containers.Layers id="helperOfTTL">
-        <UiContainers.Popups id="helperOfTTL">
-          <HelperOfTTL />
-        </UiContainers.Popups>
-      </Containers.Layers>
       <Containers.Layers id="helperOfLRCFee">
         <UiContainers.Popups id="helperOfLRCFee">
           <HelperOfLRCFee />

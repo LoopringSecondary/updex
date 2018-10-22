@@ -14,6 +14,7 @@ import { Page, Pages } from 'LoopringUI/components/Pages'
 import { connect } from 'dva'
 import config from 'common/config'
 import storage from 'modules/storage'
+import HelperOfTTL from './HelperOfTTL'
 
 const OrderMetaItem = (props) => {
   const {label, value, showArrow = false, onClick = () => {}} = props
@@ -114,7 +115,7 @@ class PlaceOrderSteps extends React.Component {
     }
     const showLRCFee = () => {
       // hideLayer({id:'placeOrderSteps'})
-      showLayer({id:'settingsInOrder'})
+      showLayer({id:'settings'})
     }
     const next = async (page) => {
       let order = {}
@@ -199,8 +200,8 @@ class PlaceOrderSteps extends React.Component {
                   </div>
                 }
                 <OrderMetaItem label={intl.get("common.price")} value={`${priceInput} ${pair}`} />
-                <OrderMetaItem showArrow={true} onClick={()=>showLRCFee()} label={intl.get('common.lrc_fee')} value={<div className="text-primary">{lrcFeeValue} LRC({settings.trading.lrcFee/10}%)</div>} />
-                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary">{validSince.format('MM-DD HH:mm')} ~ {validUntil.format('MM-DD HH:mm')}</div>}  />
+                <OrderMetaItem showArrow={true} onClick={()=>showLRCFee()} label={intl.get('common.lrc_fee')} value={<div className="text-primary cursor-pointer">{lrcFeeValue} LRC({settings.trading.lrcFee/10}%)</div>} />
+                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary cursor-pointer">{validSince.format('MM-DD HH:mm')} ~ {validUntil.format('MM-DD HH:mm')}</div>}  />
                 <div className="divider 1px zb-b-t"></div>
                 <div className="pt15 pb15 color-black-3 fs12 text-center">
                   <Icon className="mr5" type="exclamation-circle-o" />{intl.get('place_order_confirm.no_cost_gas')}
@@ -242,17 +243,16 @@ class PlaceOrderSteps extends React.Component {
             </div>
           }/>
         </Pages>
-        <Containers.Layers id="settingsInOrder">
-          <UiContainers.Drawer position="right" id="settingsInOrder" width="480px"  style={{margin:'0 auto',height:'100%'}}>
+        <Containers.Layers id="settings">
+          <UiContainers.Drawer position="right" id="settings" width="480px"  style={{margin:'0 auto',height:'100%'}}>
             <Settings />
           </UiContainers.Drawer>
         </Containers.Layers>
-        <Containers.Layers id="selectWalletInOrder">
-          <UiContainers.Drawer position="right" id="selectWalletInOrder" width="480px"  style={{margin:'0 auto',height:'100%'}}>
-            <HelperOfSignPC />
+        <Containers.Layers id="helperOfTTL">
+          <UiContainers.Drawer position="right" id="helperOfTTL" width="480px"  style={{margin:'0 auto',height:'100%'}}>
+            <HelperOfTTL />
           </UiContainers.Drawer>
         </Containers.Layers>
-
     </div>
     )
   }

@@ -30,7 +30,7 @@ class TTLForm extends React.Component {
     }
 
     return (
-      <div className="">
+      <div className="bg-white" style={{background:'#fff'}}>
         <NavBar
           className="zb-b-b"
           mode="light"

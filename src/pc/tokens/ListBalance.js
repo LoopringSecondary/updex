@@ -64,7 +64,7 @@ const TokenListComp = (props)=>{
                         token.symbol === 'WETH' &&
                         <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block" size="small" onClick={() => showConvert('WETH')}>{intl.get('common.convert')}</Button>
                       }
-                      <Popover content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol}}/>}>
+                      <Popover placement="left" content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol}}/>}>
                       <Button type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml10" size="small" >
                         <WebIcon type="ellipsis" />
                       </Button>
