@@ -154,7 +154,7 @@ function PlaceOrderSteps(props) {
     }
   }
   return (
-    <div className="">
+    <div className="bg-white">
         <Pages active="order">
           <Page id="order" render={({page})=>
             <div>
@@ -163,7 +163,7 @@ function PlaceOrderSteps(props) {
                   <div className="col-auto text-left" onClick={hideLayer.bind(this,{id:'face2FaceConfirm'})}>
                     <Icon type="close" />
                   </div>
-                  <div className="col">Place Order</div>
+                  <div className="col">Order Confirm</div>
                   <div className="col-auto color-white">
                     <Icon type="close" />
                   </div>

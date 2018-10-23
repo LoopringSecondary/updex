@@ -52,16 +52,16 @@ class HelperOfTokens extends React.Component {
     }
 
     return (
-      <div className="">
+      <div className="bg-white">
         <SearchBar placeholder="Search" maxLength={8} value={filter} onChange={filterChange}/>
-        <div style={{maxHeight: '50vh', overflow: 'auto'}}>
+        <div style={{height: '50vh', overflow: 'auto'}}>
           <List className="popup-list">
             {
               tokensList.map((item, index) => {
                 return (
-                  <List.Item key={index} arrow="horizontal" extra={`${toFixed(item.balance,6)} ${item.symbol}`}
+                  <List.Item key={index} arrow="horizontal" extra={`${toFixed(item.balance,6)}`}
                              onClick={tokenChange.bind(this, item.symbol)}>
-                    <i className={`mr10 icon icon-${item.symbol}`}></i>
+                    <i hidden className={`mr10 icon icon-token-${item.symbol}`}></i>
                     {item.symbol}
                   </List.Item>
                 )
