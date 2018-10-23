@@ -44,14 +44,14 @@ const Logged = ()=>{
           <Route path={`/trade4`} component={Pages.Home2} />
           <Redirect from="/" to="/trade" />
         </Switch>
+        <NotificationModals />
         <CommonModals />
-        <SignModals />
-        <AuthModals />
+        <MarketModals />
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
-        <MarketModals />
-        <NotificationModals />
+        <SignModals />
+        <AuthModals />
       </div>
     )
   }else{

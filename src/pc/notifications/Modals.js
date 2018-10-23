@@ -6,8 +6,8 @@ import Notifications from './Notifications'
 function Modals(props) {
   return (
     <div>
-      <Containers.Layers id="tasks">
-        <UiContainers.Drawer position="right" id="tasks" width="48rem"  style={{margin:'0 auto',height:'100%'}}>
+      <Containers.Layers id="notifications">
+        <UiContainers.Drawer position="right" id="notifications" width="48rem"  style={{margin:'0 auto',height:'100%'}}>
           <Notifications />
         </UiContainers.Drawer>
       </Containers.Layers>
