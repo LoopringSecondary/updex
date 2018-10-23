@@ -7,8 +7,8 @@ const HelperOfFAQ = (props)=>{
   const {dispatch} = props
   return (
     <div className="fs20">
-      <div className="zb-b-b p10">
-        <div className="fs14 color-black-2 mb5">TODO</div>
+      <div className="zb-b-b p15">
+        <div className="fs14 color-black-4">TODO</div>
       </div>
     </div>
   )

@@ -4,8 +4,9 @@ import { Icon as WebIcon } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import { getTokensByMarket } from 'modules/formatter/common'
-import Face2FaceOrders from './Face2FaceOrders'
+import HelperOfOrders from './HelperOfOrders'
 import HelperOfBalances from './HelperOfBalances'
+import HelperOfMarkets from './HelperOfMarkets'
 import Face2FaceForm from './Face2FaceForm'
 import intl from 'react-intl-universal'
 
@@ -67,10 +68,9 @@ class Face2FacePage extends React.Component {
           <div className="bg-white mt10">
             <div className="fs16 pt10 pb10 pl15 color-black-1">Markets</div>
             <div className="zb-b-t">
-              <HelperOfBalances />
+              <HelperOfMarkets />
             </div>
           </div>
-          
           <div className="bg-white mt10">
             <div className="fs16 pt10 pb10 pl15 color-black-1">My Wallet</div>
             <div className="zb-b-t">
@@ -80,7 +80,7 @@ class Face2FacePage extends React.Component {
           <div className="bg-white mt10">
             <div className="fs16 pt10 pb10 pl15 color-black-1">My Orders</div>
             <div className="zb-b-t">
-              <Face2FaceOrders />
+              <HelperOfOrders />
             </div>
           </div>
         </div>
