@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
-import { Button } from 'antd-mobile'
+import { Button,NavBar } from 'antd-mobile'
 import config from 'common/config'
 import intl from 'react-intl-universal'
 import * as orderFormatter from 'modules/orders/formatters'
@@ -15,15 +15,24 @@ import { signOrder, signTx } from '../common/utils/signUtils'
 import eachOfLimit from 'async/eachOfLimit'
 
 const OrderMetaItem = (props) => {
-  const {label, value} = props
+  const {label, value,showArrow=false,onClick=()=>{}} = props
   return (
-    <div className="row ml0 mr0 pl0 pr0 zb-b-t no-gutters" style={{padding: '7px 0px'}}>
+    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding:'7px 0px'}}>
       <div className="col">
-        <div className="fs14 color-black-1 lh25 text-left">{label}</div>
+        <div className="fs14 color-black-2 lh30 text-left">{label}</div>
       </div>
       <div className="col-auto text-right">
-        <div className="fs14 color-black-2 text-wrap lh25 text-left">{value}</div>
+        <div className="fs14 color-black-1 text-wrap lh30 text-left">{value}</div>
       </div>
+      {
+        !!showArrow &&
+        <div className="col-auto text-right">
+          <div className="fs14 text-primary text-wrap lh30 text-left ml5">
+            <Icon type="right" />
+          </div>
+        </div>
+      }
+
     </div>
   )
 }
@@ -206,49 +215,53 @@ function PlaceOrderSteps (props) {
       <Pages active="order">
         <Page id="order" render={({page}) =>
           <div>
-            <div className="p15 color-black-1 fs18 zb-b-b text-center">
-              <div className="row">
-                <div className="col-auto text-left" onClick={hideLayer.bind(this, {id: 'face2FaceConfirm'})}>
-                  <Icon type="close"/>
-                </div>
-                <div className="col">Order Confirm</div>
-                <div className="col-auto color-white">
-                  <Icon type="close"/>
-                </div>
+            <NavBar
+              className="zb-b-b"
+              mode="light"
+              onLeftClick={hideLayer.bind(this, {id: 'face2FaceConfirm'})}
+              leftContent={[
+                <span className="text-primary cursor-pointer" key="1"><Icon type="close" /></span>,
+              ]}
+              rightContent={null && [
+                <span className="text-primary" key="1"  onClick={()=>{}}><Icon type="swap" /></span>
+              ]}
+            >
+              <div className="color-black fs16">
+                Order Confirm
               </div>
-            </div>
-            <div className="p20 bg-white">
-              <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
+            </NavBar>
+            <div className="p15 bg-white">
+              <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center zb-b-b">
                 <div className="col-auto">
-                  <div className=" color-black-1 text-center" style={{
-                    width: '40px',
-                    height: '40px',
-                    lineHeight: '38px',
+                  <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center" style={{
+                    width: '4rem',
+                    height: '4rem',
                     borderRadius: '50em',
-                    border: '1px solid #000'
                   }}>
                     <i className={`icon-token-${tokenS} fs24`}/>
                   </div>
                 </div>
                 <div className="col-auto pl25 pr25 text-center">
-                  <Icon type="swap" className={`color-black-1 fs20`}/>
+                  <Icon type="swap-right" className={`text-primary fs20`}/>
                 </div>
                 <div className="col-auto">
-                  <div className="color-black-1 text-center" style={{
-                    width: '40px',
-                    height: '40px',
-                    lineHeight: '38px',
+                  <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center" style={{
+                    width: '4rem',
+                    height: '4rem',
                     borderRadius: '50em',
-                    border: '1px solid #000'
                   }}>
                     <i className={`icon-${tokenB} fs24`}/>
                   </div>
                 </div>
               </div>
+              <OrderMetaItem label="买入" value={`100 ${tokenB}`}/>
+              <OrderMetaItem label="卖出" value={`0.1 ${tokenS}`}/>
               <OrderMetaItem label="价格" value={`${price} ${tokenS}/${tokenB}`}/>
-              <OrderMetaItem label="订单有效期"
-                             value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}/>
-              <Button type="" className="bg-grey-900 color-white mt15" onClick={next.bind(this, page)}>签名</Button>
+              <OrderMetaItem label="订单有效期" showArrow={true}
+                             value={<div onClick={showLayer.bind(this,{id:'helperOfTTL'})} className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
+              <OrderMetaItem label="最小撮合量" showArrow={true}
+                             value={<div onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}  className="text-primary"><span className="mr5">($1.5 ≈ 10 LRC)</span>10%</div>}/>             
+              <Button type="primary" className="mt15" onClick={next.bind(this, page)}>签名</Button>
             </div>
           </div>
         }/>

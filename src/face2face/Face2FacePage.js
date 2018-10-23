@@ -5,7 +5,7 @@ import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import { getTokensByMarket } from 'modules/formatter/common'
 import Face2FaceOrders from './Face2FaceOrders'
-import Face2FaceBalances from './Face2FaceBalances'
+import HelperOfBalances from './HelperOfBalances'
 import Face2FaceForm from './Face2FaceForm'
 import intl from 'react-intl-universal'
 
@@ -82,7 +82,7 @@ class Face2FacePage extends React.Component {
               onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
             >
               <div className="zb-b-t">
-                <Face2FaceBalances />
+                <HelperOfBalances />
               </div>
               <div className="">
                 <Face2FaceOrders />

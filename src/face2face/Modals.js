@@ -2,6 +2,8 @@ import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
 import HelperOfTokens from './HelperOfTokens'
+import HelperOfTTL from './HelperOfTTL'
+import HelperOfMiniFill from './HelperOfMiniFill'
 import Face2FaceConfirm from './Face2FaceConfirm'
 import OrderDetail from './Detail'
 import OrderQrcode from './Qrcode'
@@ -34,6 +36,16 @@ function Modals(props) {
         <UiContainers.Modals id="orderQrcode" className="rs">
           <OrderQrcode/>
         </UiContainers.Modals>
+      </Containers.Layers>
+      <Containers.Layers id="helperOfTTL">
+        <UiContainers.Popups id="helperOfTTL">
+          <HelperOfTTL />
+        </UiContainers.Popups>
+      </Containers.Layers>
+      <Containers.Layers id="helperOfMiniFill">
+        <UiContainers.Popups id="helperOfMiniFill">
+          <HelperOfMiniFill />
+        </UiContainers.Popups>
       </Containers.Layers>
     </div>
   )
