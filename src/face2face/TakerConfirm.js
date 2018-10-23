@@ -12,6 +12,9 @@ import { Toast } from 'antd-mobile/lib/index'
 import intl from 'react-intl-universal'
 import { createWallet } from 'LoopringJS/ethereum/account'
 import Notification from 'LoopringUI/components/Notification'
+import * as orderFormatter from 'modules/orders/formatters'
+import eachOfLimit from "async/eachOfLimit";
+
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -30,20 +33,20 @@ const OrderMetaItem = (props) => {
 class TakerConfirm extends React.Component {
 
   render () {
-    const {dispatch, takerConfirm, gas} = this.props
+    const {dispatch, takerConfirm, gas,balance,pendingTx} = this.props
     const {makerOrder} = takerConfirm
     const validSince = monent()
     const validUntil = validSince.add(1, 'days')
     const order = {}
     order.delegateAddress = makerOrder.originalOrder.delegateAddress
     order.protocol = makerOrder.originalOrder.protocol
-    order.owner = (window.Wallet && window.Wallet.getAddress()) || storage.wallet.getUnlockedAddress()
+    order.owner = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
     order.tokenB = makerOrder.originalOrder.tokenS
     order.tokenS = makerOrder.originalOrder.tokenB
-    order.amountB = toHex(toBig(makerOrder.originalOrder.amountS).idiv(makerOrder.ratio))
-    let amountS = toBig(makerOrder.originalOrder.amountB).div(makerOrder.ratio)
+    order.amountB = toHex(toBig(makerOrder.originalOrder.amountS).idiv(makerOrder.count))
+    let amountS = toBig(makerOrder.originalOrder.amountB).div(makerOrder.count)
     if (!amountS.isInteger()) {
-      amountS = toBig(makerOrder.originalOrder.amountB).idiv(makerOrder.ratio).plus(1)
+      amountS = toBig(makerOrder.originalOrder.amountB).idiv(makerOrder.count).plus(1)
     }
     order.amountS = toHex(amountS)
     order.lrcFee = '0x0'
@@ -55,6 +58,8 @@ class TakerConfirm extends React.Component {
     const authAccount = createWallet()
     order.authAddr = authAccount.getAddressString();
     order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString());
+    order.orderType = 'p2p_order'
+
     const price = toFixed(order.amountS / order.amountB, 4);
     const showLayer = (payload = {}) => {
       dispatch({
@@ -74,10 +79,74 @@ class TakerConfirm extends React.Component {
     }
 
     const submitRing = async () => {
-      const address = (window.Wallet && window.Wallet.getAddress()) || storage.wallet.getUnlockedAddress()
+      const address = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
       const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current).times(1e9))
-      const sig = await signOrder(order);
-      if(sig.result){
+      const tradeInfo = {...order,gasLimit:config.getGasLimitByType('approve').gasLimit,gasPrice}
+      try {
+        await orderFormatter.p2pVerification(balance, tradeInfo, pendingTx ? pendingTx.items : [], gasPrice)
+      } catch (e) {
+        Notification.open({
+          message: intl.get('notifications.title.place_order_failed'),
+          description: e.message,
+          type: 'error'
+        })
+        dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
+        return
+      }
+
+      if (tradeInfo.error) {
+        tradeInfo.error.map(item => {
+          if (item.value.symbol === 'ETH') {
+            Notification.open({
+              message: intl.get('notifications.title.place_order_failed'),
+              description: intl.get('notifications.message.eth_is_required_when_place_order', {required: item.value.required}),
+              type: 'error',
+              actions: (
+                <div>
+                  <Button className="alert-btn mr5" onClick={() => dispatch({
+                    type: 'layers/showLayer',
+                    payload: {id: 'receiveToken', symbol: 'ETH'}
+                  })}>
+                    {`${intl.get('actions.receive')} ETH`}
+                  </Button>
+                </div>
+              )
+            })
+          } else if (item.value.symbol === 'LRC') {
+            Notification.open({
+              message: intl.get('notifications.title.place_order_failed'),
+              description: intl.get('notifications.message.lrcfee_is_required_when_place_order', {required: item.value.required}),
+              type: 'error',
+              actions: (
+                <div>
+                  <Button className="alert-btn mr5" onClick={() => dispatch({
+                    type: 'layers/showLayer',
+                    payload: {id: 'receiveToken', symbol: 'LRC'}
+                  })}>
+                    {`${intl.get('actions.receive')} LRC`}
+                  </Button>
+                </div>
+              )
+            })
+          }
+        })
+        dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
+        return
+      }
+
+      try {
+        const {unsigned} = await orderFormatter.signP2POrder(tradeInfo, (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress())
+        const signResult = await signOrder(order)
+        if (signResult.error) {
+          Notification.open({
+            message: intl.get('notifications.title.place_order_failed'),
+            description: signResult.error.message,
+            type: 'error'
+          })
+          return
+        }
+        const signedOrder = {...order, ...signResult.result}
+        signedOrder.powNonce = 100
         const tx = {
           value: '0x0',
           gasLimit: config.getGasLimitByType('submitRing').gasLimit,
@@ -85,27 +154,51 @@ class TakerConfirm extends React.Component {
           to: order.protocol,
           gasPrice,
           nonce:toHex((await window.RELAY.account.getNonce(address)).result),
-          data:Contracts.LoopringProtocol.encodeSubmitRing([{...order,...sig},makerOrder.originalOrder],config.getWalletAddress())
+          data:Contracts.LoopringProtocol.encodeSubmitRing([{...order,...signResult},makerOrder.originalOrder],config.getWalletAddress())
         }
-        signTx(tx).then(res => {
-          if (res.result) {
-            window.RELAY.ring.submitRingForP2P({makerOrderHash:makerOrder.originalOrder.hash,rawTx:res.result,takerOrderHash:window.RELAY.order.getOrderHash(order)}).then(resp => {
-              if (resp.result) {
-                Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
-                hideLayer({id: 'takerConfirm'})
+        eachOfLimit(unsigned.filter(item => item.type === 'tx'), 1, async (item) => {
+          signTx(item.data).then(res => {
+            if (res.result) {
+              window.ETH.sendRawTransaction(res.result).then(resp => {
+                if (resp.result) {
+                  window.RELAY.account.notifyTransactionSubmitted({
+                    txHash: resp.result,
+                    rawTx: item.data,
+                    from: window.Wallet.address
+                  })
+                }
+              })
+            }
+          })
+        }, function (e) {
+          if (e) {
+            Notification.open({
+              message: intl.get('notifications.title.place_order_failed'),
+              description: e.message,
+              type: 'error'
+            })
+          }else{
+            signTx(tx).then(res => {
+              if (res.result) {
+                window.RELAY.ring.submitRingForP2P({makerOrderHash:makerOrder.originalOrder.hash,rawTx:res.result,takerOrderHash:window.RELAY.order.getOrderHash(order)}).then(resp => {
+                  if (resp.result) {
+                    Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
+                    hideLayer({id: 'takerConfirm'})
+                  } else {
+                    Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
+                  }
+                })
               } else {
-                Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
+                Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + res.error.message, 3, null, false)
               }
             })
-          } else {
-            Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + res.error.message, 3, null, false)
           }
         })
-      }else{
+      } catch (e) {
         Notification.open({
-          message:intl.get('notifications.title.place_order_failed'),
-          description:sig.error.message,
-          type:'error'
+          message: intl.get('notifications.title.place_order_failed'),
+          description: e.message,
+          type: 'error'
         })
       }
     }
@@ -165,8 +258,10 @@ class TakerConfirm extends React.Component {
 function mapStatetoProps (state) {
 
   return {
-    gas: state.gas
+    gas: state.gas,
+    balance: state.sockets.balance.items,
+    pendingTx: state.pendingTx
   }
 }
 
-export default connect()(TakerConfirm)
+export default connect(mapStatetoProps)(TakerConfirm)

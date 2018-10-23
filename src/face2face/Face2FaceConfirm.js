@@ -9,7 +9,7 @@ import QRCode from 'qrcode.react'
 import { Page, Pages } from 'LoopringUI/components/Pages'
 import { connect } from 'dva'
 import moment from 'moment'
-import { toHex, toFixed } from 'LoopringJS/common/formatter'
+import { toHex, toFixed,toBig } from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
 import { signOrder, signTx } from '../common/utils/signUtils'
 import eachOfLimit from 'async/eachOfLimit'
@@ -29,9 +29,9 @@ const OrderMetaItem = (props) => {
 }
 
 function PlaceOrderSteps (props) {
-  const {p2pOrder, balance, settings, marketcap, pendingTx, dispatch} = props
-  const gasPrice = 10
-  const {tokenS, tokenB, amountS, amountB, ratio = 1} = p2pOrder
+  const {p2pOrder, balance, settings, marketcap, gas,pendingTx, dispatch} = props
+  const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current).times(1e9))
+  const {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
   const validSince = p2pOrder.validSince || moment()
   const validUntil = p2pOrder.validUntil || moment().add(1, 'months')
   const price = toFixed(amountS / amountB, 4)
@@ -180,13 +180,13 @@ function PlaceOrderSteps (props) {
         dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
         const unsignedOrder = unsigned.find(item => item.type === 'order')
         storage.orders.storeP2POrder({
-          Auth: unsignedOrder.completeOrder.authPrivateKey,
-          Hash: signedOrder.orderHash,
-          Ratio:ratio
+          auth: unsignedOrder.completeOrder.authPrivateKey,
+          hash: signedOrder.orderHash,
+          count
         })
         const qrcode = JSON.stringify({
           type: 'P2P',
-          value: {Auth: unsignedOrder.completeOrder.authPrivateKey, Hash: signedOrder.orderHash, Ratio:ratio}
+          value: {auth: unsignedOrder.completeOrder.authPrivateKey, hash: signedOrder.orderHash, count}
         })
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})
@@ -200,6 +200,7 @@ function PlaceOrderSteps (props) {
       })
     }
   }
+
   return (
     <div className="">
       <Pages active="order">
@@ -281,7 +282,8 @@ function mapToProps (state) {
     marketcap: state.sockets.marketcap.items,
     tokens: state.tokens.items,
     settings: state.settings,
-    pendingTx: state.pendingTx
+    pendingTx: state.pendingTx,
+    gas: state.gas,
   }
 }
 
