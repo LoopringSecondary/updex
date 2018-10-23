@@ -44,53 +44,44 @@ class Face2FacePage extends React.Component {
     }
     return (
         <div className="">
-          <NavBar
-            className="bg-white"
-            mode="light"
-            leftContent={[
-              <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle-o" /></span>
-            ]}
-            rightContent={[
-              <span  onClick={()=>{}} className="text-primary" key="1" ><WebIcon type="swap" /></span>
-            ]}
-          >
-            <div className="color-black">
-              Person To Person
-            </div>
-          </NavBar>
-          <div className="bg-white"><div className="divider 1px zb-b-t"></div></div>
+          <div className="bg-white">
+            <NavBar
+              className="zb-b-b"
+              mode="light"
+              leftContent={[
+                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle-o" /></span>
+              ]}
+              rightContent={[
+                <span  onClick={()=>{}} className="text-primary" key="1" ><WebIcon type="swap" /></span>
+              ]}
+            >
+              <div className="color-black">
+                Person To Person
+              </div>
+            </NavBar>
+          </div>
           <div className="bg-white">
             <Face2FaceForm side="sell" showLayer={showLayer} />
+            <div className="divider 1px zb-b-t"></div>
           </div>
-          <div className="bg-white"><div className="divider 1px zb-b-t"></div></div>
-          <div className="no-underline tabs-no-border">
-            <Tabs
-              tabs={
-                [
-                  { title: <div className="am-tabs-item-wrapper-bak"><div className="fs16 am-tabs-item-bak">{intl.get('common.balances')}</div></div> },
-                  { title: <div className="am-tabs-item-wrapper-bak"><div className="fs16 am-tabs-item-bak">{intl.get('common.orders')}</div></div> },
-                  { title: <div className="am-tabs-item-wrapper-bak"><div className="fs16 am-tabs-item-bak">行情</div></div> },
-                ]
-              }
-              tabBarBackgroundColor="#fff"
-              tabBarActiveTextColor={"#000"}
-              tabBarInactiveTextColor={"#999"}
-              initialPage={0}
-              swipeable={false}
-              onChange={(tab, index) => { console.log('onChange', index, tab); }}
-              onTabClick={(tab, index) => { console.log('onTabClick', index, tab); }}
-            >
-              <div className="zb-b-t">
-                <HelperOfBalances />
-              </div>
-              <div className="">
-                <Face2FaceOrders />
-              </div>
-              <div className="">
-                Markets
-              </div>
-            </Tabs>
-            <div className="pb50"></div>
+          <div className="bg-white mt10">
+            <div className="fs16 pt10 pb10 pl15 color-black-1">Markets</div>
+            <div className="zb-b-t">
+              <HelperOfBalances />
+            </div>
+          </div>
+          
+          <div className="bg-white mt10">
+            <div className="fs16 pt10 pb10 pl15 color-black-1">My Wallet</div>
+            <div className="zb-b-t">
+              <HelperOfBalances />
+            </div>
+          </div>
+          <div className="bg-white mt10">
+            <div className="fs16 pt10 pb10 pl15 color-black-1">My Orders</div>
+            <div className="zb-b-t">
+              <Face2FaceOrders />
+            </div>
           </div>
         </div>
     );
