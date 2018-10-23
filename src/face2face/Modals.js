@@ -5,6 +5,7 @@ import HelperOfTokens from './HelperOfTokens'
 import HelperOfTTL from './HelperOfTTL'
 import HelperOfMiniFill from './HelperOfMiniFill'
 import HelperOfAmount from './HelperOfAmount'
+import HelperOfFAQ from './HelperOfFAQ'
 import Face2FaceConfirm from './Face2FaceConfirm'
 import OrderDetail from './Detail'
 import OrderQrcode from './Qrcode'
@@ -43,9 +44,9 @@ function Modals(props) {
           <HelperOfTTL />
         </UiContainers.Popups>
       </Containers.Layers>
-      <Containers.Layers id="helperOfMiniFill">
-        <UiContainers.Popups id="helperOfMiniFill">
-          <HelperOfMiniFill />
+      <Containers.Layers id="helperOfFAQ">
+        <UiContainers.Popups id="helperOfFAQ">
+          <HelperOfFAQ />
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfAmount">
@@ -53,7 +54,6 @@ function Modals(props) {
           <HelperOfAmount />
         </UiContainers.Popups>
       </Containers.Layers>
-
     </div>
   )
 }

@@ -89,30 +89,17 @@ class Face2FaceForm extends React.Component {
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div className="col text-center">
               <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'sell'})} type="ghost" className="fs16 border-none bg-fill color-black-2 d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
-                <span>{intl.get('common.sell')} {p2pOrder.tokenS}</span> <WebIcon className="color-black-3" type="down"/>
+                <span>{intl.get('common.sell')}<span className="ml5">{p2pOrder.tokenS}</span></span> <WebIcon className="color-black-4 fs13" type="down"/>
               </Button>
             </div>
             <div className="col-auto text-center" style={{width:'30px'}}>
             </div>
             <div className="col text-center">
               <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'buy'})} type="ghost" className="fs16 border-none bg-fill color-black-2 d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
-                <span>{intl.get('common.buy')} {p2pOrder.tokenB}</span> <WebIcon className="color-black-3" type="down"/>
+                <span>{intl.get('common.buy')} <span className="ml5">{p2pOrder.tokenB}</span></span> <WebIcon className="color-black-4 fs13" type="down"/>
               </Button>
             </div>
           </div>
-          {
-            false &&
-            <div className="row ml0 mr0 mt20 no-gutters align-items-center justify-content-center">
-              <div className="col text-center">
-                <Input type="text" onChange={amountChange.bind(this, 'sell')}/>
-              </div>
-              <div className="col-auto text-center" style={{width:'30px'}}>
-              </div>
-              <div className="col text-center">
-                <Input type="text" onChange={amountChange.bind(this, 'buy')}/>
-              </div>
-            </div>
-          }
           <div className="row ml0 mr0 mt15 no-gutters align-items-stretch justify-content-center" style={{}}>
             <div className="col text-right no-border am-list-bg-none">
               <List  className="selectable">
@@ -123,8 +110,8 @@ class Face2FaceForm extends React.Component {
                   extra={
                     <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <WebIcon type="sliders" />
-                      <div className="fs14 color-black-3 pr10" style={{position:'absolute',width:'6rem',left:'-6rem'}}>
-                        LRC
+                      <div className="fs16 color-black-4 pr10" style={{position:'absolute',width:'6rem',left:'-6rem'}}>
+                        {p2pOrder.tokenS}
                       </div>
                     </div>
                   }
@@ -140,8 +127,8 @@ class Face2FaceForm extends React.Component {
                   extra={
                     <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenB})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <WebIcon type="sliders" />
-                      <div className="fs14 color-black-3 pr10" style={{position:'absolute',width:'6rem',left:'-6rem',}}>
-                        WETH
+                      <div className="fs16 color-black-4 pr10" style={{position:'absolute',width:'6rem',left:'-6rem',}}>
+                        {p2pOrder.tokenB}
                       </div>
                     </div>
                   }

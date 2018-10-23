@@ -119,7 +119,6 @@ function HelperOfAmount(props) {
       >
         <div className="color-black">Set LRC Amount</div>
       </NavBar>
-      <div className="divider 1px zb-b-t"></div>
       <Content />
     </div>
   )

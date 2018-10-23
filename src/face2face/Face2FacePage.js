@@ -47,15 +47,15 @@ class Face2FacePage extends React.Component {
           <NavBar
             className="bg-white"
             mode="light"
-            leftContent={null && [
-              <span onClick={routeActions.goBack} className="color-black-1" key="1"><WebIcon type="left" /></span>,
+            leftContent={[
+              <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle-o" /></span>
             ]}
             rightContent={[
-              <span className="text-primary" key="1"  onClick={()=>{}}><WebIcon type="swap" /></span>
+              <span  onClick={()=>{}} className="text-primary" key="1" ><WebIcon type="swap" /></span>
             ]}
           >
             <div className="color-black">
-              Face To Face
+              Person To Person
             </div>
           </NavBar>
           <div className="bg-white"><div className="divider 1px zb-b-t"></div></div>
@@ -70,7 +70,6 @@ class Face2FacePage extends React.Component {
                   { title: <div className="am-tabs-item-wrapper-bak"><div className="fs16 am-tabs-item-bak">{intl.get('common.balances')}</div></div> },
                   { title: <div className="am-tabs-item-wrapper-bak"><div className="fs16 am-tabs-item-bak">{intl.get('common.orders')}</div></div> },
                   { title: <div className="am-tabs-item-wrapper-bak"><div className="fs16 am-tabs-item-bak">行情</div></div> },
-                  { title: <div className="am-tabs-item-wrapper-bak"><div className="fs16 am-tabs-item-bak">{intl.get('common.help')}</div></div> },
                 ]
               }
               tabBarBackgroundColor="#fff"
@@ -90,11 +89,6 @@ class Face2FacePage extends React.Component {
               <div className="">
                 Markets
               </div>
-              <div className="">
-                HELP
-              </div>
-
-
             </Tabs>
             <div className="pb50"></div>
           </div>
