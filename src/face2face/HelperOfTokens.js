@@ -53,7 +53,7 @@ class HelperOfTokens extends React.Component {
 
     return (
       <div className="bg-white">
-        <SearchBar placeholder="Search" maxLength={8} value={filter} onChange={filterChange}/>
+        <SearchBar placeholder="Search" className="selectable" maxLength={8} value={filter} onChange={filterChange}/>
         <div style={{height: '50vh', overflow: 'auto'}}>
           <List className="popup-list">
             {

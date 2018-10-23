@@ -89,14 +89,14 @@ class Face2FaceForm extends React.Component {
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div className="col text-center">
               <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'sell'})} type="ghost" className="fs16 border-none bg-fill color-black-2 d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
-                <span>{intl.get('common.sell')}<span className="ml5">{p2pOrder.tokenS}</span></span> <WebIcon className="color-black-4 fs13" type="down"/>
+                <span>{intl.get('common.sell')}<span className="ml5">{p2pOrder.tokenS}</span></span> <WebIcon className="color-black-4 fs12" type="down"/>
               </Button>
             </div>
-            <div className="col-auto text-center" style={{width:'30px'}}>
+            <div className="col-auto text-center" style={{width:'15px'}}>
             </div>
             <div className="col text-center">
               <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'buy'})} type="ghost" className="fs16 border-none bg-fill color-black-2 d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
-                <span>{intl.get('common.buy')} <span className="ml5">{p2pOrder.tokenB}</span></span> <WebIcon className="color-black-4 fs13" type="down"/>
+                <span>{intl.get('common.buy')} <span className="ml5">{p2pOrder.tokenB}</span></span> <WebIcon className="color-black-4 fs12" type="down"/>
               </Button>
             </div>
           </div>

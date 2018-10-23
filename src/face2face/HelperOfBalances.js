@@ -71,7 +71,7 @@ const HelperOfBalance = (props)=>{
                   <td className="text-right pl10 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
                       token.symbol === 'WETH' &&
-                      <a onClick={gotoConvert.bind(this,{type:"ETH"})}>{intl.get('common.convert')}</a>
+                      <a onClick={showLayer.bind(this,{id:'convertToken',type:"ETH"})}>{intl.get('common.convert')}</a>
                     }
                     {
                       token.symbol !== 'WETH' &&

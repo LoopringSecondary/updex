@@ -6,7 +6,7 @@ import { Icon } from 'antd';
 const HelperOfFAQ = (props)=>{
   const {dispatch} = props
   return (
-    <div className="fs20 bg-white" style={{height:"100vh",overflow:'auto' }}>
+    <div className="fs20 bg-white" style={{height:"100%",overflow:'auto' }}>
       <NavBar
         className="zb-b-b"
         mode="light"
