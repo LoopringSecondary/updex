@@ -154,7 +154,7 @@ class TakerConfirm extends React.Component {
           to: order.protocol,
           gasPrice,
           nonce:toHex((await window.RELAY.account.getNonce(address)).result),
-          data:Contracts.LoopringProtocol.encodeSubmitRing([{...order,...signResult},makerOrder.originalOrder],config.getWalletAddress())
+          data:Contracts.LoopringProtocol.encodeSubmitRing([{...order,...signedOrder},makerOrder.originalOrder],config.getWalletAddress())
         }
         eachOfLimit(unsigned.filter(item => item.type === 'tx'), 1, async (item) => {
           signTx(item.data).then(res => {
