@@ -120,7 +120,14 @@ class Face2FaceForm extends React.Component {
                   type="money"
                   onChange={amountChange.bind(this, 'sell')}
                   moneyKeyboardAlign="left"
-                  extra={<div className="fs14 color-black-3 ml5">LRC</div>}
+                  extra={
+                    <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                      <WebIcon type="sliders" />
+                      <div className="fs14 color-black-3 pr10" style={{position:'absolute',width:'6rem',left:'-6rem'}}>
+                        LRC
+                      </div>
+                    </div>
+                  }
                   className="circle h-default fs18"
                   placeholder="Amout To Sell"
                 >
@@ -130,7 +137,14 @@ class Face2FaceForm extends React.Component {
                   onChange={amountChange.bind(this, 'buy')}
                   moneyKeyboardAlign="left"
                   placeholder="Amout To Sell"
-                  extra={<div className="fs14 color-black-3 ml5">WETH</div>}
+                  extra={
+                    <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenB})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                      <WebIcon type="sliders" />
+                      <div className="fs14 color-black-3 pr10" style={{position:'absolute',width:'6rem',left:'-6rem',}}>
+                        WETH
+                      </div>
+                    </div>
+                  }
                   className="circle h-default fs1 mt15"
                   placeholder="Amout To Buy"
                 >

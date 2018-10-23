@@ -4,6 +4,7 @@ import UiContainers from 'LoopringUI/containers'
 import HelperOfTokens from './HelperOfTokens'
 import HelperOfTTL from './HelperOfTTL'
 import HelperOfMiniFill from './HelperOfMiniFill'
+import HelperOfAmount from './HelperOfAmount'
 import Face2FaceConfirm from './Face2FaceConfirm'
 import OrderDetail from './Detail'
 import OrderQrcode from './Qrcode'
@@ -47,6 +48,12 @@ function Modals(props) {
           <HelperOfMiniFill />
         </UiContainers.Popups>
       </Containers.Layers>
+      <Containers.Layers id="helperOfAmount">
+        <UiContainers.Popups id="helperOfAmount">
+          <HelperOfAmount />
+        </UiContainers.Popups>
+      </Containers.Layers>
+
     </div>
   )
 }

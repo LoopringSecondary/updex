@@ -257,6 +257,7 @@ function PlaceOrderSteps (props) {
               <OrderMetaItem label="买入" value={`100 ${tokenB}`}/>
               <OrderMetaItem label="卖出" value={`0.1 ${tokenS}`}/>
               <OrderMetaItem label="价格" value={`${price} ${tokenS}/${tokenB}`}/>
+              <OrderMetaItem label="类型" value={`P2P交易`}/>
               <OrderMetaItem label="订单有效期" showArrow={true}
                              value={<div onClick={showLayer.bind(this,{id:'helperOfTTL'})} className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
               <OrderMetaItem label="最小撮合量" showArrow={true}
