@@ -108,22 +108,6 @@ class Face2FaceForm extends React.Component {
               <List  className="selectable">
                 <InputItem
                   type="money"
-                  onChange={amountChange.bind(this, 'sell')}
-                  moneyKeyboardAlign="left"
-                  extra={
-                    <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
-                      <WebIcon type="sliders" />
-                      <div className="fs16 color-black-4 pr10" style={{position:'absolute',width:'6rem',left:'-6rem'}}>
-                        {p2pOrder.tokenS}
-                      </div>
-                    </div>
-                  }
-                  className="circle h-default fs18"
-                  placeholder="Amout To Sell"
-                >
-                </InputItem>
-                <InputItem
-                  type="money"
                   onChange={amountChange.bind(this, 'buy')}
                   moneyKeyboardAlign="left"
                   placeholder="Amout To Sell"
@@ -135,14 +119,30 @@ class Face2FaceForm extends React.Component {
                       </div>
                     </div>
                   }
-                  className="circle h-default fs1 mt15"
+                  className="circle h-default fs18"
                   placeholder="Amout To Buy"
+                >
+                </InputItem>
+                <InputItem
+                  type="money"
+                  onChange={amountChange.bind(this, 'sell')}
+                  moneyKeyboardAlign="left"
+                  extra={
+                    <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                      <WebIcon type="sliders" />
+                      <div className="fs16 color-black-4 pr10" style={{position:'absolute',width:'6rem',left:'-6rem'}}>
+                        {p2pOrder.tokenS}
+                      </div>
+                    </div>
+                  }
+                  className="circle h-default fs18 mt15"
+                  placeholder="Amout To Sell"
                 >
                 </InputItem>
               </List>
             </div>
           </div>
-          <div className="row ml0 mr0 pt15 pb15 no-gutters">
+          <div hidden className="row ml0 mr0 mt15 no-gutters">
             <div className="col">
               <div className="color-black-2 fs14">{intl.get('p2p_order.price')}</div>
             </div>
@@ -150,7 +150,7 @@ class Face2FaceForm extends React.Component {
               {`${price} ${p2pOrder.tokenS}/${p2pOrder.tokenB}`}
             </div>
           </div>
-          <Button className="" onClick={submitOrder} type="primary">{intl.get('common.next_step')}</Button>
+          <Button className="mt15" onClick={submitOrder} type="primary">{intl.get('common.next_step')}</Button>
         </div>
       </div>
     );
