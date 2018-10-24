@@ -250,7 +250,7 @@ function PlaceOrderSteps (props) {
                     height: '4rem',
                     borderRadius: '50em',
                   }}>
-                    <i className={`icon-${tokenB} fs24`}/>
+                    <i className={`icon-token-${tokenB} fs24`}/>
                   </div>
                 </div>
               </div>
