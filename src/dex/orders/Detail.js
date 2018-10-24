@@ -13,7 +13,7 @@ const OrderMetaItem = (props) => {
   return (
     <div className="row ml0 mr0 pt10 pb10 pl15 pr15 zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
       <div className="col">
-        <div className="fs14 color-black-1 text-left">{label}</div>
+        <div className="fs14 color-black-2 text-left">{label}</div>
       </div>
       <div className="col-auto text-right">
         <div className="fs14 color-black-2 text-wrap text-left">{value}</div>
@@ -125,9 +125,9 @@ function OrderDetail(props) {
         <div className="divider 1px zb-b-t"></div>
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
-        <div className="ml10 mr10 mb15 mt15">
-          <div className="fs14 text-primary text-left mb5">{intl.get('order_detail.tabs_basic')}</div>
-          <div className="bg-white " style={{borderRadius:'0.4rem'}}>
+        <div className="mb10 mt10 bg-white">
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_basic')}</div>
+          <div className="" style={{borderRadius:'0rem'}}>
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
             <OrderMetaItem label={intl.get('order.price')} value={
@@ -141,9 +141,9 @@ function OrderDetail(props) {
             <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
           </div>
         </div>
-        <div className="ml10 mr10 mb15">
-          <div className="fs14 text-primary text-left mb5">{intl.get('order_detail.tabs_fills')}</div>
-          <div className="bg-white" style={{borderRadius:'0.4rem'}}>
+        <div className="mb10 bg-white">
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_fills')}</div>
+          <div className="bg-white" style={{borderRadius:'0rem'}}>
             <DetailFills order={order}/>
           </div>
         </div>

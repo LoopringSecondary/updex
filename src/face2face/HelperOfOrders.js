@@ -133,24 +133,24 @@ class Face2FaceOrders extends React.Component {
     return (
       <div>
         <Spin spinning={this.state.loading}>
-          <table className="w-100 fs13" style={{overflow: 'auto'}}>
+          <table className="w-100 fs12" style={{overflow: 'auto'}}>
             <thead>
             <tr>
-              <th className="text-left pl5 pr5 pt10 pb10 font-weight-normal color-black-4 zb-b-b hover-default"
+              <th className="text-left pl5 pr5 pt5 pb5 font-weight-normal color-black-4 zb-b-b hover-default"
                   colSpan="1" onClick={() => {}}>
 
               </th>
-              <th className="text-left pl0 pr5 pt10 pb10 font-weight-normal color-black-4 zb-b-b hover-default"
+              <th className="text-left pl0 pr5 pt5 pb5 font-weight-normal color-black-4 zb-b-b hover-default"
                   colSpan="1" onClick={() => {}}>
                 {intl.get('common.market')}
               </th>
               <th
-                className="text-left pl5 pr5 pt10 pb10 font-weight-normal color-black-4 zb-b-b">{intl.get('common.price')}</th>
+                className="text-left pl5 pr5 pt5 pb5 font-weight-normal color-black-4 zb-b-b">{intl.get('common.price')}</th>
               <th
-                className="text-left pl5 pr5 pt10 pb10 font-weight-normal color-black-4 zb-b-b">{intl.get('order.filled')}</th>
+                className="text-left pl5 pr5 pt5 pb5 font-weight-normal color-black-4 zb-b-b">{intl.get('order.filled')}</th>
               <th hidden
-                  className="text-right pl10 pr10 pt10 pb10 font-weight-normal color-black-4 zb-b-b">{intl.get('common.lrc_fee')}</th>
-              <th className="text-center pl10 pr10 pt10 pb10 font-weight-normal color-black-4 zb-b-b hover-default"
+                  className="text-right pl10 pr10 pt5 pb5 font-weight-normal color-black-4 zb-b-b">{intl.get('common.lrc_fee')}</th>
+              <th className="text-center pl10 pr10 pt5 pb5 font-weight-normal color-black-4 zb-b-b hover-default"
                   onClick={() => {}}>
                 {intl.get('common.status')}
               </th>
@@ -167,7 +167,7 @@ class Face2FaceOrders extends React.Component {
                     </td>
                     <td className="zb-b-b pt10 pb10 pl0 pr5 text-left align-top">
                       <div className="">
-                        <span className="font-weight-bold">{tokens.left}</span>-{tokens.right}
+                        <span className="font-weight-bold">{tokens.left}-{tokens.right}</span>
                       </div>
                       <div className="color-black-3 fs12">
                         <span className="">{orderFm.getCreateTime()}</span>
