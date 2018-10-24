@@ -30,7 +30,7 @@ function Modals(props) {
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="takerConfirm">
-        <UiContainers.Popups id="takerConfirm">
+        <UiContainers.Popups id="takerConfirm" className="h-100" style={{height:'100%'}} >
           <TakerConfirm />
         </UiContainers.Popups>
       </Containers.Layers>
