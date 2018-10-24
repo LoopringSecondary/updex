@@ -5,8 +5,7 @@ import { connect } from 'dva'
 import { getBalanceBySymbol, isValidNumber } from 'modules/tokens/TokenFm'
 import { getDisplaySymbol, toBig, toFixed, toHex ,toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
-
-
+import Worth from 'modules/settings/Worth'
 
 class Face2FaceForm extends React.Component {
   render() {
@@ -87,7 +86,7 @@ class Face2FaceForm extends React.Component {
               </div>
             </div>
           </div>
-          <div hidden className="row ml0 mr0 mt5 no-gutters align-items-center justify-content-center">
+          <div className="row ml0 mr0 mt5 no-gutters align-items-center justify-content-center">
             <div className="col d-flex justify-content-center">
              <div className="fs13 color-black-1">EOS <WebIcon className="fs10" type="down"/></div>
             </div>
@@ -97,7 +96,7 @@ class Face2FaceForm extends React.Component {
               <div className="fs13 color-black-1">LRC <WebIcon className="fs10" type="down"/></div>
             </div>
           </div>
-          <div className="row ml0 mr0 mt15 no-gutters align-items-center justify-content-center">
+          <div hidden className="row ml0 mr0 mt15 no-gutters align-items-center justify-content-center">
             <div className="col text-center">
               <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'buy'})} type="primary" className="fs16 border-none bg-fill color-black-1 d-flex justify-content-center align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
                 <span className="ml5">{p2pOrder.tokenB}</span> <WebIcon className="fs12" type="down"/>
@@ -111,7 +110,20 @@ class Face2FaceForm extends React.Component {
               </Button>
             </div>
           </div>
-          <div className="row ml0 mr0 mt15 no-gutters align-items-center justify-content-center">
+          <Button hidden type="primary" className="mt15 fs16 border-none bg-fill color-black-1 mt15" style={{height:'40px',lineHeight:'40px'}}>
+            <div className="row ml0 mr0 no-gutters align-items-stretch justify-content-center">
+              <div className="col text-center zb-b-r">
+                <span><span hidden>{intl.get('common.buy')}</span><span className="ml5">{p2pOrder.tokenB}</span></span>
+                <WebIcon className="fs12 ml5" type="down"/>
+              </div>
+              <div className="col text-center">
+                <span><span hidden>{intl.get('common.sell')}</span><span className="ml5">{p2pOrder.tokenS}</span></span>
+                <WebIcon className="fs12 ml5" type="down"/>
+              </div>
+            </div>
+          </Button>
+          
+          <div hidden className="row ml0 mr0 mt15 no-gutters align-items-center justify-content-center">
             <div className="col text-center">
               <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'buy'})} type="primary" className="fs16 border-none bg-fill color-black-1 d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
                 <span><span hidden>{intl.get('common.buy')}</span><span className="ml5">{p2pOrder.tokenB}</span></span>
@@ -136,7 +148,7 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                   value={toNumber(amountS).toString()}
                   extra={
-                    <div className="fs14 color-black-4 cursor-pointer zb-b-l d-flex align-items-center justify-content-center" style={{width:'6rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div className="fs14 color-black-4 cursor-pointer zb-b-l d-flex align-items-center justify-content-end pr15" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       {p2pOrder.tokenS} <WebIcon hidden className="fs12 color-black-4 ml5" type="down"/>
                       <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})}  className="fs16 text-primary pr10" style={{position:'absolute',top:'1rem',width:'4rem',left:'-4rem'}}>
                         <WebIcon type="sliders" />
@@ -146,10 +158,8 @@ class Face2FaceForm extends React.Component {
                   className="circle h-default fs18"
                   placeholder="Amount To Sell"
                 >
-                  <div style={{width:'4.8rem'}}>
-                    <div className="fs14 zb-b-r pl0 pr15 d-flex align-items-center" style={{position:'absolute',top:'0',bottom:'0'}} >
-                      Sell
-                    </div>  
+                  <div className="fs14" style={{width:'4rem'}}>
+                    Sell 
                   </div>
                 </InputItem>
                 <InputItem
@@ -158,28 +168,32 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                   value={toNumber(amountB).toString()}
                   extra={
-                    <div className="fs14 color-black-4 cursor-pointer zb-b-l d-flex align-items-center justify-content-center" style={{width:'6rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div className="fs14 color-black-4 cursor-pointer zb-b-l d-flex align-items-center justify-content-end pr15" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       {p2pOrder.tokenB} <WebIcon hidden className="fs12 color-black-4 ml5" type="down"/>
                     </div>
                   }
                   className="circle h-default fs18 mt15"
                   placeholder="Amount To Buy"
                 >
-                  <div style={{width:'4.8rem'}}>
-                    <div className="fs14 zb-b-r pl0 pr15 d-flex align-items-center" style={{position:'absolute',top:'0',bottom:'0'}} >
-                      Buy
-                    </div>  
+                  <div className="fs14" style={{width:'4rem'}}>
+                    Buy 
                   </div>
                 </InputItem>
+                <List.Item
+                  className="circle h-default mt15"
+                  arrow={false}
+                  onClick={()=>{}}
+                  extra={
+                    <div className="fs14 color-black-4 cursor-pointer pr15 d-flex align-items-center justify-content-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                       <Worth amount={price} symbol={p2pOrder.tokenB}/> ≈ {`${price} ${p2pOrder.tokenS}/${p2pOrder.tokenB}`}
+                    </div>
+                  }
+                >
+                  <div className="fs14" style={{width:'4rem'}}>
+                    Price 
+                  </div>
+                </List.Item>
               </List>
-            </div>
-          </div>
-          <div hidden className="row ml0 mr0 mt15 no-gutters">
-            <div className="col">
-              <div className="color-black-2 fs14">{intl.get('p2p_order.price')}</div>
-            </div>
-            <div className="col-auto fs14 color-black-3">
-              {`${price} ${p2pOrder.tokenS}/${p2pOrder.tokenB}`}
             </div>
           </div>
           <Button className="mt15" onClick={submitOrder} type="primary">{intl.get('common.exchange')}</Button>
