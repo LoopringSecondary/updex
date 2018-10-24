@@ -68,6 +68,7 @@ const words = {
   set:'Set',
   helper:'Helper',
   next_step:"Next",
+  exchange:"Exchange",
   list:{
     no_data:'No Data',
     no_data_custom:'No {title}',

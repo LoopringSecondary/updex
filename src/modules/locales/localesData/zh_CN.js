@@ -69,6 +69,7 @@ const words = {
   helper: '助手',
   depth: '深度',
   next_step:'下一步',
+  exchange:"兑换",
   list: {
     no_data: '暂无数据',
     no_data_custom: '暂无{title}',
