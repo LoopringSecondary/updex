@@ -3,6 +3,7 @@ import { Redirect, Route, Switch } from 'dva/router'
 import storage from 'modules/storage'
 import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
+import TokenModals from '../dex/tokens/Modals'
 
 const Logged = (props)=>{
   const isLogged = !!storage.wallet.getUnlockedAddress()
@@ -13,6 +14,7 @@ const Logged = (props)=>{
           <Route path={`/face2face`} exact component={Face2FacePage} />
         </Switch>
         <Face2FaceModals />
+        <TokenModals />
       </div>
     )
   }else{

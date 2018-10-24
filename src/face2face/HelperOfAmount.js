@@ -116,7 +116,7 @@ function HelperOfAmount(props) {
           <span key='1' onClick={()=>window.Toast.info('请点击价格或数量', 1, null, false)} className=""><WebIcon type="question-circle-o"/></span>,
         ]}
       >
-        <div className="color-black">Set {symbol} Amount</div>
+        <div className="color-black">Set Sell Amount</div>
       </NavBar>
       <Content />
     </div>
