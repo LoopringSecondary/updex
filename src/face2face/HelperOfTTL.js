@@ -17,7 +17,7 @@ class TTLForm extends React.Component {
     function timeToLiveValueChange(e) {
       const start = moment()
       const end = moment(e)
-      dispatch({type:'placeOrder/validTimeChange', payload:{validSince: start, validUntil: end}})
+      dispatch({type:'p2pOrder/validTimeChange', payload:{validSince: start, validUntil: end}})
     }
 
     const hideLayer = (payload = {}) => {
