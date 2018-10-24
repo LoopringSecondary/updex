@@ -3,7 +3,7 @@ import { Button, Toast,List,InputItem } from 'antd-mobile'
 import { Icon as WebIcon, Input } from 'antd'
 import { connect } from 'dva'
 import { getBalanceBySymbol, isValidNumber } from 'modules/tokens/TokenFm'
-import { getDisplaySymbol, toBig, toFixed, toHex } from 'LoopringJS/common/formatter'
+import { getDisplaySymbol, toBig, toFixed, toHex ,toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 
 
@@ -11,6 +11,7 @@ import intl from 'react-intl-universal'
 class Face2FaceForm extends React.Component {
   render() {
     const {balance, p2pOrder, dispatch} = this.props
+    const {amountB,amountS} = p2pOrder
     const showLayer = (payload={})=>{
       dispatch({
         type:'layers/showLayer',
@@ -89,9 +90,9 @@ class Face2FaceForm extends React.Component {
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div className="col text-center">
               <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'buy'})} type="primary" className="fs16 border-none bg-success d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
-                <span>{intl.get('common.buy')}<span className="ml5">{p2pOrder.tokenB}</span></span> 
+                <span>{intl.get('common.buy')}<span className="ml5">{p2pOrder.tokenB}</span></span>
                 <WebIcon className="fs12" type="down"/>
-                
+
               </Button>
             </div>
             <div className="col-auto text-center" style={{width:'15px'}}>
@@ -110,7 +111,7 @@ class Face2FaceForm extends React.Component {
                   type="money"
                   onChange={amountChange.bind(this, 'buy')}
                   moneyKeyboardAlign="left"
-                  placeholder="Amout To Sell"
+                  value={toNumber(amountB).toString()}
                   extra={
                     <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenB})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <WebIcon type="sliders" />
@@ -120,13 +121,14 @@ class Face2FaceForm extends React.Component {
                     </div>
                   }
                   className="circle h-default fs18"
-                  placeholder="Amout To Buy"
+                  placeholder="Amount To Buy"
                 >
                 </InputItem>
                 <InputItem
                   type="money"
                   onChange={amountChange.bind(this, 'sell')}
                   moneyKeyboardAlign="left"
+                  value={toNumber(amountS).toString()}
                   extra={
                     <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})} className="text-primary cursor-pointer zb-b-l pl15 pr15 d-flex align-items-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <WebIcon type="sliders" />
@@ -136,7 +138,7 @@ class Face2FaceForm extends React.Component {
                     </div>
                   }
                   className="circle h-default fs18 mt15"
-                  placeholder="Amout To Sell"
+                  placeholder="Amount To Sell"
                 >
                 </InputItem>
               </List>

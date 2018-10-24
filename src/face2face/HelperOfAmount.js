@@ -1,13 +1,11 @@
 import React from 'react';
-import { connect } from 'dva';
-import { Tabs,Slider,Icon,NavBar } from 'antd-mobile';
-import { Icon as WebIcon } from 'antd';
+import {connect} from 'dva';
+import {Icon, NavBar, Slider} from 'antd-mobile';
+import {Icon as WebIcon} from 'antd';
 import intl from 'react-intl-universal';
 import {toBig, toFixed} from 'LoopringJS/common/formatter'
 import {getTokensByMarket} from 'modules/formatter/common'
-import config from 'common/config'
-import * as tokenFormatter from 'modules/tokens/TokenFm'
-import * as orderFormatter from 'modules/orders/formatters'
+import TokenFm, * as tokenFormatter from 'modules/tokens/TokenFm'
 
 
 function HelperOfAmount(props) {
@@ -15,24 +13,25 @@ function HelperOfAmount(props) {
     { title: <div className="text-center">{intl.get("common.balance")}</div> },
     { title: <div className="text-center">{intl.get("common.help")}</div> },
   ]
-  const {pair,side,amountInput,priceInput,amountPercentage,amountSlider,amountSliderSelected,balance,dispatch} = props
-  const tokens = getTokensByMarket(pair)
-  const balanceL = tokenFormatter.getBalanceBySymbol({balances:balance, symbol:tokens.left, toUnit:true})
-  const balanceR = tokenFormatter.getBalanceBySymbol({balances:balance, symbol:tokens.right, toUnit:true})
-  const right = config.getTokenBySymbol(pair.split('-')[1].toUpperCase())
-  const marketConfig = config.getMarketBySymbol(tokens.left, tokens.right)
-  const amountPrecision = Math.max(0, right.precision - marketConfig.pricePrecision)
-  let availableAmount = toBig(orderFormatter.calculateAvailableAmount(side, priceInput, balanceL, balanceR, amountPrecision))
+  const {amountPercentage,amountSlider,amountSliderSelected,balances,dispatch,helperOfAmount} = props
+  const {symbol} = helperOfAmount
+  const balance = tokenFormatter.getBalanceBySymbol({balances, symbol:symbol, toUnit:true})
+
+  const tokenFm = new TokenFm({symbol})
+
+  // const amountPrecision = Math.max(0, right.precision - marketConfig.pricePrecision)
+ let availableAmount = toBig(balance.balance)
 
   const amountSliderChange = (amountPercentage) => {
     dispatch({type:'placeOrderHelper/amountSliderEffects', payload:{percentage:amountPercentage}})
-    const amount = availableAmount.times(amountPercentage).div(100).toString(10)
-    dispatch({type:'placeOrder/amountChange', payload:{amountInput:amount}})
+    const amount = availableAmount.times(amountPercentage).div(100)
+    dispatch({type:'p2pOrder/amountChange', payload:{'amountS':amount}})
   }
   const amountPercentageSelect = (percentage) => {
-    dispatch({type:'placeOrderHelper/amountPercentageEffects', payload:{percentage}})
-    const amount = availableAmount.times(percentage).div(100).toString(10)
-    dispatch({type:'placeOrder/amountChange', payload:{amountInput:amount}})
+    console.log(percentage)
+    dispatch({type:'placeOrderHelper/amountPercentageEffects', payload:{percentage:percentage}})
+    const amount = availableAmount.times(percentage).div(100)
+    dispatch({type:'p2pOrder/amountChange', payload:{'amountS':amount}})
   }
   const hideLayer = (payload = {}) => {
     dispatch({
@@ -44,7 +43,7 @@ function HelperOfAmount(props) {
   }
 
   const Content = () => {
-    const prefix = side === 'buy' ? `${toFixed(balanceR.balance, right.precision)}${tokens.right} ≈ ` : ''
+    const prefix =  ''
     return (
       <div>
         <div className="bg-white-light pb15">
@@ -52,28 +51,28 @@ function HelperOfAmount(props) {
           <div className="row pt10 pb10 ml0 mr0 zb-b-b">
             <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 100)}>
               <span className="d-inline-block" style={{width:'50px'}}>100%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${availableAmount.toString(10)}${tokens.left}`}</span>
+              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount)} ${symbol}`}</span>
             </div>
             {!amountSliderSelected && amountPercentage === 100 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
           </div>
           <div className="row pt10 pb10 ml0 mr0 zb-b-b">
             <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 75)}>
               <span className="d-inline-block" style={{width:'50px'}}>75%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${availableAmount.times(0.75).toString(10)}${tokens.left}`}</span>
+              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.75))} ${symbol}`}</span>
             </div>
             {!amountSliderSelected && amountPercentage === 75 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
           </div>
           <div className="row pt10 pb10 ml0 mr0 zb-b-b">
             <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 50)}>
               <span className="d-inline-block" style={{width:'50px'}}>50%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${availableAmount.times(0.5).toString(10)}${tokens.left}`}</span>
+              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.5))} ${symbol}`}</span>
             </div>
             {!amountSliderSelected && amountPercentage === 50 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
           </div>
           <div className="row pt15 pb15 ml0 mr0 zb-b-b">
             <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 25)}>
               <span className="d-inline-block" style={{width:'50px'}}>25%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${availableAmount.times(0.25).toString(10)}${tokens.left}`}</span>
+              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.25))} ${symbol}`}</span>
             </div>
             {!amountSliderSelected && amountPercentage === 25 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
           </div>
@@ -81,7 +80,7 @@ function HelperOfAmount(props) {
             <div className="row pt15 pb15 ml0 mr0">
               <div className="col color-black-1 text-left pl20">
                 <span className="ml5">{amountSlider}%</span>
-                <span className="color-black-3 ml25">{`${prefix} ${availableAmount.times(amountSlider).div(100).toString(10)}${tokens.left}`}</span>
+                <span className="col-auto fs18 color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(amountSlider).div(100))} ${symbol}`}</span>
               </div>
               {amountSliderSelected && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
             </div>
@@ -101,7 +100,7 @@ function HelperOfAmount(props) {
           <div className="divider 1px zb-b-b"></div>
         </div>
       </div>
-    ) 
+    )
   }
 
   return (
@@ -117,18 +116,16 @@ function HelperOfAmount(props) {
           <span key='1' onClick={()=>window.Toast.info('请点击价格或数量', 1, null, false)} className=""><WebIcon type="question-circle-o"/></span>,
         ]}
       >
-        <div className="color-black">Set LRC Amount</div>
+        <div className="color-black">Set {symbol} Amount</div>
       </NavBar>
       <Content />
     </div>
   )
 }
 export default connect(({
-  placeOrder:{pair,side,amountInput,priceInput},
   placeOrderHelper:{amountPercentage, amountSlider,amountSliderSelected},
   sockets,
-})=>({
-  pair,side,amountInput,priceInput,amountPercentage,amountSlider,amountSliderSelected,balance:sockets.balance.items
+})=>({amountPercentage,amountSlider,amountSliderSelected,balances:sockets.balance.items
 }))(HelperOfAmount)
 
 

@@ -122,6 +122,7 @@ const notifications = {
     failed_fetch_data_from_server: 'Failed fetch data from server, you could wait a moment and come back later',
     eth_is_required_when_place_order: 'ETH is required to pay Ethereum transaction fees, calculated with your current order cost that need to send Ethereum transactions, totally required {required} ETH.',
     lrcfee_is_required_when_place_order: 'LRC is required to pay trade fees, added on your history orders need LRC, totally required {required} LRC.',
+    token_required_when_place_order:'{token} is not enough,totally require {required} {token}',
     some_items_not_signed: "You may have some items not signed, please signed all items then continue",
     place_order_success: 'Good job. Your order has been submitted for ring-matching.',
     place_order_balance_not_enough: 'In order for your order to be fully filled, {amount} more {token} is required.',

@@ -124,6 +124,7 @@ const notifications = {
     failed_fetch_data_from_server: '从服务器获取数据失败, 请稍后在尝试',
     eth_is_required_when_place_order: '由于需要支付ETH油费, 根据您当前订单需要发送的以太坊交易计算，还需要 {required} ETH',
     lrcfee_is_required_when_place_order: '由于需要支付LRC油费, 汇总您历史订单所需LRC，还需要 {required} LRC',
+    token_required_when_place_order:'{token} 不足,还需要{required} {token}',
     some_items_not_signed: '您可能还有一些数据还未签名，请把所有未签名项签名后再继续操作',
     place_order_success: '您的订单已经提交成功',
     place_order_balance_not_enough: '为使订单全部成交, 至少还需要{amount} {token}',
