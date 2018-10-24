@@ -12,10 +12,10 @@ const OrderMetaItem = (props) => {
   return (
     <div className="row ml0 mr0 pt10 pb10 pl15 pr15 zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
       <div className="col">
-        <div className="fs14 color-black-1 text-left">{label}</div>
+        <div className="fs12 color-black-1 text-left">{label}</div>
       </div>
       <div className="col-auto text-right">
-        <div className="fs14 color-black-2 text-wrap text-left">{value}</div>
+        <div className="fs12 color-black-2 text-wrap text-left">{value}</div>
       </div>
     </div>
   )
@@ -93,7 +93,7 @@ function OrderDetail(props) {
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="mt10 bg-white">
-          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_basic')}</div>
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_basic')}</div>
           <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
