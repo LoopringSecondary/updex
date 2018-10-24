@@ -148,8 +148,8 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                   value={toNumber(amountS).toString()}
                   extra={
-                    <div className="fs14 color-black-4 cursor-pointer zb-b-l d-flex align-items-center justify-content-end pr15" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
-                      {p2pOrder.tokenS} <WebIcon hidden className="fs12 color-black-4 ml5" type="down"/>
+                    <div className="fs14 cursor-pointer zb-b-l d-flex align-items-center justify-content-end pr10" style={{width:'7.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                      {p2pOrder.tokenS}<WebIcon className="fs12 ml5" type="caret-down"/>
                       <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})}  className="fs16 text-primary pr10" style={{position:'absolute',top:'1rem',width:'4rem',left:'-4rem'}}>
                         <WebIcon type="sliders" />
                       </div>
@@ -168,8 +168,8 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                   value={toNumber(amountB).toString()}
                   extra={
-                    <div className="fs14 color-black-4 cursor-pointer zb-b-l d-flex align-items-center justify-content-end pr15" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
-                      {p2pOrder.tokenB} <WebIcon hidden className="fs12 color-black-4 ml5" type="down"/>
+                    <div className="fs14 cursor-pointer zb-b-l d-flex align-items-center justify-content-end pr10" style={{width:'7.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                      {p2pOrder.tokenB}<WebIcon className="fs12 ml5" type="caret-down"/>
                     </div>
                   }
                   className="circle h-default fs18 mt15"
