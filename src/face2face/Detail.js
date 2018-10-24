@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
-import { NavBar } from 'antd-mobile'
+import { NavBar,Button } from 'antd-mobile'
 import intl from 'react-intl-universal'
 import { connect } from 'dva'
 import { OrderFm } from 'modules/orders/OrderFm'
@@ -92,12 +92,9 @@ function OrderDetail(props) {
         <div className="divider 1px zb-b-t"></div>
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
-        <div className="ml10 mr10 mb15 mt15">
-          <div className='row'>
-          <div className="fs14 text-primary text-left mb5 col">{intl.get('order_detail.tabs_basic')}</div>
-            {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&  <div onClick={()=>showQR(order,orderFm,tokens)} className="fs14 text-primary text-right mb5 col">qrcode</div>}
-          </div>
-          <div className="bg-white " style={{borderRadius:'0.4rem'}}>
+        <div className="mt10 bg-white">
+          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_basic')}</div>
+          <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
             <OrderMetaItem label={intl.get('order.price')} value={
@@ -111,6 +108,9 @@ function OrderDetail(props) {
             <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
           </div>
         </div>
+        {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&  
+         <Button className="fs14 mt10 ml10 mr10" type="primary" onClick={()=>showQR(order,orderFm,tokens)}>Share Qrcode</Button>
+        }
       </div>
     </div>
   )
