@@ -64,7 +64,12 @@ class AuthByTPWallet extends React.Component {
           })
         }
       }, 1000)
-      routeActions.gotoPath('/dex')
+      let to = routeActions.location.getQueryByName(this.props,'to');
+      if(to){
+        routeActions.gotoPath(to)
+      }else{
+        routeActions.gotoPath('/dex')
+      }
     }
   }
 
@@ -89,7 +94,12 @@ class AuthByTPWallet extends React.Component {
           _props.dispatch({type: 'sockets/unlocked'})
           _props.dispatch({type: 'locales/setLocale', payload: {locale: window.Wallet.language}})
           Toast.hide()
-          routeActions.gotoPath('/dex')
+          let to = routeActions.location.getQueryByName(this.props,'to');
+          if(to){
+            routeActions.gotoPath(to)
+          }else{
+            routeActions.gotoPath('/dex')
+          }
         })
       }
     }, 1000)

@@ -27,7 +27,6 @@ class Face2FaceOrders extends React.Component {
     this.fetchOrder(pageIndex,pageSize)
   }
   componentWillReceiveProps(newProps){
-    console.log(JSON.stringify(newProps))
     if(newProps.fetchOrder){
       const {pageIndex, pageSize} = this.state
       this.fetchOrder(pageIndex,pageSize)
@@ -80,7 +79,6 @@ class Face2FaceOrders extends React.Component {
     const {orders, pageIndex,pageSize, total} = this.state
 
     const gotoDetail = (item) => {
-      console.log('detail')
       dispatch({
         type: 'layers/showLayer',
         payload: {

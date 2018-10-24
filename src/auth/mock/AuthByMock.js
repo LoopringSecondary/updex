@@ -12,7 +12,12 @@ class AuthByImtoken extends React.Component {
     const address = storage.wallet.getUnlockedAddress()
     if(address){
       this.goToDex();
-      routeActions.gotoPath('/dex');
+      let to = routeActions.location.getQueryByName(this.props,'to');
+      if(to){
+        routeActions.gotoPath(to)
+      }else{
+        routeActions.gotoPath('/dex')
+      }
     }
   }
   goToDex = () => {
@@ -37,7 +42,12 @@ class AuthByImtoken extends React.Component {
       this.props.dispatch({type:'locales/setLocale', payload:{locale:language}});
       Toast.hide()
     })
-    routeActions.gotoPath('/dex');
+    let to = routeActions.location.getQueryByName(this.props,'to');
+    if(to){
+      routeActions.gotoPath(to)
+    }else{
+      routeActions.gotoPath('/dex')
+    }
   }
   goToFace2Face = () => {
     routeActions.gotoPath('/face2face');

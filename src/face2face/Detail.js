@@ -41,9 +41,9 @@ function OrderDetail(props) {
     })
   }
 
-  const showQR = (order) => {
+  const showQR = (order,orderFm,tokens) => {
    const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
-    showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder}})
+    showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder},data:{tokens,orderFm}})
   }
 
   const orderStatus = (item) => {
@@ -95,7 +95,7 @@ function OrderDetail(props) {
         <div className="ml10 mr10 mb15 mt15">
           <div className='row'>
           <div className="fs14 text-primary text-left mb5 col">{intl.get('order_detail.tabs_basic')}</div>
-            {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&  <div onClick={()=>showQR(order)} className="fs14 text-primary text-right mb5 col">qrcode</div>}
+            {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&  <div onClick={()=>showQR(order,orderFm,tokens)} className="fs14 text-primary text-right mb5 col">qrcode</div>}
           </div>
           <div className="bg-white " style={{borderRadius:'0.4rem'}}>
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
