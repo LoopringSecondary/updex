@@ -261,7 +261,7 @@ function PlaceOrderSteps (props) {
               <OrderMetaItem label="订单有效期" showArrow={true}
                              value={<div onClick={showLayer.bind(this,{id:'helperOfTTL'})} className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
               <OrderMetaItem label="最小撮合量" showArrow={true}
-                             value={<div onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}  className="text-primary"><span className="mr5">($1.5 ≈ 10 LRC)</span>10%</div>}/>             
+                             value={<div onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}  className="text-primary"><span className="mr5">($1.5 ≈ 10 LRC)</span>10%</div>}/>
               <Button type="primary" className="mt15" onClick={next.bind(this, page)}>签名</Button>
             </div>
           </div>
@@ -281,6 +281,11 @@ function PlaceOrderSteps (props) {
             </div>
             <div className="bg-white p15">
               <QRCode value={p2pOrder.qrcode} size={240} level='H'/>
+            </div>
+            <div>
+              <OrderMetaItem label="买入" value={`100 ${tokenB}`}/>
+              <OrderMetaItem label="卖出" value={`0.1 ${tokenS}`}/>
+              <OrderMetaItem label="价格" value={`${price} ${tokenS}/${tokenB}`}/>
             </div>
           </div>
         }/>

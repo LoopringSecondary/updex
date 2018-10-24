@@ -19,7 +19,7 @@ export default class OrderQrcode extends React.Component{
             </div>
           </div>
         </div>
-        <div className="bg-white p15">
+        <div className="bg-white p15 text-center">
           <QRCode value={JSON.stringify(value)} size={240} level='H'/>
         </div>
       </div>
