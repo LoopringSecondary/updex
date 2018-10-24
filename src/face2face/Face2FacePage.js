@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavBar, Tabs } from 'antd-mobile'
+import { NavBar, Tabs,Toast } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
@@ -9,8 +9,14 @@ import HelperOfBalances from './HelperOfBalances'
 import HelperOfMarkets from './HelperOfMarkets'
 import Face2FaceForm from './Face2FaceForm'
 import intl from 'react-intl-universal'
+import {store} from "../index";
 
 class Face2FacePage extends React.Component {
+
+  componentDidMount(){
+  // window.handleP2POrder({result:JSON.stringify({value:{"auth":"624338268e423511dd23728550b282d3887c5e2eb17f6855c083b305f5bc5faa","hash":"0x6318f29d489d02849efe3b82ea7a53c91ce93a62238bc42aa2785c53d35e3a5f","count":1}})})
+  }
+
   render() {
     const {dispatch,placeOrder} = this.props
     const {side,pair} = placeOrder

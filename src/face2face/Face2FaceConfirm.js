@@ -254,8 +254,8 @@ function PlaceOrderSteps (props) {
                   </div>
                 </div>
               </div>
-              <OrderMetaItem label="买入" value={`100 ${tokenB}`}/>
-              <OrderMetaItem label="卖出" value={`0.1 ${tokenS}`}/>
+              <OrderMetaItem label="买入" value={`${amountB} ${tokenB}`}/>
+              <OrderMetaItem label="卖出" value={`${amountS} ${tokenS}`}/>
               <OrderMetaItem label="价格" value={`${price} ${tokenS}/${tokenB}`}/>
               <OrderMetaItem label="类型" value={`P2P交易`}/>
               <OrderMetaItem label="订单有效期" showArrow={true}
@@ -283,9 +283,9 @@ function PlaceOrderSteps (props) {
               <QRCode value={p2pOrder.qrcode} size={240} level='H'/>
             </div>
             <div>
-              <OrderMetaItem label="买入" value={`100 ${tokenB}`}/>
-              <OrderMetaItem label="卖出" value={`0.1 ${tokenS}`}/>
-              <OrderMetaItem label="价格" value={`${price} ${tokenS}/${tokenB}`}/>
+              <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
+              <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
+              <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>
             </div>
           </div>
         }/>

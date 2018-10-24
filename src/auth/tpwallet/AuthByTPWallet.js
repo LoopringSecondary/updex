@@ -13,32 +13,6 @@ import {toBig} from 'LoopringJS/common/formatter'
 class AuthByTPWallet extends React.Component {
 
   componentDidMount () {
-    window.handleP2POrder = ({result}) => {
-      const {hash, auth, count} = JSON.parse(result).value
-      const dispatch = this.props.dispatch
-      window.RELAY.order.getOrderByHash({orderHash: hash}).then(res => {
-        if (res.error) {
-          Toast.fail(res.error.message)
-        } else {
-          const order = res.result
-          order.originalOrder.authPrivateKey = auth;
-          if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
-            dispatch({
-              type: 'layers/showLayer',
-              payload: {
-                id:'takerConfirm',
-                makerOrder:{
-                  auth:auth, count,
-                  originalOrder:order.originalOrder
-                }
-              }
-            })
-          }else{
-            Toast.fail('This Order is completed, canceled or expired')
-          }
-        }
-      })
-    };
     const address = storage.wallet.getUnlockedAddress()
     if (address) {
       Toast.loading('Loading configs...', 0, () => {

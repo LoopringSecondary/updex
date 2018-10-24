@@ -1,6 +1,6 @@
 import React from 'react'
 import config from '../common/config'
-import { toHex, toBig, toFixed,clearHexPrefix } from 'LoopringJS/common/formatter'
+import { toHex, toBig, toFixed,clearHexPrefix ,toNumber} from 'LoopringJS/common/formatter'
 import monent from 'moment'
 import { Icon } from 'antd'
 import { Button } from 'antd-mobile'
@@ -14,6 +14,8 @@ import { createWallet } from 'LoopringJS/ethereum/account'
 import Notification from 'LoopringUI/components/Notification'
 import * as orderFormatter from 'modules/orders/formatters'
 import eachOfLimit from "async/eachOfLimit";
+import TokenFm from 'modules/tokens/TokenFm'
+
 
 
 const OrderMetaItem = (props) => {
@@ -59,6 +61,9 @@ class TakerConfirm extends React.Component {
     order.authAddr = authAccount.getAddressString();
     order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString());
     order.orderType = 'p2p_order'
+
+    const tokensFm = new TokenFm({symbol:order.tokenS})
+    const tokenbFm = new TokenFm({symbol:order.tokenB})
 
     const price = toFixed(order.amountS / order.amountB, 4);
     const showLayer = (payload = {}) => {
@@ -147,16 +152,9 @@ class TakerConfirm extends React.Component {
         }
         const signedOrder = {...order, ...signResult.result}
         signedOrder.powNonce = 100
-        const tx = {
-          value: '0x0',
-          gasLimit: config.getGasLimitByType('submitRing').gasLimit,
-          chainId: config.getChainId(),
-          to: order.protocol,
-          gasPrice,
-          nonce:toHex((await window.RELAY.account.getNonce(address)).result),
-          data:Contracts.LoopringProtocol.encodeSubmitRing([{...order,...signedOrder},makerOrder.originalOrder],config.getWalletAddress())
-        }
-        eachOfLimit(unsigned.filter(item => item.type === 'tx'), 1, async (item) => {
+       const txs = unsigned.filter(item => item.type === 'tx')
+
+        eachOfLimit(txs, 1, async (item) => {
           signTx(item.data).then(res => {
             if (res.result) {
               window.ETH.sendRawTransaction(res.result).then(resp => {
@@ -170,7 +168,7 @@ class TakerConfirm extends React.Component {
               })
             }
           })
-        }, function (e) {
+        }, async function (e) {
           if (e) {
             Notification.open({
               message: intl.get('notifications.title.place_order_failed'),
@@ -178,6 +176,16 @@ class TakerConfirm extends React.Component {
               type: 'error'
             })
           }else{
+            const nonce = txs.length >0 ? toHex(toNumber(txs[txs.length -1].nonce) + 1) :toHex((await window.RELAY.account.getNonce(address)).result)
+            const tx = {
+              value: '0x0',
+              gasLimit: config.getGasLimitByType('submitRing').gasLimit,
+              chainId: config.getChainId(),
+              to: order.protocol,
+              gasPrice,
+              nonce,
+            data:Contracts.LoopringProtocol.encodeSubmitRing([{...order,...signedOrder},makerOrder.originalOrder],config.getWalletAddress())
+          };
             signTx(tx).then(res => {
               if (res.result) {
                 window.RELAY.ring.submitRingForP2P({makerOrderHash:makerOrder.originalOrder.hash,rawTx:res.result,takerOrderHash:window.RELAY.order.getOrderHash(order)}).then(resp => {
@@ -244,8 +252,10 @@ class TakerConfirm extends React.Component {
               </div>
             </div>
           </div>
-          <OrderMetaItem label="价格" value={`${price} ${order.tokenS}/${order.tokenB}`}/>
-          <OrderMetaItem label="订单有效期"
+          <OrderMetaItem label={intl.get('common.price')} value={`${price} ${order.tokenS}/${order.tokenB}`}/>
+          <OrderMetaItem label={intl.get('common.sell')} value={`${tokensFm.getUnitAmount(order.amountS)} ${order.tokenS} `}/>
+          <OrderMetaItem label={intl.get('common.buy')} value={`${tokenbFm.getUnitAmount(order.amountB)} ${order.tokenB} `}/>
+          <OrderMetaItem label={intl.get('common.ttl')}
                          value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}/>
           <Button type="" className="bg-grey-900 color-white mt15" onClick={() => {submitRing()}}>签名</Button>
         </div>
