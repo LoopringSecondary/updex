@@ -77,6 +77,7 @@ function PlaceOrderSteps (props) {
     tradeInfo.gasLimit = config.getGasLimitByType('approve').gasLimit
     tradeInfo.gasPrice = toHex(Number(gasPrice) * 1e9)
     tradeInfo.orderType = 'p2p_order'
+
     try {
       await orderFormatter.p2pVerification(balance, tradeInfo, pendingTx ? pendingTx.items : [], gasPrice)
     } catch (e) {
