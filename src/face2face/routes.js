@@ -17,7 +17,7 @@ const Logged = (props)=>{
     )
   }else{
     // props.history.push(null,'/auth',{to:'/face2face'})
-    return <Redirect to="/auth?to=/face2face" />
+    return <Redirect to="/auth/tpwallet?to=/face2face" />
   }
 }
 
