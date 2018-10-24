@@ -63,7 +63,6 @@ class Face2FacePage extends React.Component {
           </div>
           <div className="bg-white">
             <Face2FaceForm side="sell" showLayer={showLayer} />
-            <div className="divider 1px zb-b-t"></div>
           </div>
           <div className="bg-white mt10">
             <div className="fs16 pt10 pb10 pl15 color-black-1">Markets</div>

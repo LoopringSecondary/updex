@@ -71,11 +71,11 @@ const HelperOfBalance = (props)=>{
                   <td className="text-right pl10 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
                       token.symbol === 'WETH' &&
-                      <a onClick={showLayer.bind(this,{id:'convertToken',type:"ETH"})}>{intl.get('common.convert')}</a>
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none" style={{height:'24px',lineHeight:'24px'}} type="primary" size="small" onClick={showLayer.bind(this,{id:'convertToken',type:"ETH"})}>{intl.get('common.convert')}</Button>
                     }
                     {
                       token.symbol !== 'WETH' &&
-                      <a onClick={(e) => {e.stopPropagation();gotoReceive({symbol:token.symbol})}}>{intl.get('token.action_types.receive',{token:token.symbol})}</a>
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none" style={{height:'24px',lineHeight:'24px'}} type="primary" size="small" onClick={(e) => {e.stopPropagation();gotoReceive({symbol:token.symbol})}}>{intl.get('common.receive')}</Button>
                     }
                   </td>
                 </tr>
@@ -83,9 +83,6 @@ const HelperOfBalance = (props)=>{
             }
         </tbody>
       </table>
-      <div hidden className="p10 mb15">
-        <Button onClick={gotoAll} type="" size="small" style={{height:"36px",lineHeight:'36px'}}className="d-block w-100 fs14 bg-none">View all assets</Button>
-      </div>
     </div>
   )
 }
