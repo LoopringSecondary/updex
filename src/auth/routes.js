@@ -8,33 +8,31 @@ import Auth from './index.js'
 import storage from 'modules/storage'
 import Privacy from './terms/Privacy'
 import Terms from './terms/Terms'
+import routeActions from 'common/utils/routeActions'
 
-const UnLogged = ()=>{
-  // const isLogged = !!storage.wallet.getUnlockedAddress()
-  // if(false){
-  //   return <Redirect to="/dex" />
-  // }else{
+const UnLogged = (props)=>{
+  
+  const isLogged = !!storage.wallet.getUnlockedAddress()
+  if(isLogged){
+    let to = routeActions.location.getQueryByName(props,'to')
+    console.log('auth  props.location.search to', to);
+    if(!to){ to='/dex' }
+    return <Redirect to={to} />
+  }else{
     return (
       <Switch>
          <Route path={`/auth`} exact component={Auth} />
          <Route path={`/auth/mock`} exact component={AuthByMock} />
          <Route path={`/auth/loopr`} exact component={AuthByLoopr} />
          <Route path={`/auth/imtoken`} exact component={AuthByImtoken} />
-          <Route path={`/auth/tpwallet`} exact component={AuthByTPWallet} />
+         <Route path={`/auth/tpwallet`} exact component={AuthByTPWallet} />
          <Route path={`/auth/terms`} exact component={Terms} />
-        <Route path={`/auth/privacy`} exact component={Privacy} />
+         <Route path={`/auth/privacy`} exact component={Privacy} />
        </Switch>
     )
-  // }
-}
-const Logged = ()=>{
-  const isLogged =  !!storage.wallet.getUnlockedAddress()
-  if(isLogged){
-    return <Redirect to="/dex" />
-  }else{
-    return <Redirect to="/auth" />
   }
 }
+
 export default class Routes extends React.Component {
   constructor(props) {
     super(props)

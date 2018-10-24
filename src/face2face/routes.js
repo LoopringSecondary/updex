@@ -1,13 +1,11 @@
 import React from 'react'
 import { Redirect, Route, Switch } from 'dva/router'
+import storage from 'modules/storage'
 import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
-import CommonModals from '../components/Modals'
-import Tokens from '../dex/tokens'
 
-const Logged = ()=>{
-  // const isLogged =  !!window.WALLET && !!window.WALLET.address
-  const isLogged = true
+const Logged = (props)=>{
+  const isLogged = !!storage.wallet.getUnlockedAddress()
   if(isLogged){
     return (
       <div>
@@ -15,12 +13,11 @@ const Logged = ()=>{
           <Route path={`/face2face`} exact component={Face2FacePage} />
         </Switch>
         <Face2FaceModals />
-        <CommonModals/>
-        <Tokens.Modals />
       </div>
     )
   }else{
-    return <Redirect to="/auth" />
+    // props.history.push(null,'/auth',{to:'/face2face'})
+    return <Redirect to="/auth?to=/face2face" />
   }
 }
 
