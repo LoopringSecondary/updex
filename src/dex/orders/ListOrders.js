@@ -429,7 +429,7 @@ export const renders = {
       if(cancelOrder) {
         return (
           <div>
-            <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block bg-primary-light text-primary" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
+            <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block bg-primary-light text-primary border-none" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
             {/*<div className="text-primary mt5">{intl.get("order_status.opened")}</div>*/}
           </div>
         )
@@ -441,7 +441,7 @@ export const renders = {
 
     if (status === 'ORDER_WAIT_SUBMIT_RING') {
       if(cancelOrder) {
-        return <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
+        return <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block bg-primary-light text-primary border-none" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
         // return <a className="fs12" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get("common.cancel")}</a>
       } else {
         return <span className="text-primary">{intl.get("order_status.waiting")}</span>
