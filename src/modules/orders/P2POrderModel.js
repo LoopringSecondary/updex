@@ -111,6 +111,17 @@ export default {
         ...state,
         fetchOrder
       }
+    },
+    swap(state){
+      console.log('Swap')
+      const {amountS,amountB,tokenS,tokenB}= state
+      return {
+        ...state,
+        amountS:amountB,
+        amountB:amountS,
+        tokenS:tokenB,
+        tokenB:tokenS
+      }
     }
   },
 }

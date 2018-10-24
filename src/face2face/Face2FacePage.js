@@ -51,6 +51,9 @@ class Face2FacePage extends React.Component {
    const gotoTrade = ()=>{
       routeActions.gotoPath(`/dex/markets/${pair}`)
     }
+    const swap = () => {
+      dispatch({type:'p2pOrder/swap'})
+    }
     return (
         <div className="">
           <div className="bg-white">
@@ -61,7 +64,7 @@ class Face2FacePage extends React.Component {
                 <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle-o" /></span>
               ]}
               rightContent={[
-                <span  onClick={()=>{}} className="text-primary" key="1" ><WebIcon type="swap" /></span>
+                <span  onClick={()=>{swap()}} className="text-primary" key="1" ><WebIcon type="swap" /></span>
               ]}
             >
               <div className="color-black">
