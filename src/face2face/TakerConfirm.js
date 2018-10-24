@@ -86,7 +86,7 @@ class TakerConfirm extends React.Component {
     const submitRing = async () => {
       const address = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
       const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
-      const tradeInfo = {...order,validSince:validSince.unix(),validUntil:validUntil.unix(),milliLrcFee:0,amountS:tokensFm.getUnitAmount(order.amountS),amountB:tokenbFm.getUnitAmount(order.amountB),gasLimit:config.getGasLimitByType('approve').gasLimit,gasPrice}
+      const tradeInfo = {...order,roleType:'taker',validSince:validSince.unix(),validUntil:validUntil.unix(),milliLrcFee:0,amountS:tokensFm.getUnitAmount(order.amountS),amountB:tokenbFm.getUnitAmount(order.amountB),gasLimit:config.getGasLimitByType('approve').gasLimit,gasPrice}
       try {
         await orderFormatter.p2pVerification(balance, tradeInfo, pendingTx ? pendingTx.items : [], gasPrice)
       } catch (e) {

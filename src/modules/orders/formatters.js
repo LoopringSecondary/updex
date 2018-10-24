@@ -328,7 +328,11 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
     approveCount += 1
     if(pendingAllowance.gt(0)) approveCount += 1
   }
-  const  gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount).plus(400000))
+  let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
+
+  if(tradeInfo.roleType === 'taker'){
+    gas = gas + fm.toBig(gasPrice).div(1e9).times(400000)
+  }
 
   if(ethBalance.balance.lt(gas)){
     error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
