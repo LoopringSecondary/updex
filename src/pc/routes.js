@@ -50,8 +50,8 @@ const Logged = ()=>{
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
-        <SignModals />
         <AuthModals />
+        <SignModals />
       </div>
     )
   }else{
