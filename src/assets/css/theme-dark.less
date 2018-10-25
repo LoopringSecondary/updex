@@ -30,3 +30,28 @@
 
   }
 }
+.am-picker{
+  // .am-picker-col-mask{
+  //   background:@bg-white;
+  // }
+  // .am-picker-col-item{
+  //   color:#fff;
+  // }
+}
+
+.am-picker-col-mask{
+  display: none !important;
+}
+
+.am-picker-col-item{
+  color:rgba(255,255,255,0.3);
+  &.am-picker-col-item-selected{
+    color:@brand-primary !important;
+  }
+}
+.am-picker-col-indicator::before{
+  background:@brand-primary !important;
+}
+.am-picker-col-indicator::after{
+  background:@brand-primary !important;
+}

@@ -30,7 +30,7 @@ class HelperOfMiniFill extends React.Component {
     }
 
     return (
-      <div className="bg-white">
+      <div className="bg-white" style={{height:'100%'}}>
         <NavBar
           className="zb-b-b"
           mode="light"
@@ -39,9 +39,9 @@ class HelperOfMiniFill extends React.Component {
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          Set Mini Fill Of Order
+          <div className="color-black-1">Set Mini Fill</div>
         </NavBar>
-        <div className="">
+        <div className="zb-b-b">
           <PickerView
             mode="datetime"
             data={[]}
