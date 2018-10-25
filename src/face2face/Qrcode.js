@@ -39,7 +39,7 @@ export default class OrderQrcode extends React.Component{
             <QRCode value={JSON.stringify(value)} size={240} level='H'/>
           </div>
         </div>
-        <div className="bg-white p15 text-center">
+        <div className="m15 zb-b-t p15 text-center">
           <OrderMetaItem label={intl.get('order.price')} value={
             <div>
               <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }

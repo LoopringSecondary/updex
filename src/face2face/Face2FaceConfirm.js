@@ -278,7 +278,7 @@ function PlaceOrderSteps (props) {
                 </div>
                 <div className="col">Qrcode</div>
                 <div className="col-auto color-white pl20 pr20">
-                  <Icon type="left"/>
+                  <Icon  type="left" style={{opacity:0}}/>
                 </div>
               </div>
             </div>
@@ -287,7 +287,7 @@ function PlaceOrderSteps (props) {
                 <QRCode value={p2pOrder.qrcode} size={240} level='H'/>
               </div>
             </div>
-            <div>
+            <div className="zb-b-t p15 mt15">
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
               <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>
