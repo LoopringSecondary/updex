@@ -282,7 +282,7 @@ function PlaceOrderSteps (props) {
                 </div>
               </div>
             </div>
-            <div className="text-center">
+            <div className="text-center mt15">
               <div className="p15 d-inline-block" style={{background:'#fff'}}>
                 <QRCode value={p2pOrder.qrcode} size={240} level='H'/>
               </div>
