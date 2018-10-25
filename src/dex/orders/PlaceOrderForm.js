@@ -259,12 +259,13 @@ class PlaceOrderForm extends React.Component {
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
               className="circle h-default mt15"
               extra={
-                <div style={{width:'auto',textAlign:'right'}}>
-                  {
-                    price>0 && <span className="color-black-4 fs12">≈ <Worth amount={price} symbol={tokens.right}/></span>
-                  }
-                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.right}</span>
-                  <WebIcon hidden className="text-primary" type="question-circle-o" style={{padding:'2px 0px 5px'}} onClick={showAmountHelper} />
+                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                  <span className="color-black-3 d-inline-block">{tokens.right}</span>
+                  <div className="fs16 text-primary text-right pr10" style={{position:'absolute',top:'1rem',width:'5rem',left:'-5rem'}}>
+                    {
+                      price>0 && <span className="color-black-4 fs12">≈ <Worth amount={price} symbol={tokens.right}/></span>
+                    }
+                  </div>
                 </div>
               }
               onChange={priceChange}
@@ -279,9 +280,11 @@ class PlaceOrderForm extends React.Component {
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
               className="circle h-default mt15"
               extra={
-                <div onClick={showAmountHelper} style={{width:'auto',textAlign:'right'}}>
-                  <WebIcon className="color-black-4 fs12" type="question-circle-o" style={{padding:'2px 0px 5px'}} />
-                  <span className="color-black-3 d-inline-block" style={{width:'40px',marginLeft:'7px'}}>{tokens.left}</span>
+                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                  <span className="color-black-3 d-inline-block">{tokens.left}</span>
+                  <div onClick={showAmountHelper} className="text-primary cursor-pointer text-right pr10" style={{position:'absolute',top:'1rem',width:'4rem',left:'-4rem'}}>
+                    <WebIcon className="text-primary fs14" type="sliders"/>
+                  </div>
                 </div>
               }
             ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
