@@ -282,7 +282,7 @@ class PlaceOrderForm extends React.Component {
               extra={
                 <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                   <span className="color-black-3 d-inline-block">{tokens.left}</span>
-                  <div onClick={showAmountHelper} className="text-primary cursor-pointer text-right pr10" style={{position:'absolute',top:'1rem',width:'4rem',left:'-4rem'}}>
+                  <div hidden onClick={showAmountHelper} className="text-primary cursor-pointer text-right pr10" style={{position:'absolute',top:'1rem',width:'4rem',left:'-4rem'}}>
                     <WebIcon className="text-primary fs14" type="sliders"/>
                   </div>
                 </div>

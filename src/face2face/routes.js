@@ -5,6 +5,7 @@ import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
 import TokenModals from '../dex/tokens/Modals'
 import AccountModals from '../dex/account/Modals'
+import CommonModals from '../components/Modals'
 
 const Logged = (props)=>{
   const isLogged = !!storage.wallet.getUnlockedAddress()
@@ -17,6 +18,7 @@ const Logged = (props)=>{
         <Face2FaceModals />
         <TokenModals />
         <AccountModals />
+        <CommonModals />
       </div>
     )
   }else{
