@@ -312,7 +312,8 @@ export default {
     amount_to_sell:'Amount to sell',
     amount_to_buy:'Amount to buy',
     set_sell_amount:"Set sell amount",
-    count:"Order split count"
+    count:"Order split count",
+    set_count:"Set order split count "
   },
   sign: {
     not_signed: "You may have some items not signed",

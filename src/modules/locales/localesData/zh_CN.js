@@ -314,7 +314,8 @@ no_open_orders: '{market}暂无有效订单',
     amount_to_sell:'售出数量',
     amount_to_buy:'买入数量',
     set_sell_amount:"设定售出数量",
-    count:"订单拆分份数"
+    count:"订单拆分份数",
+    set_count:"设置订单拆分份数"
   },
   sign: {
     not_signed: '您还未完成签名',

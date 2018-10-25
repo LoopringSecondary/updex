@@ -1,6 +1,7 @@
 import React from 'react'
 import {Icon, NavBar, PickerView} from 'antd-mobile';
 import {connect} from 'dva'
+import intl from 'react-intl-universal'
 
 class HelperOfMiniFill extends React.Component {
   render() {
@@ -30,9 +31,9 @@ class HelperOfMiniFill extends React.Component {
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          <div className="color-black-1">{}</div>
+          <div className="color-black-1">{intl.get('p2p_order.set_count')}</div>
         </NavBar>
-        <div className="zb-b-b">
+        <div className="zb-b-b mt10">
           <PickerView
             data={data}
             value={[count]}
