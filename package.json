@@ -15,7 +15,7 @@
     "copy-to-clipboard": "3.0.8",
     "dva": "2.1.0",
     "lodash": "4.17.5",
-    "loopring.js": "2.0.4",
+    "loopring.js": "2.0.5",
     "moment": "2.20.1",
     "qrcode.react": "0.7.2",
     "react": "16.2.0",
