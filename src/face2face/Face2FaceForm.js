@@ -38,25 +38,25 @@ class Face2FaceForm extends React.Component {
     function amountChange(side, value) {
       // const  value = Number(e.target.value).toString()
       if(side === 'buy') {
-        if(!isValidNumber(value)) {
+        if(value && !isValidNumber(value)) {
           Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
           return;
         }
-        dispatch({type:'p2pOrder/amountChange', payload:{'amountB':toBig(value)}})
+        dispatch({type:'p2pOrder/amountChange', payload:{'amountB':value}})
       } else {
-        if(!isValidNumber(value)) {
+        if(value && !isValidNumber(value)) {
           Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
           return
         }
-        if(!validateAmountS(value)){
+        if(value && !validateAmountS(value)){
           Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
           return
         }
-        dispatch({type:'p2pOrder/amountChange', payload:{'amountS':toBig(value)}})
+        dispatch({type:'p2pOrder/amountChange', payload:{'amountS':value}})
       }
     }
     const submitOrder = ()=>{
-      if(!isValidNumber(p2pOrder.amountB) || !Number(p2pOrder.amountB) || !Number(p2pOrder.amountS)) {
+      if(!isValidNumber(p2pOrder.amountB)  || !isValidNumber(p2pOrder.amountS)) {
         Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
         return
       }
@@ -64,10 +64,9 @@ class Face2FaceForm extends React.Component {
         Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
         return
       }
-      dispatch({type:'p2pOrder/isMakerChange', payload:{ismaker:true}})
       showLayer({id:'face2FaceConfirm'})
     }
-    const price = p2pOrder.amountB && p2pOrder.amountB.gt(0) && p2pOrder.amountS && p2pOrder.amountS.gt(0) ? toFixed(p2pOrder.amountS.div(p2pOrder.amountB), 8) : toFixed(toBig(0),8)
+    const price = amountB && toBig(amountB).gt(0) && amountS && toBig(amountS).gt(0) ? toFixed(toBig(amountS).div(amountB), 8) : toFixed(toBig(0),8)
     return (
       <div className="">
         <div className="zb-b-b p15 ">
@@ -93,7 +92,7 @@ class Face2FaceForm extends React.Component {
                   type="money"
                   onChange={amountChange.bind(this, 'sell')}
                   moneyKeyboardAlign="left"
-                  value={toNumber(amountS).toString()}
+                   value={amountS}
                   extra={
                     <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-end pr10" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})}>
@@ -115,7 +114,7 @@ class Face2FaceForm extends React.Component {
                   type="money"
                   onChange={amountChange.bind(this, 'buy')}
                   moneyKeyboardAlign="left"
-                  value={toNumber(amountB).toString()}
+                  value={amountB}
                   extra={
                     <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-end pr10" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       {p2pOrder.tokenB} <WebIcon className="fs12" style={{marginLeft:"0.3rem"}} type="caret-down"/>
@@ -125,7 +124,7 @@ class Face2FaceForm extends React.Component {
                   placeholder="Amount To Buy"
                 >
                   <div className="fs14 color-black-1" style={{width:'4rem'}}>
-                    Buy 
+                    Buy
                   </div>
                 </InputItem>
                 <List.Item
@@ -134,12 +133,12 @@ class Face2FaceForm extends React.Component {
                   onClick={()=>{}}
                   extra={
                     <div className="fs14 color-black-4 cursor-pointer pr15 d-flex align-items-center justify-content-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
-                       <Worth amount={price} symbol={p2pOrder.tokenB}/> ≈ {`${price} ${p2pOrder.tokenS}/${p2pOrder.tokenB}`}
+                       <Worth amount={price} symbol={p2pOrder.tokenS}/> ≈ {`${price} ${p2pOrder.tokenS}/${p2pOrder.tokenB}`}
                     </div>
                   }
                 >
                   <div className="fs14 color-black-1" style={{width:'4rem'}}>
-                    Price 
+                    Price
                   </div>
                 </List.Item>
               </List>

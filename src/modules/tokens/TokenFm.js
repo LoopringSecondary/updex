@@ -131,7 +131,8 @@ const integerReg = new RegExp("^[0-9]*$")
 const numberReg = new RegExp("^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*)|(0))$")
 
 export function isValidNumber(number) {
-  return numberReg.test(number)
+  const reg =  new RegExp("^([0-9]+\\.?[0-9]*)$")
+  return reg.test(number)
 }
 
 export function isValidInteger(int) {

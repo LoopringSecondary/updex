@@ -53,8 +53,8 @@ export default {
     reset (state, action) {
       return {
         ...state,
-        amountS: toBig(0),
-        amountB: toBig(0),
+        amountS: '',
+        amountB: '',
         validSince: null,
         validUntil: null,
         loading: false,
@@ -76,8 +76,8 @@ export default {
       const {amountS, amountB} = payload
       return {
         ...state,
-        amountS: amountS || state.amountS,
-        amountB: amountB || state.amountB,
+        amountS: amountS === undefined ? state.amountS : amountS,
+        amountB: amountB === undefined ? state.amountB : amountB,
       }
     },
     loadingChange (state, action) {
@@ -113,7 +113,6 @@ export default {
       }
     },
     swap(state){
-      console.log('Swap')
       const {amountS,amountB,tokenS,tokenB}= state
       return {
         ...state,

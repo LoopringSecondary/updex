@@ -40,10 +40,12 @@ const OrderMetaItem = (props) => {
 function PlaceOrderSteps (props) {
   const {p2pOrder, balance, settings, marketcap, gas,pendingTx, dispatch} = props
   const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current).times(1e9))
-  const {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
+  let {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
+  amountS =  toBig(amountS)
+  amountB = toBig(amountB)
   const validSince = p2pOrder.validSince || moment()
   const validUntil = p2pOrder.validUntil || moment().add(1, 'months')
-  const price = toFixed(amountS / amountB, 4)
+  const price = toFixed(amountS.div(amountB), 4)
 
   const showLayer = (payload = {}) => {
     dispatch({
