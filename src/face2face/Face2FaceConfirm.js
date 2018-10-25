@@ -17,17 +17,17 @@ import eachOfLimit from 'async/eachOfLimit'
 const OrderMetaItem = (props) => {
   const {label, value,showArrow=false,onClick=()=>{}} = props
   return (
-    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding:'7px 0px'}}>
+    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding:'10px 0px'}}>
       <div className="col">
-        <div className="fs14 color-black-2 lh30 text-left">{label}</div>
+        <div className="fs13 color-black-2 text-left">{label}</div>
       </div>
       <div className="col-auto text-right">
-        <div className="fs14 color-black-1 text-wrap lh30 text-left">{value}</div>
+        <div className="fs13 color-black-1 text-wrap text-left">{value}</div>
       </div>
       {
         !!showArrow &&
         <div className="col-auto text-right">
-          <div className="fs14 text-primary text-wrap lh30 text-left ml5">
+          <div className="fs13 text-primary text-wrap text-left ml5">
             <Icon type="right" />
           </div>
         </div>
@@ -243,7 +243,7 @@ function PlaceOrderSteps (props) {
                   </div>
                 </div>
                 <div className="col-auto pl25 pr25 text-center">
-                  <Icon type="swap-right" className={`text-primary fs20`}/>
+                  <Icon type="swap" className={`text-primary fs20`}/>
                 </div>
                 <div className="col-auto">
                   <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center" style={{

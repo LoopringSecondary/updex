@@ -15,7 +15,7 @@ const HelperOfFAQ = (props)=>{
           <span key='1' className="fs14"><Icon type="close"/></span>,
         ]}
       >
-        帮助
+        <div className="color-black-1">帮助</div>
       </NavBar>
       <div className="zb-b-b p15">
         <div className="fs14 color-black-2 mb5 text-left">什么是 P2P 交易？</div>
