@@ -20,7 +20,7 @@ function HelperOfAmount(props) {
   const tokenFm = new TokenFm({symbol})
 
   // const amountPrecision = Math.max(0, right.precision - marketConfig.pricePrecision)
- let availableAmount = toBig(balance.balance)
+  let availableAmount = toBig(balance.balance)
 
   const amountSliderChange = (amountPercentage) => {
     dispatch({type:'placeOrderHelper/amountSliderEffects', payload:{percentage:amountPercentage}})
@@ -28,7 +28,6 @@ function HelperOfAmount(props) {
     dispatch({type:'p2pOrder/amountChange', payload:{'amountS':amount}})
   }
   const amountPercentageSelect = (percentage) => {
-    console.log(percentage)
     dispatch({type:'placeOrderHelper/amountPercentageEffects', payload:{percentage:percentage}})
     const amount = availableAmount.times(percentage).div(100)
     dispatch({type:'p2pOrder/amountChange', payload:{'amountS':amount}})
@@ -42,9 +41,23 @@ function HelperOfAmount(props) {
     })
   }
 
-  const Content = () => {
-    const prefix =  ''
-    return (
+  const prefix =  ''
+
+  return (
+    <div className="tabs-no-border bg-white">
+      <NavBar
+        className="bg-white"
+        mode="light"
+        onLeftClick={() => hideLayer({id:'helperOfAmount'})}
+        leftContent={[
+          <span key='1' className=""><WebIcon type="close"/></span>,
+        ]}
+        rightContent={null && [
+          <span key='1' onClick={()=>window.Toast.info('请点击价格或数量', 1, null, false)} className=""><WebIcon type="question-circle-o"/></span>,
+        ]}
+      >
+        <div className="color-black">Set Sell Amount</div>
+      </NavBar>
       <div>
         <div className="bg-whitepb15">
           <div className="divider 1px zb-b-b mb15"></div>
@@ -76,7 +89,7 @@ function HelperOfAmount(props) {
             </div>
             {!amountSliderSelected && amountPercentage === 25 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
           </div>
-          {true && <div>
+          <div>
             <div className="row pt15 pb15 ml0 mr0">
               <div className="col color-black-1 text-left pl20">
                 <span className="ml5">{amountSlider}%</span>
@@ -87,38 +100,19 @@ function HelperOfAmount(props) {
             <div className="mt15 pb25 pl25 pr20">
               <Slider
                 className=""
-                defaultValue={10}
+                defaultValue={amountSlider}
                 min={0}
                 max={100}
                 onChange={amountSliderChange}
                 onAfterChange={()=>{}}
               />
             </div>
-          </div>}
+          </div>
         </div>
         <div className="" style={{maxHeight:'45vh',overflow:'auto'}}>
           <div className="divider 1px zb-b-b"></div>
         </div>
       </div>
-    )
-  }
-
-  return (
-    <div className="tabs-no-border bg-white">
-      <NavBar
-        className="bg-white"
-        mode="light"
-        onLeftClick={() => hideLayer({id:'helperOfAmount'})}
-        leftContent={[
-          <span key='1' className=""><WebIcon type="close"/></span>,
-        ]}
-        rightContent={null && [
-          <span key='1' onClick={()=>window.Toast.info('请点击价格或数量', 1, null, false)} className=""><WebIcon type="question-circle-o"/></span>,
-        ]}
-      >
-        <div className="color-black">Set Sell Amount</div>
-      </NavBar>
-      <Content />
     </div>
   )
 }
