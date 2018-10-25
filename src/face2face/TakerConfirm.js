@@ -205,7 +205,7 @@ class TakerConfirm extends React.Component {
             <span key='1' className=""><Icon type="close"/></span>,
           ]}
         >
-          Place Order
+          <div className="color-black-1">Place Order</div>
         </NavBar>
         <div className="p20 bg-white">
           <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">

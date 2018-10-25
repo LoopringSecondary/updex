@@ -46,7 +46,7 @@ function HelperOfAmount(props) {
     const prefix =  ''
     return (
       <div>
-        <div className="bg-white-light pb15">
+        <div className="bg-whitepb15">
           <div className="divider 1px zb-b-b mb15"></div>
           <div className="row pt10 pb10 ml0 mr0 zb-b-b">
             <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 100)}>
@@ -104,13 +104,13 @@ function HelperOfAmount(props) {
   }
 
   return (
-    <div className="tabs-no-border bg-white-light">
+    <div className="tabs-no-border bg-white">
       <NavBar
         className="bg-white"
         mode="light"
         onLeftClick={() => hideLayer({id:'helperOfAmount'})}
         leftContent={[
-          <span key='1' className=""><Icon type="cross"/></span>,
+          <span key='1' className=""><WebIcon type="close"/></span>,
         ]}
         rightContent={null && [
           <span key='1' onClick={()=>window.Toast.info('请点击价格或数量', 1, null, false)} className=""><WebIcon type="question-circle-o"/></span>,

@@ -60,11 +60,11 @@ class Face2FacePage extends React.Component {
             <NavBar
               className="zb-b-b"
               mode="light"
-              leftContent={null && [
-                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle-o" /></span>
+              leftContent={[
+                <span onClick={()=>showLayer({id:'settings'})} className="text-primary" key="1"><WebIcon type="setting" theme="" /></span>
               ]}
               rightContent={[
-                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="filled" /></span>
+                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="" /></span>
               ]}
             >
               <div className="color-black">
