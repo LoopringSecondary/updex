@@ -76,7 +76,7 @@ function HelperOfAmount(props) {
             </div>
             {!amountSliderSelected && amountPercentage === 25 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
           </div>
-          {true && <div>
+          {false && <div>
             <div className="row pt15 pb15 ml0 mr0">
               <div className="col color-black-1 text-left pl20">
                 <span className="ml5">{amountSlider}%</span>
