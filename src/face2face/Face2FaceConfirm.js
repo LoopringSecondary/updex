@@ -270,7 +270,7 @@ function PlaceOrderSteps (props) {
           </div>
         }/>
         <Page id="qrcode" render={({page}) =>
-          <div className="div">
+          <div className="bg-white">
             <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
               <div className="row">
                 <div className="col-auto text-left pl20 pr20" onClick={page.gotoPage.bind(this, {id: 'order'})}>
@@ -282,8 +282,10 @@ function PlaceOrderSteps (props) {
                 </div>
               </div>
             </div>
-            <div className="bg-white p15">
-              <QRCode value={p2pOrder.qrcode} size={240} level='H'/>
+            <div className="text-center">
+              <div className="p15 d-inline-block" style={{background:'#fff'}}>
+                <QRCode value={p2pOrder.qrcode} size={240} level='H'/>
+              </div>
             </div>
             <div>
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>

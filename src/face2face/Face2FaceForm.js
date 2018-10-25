@@ -107,7 +107,7 @@ class Face2FaceForm extends React.Component {
                   placeholder="Amount To Sell"
                 >
                   <div className="fs14 color-black-1" style={{width:'4rem'}}>
-                    Sell
+                    {intl.get('common.sell')}
                   </div>
                 </InputItem>
                 <InputItem
@@ -124,7 +124,7 @@ class Face2FaceForm extends React.Component {
                   placeholder="Amount To Buy"
                 >
                   <div className="fs14 color-black-1" style={{width:'4rem'}}>
-                    Buy
+                    {intl.get('common.buy')}
                   </div>
                 </InputItem>
                 <List.Item
@@ -138,7 +138,7 @@ class Face2FaceForm extends React.Component {
                   }
                 >
                   <div className="fs14 color-black-1" style={{width:'4rem'}}>
-                    Price
+                    {intl.get('common.price')}
                   </div>
                 </List.Item>
               </List>
