@@ -75,7 +75,7 @@ import storage from 'modules/storage'
           ]}
           rightContent={null && []}
         >
-          {intl.get('common.receive')}
+          <div className="color-black-1">{intl.get('common.receive')}</div>
         </NavBar>
         <div className="text-center pt25">
           <div className="recommended-tip fs12">
@@ -85,7 +85,7 @@ import storage from 'modules/storage'
             </div>
           }
           </div>
-          <div className="p10 zb-b d-inline-block" >
+          <div className="p10 zb-b d-inline-block" style={{background:'#fff'}}>
             <QRCode value={address} size={200} level='H'/>
           </div>
           <div className="pl15 pr15 pt15 fs12 text-center">
