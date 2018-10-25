@@ -202,7 +202,6 @@ function PlaceOrderSteps (props) {
         })
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})
-
       }
     } catch (e) {
       Notification.open({
@@ -230,7 +229,7 @@ function PlaceOrderSteps (props) {
               ]}
             >
               <div className="color-black fs16">
-                Order Confirm
+                {intl.get('p2p_order.order_title')}
               </div>
             </NavBar>
             <div className="p15 bg-white">
@@ -257,15 +256,15 @@ function PlaceOrderSteps (props) {
                   </div>
                 </div>
               </div>
-              <OrderMetaItem label="买入" value={`${amountB} ${tokenB}`}/>
-              <OrderMetaItem label="卖出" value={`${amountS} ${tokenS}`}/>
-              <OrderMetaItem label="价格" value={`${price} ${tokenS}/${tokenB}`}/>
-              <OrderMetaItem label="类型" value={`P2P交易`}/>
-              <OrderMetaItem label="订单有效期" showArrow={true}
+              <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
+              <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
+              <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>
+              <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
+              <OrderMetaItem label={intl.get('common.ttl')} showArrow={true}
                              value={<div onClick={showLayer.bind(this,{id:'helperOfTTL'})} className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
-              <OrderMetaItem label="最小撮合量" showArrow={true}
-                             value={<div onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}  className="text-primary"><span className="mr5">($1.5 ≈ 10 LRC)</span>10%</div>}/>
-              <Button type="primary" className="mt15" onClick={next.bind(this, page)}>签名</Button>
+              <OrderMetaItem label={intl.get('p2p_order.count')} showArrow={true}
+                             value={<div onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}  className="text-primary"><span className="mr5">{count}</span></div>}/>
+              <Button type="primary" className="mt15" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
             </div>
           </div>
         }/>
@@ -276,7 +275,7 @@ function PlaceOrderSteps (props) {
                 <div className="col-auto text-left pl20 pr20" onClick={page.gotoPage.bind(this, {id: 'order'})}>
                   <Icon type="left"/>
                 </div>
-                <div className="col">Qrcode</div>
+                <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
                 <div className="col-auto color-white pl20 pr20">
                   <Icon  type="left" style={{opacity:0}}/>
                 </div>

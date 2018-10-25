@@ -25,12 +25,12 @@ function HelperOfAmount(props) {
   const amountSliderChange = (amountPercentage) => {
     dispatch({type:'placeOrderHelper/amountSliderEffects', payload:{percentage:amountPercentage}})
     const amount = availableAmount.times(amountPercentage).div(100)
-    dispatch({type:'p2pOrder/amountChange', payload:{'amountS':amount}})
+    dispatch({type:'p2pOrder/amountChange', payload:{'amountS':toBig(tokenFm.toPricisionFixed(amount))}})
   }
   const amountPercentageSelect = (percentage) => {
     dispatch({type:'placeOrderHelper/amountPercentageEffects', payload:{percentage:percentage}})
     const amount = availableAmount.times(percentage).div(100)
-    dispatch({type:'p2pOrder/amountChange', payload:{'amountS':amount}})
+    dispatch({type:'p2pOrder/amountChange', payload:{'amountS':toBig(tokenFm.toPricisionFixed(amount))}})
   }
   const hideLayer = (payload = {}) => {
     dispatch({
@@ -56,7 +56,7 @@ function HelperOfAmount(props) {
           <span key='1' onClick={()=>window.Toast.info('请点击价格或数量', 1, null, false)} className=""><WebIcon type="question-circle-o"/></span>,
         ]}
       >
-        <div className="color-black">Set Sell Amount</div>
+        <div className="color-black">{intl.get('p2p_order.set_sell_amount')}</div>
       </NavBar>
       <div>
         <div className="bg-whitepb15">

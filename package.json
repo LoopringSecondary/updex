@@ -10,7 +10,7 @@
   "dependencies": {
     "@babel/polyfill": "7.0.0-beta.46",
     "antd": "3.10.0",
-    "antd-mobile": "2.2.2",
+    "antd-mobile": "2.2.5",
     "async": "2.6.0",
     "copy-to-clipboard": "3.0.8",
     "dva": "2.1.0",

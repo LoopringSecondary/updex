@@ -35,7 +35,7 @@ const OrderMetaItem = (props) => {
 class TakerConfirm extends React.Component {
 
   render () {
-    const {dispatch, takerConfirm, gas,balance,pendingTx} = this.props
+    const {dispatch, takerConfirm, gas,balance,pendingTx,socket} = this.props
     const {makerOrder} = takerConfirm
     const validSince = monent()
     const validUntil = validSince.add(1, 'days')
@@ -84,6 +84,11 @@ class TakerConfirm extends React.Component {
     }
 
     const submitRing = async () => {
+
+      if(!socket){
+        Notification.open({description:'Please wait for loading data'});
+        return
+      }
       const address = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
       const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
       const tradeInfo = {...order,roleType:'taker',validSince:validSince.unix(),validUntil:validUntil.unix(),milliLrcFee:0,amountS:tokensFm.getUnitAmount(order.amountS),amountB:tokenbFm.getUnitAmount(order.amountB),gasLimit:config.getGasLimitByType('approve').gasLimit,gasPrice}
@@ -98,11 +103,25 @@ class TakerConfirm extends React.Component {
         dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
         return
       }
-      console.log(JSON.stringify(tradeInfo.error))
-      console.log(JSON.stringify(tradeInfo.warn))
-
       if (tradeInfo.error) {
-        tradeInfo.error.map(item => {
+          const item =  tradeInfo.error[0]
+          if(item.value.symbol.toLowerCase() === 'eth'){
+            Notification.open({
+              message: intl.get('notifications.title.place_order_failed'),
+              description: intl.get('eth_is_required_when_place_order', {required: item.value.required}),
+              type: 'error',
+              actions: (
+                <div>
+                  <Button className="alert-btn mr5" onClick={() => dispatch({
+                    type: 'layers/showLayer',
+                    payload: {id: 'receiveToken', symbol: item.value.symbol}
+                  })}>
+                    {`${intl.get('actions.receive')} ${item.value.symbol}`}
+                  </Button>
+                </div>
+              )
+            })
+          }else{
             Notification.open({
               message: intl.get('notifications.title.place_order_failed'),
               description: intl.get('notifications.message.token_required_when_place_order', {required: item.value.required,token:item.value.symbol}),
@@ -118,7 +137,7 @@ class TakerConfirm extends React.Component {
                 </div>
               )
             })
-        })
+          }
         dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
         return
       }
@@ -205,7 +224,7 @@ class TakerConfirm extends React.Component {
             <span key='1' className=""><Icon type="close"/></span>,
           ]}
         >
-          <div className="color-black-1">Place Order</div>
+          <div className="color-black-1">{intl.get('p2p_order.order_title')}</div>
         </NavBar>
         <div className="p20 bg-white">
           <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
@@ -232,11 +251,11 @@ class TakerConfirm extends React.Component {
             </div>
           </div>
           <OrderMetaItem label={intl.get('common.price')} value={`${price} ${order.tokenS}/${order.tokenB}`}/>
-          <OrderMetaItem label={intl.get('common.sell')} value={`${tokensFm.getUnitAmount(order.amountS)} ${order.tokenS} `}/>
-          <OrderMetaItem label={intl.get('common.buy')} value={`${tokenbFm.getUnitAmount(order.amountB)} ${order.tokenB} `}/>
+          <OrderMetaItem label={intl.get('common.sell')} value={`${tokensFm.toPricisionFixed(tokensFm.getUnitAmount(order.amountS))} ${order.tokenS} `}/>
+          <OrderMetaItem label={intl.get('common.buy')} value={`${tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(order.amountB))} ${order.tokenB} `}/>
           <OrderMetaItem label={intl.get('common.ttl')}
                          value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}/>
-          <Button type="primary" className="mt15" onClick={() => {submitRing()}}>签名</Button>
+          <Button type="primary" className="mt15" onClick={submitRing}>{intl.get('common.exchange')}</Button>
         </div>
       </div>
     )
@@ -249,7 +268,8 @@ function mapStatetoProps (state) {
   return {
     gas: state.gas,
     balance: state.sockets.balance.items,
-    pendingTx: state.pendingTx
+    pendingTx: state.pendingTx,
+    socket:state.sockets.socket
   }
 }
 

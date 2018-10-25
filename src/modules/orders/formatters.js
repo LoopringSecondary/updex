@@ -331,7 +331,7 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
   let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
 
   if(tradeInfo.roleType === 'taker'){
-    gas = gas + fm.toBig(gasPrice).div(1e9).times(400000)
+    gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
   }
 
   if(ethBalance.balance.lt(gas)){

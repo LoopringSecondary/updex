@@ -108,8 +108,8 @@ function OrderDetail(props) {
             <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
           </div>
         </div>
-        {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&  
-         <Button className="fs14 mt10 ml10 mr10" type="primary" onClick={()=>showQR(order,orderFm,tokens)}>Share Qrcode</Button>
+        {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&
+         <Button className="fs14 mt10 ml10 mr10" type="primary" onClick={()=>showQR(order,orderFm,tokens)}>{intl.get('p2p_order.share_qr')}</Button>
         }
       </div>
     </div>

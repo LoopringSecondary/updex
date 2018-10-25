@@ -1,24 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import {Card} from 'antd'
-import { NavBar,Icon,PickerView } from 'antd-mobile';
-import intl from 'react-intl-universal'
+import {Icon, NavBar, PickerView} from 'antd-mobile';
 import {connect} from 'dva'
-import moment from 'moment'
-import storage from 'modules/storage'
 
 class HelperOfMiniFill extends React.Component {
   render() {
-    const { placeOrder,dispatch } = this.props
-    const {validUntil} = placeOrder
-    let defaultTo = moment().add(1, 'months')
-    if(validUntil) defaultTo = validUntil
-
-    function timeToLiveValueChange(e) {
-      const start = moment()
-      const end = moment(e)
-      dispatch({type:'placeOrder/validTimeChange', payload:{validSince: start, validUntil: end}})
-    }
+    const {dispatch,count } = this.props
 
     const hideLayer = (payload = {}) => {
       dispatch({
@@ -29,6 +15,11 @@ class HelperOfMiniFill extends React.Component {
       })
     }
 
+    const countChange = (value) => {
+      dispatch({type:'p2pOrder/countChange',payload:{count:value[0]}})
+    }
+
+    const data = Array.from(Array(50), (v,k) =>{return {label:k+1,value:k+1}});
     return (
       <div className="bg-white" style={{height:'100%'}}>
         <NavBar
@@ -39,25 +30,27 @@ class HelperOfMiniFill extends React.Component {
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          <div className="color-black-1">Set Mini Fill</div>
+          <div className="color-black-1">{}</div>
         </NavBar>
         <div className="zb-b-b">
           <PickerView
-            mode="datetime"
-            data={[]}
-            cols={1}
-            onChange={()=>{}}
+            data={data}
+            value={[count]}
+            cascade={false}
+            onChange={countChange}
           />
         </div>
       </div>
     );
   }
 }
-function mapToProps(state) {
-  return {
-    placeOrder:state.placeOrder,
-    settings:state.settings,
+
+function mapStatetoProps(state) {
+
+  return{
+    count:state.p2pOrder.count
   }
 }
-export default connect(mapToProps)(HelperOfMiniFill)
+
+export default connect(mapStatetoProps)(HelperOfMiniFill)
 

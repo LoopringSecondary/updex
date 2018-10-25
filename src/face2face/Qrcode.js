@@ -8,12 +8,12 @@ import intl from 'react-intl-universal'
 const OrderMetaItem = (props) => {
   const {label, value} = props
   return (
-    <div className="row ml0 mr0 pt10 pb10 pl15 pr15 zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
+    <div className="row ml0 mr0 pt10 pb10  zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
       <div className="col">
         <div className="fs14 color-black-1 text-left">{label}</div>
       </div>
       <div className="col-auto text-right">
-        <div className="fs14 color-black-2 text-wrap text-left">{value}</div>
+        <div className="fs14 color-black-2 text-wrap text-right">{value}</div>
       </div>
     </div>
   )
@@ -29,7 +29,7 @@ export default class OrderQrcode extends React.Component{
           <div className="row">
             <div className="col-auto text-left pl20 pr20">
             </div>
-            <div className="col"> P2P Order</div>
+            <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">
             </div>
           </div>

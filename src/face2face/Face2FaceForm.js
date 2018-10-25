@@ -104,7 +104,7 @@ class Face2FaceForm extends React.Component {
                     </div>
                   }
                   className="circle h-default fs18"
-                  placeholder="Amount To Sell"
+                  placeholder={intl.get('p2p_order.amount_to_sell')}
                 >
                   <div className="fs14 color-black-1" style={{width:'4rem'}}>
                     {intl.get('common.sell')}
@@ -121,7 +121,7 @@ class Face2FaceForm extends React.Component {
                     </div>
                   }
                   className="circle h-default fs18 mt15"
-                  placeholder="Amount To Buy"
+                  placeholder={intl.get('p2p_order.amount_to_buy')}
                 >
                   <div className="fs14 color-black-1" style={{width:'4rem'}}>
                     {intl.get('common.buy')}

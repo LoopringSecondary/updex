@@ -14,11 +14,8 @@ import {store} from "../index";
 class Face2FacePage extends React.Component {
 
   componentDidMount(){
-
- // window.handleP2POrder({result:JSON.stringify({value:{"auth":"624338268e423511dd23728550b282d3887c5e2eb17f6855c083b305f5bc5faa","hash":"0x6318f29d489d02849efe3b82ea7a53c91ce93a62238bc42aa2785c53d35e3a5f","count":1}})})
-
+    window.handleP2POrder({result:JSON.stringify({value:{"auth":"a15dc51daa25e3cc1fa88dc381216116aa72273b68122431e75f3676ca468303","hash":"0xba2d2e73d73dd6fb9f10c924d062120e72369f71d0327e85278b19d72cf7ec3b","count":11}})})
   }
-
   render() {
     const {dispatch,placeOrder} = this.props
     const {side,pair} = placeOrder
@@ -68,7 +65,7 @@ class Face2FacePage extends React.Component {
               ]}
             >
               <div className="color-black">
-                Person To Person
+                {intl.get('p2p_order.order_title')}
               </div>
             </NavBar>
           </div>
@@ -76,19 +73,19 @@ class Face2FacePage extends React.Component {
             <Face2FaceForm side="sell" showLayer={showLayer} />
           </div>
           <div hidden className="bg-white mt10">
-            <div className="fs16 pt10 pb10 pl15 color-black-1">Markets</div>
+            <div className="fs16 pt10 pb10 pl15 color-black-1">{intl.get('common.markets')}</div>
             <div className="zb-b-t">
               <HelperOfMarkets />
             </div>
           </div>
           <div className="bg-white mt10">
-            <div className="fs16 pt10 pb10 pl15 color-black-1">My Wallet</div>
+            <div className="fs16 pt10 pb10 pl15 color-black-1">{intl.get('user_center.my_assets')}</div>
             <div className="zb-b-t">
               <HelperOfBalances />
             </div>
           </div>
           <div className="bg-white mt10">
-            <div className="fs16 pt10 pb10 pl15 color-black-1">My Orders</div>
+            <div className="fs16 pt10 pb10 pl15 color-black-1">{intl.get('user_center.my_orders')}</div>
             <div className="zb-b-t">
               <HelperOfOrders />
             </div>

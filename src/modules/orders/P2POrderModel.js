@@ -13,7 +13,8 @@ export default {
     validUntil: null,
     loading: false,
     qrcode: '',
-    fetchOrder:false
+    fetchOrder:false,
+    count:1,
   },
   subscriptions:{
     setup({ dispatch, history }) {
@@ -59,7 +60,8 @@ export default {
         validUntil: null,
         loading: false,
         qrcode: '',
-        fetchOrder:false
+        fetchOrder:false,
+        count:1
       }
     },
     tokenChange (state, action) {
@@ -120,6 +122,13 @@ export default {
         amountB:amountS,
         tokenS:tokenB,
         tokenB:tokenS
+      }
+    },
+    countChange(state,{payload}){
+      const {count} = payload
+      return {
+        ...state,
+        count:count|| state.count
       }
     }
   },
