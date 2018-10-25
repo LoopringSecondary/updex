@@ -56,11 +56,11 @@ class Face2FaceForm extends React.Component {
       }
     }
     const submitOrder = ()=>{
-      if(!isValidNumber(p2pOrder.amountB)  || !isValidNumber(p2pOrder.amountS)) {
+      if(!amountB || !amountS || !isValidNumber(amountB)  || !isValidNumber(amountS) || !Number(amountB) || !Number(amountS)) {
         Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
         return
       }
-      if(!validateAmountS(p2pOrder.amountS)){
+      if(!validateAmountS(amountS)){
         Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
         return
       }
