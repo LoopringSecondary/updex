@@ -8,7 +8,7 @@ import AccountModals from '../dex/account/Modals'
 import CommonModals from '../components/Modals'
 
 const Logged = (props)=>{
-  const isLogged = !!storage.wallet.getUnlockedAddress()
+  const isLogged = !!(window.Wallet && window.Wallet.address)
   if(isLogged){
     return (
       <div>
