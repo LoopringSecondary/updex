@@ -11,8 +11,8 @@ import Terms from './terms/Terms'
 import routeActions from 'common/utils/routeActions'
 
 const UnLogged = (props)=>{
-  
-  const isLogged = !!storage.wallet.getUnlockedAddress()
+
+  const isLogged = !!(window.Wallet && window.Wallet.address)
   if(isLogged){
     let to = routeActions.location.getQueryByName(props,'to')
     console.log('auth  props.location.search to', to);
