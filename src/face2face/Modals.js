@@ -7,6 +7,7 @@ import HelperOfMiniFill from './HelperOfMiniFill'
 import HelperOfAmount from './HelperOfAmount'
 import HelperOfFAQ from './HelperOfFAQ'
 import Face2FaceConfirm from './Face2FaceConfirm'
+import Settings from './Settings'
 import OrderDetail from './Detail'
 import OrderQrcode from './Qrcode'
 import TakerConfirm from './TakerConfirm'
@@ -54,6 +55,12 @@ function Modals(props) {
           <HelperOfFAQ />
         </UiContainers.Popups>
       </Containers.Layers>
+      <Containers.Layers id="settings">
+        <UiContainers.Popups id="settings" className="h-100" style={{height:'100%'}}>
+          <Settings />
+        </UiContainers.Popups>
+      </Containers.Layers>
+
       <Containers.Layers id="helperOfAmount">
         <UiContainers.Popups id="helperOfAmount">
           <HelperOfAmount />
