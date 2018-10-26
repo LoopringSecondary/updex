@@ -372,7 +372,7 @@ export async function signP2POrder(tradeInfo, address) {
   return {order, unsigned}
 }
 
-async function generateSignData({tradeInfo, order, completeOrder, address}) {
+export async function generateSignData({tradeInfo, order, completeOrder, address}) {
   let unsigned = new Array()
   // sign orders and txs
   unsigned.push({type: 'order', data:order, completeOrder:completeOrder, description: `Sign Order`, address})
@@ -391,7 +391,7 @@ async function generateSignData({tradeInfo, order, completeOrder, address}) {
         unsigned.push({type: 'tx', data:cancel, description: `Cancel ${item.value.symbol} allowance`, address})
         nonce = nonce + 1;
       }
-      const approve = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:fm.toHex(fm.toBig('9223372036854775806').times('1e' + tokenConfig.digits || 18)), nonce:fm.toHex(nonce)})
+      const approve = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:'0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', nonce:fm.toHex(nonce)})
       unsigned.push({type: 'tx', data:approve, description: `Approve ${item.value.symbol} allowance`, address})
       nonce = nonce + 1;
     });
