@@ -1,18 +1,16 @@
-import React from 'react';
-import { List,Button,Toast } from 'antd-mobile';
-import { Icon as WebIcon,Button as WebButton,Input } from 'antd';
-import { connect } from 'dva';
-import routeActions from 'common/utils/routeActions'
-import Notification from 'LoopringUI/components/Notification'
-import {isValidNumber, getBalanceBySymbol} from 'modules/tokens/TokenFm'
-import {toBig,toHex,toFixed,getDisplaySymbol} from 'LoopringJS/common/formatter'
-
-const Item = List.Item;
-const Brief = Item.Brief;
+import React from 'react'
+import { Button, Toast,List,InputItem } from 'antd-mobile'
+import { Icon as WebIcon, Input } from 'antd'
+import { connect } from 'dva'
+import { getBalanceBySymbol, isValidNumber } from 'modules/tokens/TokenFm'
+import { getDisplaySymbol, toBig, toFixed, toHex ,toNumber} from 'LoopringJS/common/formatter'
+import intl from 'react-intl-universal'
+import Worth from 'modules/settings/Worth'
 
 class Face2FaceForm extends React.Component {
   render() {
     const {balance, p2pOrder, dispatch} = this.props
+    const {amountB,amountS} = p2pOrder
     const showLayer = (payload={})=>{
       dispatch({
         type:'layers/showLayer',
@@ -30,103 +28,133 @@ class Face2FaceForm extends React.Component {
       })
     }
     function validateAmountS(value) {
-      if(p2pOrder.tokenS && isValidNumber(value)) {
+      if(p2pOrder.tokenS) {
         const tokenBalance = getBalanceBySymbol({balances:balance, symbol:p2pOrder.tokenS, toUnit:true})
         return tokenBalance.balance.gt(value)
       } else {
         return false
       }
     }
-    function amountChange(side, e) {
+    function amountChange(side, value) {
+      // const  value = Number(e.target.value).toString()
       if(side === 'buy') {
-        dispatch({type:'p2pOrder/amountChange', payload:{'amountB':toBig(e.target.value)}})
-        if(!isValidNumber(e.target.value)) {
-          Toast.info('Please enter valid amount', 3, null, false);
+        if(value && !isValidNumber(value)) {
+          Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
+          return;
         }
+        dispatch({type:'p2pOrder/amountChange', payload:{'amountB':value}})
       } else {
-        dispatch({type:'p2pOrder/amountChange', payload:{'amountS':toBig(e.target.value)}})
-        if(!validateAmountS(e.target.value)){
-          Toast.info('You have insufficient balance of '+p2pOrder.tokenS, 3, null, false);
+        if(value && !isValidNumber(value)) {
+          Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
+          return
         }
+        if(value && !validateAmountS(value)){
+          Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
+          return
+        }
+        dispatch({type:'p2pOrder/amountChange', payload:{'amountS':value}})
       }
     }
     const submitOrder = ()=>{
-      if(!isValidNumber(p2pOrder.amountB)) {
-        Toast.info('Please enter valid amount', 3, null, false);
+      if(!amountB || !amountS || !isValidNumber(amountB)  || !isValidNumber(amountS) || !Number(amountB) || !Number(amountS)) {
+        Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
         return
       }
-      if(!validateAmountS(p2pOrder.amountS)){
-        Toast.info('You have insufficient balance of '+p2pOrder.tokenS, 3, null, false);
+      if(!validateAmountS(amountS)){
+        Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
         return
       }
       showLayer({id:'face2FaceConfirm'})
     }
-    const price = p2pOrder.amountB && p2pOrder.amountB.gt(0) && p2pOrder.amountS && p2pOrder.amountS.gt(0) ? toFixed(p2pOrder.amountB.div(p2pOrder.amountS), 8) : toFixed(toBig(0),8)
+    const price = amountB && toBig(amountB).gt(0) && amountS && toBig(amountS).gt(0) ? toFixed(toBig(amountS).div(amountB), 8) : toFixed(toBig(0),8)
     return (
       <div className="">
-        <div className="pt25 pb15 pl15 pr15">
+        <div className="zb-b-b p15 ">
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
-            <div className="col text-center">
-              <div className="d-inline-block color-black-3 text-center bg-fill" style={{width:"40px",height:'40px',lineHeight:'50px',borderRadius:'50em'}}>
-                <i className={`icon-token-EOS fs24`}/>
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col d-flex justify-content-center align-items-center">
+              <span hidden className="mr10 text-primary fs14">{p2pOrder.tokenS}</span>
+              <div className="bg-primary-light text-primary d-flex justify-content-center align-items-center" style={{width:"40px",height:'40px',borderRadius:'50em'}}>
+                <i className={`icon-token-${p2pOrder.tokenS} fs24`}/>
               </div>
             </div>
-            <div className="col-auto text-center" style={{width:'15px'}}>
-              <WebIcon hidden type="arrow-right" className={`color-black-3 fs16`} />
+            <div onClick={()=>dispatch({type:'p2pOrder/swap'})} className="col-auto text-center" style={{width:'30px'}}>
+              <WebIcon type="swap" className={`text-primary fs18`} />
             </div>
-            <div className="col text-center">
-              <div className="d-inline-block color-black-3 text-center bg-fill" style={{width:"40px",height:'40px',lineHeight:'50px',borderRadius:'50em'}}>
-                <i className={`icon-token-LRC fs24`}/>
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col d-flex justify-content-center align-items-center">
+              <div className="bg-primary-light text-primary d-flex justify-content-center align-items-center" style={{width:"40px",height:'40px',borderRadius:'50em'}}>
+                <i className={`icon-token-${p2pOrder.tokenB}  fs24`}/>
               </div>
+              <span hidden className="ml10 text-primary fs14">{p2pOrder.tokenB}</span>
             </div>
           </div>
-          <div className="row ml0 mr0 mt15 no-gutters align-items-center justify-content-center">
-            <div className="col text-center">
-              <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'sell'})} type="" className="bg-fill border-none fs16 color-black-2 d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
-                <span>Sell {p2pOrder.tokenS}</span> <WebIcon className="color-black-3" type="down"/>
-              </Button>
-            </div>
-            <div className="col-auto text-center" style={{width:'15px'}}>
-            </div>
-            <div className="col text-center">
-              <Button onClick={showLayer.bind(this,{id:'helperOfTokens', side:'buy'})} type="" className="bg-fill border-none fs16 color-black-2 d-flex justify-content-between align-items-center pl15 pr15" style={{height:'40px',lineHeight:'40px'}}>
-                <span>Buy {p2pOrder.tokenB}</span> <WebIcon className="color-black-3" type="down"/>
-              </Button>
+          <div className="row ml0 mr0 mt15 no-gutters align-items-stretch justify-content-center" style={{}}>
+            <div className="col text-right no-border am-list-bg-none">
+              <List  className="selectable">
+                <InputItem
+                  type="money"
+                  onChange={amountChange.bind(this, 'sell')}
+                  moneyKeyboardAlign="left"
+                   value={amountS}
+                  extra={
+                    <div className="fs14 cursor-pointer zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                      <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} >
+                        {p2pOrder.tokenS} <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
+                      </div>
+                      <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})}  className="fs16 text-primary" style={{position:'absolute',top:'1rem',width:'3.5rem',left:'-3.5rem'}}>
+                        <WebIcon type="sliders" />
+                      </div>
+                    </div>
+                  }
+                  className="circle h-default fs18"
+                  placeholder={intl.get('p2p_order.amount_to_sell')}
+                >
+                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                    {intl.get('common.sell')}
+                  </div>
+                </InputItem>
+                <InputItem
+                  type="money"
+                  onChange={amountChange.bind(this, 'buy')}
+                  moneyKeyboardAlign="left"
+                  value={amountB}
+                  extra={
+                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                        {p2pOrder.tokenB}
+                        <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
+                    </div>
+                  }
+                  className="circle h-default fs18 mt15"
+                  placeholder={intl.get('p2p_order.amount_to_buy')}
+                >
+                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                    {intl.get('common.buy')}
+                  </div>
+                </InputItem>
+                <List.Item
+                  className="circle h-default mt15"
+                  arrow={false}
+                  onClick={()=>{}}
+                  extra={
+                   <div className="fs14 color-black-4 cursor-pointer pr15 d-flex align-items-center justify-content-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    { price >0 && <span>
+                      1 {p2pOrder.tokenS} = {`${toNumber(toFixed(1/price,8))} ${p2pOrder.tokenB}`} ≈ <Worth amount={1/price} symbol={p2pOrder.tokenB}/>
+                      </span>
+                    }
+                    { price == 0 && <span>
+                      0.00 {p2pOrder.tokenS} = {`0.00 ${p2pOrder.tokenB}`} ≈ <Worth amount={0} symbol={p2pOrder.tokenB}/>
+                      </span>
+                    }
+                    </div>
+                  }
+                >
+                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                    {intl.get('common.price')}
+                  </div>
+                </List.Item>
+              </List>
             </div>
           </div>
-          <div className="row ml0 mr0 mt15 no-gutters align-items-center justify-content-center">
-            <div className="col text-center">
-              <Input className="bg-fill circle border-none color-black-1 pl15 fs16" defaultValue={"0.00"} style={{lineHeight:'40px',height:'40px'}} type="text" onChange={amountChange.bind(this, 'sell')}/>
-              {
-                false &&
-                <div className="d-none fs14 color-black-3 mt5 text-left d-flex justify-content-between">
-                  <span>Balance</span>
-                  <span>0.0000</span>
-                </div>
-              }
-            </div>
-            <div className="col-auto text-center" style={{width:'15px'}}>
-            </div>
-            <div className="col text-center">
-              <Input className="bg-fill circle border-none color-black-1 pl15 fs16" defaultValue={"0.00"} style={{lineHeight:'40px',height:'40px'}} type="text" onChange={amountChange.bind(this, 'buy')}/>
-              {
-                false &&
-                <div className="d-none fs14 color-black-3 mt5 text-left d-flex justify-content-between">
-                  <span>Balance</span>
-                  <span>0.0000</span>
-                </div>
-              }
-            </div>
-          </div>
-          <div hidden className="row ml0 mr0 pt15 pb15 no-gutters">
-            <div className="col">
-              <div className="color-black-2 fs14">Exchage Price</div>
-            </div>
-            <div className="col-auto fs14 color-black-3">
-              {`${price} ${p2pOrder.tokenS}/${p2pOrder.tokenB}`}
-            </div>
-          </div>
-          <Button className="mt15" onClick={submitOrder} type="primary">{`Exchange ${p2pOrder.tokenS} To ${p2pOrder.tokenB}`}</Button>
+          <Button className="mt15" onClick={submitOrder} type="primary">{intl.get('common.exchange')}</Button>
         </div>
       </div>
     );
