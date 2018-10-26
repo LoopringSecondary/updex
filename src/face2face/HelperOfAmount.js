@@ -61,35 +61,59 @@ function HelperOfAmount(props) {
       <div>
         <div className="bg-whitepb15">
           <div className="divider 1px zb-b-b mb15"></div>
-          <div className="row pt10 pb10 ml0 mr0 zb-b-b">
-            <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 100)}>
-              <span className="d-inline-block" style={{width:'50px'}}>100%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount)} ${symbol}`}</span>
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+            {amountPercentage === 100 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
+            {amountPercentage !== 100 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
+            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 100)}>
+              100%
             </div>
-            {!amountSliderSelected && amountPercentage === 100 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
+            <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount)} ${symbol}`}</span>
           </div>
-          <div className="row pt10 pb10 ml0 mr0 zb-b-b">
-            <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 75)}>
-              <span className="d-inline-block" style={{width:'50px'}}>75%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.75))} ${symbol}`}</span>
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+            {amountPercentage === 75 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
+            {amountPercentage !== 75 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
+            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 75)}>
+              75%
             </div>
-            {!amountSliderSelected && amountPercentage === 75 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
+            <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.75))} ${symbol}`}</span>
           </div>
-          <div className="row pt10 pb10 ml0 mr0 zb-b-b">
-            <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 50)}>
-              <span className="d-inline-block" style={{width:'50px'}}>50%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.5))} ${symbol}`}</span>
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+            {amountPercentage === 50 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
+            {amountPercentage !== 50 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
+            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 50)}>
+              50%
             </div>
-            {!amountSliderSelected && amountPercentage === 50 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
+            <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.5))} ${symbol}`}</span>
           </div>
-          <div className="row pt15 pb15 ml0 mr0 zb-b-b">
-            <div className="col color-black-1 text-left pl20" onClick={amountPercentageSelect.bind(this, 25)}>
-              <span className="d-inline-block" style={{width:'50px'}}>25%</span>
-              <span className="color-black-3 ml25">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.25))} ${symbol}`}</span>
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+            {amountPercentage === 25 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
+            {amountPercentage !== 25 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
+            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 25)}>
+              25%
             </div>
-            {!amountSliderSelected && amountPercentage === 25 && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
+            <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.25))} ${symbol}`}</span>
           </div>
-          <div>
+          <div className="pt10 pb10 ml0 mr0 zb-b-b">
+            
+            <div className="pb30 pt20 pl40 pr40">
+              <Slider
+                className=""
+                defaultValue={amountPercentage}
+                value={amountPercentage}
+                min={0}
+                max={100}
+                onChange={amountSliderChange}
+                onAfterChange={()=>{}}
+              />
+            </div>
+            <div className="color-black-1 text-center fs12 pb10" onClick={amountPercentageSelect.bind(this, 25)}>
+              {amountPercentage}%
+              <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(amountPercentage).div(100))} ${symbol}`}</span>
+            </div>
+          </div>
+          
+
+          <div hidden>
             <div className="row pt15 pb15 ml0 mr0">
               <div className="col color-black-1 text-left pl20">
                 <span className="ml5">{amountSlider}%</span>
