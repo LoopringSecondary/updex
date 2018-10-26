@@ -83,22 +83,22 @@ function Settings(props) {
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="bg-white settings pb10">
-            <List className="m10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl5">{intl.get('settings.language')}</div>}>
+            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.language')}</div>}>
               {languages.map(i => (
                 <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => languageChange(i.value)}>
                   {i.label}
                 </RadioItem>
               ))}
             </List>
-            <List className="m10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl5">{intl.get('settings.currency')}</div>}>
+            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.currency')}</div>}>
               {currencys.map(i => (
                 <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => currencyChange(i.value)}>
                   {i.label}
                 </RadioItem>
               ))}
             </List>
-            <List className="m10 no-border text-left position-relative" 
-              renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl5">{intl.get('settings.trading_fee')}</div>}
+            <List className="mt10 no-border text-left position-relative" 
+              renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.trading_fee')}</div>}
             >
               <List.Item className="pt10 pb10 overflow-visible" >
                 <div className="pt10 pb10 pl10">
@@ -124,7 +124,7 @@ function Settings(props) {
             </div>
             {
               false &&
-              <List className="m10 no-border text-left" renderHeader={() => <div className="fs13 color-black-4 mb5">Order Time-To-Live</div>}>
+              <List className="mt10 no-border text-left" renderHeader={() => <div className="fs13 color-black-4 mb5">Order Time-To-Live</div>}>
                 {ttls.map(i => (
                   <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => languageChange(i.value)}>
                     {i.label}
