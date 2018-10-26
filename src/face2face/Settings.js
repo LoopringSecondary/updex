@@ -18,6 +18,14 @@ function Settings(props) {
       }
     })
   }
+  const showLayer = (payload = {}) => {
+    dispatch({
+      type: 'layers/showLayer',
+      payload: {
+        ...payload
+      }
+    })
+  }
   const languages = [
     { value: 'en-US', label: 'English',checked: settings.preference.language === 'en-US'},
     { value: 'zh-CN', label: '中文',checked: settings.preference.language === 'zh-CN'},
@@ -55,13 +63,6 @@ function Settings(props) {
     }
   }
 
-  const lrcFeeChange = (lrcFeePermillage) => {
-    settings.trading.lrcFee = lrcFeePermillage
-    dispatch({
-      type: 'settings/preferenceChange',
-      payload: settings
-    })
-  }
 
   return (
     <div className="bg-white position-relative" style={{height:'100%'}}>
@@ -98,40 +99,20 @@ function Settings(props) {
               ))}
             </List>
             <List className="mt10 no-border text-left position-relative" 
-              renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.trading_fee')}</div>}
+              renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">P2P {intl.get('common.trade')}</div>}
             >
-              <List.Item className="pt10 pb10 overflow-visible" >
-                <div className="pt10 pb10 pl10">
-                  <Slider
-                    defaultValue={settings.trading.lrcFee}
-                    min={1}
-                    max={50}
-                    onChange={(v)=>lrcFeeChange(v)}
-                    onAfterChange={()=>{}}
-                  />
-                </div>
+              <List.Item onClick={() => showLayer({id:'helperOfGas'})} className="pt10 pb10 overflow-visible"  arrow="horizontal"
+                extra={"0.001 ETH"}
+              >
+                <div className="color-black-1">Gas</div>
               </List.Item>
-              <List.Item className="" style={{height:'auto'}}>
-                <div className="row no-gutters ml0 mr0 fs13 color-black-2">
-                 <div className="col-auto">{intl.get('setting_lrcfee.low')}</div>
-                 <div className="col text-center">{settings.trading.lrcFee/10}%</div>
-                 <div className="col-auto">{intl.get('setting_lrcfee.high')}</div>
-                </div>
+              <List.Item onClick={() => showLayer({id:'helperOfMiniFill'})} className="pt10 pb10 overflow-visible" arrow="horizontal"
+                extra="1份"
+              >
+                <div className="color-black-1">订单拆分份数</div>
               </List.Item>
             </List>
-            <div className="fs14 color-black-3 mt5 mb15 pl10 text-left">
-              {intl.get('setting_lrcfee.tips')}
-            </div>
-            {
-              false &&
-              <List className="mt10 no-border text-left" renderHeader={() => <div className="fs13 color-black-4 mb5">Order Time-To-Live</div>}>
-                {ttls.map(i => (
-                  <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => languageChange(i.value)}>
-                    {i.label}
-                  </RadioItem>
-                ))}
-              </List>
-            }
+
         </div>
       </div>
       
