@@ -71,7 +71,8 @@ class Face2FaceForm extends React.Component {
       <div className="">
         <div className="zb-b-b p15 ">
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
-            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col d-flex justify-content-center">
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col d-flex justify-content-center align-items-center">
+              <span hidden className="mr10 text-primary fs14">{p2pOrder.tokenS}</span>
               <div className="bg-primary-light text-primary d-flex justify-content-center align-items-center" style={{width:"40px",height:'40px',borderRadius:'50em'}}>
                 <i className={`icon-token-${p2pOrder.tokenS} fs24`}/>
               </div>
@@ -79,10 +80,11 @@ class Face2FaceForm extends React.Component {
             <div onClick={()=>dispatch({type:'p2pOrder/swap'})} className="col-auto text-center" style={{width:'30px'}}>
               <WebIcon type="swap" className={`text-primary fs18`} />
             </div>
-            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col d-flex justify-content-center">
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col d-flex justify-content-center align-items-center">
               <div className="bg-primary-light text-primary d-flex justify-content-center align-items-center" style={{width:"40px",height:'40px',borderRadius:'50em'}}>
                 <i className={`icon-token-${p2pOrder.tokenB}  fs24`}/>
               </div>
+              <span hidden className="ml10 text-primary fs14">{p2pOrder.tokenB}</span>
             </div>
           </div>
           <div className="row ml0 mr0 mt15 no-gutters align-items-stretch justify-content-center" style={{}}>
@@ -94,9 +96,9 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                    value={amountS}
                   extra={
-                    <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-end pr10" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
-                      <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})}>
-                        {p2pOrder.tokenS} <WebIcon className="fs12" style={{marginLeft:"0.3rem"}} type="caret-down"/>
+                    <div className="fs14 cursor-pointer zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                      <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} >
+                        {p2pOrder.tokenS} <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                       </div>
                       <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})}  className="fs16 text-primary" style={{position:'absolute',top:'1rem',width:'3.5rem',left:'-3.5rem'}}>
                         <WebIcon type="sliders" />
@@ -116,8 +118,9 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                   value={amountB}
                   extra={
-                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-end pr10" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
-                      {p2pOrder.tokenB} <WebIcon className="fs12" style={{marginLeft:"0.3rem"}} type="caret-down"/>
+                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                        {p2pOrder.tokenB}
+                        <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                     </div>
                   }
                   className="circle h-default fs18 mt15"
