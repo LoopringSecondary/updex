@@ -98,7 +98,7 @@ function Settings(props) {
                 </RadioItem>
               ))}
             </List>
-            <List className="mt10 no-border text-left position-relative" 
+          {false && <List className="mt10 no-border text-left position-relative"
               renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">P2P {intl.get('common.trade')}</div>}
             >
               <List.Item onClick={() => showLayer({id:'helperOfGas'})} className="pt10 pb10 overflow-visible"  arrow="horizontal"
@@ -111,7 +111,7 @@ function Settings(props) {
               >
                 <div className="color-black-1">订单拆分份数</div>
               </List.Item>
-            </List>
+            </List>}
 
         </div>
       </div>
