@@ -61,34 +61,36 @@ function HelperOfAmount(props) {
       <div>
         <div className="bg-whitepb15">
           <div className="divider 1px zb-b-b mb15"></div>
-          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center" onClick={amountPercentageSelect.bind(this, 100)}>
             {amountPercentage === 100 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
             {amountPercentage !== 100 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
-            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 100)}>
+            <div className="col color-black-1 text-left pl10">
               100%
             </div>
             <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount)} ${symbol}`}</span>
           </div>
-          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center" onClick={amountPercentageSelect.bind(this, 75)}>
             {amountPercentage === 75 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
             {amountPercentage !== 75 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
-            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 75)}>
+            <div className="col color-black-1 text-left pl10">
               75%
             </div>
             <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.75))} ${symbol}`}</span>
           </div>
-          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center" onClick={amountPercentageSelect.bind(this, 50)}>
             {amountPercentage === 50 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
             {amountPercentage !== 50 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
-            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 50)}>
+            <div className="col color-black-1 text-left pl10">
               50%
             </div>
             <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.5))} ${symbol}`}</span>
           </div>
-          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center">
+
+          <div className="row pt10 pb10 ml0 mr0 zb-b-b no-gutters align-items-center" onClick={amountPercentageSelect.bind(this, 25)}>
             {amountPercentage === 25 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="filled" className="text-primary" /></div>}
             {amountPercentage !== 25 && <div className="pl15 col-auto fs18 color-black-1"><WebIcon type="check-circle" theme="" className="color-black-3" /></div>}
-            <div className="col color-black-1 text-left pl10" onClick={amountPercentageSelect.bind(this, 25)}>
+            <div className="col color-black-1 text-left pl10">
               25%
             </div>
             <span className="col-auto color-black-3 pr15">{`${prefix} ${tokenFm.toPricisionFixed(availableAmount.times(0.25))} ${symbol}`}</span>
