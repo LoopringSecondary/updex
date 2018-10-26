@@ -290,6 +290,8 @@ export default {
     tabs_advanced: 'Advanced',
     low: 'Low',
     high: 'High',
+    slow: 'Slow',
+    fast: 'Fast',
     tips:"The fee must be larger than a gas of an eth transaction for matching miner."
   },
   place_order_confirm: {

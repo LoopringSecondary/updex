@@ -311,6 +311,7 @@ class PlaceOrderForm extends React.Component {
                  {
                   total>0 &&
                    <div className="fs12 lh10" style={{opacity:'0.6',paddingTop:'0.5rem'}}>
+                     <span className="mr5" style={{textTransform:'capitalize'}}>{intl.get('common.total')} :</span>
                      {total} {tokens.right}
                    </div>
                  }
@@ -322,7 +323,7 @@ class PlaceOrderForm extends React.Component {
                   <div className="row ml0 mr0 no-gutters">
                     <div className="col">{amount ? amount : 0} {tokens.left}</div>
                     <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                    <div className="col">{total} {tokens.right}</div>
+                    <div className="col">{intl.get('common.total')} {total} {tokens.right}</div>
                   </div>
                 </Button>
               }

@@ -292,6 +292,8 @@ no_open_orders: '{market}暂无有效订单',
     tabs_advanced: '高级设置',
     low: '低',
     high: '高',
+    slow: '慢',
+    fast: '快',
     tips:"撮合费 必须大于 矿工发送一个以太坊交易所需的油费。"
   },
   place_order_confirm: {
