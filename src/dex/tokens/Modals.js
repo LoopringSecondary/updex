@@ -10,9 +10,9 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="receiveToken">
-          <UiContianers.Modals id="receiveToken" className="rs">
+          <UiContianers.Popups id="receiveToken" style={{height:'100%'}} className="h100">
             <Receive/>
-          </UiContianers.Modals>
+          </UiContianers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfEnable">
           <UiContianers.Popups id="helperOfEnable">

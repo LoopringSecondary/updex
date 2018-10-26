@@ -1,5 +1,6 @@
 import React from 'react'
-import { Button, Card, Toast } from 'antd-mobile'
+import { Button, Card, Toast,NavBar } from 'antd-mobile'
+import { Icon } from 'antd'
 import QRCode from 'qrcode.react'
 import copy from 'copy-to-clipboard'
 import intl from 'react-intl-universal'
@@ -64,23 +65,35 @@ import storage from 'modules/storage'
     const address = storage.wallet.getUnlockedAddress()
     const copyAddress = ()=>{ copy(address) ?  Toast.info(intl.get('notifications.title.copy_suc')) : Toast.fail(intl.get('notifications.title.copy_suc'), 3, null, false) }
     return (
-      <Card>
-        <div className="text-center">
-          <span className="card-header-icon"><i className="icon-arrow-down"></i></span>
-        </div>
-        <div className="text-center">
-         <div className="recommended-tip fs12">{symbol  && toBig(amount).gt(0) && toBig(this.getNeeded()).gt(0) && <div className='color-black-1 text-center'>
-            {intl.get('receive.receive_value_tip')} {this.getNeeded()}  {symbol.toUpperCase()}
-          </div>}</div>
-          <QRCode value={address} size={200} level='H'/>
-
-          <div className="pt10 fs12 text-center" style={{width:'240px',margin:'0 auto',whiteSpace:'wrap',wordBreak:'break-all'}}>
-            {address}
-            <Button type="primary" size="" className="d-block w-100 mt10 mb20" onClick={copyAddress}>{intl.get('common.copy')}</Button>
-
+      <div className="bg-white"style={{height:'100%'}}>
+        <NavBar
+          className="zb-b-b"
+          mode="light"
+          onLeftClick={() => this.props.dispatch({type:'layers/hideLayer',payload:{id:'receiveToken'}})}
+          leftContent={[
+            <Icon type="close" key='1'/>,
+          ]}
+          rightContent={null && []}
+        >
+          <div className="color-black-1">{intl.get('common.receive')}</div>
+        </NavBar>
+        <div className="text-center pt25">
+          <div className="recommended-tip fs12">
+          {symbol  && toBig(amount).gt(0) && toBig(this.getNeeded()).gt(0) && 
+            <div className='color-black-1 text-center'>
+              {intl.get('receive.receive_value_tip')} {this.getNeeded()}  {symbol.toUpperCase()}
+            </div>
+          }
           </div>
+          <div className="p10 zb-b d-inline-block" style={{background:'#fff'}}>
+            <QRCode value={address} size={200} level='H'/>
+          </div>
+          <div className="pl15 pr15 pt15 fs12 text-center">
+            {address}
+          </div>
+          <Button type="primary" size="" className="d-block w-100b m15" onClick={copyAddress}>{intl.get('common.copy')}</Button>
          </div>
-      </Card>
+      </div>
     )
   }
 }
