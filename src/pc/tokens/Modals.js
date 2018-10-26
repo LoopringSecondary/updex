@@ -1,7 +1,7 @@
 import React from 'react'
 import {Containers} from 'modules'
 import UiContianers from 'LoopringUI/containers'
-import Receive from './Receive'
+import Receive from 'mobile/tokens/Receive'
 import Convert from './ConvertForm'
 import HelperOfEnable from './HelperOfEnable'
 import HelperOfTokenActions from 'mobile/tokens/HelperOfTokenActions'
@@ -10,9 +10,9 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="receiveToken">
-          <UiContianers.Modals id="receiveToken" position="right" className="rs">
+          <UiContianers.Drawer id="receiveToken" position="right" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
             <Receive/>
-          </UiContianers.Modals>
+          </UiContianers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="helperOfEnable">
           <UiContianers.Popups id="helperOfEnable">
