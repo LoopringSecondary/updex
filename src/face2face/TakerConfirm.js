@@ -159,6 +159,7 @@ class TakerConfirm extends React.Component {
         const signedOrder = {...completeOrder, ...signResult.result}
         signedOrder.powNonce = 100
         const txs = unsigned.filter(item => item.type === 'tx')
+        console.log(txs)
         eachOfLimit(txs, 1, async (item) => {
           signTx(item.data).then(res => {
             if (res.result) {
@@ -188,15 +189,17 @@ class TakerConfirm extends React.Component {
               chainId: config.getChainId(),
               to: order.protocol,
               gasPrice:toHex(toNumber(gasPrice)*1e9),
-              nonce,
+              nonce:"0xb",
               data:Contracts.LoopringProtocol.encodeSubmitRing([{...signedOrder},{...makerOrder.originalOrder,
                 tokenS:config.getTokenBySymbol(makerOrder.originalOrder.tokenS).address,
                 tokenB:config.getTokenBySymbol(makerOrder.originalOrder.tokenB).address,
                 owner:makerOrder.originalOrder.address,marginSplitPercentage:toNumber(makerOrder.originalOrder.marginSplitPercentage)}],config.getWalletAddress())
           };
+            // console.log(JSON.stringify(tx))
             window.RELAY.order.placeOrder({...signedOrder,authPrivateKey:''}).then(reponse=> {
               signTx(tx).then(res => {
                 if (res.result) {
+                  // console.log(res.result);
                   window.RELAY.ring.submitRingForP2P({makerOrderHash:makerOrder.originalOrder.hash,rawTx:res.result,takerOrderHash:toHex(window.RELAY.order.getOrderHash(completeOrder))}).then(resp => {
                     if (resp.result) {
                       Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
