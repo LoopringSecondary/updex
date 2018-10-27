@@ -3,6 +3,7 @@ import {connect} from 'dva'
 import intl from 'react-intl-universal';
 import Markets from '../tickers/Markets';
 import PlaceOrderForm from '../orders/PlaceOrderForm';
+import PlaceOrderFormNoSide from '../orders/PlaceOrderFormNoSide';
 import HelperOfDepth from '../orders/HelperOfDepth';
 import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
 import ListMarketFills from '../fills/ListMarketFills';
@@ -29,10 +30,9 @@ class Home extends React.Component {
               <PanelHeader title="Order Book" />
               <HelperOfDepth />
             </PanelWrapper>
-            <PanelWrapper className="mtpanel pb5" style={{height:'36.5rem'}}>
-              <PanelHeader title="Place Order" />
-              <div className="pt10"></div>
-              <PlaceOrderForm location={location} match={match} />
+            <PanelWrapper className="mlpanel mtpanel ml0" style={{height:'36.5rem'}}>
+              <PanelHeader title="Wallet" />
+              <HelperOfBalance />
             </PanelWrapper>
           </div>
           <div className="col d-flex flex-column" style={{flex:'1'}}>
@@ -42,17 +42,17 @@ class Home extends React.Component {
             </PanelWrapper>
             <div className="row no-gutters ml0 mr0">
               <div className="col" style={{width:'auto'}}>
-                <PanelWrapper className="mlpanel mtpanel" style={{height:'36.5rem'}}>
-                  <PanelHeader title="Wallet" />
-                  <HelperOfBalance />
+                <PanelWrapper className="mtpanel mlpanel pb5" style={{height:'36.5rem'}}>
+                  <PanelHeader title="Buy LRC" />
+                  <div className="pt10"></div>
+                  <PlaceOrderFormNoSide side={'buy'} location={location} match={match} />
                 </PanelWrapper>
               </div>
               <div className="col">
-                <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
-                  <PanelHeader title="Orders" />
-                  <div style={{flex:'1',overflow:'auto'}}>
-                    <HelperOfMyMarketOrders />
-                  </div>
+                <PanelWrapper className="mtpanel pb5" style={{height:'36.5rem'}}>
+                  <PanelHeader title="Sell LRC" />
+                  <div className="pt10"></div>
+                  <PlaceOrderFormNoSide side={'sell'} location={location} match={match} />
                 </PanelWrapper>
               </div>
             </div>
@@ -63,8 +63,10 @@ class Home extends React.Component {
               <ListMarketFills />
             </PanelWrapper>
             <PanelWrapper className="mtpanel " style={{height:'36.5rem'}}>
-              <PanelHeader title="Wallet" />
-              <HelperOfBalance />
+              <PanelHeader title="Orders" />
+              <div style={{flex:'1',overflow:'auto'}}>
+                <HelperOfMyMarketOrders />
+              </div>
             </PanelWrapper>
           </div>
         </div>

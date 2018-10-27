@@ -88,8 +88,10 @@ class PlaceOrderSteps extends React.Component {
   }
 
   render () {
-    const {placeOrder, settings, marketcap, dispatch} = this.props
-    const {side, pair, priceInput, amountInput, validSince, validUntil} = placeOrder
+    const {placeOrder, settings, marketcap, dispatch,placeOrderSteps} = this.props
+    const {pair, priceInput, amountInput, validSince, validUntil} = placeOrder
+    let side = placeOrderSteps.side ? placeOrderSteps.side : placeOrder.side
+    
     const total = toBig(amountInput).times(toBig(priceInput)).toString(10)
     const tokens = getTokensByMarket(pair)
     const lrcFeeValue = orderFormatter.calculateLrcFee(marketcap, total, 2, tokens.right)
