@@ -103,7 +103,7 @@ class Auth extends React.Component {
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
         {(!browserType || browserType === 'Others' || (browserSupported && this.state.metamaskState === 'notInstalled')) &&
-        <div className="bg-fill p15 lh25 color-black-1 m15 fs13 mt40">
+        <div className="bg-white-light p15 lh25 color-black-1 m15 fs13 mt40">
           	<div className="">{intl.get('wallet.title_connect',{walletType:'MetaMask'})}</div>
             <div>
               {!browserType || browserType === 'Others' &&

@@ -208,7 +208,7 @@ const PlaceOrderSign = (props) => {
   }
   return (
     <div className="">
-      <div className="bg-fill p15" style={{minHeight:'25rem',borderRadius:'0rem'}}>
+      <div className="bg-white-light p15" style={{minHeight:'25rem',borderRadius:'0rem'}}>
         <div className="color-black-3 fs14 pb10 zb-b-b">You Need To Do </div>
         {
           unsign && unsign.map((item, index)=><TxHeader tx={item} index={index} />)

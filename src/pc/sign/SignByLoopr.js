@@ -31,7 +31,7 @@ const SignByLoopr = ({placeOrderSteps, dispatch}) => {
           </div>
         }
       </div>
-      <div className="p15 mt5 bg-fill lh25">
+      <div className="p15 mt5 bg-white-light lh25">
         <div className="pt10 pb10 text-left fs13 color-black-1" style={{margin:'0 auto'}}>
           1. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_download') : intl.get('place_order_by_upwallet.instruction_download')}
           <br />

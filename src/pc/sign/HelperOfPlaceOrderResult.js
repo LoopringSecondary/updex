@@ -13,7 +13,7 @@ const PlaceOrderResult = (props) => {
     routeActions.gotoPath('/trade2');
   }
   return (
-    <div className="bg-fill">
+    <div className="bg-white-light">
         {
           step === 2 && signResult === 1 &&
           <div className="text-center p35">

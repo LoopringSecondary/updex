@@ -85,7 +85,7 @@ class Auth extends React.Component {
                 		</div>
                 	</span>
                 </div>
-                <div className="bg-fill p15 text-left lh25 mt15 fs13">
+                <div className="bg-white-light p15 text-left lh25 mt15 fs13">
                   1. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_download') : intl.get('unlock_by_upwallet.instruction_download')}
                   <br />
                   2. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_scan') : intl.get('unlock_by_upwallet.instruction_scan')}
