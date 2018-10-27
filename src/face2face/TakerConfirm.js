@@ -189,7 +189,7 @@ class TakerConfirm extends React.Component {
               chainId: config.getChainId(),
               to: order.protocol,
               gasPrice:toHex(toNumber(gasPrice)*1e9),
-              nonce:"0xb",
+              nonce:nonce,
               data:Contracts.LoopringProtocol.encodeSubmitRing([{...signedOrder},{...makerOrder.originalOrder,
                 tokenS:config.getTokenBySymbol(makerOrder.originalOrder.tokenS).address,
                 tokenB:config.getTokenBySymbol(makerOrder.originalOrder.tokenB).address,
