@@ -6,6 +6,7 @@ import HelperOfTTL from './HelperOfTTL'
 import HelperOfMiniFill from './HelperOfMiniFill'
 import HelperOfAmount from './HelperOfAmount'
 import HelperOfFAQ from './HelperOfFAQ'
+import HelperOfPrice from './HelperOfPrice'
 import Face2FaceConfirm from './Face2FaceConfirm'
 import Settings from './Settings'
 import OrderDetail from './Detail'
@@ -60,7 +61,11 @@ function Modals(props) {
           <Settings />
         </UiContainers.Popups>
       </Containers.Layers>
-
+      <Containers.Layers id="helperOfPrice">
+        <UiContainers.Popups id="helperOfPrice" className="h-100" style={{height:'100%'}}>
+          <HelperOfPrice />
+        </UiContainers.Popups>
+      </Containers.Layers>
       <Containers.Layers id="helperOfAmount">
         <UiContainers.Popups id="helperOfAmount">
           <HelperOfAmount />
