@@ -25,7 +25,7 @@ class Home extends React.Component {
           <Header className="" />
         </div>
         <div className="row no-gutters" style={{flex:'1'}}>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'40rem'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'37.5rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
               <PanelHeader title="Order Book" />
               <HelperOfDepth />

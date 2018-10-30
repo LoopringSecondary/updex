@@ -37,7 +37,7 @@ class Home extends React.Component {
               </div>
             </PanelWrapper>
           </div>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'375px'}}>
+          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'37.5rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
               <PanelHeader title={intl.get('common.order_book')} />
               <HelperOfDepth />
@@ -48,7 +48,7 @@ class Home extends React.Component {
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
           </div>
-          <div className="col-auto d-flex flex-column" style={{width:'350px'}}>
+          <div className="col-auto d-flex flex-column" style={{width:'35.0rem'}}>
             <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="pb10 mlpanel mtpanel">
               <PanelHeader title={intl.get('fill_list.trade_history')} />
               <ListMarketFills />

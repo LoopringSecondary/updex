@@ -13,7 +13,7 @@ const TokenItem = ({item={},actions,key,index,collapsed,loading})=>{
     return (
       <div className="row ml0 mr0 pt10 pb10 align-items-center justify-content-center no-gutters" onClick={()=>{}}>
         <div className="col-auto text-center pl10 pr10">
-            <i className={`icon-token-${item.symbol} fs20 d-block m-auto bg-primary color-black-1`} style={{width:'36px',height:'36px',lineHeight:'36px',borderRadius:'50em',background:"rgba(255,255,255,0)"}}></i>
+            <i className={`icon-token-${item.symbol} fs20 d-block m-auto bg-primary color-black-1`} style={{width:'3.6rem',height:'3.6rem',lineHeight:'3.6rem',borderRadius:'50em',background:"rgba(255,255,255,0)"}}></i>
         </div>
         <div className="col text-left" style={{display:collapsed ? 'none' : 'block'}}>
           <div>
