@@ -133,9 +133,9 @@ class Face2FaceForm extends React.Component {
                 <List.Item
                   className="circle h-default mt15"
                   arrow={false}
-                  onClick={()=>{}}
+                  onClick={()=>showLayer({id:'helperOfPrice'})}
                   extra={
-                   <div className="fs14 color-black-4 cursor-pointer pr15 d-flex align-items-center justify-content-center" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                   <div className="fs14 color-black-4 cursor-pointer d-flex align-items-center justify-content-center">
                     { price >0 && <span>
                       1 {p2pOrder.tokenS} = {`${toNumber(toFixed(1/price,8))} ${p2pOrder.tokenB}`} ≈ <Worth amount={1/price} symbol={p2pOrder.tokenB}/>
                       </span>
@@ -144,6 +144,7 @@ class Face2FaceForm extends React.Component {
                       0.00 {p2pOrder.tokenS} = {`0.00 ${p2pOrder.tokenB}`} ≈ <Worth amount={0} symbol={p2pOrder.tokenB}/>
                       </span>
                     }
+                    <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                     </div>
                   }
                 >
