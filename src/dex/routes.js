@@ -42,7 +42,7 @@ const Logged = ()=>{
           <Route path={`/dex/todos`} exact component={ListTodos} />
           <Route path={`/dex/messages`} exact component={Pages.Todo} />
           <Route path={`/dex/settings`} exact component={Pages.Todo} />
-          <Redirect from="/dex" to="/dex/markets" />
+          <Redirect from="/dex" to="/dex/placeOrder" />
         </Switch>
         <CommonModals />
         <Orders.Modals />
