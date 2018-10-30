@@ -68,15 +68,11 @@ function HelperOfTokenActions(props) {
             <Button size="small" onClick={gotoTrading} className="mt10 fs14" type="primary">{intl.get('common.buy')} {symbol}</Button>
           }
 
-          {
-            (false && symbol.toUpperCase() !== 'WETH' && symbol.toUpperCase() !== 'ETH') &&
-            <Button size="small" onClick={()=>window.toast('ComingSoon')} disabled className="mt10 fs14" type="">Enable {symbol}</Button>
-          }
-          {symbol === 'WETH' &&
+          { false &&symbol === 'WETH' &&
                 <Button size="small" className="mt10 fs14" type="primary" onClick={() => {showConvert("ETH")}}>{intl.get('convert.convert_eth_title')}</Button>
           }
           {
-            symbol === 'ETH' &&
+            false && symbol === 'ETH' &&
             <Button size="small" onClick={gotoTrading} className="mt10 fs14" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
           }
         </div>

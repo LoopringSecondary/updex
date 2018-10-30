@@ -91,11 +91,11 @@ const HelperOfBalance = (props)=>{
                   <td hidden className="pl15 pr15 pt5 pb5 color-black-2 text-left">0.00</td>
                   <td className="pl15 pr15 pt5 pb5 color-black-2 text-right text-nowrap">
                     {
-                      true && token.symbol === 'ETH' &&
+                         token.symbol === 'ETH' &&
                       <Button onClick={gotoConvert.bind(this,{token:"ETH"})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
                     }
                     {
-                      true && token.symbol === 'WETH' &&
+                       token.symbol === 'WETH' &&
                       <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
                     }
                     <Popover className="rs" trigger="click" placement="left" arrowPointAtCenter={true} content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol,hideBuy:true}}/>}>
