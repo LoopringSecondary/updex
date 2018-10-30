@@ -143,19 +143,19 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
         <div className="col-auto text-right text-number">
           {
             direction === 'up' &&
-            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-success color-white">
+            <Button style={{height:'3.2rem',lineHeight:'3.2rem',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-success color-white">
              +{tickerFm.getChange()}
             </Button>
           }
           {
             direction === 'down' &&
-            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-error color-white">
+            <Button style={{height:'3.2rem',lineHeight:'3.2rem',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-error color-white">
              {tickerFm.getChange()}
             </Button>
           }
           {
             direction === 'none' &&
-            <Button style={{height:'32px',lineHeight:'32px',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-grey-500 color-white">
+            <Button style={{height:'3.2rem',lineHeight:'3.2rem',width:'7.5rem'}} className="border-none radius-4 d-block pl5 pr5 fs14 bg-grey-500 color-white">
              {tickerFm.getChange()}
             </Button>
           }
