@@ -168,8 +168,8 @@ class Convert extends React.Component {
                     arrow={false}
                     onClick={setGas}
                     extra={<div className="fs14 text-primary">
-                      <Worth amount={gasFee} symbol='ETh'/> ≈ {tf.toPricisionFixed(toNumber(gasFee))}
-                      <span className="color-black-3 ml10">ETH</span>
+                      <Worth amount={gasFee} symbol='ETH'/> ≈ {tf.toPricisionFixed(toNumber(gasFee))}
+                      <span className="ml5">ETH</span>
                     </div>}
                   >
                     <div className="fs14 color-black-1">{intl.get('common.gas')}</div>
