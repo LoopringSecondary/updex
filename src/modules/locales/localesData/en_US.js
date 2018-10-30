@@ -250,6 +250,11 @@ export default {
   helper_of_balance: {
     description: "We only show your {pair} assets at current page"
   },
+  helper_of_price:{
+    title: 'Price Helper',
+    sell_price: 'Price of Sell {token}',
+    buy_price: 'Price of Buy {token}'
+  },
   settings: {
     title: 'Settings',
     preferences: 'Preferences',

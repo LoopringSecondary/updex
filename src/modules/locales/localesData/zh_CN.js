@@ -252,6 +252,11 @@ no_open_orders: '{market}暂无有效订单',
   helper_of_balance: {
     description: '当前仅显示您的{pair}资产'
   },
+  helper_of_price:{
+    title: '价格助手',
+    sell_price: '卖出{token}价格',
+    buy_price: '买入{token}价格'
+  },
   settings: {
     title: '设置',
     preferences: '偏好',
