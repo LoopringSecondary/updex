@@ -1,5 +1,5 @@
 import React from 'react'
-import { Modal, List, Button, SearchBar } from 'antd-mobile'
+import { Modal, List, Button, SearchBar,NavBar,Icon } from 'antd-mobile'
 import { connect } from 'dva'
 import intl from 'react-intl-universal'
 import { sorterBySymbol, getBalanceBySymbol } from 'modules/tokens/TokensFm'
@@ -53,6 +53,16 @@ class HelperOfTokens extends React.Component {
 
     return (
       <div className="bg-white" style={{height:'100%'}}>
+        <NavBar
+          className="zb-b-b"
+          mode="light"
+          onLeftClick={() => hideLayer({id:'helperOfToken'})}
+          leftContent={[
+            <span key='1' className=""><Icon type="cross"/></span>,
+          ]}
+        >
+          <div className="color-black-1">Select Token</div>
+        </NavBar>
         <SearchBar placeholder="Search" className="selectable" maxLength={8} value={filter} onChange={filterChange}/>
         <div className="divider 1px zb-b-t"></div>
         <div className="no-border" style={{height: '50vh', overflow: 'auto'}}>
