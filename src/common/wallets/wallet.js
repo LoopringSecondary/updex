@@ -65,7 +65,6 @@ export default class Wallet {
     this.address =  (await this.getCurrentAccount()).result
     this.language = (await this.getLanguage()).result
     this.currency = (await this.getCurrency()).result
-    this.rewardAddress = (await this.getRewardAddress()).result
     return this
   }
 

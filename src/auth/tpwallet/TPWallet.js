@@ -105,4 +105,10 @@ export default class TPWallet extends Wallet {
       })
     })
   }
+
+  async setConfigs(){
+    await super.setConfigs();
+    this.rewardAddress = (await this.getRewardAddress()).result
+    return this;
+  }
 }
