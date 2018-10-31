@@ -18,7 +18,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="p2p">
-        <UiContainers.Drawer position="right" id="p2p" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
+        <UiContainers.Drawer maskClosable={false} position="right" id="p2p" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
           <Face2FacePage />
         </UiContainers.Drawer>
       </Containers.Layers>
@@ -67,8 +67,8 @@ function Modals(props) {
           <HelperOfPrice />
         </UiContainers.Drawer>
       </Containers.Layers>
-      <Containers.Layers id="helperOfAmount">
-        <UiContainers.Drawer id="helperOfAmount" position="right" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
+      <Containers.Layers id="helperOfAmountOfP2P">
+        <UiContainers.Drawer id="helperOfAmountOfP2P" position="right" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
           <HelperOfAmount />
         </UiContainers.Drawer>
       </Containers.Layers>

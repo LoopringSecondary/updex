@@ -88,19 +88,18 @@ class Face2FaceForm extends React.Component {
             </div>
           </div>
           <div className="row ml0 mr0 mt15 no-gutters align-items-stretch justify-content-center" style={{}}>
-            <div className="col text-right no-border am-list-bg-none">
-              <List  className="selectable">
+            <div className="col no-border am-list-bg-none">
+              <List  className="selectable text-left">
                 <InputItem
-                  type="money"
+                  type="text"
                   onChange={amountChange.bind(this, 'sell')}
-                  moneyKeyboardAlign="left"
-                   value={amountS}
+                  value={amountS}
                   extra={
                     <div className="fs14 cursor-pointer zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} >
                         {p2pOrder.tokenS} <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                       </div>
-                      <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})}  className="fs16 text-primary" style={{position:'absolute',top:'1rem',width:'3.5rem',left:'-3.5rem'}}>
+                      <div onClick={showLayer.bind(this,{id:"helperOfAmountOfP2P",symbol:p2pOrder.tokenS})}  className="fs16 text-primary" style={{position:'absolute',top:'1rem',width:'3.5rem',left:'-3.5rem'}}>
                         <WebIcon type="sliders" />
                       </div>
                     </div>
@@ -113,9 +112,8 @@ class Face2FaceForm extends React.Component {
                   </div>
                 </InputItem>
                 <InputItem
-                  type="money"
+                  type="text"
                   onChange={amountChange.bind(this, 'buy')}
-                  moneyKeyboardAlign="left"
                   value={amountB}
                   extra={
                     <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >

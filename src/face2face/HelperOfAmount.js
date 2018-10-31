@@ -48,7 +48,7 @@ function HelperOfAmount(props) {
       <NavBar
         className="bg-white"
         mode="light"
-        onLeftClick={() => hideLayer({id:'helperOfAmount'})}
+        onLeftClick={() => hideLayer({id:'helperOfAmountOfP2P'})}
         leftContent={[
           <span key='1' className=""><WebIcon type="close"/></span>,
         ]}

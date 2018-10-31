@@ -58,10 +58,10 @@ class Face2FacePage extends React.Component {
               className="zb-b-b"
               mode="light"
               leftContent={[
-                <span onClick={()=>hideLayer({id:'p2p'})} className="text-primary" key="1"><WebIcon type="close" theme="" /></span>
+                <span onClick={()=>hideLayer({id:'p2p'})} className="text-primary cursor-pointer" key="1"><WebIcon type="close" theme="" /></span>
               ]}
               rightContent={[
-                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="" /></span>
+                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary cursor-pointer" key="1"><WebIcon type="question-circle" theme="" /></span>
               ]}
             >
               <div className="color-black">

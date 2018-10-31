@@ -243,7 +243,7 @@ class PlaceOrderForm extends React.Component {
                 </div>
               }
               onChange={priceChange}
-            ><div className="fs13 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
+            ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
             <InputItem
               type="text"
               placeholder={amountPrecision > 0 ? `0.${'0'.repeat(amountPrecision)}` : '0'}
@@ -256,7 +256,7 @@ class PlaceOrderForm extends React.Component {
                   <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.left}</span>
                 </div>
               }
-            ><div className="fs13 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
+            ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
             {
               false &&
               <Item
@@ -279,7 +279,7 @@ class PlaceOrderForm extends React.Component {
                   <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.right}</span>
                 </div>
               }
-            ><div className="fs13 color-black-3 pr5 text-default" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
+            ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
 
             <Button onClick={toConfirm} className={`fs16 p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side==='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
                 <div className="lh20">
