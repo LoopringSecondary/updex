@@ -23,14 +23,21 @@ class Header extends React.Component {
         <div className="col d-flex align-items-center text-left ">
           <TickerItem />
         </div>
-        <div onClick={showLayer.bind(this,'help')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
-          <WebIcon type="question-circle" theme="filled" className="fs20 text-primary" />
-        </div>
+
         <div onClick={showLayer.bind(this,'notifications')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
-          <i className="icon-bell fs20 text-primary"></i>
+          <WebIcon type="bell" className="fs20 text-primary" />
+        </div>
+        <div onClick={()=>{}} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
+          <WebIcon type="question-circle" className="fs20 text-primary" />
+        </div>
+        <div onClick={()=>{}} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
+          <WebIcon type="layout" className="fs20 text-primary" />
+        </div>
+        <div onClick={()=>{}} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
+          <WebIcon type="skin" className="fs20 text-primary" />
         </div>
         <div onClick={showLayer.bind(this,'settings')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
-          <i className="icon-cog fs20 text-primary"></i>
+          <WebIcon type="setting" className="fs20 text-primary" />
         </div>
         <div className="col-auto d-flex align-items-center zb-b-l">
           <UserInfo />

@@ -56,7 +56,7 @@ class UserInfo extends React.Component {
         {
           !address &&
           <div className="pl25 pr25 d-flex align-items-center" style={{height:'100%'}}>
-            <i className="icon-user fs20 text-primary"></i>
+            <WebIcon type="user" className="fs20 text-primary" />
           </div>
         }
         {

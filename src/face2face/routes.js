@@ -12,7 +12,7 @@ const Logged = (props)=>{
     return (
       <div>
         <Switch>
-          <Route path={`/face2face`} exact component={Face2FacePage} />
+          <Route path={`/p2p`} exact component={Face2FacePage} />
         </Switch>
         <Face2FaceModals />
         <TokenModals />
@@ -33,9 +33,12 @@ export default class Routes extends React.Component {
     // const {url} = match;
     const url = ""
     return (
-      <Switch>
-        <Route path={`/face2face`}  component={Logged} />
-      </Switch>
+      <div style={{width:'48rem',margin:'0 auto'}}>
+        <Switch>
+          <Route path={`/p2p`}  component={Logged} />
+        </Switch>
+      </div>
+      
     );
   }
 }

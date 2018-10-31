@@ -31,16 +31,34 @@ class Sidebar extends React.Component {
             }
           </div>
           <div className="d-flex flex-column mtpanel bg-white" style={{flex:'1'}}>
-            {!collapsed &&
+            {false && !collapsed &&
               <div className="" style={{flex:'1',overflow:'auto'}}>
                 <MarketTitckers  />
               </div>
             }
-            {collapsed &&
+            {false && collapsed &&
               <div className="bg-white" style={{flex:1,overflow:'auto'}}>
                 <ListTokens collapsed={collapsed} />
               </div>
             }
+            <div className="zb-b-b">
+              <div className="pt10 pb10 text-center zb-b-t text-primary">
+                <WebIcon type="sliders" className="fs18" />
+                <div className="fs12">Trade</div>
+              </div>
+              <div className="pt10 pb10 text-center zb-b-t">
+                <WebIcon type="team" className="fs18 color-black-2" />
+                <div className="fs12 color-black-2">P2P</div>
+              </div>
+              <div className="pt10 pb10 text-center zb-b-t">
+                <WebIcon type="profile" className="fs18 color-black-2" />
+                <div className="fs12 color-black-2">Orders</div>
+              </div>
+              <div className="pt10 pb10 text-center zb-b-t">
+                <WebIcon type="wallet" className="fs18 color-black-2" />
+                <div className="fs12 color-black-2">Wallet</div>
+              </div>
+            </div>
           </div>
       </div>
     )
