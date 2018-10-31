@@ -4,10 +4,10 @@ import storage from 'modules/storage'
 import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
 import TokenModals from '../dex/tokens/Modals'
-import CommonModals from '../components/Modals'
+import CommonModals from '../dex/common/Modals'
 
 const Logged = (props)=>{
-  const isLogged = !!(window.Wallet && window.Wallet.address)
+  const isLogged = true
   if(isLogged){
     return (
       <div>
@@ -20,8 +20,7 @@ const Logged = (props)=>{
       </div>
     )
   }else{
-    // props.history.push(null,'/auth',{to:'/face2face'})
-    return <Redirect to="/auth/tpwallet?to=/face2face" />
+    
   }
 }
 
