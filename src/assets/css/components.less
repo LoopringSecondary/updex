@@ -55,23 +55,7 @@
   border-radius:12px !important;
   border:0 !important;
 }
-.am-segment-item{
-  line-height:4.0rem;
-  height:4.0rem;
-}
-.am-button{
-  line-height:4.4rem;
-  height:4.4rem;
-}
-.am-list-line{
-  height:4.2rem;
-}
-.am-list-item .am-input-control input{
-  font-size:1.7rem;
-}
-.am-list-item .am-input-control{
-  font-size:1.7rem;
-}
+
 .am-segment-item.t-light{
   .am-segment-item{
     color:fade(@brand-primary,50%);
@@ -101,7 +85,7 @@
 .am-segment.side-buy{
   .am-segment-item{
     border:none !important;
-    background: @fill-body !important;
+    // background: @fill-body !important;
     &:extend(.color-black-4);
     text-transform:uppercase !important;
     &.am-segment-item-selected{
@@ -113,7 +97,7 @@
 .am-segment.side-sell{
   .am-segment-item{
     border:none !important;
-    background: @fill-body !important;
+    // background: @fill-body !important;
     &:extend(.color-black-4);
     text-transform:uppercase !important;
     &.am-segment-item-selected{
@@ -137,7 +121,7 @@
 // ========
 
 .am-button-small{
-  padding:0px 10px !important;
+  padding:0px 1rem !important;
 }
 .am-button-primary.am-button-disabled{
   // opacity: 1 !important;
@@ -281,6 +265,10 @@
 // ========
 
 .no-border{
+  .am-list-body {
+    background: transparent !important;
+    border:none !important;
+  }
   .am-list-body::before {
     background: transparent !important;
     border:none !important;
@@ -307,8 +295,8 @@
 .settings{
   .am-list-body{
     background: @fill-body !important;
-    border-radius:0.5rem !important;
-    border: 1px solid rgba(0,0,0,0.04) !important;
+    border-radius:0rem !important;
+    // border: 1px solid @border-color !important;
   }
   .am-radio-item{
     .am-list-content{
@@ -316,7 +304,7 @@
     }
   }
   .am-list-item{
-    border-bottom:1px solid rgba(0,0,0,0.1) !important;
+    border-bottom:1px solid @border-color !important;
   }
   .am-list-body .am-list-item:last-child{
     border-bottom:none !important;
@@ -340,9 +328,6 @@
   &:last-child{
     // border-bottom:1px solid #eeeeee !important;
   }
-}
-.am-list-item{
-  min-height:4.4rem;
 }
 .am-list-item.h-default{
   height:4.4rem !important;
@@ -378,7 +363,7 @@
     text-align: left !important;
   }
   .ant-input-affix-wrapper .ant-input:not(:last-child){
-    padding-left:15px !important;
+    padding-left:1.5rem !important;
   }
 }
 
@@ -394,19 +379,19 @@
 // ========
 // article
 // ========
-.article{ padding:15px; background: #fff; }
-.article section{ margin-bottom: 25px; }
+.article{ padding:1.5rem; background: #fff; }
+.article section{ margin-bottom: 2.5rem; }
 .article h1{ margin:0; }
 .article h4{ margin:0; font-size: 14px; }
 .article h3{ font-size: 16px; }
-.article .header{text-align: center; margin: 25px 0; }
+.article .header{text-align: center; margin: 2.5rem 0; }
 .article .header small{ opacity: 0.6 }
 .article p{}
 
 .am-pagination.custom-pagination{
   .am-button{
-    height:32px !important;
-    line-height:32px !important;
+    height:3.2rem !important;
+    line-height:3.2rem !important;
     background: @brand-primary-light !important;
     border:none !important;
     color:@brand-primary;
@@ -414,7 +399,7 @@
       border:none !important;
     }
     font-size:1.4rem !important;
-    margin-top: 5px;
+    margin-top: .5rem;
   }
   .am-pagination-wrap{
     font-size:1.4rem !important;
@@ -447,53 +432,20 @@
   margin-bottom:0.6rem;
 }
 
-.ant-collapse{
-  background: transparent !important;
-  border: none !important;
-  .ant-collapse-item{
-    border: none !important;
-  }
-}
-.ant-collapse > .ant-collapse-item > .ant-collapse-header{
-  padding:0 !important;
-}
-.ant-badge{
-  .ant-badge-count{
-    box-shadow: none;
-  }
-  &.s-small{
-    .ant-badge-count{
-      font-size:1.0rem;
-      padding:0 0.4rem;
-      height:1.8rem;
-      line-height:1.8rem;
-      min-width:1.8rem;
-    }
-  }
-
+.fake-input-placeholder{
+  font-size:1.4rem;
 }
 
-.ant-popover-inner-content{
-  padding:0px !important;
-  background: @fill-body !important;
-  // border:1px solid rgba(255,255,255,0.1);
-  borderRadius:0.6rem;
-}
-.ant-popover-arrow{
-  background: @fill-body !important;
+.am-list-item .am-input-control .fake-input-container .fake-input.focus:after{
+  top:0;
 }
 
-// table tbody{
-//   display:block;
-// }
-// table thead, tbody tr{
-//   display:table;
-//   width:100%;
-//   table-layout:fixed;  
-// }
 
-// table thead {  
-//   width: calc( 100% - 2rem )  
-// }  
+
+
+
+
+
+
 
 
