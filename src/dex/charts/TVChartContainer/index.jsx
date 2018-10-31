@@ -223,10 +223,11 @@ class TVChartContainer extends React.PureComponent {
 		return (
 		  <div style={{flex:1}} className="d-flex flex-column">
         <div className="mb5 zb-b-b">
-          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === '60' ? 'text-primary' : ''}`} onClick={() => resolutionChange('60')}>1H</a>
-          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === '120' ? 'text-primary' : ''}`} onClick={() => resolutionChange('120')}>2H</a>
-          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === '240' ? 'text-primary' : ''}`} onClick={() => resolutionChange('240')}>4H</a>
-          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-r d-inline-block ${this.state.resolution === 'D' ? 'text-primary' : ''}`} onClick={() => resolutionChange('D')}>1D</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 d-inline-block ${this.state.resolution === '60' ? 'text-primary' : ''}`} onClick={() => resolutionChange('60')}>1H</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-l d-inline-block ${this.state.resolution === '120' ? 'text-primary' : ''}`} onClick={() => resolutionChange('120')}>2H</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-l d-inline-block ${this.state.resolution === '240' ? 'text-primary' : ''}`} onClick={() => resolutionChange('240')}>4H</a>
+          <a className={`color-black-4 pl15 pr15 fs12 pt5 pb5 zb-b-l d-inline-block ${this.state.resolution === 'D' ? 'text-primary' : ''}`} onClick={() => resolutionChange('D')}>1D</a>
+          <a className={`color-black-4 pl5 fs12 pt5 pb5 zb-b-l d-inline-block`}>&nbsp;</a>
         </div>
         <div
           id={ this.state.containerId }

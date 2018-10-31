@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link, Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
-import { Icon as WebIcon } from 'antd';
+import { Icon as WebIcon,Tooltip } from 'antd';
 import ListTokens from '../tokens/ListTokens';
 import MarketTitckers from '../tickers/ListMarketTickers';
 import PanelHeader from './PanelHeader'
@@ -31,33 +31,31 @@ class Sidebar extends React.Component {
             }
           </div>
           <div className="d-flex flex-column mtpanel bg-white" style={{flex:'1'}}>
-            {false && !collapsed &&
-              <div className="" style={{flex:'1',overflow:'auto'}}>
-                <MarketTitckers  />
-              </div>
-            }
-            {false && collapsed &&
-              <div className="bg-white" style={{flex:1,overflow:'auto'}}>
-                <ListTokens collapsed={collapsed} />
-              </div>
-            }
             <div className="zb-b-b">
-              <div className="pt10 pb10 text-center zb-b-t text-primary">
-                <WebIcon type="sliders" className="fs18" />
-                <div className="fs12">Trade</div>
-              </div>
-              <div className="pt10 pb10 text-center zb-b-t">
-                <WebIcon type="team" className="fs18 color-black-2" />
-                <div className="fs12 color-black-2">P2P</div>
-              </div>
-              <div className="pt10 pb10 text-center zb-b-t">
-                <WebIcon type="profile" className="fs18 color-black-2" />
-                <div className="fs12 color-black-2">Orders</div>
-              </div>
-              <div className="pt10 pb10 text-center zb-b-t">
-                <WebIcon type="wallet" className="fs18 color-black-2" />
-                <div className="fs12 color-black-2">Wallet</div>
-              </div>
+              <Tooltip title="Market Trade" placement="right">
+                <div className="pt15 pb15 text-center zb-b-t text-primary">
+                  <WebIcon type="sliders" className="fs20" />
+                  <div hidden className="fs12">Trade</div>
+                </div>
+              </Tooltip>
+              <Tooltip title="P2P Exchange" placement="right">
+                <div className="pt15 pb15 text-center zb-b-t text-primary">
+                  <WebIcon type="team" className="fs20" />
+                  <div hidden className="fs12">P2P</div>
+                </div>
+              </Tooltip>
+              <Tooltip title="My Orders" placement="right">
+                <div className="pt15 pb15 text-center zb-b-t text-primary">
+                  <WebIcon type="profile" className="fs20" />
+                  <div hidden className="fs12">Orders</div>
+                </div>
+              </Tooltip>
+              <Tooltip title="My Wallet" placement="right">
+                <div className="pt15 pb15 text-center zb-b-t text-primary">
+                  <WebIcon type="wallet" className="fs20" />
+                  <div hidden className="fs12">Wallet</div>
+                </div>
+              </Tooltip>
             </div>
           </div>
       </div>
