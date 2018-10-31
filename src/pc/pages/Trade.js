@@ -11,7 +11,7 @@ class Trade extends React.Component {
   }
   render(){
     const {match,location,dispatch} = this.props;
-    let layout = 3;
+    let layout = 1;
     switch (layout) {
       case 1:
         return <Home1 />

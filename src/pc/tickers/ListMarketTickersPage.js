@@ -3,7 +3,7 @@ import { connect } from 'dva'
 import { NavBar, Slider,List,Radio } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import intl from 'react-intl-universal'
-import ListMarketTickers from 'mobile/tickers/ListMarketTickers'
+import ListMarketTickers from './ListMarketTickers'
 
 function MarketPage(props) {
   const {gas,settings,dispatch} = props
