@@ -56,7 +56,7 @@ class TakerConfirm extends React.Component {
     order.validUntil = toHex(Math.ceil(validUntil.valueOf() / 1e3))
     order.marginSplitPercentage = 0
     order.buyNoMoreThanAmountB = true
-    order.walletAddress = config.getWalletAddress()
+    order.walletAddress = (window.Wallet && window.Wallet.rewardAddress) || config.getWalletAddress()
     const authAccount = createWallet()
     order.authAddr = authAccount.getAddressString();
     order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString());

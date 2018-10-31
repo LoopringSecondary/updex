@@ -361,7 +361,7 @@ export async function signP2POrder(tradeInfo, address) {
   order.validUntil = fm.toHex(tradeInfo.validUntil);
   order.marginSplitPercentage = Number(tradeInfo.marginSplit);
   order.buyNoMoreThanAmountB = true;
-  order.walletAddress = config.getWalletAddress();
+  order.walletAddress = (window.Wallet && window.Wallet.rewardAddress) || config.getWalletAddress()
   order.orderType = tradeInfo.orderType
   const authAccount = createWallet()
   order.authAddr = authAccount.getAddressString();

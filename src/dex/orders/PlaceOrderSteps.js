@@ -150,7 +150,7 @@ function PlaceOrderSteps(props) {
     order.validUntil = toHex(validUntil.unix());
     order.marginSplitPercentage = 50;
     order.buyNoMoreThanAmountB = side.toLowerCase() === "buy";
-    order.walletAddress = config.getWalletAddress();
+    order.walletAddress = (window.Wallet && window.Wallet.rewardAddress) || config.getWalletAddress()
     order.orderType = 'market_order'
     const authAccount = createWallet()
     order.authAddr = authAccount.getAddressString();
@@ -240,7 +240,7 @@ function PlaceOrderSteps(props) {
                 </div>
                 <Button type="primary" className="fs18" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
               </div>
-              
+
             </div>
           }/>
           <Page id="wallet" render={({page})=>

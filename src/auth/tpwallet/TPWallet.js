@@ -55,7 +55,18 @@ export default class TPWallet extends Wallet {
   getCurrentAccount () {
     return new Promise((resolve) => {
       callApi('user.getCurrentAccount', null, function ({error, result}) {
-        console.log("get Address: " + result )
+        if (error) {
+          resolve({error})
+        } else {
+          resolve({result})
+        }
+      })
+    })
+  }
+
+  getRewardAddress(){
+    return new Promise((resolve) => {
+      callApi('user.getRewardAddress', null, function ({error, result}) {
         if (error) {
           resolve({error})
         } else {

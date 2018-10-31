@@ -30,6 +30,12 @@ export default class Wallet {
   getCurrentAccount () {
     throw new Error('unimplemented')
   }
+  /**
+   * @@return (error,result) {error:{errorCode:,message:''},result:'0x00000000'}
+   */
+  getRewardAddress () {
+    throw new Error('unimplemented')
+  }
 
   /**
    * @param message
@@ -59,6 +65,7 @@ export default class Wallet {
     this.address =  (await this.getCurrentAccount()).result
     this.language = (await this.getLanguage()).result
     this.currency = (await this.getCurrency()).result
+    this.rewardAddress = (await this.getRewardAddress()).result
     return this
   }
 
