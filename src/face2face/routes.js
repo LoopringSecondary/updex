@@ -4,7 +4,7 @@ import storage from 'modules/storage'
 import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
 import TokenModals from '../dex/tokens/Modals'
-import CommonModals from '../dex/common/Modals'
+import CommonModals from '../components/Modals'
 
 const Logged = (props)=>{
   const isLogged = !!(window.Wallet && window.Wallet.address)

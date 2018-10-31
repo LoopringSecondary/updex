@@ -62,8 +62,10 @@ class HelperOfTokens extends React.Component {
                 return (
                   <List.Item className="" key={index} arrow="horizontal" extra={<div className="color-black-3">{toFixed(item.balance,6)}</div>}
                              onClick={tokenChange.bind(this, item.symbol)}>
-                    <i hidden className={`mr10 icon icon-token-${item.symbol}`}></i>
-                    <div className="color-black-1">{item.symbol}</div>
+                    <div className="color-black-1">
+                      <span className="d-inline-block text-center bg-primary-light text-primary circle fs14 mr5 " style={{width:'2.4rem',height:'2.4rem',lineHeight:'2.8rem'}}><i className={`icon icon-token-${item.symbol}`}></i></span>
+                      {item.symbol}
+                    </div>
                   </List.Item>
                 )
               })
