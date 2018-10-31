@@ -213,7 +213,7 @@ function PlaceOrderSteps (props) {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" style={{height:'100%'}}>
       <Pages active="order">
         <Page id="order" render={({page}) =>
           <div>

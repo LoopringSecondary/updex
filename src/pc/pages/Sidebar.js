@@ -32,25 +32,21 @@ class Sidebar extends React.Component {
               <Tooltip title="Market Trade" placement="right">
                 <div className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary bg-primary-light">
                   <WebIcon type="sliders" theme="" className="fs20" />
-                  <div hidden className="fs12">Trade</div>
                 </div>
               </Tooltip>
-              <Tooltip title="P2P Exchange" placement="right">
-                <div className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary">
+              <Tooltip title="P2P Trade" placement="right">
+                <div onClick={()=>showLayer('p2p')} className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary">
                   <WebIcon type="swap" theme="" className="fs20" />
-                  <div hidden className="fs12">P2P</div>
                 </div>
               </Tooltip>
               <Tooltip title="My Orders" placement="right">
                 <div className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary">
                   <WebIcon type="profile" theme="" className="fs20" />
-                  <div hidden className="fs12">Orders</div>
                 </div>
               </Tooltip>
               <Tooltip title="My Wallet" placement="right">
                 <div className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary">
                   <WebIcon type="wallet" theme="" className="fs20" />
-                  <div hidden className="fs12">Wallet</div>
                 </div>
               </Tooltip>
             </div>

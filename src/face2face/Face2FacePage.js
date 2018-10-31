@@ -52,13 +52,13 @@ class Face2FacePage extends React.Component {
       dispatch({type:'p2pOrder/swap'})
     }
     return (
-        <div className="">
+        <div className="bg-fill" style={{height:'100%'}}>
           <div className="bg-white">
             <NavBar
               className="zb-b-b"
               mode="light"
               leftContent={[
-                <span onClick={()=>showLayer({id:'settings'})} className="text-primary" key="1"><WebIcon type="setting" theme="" /></span>
+                <span onClick={()=>hideLayer({id:'p2p'})} className="text-primary" key="1"><WebIcon type="close" theme="" /></span>
               ]}
               rightContent={[
                 <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="" /></span>

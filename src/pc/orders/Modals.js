@@ -29,11 +29,6 @@ function Modals(props) {
           <HelperOfAdvance />
         </UiContainers.Popups>
       </Containers.Layers>
-      <Containers.Layers id="helperOfPrice">
-        <UiContainers.Popups id="helperOfPrice">
-          <HelperOfPrice />
-        </UiContainers.Popups>
-      </Containers.Layers>
       <Containers.Layers id="helperOfAmount">
         <UiContainers.Popups id="helperOfAmount">
           <HelperOfAmount />

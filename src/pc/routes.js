@@ -10,6 +10,7 @@ import MarketDetail from './tickers/Detail'
 import MarketModals from './tickers/Modals'
 import AuthModals from './auth/Modals'
 import SignModals from './sign/Modals'
+import P2PModals from '../face2face/Modals'
 import NotificationModals from './notifications/Modals'
 import Convert from './tokens/ConvertForm'
 import PlaceOrder from './orders/PlaceOrderPage'
@@ -49,6 +50,7 @@ const Logged = ()=>{
         <Account.Modals />
         <AuthModals />
         <SignModals />
+        <P2PModals />
       </div>
     )
   }else{

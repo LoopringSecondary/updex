@@ -44,7 +44,7 @@ function HelperOfAmount(props) {
   const prefix =  ''
 
   return (
-    <div className="tabs-no-border bg-white">
+    <div className="bg-white" style={{height:'100%'}}>
       <NavBar
         className="bg-white"
         mode="light"
