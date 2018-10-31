@@ -13,7 +13,8 @@ function HelperOfAmount(props) {
     { title: <div className="text-center">{intl.get("common.balance")}</div> },
     { title: <div className="text-center">{intl.get("common.help")}</div> },
   ]
-  const {amountPercentage,amountSlider,amountSliderSelected,balances,dispatch,helperOfAmount} = props
+  const {amountPercentage,amountSlider,amountSliderSelected,balances,dispatch,helperOfAmountOfP2P} = props
+  const helperOfAmount = helperOfAmountOfP2P
   const {symbol} = helperOfAmount
   const balance = tokenFormatter.getBalanceBySymbol({balances, symbol:symbol, toUnit:true})
 

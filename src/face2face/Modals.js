@@ -68,7 +68,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="helperOfAmountOfP2P">
-        <UiContainers.Drawer id="helperOfAmountOfP2P" position="right" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
+        <UiContainers.Drawer id="helperOfAmountOfP2P" alias="helperOfAmount" position="right" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
           <HelperOfAmount />
         </UiContainers.Drawer>
       </Containers.Layers>
