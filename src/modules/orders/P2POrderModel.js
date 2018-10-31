@@ -1,26 +1,70 @@
 import config from 'common/config'
-import {toBig} from 'LoopringJS/common/formatter'
-
+import { toBig } from 'LoopringJS/common/formatter'
+import {Toast} from 'antd-mobile'
 const MODULES = 'p2pOrder'
 export default {
   namespace: MODULES,
   state: {
-   tokenS:'LRC',
-   tokenB:'WETH',
-   amountS:toBig(0),
-   amountB:toBig(0),
-   validSince: null,
-   validUntil: null,
-   loading:false,
-   qrcode:"",
+    tokenS: 'LRC',
+    tokenB: 'WETH',
+    amountS: '',
+    amountB: '',
+    validSince: null,
+    validUntil: null,
+    loading: false,
+    qrcode: '',
+    fetchOrder:false,
+    count:1,
   },
-  effects:{
-    *init({ payload={} }, { put }) {
+  subscriptions:{
+    setup({ dispatch, history }) {
+      window.handleP2POrder = ({result}) => {
+        const {hash, auth, count} = JSON.parse(result).value
+        window.RELAY.order.getOrderByHash({orderHash: hash}).then(res => {
+          if (res.error) {
+            Toast.fail(res.error.message)
+          } else {
+            const order = res.result
+            order.originalOrder.authPrivateKey = auth;
+            if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
+              dispatch({
+                type: 'layers/showLayer',
+                payload: {
+                  id:'takerConfirm',
+                  makerOrder:{
+                    auth:auth, count,
+                    originalOrder:order.originalOrder
+                  }
+                }
+              })
+            }else{
+              Toast.fail('This Order is completed, canceled or expired')
+            }
+          }
+        })
+      };
+    }
+  },
+  effects: {
+    * init ({payload = {}}, {put}) {
       //yield put({ type: 'tokenChange',payload});
     },
   },
   reducers: {
-    tokenChange(state, action) {
+    reset (state, action) {
+      return {
+        ...state,
+        amountS: '',
+        amountB: '',
+        validSince: null,
+        validUntil: null,
+        loading: false,
+        qrcode: '',
+        fetchOrder:false,
+        count:1
+      }
+    },
+    tokenChange (state, action) {
       let {payload} = action
       const {tokenS, tokenB} = payload
       return {
@@ -29,16 +73,16 @@ export default {
         tokenB: tokenB || state.tokenB
       }
     },
-    amountChange(state, action) {
+    amountChange (state, action) {
       let {payload} = action
       const {amountS, amountB} = payload
       return {
         ...state,
-        amountS: amountS || state.amountS,
-        amountB: amountB || state.amountB,
+        amountS: amountS === undefined ? state.amountS : amountS,
+        amountB: amountB === undefined ? state.amountB : amountB,
       }
     },
-    loadingChange(state, action) {
+    loadingChange (state, action) {
       let {payload} = action
       const {loading} = payload
       return {
@@ -46,7 +90,7 @@ export default {
         loading
       }
     },
-    qrcodeChange(state, action) {
+    qrcodeChange (state, action) {
       let {payload} = action
       const {qrcode} = payload
       return {
@@ -54,7 +98,7 @@ export default {
         qrcode
       }
     },
-    validTimeChange(state, action) {
+    validTimeChange (state, action) {
       let {payload} = action
       const {validSince, validUntil} = payload
       return {
@@ -63,7 +107,31 @@ export default {
         validUntil
       }
     },
+    setFetchOrder(state,{payload}){
+      const {fetchOrder} = payload
+      return {
+        ...state,
+        fetchOrder
+      }
+    },
+    swap(state){
+      const {amountS,amountB,tokenS,tokenB}= state
+      return {
+        ...state,
+        amountS:amountB,
+        amountB:amountS,
+        tokenS:tokenB,
+        tokenB:tokenS
+      }
+    },
+    countChange(state,{payload}){
+      const {count} = payload
+      return {
+        ...state,
+        count:count|| state.count
+      }
+    }
   },
-};
+}
 
 

@@ -69,6 +69,8 @@ const words = {
   helper: '助手',
   depth: '深度',
   order_book:"订单表",
+  next_step:'下一步',
+  exchange:"兑换",
   list: {
     no_data: '暂无数据',
     no_data_custom: '暂无{title}',
@@ -116,7 +118,9 @@ const notifications = {
     enable_suc: '授权成功',
     enable_fail: '授权失败',
     place_order_price_confirm:'您确定要继续下单吗?',
-    open_safari:"请在Safari 浏览器中打开"
+    open_safari:"请在Safari 浏览器中打开",
+    submit_ring_suc:'提交环路成功',
+    submit_ring_fail:'提交环路失败'
   },
   message: {
     place_order_price_high:"您当前的价格高于市场价5%",
@@ -125,6 +129,7 @@ const notifications = {
     failed_fetch_data_from_server: '从服务器获取数据失败, 请稍后在尝试',
     eth_is_required_when_place_order: '由于需要支付ETH油费, 根据您当前订单需要发送的以太坊交易计算，还需要 {required} ETH',
     lrcfee_is_required_when_place_order: '由于需要支付LRC油费, 汇总您历史订单所需LRC，还需要 {required} LRC',
+    token_required_when_place_order:'{token} 不足,还需要{required} {token}',
     some_items_not_signed: '您可能还有一些数据还未签名，请把所有未签名项签名后再继续操作',
     place_order_success: '您的订单已经提交成功',
     place_order_balance_not_enough: '为使订单全部成交, 至少还需要{amount} {token}',
@@ -304,6 +309,11 @@ export default {
   helper_of_balance: {
     description: '当前仅显示您的{pair}资产'
   },
+  helper_of_price:{
+    title: '价格助手',
+    sell_price: '卖出{token}价格',
+    buy_price: '买入{token}价格'
+  },
   settings: {
     title: '设置',
     preferences: '偏好',
@@ -344,6 +354,8 @@ export default {
     tabs_advanced: '高级设置',
     low: '低',
     high: '高',
+    slow: '慢',
+    fast: '快',
     tips:"撮合费 必须大于 矿工发送一个以太坊交易所需的油费。"
   },
   p2p_order: {
@@ -353,9 +365,16 @@ export default {
     token_balance: '代币余额',
     order_detail: '订单详情',
     generate_order: '生成订单',
+    price:'兑换比例',
     instruction: '1. 以您希望的兑换率生成一个订单，把不包含鉴权数据（没有这部分数据任何人都无法撮合您的订单）的订单信息提交给relay，同时将生成的订单hash和鉴权信息生成二维码。</br>2. 您可以把这个二维码发送给您的朋友，任何人拿到这个二维码都有可能吃掉您的订单，请注意以安全的方式传播。</br>3. 对方使用Circulr移动端扫描二维码，下一个与您买入卖出量完全匹配的对手单，发送以太坊交易吃掉这个订单，因此吃单方需要消耗油费。',
     notice: '* P2P订单双方都不需要支付LRC手续费</br>',
-    user_center_p2p: 'P2P 交易'
+    user_center_p2p: 'P2P 交易',
+    share_qr:'分享订单二维码',
+    amount_to_sell:'售出数量',
+    amount_to_buy:'买入数量',
+    set_sell_amount:"设定售出数量",
+    count:"订单拆分份数",
+    set_count:"设置订单拆分份数"
   },
   sign: {
     not_signed: '您还未完成签名',

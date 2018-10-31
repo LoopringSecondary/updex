@@ -269,7 +269,7 @@ export default {
         validSince,
         validUntil
       }
-    },
+    }
   },
 };
 

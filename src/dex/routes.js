@@ -19,14 +19,14 @@ import storage from 'modules/storage'
 import UserAgent from 'common/utils/useragent'
 
 const UnLogged = ()=>{
-  const isLogged = !!storage.wallet.getUnlockedAddress()
+  const isLogged =  !!(window.Wallet && window.Wallet.address)
   if(isLogged){
     return <Redirect to="/dex" />
   }else{
     return (
       <Redirect to="/auth" />
     )
-  }
+}
 }
 const Logged = ()=>{
   const isLogged =  !!storage.wallet.getUnlockedAddress()

@@ -328,9 +328,14 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
     approveCount += 1
     if(pendingAllowance.gt(0)) approveCount += 1
   }
-  const gas = fm.toBig(gasPrice).times(approveGasLimit).div(1e9).times(approveCount)
+  let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
+
+  if(tradeInfo.roleType === 'taker'){
+    gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
+  }
+
   if(ethBalance.balance.lt(gas)){
-    error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance),6)}})
+    error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
     failed = true
   }
   if(failed) {
@@ -356,7 +361,7 @@ export async function signP2POrder(tradeInfo, address) {
   order.validUntil = fm.toHex(tradeInfo.validUntil);
   order.marginSplitPercentage = Number(tradeInfo.marginSplit);
   order.buyNoMoreThanAmountB = true;
-  order.walletAddress = config.getWalletAddress();
+  order.walletAddress = (window.Wallet && window.Wallet.rewardAddress) || config.getWalletAddress()
   order.orderType = tradeInfo.orderType
   const authAccount = createWallet()
   order.authAddr = authAccount.getAddressString();
@@ -367,7 +372,7 @@ export async function signP2POrder(tradeInfo, address) {
   return {order, unsigned}
 }
 
-async function generateSignData({tradeInfo, order, completeOrder, address}) {
+export async function generateSignData({tradeInfo, order, completeOrder, address}) {
   let unsigned = new Array()
   // sign orders and txs
   unsigned.push({type: 'order', data:order, completeOrder:completeOrder, description: `Sign Order`, address})
@@ -375,7 +380,7 @@ async function generateSignData({tradeInfo, order, completeOrder, address}) {
   if (approveWarn && approveWarn.length > 0) {
     const gasLimit = tradeInfo.gasLimit;
     const gasPrice = tradeInfo.gasPrice;
-    let nonce = await window.RELAY.account.getNonce(address)
+    let nonce = (await window.RELAY.account.getNonce(address)).result
     if(nonce.error) {
       throw new Error(nonce.error.message)
     }
@@ -386,11 +391,10 @@ async function generateSignData({tradeInfo, order, completeOrder, address}) {
         unsigned.push({type: 'tx', data:cancel, description: `Cancel ${item.value.symbol} allowance`, address})
         nonce = nonce + 1;
       }
-      const approve = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:fm.toHex(fm.toBig('9223372036854775806').times('1e' + tokenConfig.digits || 18)), nonce:fm.toHex(nonce)})
+      const approve = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:'0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', nonce:fm.toHex(nonce)})
       unsigned.push({type: 'tx', data:approve, description: `Approve ${item.value.symbol} allowance`, address})
       nonce = nonce + 1;
     });
-    console.log('    unsigned:', unsigned)
   }
   return unsigned
 }

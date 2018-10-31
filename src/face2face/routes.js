@@ -8,6 +8,7 @@ import CommonModals from '../dex/common/Modals'
 
 const Logged = (props)=>{
   const isLogged = true
+
   if(isLogged){
     return (
       <div>
@@ -20,7 +21,6 @@ const Logged = (props)=>{
       </div>
     )
   }else{
-    
   }
 }
 
@@ -38,7 +38,6 @@ export default class Routes extends React.Component {
           <Route path={`/p2p`}  component={Logged} />
         </Switch>
       </div>
-      
     );
   }
 }

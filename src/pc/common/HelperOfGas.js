@@ -56,7 +56,7 @@ function HelperOfGas(props) {
     })
   }
   return (
-    <div className="bg-white">
+    <div className="bg-white" style={{height:'100%'}}>
       <NavBar
         className="zb-b-b bg-white"
         mode="light"
@@ -78,7 +78,7 @@ function HelperOfGas(props) {
           </div>
           {gas.tabSelected === 'estimate' && <div className="col-auto fs18 color-black-1"><WebIcon type="check-circle-o" /></div>}
         </div>
-        <div className="p15 pb35" onClick={tabChanged.bind(this, 'custom')}>
+        <div className="p15 pb35 zb-b-b" onClick={tabChanged.bind(this, 'custom')}>
           <div className="color-black-1 pl25 pb25 text-left">
             {gasShow(gasPriceStore.current, intl.get('gas_setting.gas_selector_custom'))}
           </div>
