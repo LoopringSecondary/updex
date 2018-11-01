@@ -1,30 +1,14 @@
 export default {
-    selected:'up_wd_black',
-    up_grey:{
-        red:"#D54359",
-        green:"#19A774",
-        bg:'#3B3B47',
-        text:'rgba(255,255,255,0.2)',
-        line:'rgba(255,255,255,0.06)',
-        grid:'rgba(255,255,255,0.02)',
-    },
-    up_purple:{
-        red:"#C1195B",
-        green:"#558B2F",
-        bg:'#272749',
-        text:'rgba(255,255,255,0.2)',
-        line:'rgba(255,255,255,0.06)',
-        grid:'rgba(255,255,255,0.02)',
-    },
-    up_purple_reverse:{
+    selected:'purple',
+    purple:{
         red:"#f44336",
         green:"#4caf50",
-        bg:'#20203C',
+        bg:'#232343',
         text:'rgba(255,255,255,0.2)',
         line:'rgba(255,255,255,0.06)',
         grid:'rgba(255,255,255,0.01)',
     },
-    up_blue:{
+    blue:{
         red:"#f44336",
         green:"#4caf50",
         bg:'#2E3552',
@@ -32,7 +16,7 @@ export default {
         line:'rgba(255,255,255,0.06)',
         grid:'rgba(255,255,255,0.02)',
     },
-    up_white:{
+    white:{
         red:"#f44336",
         green:"#4caf50",
         bg:'#fff',
@@ -40,7 +24,7 @@ export default {
         line:'rgba(0,0,0,0.06)',
         grid:'rgba(0,0,0,0.01)',
     },
-    up_wd_black:{
+    grey:{
         red:"#f44336",
         green:"#4caf50",
         bg:'#202124',
@@ -48,7 +32,7 @@ export default {
         line:'rgba(255,255,255,0.06)',
         grid:'rgba(255,255,255,0.01)',
     },
-    up_white:{
+    white:{
         red:"#f44336",
         green:"#4caf50",
         bg:'#fff',
