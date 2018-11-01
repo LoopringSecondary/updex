@@ -3,6 +3,12 @@ export default {
     // ["import", { "libraryName": "antd-mobile", "libraryDirectory": "es", "style": true },'antd-mobile'],
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true },'antd'],
 	],
+  // multipage:true,
+  // entry:'./src/assets/css/themes/*.less',
+  // entry:{
+  //   index:'./src/index.js',
+  //   'theme-white':'./src/assets/css/themes/theme-white.less',
+  // },
   disableCSSModules: true,
   hash:true,
 	"alias":{
