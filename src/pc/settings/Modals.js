@@ -1,10 +1,10 @@
 import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
-import Settings from 'mobile/settings/Settings'
+import Settings from './Settings'
 import SetLanguage from 'mobile/settings/SetLanguage'
 import SetCurrency from 'mobile/settings/SetCurrency'
-import SetLayout from 'mobile/settings/SetLayout'
+import SetLayout from './SetLayout'
 import SetLRCFee from 'mobile/settings/SetLRCFee'
 import SetTheme from 'mobile/settings/SetTheme'
 import SetTTL from 'mobile/settings/SetTTL'
@@ -63,8 +63,6 @@ export function SetTTLModal(){
     </Containers.Layers>
   )
 }
-
-
 
 function Modals(props) {
   return (
