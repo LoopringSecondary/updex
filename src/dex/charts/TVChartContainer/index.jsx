@@ -5,8 +5,6 @@ import historyProvider from "./api/historyProvider";
 import themes from "./themes.js";
 import storage from "../../../modules/storage";
 
-const theme = themes[themes.selected]
-
 function getLanguageFromURL() {
 	const regex = new RegExp('[\\?&]lang=([^&#]*)');
 	const results = regex.exec(window.location.search);
@@ -45,6 +43,9 @@ class TVChartContainer extends React.PureComponent {
   }
 
 	initChart(symbol) {
+    const {themeName} = this.props
+    const theme = themes[themeName]
+    console.log('themeName',themeName)
 	  const _this = this
 		const widgetOptions = {
 			debug: false,
@@ -242,8 +243,9 @@ class TVChartContainer extends React.PureComponent {
 function mapToProps(state) {
   return {
     trends:state.sockets.trends.items,
-    pair:state.placeOrder.pair
+    pair:state.placeOrder.pair,
+    themeName:state.settings.preference.theme,
+    changeColor:state.settings.preference.changeColor,
   }
 }
-
 export default (connect(mapToProps)(TVChartContainer));

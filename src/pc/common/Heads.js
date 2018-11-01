@@ -14,25 +14,24 @@ class Heads extends React.Component {
           theme === 'purple' &&
           <Helmet>
              <link rel="stylesheet" type="text/css" href="./themes/theme-purple.css" />
-             {changeColor === 'red-green+' && <body className="red-green+" />}
-             {changeColor === 'red+green-' && <body className="red+green-" />}
-             
+             {changeColor === 'red-green+' && <body className="red-down-green-down" />}
+             {changeColor === 'red+green-' && <body className="red-up-green-down" />}
           </Helmet>
         }
         {
           theme === 'darkgrey' && 
           <Helmet>
              <link rel="stylesheet" type="text/css" href="./themes/theme-darkgrey.css" />
-             {changeColor === 'red-green+' && <body className="red-green+" />}
-             {changeColor === 'red+green-' && <body className="red+green-" />}
+             {changeColor === 'red-green+' && <body className="red-down-green-down" />}
+             {changeColor === 'red+green-' && <body className="red-up-green-down" />}
           </Helmet>
         }
         {
           theme === 'white' && 
           <Helmet>
              <link rel="stylesheet" type="text/css" href="./themes/theme-white.css" />
-             {changeColor === 'red-green+' && <body className="red-green+" />}
-             {changeColor === 'red+green-' && <body className="red+green-" />}
+             {changeColor === 'red-green+' && <body className="red-down-green-down" />}
+             {changeColor === 'red+green-' && <body className="red-up-green-down" />}
           </Helmet>
         }
       </div>

@@ -1,5 +1,5 @@
 export default {
-    selected:'purple',
+    // selected:'',
     purple:{
         red:"#f44336",
         green:"#4caf50",
@@ -24,7 +24,7 @@ export default {
         line:'rgba(0,0,0,0.06)',
         grid:'rgba(0,0,0,0.01)',
     },
-    grey:{
+    darkgrey:{
         red:"#f44336",
         green:"#4caf50",
         bg:'#202124',

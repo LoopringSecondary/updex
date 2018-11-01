@@ -23,17 +23,16 @@ class Header extends React.Component {
         <div className="col d-flex align-items-center text-left ">
           <TickerItem />
         </div>
-
-        <div onClick={showLayer.bind(this,'notifications')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
-          <WebIcon type="bell" className="fs20 text-primary" />
-        </div>
         <div onClick={()=>{}} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <WebIcon type="question-circle" className="fs20 text-primary" />
         </div>
-        <div onClick={()=>{}} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
+        <div onClick={showLayer.bind(this,'notifications')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
+          <WebIcon type="bell" className="fs20 text-primary" />
+        </div>
+        <div onClick={showLayer.bind(this,'setLayout')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <WebIcon type="layout" className="fs20 text-primary" />
         </div>
-        <div onClick={()=>{}} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
+        <div onClick={showLayer.bind(this,'setTheme')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <WebIcon type="skin" className="fs20 text-primary" />
         </div>
         <div onClick={showLayer.bind(this,'settings')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
