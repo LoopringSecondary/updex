@@ -90,7 +90,7 @@ function Settings(props) {
         <div className="divider 1px zb-b-t"></div>
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
-        <div className="bg-white settings pb10">
+        <div className="settings pb10">
             <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Preference</div>}>
               <List.Item onClick={()=>showLayer({id:'setLanguage'})} className="overflow-visible" extra={"English"} arrow="horizontal" >
                 <WebIcon type="global" className="mr10 text-primary fs16" />

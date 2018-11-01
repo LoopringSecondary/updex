@@ -19,13 +19,14 @@ function Settings(props) {
     })
   }
   const options = [
-    { value: 'grey', label: 'Blue',checked: settings.preference.currency === 'grey'},
-    { value: 'white', label: 'White',checked: settings.preference.currency === 'white' },
-    { value: 'purple', label: 'Purple',checked: settings.preference.currency === 'purple' },
+    { value: 'grey', label: 'Grey',checked: settings.preference.theme === 'grey'},
+    { value: 'white', label: 'White',checked: settings.preference.theme === 'white' },
+    { value: 'purple', label: 'Purple',checked: settings.preference.theme === 'purple' },
+    { value: 'blue', label: 'Blue',checked: settings.preference.theme === 'blue' },
   ];
-  const currencyChange = (currency) => {
-    if(currency) {
-      settings.preference.currency = currency
+  const themeChange = (theme) => {
+    if(theme) {
+      settings.preference.theme = theme
       dispatch({
         type: 'settings/preferenceChange',
         payload: settings
@@ -44,7 +45,7 @@ function Settings(props) {
           ]}
           rightContent={[]}
         >
-          <div className="color-black">Set {intl.get('settings.currency')}</div>
+          <div className="color-black">Set Theme</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
@@ -52,7 +53,7 @@ function Settings(props) {
         <div className="bg-white settings pb10">
             <List className="mt10 no-border text-left">
               {options.map(i => (
-                <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => currencyChange(i.value)}>
+                <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => themeChange(i.value)}>
                   {i.label}
                 </RadioItem>
               ))}
