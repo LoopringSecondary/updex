@@ -174,7 +174,7 @@ class SignSteps extends React.Component {
         <div className="p15">
           <div className="mb20 mt20">
             <Steps current={step} direction="horizontal">
-              {steps.map(item => <Steps.Step key={item.title} title={<div className="color-black-1 font-weight-normal fs13 pt5">{item.title}</div>} />)}
+              {steps.map((item, index) => <Steps.Step key={index} title={<div className="color-black-1 font-weight-normal fs13 pt5">{item.title}</div>} />)}
             </Steps>
           </div>
           {
