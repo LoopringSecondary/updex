@@ -10,6 +10,7 @@ import {keccakHash} from 'LoopringJS/common/utils'
 import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
 import SignOrderAndTxs from './SignOrderAndTxs'
 import HelperOfPlaceOrderResult from './HelperOfPlaceOrderResult'
+import HelperOfPlaceP2POrderResult from './HelperOfPlaceP2POrderResult'
 import SignByLoopr from './SignByLoopr'
 import storage from 'modules/storage'
 
@@ -51,9 +52,18 @@ class SignSteps extends React.Component {
       }
       let origin = {}
       // [approve, approveZero] use sign instead
+      let type = placeOrderSteps.task
       switch(placeOrderSteps.task) {
         case 'sign':
           origin = JSON.stringify(placeOrderSteps.unsign)
+          break;
+        case 'signP2P':
+          type = 'sign'
+          const unsign = new Array()
+          placeOrderSteps.unsign.forEach(item => {
+            unsign.push({type:item.type, data:item.data})
+          })
+          origin = JSON.stringify(unsign)
           break;
         case 'cancelOrder':
           origin = JSON.stringify(placeOrderSteps.unsign[0].data)
@@ -72,7 +82,7 @@ class SignSteps extends React.Component {
       this.setState({generating:true})
       window.RELAY.order.setTempStore(hash, origin).then(res => {
         const signWith = window.WALLET.getUnlockType()
-        const qrcode = JSON.stringify({type:placeOrderSteps.task, value: hash})
+        const qrcode = JSON.stringify({type, value: hash})
         const time = moment().valueOf()
         dispatch({type: 'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
         if (!res.error) {
@@ -198,7 +208,8 @@ class SignSteps extends React.Component {
           {
             step === 2 &&
             <div className="mt15">
-              <HelperOfPlaceOrderResult />
+              {placeOrderSteps.task === 'signP2P' && <HelperOfPlaceP2POrderResult />}
+              {placeOrderSteps.task !== 'signP2P' && <HelperOfPlaceOrderResult />}
             </div>
           }
         </div>

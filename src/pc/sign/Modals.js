@@ -17,7 +17,7 @@ export function HelperOfSignStepsModal(){
 function Modals(props) {
   return (
     <div>
-      
+      <HelperOfSignStepsModal />
     </div>
   )
 }
