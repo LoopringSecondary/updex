@@ -20,6 +20,7 @@ import ListTodos from './notifications/ListTodos'
 import CommonModals from './common/Modals'
 import storage from 'modules/storage'
 import UserAgent from 'common/utils/useragent'
+import Themes from './common/Themes'
 
 const UnLogged = ()=>{
   const isLogged = !!storage.wallet.getUnlockedAddress()
@@ -53,6 +54,7 @@ const Logged = ()=>{
         <SignModals />
         <P2PModals />
         <SettingsModals />
+        <Themes />
       </div>
     )
   }else{

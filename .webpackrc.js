@@ -6,8 +6,7 @@ export default {
   // multipage:true,
   // entry:'./src/assets/css/themes/*.less',
   // entry:{
-  //   index:'./src/index.js',
-  //   'theme-white':'./src/assets/css/themes/theme-white.less',
+  //   index:['./src/index.js','./src/assets/css/themes/theme-white.less']
   // },
   disableCSSModules: true,
   hash:true,
