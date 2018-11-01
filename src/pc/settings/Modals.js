@@ -4,6 +4,7 @@ import UiContainers from 'LoopringUI/containers'
 import Settings from 'mobile/settings/Settings'
 import SetLanguage from 'mobile/settings/SetLanguage'
 import SetCurrency from 'mobile/settings/SetCurrency'
+import SetLayout from 'mobile/settings/SetLayout'
 
 
 export function SetLanguageModal(){
@@ -24,6 +25,16 @@ export function SetCurrencyModal(){
     </Containers.Layers>
   )
 }
+export function SetLayoutModal(){
+  return (
+    <Containers.Layers id="setLayout">
+      <UiContainers.Drawer id="setLayout" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+        <SetLayout />
+      </UiContainers.Drawer>
+    </Containers.Layers>
+  )
+}
+
 
 function Modals(props) {
   return (
@@ -35,6 +46,7 @@ function Modals(props) {
       </Containers.Layers>
       <SetLanguageModal />
       <SetCurrencyModal />
+      <SetLayoutModal />
     </div>
   )
 }

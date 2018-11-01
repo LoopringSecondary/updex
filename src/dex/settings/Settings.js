@@ -104,7 +104,7 @@ function Settings(props) {
                 <WebIcon type="skin" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Skin</span>
               </List.Item>
-              <List.Item className="overflow-visible" extra={"Big Chart"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setLayout'})} className="overflow-visible" extra={"Big Chart"} arrow="horizontal" >
                 <WebIcon type="layout" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Layout</span>
               </List.Item>

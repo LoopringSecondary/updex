@@ -1,4 +1,5 @@
 import React from 'react';
+import {connect} from 'dva';
 import Home1 from './Home1'
 import Home2 from './Home2'
 import Home3 from './Home3'
@@ -10,19 +11,18 @@ class Trade extends React.Component {
     super(props);
   }
   render(){
-    const {match,location,dispatch} = this.props;
-    let layout = 1;
+    const {match,location,dispatch,layout} = this.props;
     switch (layout) {
-      case 1:
+      case "1":
         return <Home1 />
         break;
-      case 2:
+      case "2":
         return <Home2 />
         break;
-      case 3:
+      case "3":
         return <Home3 />
         break;
-      case 4:
+      case "4":
         return <Home4 />
         break;
       default:
@@ -32,4 +32,6 @@ class Trade extends React.Component {
   }
 }
 
-export default Trade
+export default connect(({settings})=>({
+  layout:settings.preference.layout
+}))(Trade)
