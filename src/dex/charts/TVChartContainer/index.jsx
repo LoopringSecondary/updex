@@ -44,8 +44,8 @@ class TVChartContainer extends React.PureComponent {
 
 	initChart(symbol) {
     const {themeName} = this.props
-    const theme = themes[themeName]
     console.log('themeName',themeName)
+    const theme = themes[themeName]
 	  const _this = this
 		const widgetOptions = {
 			debug: false,

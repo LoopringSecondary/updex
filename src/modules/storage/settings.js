@@ -22,7 +22,7 @@ const get = ()=>{
         timezone: "UTC+00:00",
         layout: "1",
         changeColor: "red-green+",
-        theme: "grey",
+        theme: "darkgrey",
       },
       trading: {
         contract: {

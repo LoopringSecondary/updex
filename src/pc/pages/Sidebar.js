@@ -30,23 +30,31 @@ class Sidebar extends React.Component {
           <div className="d-flex flex-column mtpanel bg-white" style={{flex:'1'}}>
             <div className="zb-b-b">
               <Tooltip title="Market Trade" placement="right">
-                <div className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary bg-primary-light">
-                  <WebIcon type="sliders" theme="" className="fs20" />
+                <div className="pt10 pb10 zb-b-t">
+                  <div className="text-center cursor-pointer bg-primary circle m-auto" style={{height:'4.4rem',width:'4.4rem',lineHeight:'5rem'}}>
+                    <WebIcon type="line-chart" theme="" className="fs20 color-black" />
+                  </div>
                 </div>
               </Tooltip>
               <Tooltip title="P2P Trade" placement="right">
-                <div onClick={()=>showLayer('p2p')} className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary">
-                  <WebIcon type="swap" theme="" className="fs20" />
+                <div className="pt10 pb10 zb-b-t">
+                  <div onClick={()=>showLayer('p2p')} className="text-center cursor-pointer text-primary bg-primary-light circle m-auto" style={{height:'4.4rem',width:'4.4rem',lineHeight:'5rem'}}>
+                    <WebIcon type="team" theme="" className="fs20" />
+                  </div>
                 </div>
               </Tooltip>
               <Tooltip title="My Orders" placement="right">
-                <div className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary">
-                  <WebIcon type="profile" theme="" className="fs20" />
+                <div className="pt10 pb10 zb-b-t">
+                  <div  className="text-center cursor-pointer text-primary bg-primary-light circle m-auto" style={{height:'4.4rem',width:'4.4rem',lineHeight:'5rem'}}>
+                    <WebIcon type="solution" theme="" className="fs20" />
+                  </div>
                 </div>
               </Tooltip>
               <Tooltip title="My Wallet" placement="right">
-                <div className="pt15 pb15 text-center cursor-pointer zb-b-t text-primary">
-                  <WebIcon type="wallet" theme="" className="fs20" />
+                <div className="pt10 pb10 zb-b-t">
+                  <div  className="text-center cursor-pointer text-primary bg-primary-light circle m-auto" style={{height:'4.4rem',width:'4.4rem',lineHeight:'5rem'}}>
+                    <WebIcon type="property-safety" theme="" className="fs20" />
+                  </div>
                 </div>
               </Tooltip>
             </div>

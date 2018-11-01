@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'dva'
 import intl from 'react-intl-universal';
 import Markets from '../tickers/Markets';
-import PlaceOrderForm from '../orders/PlaceOrderForm';
+import PlaceOrderFormNoSide from '../orders/PlaceOrderFormNoSide';
 import HelperOfDepth from '../orders/HelperOfDepth';
 import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
 import ListMarketFills from '../fills/ListMarketFills';
@@ -31,28 +31,46 @@ class Home extends React.Component {
               <Kline />
             </PanelWrapper>
           </div>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'40rem'}}>
-            <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="">
-              <PanelHeader title="Order Book" />
-              <HelperOfDepth />
-            </PanelWrapper>
-            <PanelWrapper className="mtpanel pb5" style={{height:'36.5rem'}}>
-              <PanelHeader title="Place Order" />
-              <div className="pt10"></div>
-              <PlaceOrderForm location={location} match={match} />
-            </PanelWrapper>
-          </div>
-          <div className="col-auto d-flex flex-column mpanel mr0 mb0" style={{width:'35rem'}}>
-            <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem'}} className="pb10">
-              <PanelHeader title="Trade History" />
-              <ListMarketFills />
-            </PanelWrapper>
-            <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
-              <PanelHeader title="Orders" />
-              <div style={{flex:'1',overflow:'auto'}}>
-                <HelperOfMyMarketOrders />
+          <div className="col-auto d-flex flex-column mlpanel mtpanel">
+            <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
+              <div className="col-auto" style={{height:'100%'}}>
+                <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'35rem'}} className="">
+                  <PanelHeader title="Order Book" />
+                  <HelperOfDepth />
+                </PanelWrapper>
               </div>
-            </PanelWrapper>
+              <div className="col-auto" style={{height:'100%'}}>
+                <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'35rem'}} className="mlpanel">
+                  <PanelHeader title="Trade History" />
+                  <ListMarketFills />
+                </PanelWrapper>
+              </div>
+            </div>
+            <div className="row no-gutters ml0 mr0 mtpanel">
+              <div className="col-auto">
+                <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem',height:'36.5rem '}} className="">
+                  <PanelHeader title="Buy LRC" />
+                  <div className="pt10"></div>
+                  <PlaceOrderFormNoSide side="buy" location={location} match={match} />
+                </PanelWrapper>
+              </div>
+              <div className="col-auto">
+                <PanelWrapper className="" style={{height:'36.5rem'}}>
+                  <PanelHeader title="Sell LRC" />
+                  <div className="pt10"></div>
+                  <PlaceOrderFormNoSide side="sell" location={location} match={match} />
+                </PanelWrapper>
+              </div>
+            </div>
+            {
+              false &&
+              <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
+                <PanelHeader title="Orders" />
+                <div style={{flex:'1',overflow:'auto'}}>
+                  <HelperOfMyMarketOrders />
+                </div>
+              </PanelWrapper>
+            }
           </div>
         </div>
       </div>

@@ -19,7 +19,7 @@ function Settings(props) {
     })
   }
   const options = [
-    { value: 'grey', label: 'Grey',checked: settings.preference.theme === 'grey'},
+    { value: 'darkgrey', label: 'Dark Grey',checked: settings.preference.theme === 'darkgrey'},
     { value: 'white', label: 'White',checked: settings.preference.theme === 'white' },
     { value: 'purple', label: 'Purple',checked: settings.preference.theme === 'purple' },
     // { value: 'blue', label: 'Blue',checked: settings.preference.theme === 'blue' },
