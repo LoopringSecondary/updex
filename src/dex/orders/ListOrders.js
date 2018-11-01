@@ -1,22 +1,16 @@
-import React from 'react';
-import { Button,WingBlank, Tabs, NavBar, Icon,Modal, Toast, PullToRefresh,Pagination } from 'antd-mobile';
-import { Icon as WebIcon,Spin } from 'antd';
-import { createForm } from 'rc-form';
-import { connect } from 'dva';
-import Containers from 'modules/containers';
-import UiContainers from 'LoopringUI/containers'
-import routeActions from 'common/utils/routeActions'
+import React from 'react'
+import { Button, Modal, Pagination, PullToRefresh, Toast } from 'antd-mobile'
+import { Icon as WebIcon, Spin } from 'antd'
+import { createForm } from 'rc-form'
 import commonFm from 'modules/formatter/common'
 import intl from 'react-intl-universal'
-import {OrderFm} from 'modules/orders/OrderFm'
+import { OrderFm } from 'modules/orders/OrderFm'
 import Worth from 'modules/settings/Worth'
 import moment from 'moment'
 import storage from 'modules/storage'
-import TokenFm from "../../modules/tokens/TokenFm";
-import {signMessage} from "../../common/utils/signUtils";
-import ReactDOM from 'react-dom'
+import TokenFm from '../../modules/tokens/TokenFm'
+import { signMessage } from '../../common/utils/signUtils'
 import config from 'common/config'
-import ListPagination from 'LoopringUI/components/ListPagination'
 
 async function fetchOrders(page) {
   let filter = {}
@@ -419,7 +413,7 @@ export const renders = {
       if(cancelOrder) {
         return (
           <div>
-            <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block bg-primary-light text-primary" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
+            <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block bg-primary-light text-primary border-none" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
             {/*<div className="text-primary mt5">{intl.get("order_status.opened")}</div>*/}
           </div>
         )
@@ -431,7 +425,7 @@ export const renders = {
 
     if (status === 'ORDER_WAIT_SUBMIT_RING') {
       if(cancelOrder) {
-        return <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
+        return <Button type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block bg-primary-light text-primary border-none" size="small" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get('common.cancel')}</Button>
         // return <a className="fs12" onClick={(e) =>{e.stopPropagation();cancelOrder()}}>{intl.get("common.cancel")}</a>
       } else {
         return <span className="text-primary">{intl.get("order_status.waiting")}</span>

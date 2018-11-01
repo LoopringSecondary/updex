@@ -18,6 +18,14 @@ function Settings(props) {
       }
     })
   }
+  const showLayer = (payload = {}) => {
+    dispatch({
+      type: 'layers/showLayer',
+      payload: {
+        ...payload
+      }
+    })
+  }
   const languages = [
     { value: 'en-US', label: 'English',checked: settings.preference.language === 'en-US'},
     { value: 'zh-CN', label: '中文',checked: settings.preference.language === 'zh-CN'},
@@ -83,57 +91,38 @@ function Settings(props) {
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="bg-white settings pb10">
-            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.language')}</div>}>
-              {languages.map(i => (
-                <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => languageChange(i.value)}>
-                  {i.label}
-                </RadioItem>
-              ))}
-            </List>
-            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.currency')}</div>}>
-              {currencys.map(i => (
-                <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => currencyChange(i.value)}>
-                  {i.label}
-                </RadioItem>
-              ))}
-            </List>
-            <List className="mt10 no-border text-left position-relative" 
-              renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15 d-flex justify-content-between">
-              <span>{intl.get('settings.trading_fee')}</span>
-              <span className="mr15">{settings.trading.lrcFee/10}%</span>
-              </div>}
-            >
-              <List.Item className="pt10 pb10 overflow-visible" >
-                <div className="row no-gutters ml0 mr0 fs13 color-black-2 ">
-                 <div className="col-auto fs14">{intl.get('setting_lrcfee.slow')}</div>
-                 <div className="col text-center">
-                  <div className="pt10 pb10 pl15 pr15">
-                    <Slider
-                      defaultValue={settings.trading.lrcFee}
-                      min={1}
-                      max={50}
-                      onChange={(v)=>lrcFeeChange(v)}
-                      onAfterChange={()=>{}}
-                    />
-                  </div>
-                 </div>
-                 <div className="col-auto fs14">{intl.get('setting_lrcfee.fast')}</div>
-                </div>
+            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Preference</div>}>
+              <List.Item onClick={()=>showLayer({id:'setLanguage'})} className="overflow-visible" extra={"English"} arrow="horizontal" >
+                <WebIcon type="global" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Language</span>
+              </List.Item>
+              <List.Item onClick={()=>showLayer({id:'setCurrency'})} className="overflow-visible" extra={"USD"} arrow="horizontal" >
+                <WebIcon type="pay-circle" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Currency</span>
+              </List.Item>
+              <List.Item className="overflow-visible" extra={"Grey"} arrow="horizontal" >
+                <WebIcon type="skin" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Skin</span>
+              </List.Item>
+              <List.Item onClick={()=>showLayer({id:'setLayout'})} className="overflow-visible" extra={"Big Chart"} arrow="horizontal" >
+                <WebIcon type="layout" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Layout</span>
+              </List.Item>
+              <List.Item className="overflow-visible" extra={"Red- Green+"} arrow="horizontal" >
+                <WebIcon type="rise" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Change Color</span>
               </List.Item>
             </List>
-            <div className="fs14 color-black-3 mt5 mb15 pl10 text-left">
-              {intl.get('setting_lrcfee.tips')}
-            </div>
-            {
-              false &&
-              <List className="mt10 no-border text-left" renderHeader={() => <div className="fs13 color-black-4 mb5">Order Time-To-Live</div>}>
-                {ttls.map(i => (
-                  <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => languageChange(i.value)}>
-                    {i.label}
-                  </RadioItem>
-                ))}
-              </List>
-            }
+            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Market Trade</div>}>
+              <List.Item className="overflow-visible" extra={"0.2%"} arrow="horizontal" >
+                <WebIcon type="property-safety" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Trade Fee</span>
+              </List.Item>
+              <List.Item className="overflow-visible" extra={"1 Hour"} arrow="horizontal" >
+                <WebIcon type="hourglass" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Order Time-To-Live</span>
+              </List.Item>
+            </List>
         </div>
       </div>
       

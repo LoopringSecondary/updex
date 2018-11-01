@@ -12,15 +12,15 @@ class AuthByImtoken extends React.Component {
     const address = storage.wallet.getUnlockedAddress()
     if(address){
       this.goToDex();
-      routeActions.gotoPath('/dex');
     }
   }
   goToDex = () => {
     Toast.loading('Loading configs...', 0, () => {
       Toast.success('Load complete !!!')
     })
+
     const _props = this.props
-    window.Wallet = new Mock()
+    window.Wallet = new Mock();
     window.Wallet.setConfigs().then(res => {
       let language = 'en-US'
       let currency = 'USD'
@@ -29,15 +29,20 @@ class AuthByImtoken extends React.Component {
       // }
       // if(window.Wallet.currency === 'CNY'){
       //   currency = 'CNY'
-      // }
+      // }s
       storage.wallet.storeUnlockedAddress("mock", window.Wallet.address)
       window.RELAY.account.register(window.Wallet.address)
       _props.dispatch({type:'settings/preferenceChange',payload:{language,currency}})
       _props.dispatch({type: 'sockets/unlocked'});
       this.props.dispatch({type:'locales/setLocale', payload:{locale:language}});
       Toast.hide()
+      let to = routeActions.location.getQueryByName(this.props,'to');
+      if(to){
+        routeActions.gotoPath(to)
+      }else{
+        routeActions.gotoPath('/dex')
+      }
     })
-    routeActions.gotoPath('/dex');
   }
   goToFace2Face = () => {
     routeActions.gotoPath('/face2face');

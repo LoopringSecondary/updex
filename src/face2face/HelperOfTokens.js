@@ -56,7 +56,7 @@ class HelperOfTokens extends React.Component {
         <NavBar
           className="zb-b-b"
           mode="light"
-          onLeftClick={() => hideLayer({id:'helperOfToken'})}
+          onLeftClick={() => hideLayer({id:'helperOfTokens'})}
           leftContent={[
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}

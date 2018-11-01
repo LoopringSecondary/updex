@@ -15,7 +15,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="orderDetail">
-        <UiContainers.Popups id="orderDetail" className="h100" style={{height:'100%'}}>
+        <UiContainers.Popups id="orderDetail" className="h-100" style={{height:'100%'}}>
           <OrderDetail />
         </UiContainers.Popups>
       </Containers.Layers>
@@ -45,7 +45,7 @@ function Modals(props) {
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfTTL">
-        <UiContainers.Popups id="helperOfTTL">
+        <UiContainers.Popups id="helperOfTTL" className="h-100" style={{height:'100%'}}>
           <HelperOfTTL />
         </UiContainers.Popups>
       </Containers.Layers>

@@ -8,11 +8,11 @@ import HelperOfAmount from './HelperOfAmount'
 import HelperOfFAQ from './HelperOfFAQ'
 import HelperOfPrice from './HelperOfPrice'
 import Face2FaceConfirm from './Face2FaceConfirm'
-import Settings from './Settings'
 import OrderDetail from './Detail'
 import OrderQrcode from './Qrcode'
 import TakerConfirm from './TakerConfirm'
 import Face2FacePage from './Face2FacePage'
+
 
 function Modals(props) {
   return (
@@ -68,7 +68,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="helperOfAmountOfP2P">
-        <UiContainers.Drawer id="helperOfAmountOfP2P" position="right" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
+        <UiContainers.Drawer id="helperOfAmountOfP2P" alias="helperOfAmount" position="right" className="h-100" style={{height:'100%',width:"48rem",margin:'0 auto'}}>
           <HelperOfAmount />
         </UiContainers.Drawer>
       </Containers.Layers>

@@ -156,7 +156,6 @@ class SignSteps extends React.Component {
       title: step3,
     }];
 
-    console.log(100000,placeOrderSteps)
     return (
       <div className="bg-white" style={{height:'100%'}}>
         <NavBar
@@ -209,8 +208,8 @@ class SignSteps extends React.Component {
           {
             step === 2 &&
             <div className="mt15">
-              {(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') && <HelperOfPlaceP2POrderResult />}
-              {placeOrderSteps.signWith !== 'loopr' && placeOrderSteps.signWith !== 'upWallet' && <HelperOfPlaceOrderResult />}
+              {placeOrderSteps.task === 'signP2P' && <HelperOfPlaceP2POrderResult />}
+              {placeOrderSteps.task !== 'signP2P' && <HelperOfPlaceOrderResult />}
             </div>
           }
         </div>

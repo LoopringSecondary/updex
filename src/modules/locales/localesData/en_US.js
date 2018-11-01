@@ -68,6 +68,8 @@ const words = {
   order_book:'Order Book',
   set:'Set',
   helper:'Helper',
+  next_step:"Next",
+  exchange:"Exchange",
   list:{
     no_data:'No Data',
     no_data_custom:'No {title}',
@@ -114,7 +116,9 @@ const notifications = {
     enable_suc:'Enable Successfully',
     enable_fail:'Enable failed',
     place_order_price_confirm:"Are you sure you want to continue ?",
-    open_safari:"Please open in safari"
+    open_safari:"Please open in safari",
+    submit_ring_suc:'Submit ring successfully',
+    submit_ring_fail:'Submit ring failed'
   },
   message: {
     place_order_price_high:"Your price is 5% higher than the market price.",
@@ -123,6 +127,7 @@ const notifications = {
     failed_fetch_data_from_server: 'Failed fetch data from server, you could wait a moment and come back later',
     eth_is_required_when_place_order: 'ETH is required to pay Ethereum transaction fees, calculated with your current order cost that need to send Ethereum transactions, totally required {required} ETH.',
     lrcfee_is_required_when_place_order: 'LRC is required to pay trade fees, added on your history orders need LRC, totally required {required} LRC.',
+    token_required_when_place_order:'{token} is not enough,totally require {required} {token}',
     some_items_not_signed: "You may have some items not signed, please signed all items then continue",
     place_order_success: 'Good job. Your order has been submitted for ring-matching.',
     place_order_balance_not_enough: 'In order for your order to be fully filled, {amount} more {token} is required.',
@@ -297,6 +302,11 @@ export default {
   helper_of_balance: {
     description: "We only show your {pair} assets at current page"
   },
+  helper_of_price:{
+    title: 'Price Helper',
+    sell_price: 'Price of Sell {token}',
+    buy_price: 'Price of Buy {token}'
+  },
   settings: {
     title: 'Settings',
     preferences: 'Preferences',
@@ -337,6 +347,8 @@ export default {
     tabs_advanced: 'Advanced',
     low: 'Low',
     high: 'High',
+    slow: 'Slow',
+    fast: 'Fast',
     tips:"The fee must be larger than a gas of an eth transaction for matching miner."
   },
   place_order_confirm: {
@@ -351,9 +363,16 @@ export default {
     token_balance: 'Token Balance',
     order_detail: 'Order Detail',
     generate_order: 'Generate Order',
+    price:'Exchange Price',
     instruction: '1. 以您希望的兑换率生成一个订单，把不包含鉴权数据（没有这部分数据任何人都无法撮合您的订单）的订单信息提交给relay，同时将生成的订单hash和鉴权信息生成二维码。</br>2. 您可以把这个二维码发送给您的朋友，任何人拿到这个二维码都有可能吃掉您的订单，请注意以安全的方式传播。</br>3. 对方使用Circulr移动端扫描二维码，下一个与您买入卖出量完全匹配的对手单，发送以太坊交易吃掉这个订单，因此吃单方需要消耗油费。',
     notice: '* P2P订单不需要支付LRC手续费</br>',
-    user_center_p2p:'P2P Trade'
+    user_center_p2p:'P2P Trade',
+    share_qr:'Share QRCode',
+    amount_to_sell:'Amount to sell',
+    amount_to_buy:'Amount to buy',
+    set_sell_amount:"Set sell amount",
+    count:"Order split count",
+    set_count:"Set order split count "
   },
   sign: {
     not_signed: "You may have some items not signed",

@@ -21,7 +21,7 @@
 .am-search{
   background: transparent !important;
   .am-search-input{
-    background: @fill-body !important;
+    background: @bg-white-light !important;
     input[type="search"]{
       color:rgba(255,255,255,0.5) !important;
     }
@@ -55,4 +55,24 @@
 .am-picker-col-indicator::after{
   background:@brand-primary !important;
 }
-
+.am-list-item{
+  &.circle{
+    background: @bg-white-light !important;
+  }
+}
+.am-segment.side-buy{
+  .am-segment-item{
+    background: @bg-white-light !important;
+    &.am-segment-item-selected{
+      
+    }
+  }
+}
+.am-segment.side-sell{
+  .am-segment-item{
+    background: @bg-white-light !important;
+    &.am-segment-item-selected{
+      
+    }
+  }
+}

@@ -37,20 +37,21 @@ const PlaceOrderResult = (props) => {
     }
     return step
   }
+  let signResult = placeOrderSteps.step
+  if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') {
+    signResult = signByLooprStep(placeOrderSteps, circulrNotify)
+  }
   const getSignP2P = () => {
-    const signResult = signByLooprStep(placeOrderSteps, circulrNotify)
     const order = unsign.find((item) => item.type === 'order')
     if(placeOrderSteps.task === 'signP2P' && signResult > 1 && order && order.completeOrder.authPrivateKey) {
       return JSON.stringify({
         type: 'P2P',
-        value: {auth: order.completeOrder.authPrivateKey, hash: toHex(window.RELAY.order.getOrderHash(order.completeOrder)), count:1}
+        value: {auth: order.completeOrder.authPrivateKey, hash: toHex(window.RELAY.order.getOrderHash(order.completeOrder)), count:p2pOrder.count}
       })
     } else {
       return ''
     }
   }
-  console.log(1231, unsign, placeOrderSteps, p2pOrder)
-  const signResult = signByLooprStep(placeOrderSteps, circulrNotify)
   const qrcodeData = getSignP2P()
   return (
     <div className="bg-white-light">
@@ -60,10 +61,10 @@ const PlaceOrderResult = (props) => {
             <i className={`fs50 icon-success color-success`}></i>
             <div className="fs18 color-black-1">{intl.get('sign.submit_success')}</div>
             {
-              placeOrderSteps.task === 'signP2P' &&
+              placeOrderSteps.task === 'signP2P' && qrcodeData &&
               <div>
                 <div className="p5 d-inline-block pb0" style={{background:'#fff',minHeight:'210px'}}>
-                  <QRCode value={{a:'aaa'}} size={210} level='H'/>
+                  <QRCode value={qrcodeData} size={210} level='H'/>
                 </div>
               </div>
             }

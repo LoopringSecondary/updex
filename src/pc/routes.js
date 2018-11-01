@@ -9,6 +9,7 @@ import MarketsSearch from './tickers/ListSearchTickers'
 import MarketDetail from './tickers/Detail'
 import MarketModals from './tickers/Modals'
 import AuthModals from './auth/Modals'
+import SettingsModals from './settings/Modals'
 import SignModals from './sign/Modals'
 import P2PModals from '../face2face/Modals'
 import NotificationModals from './notifications/Modals'
@@ -51,6 +52,7 @@ const Logged = ()=>{
         <AuthModals />
         <SignModals />
         <P2PModals />
+        <SettingsModals />
       </div>
     )
   }else{

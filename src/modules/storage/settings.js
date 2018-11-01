@@ -19,7 +19,10 @@ const get = ()=>{
       preference: {
         language: userAgent.getLanguage() || 'en-US',
         currency: userAgent.getLanguage() === 'zh-CN' ? 'CNY':"USD",
-        timezone: "UTC+00:00"
+        timezone: "UTC+00:00",
+        layout: "1",
+        changeColor: "red-green+",
+        theme: "grey",
       },
       trading: {
         contract: {

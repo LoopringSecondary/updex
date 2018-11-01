@@ -1,7 +1,7 @@
 import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
-import Settings from 'mobile/account/Settings'
+import Settings from 'mobile/settings/Settings'
 import { Icon } from 'antd'
 import { Button,Modal,Toast,NavBar} from 'antd-mobile'
 import { toBig, toHex, clearHexPrefix } from 'LoopringJS/common/formatter'

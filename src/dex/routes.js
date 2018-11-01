@@ -13,20 +13,21 @@ import UserCenter from './account/UserCenter'
 import Notifications from './notifications/Notifications'
 import NotificationModals from './notifications/Modals'
 import AuthModals from './auth/Modals'
+import SettingsModals from './settings/Modals'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from './common/Modals'
 import storage from 'modules/storage'
 import UserAgent from 'common/utils/useragent'
 
 const UnLogged = ()=>{
-  const isLogged = !!storage.wallet.getUnlockedAddress()
+  const isLogged =  !!(window.Wallet && window.Wallet.address)
   if(isLogged){
     return <Redirect to="/dex" />
   }else{
     return (
       <Redirect to="/auth" />
     )
-  }
+}
 }
 const Logged = ()=>{
   const isLogged =  !!storage.wallet.getUnlockedAddress()
@@ -52,9 +53,9 @@ const Logged = ()=>{
         <CommonModals />
         <Orders.Modals />
         <Tokens.Modals />
-        <Account.Modals />
         <NotificationModals />
         <AuthModals />
+        <SettingsModals />
       </div>
     )
   }else{
