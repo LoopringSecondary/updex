@@ -100,9 +100,9 @@ function Settings(props) {
                 <WebIcon type="pay-circle" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Currency</span>
               </List.Item>
-              <List.Item className="overflow-visible" extra={"Grey"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setTheme'})} className="overflow-visible" extra={"Grey"} arrow="horizontal" >
                 <WebIcon type="skin" className="mr10 text-primary fs16" />
-                <span className="color-black-1">Skin</span>
+                <span className="color-black-1">Theme</span>
               </List.Item>
               <List.Item onClick={()=>showLayer({id:'setLayout'})} className="overflow-visible" extra={"Big Chart"} arrow="horizontal" >
                 <WebIcon type="layout" className="mr10 text-primary fs16" />
@@ -114,11 +114,11 @@ function Settings(props) {
               </List.Item>
             </List>
             <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Market Trade</div>}>
-              <List.Item className="overflow-visible" extra={"0.2%"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setLRCFee'})} className="overflow-visible" extra={"0.2%"} arrow="horizontal" >
                 <WebIcon type="property-safety" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Trade Fee</span>
               </List.Item>
-              <List.Item className="overflow-visible" extra={"1 Hour"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setTTL'})}  className="overflow-visible" extra={"1 Hour"} arrow="horizontal" >
                 <WebIcon type="hourglass" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Order Time-To-Live</span>
               </List.Item>

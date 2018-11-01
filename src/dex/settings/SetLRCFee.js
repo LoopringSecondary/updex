@@ -66,8 +66,7 @@ function Settings(props) {
                  </div>
                  <div className="col-auto fs14">{intl.get('setting_lrcfee.fast')}</div>
                 </div>
-              
-
+              </List.Item>
             </List>
             <div className="fs14 color-black-3 mt5 mb15 pl10 text-left">
               {intl.get('setting_lrcfee.tips')}

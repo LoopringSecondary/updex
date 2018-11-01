@@ -1,84 +1,62 @@
 import React from 'react'
-import { connect } from 'dva'
-import { NavBar, Slider,List,Radio } from 'antd-mobile'
-import { Icon as WebIcon } from 'antd'
-import { toNumber } from 'LoopringJS/common/formatter'
+import ReactDOM from 'react-dom'
+import {Card} from 'antd'
+import { DatePickerView, NavBar,Icon } from 'antd-mobile';
 import intl from 'react-intl-universal'
-import {setLocale} from "common/utils/localeSetting";
+import {connect} from 'dva'
+import moment from 'moment'
+import storage from 'modules/storage'
 
-const RadioItem = Radio.RadioItem;
+class TTLForm extends React.Component {
+  render() {
+    const { placeOrder,dispatch } = this.props
+    const {validUntil} = placeOrder
+    let defaultTo = moment().add(1, 'months')
+    if(validUntil) defaultTo = validUntil
 
-function Settings(props) {
-  const {settings,dispatch} = props
-  const hideLayer = (payload = {}) => {
-    dispatch({
-      type: 'layers/hideLayer',
-      payload: {
-        ...payload
-      }
-    })
-  }
-  const lrcFeeChange = (lrcFeePermillage) => {
-    settings.trading.lrcFee = lrcFeePermillage
-    dispatch({
-      type: 'settings/preferenceChange',
-      payload: settings
-    })
-  }
-
-  return (
-    <div className="bg-white position-relative" style={{height:'100%'}}>
-      <div className="position-absolute w-100" style={{zIndex:'1000'}}>
+    function timeToLiveValueChange(e) {
+      const start = moment()
+      const end = moment(e)
+      dispatch({type:'placeOrder/validTimeChange', payload:{validSince: start, validUntil: end}})
+    }
+    const hideLayer = (payload = {}) => {
+      dispatch({
+        type: 'layers/hideLayer',
+        payload: {
+          ...payload
+        }
+      })
+    }
+    return (
+      <div className="bg-white" style={{height:'100%'}}>
         <NavBar
-          className="bg-white"
+          className="zb-b-b"
           mode="light"
-          onLeftClick={()=>hideLayer({id:'setTTL'})}
+          onLeftClick={() => hideLayer({id:'setTTL'})}
           leftContent={[
-            <span key='1' className=""><WebIcon type="close"/></span>,
+            <span key='1' className=""><Icon type="cross"/></span>,
           ]}
-          rightContent={[]}
         >
-          <div className="color-black">Set Order Time-To-Live</div>
+          <div className="color-black-1">{intl.get('setting_ttl.title')}</div>
         </NavBar>
-        <div className="divider 1px zb-b-t"></div>
-      </div>
-      <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
-        <div className="bg-white settings pb10">
-            <List className="mt10 no-border text-left position-relative" 
-              renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15 d-flex justify-content-between">
-              <span>{intl.get('settings.trading_fee')}</span>
-              <span className="mr15">{settings.trading.lrcFee/10}%</span>
-              </div>}
-            >
-              <List.Item className="pt10 pb10 overflow-visible" >
-                <div className="row no-gutters ml0 mr0 fs13 color-black-2 ">
-                 <div className="col-auto fs14">{intl.get('setting_lrcfee.slow')}</div>
-                 <div className="col text-center">
-                  <div className="pt10 pb10 pl15 pr15">
-                    <Slider
-                      defaultValue={settings.trading.lrcFee}
-                      min={1}
-                      max={50}
-                      onChange={(v)=>lrcFeeChange(v)}
-                      onAfterChange={()=>{}}
-                    />
-                  </div>
-                 </div>
-                 <div className="col-auto fs14">{intl.get('setting_lrcfee.fast')}</div>
-                </div>
-              
-
-            </List>
-            <div className="fs14 color-black-3 mt5 mb15 pl10 text-left">
-              {intl.get('setting_lrcfee.tips')}
-            </div>
+        <div className="zb-b-b">
+          <DatePickerView
+            mode="datetime"
+            minDate={moment().toDate()}
+            value={defaultTo.toDate()}
+            locale={storage.settings.get().preference.language}
+            onChange={timeToLiveValueChange}
+          />
         </div>
       </div>
-      
-    </div>
-  )
+    );
+  }
 }
-export default connect(({settings})=>({settings}))(Settings)
-
-
+function mapToProps(state) {
+  return {
+    placeOrder:state.placeOrder,
+    settings:state.settings,
+  }
+}
+export default connect(mapToProps)(TTLForm)
 

@@ -5,7 +5,9 @@ import Settings from 'mobile/settings/Settings'
 import SetLanguage from 'mobile/settings/SetLanguage'
 import SetCurrency from 'mobile/settings/SetCurrency'
 import SetLayout from 'mobile/settings/SetLayout'
-
+import SetLRCFee from 'mobile/settings/SetLRCFee'
+import SetTheme from 'mobile/settings/SetTheme'
+import SetTTL from 'mobile/settings/SetTTL'
 
 export function SetLanguageModal(){
   return (
@@ -34,6 +36,34 @@ export function SetLayoutModal(){
     </Containers.Layers>
   )
 }
+export function SetLRCFeeModal(){
+  return (
+    <Containers.Layers id="setLRCFee">
+      <UiContainers.Drawer id="setLRCFee" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+        <SetLRCFee />
+      </UiContainers.Drawer>
+    </Containers.Layers>
+  )
+}
+export function SetThemeModal(){
+  return (
+    <Containers.Layers id="setTheme">
+      <UiContainers.Drawer id="setTheme" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+        <SetTheme />
+      </UiContainers.Drawer>
+    </Containers.Layers>
+  )
+}
+export function SetTTLModal(){
+  return (
+    <Containers.Layers id="setTTL">
+      <UiContainers.Drawer id="setTTL" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+        <SetTTL />
+      </UiContainers.Drawer>
+    </Containers.Layers>
+  )
+}
+
 
 
 function Modals(props) {
@@ -47,6 +77,9 @@ function Modals(props) {
       <SetLanguageModal />
       <SetCurrencyModal />
       <SetLayoutModal />
+      <SetLRCFeeModal />
+      <SetThemeModal />
+      <SetTTLModal />
     </div>
   )
 }
