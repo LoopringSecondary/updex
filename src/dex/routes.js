@@ -13,6 +13,7 @@ import UserCenter from './account/UserCenter'
 import Notifications from './notifications/Notifications'
 import NotificationModals from './notifications/Modals'
 import AuthModals from './auth/Modals'
+import SettingsModals from './settings/Modals'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from './common/Modals'
 import storage from 'modules/storage'
@@ -52,9 +53,9 @@ const Logged = ()=>{
         <CommonModals />
         <Orders.Modals />
         <Tokens.Modals />
-        <Account.Modals />
         <NotificationModals />
         <AuthModals />
+        <SettingsModals />
       </div>
     )
   }else{

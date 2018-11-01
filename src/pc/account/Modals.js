@@ -1,7 +1,7 @@
 import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
-import Settings from 'mobile/account/Settings'
+import Settings from 'mobile/settings/Settings'
 import UserCenter from './UserCenter'
 import ChooseLedgerAddress from './ChooseLedgerAddress'
 

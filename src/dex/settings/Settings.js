@@ -110,8 +110,11 @@ function Settings(props) {
                 <WebIcon type="property-safety" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Trade Fee</span>
               </List.Item>
+              <List.Item className="overflow-visible" extra={"1 Hour"} arrow="horizontal" >
+                <WebIcon type="hourglass" className="mr10 text-primary fs16" />
+                <span className="color-black-1">Order Time-To-Live</span>
+              </List.Item>
             </List>
-            
         </div>
       </div>
       
