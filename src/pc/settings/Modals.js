@@ -1,15 +1,15 @@
 import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
-import Settings from './Settings'
-import SetLanguage from './SetLanguage'
-import SetCurrency from './SetCurrency'
+import Settings from 'mobile/settings/Settings'
+import SetLanguage from 'mobile/settings/SetLanguage'
+import SetCurrency from 'mobile/settings/SetCurrency'
 
 
 export function SetLanguageModal(){
   return (
     <Containers.Layers id="setLanguage">
-      <UiContainers.Drawer id="setLanguage" position="right" style={{height:'100%',width:'40rem'}}>
+      <UiContainers.Drawer id="setLanguage" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
         <SetLanguage />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -17,8 +17,8 @@ export function SetLanguageModal(){
 }
 export function SetCurrencyModal(){
   return (
-    <Containers.Layers id="setLanguage">
-      <UiContainers.Drawer id="setLanguage" position="right" style={{height:'100%',width:'40rem'}}>
+    <Containers.Layers id="setCurrency">
+      <UiContainers.Drawer id="setCurrency" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
         <SetCurrency />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -29,9 +29,9 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="settings">
-        <UiContainers.Popups id="settings" position="right"  style={{height:'100%',width:'48rem'}}>
+        <UiContainers.Drawer position="right" id="settings" level={null} style={{margin:'0 auto',height:'100%',width:'48rem'}}>
           <Settings />
-        </UiContainers.Popups>
+        </UiContainers.Drawer>
       </Containers.Layers>
       <SetLanguageModal />
       <SetCurrencyModal />

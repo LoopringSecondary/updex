@@ -18,6 +18,14 @@ function Settings(props) {
       }
     })
   }
+  const showLayer = (payload = {}) => {
+    dispatch({
+      type: 'layers/showLayer',
+      payload: {
+        ...payload
+      }
+    })
+  }
   const languages = [
     { value: 'en-US', label: 'English',checked: settings.preference.language === 'en-US'},
     { value: 'zh-CN', label: '中文',checked: settings.preference.language === 'zh-CN'},
@@ -84,11 +92,11 @@ function Settings(props) {
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="bg-white settings pb10">
             <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Preference</div>}>
-              <List.Item className="overflow-visible" extra={"English"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setLanguage'})} className="overflow-visible" extra={"English"} arrow="horizontal" >
                 <WebIcon type="global" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Language</span>
               </List.Item>
-              <List.Item className="overflow-visible" extra={"USD"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setCurrency'})} className="overflow-visible" extra={"USD"} arrow="horizontal" >
                 <WebIcon type="pay-circle" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Currency</span>
               </List.Item>

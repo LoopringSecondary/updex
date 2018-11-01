@@ -10,6 +10,14 @@ const RadioItem = Radio.RadioItem;
 
 function Settings(props) {
   const {settings,dispatch} = props
+  const hideLayer = (payload = {}) => {
+    dispatch({
+      type: 'layers/hideLayer',
+      payload: {
+        ...payload
+      }
+    })
+  }
   const lrcFeeChange = (lrcFeePermillage) => {
     settings.trading.lrcFee = lrcFeePermillage
     dispatch({
@@ -20,6 +28,20 @@ function Settings(props) {
 
   return (
     <div className="bg-white position-relative" style={{height:'100%'}}>
+      <div className="position-absolute w-100" style={{zIndex:'1000'}}>
+        <NavBar
+          className="bg-white"
+          mode="light"
+          onLeftClick={()=>hideLayer({id:'setTTL'})}
+          leftContent={[
+            <span key='1' className=""><WebIcon type="close"/></span>,
+          ]}
+          rightContent={[]}
+        >
+          <div className="color-black">Set Order Time-To-Live</div>
+        </NavBar>
+        <div className="divider 1px zb-b-t"></div>
+      </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="bg-white settings pb10">
             <List className="mt10 no-border text-left position-relative" 
