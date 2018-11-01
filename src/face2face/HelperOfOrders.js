@@ -104,27 +104,9 @@ class Face2FaceOrders extends React.Component {
         {text: intl.get('order_cancel.confirm_no'), onPress: () => {}, style: 'default'},
         {
           text: intl.get('order_cancel.confirm_yes'), onPress: () => {
-            const timestamp = Math.floor(moment().valueOf() / 1e3).toString()
-            signMessage(timestamp).then(res => {
-              if (res.result) {
-                const sig = res.result
-                window.RELAY.order.cancelOrder({
-                  sign: {...sig, timestamp, owner: storage.wallet.getUnlockedAddress()},
-                  orderHash: item.originalOrder.hash,
-                  type: 1
-                }).then(response => {
-                  if (response.error) {
-                    Toast.fail(`${intl.get('notifications.title.cancel_fail', {type: intl.get('common.order')})}:${response.error.message}`, 3, null, false)
-                  } else {
-                    storage.orders.deleteP2POrder(item.originalOrder.hash);
-                    this.fetchOrder(pageIndex,pageSize);
-                    Toast.success(intl.get('notifications.title.cancel_suc', {type: intl.get('common.order')}), 3, null, false)
-                  }
-                })
-              } else {
-                Toast.fail(`${intl.get('notifications.title.cancel_fail', {type: intl.get('common.order')})}:${res.error.message}`, 3, null, false)
-              }
-            })
+            const data = {type:1, orderHash:item.originalOrder.hash, timestamp:Math.floor(moment().valueOf() / 1e3).toString(), owner:storage.wallet.getUnlockedAddress()}
+            const unsign = [{type:'cancelOrder', data}]
+            dispatch({type: 'task/setTask', payload: {task:'cancelOrder', unsign}})
           }
         },
       ])

@@ -7,8 +7,8 @@ export default {
   state: {
    tokenS:'LRC',
    tokenB:'WETH',
-   amountS:toBig(0),
-   amountB:toBig(0),
+   amountS:'',
+   amountB:'',
    validSince: null,
    validUntil: null,
    loading:false,

@@ -33,7 +33,7 @@ export default {
     },
     *qrcodeGenerated({ payload={} }, { put }) {
       const {signWith, order, qrcode, hash, time} = payload
-      yield put({ type: 'unsignChange',payload:{unsign:[{type:'order', data:order}]}})
+      // yield put({ type: 'unsignChange',payload:{unsign:[{type:'order', data:order}]}})
       yield put({ type: 'signedChange',payload:{signed:[]}})
       yield put({ type: 'signWithChange',payload:{signWith}})
       yield put({ type: 'hashChange',payload:{hash}});

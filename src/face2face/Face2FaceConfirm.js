@@ -132,6 +132,9 @@ function PlaceOrderSteps (props) {
     }
     try {
       const {order, unsigned} = await orderFormatter.signP2POrder(tradeInfo, (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress())
+      dispatch({type: 'task/setTask', payload: {task:'signP2P', unsign:unsigned}})
+
+      /*
       const signResult = await signOrder(order)
       if (signResult.error) {
         Notification.open({
@@ -203,6 +206,7 @@ function PlaceOrderSteps (props) {
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})
       }
+      */
     } catch (e) {
       Notification.open({
         message: intl.get('notifications.title.place_order_failed'),

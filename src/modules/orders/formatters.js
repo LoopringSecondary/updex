@@ -364,6 +364,7 @@ export async function signP2POrder(tradeInfo, address) {
   completeOrder.authPrivateKey = fm.clearHexPrefix(authAccount.getPrivateKeyString());
   // sign orders and txs
   const unsigned = await generateSignData({tradeInfo, order, completeOrder, address})
+  console.log(1, unsigned)
   return {order, unsigned}
 }
 
