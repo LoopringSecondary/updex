@@ -42,7 +42,7 @@ const HelperOfBalance = (props)=>{
     })
   }
   const gotoReceive = (payload)=>{
-    showLayer({id:'receiveToken',...payload})
+    showLayer({id:'receiveToken',...payload}) 
   }
   const showActions = (payload)=>{
     showLayer({id:'helperOfTokenActions',...payload})
@@ -65,7 +65,7 @@ const HelperOfBalance = (props)=>{
           <tr className="">
             <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.token')}</th>
             <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.balance')}</th>
-            <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">交易授权</th>
+            <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">交易授权</th>
             <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get('helper_of_market_order.selling')}</th>
             <th className="text-right zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.actions')}</th>
           </tr>
@@ -80,7 +80,7 @@ const HelperOfBalance = (props)=>{
                     <span hidden className="color-black-3 ml5">{token.name}</span>
                   </td>
                   <td className="pl15 pr15 pt5 pb5 color-black-2 text-left">{toFixed(token.balance, 8)}</td>
-                  <td hidden className="pl15 pr15 pt5 pb5 zb-b-b color-black-2 text-left">
+                  <td className="pl15 pr15 pt5 pb5 zb-b-b color-black-2 text-left">
                     {
                       token.symbol !== 'ETH' && index === 0 && <Switch size="small" loading={true} />
                     }
@@ -98,11 +98,7 @@ const HelperOfBalance = (props)=>{
                        token.symbol === 'WETH' &&
                       <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
                     }
-                    <Popover className="rs" trigger="click" placement="left" arrowPointAtCenter={true} content={<HelperOfTokenActions helperOfTokenActions={{symbol:token.symbol,hideBuy:true}}/>}>
-                      <Button  type="ghost" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block ml10 border-none bg-primary-light" size="small">
-                        <WebIcon type="ellipsis" />
-                      </Button>
-                    </Popover>
+                    <Button onClick={gotoReceive.bind(this,{token:token.symbol})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary ml5" size="small">{intl.get('common.receive')}</Button>
                   </td>
                 </tr>
               )
