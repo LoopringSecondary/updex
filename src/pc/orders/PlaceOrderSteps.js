@@ -203,7 +203,7 @@ class PlaceOrderSteps extends React.Component {
                 }
                 <OrderMetaItem label={intl.get("common.price")} value={`${priceInput} ${pair}`} />
                 <OrderMetaItem showArrow={true} onClick={()=>showLRCFee()} label={intl.get('common.lrc_fee')} value={<div className="text-primary cursor-pointer">{lrcFeeValue} LRC({settings.trading.lrcFee/10}%)</div>} />
-                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary cursor-pointer">{validSince.format('MM-DD HH:mm')} ~ {validUntil.format('MM-DD HH:mm')}</div>}  />
+                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary cursor-pointer">{validSince.format('YYYY-MM-DD HH:mm')} ~ {validUntil.format('YYYY-MM-DD HH:mm')}</div>}  />
                 <div className="divider 1px zb-b-t"></div>
                 <div className="pt15 pb15 color-black-3 fs12 text-center">
                   <Icon className="mr5" type="exclamation-circle-o" />{intl.get('place_order_confirm.no_cost_gas')}
