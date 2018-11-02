@@ -19,7 +19,8 @@ class UserCenter extends React.Component {
       dispatch({type:"wallet/lock", payload:{}})
       dispatch({type:"placeOrderSteps/reset", payload:{}})
       dispatch({type:"layers/hideLayer", payload:{id:'usercenter'}})
-      dispatch({type:"layers/showLayer", payload:{id:'authOfPC'}})
+      window.location.reload()
+      // dispatch({type:"layers/showLayer", payload:{id:'authOfPC'}})
     }
     return (
         <div className="bg-fill" style={{height:'100%'}}>
