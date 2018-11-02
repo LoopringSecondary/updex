@@ -1,122 +1,710 @@
-@font-face { font-family: 'iconfont-token'; src: url('iconfont-token.ttf?4torjq') format('truetype'), url('iconfont-token.woff?4torjq') format('woff'), url('iconfont-token.svg?4torjq#iconfont-token') format('svg'); font-weight: normal; font-style: normal; }
-[class^="icon-token"], [class*=" icon-token"] {  /* use !important to prevent issues with browser extensions that change fonts */
-font-family: 'iconfont-token' !important; speak: none; display: inline-block; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1;  /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-.icon-token-BAR:before { content: "\e900"; }
-.icon-token-FOO:before { content: "\e901"; }
-.icon-token-GUP:before { content: "\e979"; }
-.icon-token-GNT:before { content: "\e9ab"; }
-.icon-token-PAY:before { content: "\e92f"; }
-.icon-token-PPP:before { content: "\e930"; }
-.icon-token-SNGLS:before { content: "\e931"; }
-.icon-token-WTC:before { content: "\e932"; }
-.icon-token-SWT:before { content: "\e933"; }
-.icon-token-CFI:before { content: "\e934"; }
-.icon-token-WINGS:before { content: "\e935"; }
-.icon-token-XAUR:before { content: "\e936"; }
-.icon-token-TAAS:before { content: "\e937"; }
-.icon-token-TKN:before { content: "\e938"; }
-.icon-token-TRST:before { content: "\e939"; }
-.icon-token-SALT:before { content: "\e93a"; }
-.icon-token-SAN:before { content: "\e93b"; }
-.icon-token-STORJ:before { content: "\e93c"; }
-.icon-token-PPT:before { content: "\e93d"; }
-.icon-token-REX:before { content: "\e93e"; }
-.icon-token-RHOC:before { content: "\e93f"; }
-.icon-token-RLC:before { content: "\e940"; }
-.icon-token-ROL:before { content: "\e941"; }
-.icon-token-POWR:before { content: "\e942"; }
-.icon-token-QSP:before { content: "\e943"; }
-.icon-token-RCN:before { content: "\e944"; }
-.icon-token-RDN:before { content: "\e945"; }
-.icon-token-REQ:before { content: "\e946"; }
-.icon-token-MTL:before { content: "\e947"; }
-.icon-token-NET:before { content: "\e948"; }
-.icon-token-NMR:before { content: "\e949"; }
-.icon-token-PLU:before { content: "\e94a"; }
-.icon-token-LUN:before { content: "\e94b"; }
-.icon-token-MANA:before { content: "\e94c"; }
-.icon-token-MCO:before { content: "\e94d"; }
-.icon-token-MGO:before { content: "\e94e"; }
-.icon-token-MLN:before { content: "\e94f"; }
-.icon-token-IOST:before { content: "\e950"; }
-.icon-token-KIN:before { content: "\e951"; }
-.icon-token-LINK:before { content: "\e952"; }
-.icon-token-FUN:before { content: "\e953"; }
-.icon-token-GNO:before { content: "\e954"; }
-.icon-token-HMQ:before { content: "\e955"; }
-.icon-token-ICN:before { content: "\e956"; }
-.icon-token-IND:before { content: "\e957"; }
-.icon-token-DRP:before { content: "\e958"; }
-.icon-token-EDG:before { content: "\e959"; }
-.icon-token-ENG:before { content: "\e95a"; }
-.icon-token-ETHOS:before { content: "\e95b"; }
-.icon-token-CVC:before { content: "\e95c"; }
-.icon-token-DAI:before { content: "\e95d"; }
-.icon-token-DNT:before { content: "\e95e"; }
-.icon-token-BNT:before { content: "\e95f"; }
-.icon-token-BTM:before { content: "\e960"; }
-.icon-token-CAT:before { content: "\e961"; }
-.icon-token-ANT:before { content: "\e962"; }
-.icon-token-ARP:before { content: "\e963"; }
-.icon-token-AST:before { content: "\e964"; }
-.icon-token-ATM:before { content: "\e965"; }
-.icon-token-1ST:before { content: "\e966"; }
-.icon-token-VITE:before { content: "\e967"; }
-.icon-token-AE:before { content: "\e968"; }
-.icon-token-DASH:before { content: "\e969"; }
-.icon-token-VERI:before { content: "\e96b"; }
-.icon-token-LSK:before { content: "\e972"; }
-.icon-token-KMD:before { content: "\e973"; }
-.icon-token-KNC:before { content: "\e974"; }
-.icon-token-LTC:before { content: "\e975"; }
-.icon-token-GAS:before { content: "\e976"; }
-.icon-token-PIVX:before { content: "\e977"; }
-.icon-token-REP:before { content: "\e978"; }
-.icon-token-XVG:before { content: "\e97a"; }
-.icon-token-ZEC:before { content: "\e97b"; }
-.icon-token-ZIL:before { content: "\e97c"; }
-.icon-token-ZRX:before { content: "\e97d"; }
-.icon-token-WAVES:before { content: "\e97e"; }
-.icon-token-WETH:before { content: "\e97f"; }
-.icon-token-XLM:before { content: "\e980"; }
-.icon-token-XMR:before { content: "\e981"; }
-.icon-token-XRB:before { content: "\e982"; }
-.icon-token-XRP:before { content: "\e983"; }
-.icon-token-NAS:before { content: "\e984"; }
-.icon-token-NEM:before { content: "\e985"; }
-.icon-token-TRX:before { content: "\e986"; }
-.icon-token-USDT:before { content: "\e987"; }
-.icon-token-VEN:before { content: "\e988"; }
-.icon-token-SC:before { content: "\e989"; }
-.icon-token-SNT:before { content: "\e98a"; }
-.icon-token-STEEM:before { content: "\e98b"; }
-.icon-token-STRAT:before { content: "\e98c"; }
-.icon-token-LRC:before { content: "\e98d"; }
-.icon-token-MKR:before { content: "\e98e"; }
-.icon-token-OMG:before { content: "\e98f"; }
-.icon-token-PLR:before { content: "\e990"; }
-.icon-token-QASH:before { content: "\e991"; }
-.icon-token-ICX:before { content: "\e992"; }
-.icon-token-IOTA:before { content: "\e994"; }
-.icon-token-KCS:before { content: "\e995"; }
-.icon-token-ETH:before { content: "\e996"; }
-.icon-token-ETN:before { content: "\e997"; }
-.icon-token-GBYTE:before { content: "\e998"; }
-.icon-token-HSR:before { content: "\e999"; }
-.icon-token-NEO:before { content: "\e99a"; }
-.icon-token-DGB:before { content: "\e99b"; }
-.icon-token-DOGE:before { content: "\e99c"; }
-.icon-token-ELF:before { content: "\e99d"; }
-.icon-token-EOS:before { content: "\e99e"; }
-.icon-token-ETC:before { content: "\e99f"; }
-.icon-token-BNB:before { content: "\e9a0"; }
-.icon-token-BTS:before { content: "\e9a1"; }
-.icon-token-DCR:before { content: "\e9a2"; }
-.icon-token-ARDR:before { content: "\e9a3"; }
-.icon-token-ARK:before { content: "\e9a4"; }
-.icon-token-BAT:before { content: "\e9a5"; }
-.icon-token-BCN:before { content: "\e9a6"; }
-.icon-token-BTG:before { content: "\e9a7"; }
-.icon-token-ADA:before { content: "\e9a8"; }
-.icon-token-BTC:before { content: "\e9a9"; }
-.icon-token-QTUM:before { content: "\e9aa"; }
+@font-face {
+  font-family: 'iconfont-token';
+  src:  url('./iconfont-token.eot?hp1zwf');
+  src:  url('./iconfont-token.eot?hp1zwf#iefix') format('embedded-opentype'),
+    url('./iconfont-token.ttf?hp1zwf') format('truetype'),
+    url('./iconfont-token.woff?hp1zwf') format('woff'),
+    url('./iconfont-token.svg?hp1zwf#iconfont') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-token"], [class*=" icon-token"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'iconfont-token' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-token-MOOLYA:before {
+  content: "\e909";
+}
+.icon-token-MOT:before {
+  content: "\e9be";
+}
+.icon-token-INK:before {
+  content: "\e9bf";
+}
+.icon-token-MOOLYA1:before {
+  content: "\e9c0";
+}
+.icon-token-NCU:before {
+  content: "\e9c1";
+}
+.icon-token-IBT:before {
+  content: "\e9c2";
+}
+.icon-token-SMDX:before {
+  content: "\e9c3";
+}
+.icon-token-CDCC:before {
+  content: "\e9c4";
+}
+.icon-token-WEB:before {
+  content: "\e9c5";
+}
+.icon-token-HDL:before {
+  content: "\e9c6";
+}
+.icon-token-RDEX:before {
+  content: "\e9c7";
+}
+.icon-token-R:before {
+  content: "\e9c8";
+}
+.icon-token-HAND:before {
+  content: "\e9c9";
+}
+.icon-token-GPT:before {
+  content: "\e9ca";
+}
+.icon-token-FOTC:before {
+  content: "\e9cb";
+}
+.icon-token-BITS:before {
+  content: "\e9cc";
+}
+.icon-token-GUSD:before {
+  content: "\e9cd";
+}
+.icon-token-MOTE:before {
+  content: "\e9ce";
+}
+.icon-token-MRL:before {
+  content: "\e9cf";
+}
+.icon-token-RTE:before {
+  content: "\e9d0";
+}
+.icon-token-BRM:before {
+  content: "\e9d1";
+}
+.icon-token-CEN:before {
+  content: "\e9d2";
+}
+.icon-token-BOE:before {
+  content: "\e9d3";
+}
+.icon-token-QUBE:before {
+  content: "\e9d4";
+}
+.icon-token-SET:before {
+  content: "\e9d5";
+}
+.icon-token-TCT:before {
+  content: "\e9d6";
+}
+.icon-token-ECT:before {
+  content: "\e9d7";
+}
+.icon-token-XMRC:before {
+  content: "\e9d8";
+}
+.icon-token-EPH:before {
+  content: "\e9d9";
+}
+.icon-token-NTK:before {
+  content: "\e9da";
+}
+.icon-token-JNT:before {
+  content: "\e9db";
+}
+.icon-token-ATN:before {
+  content: "\e9dc";
+}
+.icon-token-MT:before {
+  content: "\e9dd";
+}
+.icon-token-HVN:before {
+  content: "\e9de";
+}
+.icon-token-QCH:before {
+  content: "\e9df";
+}
+.icon-token-CVH:before {
+  content: "\e9e0";
+}
+.icon-token-CYBER:before {
+  content: "\e9e1";
+}
+.icon-token-TRUE:before {
+  content: "\e9e2";
+}
+.icon-token-TUSD:before {
+  content: "\e9e3";
+}
+.icon-token-HT:before {
+  content: "\e9b8";
+}
+.icon-token-CND:before {
+  content: "\e9b9";
+}
+.icon-token-BKX:before {
+  content: "\e9ba";
+}
+.icon-token-BETR:before {
+  content: "\e9bb";
+}
+.icon-token-BBN:before {
+  content: "\e9bc";
+}
+.icon-token-AION:before {
+  content: "\e9bd";
+}
+.icon-token-WAX:before {
+  content: "\e900";
+}
+.icon-token-GVT:before {
+  content: "\e902";
+}
+.icon-token-WPR:before {
+  content: "\e903";
+}
+.icon-token-TNB:before {
+  content: "\e904";
+}
+.icon-token-BRD:before {
+  content: "\e905";
+}
+.icon-token-YOYOW:before {
+  content: "\e906";
+}
+.icon-token-FUEL:before {
+  content: "\e907";
+}
+.icon-token-AMB:before {
+  content: "\e908";
+}
+.icon-token-BOS:before {
+  content: "\e90a";
+}
+.icon-token-TRAC:before {
+  content: "\e90b";
+}
+.icon-token-INSUR:before {
+  content: "\e90c";
+}
+.icon-token-XMM:before {
+  content: "\e90d";
+}
+.icon-token-BIZ:before {
+  content: "\e90e";
+}
+.icon-token-BTK:before {
+  content: "\e90f";
+}
+.icon-token-BTO:before {
+  content: "\e910";
+}
+.icon-token-IDHUB:before {
+  content: "\e911";
+}
+.icon-token-ALI:before {
+  content: "\e912";
+}
+.icon-token-CPC:before {
+  content: "\e913";
+}
+.icon-token-HB:before {
+  content: "\e914";
+}
+.icon-token-TEN:before {
+  content: "\e915";
+}
+.icon-token-TNT:before {
+  content: "\e916";
+}
+.icon-token-ABA:before {
+  content: "\e917";
+}
+.icon-token-MXCA:before {
+  content: "\e918";
+}
+.icon-token-BP:before {
+  content: "\e919";
+}
+.icon-token-EQC:before {
+  content: "\e91a";
+}
+.icon-token-RATING:before {
+  content: "\e91b";
+}
+.icon-token-LBA:before {
+  content: "\e91c";
+}
+.icon-token-HSC:before {
+  content: "\e91d";
+}
+.icon-token-PNT:before {
+  content: "\e91e";
+}
+.icon-token-MTH:before {
+  content: "\e91f";
+}
+.icon-token-QKC:before {
+  content: "\e920";
+}
+.icon-token-DET:before {
+  content: "\e921";
+}
+.icon-token-FKX:before {
+  content: "\e922";
+}
+.icon-token-ENJ:before {
+  content: "\e923";
+}
+.icon-token-BCPT:before {
+  content: "\e924";
+}
+.icon-token-SNM:before {
+  content: "\e925";
+}
+.icon-token-CTR:before {
+  content: "\e926";
+}
+.icon-token-MDA:before {
+  content: "\e927";
+}
+.icon-token-SUB:before {
+  content: "\e928";
+}
+.icon-token-CMT:before {
+  content: "\e929";
+}
+.icon-token-ADX:before {
+  content: "\e92a";
+}
+.icon-token-DGD:before {
+  content: "\e92b";
+}
+.icon-token-POE:before {
+  content: "\e92c";
+}
+.icon-token-CDT:before {
+  content: "\e92d";
+}
+.icon-token-DLT:before {
+  content: "\e92e";
+}
+.icon-token-NULS:before {
+  content: "\e96a";
+}
+.icon-token-MOD:before {
+  content: "\e96c";
+}
+.icon-token-EVX:before {
+  content: "\e96d";
+}
+.icon-token-BKBT:before {
+  content: "\e96e";
+}
+.icon-token-STORM:before {
+  content: "\e96f";
+}
+.icon-token-NCASH:before {
+  content: "\e970";
+}
+.icon-token-BLZ:before {
+  content: "\e971";
+}
+.icon-token-INS:before {
+  content: "\e993";
+}
+.icon-token-VIBE:before {
+  content: "\e9ac";
+}
+.icon-token-OST:before {
+  content: "\e9ad";
+}
+.icon-token-WABI:before {
+  content: "\e9ae";
+}
+.icon-token-LEND:before {
+  content: "\e9af";
+}
+.icon-token-VIB:before {
+  content: "\e9b0";
+}
+.icon-token-LOOM:before {
+  content: "\e9b1";
+}
+.icon-token-APPC:before {
+  content: "\e9b2";
+}
+.icon-token-EDO:before {
+  content: "\e9b3";
+}
+.icon-token-GTO:before {
+  content: "\e9b4";
+}
+.icon-token-MTN:before {
+  content: "\e9b5";
+}
+.icon-token-AGI:before {
+  content: "\e9b6";
+}
+.icon-token-BFT:before {
+  content: "\e9b7";
+}
+.icon-token-FOO:before {
+  content: "\e901";
+}
+.icon-token-GUP:before {
+  content: "\e979";
+}
+.icon-token-GNT:before {
+  content: "\e9ab";
+}
+.icon-token-PAY:before {
+  content: "\e92f";
+}
+.icon-token-PPP:before {
+  content: "\e930";
+}
+.icon-token-SNGLS:before {
+  content: "\e931";
+}
+.icon-token-WTC:before {
+  content: "\e932";
+}
+.icon-token-SWT:before {
+  content: "\e933";
+}
+.icon-token-CFI:before {
+  content: "\e934";
+}
+.icon-token-WINGS:before {
+  content: "\e935";
+}
+.icon-token-XAUR:before {
+  content: "\e936";
+}
+.icon-token-TAAS:before {
+  content: "\e937";
+}
+.icon-token-TKN:before {
+  content: "\e938";
+}
+.icon-token-TRST:before {
+  content: "\e939";
+}
+.icon-token-SALT:before {
+  content: "\e93a";
+}
+.icon-token-SAN:before {
+  content: "\e93b";
+}
+.icon-token-STORJ:before {
+  content: "\e93c";
+}
+.icon-token-PPT:before {
+  content: "\e93d";
+}
+.icon-token-REX:before {
+  content: "\e93e";
+}
+.icon-token-RHOC:before {
+  content: "\e93f";
+}
+.icon-token-RLC:before {
+  content: "\e940";
+}
+.icon-token-ROL:before {
+  content: "\e941";
+}
+.icon-token-POWR:before {
+  content: "\e942";
+}
+.icon-token-QSP:before {
+  content: "\e943";
+}
+.icon-token-RCN:before {
+  content: "\e944";
+}
+.icon-token-RDN:before {
+  content: "\e945";
+}
+.icon-token-REQ:before {
+  content: "\e946";
+}
+.icon-token-MTL:before {
+  content: "\e947";
+}
+.icon-token-NET:before {
+  content: "\e948";
+}
+.icon-token-NMR:before {
+  content: "\e949";
+}
+.icon-token-PLU:before {
+  content: "\e94a";
+}
+.icon-token-LUN:before {
+  content: "\e94b";
+}
+.icon-token-MANA:before {
+  content: "\e94c";
+}
+.icon-token-MCO:before {
+  content: "\e94d";
+}
+.icon-token-MGO:before {
+  content: "\e94e";
+}
+.icon-token-MLN:before {
+  content: "\e94f";
+}
+.icon-token-IOST:before {
+  content: "\e950";
+}
+.icon-token-KIN:before {
+  content: "\e951";
+}
+.icon-token-LINK:before {
+  content: "\e952";
+}
+.icon-token-FUN:before {
+  content: "\e953";
+}
+.icon-token-GNO:before {
+  content: "\e954";
+}
+.icon-token-HMQ:before {
+  content: "\e955";
+}
+.icon-token-ICN:before {
+  content: "\e956";
+}
+.icon-token-IND:before {
+  content: "\e957";
+}
+.icon-token-DRP:before {
+  content: "\e958";
+}
+.icon-token-EDG:before {
+  content: "\e959";
+}
+.icon-token-ENG:before {
+  content: "\e95a";
+}
+.icon-token-ETHOS:before {
+  content: "\e95b";
+}
+.icon-token-CVC:before {
+  content: "\e95c";
+}
+.icon-token-DAI:before {
+  content: "\e95d";
+}
+.icon-token-DNT:before {
+  content: "\e95e";
+}
+.icon-token-BNT:before {
+  content: "\e95f";
+}
+.icon-token-BTM:before {
+  content: "\e960";
+}
+.icon-token-CAT:before {
+  content: "\e961";
+}
+.icon-token-ANT:before {
+  content: "\e962";
+}
+.icon-token-ARP:before {
+  content: "\e963";
+}
+.icon-token-AST:before {
+  content: "\e964";
+}
+.icon-token-ATM:before {
+  content: "\e965";
+}
+.icon-token-1ST:before {
+  content: "\e966";
+}
+.icon-token-VITE:before {
+  content: "\e967";
+}
+.icon-token-AE:before {
+  content: "\e968";
+}
+.icon-token-DASH:before {
+  content: "\e969";
+}
+.icon-token-VERI:before {
+  content: "\e96b";
+}
+.icon-token-LSK:before {
+  content: "\e972";
+}
+.icon-token-KMD:before {
+  content: "\e973";
+}
+.icon-token-KNC:before {
+  content: "\e974";
+}
+.icon-token-LTC:before {
+  content: "\e975";
+}
+.icon-token-GAS:before {
+  content: "\e976";
+}
+.icon-token-PIVX:before {
+  content: "\e977";
+}
+.icon-token-REP:before {
+  content: "\e978";
+}
+.icon-token-XVG:before {
+  content: "\e97a";
+}
+.icon-token-ZEC:before {
+  content: "\e97b";
+}
+.icon-token-ZIL:before {
+  content: "\e97c";
+}
+.icon-token-ZRX:before {
+  content: "\e97d";
+}
+.icon-token-WAVES:before {
+  content: "\e97e";
+}
+.icon-token-WETH:before {
+  content: "\e97f";
+}
+.icon-token-XLM:before {
+  content: "\e980";
+}
+.icon-token-XMR:before {
+  content: "\e981";
+}
+.icon-token-XRB:before {
+  content: "\e982";
+}
+.icon-token-XRP:before {
+  content: "\e983";
+}
+.icon-token-NAS:before {
+  content: "\e984";
+}
+.icon-token-NEM:before {
+  content: "\e985";
+}
+.icon-token-TRX:before {
+  content: "\e986";
+}
+.icon-token-USDT:before {
+  content: "\e987";
+}
+.icon-token-VEN:before {
+  content: "\e988";
+}
+.icon-token-SC:before {
+  content: "\e989";
+}
+.icon-token-SNT:before {
+  content: "\e98a";
+}
+.icon-token-STEEM:before {
+  content: "\e98b";
+}
+.icon-token-STRAT:before {
+  content: "\e98c";
+}
+.icon-token-LRC:before {
+  content: "\e98d";
+}
+.icon-token-MKR:before {
+  content: "\e98e";
+}
+.icon-token-OMG:before {
+  content: "\e98f";
+}
+.icon-token-PLR:before {
+  content: "\e990";
+}
+.icon-token-QASH:before {
+  content: "\e991";
+}
+.icon-token-ICX:before {
+  content: "\e992";
+}
+.icon-token-IOTA:before {
+  content: "\e994";
+}
+.icon-token-KCS:before {
+  content: "\e995";
+}
+.icon-token-ETH:before {
+  content: "\e996";
+}
+.icon-token-ETN:before {
+  content: "\e997";
+}
+.icon-token-GBYTE:before {
+  content: "\e998";
+}
+.icon-token-HSR:before {
+  content: "\e999";
+}
+.icon-token-NEO:before {
+  content: "\e99a";
+}
+.icon-token-DGB:before {
+  content: "\e99b";
+}
+.icon-token-DOGE:before {
+  content: "\e99c";
+}
+.icon-token-ELF:before {
+  content: "\e99d";
+}
+.icon-token-EOS:before {
+  content: "\e99e";
+}
+.icon-token-ETC:before {
+  content: "\e99f";
+}
+.icon-token-BNB:before {
+  content: "\e9a0";
+}
+.icon-token-BTS:before {
+  content: "\e9a1";
+}
+.icon-token-DCR:before {
+  content: "\e9a2";
+}
+.icon-token-ARDR:before {
+  content: "\e9a3";
+}
+.icon-token-ARK:before {
+  content: "\e9a4";
+}
+.icon-token-BAT:before {
+  content: "\e9a5";
+}
+.icon-token-BCN:before {
+  content: "\e9a6";
+}
+.icon-token-BTG:before {
+  content: "\e9a7";
+}
+.icon-token-ADA:before {
+  content: "\e9a8";
+}
+.icon-token-BTC:before {
+  content: "\e9a9";
+}
+.icon-token-QTUM:before {
+  content: "\e9aa";
+}
