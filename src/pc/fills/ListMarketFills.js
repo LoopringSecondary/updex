@@ -48,7 +48,7 @@ const ListMarketFills = ({trades={},maxRows=5,dispatch})=>{
                 // const fillFm = new FillFm({...item,market})
                 return (
                   <tr key={index}>
-                    <td className="border-none pl15 pr5 text-left align-middle"  style={{lineHeight:'1.8rem'}} onClick={changePrice.bind(this,toNumber(item.price.toFixed(8)))}>
+                    <td className="border-none pl15 pr5 text-left align-middle cursor-pointer hover-default"  style={{lineHeight:'1.8rem'}} onClick={changePrice.bind(this,toNumber(item.price.toFixed(8)))}>
                       {
                         index%2 === 0 && <span className="color-error">{item.price.toFixed(8)}</span>
                       }
@@ -56,7 +56,7 @@ const ListMarketFills = ({trades={},maxRows=5,dispatch})=>{
                         index%2 === 1 && <span className="color-success">{item.price.toFixed(8)}</span>
                       }
                     </td>
-                    <td className="border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap"  style={{lineHeight:'1.8rem'}} onClick={changeAmount.bind(this,toNumber(item.amount.toFixed(4)))}>
+                    <td className="border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap cursor-pointer  hover-default"  style={{lineHeight:'1.8rem'}} onClick={changeAmount.bind(this,toNumber(item.amount.toFixed(4)))}>
                       {item.amount.toFixed(4)}
                     </td>
                     <td hidden className="border-none pl5 pr5 text-right color-black-2 align-middle text-nowrap"  style={{lineHeight:'1.8rem'}}>
