@@ -6,12 +6,30 @@ import {toBig, toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import Worth from 'modules/settings/Worth'
 
-const ListMarketFills = ({trades={},maxRows=5})=>{
+const ListMarketFills = ({trades={},maxRows=5,dispatch})=>{
   // const maxHeight = (60*maxRows+32) + 'px'
   const market = trades.filters.market || 'LRC-WETH'
   const tokens = getTokensByMarket(market)
   const maxHeight = 'auto'
-  console.log('ListMarketFills',trades)
+  const changePrice = (value) => {
+    // Toast.info('Price has changed', 3, null, false);
+    dispatch({
+      type: 'placeOrder/priceChangeEffects',
+      payload: {
+        price: value
+      }
+    })
+  }
+  const changeAmount = (value) => {
+    // Toast.info('Amount has changed', 3, null, false);
+    dispatch({
+      type: 'placeOrder/amountChange',
+      payload: {
+        amountInput: value
+      }
+    })
+  }
+
   return (
     <div style={{height:maxHeight,overflow:'auto'}}>
       <table className="w-100 fs12" style={{overflow:'auto'}}>
@@ -30,7 +48,7 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                 // const fillFm = new FillFm({...item,market})
                 return (
                   <tr key={index}>
-                    <td className="border-none pl15 pr5 text-left align-middle"  style={{lineHeight:'1.8rem'}}>
+                    <td className="border-none pl15 pr5 text-left align-middle"  style={{lineHeight:'1.8rem'}} onClick={changePrice.bind(this,toNumber(item.price.toFixed(8)))}>
                       {
                         index%2 === 0 && <span className="color-error">{item.price.toFixed(8)}</span>
                       }
@@ -38,7 +56,7 @@ const ListMarketFills = ({trades={},maxRows=5})=>{
                         index%2 === 1 && <span className="color-success">{item.price.toFixed(8)}</span>
                       }
                     </td>
-                    <td className="border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap"  style={{lineHeight:'1.8rem'}}>
+                    <td className="border-none pl5 pr5 color-black-2 text-right align-middle text-nowrap"  style={{lineHeight:'1.8rem'}} onClick={changeAmount.bind(this,toNumber(item.amount.toFixed(4)))}>
                       {item.amount.toFixed(4)}
                     </td>
                     <td hidden className="border-none pl5 pr5 text-right color-black-2 align-middle text-nowrap"  style={{lineHeight:'1.8rem'}}>
