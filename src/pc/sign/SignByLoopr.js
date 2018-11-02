@@ -17,7 +17,7 @@ const SignByLoopr = ({placeOrderSteps, dispatch}) => {
   };
   return (
     <div className="">
-      <div className="p25 bg-fill">
+      <div className="p25 bg-white-light">
         {
           placeOrderSteps.overdue &&
           <div className="fs12 color-black-1">{intl.get('place_order_by_loopr.qrcode_overdue')}</div>

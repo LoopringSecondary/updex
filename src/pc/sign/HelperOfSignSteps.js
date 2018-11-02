@@ -192,7 +192,7 @@ class SignSteps extends React.Component {
               <div className="">
                 {
                   (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
-                  <div className="text-center pt40 pb40 pl15 pr15 bg-fill">
+                  <div className="text-center pt40 pb40 pl15 pr15 bg-white-light">
                     <Icon type="clock-circle" className="fs36 text-primary" />
                     <div className="mt15 color-black-1">
                       {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.waiting_sign') : intl.get('place_order_by_upwallet.waiting_sign')}

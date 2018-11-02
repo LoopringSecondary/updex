@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Card} from 'antd'
-import { DatePickerView, NavBar,Icon } from 'antd-mobile';
+import { PickerView, NavBar,Icon } from 'antd-mobile';
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import moment from 'moment'
@@ -40,7 +40,7 @@ class TTLForm extends React.Component {
           <div className="color-black-1">{intl.get('setting_ttl.title')}</div>
         </NavBar>
         <div className="zb-b-b">
-          <DatePickerView
+          <PickerView
             mode="datetime"
             minDate={moment().toDate()}
             value={defaultTo.toDate()}

@@ -50,10 +50,10 @@ const Logged = ()=>{
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
-        <AuthModals />
-        <SignModals />
         <P2PModals />
         <SettingsModals />
+        <AuthModals />
+        <SignModals />
         <Heads />
       </div>
     )
