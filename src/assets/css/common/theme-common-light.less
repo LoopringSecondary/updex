@@ -1,4 +1,5 @@
 @color-text-placeholder:rgba(0,0,0,0.25) ;
+@border-color:rgba(0,0,0,0.05);
 
 .color-black{
   color:#000 !important;
@@ -6,12 +7,12 @@
   // color:#C5CAE9 !important;
 }
 .color-black-1{
-  color:rgba(0,0,0,0.85) !important;
+  color:rgba(0,0,0,0.9) !important;
   // color:#C5CAE9 !important;
 }
 .color-black-2{
   // color:rgba(0,0,0,0.65) !important;
-  color:rgba(0,0,0,0.85) !important;
+  color:rgba(0,0,0,0.9) !important;
 }
 .color-black-3{
   // color:rgba(0,0,0,0.45) !important;
@@ -40,8 +41,12 @@
 		color:#fff !important;
 	}
 	.color-black-1{
-		color:rgba(255,255,255,0.9) !important;
+    color:rgba(255,255,255,0.9) !important;
+  }
+  .color-black-2{
+		color:rgba(255,255,255,0.8) !important;
 	}
+
 	&.color-black{
 		color:#fff !important;
 	}
@@ -74,5 +79,22 @@
 .am-segment.side-sell{
   .am-segment-item{
     background: @bg-fill !important;
+  }
+}
+.settings{
+  .am-list{
+    .am-list-body{
+      background: @bg-fill !important;
+    }  
+  }
+  .am-list-body{
+    background: @bg-fill !important;
+  }
+}
+a:hover,a:active{
+  // color:inherit !important;
+  color:@brand-primary !important;
+  &.am-button-primary{
+    color:@brand-primary !important;
   }
 }
