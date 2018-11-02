@@ -21,6 +21,12 @@ class AuthByTPWallet extends React.Component {
         if (isTPWalletReady()) {
           clearInterval(load)
           window.Wallet = new TPWallet()
+          window.Wallet.getRewardAddress().then(res => {
+            if(res.result){
+              window.Wallet.rewardAddress = res.result;
+              storage.wallet.setRewardAddress(res.result)
+            }
+          })
           window.Wallet.setConfigs().then(res => {
             if (address.toLowerCase() !== window.Wallet.address.toLowerCase()) {
               storage.wallet.storeUnlockedAddress('loopr', window.Wallet.address)
@@ -33,13 +39,6 @@ class AuthByTPWallet extends React.Component {
             _this.props.dispatch({type: 'sockets/unlocked'})
             _this.props.dispatch({type: 'locales/setLocale', payload: {locale: window.Wallet.language}})
             Toast.hide()
-            window.Wallet.getRewardAddress().then(res => {
-              if(res.result){
-                window.Wallet.rewardAddress = res.result;
-                storage.wallet.setRewardAddress(res.result)
-              }
-            })
-        
             let to = routeActions.location.getQueryByName(this.props,'to');
             if(to){
               routeActions.gotoPath(to)
