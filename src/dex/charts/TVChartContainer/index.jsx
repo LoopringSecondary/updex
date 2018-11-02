@@ -16,22 +16,41 @@ class TVChartContainer extends React.PureComponent {
 	state = {
     containerId: 'tv_chart_container',
 	  barsLoaded: false,
-    resolution: 'D'
+    resolution: 'D',
   }
 
   tvWidget = null;
 
   componentDidMount() {
-    //const param = location.pathname.replace(`${match.path}/`, '')
-    const {pair} = this.props
-	  this.initChart(pair)
+    const {pair, themeName} = this.props
+	  this.initChart(pair, themeName)
   }
 
   componentWillReceiveProps(newProps) {
-    const {pair} = newProps
+    const {pair, themeName} = newProps
     if (this.tvWidget !== null && this.tvWidget._ready) {
       this.setState({barsLoaded: false})
       this.tvWidget.chart().setSymbol(pair, () => {})
+      const theme = themes[themeName]
+      const overrides = {
+        "mainSeriesProperties.candleStyle.upColor": theme.green,
+        "mainSeriesProperties.candleStyle.borderUpColor": theme.green,
+        "mainSeriesProperties.candleStyle.wickUpColor": theme.green,
+        "mainSeriesProperties.candleStyle.downColor": theme.red,
+        "mainSeriesProperties.candleStyle.borderDownColor": theme.red,
+        "mainSeriesProperties.candleStyle.wickDownColor": theme.red,
+        "paneProperties.background":theme.bg,
+        "paneProperties.vertGridProperties.color": theme.grid,
+        "paneProperties.horzGridProperties.color": theme.grid,
+        "scalesProperties.lineColor": theme.line,
+        "scalesProperties.textColor": theme.text,
+      }
+      const studiesOverrides = {
+        "volume.volume.color.0": theme.red,
+        "volume.volume.color.1": theme.green,
+      }
+      this.tvWidget.applyOverrides(overrides)
+      this.tvWidget.applyStudiesOverrides(studiesOverrides)
     }
   }
 
@@ -42,9 +61,7 @@ class TVChartContainer extends React.PureComponent {
     }
   }
 
-	initChart(symbol) {
-    const {themeName} = this.props
-    console.log('themeName',themeName)
+	initChart(symbol, themeName) {
     const theme = themes[themeName]
 	  const _this = this
 		const widgetOptions = {
