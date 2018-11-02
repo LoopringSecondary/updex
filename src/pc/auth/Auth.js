@@ -292,20 +292,23 @@ class Auth extends React.Component {
               </div>
             </div>
           </div>
-          <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary" style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-              <i className="icon-loopr color-black-1 fs28"></i>
-            </div>
-            <div className="col text-left">
-              <div className="fs16 color-black-1 text-left">Loopr Wallet</div>
-            </div>
-            <div className="col-auto text-right">
-              <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-2 mr5">Unlock</span>
-                <Icon className="color-black-2" type="right"/>
+          {
+            false &&
+            <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary" style={{padding: '7px 0px',borderRadius:'50em'}}>
+              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+                <i className="icon-loopr color-black-1 fs28"></i>
+              </div>
+              <div className="col text-left">
+                <div className="fs16 color-black-1 text-left">Loopr Wallet</div>
+              </div>
+              <div className="col-auto text-right">
+                <div className="fs14 text-wrap text-left">
+                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <Icon className="color-black-2" type="right"/>
+                </div>
               </div>
             </div>
-          </div>
+          }
           <Spin spinning={metaMask.loading}>
             <div onClick={()=>unlockTypeChanged('metaMask')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary"
                  style={{padding: '7px 0px',borderRadius:'50em'}}>

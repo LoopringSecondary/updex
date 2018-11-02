@@ -71,7 +71,7 @@ const HelperOfBalance = (props)=>{
           <tr className="">
             <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.token')}</th>
             <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.balance')}</th>
-            <th className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">交易授权</th>
+            <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4 text-nowrap">交易授权</th>
             <th hidden className="text-left zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get('helper_of_market_order.selling')}</th>
             <th className="text-right zb-b-b pl15 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.actions')}</th>
           </tr>
@@ -86,12 +86,12 @@ const HelperOfBalance = (props)=>{
                     <span hidden className="color-black-3 ml5">{token.name}</span>
                   </td>
                   <td className="pl15 pr15 pt5 pb5 color-black-2 text-left">{toFixed(token.balance, 8)}</td>
-                  <td className="pl15 pr15 pt5 pb5 zb-b-b color-black-2 text-left">
+                  <td hidden className="pl15 pr15 pt5 pb5 color-black-2 text-left">
                     {
-                      token.symbol !== 'ETH' && index === 0 && <Switch size="small" loading={true} />
+                      token.symbol !== 'ETH' && index === 0 && <Switch size="small" loading={false} />
                     }
                     {
-                      token.symbol !== 'ETH' && index === 1 && <Switch size="small" loading={false} checked={true} />
+                      token.symbol !== 'ETH' && index === 1 && <Switch size="small" loading={false} checked={false} />
                     }
                   </td>
                   <td hidden className="pl15 pr15 pt5 pb5 color-black-2 text-left">0.00</td>

@@ -3,7 +3,6 @@ import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
 import OrderDetail from 'mobile/orders/Detail'
 import PlaceOrderSteps from './PlaceOrderSteps'
-import HelperOfAdvance from './HelperOfAdvance'
 import HelperOfPrice from './HelperOfPrice'
 import HelperOfAmount from './HelperOfAmount'
 import HelperOfMarket from './HelperOfMarket'
@@ -23,11 +22,6 @@ function Modals(props) {
         <UiContainers.Drawer position="right" wrapperClassName="orderConfirm" id="placeOrderSteps" level={'all'} width="48rem" style={{margin:'0 auto',height:'100%'}}>
           <PlaceOrderSteps />
         </UiContainers.Drawer>
-      </Containers.Layers>
-      <Containers.Layers id="helperOfAdvance">
-        <UiContainers.Popups id="helperOfAdvance">
-          <HelperOfAdvance />
-        </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfAmount">
         <UiContainers.Popups id="helperOfAmount">

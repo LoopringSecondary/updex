@@ -170,7 +170,7 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
           <th className="text-center pl10 pr10 pt5 pb5 font-weight-normal color-black-4 zb-b-b text-nowrap">
             {
               orders.items && orders.items.length > 0 &&
-              <Button onClick={cancelOrderByTokenPair.bind(this)} type="ghost" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml5 bg-primary-light text-primary border-none" size="small">
+              <Button onClick={cancelOrderByTokenPair.bind(this)} type="ghost" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block ml5 bg-primary-light text-primary border-none" size="small">
                 {intl.get('common.cancel')}
               </Button>
             }
