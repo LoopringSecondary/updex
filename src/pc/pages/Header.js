@@ -5,6 +5,8 @@ import { Icon as WebIcon } from 'antd';
 import TickerItem from '../tickers/TickerItem';
 import storage from 'modules/storage'
 import UserInfo from '../account/UserInfo'
+import NumberOfTodos from 'mobile/notifications/NumberOfTodos'
+
 
 class Header extends React.Component {
   constructor(props) {
@@ -27,7 +29,7 @@ class Header extends React.Component {
           <WebIcon type="question-circle" className="fs20 text-primary" />
         </div>
         <div onClick={showLayer.bind(this,'notifications')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
-          <WebIcon type="bell" className="fs20 text-primary" />
+          <NumberOfTodos> <WebIcon type="bell" className="fs20 text-primary" /></NumberOfTodos>
         </div>
         <div onClick={showLayer.bind(this,'setLayout')} className="cursor-pointer col-auto d-flex align-items-center zb-b-l pl25 pr25">
           <WebIcon type="layout" className="fs20 text-primary" />
