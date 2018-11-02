@@ -24,11 +24,11 @@ function MarketPage(props) {
           className="bg-white"
           mode="light"
           onLeftClick={()=>hideLayer({id:'ListMarketTickers'})}
-          leftContent={[
+          leftContent={null && [
             <span key='1' className=""><WebIcon type="close"/></span>,
           ]}
-          rightContent={null && [
-            <WebIcon key="1" type="question-circle-o"/>,
+          rightContent={[
+            <span key='1' onClick={()=>hideLayer({id:'ListMarketTickers'})} className=""><WebIcon type="close"/></span>,
           ]}
         >
           <div className="color-black">Markets</div>

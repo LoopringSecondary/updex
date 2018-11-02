@@ -48,14 +48,14 @@ class Home extends React.Component {
             </div>
             <div className="row no-gutters ml0 mr0 mtpanel">
               <div className="col-auto">
-                <PanelWrapper style={{flex:'1',paddingBottom:'0.7rem',height:'36.5rem '}} className="">
+                <PanelWrapper style={{width:'35rem',height:'34.5rem '}} className="">
                   <PanelHeader title="Buy LRC" />
                   <div className="pt10"></div>
                   <PlaceOrderFormNoSide side="buy" location={location} match={match} />
                 </PanelWrapper>
               </div>
               <div className="col-auto">
-                <PanelWrapper className="" style={{height:'36.5rem'}}>
+                <PanelWrapper style={{width:'35rem',height:'34.5rem'}} className="" >
                   <PanelHeader title="Sell LRC" />
                   <div className="pt10"></div>
                   <PlaceOrderFormNoSide side="sell" location={location} match={match} />
