@@ -199,7 +199,14 @@ class PlaceOrderForm extends React.Component {
         return
       }
       const validSince = moment()
-      const validUntil = moment().add(1, 'months')
+      let validUntil = null
+      switch(trading.timeToLiveUnit) {
+        case 'hour': validUntil = moment().add(trading.timeToLive, 'hours'); break;
+        case 'day': validUntil = moment().add(trading.timeToLive, 'days'); break;
+        case 'week': validUntil = moment().add(trading.timeToLive, 'weeks'); break;
+        case 'month': validUntil = moment().add(trading.timeToLive, 'months'); break;
+      }
+      console.log(1111, trading.timeToLive, trading.timeToLiveUnit, validUntil.format('MM-DD HH:mm'))
       dispatch({type:'placeOrder/validTimeChange', payload:{validSince, validUntil}})
       showLayer({id:'placeOrderSteps'})
     }

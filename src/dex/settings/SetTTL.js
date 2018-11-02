@@ -9,15 +9,16 @@ import storage from 'modules/storage'
 
 class TTLForm extends React.Component {
   render() {
-    const { placeOrder,dispatch } = this.props
-    const {validUntil} = placeOrder
-    let defaultTo = moment().add(1, 'months')
-    if(validUntil) defaultTo = validUntil
+    const { settings, dispatch } = this.props
 
     function timeToLiveValueChange(e) {
-      const start = moment()
-      const end = moment(e)
-      dispatch({type:'placeOrder/validTimeChange', payload:{validSince: start, validUntil: end}})
+      const data = e[0].split('-')
+      settings.trading.timeToLive = data[0]
+      settings.trading.timeToLiveUnit = data[1]
+      dispatch({
+        type: 'settings/preferenceChange',
+        payload: settings
+      })
     }
     const hideLayer = (payload = {}) => {
       dispatch({
@@ -28,10 +29,10 @@ class TTLForm extends React.Component {
       })
     }
     const options = [
-      {label:'1 Hour',value:'1h'},
-      {label:'1 Day',value:'1d'},
-      {label:'1 Week',value:'7d'},
-      {label:'1 Month',value:'1m'},
+      {label:`1${intl.get('common.hour')}`,value:'1-hour'},
+      {label:`1${intl.get('common.day')}`,value:'1-day'},
+      {label:`1${intl.get('common.week')}`,value:'1-week'},
+      {label:`1${intl.get('common.month')}`,value:'1-month'},
     ]
     return (
       <div className="bg-white" style={{height:'100%'}}>
@@ -48,7 +49,7 @@ class TTLForm extends React.Component {
         <div className="zb-b-b">
           <PickerView
             data={options}
-            value={'1h'}
+            value={[`${settings.trading.timeToLive}-${settings.trading.timeToLiveUnit}`]}
             cols={1}
             locale={storage.settings.get().preference.language}
             onChange={timeToLiveValueChange}
@@ -60,7 +61,6 @@ class TTLForm extends React.Component {
 }
 function mapToProps(state) {
   return {
-    placeOrder:state.placeOrder,
     settings:state.settings,
   }
 }

@@ -91,27 +91,27 @@ function Settings(props) {
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="settings pb10">
-            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Preference</div>}>
+            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.preferences')}</div>}>
               <List.Item onClick={()=>showLayer({id:'setLanguage'})} className="overflow-visible" extra={"English"} arrow="horizontal" >
                 <WebIcon type="global" className="mr10 text-primary fs16" />
-                <span className="color-black-1">Language</span>
+                <span className="color-black-1">{intl.get('settings.language')}</span>
               </List.Item>
               <List.Item onClick={()=>showLayer({id:'setCurrency'})} className="overflow-visible" extra={"USD"} arrow="horizontal" >
                 <WebIcon type="pay-circle" className="mr10 text-primary fs16" />
-                <span className="color-black-1">Currency</span>
+                <span className="color-black-1">{intl.get('settings.currency')}</span>
               </List.Item>
               {
                 false &&
                 <List.Item onClick={()=>showLayer({id:'setTheme'})} className="overflow-visible" extra={"Grey"} arrow="horizontal" >
                   <WebIcon type="skin" className="mr10 text-primary fs16" />
-                  <span className="color-black-1">Theme</span>
+                  <span className="color-black-1">{intl.get('settings.theme')}</span>
                 </List.Item>
               }
               {
                 false &&
                 <List.Item onClick={()=>showLayer({id:'setLayout'})} className="overflow-visible" extra={"Big Chart"} arrow="horizontal" >
                   <WebIcon type="layout" className="mr10 text-primary fs16" />
-                  <span className="color-black-1">Layout</span>
+                  <span className="color-black-1">{intl.get('settings.layout')}</span>
                 </List.Item>
               }
               {
@@ -122,14 +122,14 @@ function Settings(props) {
                 </List.Item>
               }
             </List>
-            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Market Trade</div>}>
+            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.market_trade')}</div>}>
               <List.Item onClick={()=>showLayer({id:'setLRCFee'})} className="overflow-visible" extra={`${settings.trading.lrcFee / 10}%`} arrow="horizontal" >
                 <WebIcon type="property-safety" className="mr10 text-primary fs16" />
-                <span className="color-black-1">Trade Fee</span>
+                <span className="color-black-1">{intl.get('settings.trading_fee')}</span>
               </List.Item>
-              <List.Item onClick={()=>showLayer({id:'setTTL'})}  className="overflow-visible" extra={"1 Hour"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setTTL'})}  className="overflow-visible" extra={intl.get('settings.time_to_live_value', {value:settings.trading.timeToLive, unit:intl.get(`common.${settings.trading.timeToLiveUnit}`)})} arrow="horizontal" >
                 <WebIcon type="hourglass" className="mr10 text-primary fs16" />
-                <span className="color-black-1">Order Time-To-Live</span>
+                <span className="color-black-1">{intl.get('settings.time_to_live')}</span>
               </List.Item>
             </List>
         </div>

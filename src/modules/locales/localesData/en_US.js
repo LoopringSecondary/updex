@@ -317,10 +317,14 @@ export default {
     timezone: 'Timezone',
     select_placeholder: 'Search/Select',
     time_to_live: 'Order Time-To-Live',
+    time_to_live_value: '{value} {unit}',
     trading_fee: 'Trading Fee (LRC)',
     margin_split: 'Default Margin Split',
     gas_price: 'Default Gas Price',
-    choose_relay: 'Choose Relay'
+    choose_relay: 'Choose Relay',
+    theme:'Theme',
+    layout:'Layout',
+    market_trade: 'Market Trade'
   },
   gas_setting: {
     title: 'Set Gas Fee',

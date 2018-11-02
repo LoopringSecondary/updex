@@ -13,10 +13,12 @@ class TTLForm extends React.Component {
     const {validUntil} = placeOrder
     let defaultTo = moment().add(1, 'months')
     if(validUntil) defaultTo = validUntil
+    console.log(123123)
 
     function timeToLiveValueChange(e) {
       const start = moment()
       const end = moment(e)
+      console.log(222, e)
       dispatch({type:'placeOrder/validTimeChange', payload:{validSince: start, validUntil: end}})
     }
 
@@ -48,6 +50,7 @@ class TTLForm extends React.Component {
             value={defaultTo.toDate()}
             locale={storage.settings.get().preference.language}
             onChange={timeToLiveValueChange}
+            onValueChange={v=>console.log(v)}
           />
         </div>
       </div>
