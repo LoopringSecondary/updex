@@ -42,16 +42,22 @@ const HelperOfBalance = (props)=>{
     })
   }
   const gotoReceive = (payload)=>{
-    showLayer({id:'receiveToken',...payload}) 
+    if(window.WALLET){
+      showLayer({id:'receiveToken',...payload})
+    }else{
+      showLayer({id:'authOfPC'})
+    }
   }
   const showActions = (payload)=>{
     showLayer({id:'helperOfTokenActions',...payload})
   }
 
   const gotoConvert = (payload)=>{
-    showLayer({id:'convertToken',...payload})
-    // routeActions.gotoPath(`/dex/convert/${payload.token}`)
-    // showLayer({id:'convertToken',...payload})
+    if(window.WALLET){
+      showLayer({id:'convertToken',...payload})
+    }else{
+      showLayer({id:'authOfPC'})
+    }
   }
   const gotoAll = (payload)=>{
     // TODO
