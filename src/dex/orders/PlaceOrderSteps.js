@@ -150,7 +150,7 @@ function PlaceOrderSteps(props) {
     order.validUntil = toHex(validUntil.unix());
     order.marginSplitPercentage = 50;
     order.buyNoMoreThanAmountB = side.toLowerCase() === "buy";
-    order.walletAddress = (window.Wallet && window.Wallet.rewardAddress) || config.getWalletAddress()
+    order.walletAddress = (storage.wallet.getRewardAddress()) || config.getWalletAddress()
     order.orderType = 'market_order'
     const authAccount = createWallet()
     order.authAddr = authAccount.getAddressString();

@@ -1,13 +1,11 @@
 import React from 'react'
 import TPWallet from './TPWallet'
-import { Toast, Button, Modal } from 'antd-mobile'
+import {Button, Toast} from 'antd-mobile'
 import routeActions from 'common/utils/routeActions'
-import { connect } from 'dva'
+import {connect} from 'dva'
 import storage from 'modules/storage'
 import intl from 'react-intl-universal'
-import { isTPWalletReady } from './bridge'
-import { store } from '../../index'
-import {toBig} from 'LoopringJS/common/formatter'
+import {isTPWalletReady} from './bridge'
 
 
 class AuthByTPWallet extends React.Component {
@@ -27,6 +25,9 @@ class AuthByTPWallet extends React.Component {
             if (address.toLowerCase() !== window.Wallet.address.toLowerCase()) {
               storage.wallet.storeUnlockedAddress('loopr', window.Wallet.address)
               window.RELAY.account.register(window.Wallet.address)
+            }
+            if(window.rewardAddress){
+              storage.wallet.setRewardAddress(window.rewardAddress)
             }
             _this.props.dispatch({
               type: 'settings/preferenceChange',

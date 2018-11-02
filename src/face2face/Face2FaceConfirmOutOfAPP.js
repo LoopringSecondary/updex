@@ -1,20 +1,16 @@
 import React from 'react';
-import { Input,Icon,Button as WebButton } from 'antd';
-import { Modal,List,Button,Accordion,Steps} from 'antd-mobile';
-import {toBig, toHex, clearHexPrefix} from 'LoopringJS/common/formatter'
+import {Icon} from 'antd';
+import {Button} from 'antd-mobile';
+import {clearHexPrefix, toBig, toHex} from 'LoopringJS/common/formatter'
 import config from 'common/config'
 import intl from 'react-intl-universal';
-import eachLimit from 'async/eachLimit';
 import * as orderFormatter from 'modules/orders/formatters'
-import Notification from 'LoopringUI/components/Notification'
 import {createWallet} from 'LoopringJS/ethereum/account';
-import * as uiFormatter from 'modules/formatter/common'
-import QRCode from 'qrcode.react';
-import Alert from 'LoopringUI/components/Alert'
-import {Pages,Page} from 'LoopringUI/components/Pages'
-import {connect} from 'dva'
 import {getTokensByMarket} from 'modules/formatter/common'
+import {Page, Pages} from 'LoopringUI/components/Pages'
+import {connect} from 'dva'
 import moment from 'moment'
+import storage from 'modules/storage'
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -137,7 +133,7 @@ function PlaceOrderSteps(props) {
     order.validUntil = toHex(validUntil);
     order.marginSplitPercentage = 50;
     order.buyNoMoreThanAmountB = side.toLowerCase() === "buy";
-    order.walletAddress = config.getWalletAddress();
+    order.walletAddress = (storage.wallet.getRewardAddress()) || config.getWalletAddress()
     order.orderType = 'market_order'
     const authAccount = createWallet()
     order.authAddr = authAccount.getAddressString();
