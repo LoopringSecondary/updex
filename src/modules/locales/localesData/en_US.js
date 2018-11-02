@@ -320,7 +320,10 @@ export default {
     trading_fee: 'Trading Fee (LRC)',
     margin_split: 'Default Margin Split',
     gas_price: 'Default Gas Price',
-    choose_relay: 'Choose Relay'
+    choose_relay: 'Choose Relay',
+    theme:'Theme',
+    layout:'Layout',
+    market_trade: 'Market Trade'
   },
   gas_setting: {
     title: 'Set Gas Fee',

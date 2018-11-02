@@ -327,7 +327,10 @@ export default {
     trading_fee: '交易费(LRC)',
     margin_split: '默认分润',
     gas_price: '默认Gas价格',
-    choose_relay: '切换Relay'
+    choose_relay: '切换Relay',
+    theme:'样式',
+    layout:'布局',
+    market_trade: '市场'
   },
   gas_setting: {
     title: '设置矿工费',
