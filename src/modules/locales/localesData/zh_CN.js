@@ -324,7 +324,6 @@ export default {
     timezone: '时区',
     select_placeholder: '搜索/选择',
     time_to_live: '订单有效时间',
-    time_to_live_value: '{value} {unit}',
     trading_fee: '交易费(LRC)',
     margin_split: '默认分润',
     gas_price: '默认Gas价格',

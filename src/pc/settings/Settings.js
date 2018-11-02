@@ -71,6 +71,8 @@ function Settings(props) {
     })
   }
 
+  const language = settings.preference.language === 'en-US' ? 'English' : '中文'
+  const unit = intl.get(`common.${settings.trading.timeToLiveUnit}`)
   return (
     <div className="bg-white position-relative" style={{height:'100%'}}>
       <div className="position-absolute w-100" style={{zIndex:'1000'}}>
@@ -92,11 +94,11 @@ function Settings(props) {
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="settings pb10">
             <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('settings.preferences')}</div>}>
-              <List.Item onClick={()=>showLayer({id:'setLanguage'})} className="overflow-visible" extra={"English"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setLanguage'})} className="overflow-visible" extra={language} arrow="horizontal" >
                 <WebIcon type="global" className="mr10 text-primary fs16" />
                 <span className="color-black-1">{intl.get('settings.language')}</span>
               </List.Item>
-              <List.Item onClick={()=>showLayer({id:'setCurrency'})} className="overflow-visible" extra={"USD"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setCurrency'})} className="overflow-visible" extra={settings.preference.currency} arrow="horizontal" >
                 <WebIcon type="pay-circle" className="mr10 text-primary fs16" />
                 <span className="color-black-1">{intl.get('settings.currency')}</span>
               </List.Item>
@@ -127,7 +129,7 @@ function Settings(props) {
                 <WebIcon type="property-safety" className="mr10 text-primary fs16" />
                 <span className="color-black-1">{intl.get('settings.trading_fee')}</span>
               </List.Item>
-              <List.Item onClick={()=>showLayer({id:'setTTL'})}  className="overflow-visible" extra={intl.get('settings.time_to_live_value', {value:settings.trading.timeToLive, unit:intl.get(`common.${settings.trading.timeToLiveUnit}`)})} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setTTL'})}  className="overflow-visible" extra={`${settings.trading.timeToLive} ${unit}`} arrow="horizontal" >
                 <WebIcon type="hourglass" className="mr10 text-primary fs16" />
                 <span className="color-black-1">{intl.get('settings.time_to_live')}</span>
               </List.Item>
