@@ -43,7 +43,7 @@ function Settings(props) {
           ]}
           rightContent={[]}
         >
-          <div className="color-black">Set {intl.get('settings.currency')}</div>
+          <div className="color-black">{intl.get('settings.currency')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>

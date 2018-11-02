@@ -73,14 +73,7 @@
   &.am-segment-item-selected{
     background: @brand-primary !important;
   }
-}
-.am-segment-item{
-  // border-color:@brand-primary-light !important;
-  border:none !important;
-  background: @brand-primary-light !important;
-  &.am-segment-item-selected{
-    background: @brand-primary !important;
-  }
+  cursor:pointer;
 }
 .am-segment.side-buy{
   .am-segment-item{
@@ -328,6 +321,7 @@
     // border: 1px solid @border-color !important;
   }
   .am-radio-item{
+    cursor:pointer;
     .am-list-content{
       &:extend(.color-black-1);  
     }
@@ -345,6 +339,9 @@
   &.h-default{
     height:4.4rem !important;
   }
+}
+.am-list-item{
+  cursor:pointer;
 }
 .am-list-item .am-input-control input:disabled{
   background: transparent;

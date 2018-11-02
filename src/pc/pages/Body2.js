@@ -46,22 +46,17 @@ class Home extends React.Component {
                 </PanelWrapper>
               </div>
             </div>
-            <div className="row no-gutters ml0 mr0 mtpanel">
-              <div className="col-auto">
-                <PanelWrapper style={{width:'35rem',height:'34.5rem '}} className="">
-                  <PanelHeader title="Buy LRC" />
-                  <div className="pt10"></div>
+            <PanelWrapper className="mtpanel">
+              <PanelHeader title="Place Order" />
+              <div className="row no-gutters ml0 mr0 mtpanel">
+                <div className="col-auto" style={{width:'35rem'}}>
                   <PlaceOrderFormNoSide side="buy" location={location} match={match} />
-                </PanelWrapper>
-              </div>
-              <div className="col-auto">
-                <PanelWrapper style={{width:'35rem',height:'34.5rem'}} className="" >
-                  <PanelHeader title="Sell LRC" />
-                  <div className="pt10"></div>
+                </div>
+                <div className="col-6" style={{width:'35rem'}}>
                   <PlaceOrderFormNoSide side="sell" location={location} match={match} />
-                </PanelWrapper>
+                </div>
               </div>
-            </div>
+            </PanelWrapper>
             {
               false &&
               <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>

@@ -45,7 +45,7 @@ function SetForm(props) {
           ]}
           rightContent={[]}
         >
-          <div className="color-black">Set {intl.get('settings.language')}</div>
+          <div className="color-black">{intl.get('settings.language')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>

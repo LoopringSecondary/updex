@@ -213,22 +213,22 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
           为什么订单没有撮合成交？
         </NoticeBar>
       }
-      <table className="w-100 fs13" style={{overflow: 'auto'}}>
+      <table className="w-100 fs12" style={{overflow: 'auto'}}>
         <thead>
         <tr className="">
-          <th className="text-left pt10 pb10 pl10 pr5 font-weight-normal color-black-3 zb-b-b">
+          <th className="text-left pt5 pb5 pl10 pr5 font-weight-normal color-black-3 zb-b-b">
             {intl.get("common.side")}
             <span hidden className="color-black-4 ml5 fs10">{tokens.right}</span>
           </th>
-          <th className="text-left pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">
+          <th className="text-left pt5 pb5 pl5 pr5 font-weight-normal color-black-3 zb-b-b">
             {intl.get("common.price")}/{tokens.right}
           </th>
-          <th className="text-left pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">
+          <th className="text-left pt5 pb5 pl5 pr5 font-weight-normal color-black-3 zb-b-b">
             {intl.get("common.amount")}/{tokens.left}
           </th>
-          <th hidden className="text-right pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">Fee</th>
+          <th hidden className="text-right pt5 pb5 pl5 pr5 font-weight-normal color-black-3 zb-b-b">Fee</th>
           <th
-            className="text-left pt10 pb10 pl5 pr5 font-weight-normal color-black-3 zb-b-b">{intl.get('order.filled')}</th>
+            className="text-left pt5 pb5 pl5 pr5 font-weight-normal color-black-3 zb-b-b">{intl.get('order.filled')}</th>
           <th className="text-center pl10 pr10 pt5 pb5 font-weight-normal color-black-3 zb-b-b text-nowrap">
             {
               orders.items && orders.items.length > 0 &&

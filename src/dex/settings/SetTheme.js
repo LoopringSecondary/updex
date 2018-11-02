@@ -45,7 +45,7 @@ function Settings(props) {
           ]}
           rightContent={[]}
         >
-          <div className="color-black">Set Theme</div>
+          <div className="color-black">Theme</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
