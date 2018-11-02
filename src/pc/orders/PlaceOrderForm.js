@@ -262,7 +262,7 @@ class PlaceOrderForm extends React.Component {
               className="overflow-visible"
               style={{marginTop:'-0.7rem',marginBottom:'-1.2rem'}}
             >
-              <div className="pl0 pr0">
+              <div className="pl0 pr0 placeOrder">
                   <Slider marks={{0:'0%',25:'25%',50:'50%',75:'75%',100:'100%'}} step={10} disabled={false} />
               </div>
             </Item>

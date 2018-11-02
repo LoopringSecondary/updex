@@ -38,37 +38,35 @@ function Settings(props) {
           ]}
           rightContent={[]}
         >
-          <div className="color-black">Set Trade Fee</div>
+          <div className="color-black">{intl.get('settings.trading_fee')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
       <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
         <div className="bg-white settings pb10">
-            <List className="mt10 no-border text-left position-relative" 
-              renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15 d-flex justify-content-between">
-              <span>{intl.get('settings.trading_fee')}</span>
-              <span className="mr15">{settings.trading.lrcFee/10}%</span>
-              </div>}
-            >
-              <List.Item className="pt10 pb10 overflow-visible" >
-                <div className="row no-gutters ml0 mr0 fs13 color-black-2 ">
-                 <div className="col-auto fs14">{intl.get('setting_lrcfee.slow')}</div>
+            <List className="mt10 no-border text-left position-relative" >
+              <List.Item className="overflow-visible pt15 pb15" style={{height:'auto'}}>
+                <div className="ml25 mr25">
+                  <Slider
+                    defaultValue={settings.trading.lrcFee}
+                    min={1}
+                    max={50}
+                    onChange={(v)=>lrcFeeChange(v)}
+                    onAfterChange={()=>{}}
+                  />
+                </div>
+              </List.Item>
+              <List.Item className="pt5 pb5 overflow-visible" >
+                <div className="row no-gutters ml25 mr25 color-black-2 fs13">
+                 <div className="col-auto">{intl.get('setting_lrcfee.slow')}</div>
                  <div className="col text-center">
-                  <div className="pt10 pb10 pl15 pr15">
-                    <Slider
-                      defaultValue={settings.trading.lrcFee}
-                      min={1}
-                      max={50}
-                      onChange={(v)=>lrcFeeChange(v)}
-                      onAfterChange={()=>{}}
-                    />
-                  </div>
+                  {settings.trading.lrcFee/10}%
                  </div>
-                 <div className="col-auto fs14">{intl.get('setting_lrcfee.fast')}</div>
+                 <div className="col-auto">{intl.get('setting_lrcfee.fast')}</div>
                 </div>
               </List.Item>
             </List>
-            <div className="fs14 color-black-3 mt5 mb15 pl10 text-left">
+            <div className="fs12 color-black-3 mt10 mb15 pl10 text-left">
               {intl.get('setting_lrcfee.tips')}
             </div>
         </div>
