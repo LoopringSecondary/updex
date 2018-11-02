@@ -1,21 +1,21 @@
 import Wallet from 'common/wallets/wallet'
 import config from './config'
-import { toNumber, addHexPrefix } from 'LoopringJS/common/formatter'
-import { keccakHash } from 'LoopringJS/common/utils'
-import { callApi } from './bridge'
-import { Modal } from 'antd-mobile'
+import {toNumber, addHexPrefix} from 'LoopringJS/common/formatter'
+import {keccakHash} from 'LoopringJS/common/utils'
+import {callApi} from './bridge'
+import {Modal} from 'antd-mobile'
 
 export default class TPWallet extends Wallet {
 
-  constructor () {
+  constructor() {
     super()
     this.walletType = 'tpwallet'
   }
 
-  getLanguage () {
+  getLanguage() {
     return new Promise((resolve) => {
       callApi('device.getCurrentLanguage', null, ({error, result}) => {
-        console.log("get Language: " + result )
+        console.log("get Language: " + result)
         let language = 'en-US'
         if (error) {
           resolve({result: language})
@@ -29,10 +29,10 @@ export default class TPWallet extends Wallet {
     })
   }
 
-  getCurrency () {
+  getCurrency() {
     return new Promise((resolve) => {
       callApi('device.getCurrentCurrency', null, ({error, result}) => {
-        console.log("get Currency: " + result )
+        console.log("get Currency: " + result)
         let currency = 'USD'
         if (error) {
           resolve({result: currency})
@@ -46,13 +46,13 @@ export default class TPWallet extends Wallet {
     })
   }
 
-  getLrcFee () {
+  getLrcFee() {
     return new Promise((resolve) => {
       resolve({result: config.getLrcFeePercentage()})
     })
   }
 
-  getCurrentAccount () {
+  getCurrentAccount() {
     return new Promise((resolve) => {
       callApi('user.getCurrentAccount', null, function ({error, result}) {
         if (error) {
@@ -64,8 +64,8 @@ export default class TPWallet extends Wallet {
     })
   }
 
-  getRewardAddress(){
-    return new Promise((resolve) => {
+  getRewardAddress() {
+    const promise1 = new Promise((resolve) => {
       callApi('user.getRewardAddress', null, function ({error, result}) {
         if (error) {
           resolve({error})
@@ -74,9 +74,16 @@ export default class TPWallet extends Wallet {
         }
       })
     })
+
+    const promise2 = new Promise((resolve => {
+      setTimeout(() => {
+        resolve({error: {message: "user.getRewardAddress method isn't implemented by current wallet"}})
+      }, 1000)
+    }))
+    return Promise.race([promise1, promise2])
   }
 
-  signMessage (message) {
+  signMessage(message) {
     return new Promise((resolve) => {
       callApi('message.sign', {
         message: keccakHash(message),
@@ -94,7 +101,7 @@ export default class TPWallet extends Wallet {
     })
   }
 
-  signTx (tx, feeCustomizable) {
+  signTx(tx, feeCustomizable) {
     return new Promise((resolve) => {
       callApi('transaction.sign', tx, ({error, result}) => {
         if (error) {
@@ -106,7 +113,7 @@ export default class TPWallet extends Wallet {
     })
   }
 
-  async setConfigs(){
+  async setConfigs() {
     await super.setConfigs();
     this.rewardAddress = (await this.getRewardAddress()).result
     return this;
