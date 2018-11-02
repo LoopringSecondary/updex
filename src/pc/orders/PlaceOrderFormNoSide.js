@@ -250,16 +250,14 @@ class PlaceOrderForm extends React.Component {
                 </div>
               }
             ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
-            {
-              false &&
-              <Item
-                className="overflow-visible"
-              >
-                <div className="pl0 pr0">
-                  <Slider />
-                </div>
-              </Item>
-            }
+            <Item
+              className="overflow-visible"
+              style={{marginTop:'-0.7rem',marginBottom:'-1.2rem'}}
+            >
+              <div className="pl0 pr0">
+                  <Slider marks={{0:'0%',25:'25%',50:'50%',75:'75%',100:'100%'}} step={10} disabled={false} />
+              </div>
+            </Item>
             <InputItem
               type="text"
               disabled={true}
