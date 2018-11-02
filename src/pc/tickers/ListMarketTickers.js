@@ -80,8 +80,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
     const tokens = tickerFm.getTokens()
     const direction = tickerFm.getChangeDirection()
     const gotoDetail = ()=>{
-      // routeActions.gotoPath(`/dex/markets/${item.market}`)
-
+       routeActions.gotoPath(`/trade/${item.market}`)
       dispatch({
         type:'sockets/marketChange',
         payload:{
@@ -94,12 +93,12 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
           pair:item.market
         }
       })
-      // dispatch({
-      //   type:'layers/toggleLayer',
-      //   payload:{
-      //     id:'SidebarOfMarkets'
-      //   }
-      // })
+      dispatch({
+        type:'layers/toggleLayer',
+        payload:{
+          id:'ListMarketTickers'
+        }
+      })
     }
     const toggleTickerFavored = (item, e)=>{
       e.stopPropagation();

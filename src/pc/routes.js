@@ -41,8 +41,8 @@ const Logged = ()=>{
     return (
       <div>
         <Switch>
-          <Route path={`/trade`} component={Pages.Trade} />
-          <Redirect from="/" to="/trade" />
+          <Route path={`/trade/:market`} component={Pages.Trade} />
+          <Redirect from="/" to="/trade/lrc-weth" />
         </Switch>
         <NotificationModals />
         <CommonModals />

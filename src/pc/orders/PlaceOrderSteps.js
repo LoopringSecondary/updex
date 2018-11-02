@@ -94,7 +94,7 @@ class PlaceOrderSteps extends React.Component {
     
     const total = toBig(amountInput).times(toBig(priceInput)).toString(10)
     const tokens = getTokensByMarket(pair)
-    const lrcFeeValue = orderFormatter.calculateLrcFee(marketcap, total, 2, tokens.right)
+    const lrcFeeValue = orderFormatter.calculateLrcFee(marketcap, total, settings.trading.lrcFee, tokens.right)
     const showLayer = (payload = {}) => {
       dispatch({
         type: 'layers/showLayer',
@@ -117,7 +117,7 @@ class PlaceOrderSteps extends React.Component {
     }
     const showLRCFee = () => {
       // hideLayer({id:'placeOrderSteps'})
-      showLayer({id:'settings'})
+      showLayer({id:'setLRCFee'})
     }
     const next = async (page) => {
       let order = {}

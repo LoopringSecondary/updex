@@ -27,6 +27,12 @@ class TTLForm extends React.Component {
         }
       })
     }
+    const options = [
+      {label:'1 Hour',value:'1h'},
+      {label:'1 Day',value:'1d'},
+      {label:'1 Week',value:'7d'},
+      {label:'1 Month',value:'1m'},
+    ]
     return (
       <div className="bg-white" style={{height:'100%'}}>
         <NavBar
@@ -41,9 +47,9 @@ class TTLForm extends React.Component {
         </NavBar>
         <div className="zb-b-b">
           <PickerView
-            mode="datetime"
-            minDate={moment().toDate()}
-            value={defaultTo.toDate()}
+            data={options}
+            value={'1h'}
+            cols={1}
             locale={storage.settings.get().preference.language}
             onChange={timeToLiveValueChange}
           />

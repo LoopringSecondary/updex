@@ -11,6 +11,8 @@ export default {
    priceInput: '0',
    priceChanged:false,
    amountInput:'0',
+   buySliderValue:0,
+   sellSliderValue:0,
    showAdvance:false,
    sliderMilliLrcFee:0,
    timeToLivePatternSelect: 'easy',
@@ -54,12 +56,16 @@ export default {
       if(side) {
         yield put({ type: 'sideChange',payload:{side}});
         yield put({ type: 'amountChange',payload:{amountInput:0}});
+        yield put({ type: 'buySliderValueChange',payload:{value:0}});
+        yield put({ type: 'sellSliderValueChange',payload:{value:0}});
       }
     },
     *priceChangeEffects({ payload={} }, { put }) {
       const {price} = payload
       yield put({ type: 'priceChange',payload:{priceInput:price}});
       yield put({ type: 'priceChangedChange',payload:{priceChanged:true}});
+      yield put({ type: 'buySliderValueChange',payload:{value:0}});
+      yield put({ type: 'sellSliderValueChange',payload:{value:0}});
     },
     *timeToLivePatternChangeEffects({ payload={} }, { select, put }) {
       const {timeToLivePatternSelect} = payload
@@ -177,6 +183,20 @@ export default {
       return {
         ...state,
         pair
+      }
+    },
+    buySliderValueChange(state, action) {
+      const {value} = action.payload
+      return {
+        ...state,
+        buySliderValue: value
+      }
+    },
+    sellSliderValueChange(state, action) {
+      const {value} = action.payload
+      return {
+        ...state,
+        sellSliderValue: value
       }
     },
     milliLrcFeeChange(state, action) {

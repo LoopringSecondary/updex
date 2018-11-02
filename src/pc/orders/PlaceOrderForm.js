@@ -6,6 +6,7 @@ import { getTokensByMarket } from 'modules/formatter/common'
 import { getDisplaySymbol, toBig,toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import * as orderFormatter from 'modules/orders/formatters'
+import * as tokenFormatter from 'modules/tokens/TokenFm'
 import moment from 'moment'
 import config from 'common/config'
 import Notification from 'LoopringUI/components/Notification'
@@ -27,8 +28,8 @@ if (isIPhone) {
 class PlaceOrderForm extends React.Component {
 
   componentWillReceiveProps(newProps) {
-    const {marketcap,dispatch, placeOrder,lastPrice} = newProps;
-    const {pair,priceChanged} = placeOrder;
+    const {marketcap,dispatch, placeOrder,lastPrice,balance} = newProps;
+    const {pair,side,priceChanged,priceInput} = placeOrder;
     if (this.props.marketcap !== newProps.marketcap && newProps.marketcap.length > 0 && !priceChanged) {
       const tokens = getTokensByMarket(pair)
       const currentPrice = orderFormatter.getMarketPrice(marketcap,tokens.left, tokens.right);
@@ -47,7 +48,7 @@ class PlaceOrderForm extends React.Component {
 
   render(){
     const {dispatch,placeOrder,marketcap,balance,preference,trading,lastPrice} = this.props
-    const {side,pair} = placeOrder
+    const {side,pair,buySliderValue, sellSliderValue} = placeOrder
     const tokens = getTokensByMarket(pair)
     const marketConfig = config.getMarketBySymbol(tokens.left, tokens.right)
     const right = config.getTokenBySymbol(tokens.right)
@@ -216,6 +217,46 @@ class PlaceOrderForm extends React.Component {
     }
     const menu1 = `${intl.get("common.buy")} ${tokens.left}`
     const menu2 = `${intl.get("common.sell")} ${tokens.left}`
+
+    const amountSliderDisable = (pair, side, price, balance) => {
+      if(!pair || !side || !balance  || !price || toNumber(price) <= 0 || balance.length === 0) return true
+      const tokens = getTokensByMarket(pair)
+      const balanceL = tokenFormatter.getBalanceBySymbol({balances: balance, symbol: tokens.left, toUnit: true})
+      const balanceR = tokenFormatter.getBalanceBySymbol({balances: balance, symbol: tokens.right, toUnit: true})
+      if(side === 'buy') {
+        if(toNumber(price) === 0) return true
+        return balanceR.balance.div(price).lte(0)
+      } else {
+        return balanceL.balance.lte(0)
+      }
+    }
+
+    function amountSliderChange(e) {
+      let availableAmount = 0
+      const balanceL = tokenFormatter.getBalanceBySymbol({balances: balance, symbol: tokens.left, toUnit: true})
+      const balanceR = tokenFormatter.getBalanceBySymbol({balances: balance, symbol: tokens.right, toUnit: true})
+      if (side === 'buy') {
+        availableAmount = balanceR.balance.div(price)
+      } else {
+        availableAmount = balanceL.balance
+      }
+      const amount = orderFormatter.sliderEffectAmount(availableAmount, e, {symbol:tokens.left}, {symbol:tokens.right})
+      dispatch({type: 'placeOrder/amountChange', payload: {amountInput: amount}})
+      if(side === 'buy') {
+        dispatch({type: 'placeOrder/buySliderValueChange', payload: {value: e}})
+      } else {
+        dispatch({type: 'placeOrder/sellSliderValueChange', payload: {value: e}})
+      }
+    }
+
+    const sliderValue = (side, buySliderValue, sellSliderValue) => {
+      if(side === 'buy') {
+        return buySliderValue
+      } else {
+        return sellSliderValue
+      }
+    }
+
     return (
       <div>
         <div className="p15">
@@ -263,7 +304,13 @@ class PlaceOrderForm extends React.Component {
               style={{marginTop:'-0.7rem',marginBottom:'-1.2rem'}}
             >
               <div className="pl0 pr0 placeOrder">
-                  <Slider marks={{0:'0%',25:'25%',50:'50%',75:'75%',100:'100%'}} step={10} disabled={false} />
+                  <Slider
+                    marks={{0:'0%',25:'25%',50:'50%',75:'75%',100:'100%'}}
+                    step={10}
+                    disabled={amountSliderDisable(pair, side, price, balance)}
+                    onChange={amountSliderChange.bind(this)}
+                    value={sliderValue(side, buySliderValue, sellSliderValue)}
+                  />
               </div>
             </Item>
             {

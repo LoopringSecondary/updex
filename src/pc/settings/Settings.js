@@ -123,7 +123,7 @@ function Settings(props) {
               }
             </List>
             <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">Market Trade</div>}>
-              <List.Item onClick={()=>showLayer({id:'setLRCFee'})} className="overflow-visible" extra={"0.2%"} arrow="horizontal" >
+              <List.Item onClick={()=>showLayer({id:'setLRCFee'})} className="overflow-visible" extra={`${settings.trading.lrcFee / 10}%`} arrow="horizontal" >
                 <WebIcon type="property-safety" className="mr10 text-primary fs16" />
                 <span className="color-black-1">Trade Fee</span>
               </List.Item>
