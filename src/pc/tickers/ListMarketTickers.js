@@ -81,18 +81,18 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
     const direction = tickerFm.getChangeDirection()
     const gotoDetail = ()=>{
        routeActions.gotoPath(`/trade/${item.market}`)
-      dispatch({
-        type:'sockets/marketChange',
-        payload:{
-          market:item.market
-        }
-      })
-      dispatch({
-        type:'placeOrder/pairChangeEffects',
-        payload:{
-          pair:item.market
-        }
-      })
+      // dispatch({
+      //   type:'sockets/marketChange',
+      //   payload:{
+      //     market:item.market
+      //   }
+      // })
+      // dispatch({
+      //   type:'placeOrder/pairChangeEffects',
+      //   payload:{
+      //     pair:item.market
+      //   }
+      // })
       dispatch({
         type:'layers/toggleLayer',
         payload:{

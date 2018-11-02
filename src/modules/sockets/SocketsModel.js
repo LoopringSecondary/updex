@@ -84,6 +84,26 @@ export default {
         }
       })
 
+      history.listen(({pathname,search})=> {
+        if (pathname.indexOf('/trade/')>-1) {
+          const market = pathname.replace('/trade/','')
+          if(market.indexOf('-')>-1){
+            dispatch({
+              type:'sockets/marketChange',
+              payload:{
+                market:market
+              }
+            })
+            dispatch({
+              type:'placeOrder/pairChangeEffects',
+              payload:{
+                pair:market
+              }
+            })
+          }
+        }
+      })
+
     },
   },
   effects: {
