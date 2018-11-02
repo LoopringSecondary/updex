@@ -104,13 +104,11 @@ class TVChartContainer extends React.PureComponent {
         },
         getBars: function(symbolInfo, resolution, from, to, onHistoryCallback, onErrorCallback, firstDataRequest) {
           console.log('=====getBars running', symbolInfo.name, resolution)
-          console.log(1, _this.state.barsLoaded, _this.state.resolution, resolution)
           if(_this.state.barsLoaded && _this.state.resolution === resolution) {
             setTimeout(() => {
               onHistoryCallback([], {noData: true})
             }, 0)
           } else {
-            console.log(2)
             historyProvider.getLoopringBars(symbolInfo, resolution, from, to, firstDataRequest)
               .then(bars => {
                 _this.setState({barsLoaded: true, resolution})
