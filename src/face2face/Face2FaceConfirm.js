@@ -39,7 +39,7 @@ const OrderMetaItem = (props) => {
 
 function PlaceOrderSteps (props) {
   const {p2pOrder, balance, settings, marketcap, gas,pendingTx, dispatch} = props
-  const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current).times(1e9))
+  const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
   let {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
   amountS =  toBig(amountS)
   amountB = toBig(amountB)

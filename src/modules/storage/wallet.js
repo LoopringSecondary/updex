@@ -19,11 +19,20 @@ const clearUnlockedAddress = () => {
   localStorage.unlockedAddress = ''
 };
 
+const setRewardAddress = (address) => {
+  localStorage.rewardAddress =  address;
+};
+
+const getRewardAddress = () => {
+  return  localStorage.rewardAddress
+};
 
 export default {
   storeUnlockedAddress,
   getUnlockedAddress,
   getUnlockedType,
-  clearUnlockedAddress
+  clearUnlockedAddress,
+  setRewardAddress,
+  getRewardAddress
 }
 

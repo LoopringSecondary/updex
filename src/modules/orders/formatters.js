@@ -7,6 +7,8 @@ import contracts from 'LoopringJS/ethereum/contracts/Contracts'
 import {createWallet} from 'LoopringJS/ethereum/account';
 import * as tokenFormatter from 'modules/tokens/TokenFm'
 import Notification from 'LoopringUI/components/Notification'
+import storage from 'modules/storage'
+
 
 const integerReg = new RegExp("^[0-9]*$")
 const amountReg = new RegExp("^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*))$")
@@ -296,7 +298,7 @@ export async function signOrder(tradeInfo, wallet) {
   order.validUntil = fm.toHex(tradeInfo.validUntil);
   order.marginSplitPercentage = Number(tradeInfo.marginSplit);
   order.buyNoMoreThanAmountB = tradeInfo.side.toLowerCase() === "buy";
-  order.walletAddress = config.getWalletAddress();
+  order.walletAddress = (storage.wallet.getRewardAddress()) || config.getWalletAddress()
   order.orderType = tradeInfo.orderType
   const authAccount = createWallet()
   order.authAddr = authAccount.getAddressString();
@@ -330,10 +332,11 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
   }
   let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
 
-  if(tradeInfo.roleType === 'taker'){
+  if(tradeInfo.roleType === 'taker' || true){
     gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
   }
 
+  console.log(gas)
   if(ethBalance.balance.lt(gas)){
     error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
     failed = true
@@ -361,7 +364,7 @@ export async function signP2POrder(tradeInfo, address) {
   order.validUntil = fm.toHex(tradeInfo.validUntil);
   order.marginSplitPercentage = Number(tradeInfo.marginSplit);
   order.buyNoMoreThanAmountB = true;
-  order.walletAddress = (window.Wallet && window.Wallet.rewardAddress) || config.getWalletAddress()
+  order.walletAddress = (storage.wallet.getRewardAddress()) || config.getWalletAddress()
   order.orderType = tradeInfo.orderType
   const authAccount = createWallet()
   order.authAddr = authAccount.getAddressString();
