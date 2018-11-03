@@ -2,12 +2,14 @@ export default {
 	"extraBabelPlugins": [
     // ["import", { "libraryName": "antd-mobile", "libraryDirectory": "es", "style": true },'antd-mobile'],
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true },'antd'],
+    // ["@babel/transform-runtime",{regenerator:true}],
 	],
   // multipage:true,
   // entry:'./src/assets/css/themes/*.less',
   // entry:{
   //   index:['./src/index.js','./src/assets/css/themes/theme-white.less']
   // },
+  // extraBabelPresets: ["@babel/env",'@babel/react'],
   disableCSSModules: true,
   hash:true,
 	"alias":{
@@ -32,12 +34,13 @@ export default {
     "favicon": './src/assets/images/favicon.ico'
   },
   sass:{},
+  ignoreMomentLocale:true,
   env: {
     development: {
       extraBabelPlugins: ['dva-hmr'],
     },
   },
-
+  ignoreMomentLocale:true,
 }
 
 
