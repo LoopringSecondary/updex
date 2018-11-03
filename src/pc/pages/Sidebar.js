@@ -18,9 +18,9 @@ class Sidebar extends React.Component {
     }
     const collapsedWidth = collapsed ? '6rem' : '35rem'
     return (
-      <div className="d-flex flex-column" style={{height:'100vh',width:collapsedWidth,transition:'all 0s'}}>
-          <div className="bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0',height:'6rem'}}>
-            <img style={{height:'4rem'}} src={require('../../assets/images/up-logo-notext-filled.png')} alt=""/>
+      <div className="d-flex flex-column w-60" style={{height:'100vh',transition:'all 0s'}}>
+          <div className="h-60 bg-white d-flex align-items-center justify-content-center" style={{flexGrow:'0'}}>
+            <img className="h-40" src={require('../../assets/images/up-logo-notext-filled.png')} alt=""/>
             {!collapsed &&
               <div className="fs20 text-primary font-weight-bold ml10">
                 UP DEX
@@ -28,31 +28,31 @@ class Sidebar extends React.Component {
             }
           </div>
           <div className="d-flex flex-column mtpanel bg-white" style={{flex:'1'}}>
-            <div className="zb-b-b">
+            <div className="">
               <Tooltip title="Market Trade" placement="right">
-                <div className="pt10 pb10 zb-b-t">
-                  <div className="text-center cursor-pointer bg-primary circle m-auto" style={{height:'4.2rem',width:'4.2rem',lineHeight:'5rem'}}>
+                <div className="pt15">
+                  <div className="text-center cursor-pointer bg-primary m-auto circle-45 center-center">
                     <WebIcon type="line-chart" theme="" className="fs20 color-black" />
                   </div>
                 </div>
               </Tooltip>
               <Tooltip title="P2P Trade" placement="right">
-                <div className="pt10 pb10 zb-b-t">
-                  <div onClick={()=>showLayer('p2p')} className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary circle m-auto" style={{height:'4.2rem',width:'4.2rem',lineHeight:'5rem'}}>
+                <div className="pt15">
+                  <div onClick={()=>showLayer('p2p')} className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="team" theme="" className="fs20" />
                   </div>
                 </div>
               </Tooltip>
               <Tooltip title="My Orders" placement="right">
-                <div className="pt10 pb10 zb-b-t">
-                  <div  className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary circle m-auto" style={{height:'4.2rem',width:'4.2rem',lineHeight:'5rem'}}>
+                <div className="pt15">
+                  <div  className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="solution" theme="" className="fs20" />
                   </div>
                 </div>
               </Tooltip>
               <Tooltip title="My Wallet" placement="right">
-                <div className="pt10 pb10 zb-b-t">
-                  <div  className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary circle m-auto" style={{height:'4.2rem',width:'4.2rem',lineHeight:'5rem'}}>
+                <div className="pt15">
+                  <div  className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="property-safety" theme="" className="fs20" />
                   </div>
                 </div>

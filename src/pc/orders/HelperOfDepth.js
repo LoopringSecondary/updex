@@ -74,17 +74,17 @@ class HelperOfDepth extends React.Component {
             {
               sell && sell.reverse().map((item, index) =>
                 <tr key={index}>
-                  <td className="hover-default pl15 pr5 text-left color-error align-top" style={{lineHeight:'1.8rem'}}
+                  <td className="hover-default pl15 pr5 text-left color-error align-top lh20"
                       onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
                     {Number(item[0]).toFixed(8)}
                     <span className="fs12 color-black-4 ml5"><Worth amount={Number(item[0]).toFixed(8)}
                                                                     symbol={tokens.right}/></span>
                   </td>
-                  <td className="hover-default pl5 pr5 color-black-2 text-right" style={{lineHeight:'1.8rem'}}
+                  <td className="hover-default pl5 pr5 color-black-2 text-right lh20"
                       onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                     {Number(item[1]).toFixed(4)}
                   </td>
-                  <td className="hover-default pl5 pr15 color-black-2 text-right align-top" style={{lineHeight:'1.8rem'}}
+                  <td className="hover-default pl5 pr15 color-black-2 text-right align-top lh20"
                       onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                     {Number(item[2]).toFixed(4)}
                   </td>
@@ -136,17 +136,17 @@ class HelperOfDepth extends React.Component {
             {
               depth.item && depth.item.buy && depth.item.buy.map((item, index) =>
                 <tr key={index}>
-                  <td className="hover-default pl15 pr5 text-left color-success align-top" style={{lineHeight:'1.8rem'}}
+                  <td className="hover-default pl15 pr5 text-left color-success align-top lh20"
                       onClick={changePrice.bind(this, Number(item[0]).toFixed(8))}>
                     {Number(item[0]).toFixed(8)}
                     <span className="fs12 color-black-4 ml5"><Worth amount={Number(item[0]).toFixed(8)}
                                                                     symbol={tokens.right}/></span>
                   </td>
-                  <td className="hover-default pl5 pr5 color-black-2 text-right align-top" style={{lineHeight:'1.8rem'}}
+                  <td className="hover-default pl5 pr5 color-black-2 text-right align-top lh20"
                       onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                     {Number(item[1]).toFixed(4)}
                   </td>
-                  <td className="hover-default pl5 pr15 color-black-2 text-right align-top" style={{lineHeight:'1.8rem'}}
+                  <td className="hover-default pl5 pr15 color-black-2 text-right align-top lh20"
                       onClick={changeAmount.bind(this, Number(item[1]).toFixed(4))}>
                     {Number(item[2]).toFixed(4)}
                   </td>

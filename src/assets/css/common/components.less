@@ -57,6 +57,7 @@
 .am-segment-item{
   // border-color:@brand-primary-light !important;
   border:none !important;
+  height:4rem * @times;
   background: @brand-primary-light !important;
   &.am-segment-item-selected{
     background: @brand-primary !important;
@@ -94,7 +95,7 @@
     // color:#fff !important;
   }
 .segmented-fs16{
-  .am-segment-item{font-size: 1.6rem !important;}
+  .am-segment-item{font-size: 1.6rem * @times !important;}
 }
 
 // ========
@@ -102,7 +103,7 @@
 // ========
 
 .am-button-small{
-  padding:0px 1rem !important;
+  padding:0px 1rem * @times !important;
 }
 .am-button-primary.am-button-disabled{
   // opacity: 1 !important;
@@ -142,7 +143,7 @@
 // ========
 
 .am-slider-handle{
-  border:0.2rem solid @brand-primary !important;
+  border:0.2rem * @times solid @brand-primary !important;
   background: @brand-primary !important;
   
 }
@@ -159,18 +160,18 @@
 
 .placeOrder{
   .am-slider-handle{
-    width:1.1rem;
-    height:1.1rem;
-    margin-left:-0.55rem;
-    margin-top:-0.55rem;
+    width:1.1rem * @times;
+    height:1.1rem * @times;
+    margin-left:-0.55rem * @times;
+    margin-top:-0.55rem * @times;
   }
   .am-slider-rail{
     background:@bg-white-light !important;
   }
   .am-slider-dot{
-    bottom:-0.15rem !important;
-    width:0.9rem;
-    height:0.9rem;
+    bottom:-0.15rem * @times !important;
+    width:0.9rem * @times;
+    height:0.9rem * @times;
     &.am-slider-dot-active{
       background-color:@brand-primary !important;
       border-color:@brand-primary !important;  
@@ -208,11 +209,11 @@
   }
 }
 .am-tab-bar-bar .am-tab-bar-tab-icon{
-  margin-top: 3px;
-  font-size:1.6rem;
+  margin-top: 0.3rem * @times;
+  font-size:1.6rem * @times;
 }
 .am-tab-bar-bar .am-tab-bar-tab-title{
-  font-size:1.3rem;
+  font-size:1.3rem * @times;
   margin-top: 1px;
 }
 
@@ -243,10 +244,10 @@
     border-radius:@radius-sm;
   }
   &.s-lg{
-    height: 4.4rem;
-    line-height: 3.6rem;
-    padding-top:.4rem;
-    padding-bottom:.4rem;
+    height: 4.4rem * @times;
+    line-height: 3.6rem * @times;
+    padding-top:.4rem * @times;
+    padding-bottom:.4rem * @times;
 }
   &.t-primary{
     background: fade(@brand-primary,5%);
@@ -305,7 +306,7 @@
 }
 .settings{
   .am-list-body{
-    border-radius:0rem !important;
+    border-radius:0rem * @times !important;
     // border: 1px solid @border-color !important;
   }
   .am-radio-item{
@@ -323,9 +324,9 @@
 }
 
 .am-list-item.am-input-item{
-  height: 5.0rem !important;
+  height: 5.0rem * @times !important;
   &.h-default{
-    height:4.4rem !important;
+    height:4.4rem * @times !important;
   }
 }
 .am-list-item{
@@ -344,7 +345,7 @@
   }
 }
 .am-list-item.h-default{
-  height:4.4rem !important;
+  height:4.4rem * @times !important;
 }
 
 .am-list-header{
@@ -377,7 +378,7 @@
     text-align: left !important;
   }
   .ant-input-affix-wrapper .ant-input:not(:last-child){
-    padding-left:1.5rem !important;
+    padding-left:1.5rem * @times !important;
   }
 }
 
@@ -393,30 +394,30 @@
 // ========
 // article
 // ========
-.article{ padding:1.5rem; background: #fff; }
-.article section{ margin-bottom: 2.5rem; }
+.article{ padding:1.5rem * @times; background: #fff; }
+.article section{ margin-bottom: 2.5rem * @times; }
 .article h1{ margin:0; }
 .article h4{ margin:0; font-size: 14px; }
 .article h3{ font-size: 16px; }
-.article .header{text-align: center; margin: 2.5rem 0; }
+.article .header{text-align: center; margin: 2.5rem * @times 0; }
 .article .header small{ opacity: 0.6 }
 .article p{}
 
 .am-pagination.custom-pagination{
   .am-button{
-    height:3.2rem !important;
-    line-height:3.2rem !important;
+    height:3.2rem * @times !important;
+    line-height:3.2rem * @times !important;
     background: @brand-primary-light !important;
     border:none !important;
     color:@brand-primary;
     &::before{
       border:none !important;
     }
-    font-size:1.4rem !important;
-    margin-top: .5rem;
+    font-size:1.4rem * @times !important;
+    margin-top: .5rem * @times;
   }
   .am-pagination-wrap{
-    font-size:1.4rem !important;
+    font-size:1.4rem * @times !important;
     &:extend(.color-black-3);
     .active{
       &:extend(.color-black-2);
@@ -431,26 +432,26 @@
 
 }
 .mpanel{
-  margin:0.6rem;
+  margin:0.6rem * @times;
 }
 .mtpanel{
-  margin-top:0.6rem;
+  margin-top:0.6rem * @times;
 }
 .mrpanel{
-  margin-right:0.6rem;
+  margin-right:0.6rem * @times;
 }
 .mlpanel{
-  margin-left:0.6rem;
+  margin-left:0.6rem * @times;
 }
 .mbpanel{
-  margin-bottom:0.6rem;
+  margin-bottom:0.6rem * @times;
 }
 
 .am-list-item .am-input-control input{
-  font-size:1.6rem !important;
+  font-size:1.6rem * @times !important;
 }
 .fake-input-placeholder{
-  font-size:1.4rem;
+  font-size:1.4rem * @times;
 }
 
 .am-list-item .am-input-control .fake-input-container .fake-input.focus:after{

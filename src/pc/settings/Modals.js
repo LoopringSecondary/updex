@@ -12,7 +12,7 @@ import SetTTL from 'mobile/settings/SetTTL'
 export function SetLanguageModal(){
   return (
     <Containers.Layers id="setLanguage">
-      <UiContainers.Drawer id="setLanguage" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+      <UiContainers.Drawer id="setLanguage" position="right" style={{margin:'0 auto',height:'100%',width:'25vw'}}>
         <SetLanguage />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -21,7 +21,7 @@ export function SetLanguageModal(){
 export function SetCurrencyModal(){
   return (
     <Containers.Layers id="setCurrency">
-      <UiContainers.Drawer id="setCurrency" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+      <UiContainers.Drawer id="setCurrency" position="right" style={{margin:'0 auto',height:'100%',width:'25vw'}}>
         <SetCurrency />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -30,7 +30,7 @@ export function SetCurrencyModal(){
 export function SetLayoutModal(){
   return (
     <Containers.Layers id="setLayout">
-      <UiContainers.Drawer id="setLayout" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+      <UiContainers.Drawer id="setLayout" position="right" style={{margin:'0 auto',height:'100%',width:'25vw'}}>
         <SetLayout />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -39,7 +39,7 @@ export function SetLayoutModal(){
 export function SetLRCFeeModal(){
   return (
     <Containers.Layers id="setLRCFee">
-      <UiContainers.Drawer id="setLRCFee" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+      <UiContainers.Drawer id="setLRCFee" position="right" style={{margin:'0 auto',height:'100%',width:'25vw'}}>
         <SetLRCFee />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -48,7 +48,7 @@ export function SetLRCFeeModal(){
 export function SetThemeModal(){
   return (
     <Containers.Layers id="setTheme">
-      <UiContainers.Drawer id="setTheme" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+      <UiContainers.Drawer id="setTheme" position="right" style={{margin:'0 auto',height:'100%',width:'25vw'}}>
         <SetTheme />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -57,7 +57,7 @@ export function SetThemeModal(){
 export function SetTTLModal(){
   return (
     <Containers.Layers id="setTTL">
-      <UiContainers.Drawer id="setTTL" position="right" style={{margin:'0 auto',height:'100%',width:'40rem'}}>
+      <UiContainers.Drawer id="setTTL" position="right" style={{margin:'0 auto',height:'100%',width:'25vw'}}>
         <SetTTL />
       </UiContainers.Drawer>
     </Containers.Layers>
@@ -68,7 +68,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="settings">
-        <UiContainers.Drawer position="right" id="settings" level={null} style={{margin:'0 auto',height:'100%',width:'48rem'}}>
+        <UiContainers.Drawer position="right" id="settings" level={null} style={{margin:'0 auto',height:'100%',width:'30vw'}}>
           <Settings />
         </UiContainers.Drawer>
       </Containers.Layers>

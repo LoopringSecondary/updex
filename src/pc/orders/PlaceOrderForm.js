@@ -272,7 +272,6 @@ class PlaceOrderForm extends React.Component {
               values={[menu1, menu2]}
               className={`m-auto side-${side}`}
               selectedIndex={side === 'buy' ? 0 : 1}
-              style={{height:'4rem'}}
               onChange={sideChange}
             />
           </div>
