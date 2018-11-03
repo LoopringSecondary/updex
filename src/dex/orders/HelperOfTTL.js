@@ -39,7 +39,7 @@ class TTLForm extends React.Component {
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          {intl.get('setting_ttl.title')}
+          <div className="color-black-1">{intl.get('setting_ttl.title')}</div>
         </NavBar>
         <div className="zb-b-b">
           <DatePickerView
