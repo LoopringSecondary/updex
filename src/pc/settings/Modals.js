@@ -68,7 +68,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="settings">
-        <UiContainers.Drawer position="right" id="settings" level={null} style={{margin:'0 auto',height:'100%',width:'30vw'}}>
+        <UiContainers.Drawer position="right" id="settings" level={null} style={{margin:'0 auto',height:'100%',width:'25vw'}}>
           <Settings />
         </UiContainers.Drawer>
       </Containers.Layers>

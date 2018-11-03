@@ -272,15 +272,15 @@ class Auth extends React.Component {
         <div className="divider 1px zb-b-t"></div>
         <div className="pl15 pr15">
           <div className="text-center pt50 pb30">
-            <img style={{height:'5rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/>
+            <img className="h-50" src={require('../../assets/images/up-logo-notext.png')} alt=""/>
             <div className="text-primary fs20 font-weight-bold mt5">UP DEX</div>
           </div>
         </div>
         <div className="">
-          <div onClick={()=>unlockTypeChanged('upWallet')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary"
-               style={{padding: '7px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
-              <img style={{height: '30px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
+          <div onClick={()=>unlockTypeChanged('upWallet')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55"
+              pt5 pb5  style={{borderRadius:'50em'}}>
+            <div className="col-auto text-left pl15 w-60">
+              <img className="h-30" src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
             </div>
             <div className="col text-left">
               <div className="fs16 color-black-1 text-left">UP Wallet</div>
@@ -294,8 +294,8 @@ class Auth extends React.Component {
           </div>
           {
             false &&
-            <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary" style={{padding: '7px 0px',borderRadius:'50em'}}>
-              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+            <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
+              <div className="col-auto text-left pl15 w-60">
                 <i className="icon-loopr color-black-1 fs28"></i>
               </div>
               <div className="col text-left">
@@ -310,8 +310,8 @@ class Auth extends React.Component {
             </div>
           }
           <Spin spinning={metaMask.loading}>
-            <div onClick={()=>unlockTypeChanged('metaMask')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary"
-                 style={{padding: '7px 0px',borderRadius:'50em'}}>
+            <div onClick={()=>unlockTypeChanged('metaMask')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55"
+                pt5 pb5  style={{borderRadius:'50em'}}>
               <AntdModal
                 title={intl.get('wallet_meta.unlock_steps_title')}
                 visible={metaMask.refreshModalVisible}
@@ -335,7 +335,7 @@ class Auth extends React.Component {
                   />
                 </Steps>
               </AntdModal>
-              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+              <div className="col-auto text-left pl15 w-60">
                 <i className="icon-Metamaskwallet color-black-1 fs26"></i>
               </div>
               <div className="col text-left">
@@ -350,9 +350,9 @@ class Auth extends React.Component {
             </div>
           </Spin>
           <Spin spinning={this.state.connectingLedger}>
-            <div onClick={this.unlockByLedger} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary"
-                 style={{padding: '7px 0px',borderRadius:'50em'}}>
-              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+            <div onClick={this.unlockByLedger} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55"
+                pt5 pb5  style={{borderRadius:'50em'}}>
+              <div className="col-auto text-left pl15 w-60">
                 <i className="icon-ledgerwallet color-black-1 fs26"></i>
               </div>
               <div className="col text-left">
@@ -368,9 +368,9 @@ class Auth extends React.Component {
           </Spin>
           {
             placeOrderSteps.step === 0 &&
-            <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary"
-                 style={{padding: '7px 0px',borderRadius:'50em'}}>
-              <div className="col-auto text-left pl15 " style={{width:'6rem'}}>
+            <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55"
+                pt5 pb5  style={{borderRadius:'50em'}}>
+              <div className="col-auto text-left pl15 w-60">
                 <i className="icon-eye color-black-1 fs22"></i>
               </div>
               <div className="col text-left">

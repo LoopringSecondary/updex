@@ -35,7 +35,7 @@ function MarketPage(props) {
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
-      <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
+      <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
         <ListMarketTickers />
       </div>
     </div>
