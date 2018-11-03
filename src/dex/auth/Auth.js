@@ -97,14 +97,14 @@ class Auth extends React.Component {
         <div className="divider 1px zb-b-t"></div>
         <div className="pt30 pb40 pl15 pr15">
           <div className="text-center">
-            <img style={{height:'4.5rem'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/>
+            <img className="h-45" src={require('../../assets/images/up-logo-notext.png')} alt=""/>
             <div className="text-primary fs18 font-weight-bold mt5">UP DEX</div>
           </div>
         </div>
         <div className="">
           <div className="row ml15 mr15 mb15 p15 no-gutters align-items-center bg-primary"
                style={{padding: '0px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left ml5 mr15" style={{width:'2.5rem'}}>
+            <div className="col-auto text-left ml5 mr15 w-25">
               <img style={{height: '24px'}} src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
             </div>
             <div className="col text-left">
@@ -118,7 +118,7 @@ class Auth extends React.Component {
             </div>
           </div>
           <div className="row ml15 mr15 mb15 p15 no-gutters align-items-center bg-primary" style={{padding: '0px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left ml5 mr15" style={{width:'2.5rem'}}>
+            <div className="col-auto text-left ml5 mr15 w-25">
               <i className="icon-loopr color-black-1 fs22"></i>
             </div>
             <div className="col text-left">
@@ -133,7 +133,7 @@ class Auth extends React.Component {
           </div>
           <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row ml15 mr15 p15 no-gutters align-items-center bg-primary"
                style={{padding: '0px 0px',borderRadius:'50em'}}>
-            <div className="col-auto text-left ml5 mr15" style={{width:'2.5rem'}}>
+            <div className="col-auto text-left ml5 mr15 w-25">
               <i className="icon-eye color-black-1 fs20"></i>
             </div>
             <div className="col text-left">

@@ -16,16 +16,16 @@ class Markets extends React.Component {
     return (
       <LayoutDexHome {...this.props}>
         <div className=""  style={{height:'100%'}}>
-          <div style={{height:'45px'}}></div>
+          <div className="h-45"></div>
           <NavBar
             style={{top:'0px',position:'absolute',zIndex:10}}
-            className="w-100 zb-b-t bg-white"
+            className="w-100 bg-white"
             mode="light"
             icon={null && <Icon type="left" />}
             leftContent={ [
             ]}
             rightContent={[
-              <i style={{width:'32px',height:'32px',lineHeight:'32px',textAlign:'right'}} onClick={search} key="1" className="icon-search" />,
+              <i className="h-30 w-30"style={{textAlign:'right'}} onClick={search} key="1" className="icon-search" />,
             ]}
           >
             <div className="color-black">{intl.get('common.markets')}</div>

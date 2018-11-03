@@ -243,7 +243,6 @@ class PlaceOrderForm extends React.Component {
           <div className="segmented-fs16">
             <SegmentedControl
               values={[menu1, menu2]}
-              style={{height:'4rem'}}
               className={`m-auto side-${side}`}
               selectedIndex={side === 'buy' ? 0 : 1}
               onChange={sideChange}
@@ -259,9 +258,9 @@ class PlaceOrderForm extends React.Component {
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
               className="circle h-default mt15"
               extra={
-                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center w-65" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                   <span className="color-black-3 d-inline-block">{tokens.right}</span>
-                  <div className="text-primary text-right pr10 text-nowrap" style={{position:'absolute',top:'1rem',width:'7rem',marginLeft:'-7rem'}}>
+                  <div className="text-primary text-right pr10 text-nowrap w-65" style={{position:'absolute',marginLeft:'-100%'}}>
                     {
                       price>0 && <span className="color-black-4 fs12">≈ <Worth amount={price} symbol={tokens.right}/></span>
                     }
@@ -269,7 +268,7 @@ class PlaceOrderForm extends React.Component {
                 </div>
               }
               onChange={priceChange}
-            ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
+            ><div className="fs14 color-black-3 pr5 w-50">{intl.get("common.price")}</div></InputItem>
             <InputItem
               type="money"
               placeholder={amountPrecision > 0 ? `0.${'0'.repeat(amountPrecision)}` : '0'}
@@ -280,14 +279,14 @@ class PlaceOrderForm extends React.Component {
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
               className="circle h-default mt15"
               extra={
-                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center w-65" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                   <span className="color-black-3 d-inline-block">{tokens.left}</span>
-                  <div onClick={showAmountHelper} className="text-primary cursor-pointer text-right pr10 text-nowrap" style={{position:'absolute',top:'1rem',width:'3rem',left:'-3rem'}}>
+                  <div onClick={showAmountHelper} className="text-primary cursor-pointer text-right pr0 text-nowrap w-30" style={{position:'absolute',marginLeft:'-100%'}}>
                     <WebIcon className="text-primary fs14" type="sliders"/>
                   </div>
                 </div>
               }
-            ><div className="fs14 color-black-3 pr5" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
+            ><div className="fs14 color-black-3 pr5 w-50">{intl.get("common.amount")}</div></InputItem>
             {
               false &&
               <List.Item
@@ -296,12 +295,12 @@ class PlaceOrderForm extends React.Component {
                 extra={
                   <div className="fs12" style={{width:'auto',textAlign:'right'}}>
                     <span className="color-black-4 ml5">{total ? total : '0.00'}</span>
-                    <span className="color-black-4 d-inline-block ml5" style={{width:'35px'}}>{tokens.right}</span>
+                    <span className="color-black-4 d-inline-block ml5 w-35">{tokens.right}</span>
                   </div>
                 }
               >
                 <div className="">
-                  <span className="d-inline-block mr5 fs12 color-black-4" style={{width:'50px'}}>{intl.get("common.total")}</span>
+                  <span className="d-inline-block mr5 fs12 color-black-4 w-50">{intl.get("common.total")}</span>
                 </div>
               </List.Item>
             }
@@ -317,26 +316,6 @@ class PlaceOrderForm extends React.Component {
                  }
                </div>
               </Button>
-              {
-                false && side === 'sell' &&
-                <Button onClick={toConfirm} className={`w-100 d-block mt15 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
-                  <div className="row ml0 mr0 no-gutters">
-                    <div className="col">{amount ? amount : 0} {tokens.left}</div>
-                    <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                    <div className="col">{intl.get('common.total')} {total} {tokens.right}</div>
-                  </div>
-                </Button>
-              }
-              {
-                false && side === 'buy' &&
-                <Button onClick={toConfirm} className={`w-100 d-block mt15 fs16 ${submitEnable ? " " : "t-light-bak"}`} type={"primary"} disabled={false}>
-                  <div className="row ml0 mr0 no-gutters">
-                    <div className="col">{total} {tokens.right}</div>
-                    <div className="col-auto" style={{background:'rgba(0,0,0,0.05)',padding:'0 1.2rem'}}>→</div>
-                    <div className="col">{amount ? amount : 0} {tokens.left}</div>
-                  </div>
-                </Button>
-              }
           </List>
         </div>
         <div className="divider 1px zb-b-t"></div>
