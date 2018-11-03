@@ -30,7 +30,7 @@ class Home extends React.Component {
               <PanelHeader title="Kline Chart" />
               <Kline />
             </PanelWrapper>
-            <div className="row no-gutters ml0 mr0" style={{height:'33.5rem'}}>
+            <div className="row no-gutters ml0 mr0" style={{height:'25vh'}}>
               <div className="col">
                 <PanelWrapper style={{height:'100%'}} className="mlpanel mtpanel">
                   <PanelHeader title="My Orders" />
@@ -40,7 +40,7 @@ class Home extends React.Component {
               {
                 false &&
                 <div className="col-auto">
-                  <PanelWrapper style={{height:'100%', width:'35rem'}} className="mtpanel mlpanel">
+                  <PanelWrapper style={{height:'100%', width:'25rem'}} className="mtpanel mlpanel">
                     <PanelHeader title="My Wallet" />
                     <HelperOfBalance />
                   </PanelWrapper>
@@ -51,13 +51,13 @@ class Home extends React.Component {
           <div className="col-auto d-flex flex-column mlpanel mtpanel">
             <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
               <div className="col-auto" style={{height:'100%'}}>
-                <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'35rem'}} className="">
+                <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'25rem'}} className="">
                   <PanelHeader title="Order Book" />
                   <HelperOfDepth />
                 </PanelWrapper>
               </div>
               <div className="col-auto" style={{height:'100%'}}>
-                <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'35rem'}} className="mlpanel">
+                <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'25rem'}} className="mlpanel">
                   <PanelHeader title="Trade History" />
                   <ListMarketFills />
                 </PanelWrapper>
@@ -66,10 +66,10 @@ class Home extends React.Component {
             <PanelWrapper className="mtpanel">
               <PanelHeader title="Place Order" />
               <div className="row no-gutters ml0 mr0 mtpanel">
-                <div className="col-auto" style={{width:'35rem'}}>
+                <div className="col-auto" style={{width:'25rem'}}>
                   <PlaceOrderFormNoSide side="buy" location={location} match={match} />
                 </div>
-                <div className="col-6" style={{width:'35rem'}}>
+                <div className="col-6" style={{width:'25rem'}}>
                   <PlaceOrderFormNoSide side="sell" location={location} match={match} />
                 </div>
               </div>
