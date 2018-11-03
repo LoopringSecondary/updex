@@ -71,23 +71,23 @@ class Face2FaceForm extends React.Component {
       <div className="">
         <div className="zb-b-b p15 ">
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
-            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col d-flex justify-content-center align-items-center">
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col center-center">
               <span hidden className="mr10 text-primary fs14">{p2pOrder.tokenS}</span>
-              <div className="bg-primary-light text-primary d-flex justify-content-center align-items-center" style={{width:"40px",height:'40px',borderRadius:'50em'}}>
+              <div className="bg-primary-light text-primary circle-40 center-center">
                 <i className={`icon-token-${p2pOrder.tokenS} fs24`}/>
               </div>
             </div>
             <div onClick={()=>dispatch({type:'p2pOrder/swap'})} className="col-auto text-center" style={{width:'30px'}}>
               <WebIcon type="swap" className={`text-primary fs18`} />
             </div>
-            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col d-flex justify-content-center align-items-center">
-              <div className="bg-primary-light text-primary d-flex justify-content-center align-items-center" style={{width:"40px",height:'40px',borderRadius:'50em'}}>
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col center-center">
+              <div className="bg-primary-light text-primary circle-40 center-center">
                 <i className={`icon-token-${p2pOrder.tokenB}  fs24`}/>
               </div>
               <span hidden className="ml10 text-primary fs14">{p2pOrder.tokenB}</span>
             </div>
           </div>
-          <div className="row ml0 mr0 mt15 no-gutters align-items-stretch justify-content-center" style={{}}>
+          <div className="row ml0 mr0 mt15 no-gutters center-center" style={{}}>
             <div className="col no-border am-list-bg-none">
               <List  className="selectable text-left">
                 <InputItem
@@ -95,11 +95,11 @@ class Face2FaceForm extends React.Component {
                   onChange={amountChange.bind(this, 'sell')}
                   value={amountS}
                   extra={
-                    <div className="fs14 cursor-pointer zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div className="fs14 cursor-pointer zb-b-l color-black-3 center-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} >
                         {p2pOrder.tokenS} <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                       </div>
-                      <div onClick={showLayer.bind(this,{id:"helperOfAmountOfP2P",symbol:p2pOrder.tokenS})}  className="fs16 text-primary" style={{position:'absolute',top:'1rem',width:'3.5rem',left:'-3.5rem'}}>
+                      <div onClick={showLayer.bind(this,{id:"helperOfAmountOfP2P",symbol:p2pOrder.tokenS})}  className="fs16 text-primary w-35" style={{position:'absolute',marginLeft:'-100%'}}>
                         <WebIcon type="sliders" />
                       </div>
                     </div>
@@ -107,7 +107,7 @@ class Face2FaceForm extends React.Component {
                   className="circle h-default fs18"
                   placeholder={intl.get('p2p_order.amount_to_sell')}
                 >
-                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                  <div className="fs14 color-black-1 w-40">
                     {intl.get('common.sell')}
                   </div>
                 </InputItem>
@@ -116,7 +116,7 @@ class Face2FaceForm extends React.Component {
                   onChange={amountChange.bind(this, 'buy')}
                   value={amountB}
                   extra={
-                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-3 center-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                         {p2pOrder.tokenB}
                         <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                     </div>
@@ -124,7 +124,7 @@ class Face2FaceForm extends React.Component {
                   className="circle h-default fs18 mt15"
                   placeholder={intl.get('p2p_order.amount_to_buy')}
                 >
-                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                  <div className="fs14 color-black-1 w-40">
                     {intl.get('common.buy')}
                   </div>
                 </InputItem>
@@ -133,7 +133,7 @@ class Face2FaceForm extends React.Component {
                   arrow={false}
                   onClick={()=>showLayer({id:'helperOfPrice'})}
                   extra={
-                   <div className="fs14 color-black-4 cursor-pointer d-flex align-items-center justify-content-center">
+                   <div className="fs14 color-black-4 cursor-pointer center-center">
                     { price >0 && <span>
                       1 {p2pOrder.tokenS} = {`${toNumber(toFixed(1/price,8))} ${p2pOrder.tokenB}`} ≈ <Worth amount={1/price} symbol={p2pOrder.tokenB}/>
                       </span>
@@ -146,7 +146,7 @@ class Face2FaceForm extends React.Component {
                     </div>
                   }
                 >
-                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                  <div className="fs14 color-black-1 w-40">
                     {intl.get('common.price')}
                   </div>
                 </List.Item>

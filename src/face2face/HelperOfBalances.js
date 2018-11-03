@@ -71,13 +71,13 @@ const HelperOfBalance = (props)=>{
                   <td className="text-right pl10 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
                       token.symbol === 'WETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 mr10 bg-primary-light text-primary border-none" style={{height:'2.4rem',lineHeight:'2.4rem'}} type="primary" size="small" onClick={showLayer.bind(this,{id:'convertToken',type:"WETH"})}>{intl.get('common.convert')}</Button>
+                      <Button className="fs12 d-inline-block pl15 pr15 mr10 bg-primary-light text-primary border-none h-25 lh-25" type="primary" size="small" onClick={showLayer.bind(this,{id:'convertToken',type:"WETH"})}>{intl.get('common.convert')}</Button>
                     }
                     {
                       token.symbol === 'ETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 mr10 bg-primary-light text-primary border-none" style={{height:'2.4rem',lineHeight:'2.4rem'}} type="primary" size="small" onClick={showLayer.bind(this,{id:'convertToken',type:"ETH"})}>{intl.get('common.convert')}</Button>
+                      <Button className="fs12 d-inline-block pl15 pr15 mr10 bg-primary-light text-primary border-none h-25 lh-25" type="primary" size="small" onClick={showLayer.bind(this,{id:'convertToken',type:"ETH"})}>{intl.get('common.convert')}</Button>
                     }
-                    <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none" style={{height:'2.4rem',lineHeight:'2.4rem'}} type="primary" size="small" onClick={(e) => {e.stopPropagation();gotoReceive({symbol:token.symbol})}}>{intl.get('common.receive')}</Button>
+                    <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none h-25 lh-25" type="primary" size="small" onClick={(e) => {e.stopPropagation();gotoReceive({symbol:token.symbol})}}>{intl.get('common.receive')}</Button>
                   </td>
                 </tr>
               )

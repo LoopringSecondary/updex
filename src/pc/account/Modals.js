@@ -8,7 +8,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="usercenter">
-        <UiContainers.Drawer position="right" id="usercenter" width="56rem"  style={{margin:'0 auto',height:'100%'}}>
+        <UiContainers.Drawer position="right" id="usercenter" width="27.5vw"  style={{margin:'0 auto',height:'100%'}}>
           <UserCenter />
         </UiContainers.Drawer>
       </Containers.Layers>
