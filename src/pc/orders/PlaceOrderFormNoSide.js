@@ -266,7 +266,7 @@ class PlaceOrderForm extends React.Component {
 
     return (
       <div>
-        <div className="p15">
+        <div className="p15 pt10">
           <List className="no-border am-list-bg-none selectable">
             <InputItem
               type="text"
