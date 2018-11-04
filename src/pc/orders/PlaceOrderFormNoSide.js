@@ -15,7 +15,7 @@ import Worth from 'modules/settings/Worth'
 
 const Item = List.Item;
 
-// é€šè¿‡è‡ªå®šä¹‰ moneyKeyboardWrapProps ä¿®å¤è™šæ‹Ÿé”®ç›˜æ»šåŠ¨ç©¿é€é—®é¢˜
+// Í¨¹ı×Ô¶¨Òå moneyKeyboardWrapProps ĞŞ¸´ĞéÄâ¼üÅÌ¹ö¶¯´©Í¸ÎÊÌâ
 // https://github.com/ant-design/ant-design-mobile/issues/307
 // https://github.com/ant-design/ant-design-mobile/issues/163
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
@@ -277,7 +277,7 @@ class PlaceOrderForm extends React.Component {
               extra={
                 <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
                   {
-                    price>0 && <span className="color-black-4 fs12">â‰ˆ<Worth amount={price} symbol={tokens.right}/></span>
+                    price>0 && <span className="color-black-4 fs12">¡Ö<Worth amount={price} symbol={tokens.right}/></span>
                   }
                   <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.right}</span>
                 </div>
@@ -299,7 +299,7 @@ class PlaceOrderForm extends React.Component {
             ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
             <Item
               className="overflow-visible"
-              style={{marginTop:'-0.7rem',marginBottom:'-1.2rem'}}
+              style={{marginTop:'-0.5rem',marginBottom:'-1.3rem'}}
             >
               <div className="pl0 pr0 placeOrder">
                 <Slider

@@ -64,9 +64,9 @@ class HelperOfDepth extends React.Component {
               <th
                 className="zb-b-b text-left pl15 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.price")}</th>
               <th
-                className="zb-b-b text-right pl5 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")}/{tokens.left}</th>
+                className="zb-b-b text-right pl5 pr5 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")} {tokens.left}</th>
               <th
-                className="zb-b-b text-right pl5 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
+                className="zb-b-b text-right pl5 pr15 pt5 pb5 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")} {tokens.right}</th>
             </tr>
             </thead>
             <tbody className="text-number">
@@ -126,9 +126,9 @@ class HelperOfDepth extends React.Component {
               <th style={{lineHeight:'0rem'}}
                   className="zb-b-b text-left pl15 pr5 text-nowrap font-weight-normal color-black-4">{intl.get("common.price")}</th>
               <th style={{lineHeight:'0rem'}}
-                  className="zb-b-b text-right pl5 pr5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")}/{tokens.left}</th>
+                  className="zb-b-b text-right pl5 pr5 text-nowrap font-weight-normal color-black-4">{intl.get("common.amount")} {tokens.left}</th>
               <th style={{lineHeight:'0rem'}}
-                  className="zb-b-b text-right pl5 pr15 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")}/{tokens.right}</th>
+                  className="zb-b-b text-right pl5 pr15 text-nowrap font-weight-normal color-black-4">{intl.get("common.total")} {tokens.right}</th>
             </tr>
             </thead>
             <tbody className="text-number">
