@@ -19,10 +19,10 @@ function Settings(props) {
     })
   }
   const options = [
-    { value: 'darkgrey', label: 'Dark Grey',checked: settings.preference.theme === 'darkgrey'},
-    { value: 'white', label: 'White',checked: settings.preference.theme === 'white' },
-    { value: 'purple', label: 'Purple',checked: settings.preference.theme === 'purple' },
-    { value: 'blue', label: 'Blue',checked: settings.preference.theme === 'blue' },
+    { value: 'darkgrey', label: intl.get('theme.dark_grey'),checked: settings.preference.theme === 'darkgrey'},
+    { value: 'white', label: intl.get('theme.white'),checked: settings.preference.theme === 'white' },
+    { value: 'purple', label: intl.get('theme.purple'),checked: settings.preference.theme === 'purple' },
+    { value: 'blue', label: intl.get('theme.blue'),checked: settings.preference.theme === 'blue' },
   ];
   const themeChange = (theme) => {
     if(theme) {
@@ -45,7 +45,7 @@ function Settings(props) {
           ]}
           rightContent={[]}
         >
-          <div className="color-black">Theme</div>
+          <div className="color-black">{intl.get('settings.theme')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
