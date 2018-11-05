@@ -15,8 +15,8 @@ function RouterConfig({ history }) {
       <Locales>
         <Router history={history}>
           <div>
-            <Face2FaceRoutes />
             <DexRoutes />
+            <Face2FaceRoutes />
             <PCRoutes />
             <TestRoutes />
           </div>

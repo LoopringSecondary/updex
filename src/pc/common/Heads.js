@@ -11,7 +11,7 @@ class Heads extends React.Component {
     return (
       <div >
         {
-          true && theme === 'purple' &&
+          false && theme === 'purple' &&
           <Helmet>
              <link rel="stylesheet" type="text/css" href="./themes/theme-purple.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}
@@ -19,7 +19,7 @@ class Heads extends React.Component {
           </Helmet>
         }
         {
-          true && theme === 'darkgrey' && 
+          false && theme === 'darkgrey' && 
           <Helmet>
              <link rel="stylesheet" type="text/css" href="./themes/theme-darkgrey.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}
@@ -27,7 +27,7 @@ class Heads extends React.Component {
           </Helmet>
         }
         {
-          true && theme === 'white' && 
+          false && theme === 'white' && 
           <Helmet>
              <link rel="stylesheet" type="text/css" href="./themes/theme-white.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}
@@ -35,7 +35,7 @@ class Heads extends React.Component {
           </Helmet>
         }
         {
-          true && theme === 'blue' && 
+          false && theme === 'blue' && 
           <Helmet>
              <link rel="stylesheet" type="text/css" href="./themes/theme-blue.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}

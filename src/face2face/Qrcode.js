@@ -1,5 +1,7 @@
 import React from 'react'
 import { Icon } from 'antd'
+import { NavBar } from 'antd-mobile'
+import { connect } from 'dva'
 import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
@@ -19,11 +21,20 @@ const OrderMetaItem = (props) => {
   )
 }
 
-export default class OrderQrcode extends React.Component{
-
+class OrderQrcode extends React.Component{
   render(){
     const {value,data:{orderFm,tokens}} = this.props.orderQrcode
-    return(
+    const {dispatch} = this.props
+    const hideLayer = (payload={})=>{
+      dispatch({
+        type:'layers/hideLayer',
+        payload:{
+          ...payload
+        }
+      })
+    }
+
+    return (
       <div className="bg-white">
         <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
           <div className="row">
@@ -34,6 +45,19 @@ export default class OrderQrcode extends React.Component{
             </div>
           </div>
         </div>
+        <NavBar
+          className="bg-white"
+          mode="light"
+          onLeftClick={()=>hideLayer({id:'orderQrcode'})}
+          leftContent={[
+            <span key='1' className=""><Icon type="close"/></span>,
+          ]}
+          rightContent={null && [
+            <Icon key="1" type="question-circle-o"/>,
+          ]}
+        >
+          <div className="color-black">{intl.get('p2p_order.user_center_p2p')}</div>
+        </NavBar>
         <div className="text-center mt15">
           <div className="p15 d-inline-block" style={{background:'#fff'}}>
             <QRCode value={JSON.stringify(value)} size={240} level='H'/>
@@ -53,3 +77,5 @@ export default class OrderQrcode extends React.Component{
     )
   }
 }
+
+export default connect()(OrderQrcode)
