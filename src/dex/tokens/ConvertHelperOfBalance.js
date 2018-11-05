@@ -1,11 +1,12 @@
 import React from 'react'
-import { Button } from 'antd-mobile'
+import { Button,Toast } from 'antd-mobile'
 import { toBig, toFixed } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 
 const HelperOfBalance = (props) => {
   const {dispatch, token, gasFee} = props
   const setMax = () => {
+    Toast.info(intl.get('convert.convert_eth_tip'))
     let max = token.balance
     if (token.symbol.toUpperCase() === 'ETH') {
       max = toBig(token.balance).minus(gasFee).minus(0.1).isPositive() ? toBig(token.balance).minus(gasFee).minus(0.1) : toBig(0)

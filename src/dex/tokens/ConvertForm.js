@@ -3,7 +3,7 @@ import { Button, Icon, InputItem, List, NavBar, Toast } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
-import { toBig, toHex, toNumber } from 'LoopringJS/common/formatter'
+import { toBig, toHex, toNumber,toFixed } from 'LoopringJS/common/formatter'
 import Contracts from 'LoopringJS/ethereum/contracts/Contracts'
 import TokenFormatter, { getBalanceBySymbol, isValidNumber } from '../../modules/tokens/TokenFm'
 import config from '../../common/config'
@@ -25,11 +25,16 @@ class Convert extends React.Component {
     const {match} = this.props
     if (match && match.params && match.params.token) {
       this.setState({token: match.params.token})
+      return
+    }
+    const {convertToken:{token}} = this.props
+    if(token){
+      this.setState({token})
     }
   }
 
   render () {
-    const {dispatch, balance, amount, gas} = this.props
+    const {dispatch, balance, amount, gas,convertToken} = this.props
     const {token,loading} = this.state
     const address = storage.wallet.getUnlockedAddress()
     const assets = getBalanceBySymbol({balances: balance.items, symbol: token, toUnit: true})
@@ -109,7 +114,11 @@ class Convert extends React.Component {
               })
               Toast.success(intl.get('notifications.title.convert_suc'), 3, null, false)
               hideLayer({id: 'convertToken'})
-              routeActions.gotoPath('/dex/todos');
+              if(convertToken.token){
+                showLayer({id:"notifications"})
+              }else{
+                routeActions.gotoPath('/dex/todos');
+              }
             } else {
               Toast.fail(intl.get('notifications.title.convert_fail') + ':' + resp.error.message, 3, null, false)
             }
@@ -156,7 +165,7 @@ class Convert extends React.Component {
                     type="money"
                     onChange={amountChange}
                     moneyKeyboardAlign="right"
-                    value={amount>=0 ? amount : null}
+                    value={amount}
                     extra={<div className="fs14 color-black-3 ml5">{fromToken}</div>}
                     className="circle h-default fs18"
                     placeholder={intl.get('common.amount')}
