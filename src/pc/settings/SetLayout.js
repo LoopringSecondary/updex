@@ -19,10 +19,9 @@ function Settings(props) {
     })
   }
   const options = [
-    { value: '1', label: '1',checked: settings.preference.layout === '1'},
-    { value: '2', label: '2',checked: settings.preference.layout === '2' },
-    { value: '3', label: '3',checked: settings.preference.layout === '3' },
-    { value: '4', label: '4',checked: settings.preference.layout === '4' },
+    { value: '1', label: intl.get('lay_out.l1'),checked: settings.preference.layout === '1'},
+    { value: '2', label: intl.get('lay_out.l3'),checked: settings.preference.layout === '2' },
+    { value: '3', label: intl.get('lay_out.l2'),checked: settings.preference.layout === '3' },
   ];
   const currencyChange = (layout) => {
     if(layout) {
@@ -47,7 +46,7 @@ function Settings(props) {
           ]}
           rightContent={[]}
         >
-          <div className="color-black">Set Trade Layout</div>
+          <div className="color-black">{intl.get('settings.layout')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>

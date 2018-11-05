@@ -339,6 +339,17 @@ export default {
     layout:'布局',
     market_trade: '市场'
   },
+  theme: {
+    dark_grey: '沉稳深灰',
+    white: '简洁白',
+    purple: '魅力紫',
+    blue: '经典深蓝'
+  },
+  lay_out: {
+    l1: '经典4列',
+    l2: '经典3列 ',
+    l3: '经典3列（大图）'
+  },
   gas_setting: {
     title: '设置矿工费',
     gas_selector_last: '上一次',

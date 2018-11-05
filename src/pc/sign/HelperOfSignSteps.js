@@ -71,11 +71,6 @@ class SignSteps extends React.Component {
               hash: toHex(window.RELAY.order.getOrderHash(order.completeOrder)),
               count: p2pOrder.count
             })
-            console.log(456, {
-              auth: order.completeOrder.authPrivateKey,
-              hash: toHex(window.RELAY.order.getOrderHash(order.completeOrder)),
-              count: p2pOrder.count
-            })
           }
           origin = JSON.stringify(unsign)
           break;
