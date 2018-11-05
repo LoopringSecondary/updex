@@ -6,6 +6,11 @@ export default {
 	],
   // multipage:true,
   // entry:'./src/assets/css/themes/*.less',
+  // outputPath:'dist/themes',
+  // output:{
+  //  path:'dist/themes',
+  //  filename:'[name].css',
+  // },
   // entry:{
   //   index:['./src/index.js','./src/assets/css/themes/theme-white.less']
   // },

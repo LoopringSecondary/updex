@@ -124,7 +124,7 @@ function OrderDetail(props) {
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
-      <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
+      <div className="pt45 pb30" style={{overflow:'auto', height:'100%'}}>
         <div className="mb10 mt10 bg-white">
           <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_basic')}</div>
           <div className="" style={{borderRadius:'0rem'}}>
