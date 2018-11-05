@@ -30,24 +30,23 @@ class Home extends React.Component {
               <PanelHeader title="Kline Chart" />
               <Kline />
             </PanelWrapper>
-            <div className="row no-gutters ml0 mr0" style={{height:'25vh'}}>
-              <div className="col" style={{height:'100%'}}>
-                <PanelWrapper className="mtpanel mlpanel" style={{flex:'1',height:'100%'}}>
+            <div className="row no-gutters ml0 mr0 mtpanel" style={{height:'320px'}}>
+              <div className="col-6" style={{height:'100%'}}>
+                <PanelWrapper className="mlpanel" style={{flex:'1',height:'100%'}}>
                   <PanelHeader title="My Orders" />
                   <div style={{flex:'1',overflow:'auto'}}>
                     <HelperOfMyMarketOrders />
                   </div>
                 </PanelWrapper>
               </div>
-              {
-                false &&
-                <div className="col-auto">
-                  <PanelWrapper style={{height:'100%', width:'25rem'}} className="mtpanel mlpanel">
-                    <PanelHeader title="My Wallet" />
+              <div className="col-6" style={{height:'100%'}}>
+                <PanelWrapper className="mlpanel" style={{flex:'1',height:'100%'}}>
+                  <PanelHeader title="My Wallet" />
+                  <div style={{flex:'1',overflow:'auto'}}>
                     <HelperOfBalance />
-                  </PanelWrapper>
-                </div>
-              }
+                  </div>
+                </PanelWrapper>
+              </div>
             </div>
           </div>
           <div className="col-auto d-flex flex-column mlpanel mtpanel">
@@ -65,7 +64,7 @@ class Home extends React.Component {
                 </PanelWrapper>
               </div>
             </div>
-            <PanelWrapper className="mtpanel">
+            <PanelWrapper className="mtpanel" style={{height:'320px'}}>
               <PanelHeader title="Place Order" />
               <div className="row no-gutters ml0 mr0 mtpanel">
                 <div className="col-auto" style={{width:'25rem'}}>

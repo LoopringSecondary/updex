@@ -335,7 +335,7 @@ export default {
     margin_split: '默认分润',
     gas_price: '默认Gas价格',
     choose_relay: '切换Relay',
-    theme:'样式',
+    theme:'主题风格',
     layout:'布局',
     market_trade: '市场'
   },
@@ -346,9 +346,9 @@ export default {
     blue: '经典深蓝'
   },
   set_layout: {
-    l1: '经典4列',
-    l2: '经典3列 ',
-    l3: '经典3列（大图表）'
+    l1: '经典 4 列布局',
+    l2: '经典 3 列布局',
+    l3: '经典 3 列布局（大图表）'
   },
   gas_setting: {
     title: '设置矿工费',
@@ -762,6 +762,13 @@ export default {
     title:'登录',
     tp_title:"第三钱包登录",
     pre:"地址"
-  }
+  },
+  pc_sidebar:{
+    market_trade:'市场交易',
+    p2p_trade:"P2P交易",
+    my_orders:"我的订单",
+    my_wallet:"我的钱包",
+  },
+
 }
 

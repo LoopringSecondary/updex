@@ -339,9 +339,9 @@ export default {
     blue: 'Blue'
   },
   set_layout: {
-    l1: 'Classic 4 Cloumn',
-    l2: 'Classic 3 Cloumn',
-    l3: 'Classic 3 Cloumn (Large Chart)'
+    l1: 'Classic Layout Of 4 Cloumn ',
+    l2: 'Classic Layout Of 3 Cloumn',
+    l3: 'Classic Layout Of 3 Cloumn (Large Chart)'
   },
   gas_setting: {
     title: 'Set Gas Fee',
@@ -759,5 +759,12 @@ export default {
     title:'Sign In',
     tp_title:"Sign in by third party wallet",
     pre:'Address'
-  }
+  },
+  pc_sidebar:{
+    market_trade:'Trade',
+    p2p_trade:"P2P",
+    my_orders:"Orders",
+    my_wallet:"Wallet",
+  },
+
 }

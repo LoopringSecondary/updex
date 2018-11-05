@@ -51,7 +51,7 @@ function Settings(props) {
       </div>
       <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
         <div className="bg-white settings pb10">
-            <List className="mt10 no-border text-left">
+            <List className="no-border text-left">
               {options.map(i => (
                 <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => themeChange(i.value)}>
                   {i.label}
