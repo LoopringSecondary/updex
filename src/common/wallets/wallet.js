@@ -45,6 +45,10 @@ export default class Wallet {
     throw new Error('unimplemented')
   }
 
+  share(message){
+    throw new Error('unimplemented')
+  }
+
   /**
    *
    * @param tx rawTx

@@ -118,4 +118,8 @@ export default class TPWallet extends Wallet {
     this.rewardAddress = (await this.getRewardAddress()).result
     return this;
   }
+
+  share(message){
+    callApi('device.share', message, null)
+  }
 }

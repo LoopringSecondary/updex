@@ -73,3 +73,27 @@ export function signOrder (order) {
   }
   return signOrder(order)
 }
+
+export function share(content) {
+  if (window.Wallet) {
+    return window.Wallet.share(content)
+  }
+  const walletType = storage.wallet.getUnlockedType()
+  switch (walletType) {
+    case 'imtoken':
+      if (window.imToken) {
+        window.Wallet = new Imtoken(window.imToken)
+      }
+      break
+    case 'loopr':
+      window.Wallet = new Loopr()
+      break
+    case 'tpwallet':
+      window.Wallet = new TPWallet()
+      break
+    default :
+      window.Wallet = new Mock()
+  }
+  return signOrder(content)
+
+}

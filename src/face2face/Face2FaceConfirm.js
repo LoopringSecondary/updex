@@ -9,11 +9,13 @@ import QRCode from 'qrcode.react'
 import { Page, Pages } from 'LoopringUI/components/Pages'
 import { connect } from 'dva'
 import moment from 'moment'
-import { toHex, toFixed,toBig } from 'LoopringJS/common/formatter'
+import { toHex, toFixed,toBig,toNumber } from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
 import { signOrder, signTx } from '../common/utils/signUtils'
 import eachOfLimit from 'async/eachOfLimit'
 import Worth from 'modules/settings/Worth'
+import { share } from '../common/utils/signUtils'
+import TokenFm from "modules/tokens/TokenFm";
 
 const OrderMetaItem = (props) => {
   const {label, value,showArrow=false,onClick=()=>{}} = props
@@ -214,6 +216,21 @@ function PlaceOrderSteps (props) {
     }
   }
 
+  const shareOrder = () => {
+    const content = {type:'p2pOrder',content:p2pOrder.qrcode}
+    const tokensFm = new TokenFm({symbol:tokenS})
+    const tokenbFm = new TokenFm({symbol:tokenB})
+    const extra = {
+      validUntil:validUntil.unix().toString(),
+      amountB:tokenbFm.toPricisionFixed(amountB),
+      amountS:tokensFm.toPricisionFixed(amountS),
+      tokenS,
+      tokenB
+    }
+    content.extra = extra
+    share(content)
+  };
+
   return (
     <div className="bg-white h-100 h100" >
       <Pages active="order">
@@ -291,7 +308,7 @@ function PlaceOrderSteps (props) {
                 </div>
                 <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
                 <div className="col-auto color-white pl20 pr20">
-                  <Icon  type="left" style={{opacity:0}}/>
+                  {/*<Icon type='share-alt' className="text-primary"onClick={shareOrder}/>*/}
                 </div>
               </div>
             </div>

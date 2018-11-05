@@ -4,8 +4,8 @@ import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
 import TokenFm from "modules/tokens/TokenFm";
-import {toFixed} from 'LoopringJS/common/formatter'
-
+import {toFixed,toNumber} from 'LoopringJS/common/formatter'
+import { share } from '../common/utils/signUtils'
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -25,10 +25,22 @@ export default class OrderQrcode extends React.Component{
 
   render(){
     const {value,data:{orderFm,tokens}} = this.props.orderQrcode
-    const {originalOrder:{tokenS,tokenB,amountS,amountB}} = orderFm.order
+    const {originalOrder:{tokenS,tokenB,amountS,amountB,validUntil}} = orderFm.order
     const tokensFm = new TokenFm({symbol:tokenS})
     const tokenbFm = new TokenFm({symbol:tokenB})
-
+    const shareOrder = () => {
+      const content = {type:'p2pOrder',content:value}
+      const extra = {
+        validUntil:toNumber(validUntil).toString(),
+        amountB:tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB)),
+        amountS:tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS)),
+        tokenS,
+        tokenB
+      }
+      content.extra = extra
+      console.log(JSON.stringify(content))
+      share(content)
+    };
     return(
       <div className="bg-white">
         <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
@@ -37,6 +49,7 @@ export default class OrderQrcode extends React.Component{
             </div>
             <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">
+              {/*<Icon type='share-alt' className="text-primary"onClick={shareOrder}/>*/}
             </div>
           </div>
         </div>
