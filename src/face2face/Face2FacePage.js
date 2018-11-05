@@ -59,11 +59,11 @@ class Face2FacePage extends React.Component {
               className="zb-b-b"
               mode="light"
               leftContent={[
-                <span onClick={()=>showLayer({id:'settings'})} className="text-primary" key="1"><WebIcon type="setting" theme="" /></span>
+                <NumberOfTodos><span onClick={()=>showLayer({id:'notifications'})} className="text-primary fs16" key="1"><WebIcon type="bell" theme="" /></span></NumberOfTodos>,
+                <span hidden onClick={()=>showLayer({id:'settings'})} className="text-primary" key="1"><WebIcon type="setting" theme="" /></span>
               ]}
               rightContent={[
-                <NumberOfTodos><span onClick={()=>showLayer({id:'notifications'})} className="text-primary fs16" key="1"><WebIcon type="bell" theme="" /></span></NumberOfTodos>,
-                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary ml20" key="1"><WebIcon type="question-circle" theme="" /></span>
+                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="" /></span>
               ]}
             >
               <div className="color-black">
