@@ -10,6 +10,7 @@ import HelperOfMarkets from './HelperOfMarkets'
 import Face2FaceForm from './Face2FaceForm'
 import intl from 'react-intl-universal'
 import {store} from "../index";
+import NumberOfTodos from "../dex/notifications/NumberOfTodos";
 
 class Face2FacePage extends React.Component {
 
@@ -61,7 +62,8 @@ class Face2FacePage extends React.Component {
                 <span onClick={()=>showLayer({id:'settings'})} className="text-primary" key="1"><WebIcon type="setting" theme="" /></span>
               ]}
               rightContent={[
-                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="" /></span>
+                <NumberOfTodos><span onClick={()=>showLayer({id:'notifications'})} className="text-primary fs16" key="1"><WebIcon type="bell" theme="" /></span></NumberOfTodos>,
+                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary ml20" key="1"><WebIcon type="question-circle" theme="" /></span>
               ]}
             >
               <div className="color-black">
