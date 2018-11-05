@@ -162,7 +162,8 @@ const actions = {
   place_buy_order: '提交买单',
   place_sell_order: '提交卖单',
   all_assets: '全部资产',
-  fills_of_all_markets: '查看全部市场成交'
+  fills_of_all_markets: '查看全部市场成交',
+  download:'下载'
 }
 
 const time_unit = {

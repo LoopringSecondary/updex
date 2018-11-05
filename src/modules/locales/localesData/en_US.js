@@ -160,7 +160,8 @@ const actions = {
   place_buy_order: "Place Buy Order",
   place_sell_order: "Place Sell Order",
   all_assets: "All Assets",
-  fills_of_all_markets: "Fills of all markets"
+  fills_of_all_markets: "Fills of all markets",
+  download:'Download'
 }
 
 const time_unit = {
