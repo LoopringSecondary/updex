@@ -140,7 +140,7 @@ class Face2FaceForm extends React.Component {
                       1 {p2pOrder.tokenS} = {`${toNumber(toFixed(1/price,8))} ${p2pOrder.tokenB}`} ≈ <Worth amount={1/price} symbol={p2pOrder.tokenB}/>
                       </span>
                     }
-                    { price == 0 && <span>
+                    { price === 0 && <span>
                       1 {p2pOrder.tokenS} = {`0.00 ${p2pOrder.tokenB}`} ≈ <Worth amount={0} symbol={p2pOrder.tokenB}/>
                       </span>
                     }

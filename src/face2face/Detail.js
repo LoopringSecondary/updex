@@ -6,6 +6,10 @@ import { connect } from 'dva'
 import { OrderFm } from 'modules/orders/OrderFm'
 import Worth from 'modules/settings/Worth'
 import storage from 'modules/storage'
+import TokenFm from "modules/tokens/TokenFm";
+import {toFixed} from 'LoopringJS/common/formatter'
+
+
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -24,6 +28,10 @@ function OrderDetail(props) {
   const {p2pOrderDetail,dispatch} = props
   const {order} = p2pOrderDetail;
   const orderFm = new OrderFm(order);
+  const {originalOrder:{tokenS,tokenB,amountS,amountB}} = order
+  const tokensFm = new TokenFm({symbol:tokenS})
+  const tokenbFm = new TokenFm({symbol:tokenB})
+
   const showLayer = (payload={})=>{
     dispatch({
       type:'layers/showLayer',
@@ -40,6 +48,8 @@ function OrderDetail(props) {
       }
     })
   }
+
+
 
   const showQR = (order,orderFm,tokens) => {
    const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
@@ -97,13 +107,25 @@ function OrderDetail(props) {
           <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
-            <OrderMetaItem label={intl.get('order.price')} value={
+            <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
+            <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
+            { false && <OrderMetaItem label={intl.get('order.price')} value={
               <div>
                 <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }
               </div>
+            }/>}
+            <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+              <span>
+                  {`1 ${tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB)),8))} ${tokenS} ≈`} <Worth amount={tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB))} symbol={tokenS}/>
+                </span>
             }/>
-            <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
-            <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
+
+            <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+              <span>
+                  {`1 ${tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS)),8))} ${tokenB} ≈`} <Worth amount={tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS))} symbol={tokenB}/>
+                </span>
+            }/>
+
             <OrderMetaItem label={intl.get('order.LRCFee')} value={orderFm.getLRCFee()}/>
             <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
           </div>

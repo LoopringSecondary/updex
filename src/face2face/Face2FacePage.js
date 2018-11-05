@@ -14,7 +14,7 @@ import {store} from "../index";
 class Face2FacePage extends React.Component {
 
   // componentDidMount(){
-  //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"45447993b644a00d7d6aaa4351482d29c4c4a0909704169df0262681281ec443","hash":"0x390809f080bfd439f66f762efa15276fee9d7377c8f8e4001c7ffb443040866d","count":1}})})
+  //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"8dfe21ff4efb74f89274c13b32a19489edd2597171dba74421ec2985f12ced60","hash":"0x7693ebf0018da0d78f15db979482509f6bb4424e82d3689217016c04382b4e45","count":1}})})
   // }
   render() {
     const {dispatch,placeOrder} = this.props

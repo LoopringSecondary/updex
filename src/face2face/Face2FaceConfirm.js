@@ -46,7 +46,7 @@ function PlaceOrderSteps (props) {
   amountB = toBig(amountB)
   const validSince = p2pOrder.validSince || moment()
   const validUntil = p2pOrder.validUntil || moment().add(1, 'months')
-  const price = toFixed(amountS.div(amountB), 4)
+  const price = toFixed(amountS.div(amountB), 8)
 
   const showLayer = (payload = {}) => {
     dispatch({
@@ -259,16 +259,18 @@ function PlaceOrderSteps (props) {
               </div>
               <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
+
+
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
               { false && <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/> }
               <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
                 <span>
-                  {`1 ${tokenB} = xxx ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
+                  {`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
                 </span>
               }/>
               <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
                 <span>
-                  {`1 ${tokenS} = xxx ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
+                  {`1 ${tokenS} = ${Number(toFixed(1/price,8))} ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
                 </span>
               }/>
               <OrderMetaItem label={intl.get('common.ttl')} showArrow={true}
@@ -302,12 +304,12 @@ function PlaceOrderSteps (props) {
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
               <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
                 <span>
-                  {`1 ${tokenB} = xxx ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
+                  {`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
                 </span>
               }/>
               <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
                 <span>
-                  {`1 ${tokenS} = xxx ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
+                  {`1 ${tokenS} = ${Number(toFixed(1/price,8))} ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
                 </span>
               }/>
             </div>
