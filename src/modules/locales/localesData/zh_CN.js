@@ -562,6 +562,7 @@ export default {
     not_enough_tip: '{token} 余额不足'
   },
   unlock: {
+    title : '解锁您的钱包',
     has_not_unlocked: '您的钱包还未解锁',
     to_unlock: '解锁钱包',
     title_connect: '连接{walletType}',
@@ -588,6 +589,11 @@ export default {
   },
   unlock_by_metaMask: {
     title:'使用MetaMask浏览器插件解锁'
+  },
+  unlock_by_address: {
+    tap:'观察模式',
+    title:'使用地址解锁钱包',
+    address_place_holder: '填写您的以太坊地址'
   },
   wallet_type: {
     generate: '生成钱包',
@@ -693,7 +699,10 @@ export default {
     instruction: '当您有效订单中需要额外完成一些任务以使订单生效时会在这里给您提示。<br>1.您要卖出的代币授权不足<br>2.代币余额数量不足'
   },
   message_list: {
-    message_list_title: '消息',
+    message_list_title: '通知',
+  },
+  notification_list:{
+    page_title:"消息",
   },
   todo_list: {
     todo_list_title: '任务',

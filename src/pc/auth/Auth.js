@@ -266,7 +266,7 @@ class Auth extends React.Component {
           rightContent={[]}
         >
           <div className="color-black-1 fs16">
-            Unlock  Wallet
+            {intl.get('unlock.title')}
           </div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
@@ -287,7 +287,7 @@ class Auth extends React.Component {
             </div>
             <div className="col-auto text-right">
               <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                 <Icon className="color-black-2" type="right"/>
               </div>
             </div>
@@ -303,7 +303,7 @@ class Auth extends React.Component {
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>
@@ -343,7 +343,7 @@ class Auth extends React.Component {
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>
@@ -360,7 +360,7 @@ class Auth extends React.Component {
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>
@@ -374,11 +374,11 @@ class Auth extends React.Component {
                 <i className="icon-eye color-black-1 fs22"></i>
               </div>
               <div className="col text-left">
-                <div className="fs16 color-black-1 text-left">Watch-Only Wallet</div>
+                <div className="fs16 color-black-1 text-left">{intl.get('unlock_by_address.tap')}</div>
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>

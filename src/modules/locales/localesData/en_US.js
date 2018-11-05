@@ -561,6 +561,7 @@ export default {
   // wallet
   // -----------
   unlock: {
+    title : 'Unlock Your Wallet',
     has_not_unlocked: 'Your wallet hasn\'t unlocked yet',
     title_connect: 'Connect to {walletType}',
     to_unlock: 'To Unlock',
@@ -587,6 +588,11 @@ export default {
   },
   unlock_by_metaMask: {
     title:'Unlock With MetaMask Browser Plug-in'
+  },
+  unlock_by_address: {
+    tap:'Watch-Only Wallet',
+    title:'Unlock With Your Address',
+    address_place_holder: 'Paste ETH address'
   },
   password: {
     password_strength_title: 'Password Strength',
@@ -691,6 +697,9 @@ export default {
   },
   message_list:{
     message_list_title:'Messages',
+  },
+  notification_list:{
+    page_title:"Notifications",
   },
   todo_list:{
     todo_list_title:'Tasks',
