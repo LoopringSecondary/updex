@@ -65,6 +65,13 @@ const updateScannedAddress = (item, id) => {
   }
 }
 
+const updateNotified = (item, id) => {
+  if(item && item.status === 'accept') {
+    const dispatch = require('../../index.js').default._store.dispatch
+    dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder:true}})
+  }
+}
+
 const transfromers = {
   transaction:{
     queryTransformer:(payload)=>{
@@ -374,6 +381,7 @@ const transfromers = {
         item = {...res.data.body}
       }
       updateItem(item, id)
+      updateNotified(item, id)
     },
   },
 }
