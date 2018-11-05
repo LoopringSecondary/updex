@@ -95,7 +95,7 @@ class Face2FaceForm extends React.Component {
                   onChange={amountChange.bind(this, 'sell')}
                   value={amountS}
                   extra={
-                    <div className="fs14 cursor-pointer zb-b-l color-black-3 center-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div className="fs14 cursor-pointer zb-b-l color-black-1 center-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} >
                         {p2pOrder.tokenS} <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                       </div>
@@ -116,7 +116,7 @@ class Face2FaceForm extends React.Component {
                   onChange={amountChange.bind(this, 'buy')}
                   value={amountB}
                   extra={
-                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-3 center-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-1 center-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                         {p2pOrder.tokenB}
                         <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                     </div>

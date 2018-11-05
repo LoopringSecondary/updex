@@ -24,7 +24,7 @@ class Notifications extends React.Component {
               <span className="" key="1" onClick={()=>window.Toast.info('Coming Soon', 1, null, false)}><i className="icon-cog-o"></i></span>
             ]}
           >
-            <div className="color-black">{intl.get('todo_list.todo_list_title')}</div>
+            <div className="color-black">{intl.get('notification_list.page_title')}</div>
           </NavBar>
           <div className="divider 1px zb-b-t"></div>
           <ListTodos />

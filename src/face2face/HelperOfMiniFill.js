@@ -37,6 +37,7 @@ class HelperOfMiniFill extends React.Component {
           <Stepper
             showNumber
             className="bg-white-light circle text-primary"
+            style={{margin:'0 auto'}}
             min={1}
             defaultValue={1}
             value={count}

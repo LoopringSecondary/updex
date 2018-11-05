@@ -126,7 +126,7 @@ function OrderDetail(props) {
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
-      <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
+      <div className="pt45 pb30" style={{overflow:'auto'height:'100%'}}>
         <div className="ml0 mr0 mb15 mt15">
           <div className="ml15 fs14 text-primary text-left mb5">Order Detail</div>
           <div className="bg-white" style={{borderRadius:'0.0rem'}}>
