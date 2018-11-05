@@ -1,5 +1,6 @@
 import React from 'react';
-import {Alert, Button, Icon} from 'antd'
+import {Alert, Icon} from 'antd'
+import {Button} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions';
@@ -68,10 +69,10 @@ const PlaceOrderResult = (props) => {
                 </div>
               </div>
             }
-            {false && <div className="mt10">
-              <Button className="m5" type="default"> {intl.get('place_order_result.view_order')} </Button>
-              <Button className="m5" type="default" onClick={gotToTrade}> {intl.get('place_order_result.continue_place_order')} </Button>
-            </div>}
+            <div className="mt10">
+              <Button className="m5" type="primary">查看订单详情</Button>
+              <Button className="m5" type="primary" onClick={gotToTrade}> {intl.get('place_order_result.continue_place_order')} </Button>
+            </div>
           </div>
         }
         {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
-import { NavBar } from 'antd-mobile'
+import { Button } from 'antd-mobile'
 import { connect } from 'dva'
 import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
@@ -11,11 +11,11 @@ import {toFixed,toNumber} from 'LoopringJS/common/formatter'
 const OrderMetaItem = (props) => {
   const {label, value} = props
   return (
-    <div className="row ml0 mr0 pt10 pb10  zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
-      <div className="col">
+    <div className="row ml0 mr0 pt10 pb10  zb-b-t no-gutters align-items-center">
+      <div className="col pl15 ">
         <div className="fs14 color-black-1 text-left">{label}</div>
       </div>
-      <div className="col-auto text-right">
+      <div className="col-auto text-right pr15">
         <div className="fs14 color-black-2 text-wrap text-right">{value}</div>
       </div>
     </div>
@@ -39,35 +39,24 @@ class OrderQrcode extends React.Component{
     }
 
     return (
-      <div className="bg-white">
-        <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
-          <div className="row">
-            <div className="col-auto text-left pl20 pr20">
-            </div>
-            <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
-            <div className="col-auto color-white pl20 pr20">
-            </div>
-          </div>
+       <div className="bg-white" style={{height:'100%'}}>
+        <div className="p15">
+          <Icon className="text-primary primary fs14" onClick={()=>hideLayer({id:'orderQrcode'})} key="1" type="close"/>
         </div>
-        <NavBar
-          className="bg-white"
-          mode="light"
-          onLeftClick={()=>hideLayer({id:'orderQrcode'})}
-          leftContent={[
-            <span key='1' className=""><Icon type="close"/></span>,
-          ]}
-          rightContent={null && [
-            <Icon key="1" type="question-circle-o"/>,
-          ]}
-        >
-          <div className="color-black">{intl.get('p2p_order.user_center_p2p')}</div>
-        </NavBar>
-        <div className="text-center mt15">
-          <div className="p15 d-inline-block" style={{background:'#fff'}}>
-            <QRCode value={JSON.stringify(value)} size={240} level='H'/>
+        <div className="text-center bg-white-light ml25 mr25 pl15 pr15 pb15">
+          <div className="pt25 pb25 center-center">
+            <img className="h-45" src={require('../assets/images/up-logo-notext.png')} alt=""/>
+            <span className="fs20 font-weight-bold ml10 text-primary">UP DEX</span>
           </div>
+          <div className="p5 d-inline-block" style={{background:'#fff'}}>
+            <QRCode value={JSON.stringify(value)} size={220} level='H'/>
+          </div>
+          <Button type="primary" size="small" className="mt15 border-none bg-primary-light text-primary fs12 d-block w-100">
+            <Icon type="apple" className="mr5" theme="filled" />请使用 UP Wallet iOS 版进行扫码吃单
+          </Button>
+
         </div>
-        <div className="m15 zb-b-t p15 text-center">
+        <div className="zb-b-t pt15 pb15 ml25 mr25 text-center bg-white-light">
           {false && <OrderMetaItem label={intl.get('order.price')} value={
             <div>
               <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }
