@@ -13,6 +13,7 @@ import { toHex, toFixed,toBig } from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
 import { signOrder, signTx } from '../common/utils/signUtils'
 import eachOfLimit from 'async/eachOfLimit'
+import Worth from 'modules/settings/Worth'
 
 const OrderMetaItem = (props) => {
   const {label, value,showArrow=false,onClick=()=>{}} = props
@@ -213,7 +214,7 @@ function PlaceOrderSteps (props) {
   }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white h-100 h100" >
       <Pages active="order">
         <Page id="order" render={({page}) =>
           <div>
@@ -256,10 +257,20 @@ function PlaceOrderSteps (props) {
                   </div>
                 </div>
               </div>
+              <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
-              <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>
-              <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
+              { false && <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/> }
+              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenB} = xxx ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
+                </span>
+              }/>
+              <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenS} = xxx ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
+                </span>
+              }/>
               <OrderMetaItem label={intl.get('common.ttl')} showArrow={true}
                              value={<div onClick={showLayer.bind(this,{id:'helperOfTTL'})} className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
               <OrderMetaItem label={intl.get('p2p_order.count')} showArrow={true}
@@ -289,7 +300,16 @@ function PlaceOrderSteps (props) {
             <div className="zb-b-t p15 mt15">
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
-              <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>
+              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenB} = xxx ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
+                </span>
+              }/>
+              <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenS} = xxx ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
+                </span>
+              }/>
             </div>
           </div>
         }/>

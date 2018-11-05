@@ -27,7 +27,7 @@ function Modals(props) {
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="face2FaceConfirm">
-        <UiContainers.Popups id="face2FaceConfirm">
+        <UiContainers.Popups id="face2FaceConfirm" className="h100" style={{height:'100%'}}>
           <Face2FaceConfirm />
         </UiContainers.Popups>
       </Containers.Layers>
