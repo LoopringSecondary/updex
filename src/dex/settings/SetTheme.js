@@ -19,10 +19,10 @@ function Settings(props) {
     })
   }
   const options = [
-    { value: 'darkgrey', label: intl.get('theme.dark_grey'),checked: settings.preference.theme === 'darkgrey'},
-    { value: 'white', label: intl.get('theme.white'),checked: settings.preference.theme === 'white' },
-    { value: 'purple', label: intl.get('theme.purple'),checked: settings.preference.theme === 'purple' },
-    { value: 'blue', label: intl.get('theme.blue'),checked: settings.preference.theme === 'blue' },
+    { value: 'darkgrey', label: intl.get('set_theme.dark_grey'),checked: settings.preference.theme === 'darkgrey'},
+    { value: 'white', label: intl.get('set_theme.white'),checked: settings.preference.theme === 'white' },
+    { value: 'purple', label: intl.get('set_theme.purple'),checked: settings.preference.theme === 'purple' },
+    { value: 'blue', label: intl.get('set_theme.blue'),checked: settings.preference.theme === 'blue' },
   ];
   const themeChange = (theme) => {
     if(theme) {

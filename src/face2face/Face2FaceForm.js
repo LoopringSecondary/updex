@@ -133,7 +133,7 @@ class Face2FaceForm extends React.Component {
                   arrow={false}
                   onClick={()=>showLayer({id:'helperOfPrice'})}
                   extra={
-                   <div className="fs14 color-black-4 cursor-pointer center-center">
+                   <div className="fs14 color-black-2 cursor-pointer center-center">
                     { price >0 && <span>
                       1 {p2pOrder.tokenS} = {`${toNumber(toFixed(1/price,8))} ${p2pOrder.tokenB}`} ≈ <Worth amount={1/price} symbol={p2pOrder.tokenB}/>
                       </span>

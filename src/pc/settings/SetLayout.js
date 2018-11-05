@@ -19,9 +19,9 @@ function Settings(props) {
     })
   }
   const options = [
-    { value: '1', label: intl.get('lay_out.l1'),checked: settings.preference.layout === '1'},
-    { value: '2', label: intl.get('lay_out.l3'),checked: settings.preference.layout === '2' },
-    { value: '3', label: intl.get('lay_out.l2'),checked: settings.preference.layout === '3' },
+    { value: '1', label: intl.get('set_layout.l1'),checked: settings.preference.layout === '1'},
+    { value: '2', label: intl.get('set_layout.l3'),checked: settings.preference.layout === '2' },
+    { value: '3', label: intl.get('set_layout.l2'),checked: settings.preference.layout === '3' },
   ];
   const currencyChange = (layout) => {
     if(layout) {

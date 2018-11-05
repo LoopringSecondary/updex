@@ -332,16 +332,16 @@ export default {
     layout:'Layout',
     market_trade: 'Market Trade'
   },
-  theme: {
+  set_theme: {
     dark_grey: 'Dark Grey',
     white: 'White',
     purple: 'Purple',
     blue: 'Blue'
   },
-  lay_out: {
-    l1: 'Classic 4 Line',
-    l2: 'Classic 3 Line',
-    l3: 'Classic 3 Line (Large)'
+  set_layout: {
+    l1: 'Classic 4 Cloumn',
+    l2: 'Classic 3 Cloumn',
+    l3: 'Classic 3 Cloumn (Large Chart)'
   },
   gas_setting: {
     title: 'Set Gas Fee',
