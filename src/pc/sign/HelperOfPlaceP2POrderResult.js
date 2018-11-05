@@ -4,7 +4,6 @@ import {Button} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions';
-import QRCode from "qrcode.react";
 import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
 import { toHex } from 'LoopringJS/common/formatter'
 
@@ -53,7 +52,6 @@ const PlaceOrderResult = (props) => {
       return ''
     }
   }
-  const qrcodeData = getSignP2P()
   return (
     <div className="bg-white-light">
         {
@@ -61,20 +59,22 @@ const PlaceOrderResult = (props) => {
           <div className="text-center p35 pb50">
             <i className={`fs50 icon-success color-success`}></i>
             <div className="fs18 color-black-1 mb15">P2P订单生成成功</div>
-            {
-              false && placeOrderSteps.task === 'signP2P' && qrcodeData &&
-              <div>
-                <div className="p5 d-inline-block pb0" style={{background:'#fff',minHeight:'210px'}}>
-                  <QRCode value={qrcodeData} size={210} level='H'/>
-                </div>
-              </div>
-            }
             <div className="mt25 text-center">
               <Button className="h-35 fs14 center-center m-auto" style={{width:'75%'}} type="primary" size="small" onClick={()=>{}}>分享订单给朋友{intl.get('place_order_result.view_order')}</Button>
               <div className="pt15"></div>
               <Button className="h-35 fs14 center-center m-auto" style={{width:'75%'}} type="primary" size="small" onClick={()=>{}}>查看订单详情{intl.get('place_order_result.view_order')}</Button>
               <div className="pt15"></div>
               <Button className="h-35 fs14 center-center m-auto bg-primary-light text-primary border-none" style={{width:'75%'}} type="primary" size="small" onClick={gotToTrade}>继续下单{intl.get('place_order_result.continue_place_order')} </Button>
+            </div>
+          </div>
+        }
+        {
+          true &&
+          <div className="text-center p35 pb50">
+            <i className={`fs50 icon-success color-success`}></i>
+            <div className="fs18 color-black-1 mb15">订单取消成功</div>
+            <div className="mt25 text-center">
+              <Button className="h-35 fs14 center-center m-auto" style={{width:'75%'}} type="primary" size="small" onClick={()=>{}}>返回订单列表{intl.get('place_order_result.view_order')}</Button>
             </div>
           </div>
         }

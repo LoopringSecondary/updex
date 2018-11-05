@@ -40,8 +40,9 @@ class OrderQrcode extends React.Component{
 
     return (
        <div className="bg-white" style={{height:'100%'}}>
-        <div className="p15">
-          <Icon className="text-primary primary fs14" onClick={()=>hideLayer({id:'orderQrcode'})} key="1" type="close"/>
+        <div className="p25 text-center fs12 color-black-1">
+          Share this page to your friends
+          <Icon className="text-primary primary fs12 ml15 cursor-pointer" onClick={()=>hideLayer({id:'orderQrcode'})} key="1" type="close"/>
         </div>
         <div className="text-center bg-white-light ml25 mr25 pl15 pr15 pb15">
           <div className="pt25 pb25 center-center">

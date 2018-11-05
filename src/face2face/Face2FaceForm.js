@@ -71,17 +71,19 @@ class Face2FaceForm extends React.Component {
       <div className="">
         <div className="zb-b-b p15 ">
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
-            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col center-center">
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col center-center cursor-pointer">
               <span hidden className="mr10 text-primary fs14">{p2pOrder.tokenS}</span>
-              <div className="bg-primary-light text-primary circle-40 center-center">
+              <div className="bg-primary-light text-primary circle-40 center-center hover-bg-primary">
                 <i className={`icon-token-${p2pOrder.tokenS} fs24`}/>
               </div>
             </div>
-            <div onClick={()=>dispatch({type:'p2pOrder/swap'})} className="col-auto text-center" style={{width:'30px'}}>
-              <WebIcon type="swap" className={`text-primary fs18`} />
+            <div onClick={()=>dispatch({type:'p2pOrder/swap'})} className="col-auto text-center cursor-pointer w-35">
+              <div className="circle-35 hover-bg-primary center-center">
+                <WebIcon type="swap" className={`text-primary fs18`} />
+              </div>
             </div>
-            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col center-center">
-              <div className="bg-primary-light text-primary circle-40 center-center">
+            <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col center-center cursor-pointer">
+              <div className="bg-primary-light text-primary circle-40 center-center hover-bg-primary">
                 <i className={`icon-token-${p2pOrder.tokenB}  fs24`}/>
               </div>
               <span hidden className="ml10 text-primary fs14">{p2pOrder.tokenB}</span>
