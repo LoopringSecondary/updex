@@ -61,6 +61,10 @@ class Auth extends React.Component {
     }
   }
 
+  addressChanged = (address) => {
+    this.setState({address})
+  }
+
   render () {
     const {dispatch} = this.props
     const {address} = this.state;
@@ -85,7 +89,7 @@ class Auth extends React.Component {
           <List className="no-border am-list-bg-none selectable">
             <InputItem
               type="text"
-              onChange={()=>{}}
+              onChange={(v)=>{this.addressChanged(v)}}
               value={address}
               className="circle h-default color-black-2 fs13"
               placeholder="Paste ETH address"

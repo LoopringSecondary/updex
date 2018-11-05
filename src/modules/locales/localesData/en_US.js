@@ -141,6 +141,8 @@ const notifications = {
     lrcfee_is_required: 'LRC is required to pay trade fees, added on your history orders need LRC, totally required {required} LRC.',
     unlock_by_cookie_address:'Loopr has switched your account to the watch-only mode, and your private-key is no longer available to the browser.  You\'ll need to unlock your wallet again to perform some operations.',
     ledger_connect_failed: "Failed to connect with your Ledger device, you could follow these advices and have a try later. 1、Make sure your Ledger device has connected with your computer and unlocked. 2、Set this to 'yes': Settings->Browser support 3、Enter into Ethereum app",
+    copy_success: 'Copied successfully.',
+    copy_failed: 'Failed to copy!',
   }
 }
 
@@ -644,6 +646,7 @@ export default {
     placeholder_tip: 'Address:',
     paste_address_title: 'Paste Your Address Here',
     invalid_address_tip: "Invalid Address",
+    copy: 'Copy',
   },
   wallet_determine: {
     default_address: 'Default Address',
