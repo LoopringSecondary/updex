@@ -46,7 +46,7 @@ const PlaceOrderResult = (props) => {
             <i className={`fs50 icon-success color-success`}></i>
             <div className="fs18 color-black-1">{intl.get('sign.submit_success')}</div>
             {false && <div className="mt10">
-              <Button className="m5" type="default"> {intl.get('place_order_result.view_order')} </Button>
+              <Button className="m5" type="default">{intl.get('place_order_result.view_order')} </Button>
               <Button className="m5" type="default" onClick={gotToTrade}> {intl.get('place_order_result.continue_place_order')} </Button>
             </div>}
           </div>

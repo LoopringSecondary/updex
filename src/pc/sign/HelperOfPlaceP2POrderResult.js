@@ -58,20 +58,23 @@ const PlaceOrderResult = (props) => {
     <div className="bg-white-light">
         {
           signResult === 2 &&
-          <div className="text-center p35">
+          <div className="text-center p35 pb50">
             <i className={`fs50 icon-success color-success`}></i>
-            <div className="fs18 color-black-1">{intl.get('sign.submit_success')}</div>
+            <div className="fs18 color-black-1 mb15">P2P订单生成成功</div>
             {
-              placeOrderSteps.task === 'signP2P' && qrcodeData &&
+              false && placeOrderSteps.task === 'signP2P' && qrcodeData &&
               <div>
                 <div className="p5 d-inline-block pb0" style={{background:'#fff',minHeight:'210px'}}>
                   <QRCode value={qrcodeData} size={210} level='H'/>
                 </div>
               </div>
             }
-            <div className="mt10">
-              <Button className="m5" type="primary">查看订单详情</Button>
-              <Button className="m5" type="primary" onClick={gotToTrade}> {intl.get('place_order_result.continue_place_order')} </Button>
+            <div className="mt25 text-center">
+              <Button className="h-35 fs14 center-center m-auto" style={{width:'75%'}} type="primary" size="small" onClick={()=>{}}>分享订单给朋友{intl.get('place_order_result.view_order')}</Button>
+              <div className="pt15"></div>
+              <Button className="h-35 fs14 center-center m-auto" style={{width:'75%'}} type="primary" size="small" onClick={()=>{}}>查看订单详情{intl.get('place_order_result.view_order')}</Button>
+              <div className="pt15"></div>
+              <Button className="h-35 fs14 center-center m-auto bg-primary-light text-primary border-none" style={{width:'75%'}} type="primary" size="small" onClick={gotToTrade}>继续下单{intl.get('place_order_result.continue_place_order')} </Button>
             </div>
           </div>
         }

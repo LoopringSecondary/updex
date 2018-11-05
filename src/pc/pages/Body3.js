@@ -31,10 +31,12 @@ class Home extends React.Component {
               <Kline />
             </PanelWrapper>
             <div className="row no-gutters ml0 mr0" style={{height:'25vh'}}>
-              <div className="col">
-                <PanelWrapper style={{height:'100%'}} className="mlpanel mtpanel">
+              <div className="col" style={{height:'100%'}}>
+                <PanelWrapper className="mtpanel mlpanel" style={{flex:'1',height:'100%'}}>
                   <PanelHeader title="My Orders" />
-                  <HelperOfMyMarketOrders />
+                  <div style={{flex:'1',overflow:'auto'}}>
+                    <HelperOfMyMarketOrders />
+                  </div>
                 </PanelWrapper>
               </div>
               {
