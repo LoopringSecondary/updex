@@ -608,6 +608,9 @@ export default {
   message_list:{
     message_list_title:'Messages',
   },
+  notification_list:{
+    page_title:"Notifications",
+  },
   todo_list:{
     todo_list_title:'Tasks',
     title_allowance_not_enough:"{symbol} is disabled to trade",

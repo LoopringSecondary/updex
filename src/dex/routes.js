@@ -15,6 +15,7 @@ import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
 import storage from 'modules/storage'
 
+
 const UnLogged = ()=>{
   const isLogged =  !!(window.Wallet && window.Wallet.address)
   if(isLogged){

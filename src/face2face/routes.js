@@ -5,6 +5,7 @@ import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
 import TokenModals from '../dex/tokens/Modals'
 import CommonModals from '../components/Modals'
+import NotificationModals from '../dex/notifications/Modals'
 
 const Logged = (props)=>{
   const isLogged = !!(window.Wallet && window.Wallet.address)
@@ -17,6 +18,7 @@ const Logged = (props)=>{
         <Face2FaceModals />
         <TokenModals />
         <CommonModals />
+        <NotificationModals />
       </div>
     )
   }else{
