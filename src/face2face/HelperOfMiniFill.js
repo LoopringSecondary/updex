@@ -1,5 +1,5 @@
 import React from 'react'
-import {Icon, NavBar, PickerView} from 'antd-mobile';
+import {Icon, NavBar, PickerView,Stepper} from 'antd-mobile';
 import {connect} from 'dva'
 import intl from 'react-intl-universal'
 
@@ -17,7 +17,7 @@ class HelperOfMiniFill extends React.Component {
     }
 
     const countChange = (value) => {
-      dispatch({type:'p2pOrder/countChange',payload:{count:value[0]}})
+      dispatch({type:'p2pOrder/countChange',payload:{count:value}})
     }
 
     const data = Array.from(Array(50), (v,k) =>{return {label:k+1,value:k+1}});
@@ -33,11 +33,13 @@ class HelperOfMiniFill extends React.Component {
         >
           <div className="color-black-1">{intl.get('p2p_order.set_count')}</div>
         </NavBar>
-        <div className="zb-b-b mt10">
-          <PickerView
-            data={data}
-            value={[count]}
-            cascade={false}
+        <div className="zb-b-b mt10 p15 pt30" style={{height:'25vh'}}>
+          <Stepper
+            showNumber
+            className="bg-white-light circle text-primary"
+            min={1}
+            defaultValue={1}
+            value={count}
             onChange={countChange}
           />
         </div>
