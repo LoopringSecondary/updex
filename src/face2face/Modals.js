@@ -37,17 +37,17 @@ function Modals(props) {
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="orderQrcode">
-        <UiContainers.Modals id="orderQrcode" className="rs">
+        <UiContainers.Popups id="orderQrcode" className="h-100" style={{height:'100%'}}>
           <OrderQrcode/>
-        </UiContainers.Modals>
+        </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfTTL">
-        <UiContainers.Popups id="helperOfTTL" className="h-100" style={{height:'100%'}}>
+        <UiContainers.Popups id="helperOfTTL" className="" style={{}}>
           <HelperOfTTL />
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfMiniFill">
-        <UiContainers.Popups id="helperOfMiniFill" className="h-100" style={{height:'100%'}}>
+        <UiContainers.Popups id="helperOfMiniFill" className="" style={{}}>
           <HelperOfMiniFill />
         </UiContainers.Popups>
       </Containers.Layers>
