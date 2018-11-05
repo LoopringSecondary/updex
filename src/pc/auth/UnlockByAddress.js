@@ -61,6 +61,10 @@ class Auth extends React.Component {
     }
   }
 
+  addressChanged = (address) => {
+    this.setState({address})
+  }
+
   render () {
     const {dispatch} = this.props
     const {address} = this.state;
@@ -77,7 +81,7 @@ class Auth extends React.Component {
           rightContent={[]}
         >
           <div className="color-black-1 fs16">
-            Unlock A Watch-Only Wallet
+            {intl.get('unlock_by_address.title')}
           </div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
@@ -85,16 +89,16 @@ class Auth extends React.Component {
           <List className="no-border am-list-bg-none selectable">
             <InputItem
               type="text"
-              onChange={()=>{}}
+              onChange={(v)=>{this.addressChanged(v)}}
               value={address}
               className="circle h-default color-black-2 fs13"
-              placeholder="Paste ETH address"
+              placeholder={intl.get('unlock_by_address.address_place_holder')}
               extra={<Icon hidden type="scan" />}
               clear
             >
             </InputItem>
           </List>
-          <Button onClick={this.authByAddress} className="mt20 fs18" type="primary">Unlock</Button>
+          <Button onClick={this.authByAddress} className="mt20 fs18" type="primary">{intl.get('unlock.actions_unlock')}</Button>
         </div>
         
       </div>

@@ -10,6 +10,8 @@ import { getShortAddress } from '../../modules/formatter/common'
 import storage from 'modules/storage'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
+import copy from 'copy-to-clipboard';
+import Notification from 'LoopringUI/components/Notification'
 
 class UserCenter extends React.Component {
   render() {
@@ -22,6 +24,11 @@ class UserCenter extends React.Component {
       window.location.reload()
       // dispatch({type:"layers/showLayer", payload:{id:'authOfPC'}})
     }
+
+    const copyToClipboard = () => {
+      copy(address) ? Notification.open({description: intl.get('notifications.message.copy_success'),type: "success"}) : Notification.open({description: intl.get('notifications.message.copy_failed'),type: "error",})
+    }
+
     return (
         <div className="bg-fill" style={{height:'100%',overflow:'auto'}}>
           <div className="bg-white position-absolute w-100" style={{zIndex:'1000'}}>
@@ -46,7 +53,7 @@ class UserCenter extends React.Component {
             <div className="color-black-2 text-center fs16">{getShortAddress(address)}</div>
             <div className="text-center mt5">
               <span target="_blank" onClick={routeActions.gotoHref.bind(this,`https://etherscan.io/address/${address}`)} className="d-inline-block cursor-pointer fs12 lh25 pl10 pr10 bg-primary-light text-primary radius-circle">etherscan.io</span>
-              <span target="_blank" className="d-inline-block cursor-pointer fs12 lh25 pl10 pr10 bg-primary-light text-primary radius-circle ml10">copy</span>
+              <span target="_blank" className="d-inline-block cursor-pointer fs12 lh25 pl10 pr10 bg-primary-light text-primary radius-circle ml10" onClick={copyToClipboard}>{intl.get('address.copy')}</span>
             </div>
           </div>
           <div className="bg-white"><div className="divider 1px zb-b-t "></div></div>

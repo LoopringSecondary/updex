@@ -34,6 +34,7 @@ const SignByLoopr = ({placeOrderSteps, dispatch}) => {
       <div className="p15 mt5 bg-white-light lh25">
         <div className="pt10 pb10 text-left fs13 color-black-1" style={{margin:'0 auto'}}>
           1. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_download') : intl.get('place_order_by_upwallet.instruction_download')}
+          <a href="https://upwallet.io" target='_blank' className="text-primary ml5">{intl.get('actions.download')}</a>
           <br />
           2. {placeOrderSteps.signWith === 'loopr' ? intl.get('place_order_by_loopr.instruction_scan') : intl.get('place_order_by_upwallet.instruction_scan')}
           <br />

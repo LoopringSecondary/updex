@@ -143,6 +143,8 @@ const notifications = {
     lrcfee_is_required: '由于需要支付LRC油费, 汇总您历史订单所需LRC，还需要 {required} LRC',
     unlock_by_cookie_address: 'Loopr切换您的账户至观察模式，您的私钥对当前网页已失效。当您执行一些操作时可能需要再次解锁钱包。',
     ledger_connect_failed: "与您的Ledger设备连接失败, 您可以参照以下建议. 1、请确保您的设备与电脑连接并解锁. 2、在设备上将该选项设置为'yes': Settings->Browser support 3、在设备上选择'Ethereum app'并进入",
+    copy_success: '复制地址成功',
+    copy_failed: '复制地址失败',
   }
 }
 
@@ -160,7 +162,8 @@ const actions = {
   place_buy_order: '提交买单',
   place_sell_order: '提交卖单',
   all_assets: '全部资产',
-  fills_of_all_markets: '查看全部市场成交'
+  fills_of_all_markets: '查看全部市场成交',
+  download:'下载'
 }
 
 const time_unit = {
@@ -560,6 +563,7 @@ export default {
     not_enough_tip: '{token} 余额不足'
   },
   unlock: {
+    title : '解锁您的钱包',
     has_not_unlocked: '您的钱包还未解锁',
     to_unlock: '解锁钱包',
     title_connect: '连接{walletType}',
@@ -582,10 +586,20 @@ export default {
     instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
   },
   unlock_by_ledger:{
-    title:'使用Ledger钱包解锁'
+    title:'使用Ledger钱包解锁',
+    unlock_steps_title: '与您的Ledger设备连接失败, 您可以参照以下建议',
+    ledger_connect_failed_step1: "请确保您的设备与电脑连接并解锁",
+    ledger_connect_failed_step2: "在设备上将该选项设置为'yes': Settings->Browser support",
+    ledger_connect_failed_step3: "在设备上选择'Ethereum app'并进入",
+    unlock_again_button: '全做完了？尝试解锁',
   },
   unlock_by_metaMask: {
     title:'使用MetaMask浏览器插件解锁'
+  },
+  unlock_by_address: {
+    tap:'观察模式',
+    title:'使用地址解锁钱包',
+    address_place_holder: '填写您的以太坊地址'
   },
   wallet_type: {
     generate: '生成钱包',
@@ -644,6 +658,7 @@ export default {
     placeholder_tip: '地址：',
     paste_address_title: '请粘贴您的地址',
     invalid_address_tip: '不合法的地址',
+    copy: '复制',
   },
   wallet_determine: {
     default_address: '默认地址',
@@ -690,7 +705,10 @@ export default {
     instruction: '当您有效订单中需要额外完成一些任务以使订单生效时会在这里给您提示。<br>1.您要卖出的代币授权不足<br>2.代币余额数量不足'
   },
   message_list: {
-    message_list_title: '消息',
+    message_list_title: '通知',
+  },
+  notification_list:{
+    page_title:"消息",
   },
   todo_list: {
     todo_list_title: '任务',

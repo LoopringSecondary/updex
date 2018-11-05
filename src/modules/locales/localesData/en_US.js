@@ -141,6 +141,8 @@ const notifications = {
     lrcfee_is_required: 'LRC is required to pay trade fees, added on your history orders need LRC, totally required {required} LRC.',
     unlock_by_cookie_address:'Loopr has switched your account to the watch-only mode, and your private-key is no longer available to the browser.  You\'ll need to unlock your wallet again to perform some operations.',
     ledger_connect_failed: "Failed to connect with your Ledger device, you could follow these advices and have a try later. 1、Make sure your Ledger device has connected with your computer and unlocked. 2、Set this to 'yes': Settings->Browser support 3、Enter into Ethereum app",
+    copy_success: 'Copied successfully.',
+    copy_failed: 'Failed to copy!',
   }
 }
 
@@ -158,7 +160,8 @@ const actions = {
   place_buy_order: "Place Buy Order",
   place_sell_order: "Place Sell Order",
   all_assets: "All Assets",
-  fills_of_all_markets: "Fills of all markets"
+  fills_of_all_markets: "Fills of all markets",
+  download:'Download'
 }
 
 const time_unit = {
@@ -559,6 +562,7 @@ export default {
   // wallet
   // -----------
   unlock: {
+    title : 'Unlock Your Wallet',
     has_not_unlocked: 'Your wallet hasn\'t unlocked yet',
     title_connect: 'Connect to {walletType}',
     to_unlock: 'To Unlock',
@@ -581,10 +585,20 @@ export default {
     instruction_warn: '* The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
   },
   unlock_by_ledger:{
-    title:'Unlock With Ledger'
+    title:'Unlock With Ledger',
+    unlock_steps_title: 'Failed to connect with your Ledger device, you could follow these advices and try again',
+    ledger_connect_failed_step1: "Make sure your Ledger device has connected with your computer and unlocked",
+    ledger_connect_failed_step2: "Set this to 'yes': Settings->Browser support",
+    ledger_connect_failed_step3: "Enter into Ethereum app",
+    unlock_again_button: 'All Done? Try to Unlock',
   },
   unlock_by_metaMask: {
     title:'Unlock With MetaMask Browser Plug-in'
+  },
+  unlock_by_address: {
+    tap:'Watch-Only Wallet',
+    title:'Unlock With Your Address',
+    address_place_holder: 'Paste ETH address'
   },
   password: {
     password_strength_title: 'Password Strength',
@@ -644,6 +658,7 @@ export default {
     placeholder_tip: 'Address:',
     paste_address_title: 'Paste Your Address Here',
     invalid_address_tip: "Invalid Address",
+    copy: 'Copy',
   },
   wallet_determine: {
     default_address: 'Default Address',
@@ -688,6 +703,9 @@ export default {
   },
   message_list:{
     message_list_title:'Messages',
+  },
+  notification_list:{
+    page_title:"Notifications",
   },
   todo_list:{
     todo_list_title:'Tasks',

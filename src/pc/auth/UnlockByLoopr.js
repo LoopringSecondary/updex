@@ -87,6 +87,7 @@ class Auth extends React.Component {
                 </div>
                 <div className="bg-white-light p15 text-left lh25 mt15 fs13">
                   1. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_download') : intl.get('unlock_by_upwallet.instruction_download')}
+                  <a href="https://upwallet.io" target='_blank' className="text-primary ml5">{intl.get('actions.download')}</a>
                   <br />
                   2. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_scan') : intl.get('unlock_by_upwallet.instruction_scan')}
                   <br />

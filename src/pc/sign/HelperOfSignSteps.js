@@ -13,6 +13,7 @@ import HelperOfPlaceOrderResult from './HelperOfPlaceOrderResult'
 import HelperOfPlaceP2POrderResult from './HelperOfPlaceP2POrderResult'
 import SignByLoopr from './SignByLoopr'
 import storage from 'modules/storage'
+import { toHex } from 'LoopringJS/common/formatter'
 
 const signByLooprStep = (placeOrderSteps, circulrNotify) => {
   const hashItem = getSocketAuthorizationByHash(placeOrderSteps.hash, circulrNotify)
@@ -45,7 +46,7 @@ class SignSteps extends React.Component {
     };
   }
 
-  generateQRCode(placeOrderSteps, dispatch) {
+  generateQRCode(placeOrderSteps, p2pOrder, dispatch) {
     if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0 && !this.state.generating) {
       if(placeOrderSteps.task !== 'sign' && placeOrderSteps.unsign.length > 1) {
         throw new Error('Illegal argument : parameter unsign length could larger than 1 only when task equals sign')
@@ -63,6 +64,19 @@ class SignSteps extends React.Component {
           placeOrderSteps.unsign.forEach(item => {
             unsign.push({type:item.type, data:item.data})
           })
+          const order = placeOrderSteps.unsign.find((item) => item.type === 'order')
+          if(order && order.completeOrder.authPrivateKey) {
+            storage.orders.storeP2POrder({
+              auth: order.completeOrder.authPrivateKey,
+              hash: toHex(window.RELAY.order.getOrderHash(order.completeOrder)),
+              count: p2pOrder.count
+            })
+            console.log(456, {
+              auth: order.completeOrder.authPrivateKey,
+              hash: toHex(window.RELAY.order.getOrderHash(order.completeOrder)),
+              count: p2pOrder.count
+            })
+          }
           origin = JSON.stringify(unsign)
           break;
         case 'cancelOrder':
@@ -96,9 +110,9 @@ class SignSteps extends React.Component {
   }
 
   check(props) {
-    const {placeOrderSteps, dispatch} = props
+    const {placeOrderSteps, p2pOrder, dispatch} = props
     if((placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') && !placeOrderSteps.qrcode){
-      this.generateQRCode(placeOrderSteps, dispatch)
+      this.generateQRCode(placeOrderSteps, p2pOrder, dispatch)
     }
   }
 
@@ -223,7 +237,8 @@ class SignSteps extends React.Component {
 function mapToProps (state) {
   return {
     placeOrderSteps: state.placeOrderSteps,
-    circulrNotify:state.sockets.circulrNotify
+    circulrNotify:state.sockets.circulrNotify,
+    p2pOrder: state.p2pOrder,
   }
 }
 
