@@ -88,39 +88,36 @@ function OrderDetail(props) {
             <Icon key="1" type="question-circle-o"/>,
           ]}
         >
-          <div className="color-black">{intl.get('common.order')}</div>
+          <div className="color-black">{intl.get('order_detail.page_title')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
       <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
-        <div className="">
-          <div className="bg-white">
-            <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">Order Status</div>
-            <div className="">
-              <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
-              <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
-            </div>
+        <div className="bg-white">
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_status_title')}</div>
+          <div className="">
+            <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
+            <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
           </div>
-          <div className="bg-white mt10">
-            <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">Order Basic{false && intl.get('order_detail.tabs_basic')}</div>
-            <div className="">
-              <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
-              <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
-              <OrderMetaItem label={intl.get('order.price')} value={
-                <div>
-                  <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }
-                </div>
-              }/>
-              <OrderMetaItem label={intl.get('order.LRCFee')} value={orderFm.getLRCFee()}/>
-              <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
-            </div>
-          </div>
-          
         </div>
         <div className="bg-white mt10">
-          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_fills')}</div>
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_basic_title')}</div>
+          <div className="">
+            <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
+            <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
+            <OrderMetaItem label={intl.get('order.price')} value={
+              <div>
+                <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }
+              </div>
+            }/>
+            <OrderMetaItem label={intl.get('order.LRCFee')} value={orderFm.getLRCFee()}/>
+            <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
+          </div>
+        </div>
+        <div className="bg-white mt10">
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_fills_title')}</div>
           <div className="" style={{borderRadius:'0rem'}}>
-            <DetailFills order={order}/>
+            <DetailFills order={order} />
           </div>
         </div>
         {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&

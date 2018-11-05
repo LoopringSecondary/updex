@@ -229,6 +229,10 @@ export default {
     tabs_basic: 'Order Detail',
     tabs_fills: 'Order Fills',
     tabs_logs: 'Order Logs',
+    page_title:'Order Detail',
+    order_status_title:'Order Status',
+    order_basic_title:'Order Basic',
+    order_fills_title:'Order Fills',
   },
   place_order: {
     title: 'Place Order',

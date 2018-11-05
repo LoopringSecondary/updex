@@ -227,10 +227,14 @@ export default {
     view_all_orders: '查看全部订单'
   },
   order_detail: {
-    title: '订单详情',
-    tabs_basic: '订单详情',
-    tabs_fills: '订单成交',
-    tabs_logs: '订单日志',
+    title: 'Order Detail',
+    tabs_basic: 'Order Detail',
+    tabs_fills: 'Order Fills',
+    tabs_logs: 'Order Logs',
+    page_title:'订单详情',
+    order_status_title:'订单状态',
+    order_basic_title:'订单信息',
+    order_fills_title:'订单成交',
   },
   place_order: {
     title: '下单',
