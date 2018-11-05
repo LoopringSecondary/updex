@@ -5,7 +5,8 @@ import { connect } from 'dva'
 import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
-
+import TokenFm from "modules/tokens/TokenFm";
+import {toFixed,toNumber} from 'LoopringJS/common/formatter'
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -24,6 +25,9 @@ const OrderMetaItem = (props) => {
 class OrderQrcode extends React.Component{
   render(){
     const {value,data:{orderFm,tokens}} = this.props.orderQrcode
+    const {originalOrder:{tokenS,tokenB,amountS,amountB,validUntil}} = orderFm.order
+    const tokensFm = new TokenFm({symbol:tokenS})
+    const tokenbFm = new TokenFm({symbol:tokenB})
     const {dispatch} = this.props
     const hideLayer = (payload={})=>{
       dispatch({
@@ -64,13 +68,24 @@ class OrderQrcode extends React.Component{
           </div>
         </div>
         <div className="m15 zb-b-t p15 text-center">
-          <OrderMetaItem label={intl.get('order.price')} value={
+          {false && <OrderMetaItem label={intl.get('order.price')} value={
             <div>
               <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }
             </div>
-          }/>
+          }/>}
           <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
           <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
+          <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+            <span>
+                  {`1 ${tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB)),8))} ${tokenS} ≈`} <Worth amount={tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB))} symbol={tokenS}/>
+                </span>
+          }/>
+
+          <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+            <span>
+                  {`1 ${tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS)),8))} ${tokenB} ≈`} <Worth amount={tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS))} symbol={tokenB}/>
+                </span>
+          }/>
           <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
         </div>
       </div>

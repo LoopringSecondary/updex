@@ -11,8 +11,7 @@ import { connect } from 'dva'
 import moment from 'moment'
 import { toHex, toFixed,toBig } from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
-import { signOrder, signTx } from '../common/utils/signUtils'
-import eachOfLimit from 'async/eachOfLimit'
+import Worth from 'modules/settings/Worth'
 
 const OrderMetaItem = (props) => {
   const {label, value,showArrow=false,onClick=()=>{}} = props
@@ -133,80 +132,6 @@ function PlaceOrderSteps (props) {
     try {
       const {order, unsigned} = await orderFormatter.signP2POrder(tradeInfo, (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress())
       dispatch({type: 'task/setTask', payload: {task:'signP2P', unsign:unsigned}})
-
-      /*
-      const signResult = await signOrder(order)
-      if (signResult.error) {
-        Notification.open({
-          message: intl.get('notifications.title.place_order_failed'),
-          description: signResult.error.message,
-          type: 'error'
-        })
-        return
-      }
-      const signedOrder = {...order, ...signResult.result}
-      signedOrder.powNonce = 100
-      let failed = false;
-      eachOfLimit(unsigned.filter(item => item.type === 'tx'), 1, async (item) => {
-        signTx(item.data).then(res => {
-          if (res.result) {
-            window.ETH.sendRawTransaction(res.result).then(resp => {
-              if (resp.result) {
-                window.RELAY.account.notifyTransactionSubmitted({
-                  txHash: resp.result,
-                  rawTx: item.data,
-                  from: window.Wallet.address
-                })
-              }
-            })
-          }
-        })
-      }, function (e) {
-        if (e) {
-          failed = true
-          Notification.open({
-            message: intl.get('notifications.title.place_order_failed'),
-            description: e.message,
-            type: 'error'
-          })
-        }
-      })
-
-      if (failed) {
-        return
-      }
-      const response = await window.RELAY.order.placeOrder(signedOrder)
-      // console.log('...submit order :', response)
-      if (response.error) {
-        Notification.open({
-          message: intl.get('notifications.title.place_order_failed'),
-          description: response.error.message,
-          type: 'error'
-        })
-      } else {
-        dispatch({type:'p2pOrder/setFetchOrder',payload:{fetchOrder:true}});
-        Notification.open({
-          message: intl.get('notifications.title.place_order_success'),
-          description: 'successfully submit order',
-          type: 'info'
-        })
-
-        signedOrder.orderHash = response.result
-        dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
-        const unsignedOrder = unsigned.find(item => item.type === 'order')
-        storage.orders.storeP2POrder({
-          auth: unsignedOrder.completeOrder.authPrivateKey,
-          hash: signedOrder.orderHash,
-          count
-        })
-        const qrcode = JSON.stringify({
-          type: 'P2P',
-          value: {auth: unsignedOrder.completeOrder.authPrivateKey, hash: signedOrder.orderHash, count}
-        })
-        dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
-        page.gotoPage({id: 'qrcode'})
-      }
-      */
     } catch (e) {
       Notification.open({
         message: intl.get('notifications.title.place_order_failed'),
@@ -254,7 +179,17 @@ function PlaceOrderSteps (props) {
               </div>
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
-              <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>
+              {false &&  <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>}
+              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
+                </span>
+              }/>
+              <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenS} = ${Number(toFixed(1/price,8))} ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
+                </span>
+              }/>
               <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
               <OrderMetaItem label={intl.get('common.ttl')} showArrow={true}
                              value={<div onClick={showLayer.bind(this,{id:'helperOfTTL'})} className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
@@ -285,7 +220,17 @@ function PlaceOrderSteps (props) {
             <div className="zb-b-t p15 mt15">
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
-              <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>
+              {false && <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>}
+              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
+                </span>
+              }/>
+              <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+                <span>
+                  {`1 ${tokenS} = ${Number(toFixed(1/price,8))} ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
+                </span>
+              }/>
             </div>
           </div>
         }/>
