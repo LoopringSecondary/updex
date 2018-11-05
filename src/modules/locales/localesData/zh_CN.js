@@ -585,7 +585,12 @@ export default {
     instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
   },
   unlock_by_ledger:{
-    title:'使用Ledger钱包解锁'
+    title:'使用Ledger钱包解锁',
+    unlock_steps_title: '与您的Ledger设备连接失败, 您可以参照以下建议',
+    ledger_connect_failed_step1: "请确保您的设备与电脑连接并解锁",
+    ledger_connect_failed_step2: "在设备上将该选项设置为'yes': Settings->Browser support",
+    ledger_connect_failed_step3: "在设备上选择'Ethereum app'并进入",
+    unlock_again_button: '全做完了？尝试解锁',
   },
   unlock_by_metaMask: {
     title:'使用MetaMask浏览器插件解锁'

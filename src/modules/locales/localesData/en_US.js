@@ -584,7 +584,12 @@ export default {
     instruction_warn: '* The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
   },
   unlock_by_ledger:{
-    title:'Unlock With Ledger'
+    title:'Unlock With Ledger',
+    unlock_steps_title: 'Failed to connect with your Ledger device, you could follow these advices and try again',
+    ledger_connect_failed_step1: "Make sure your Ledger device has connected with your computer and unlocked",
+    ledger_connect_failed_step2: "Set this to 'yes': Settings->Browser support",
+    ledger_connect_failed_step3: "Enter into Ethereum app",
+    unlock_again_button: 'All Done? Try to Unlock',
   },
   unlock_by_metaMask: {
     title:'Unlock With MetaMask Browser Plug-in'
