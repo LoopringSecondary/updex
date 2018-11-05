@@ -128,6 +128,7 @@ const PlaceOrderSign = (props) => {
         dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:error.message}})
       } else {
         dispatch({type:'placeOrderSteps/signed', payload: {signResult:1, error:''}})
+        dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder:true}})
       }
     });
   }
