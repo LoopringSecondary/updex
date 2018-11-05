@@ -139,7 +139,7 @@ class Face2FaceForm extends React.Component {
                       </span>
                     }
                     { price == 0 && <span>
-                      0.00 {p2pOrder.tokenS} = {`0.00 ${p2pOrder.tokenB}`} ≈ <Worth amount={0} symbol={p2pOrder.tokenB}/>
+                      1 {p2pOrder.tokenS} = {`0.00 ${p2pOrder.tokenB}`} ≈ <Worth amount={0} symbol={p2pOrder.tokenB}/>
                       </span>
                     }
                     <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>

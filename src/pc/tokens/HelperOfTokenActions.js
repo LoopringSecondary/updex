@@ -50,7 +50,7 @@ function HelperOfTokenActions(props) {
   }
 
   return (
-    <div className="p0" style={{width:'24rem'}}>
+    <div className="p0" style={{width:'15rem'}}>
         <NavBar
           className="zb-b-b d-none"
           mode="light"
@@ -62,9 +62,9 @@ function HelperOfTokenActions(props) {
           <div className="fs14 text-left">{symbol} {intl.get('common.actions')}</div>
         </NavBar>
         <div className="p10">
-          <Button size="small" onClick={showReceive} className="fs14" type="primary">{intl.get('common.receive')} {symbol}</Button>
+          <Button onClick={showReceive} className="fs14" type="primary">{intl.get('common.receive')} {symbol}</Button>
           {
-            isSupportedTrading() && !hideBuy &&
+            false && isSupportedTrading() && !hideBuy &&
             <Button size="small" onClick={gotoTrading} className="mt10 fs14" type="primary">{intl.get('common.buy')} {symbol}</Button>
           }
 

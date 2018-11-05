@@ -52,7 +52,7 @@ class HelperOfTokens extends React.Component {
     }
 
     return (
-      <div className="bg-white" style={{height:'100%'}}>
+      <div className="bg-white" style={{height:'100%',overflow: 'auto'}}>
         <NavBar
           className="zb-b-b"
           mode="light"
@@ -65,7 +65,7 @@ class HelperOfTokens extends React.Component {
         </NavBar>
         <SearchBar placeholder="Search" className="selectable" maxLength={8} value={filter} onChange={filterChange}/>
         <div className="divider 1px zb-b-t"></div>
-        <div className="no-border" style={{height: '50vh', overflow: 'auto'}}>
+        <div className="no-border">
           <List className="">
             {
               tokensList.map((item, index) => {
