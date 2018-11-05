@@ -17,6 +17,7 @@ class Auth extends React.Component {
     address:'',
     metamaskState:'',
     connectingLedger:false,
+    showLedgerHelper:false,
     unlockWith:''
   }
 
@@ -133,7 +134,7 @@ class Auth extends React.Component {
   }
 
   unlockByLedger = () =>{
-    this.setState({connectingLedger:true})
+    this.setState({connectingLedger:true, showLedgerHelper:false})
     connectLedger().then(res => {
       if (!res.error) {
         const ledger = res.result;
@@ -151,8 +152,8 @@ class Auth extends React.Component {
         throw new Error(resp.error)
       }
     }).catch(e=>{
-      this.setState({connectingLedger:false})
-      Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
+      this.setState({connectingLedger:false, showLedgerHelper:true})
+      // Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
     });
   }
 
@@ -219,6 +220,10 @@ class Auth extends React.Component {
       dispatch({type: 'metaMask/setRefreshModalVisible', payload: {refreshModalVisible:false}});
     }
 
+    const hideLedgerHelper = () => {
+      this.setState({showLedgerHelper:false})
+    }
+
     const refresh = () => {
       if (window.web3 && window.web3.eth.accounts[0]) {
         this.connectToMetamask()
@@ -266,7 +271,7 @@ class Auth extends React.Component {
           rightContent={[]}
         >
           <div className="color-black-1 fs16">
-            Unlock  Wallet
+            {intl.get('unlock.title')}
           </div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
@@ -287,7 +292,7 @@ class Auth extends React.Component {
             </div>
             <div className="col-auto text-right">
               <div className="fs14 text-wrap text-left">
-                <span className="fs13 color-black-2 mr5">Unlock</span>
+                <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                 <Icon className="color-black-2" type="right"/>
               </div>
             </div>
@@ -303,7 +308,7 @@ class Auth extends React.Component {
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>
@@ -343,14 +348,37 @@ class Auth extends React.Component {
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>
             </div>
           </Spin>
           <Spin spinning={this.state.connectingLedger}>
-            <div onClick={this.unlockByLedger} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55"
+            <AntdModal
+              title={intl.get('unlock_by_ledger.unlock_steps_title')}
+              visible={this.state.showLedgerHelper}
+              maskClosable={false}
+              onOk={()=>{}}
+              onCancel={()=>hideLedgerHelper()}
+              okText={null}
+              cancelText={null}
+              footer={null}
+            >
+              <Steps direction="vertical">
+                <Steps.Step status="process" title={''} description={intl.get('unlock_by_ledger.ledger_connect_failed_step1')} />
+                <Steps.Step status="process" title={''} description={intl.get('unlock_by_ledger.ledger_connect_failed_step2')} />
+                <Steps.Step status="process" title={''}
+                            description={
+                              <div>
+                                <div>{intl.get('unlock_by_ledger.ledger_connect_failed_step3')}</div>
+                                <Button onClick={() => this.unlockByLedger()} type="primary" className="mt5" loading={false}>{intl.get('unlock_by_ledger.unlock_again_button')}</Button>
+                              </div>
+                            }
+                />
+              </Steps>
+            </AntdModal>
+            <div onClick={()=>this.unlockByLedger()} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55"
                 pt5 pb5  style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
                 <i className="icon-ledgerwallet color-black-1 fs26"></i>
@@ -360,7 +388,7 @@ class Auth extends React.Component {
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>
@@ -374,11 +402,11 @@ class Auth extends React.Component {
                 <i className="icon-eye color-black-1 fs22"></i>
               </div>
               <div className="col text-left">
-                <div className="fs16 color-black-1 text-left">Watch-Only Wallet</div>
+                <div className="fs16 color-black-1 text-left">{intl.get('unlock_by_address.tap')}</div>
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">
-                  <span className="fs13 color-black-2 mr5">Unlock</span>
+                  <span className="fs13 color-black-2 mr5">{intl.get('unlock.actions_unlock')}</span>
                   <Icon className="color-black-2" type="right"/>
                 </div>
               </div>
