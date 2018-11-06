@@ -47,7 +47,7 @@ class Sidebar extends React.Component {
                   <div className="fs12 text-primary text-center mt5">{intl.get('pc_sidebar.p2p_trade')}</div>
                 </div>
               </Tooltip>
-              <Tooltip title="My Orders" placement="right">
+              <Tooltip title={intl.get('pc_panels.my_orders')} placement="right">
                 <div className="pt15">
                   <div  className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="solution" theme="" className="fs20" />

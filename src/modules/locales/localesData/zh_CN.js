@@ -347,7 +347,7 @@ export default {
   },
   set_layout: {
     l1: '经典 4 列布局',
-    l2: '经典 3 列布局',
+    l2: '经典 3 列布局（小图表）',
     l3: '经典 3 列布局（大图表）'
   },
   gas_setting: {
@@ -769,6 +769,13 @@ export default {
     my_orders:"我的订单",
     my_wallet:"我的钱包",
   },
-
+  pc_panels:{
+    place_order:'挂单交易',
+    charts:"K线图",
+    my_wallet:"我的钱包",
+    my_orders:"我的订单",
+    order_book:"最新挂单",
+    trade_history:"最新成交",
+  },
 }
 

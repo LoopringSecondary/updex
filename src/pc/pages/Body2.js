@@ -27,7 +27,7 @@ class Home extends React.Component {
         <div className="row no-gutters" style={{flex:'1'}}>
           <div className="col d-flex flex-column" style={{flex:'1'}}>
             <PanelWrapper style={{flex:'1'}} className="mpanel mr0 mb0">
-              <PanelHeader title="Kline Chart" />
+              <PanelHeader title={intl.get('pc_panels.charts')} />
               <Kline />
             </PanelWrapper>
           </div>
@@ -35,19 +35,19 @@ class Home extends React.Component {
             <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
               <div className="col-auto" style={{height:'100%'}}>
                 <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'25rem'}} className="">
-                  <PanelHeader title="Order Book" />
+                  <PanelHeader title={intl.get('pc_panels.order_book')}  />
                   <HelperOfDepth />
                 </PanelWrapper>
               </div>
               <div className="col-auto" style={{height:'100%'}}>
                 <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'25rem'}} className="mlpanel">
-                  <PanelHeader title="Trade History" />
+                  <PanelHeader title={intl.get('pc_panels.trade_history')} />
                   <ListMarketFills />
                 </PanelWrapper>
               </div>
             </div>
             <PanelWrapper className="mtpanel">
-              <PanelHeader title="Place Order" />
+              <PanelHeader title={intl.get('pc_panels.place_order')} />
               <div className="row no-gutters ml0 mr0 mtpanel">
                 <div className="col-auto" style={{width:'25rem'}}>
                   <PlaceOrderFormNoSide side="buy" location={location} match={match} />
@@ -60,7 +60,7 @@ class Home extends React.Component {
             {
               false &&
               <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
-                <PanelHeader title="Orders" />
+                <PanelHeader title={intl.get('pc_panels.my_orders')} />
                 <div style={{flex:'1',overflow:'auto'}}>
                   <HelperOfMyMarketOrders />
                 </div>

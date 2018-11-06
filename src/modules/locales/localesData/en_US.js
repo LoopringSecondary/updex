@@ -339,9 +339,9 @@ export default {
     blue: 'Blue'
   },
   set_layout: {
-    l1: 'Classic Layout Of 4 Cloumn ',
-    l2: 'Classic Layout Of 3 Cloumn',
-    l3: 'Classic Layout Of 3 Cloumn (Large Chart)'
+    l1: 'Classic 4 Column ',
+    l2: 'Classic 3 Column ( Small Chart )',
+    l3: 'Classic 3 Column ( Large Chart )'
   },
   gas_setting: {
     title: 'Set Gas Fee',
@@ -766,5 +766,12 @@ export default {
     my_orders:"Orders",
     my_wallet:"Wallet",
   },
-
+  pc_panels:{
+    place_order:'Place Order',
+    my_wallet:"My Wallet",
+    charts:"Kline Chart",
+    my_orders:"My Orders",
+    order_book:"Order Book",
+    trade_history:"Trade History",
+  },
 }

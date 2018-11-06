@@ -5,6 +5,7 @@ import { Icon as WebIcon } from 'antd'
 import { toNumber } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import {setLocale} from "common/utils/localeSetting";
+import routeActions from "common/utils/routeActions";
 
 const RadioItem = Radio.RadioItem;
 
@@ -31,6 +32,7 @@ function SetForm(props) {
         payload: settings
       })
       setLocale(language);
+      routeActions.gotoPath('/') // temp solutions to fix bug not re-render
     }
   }
   return (

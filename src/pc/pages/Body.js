@@ -26,16 +26,16 @@ class Home extends React.Component {
         <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
           <div className="col-auo d-flex flex-column mpanel mr0 mb0" style={{width:'20vw'}}>
             <PanelWrapper className="pb5">
-              <PanelHeader title="Place Order" />
+              <PanelHeader title={intl.get('pc_panels.place_order')} />
               <div className="pt5"></div>
               <PlaceOrderForm location={location} match={match} />
             </PanelWrapper>
             <PanelWrapper className="mtpanel">
-              <PanelHeader title="Wallet" />
+              <PanelHeader title={intl.get('pc_panels.my_wallet')} />
               <HelperOfBalance />
             </PanelWrapper>
             <PanelWrapper className="mtpanel" style={{flex:'1'}}>
-              <PanelHeader title="Orders" />
+              <PanelHeader title={intl.get('pc_panels.my_orders')} />
               <div style={{flex:'1',overflow:'auto'}}>
                 <HelperOfMyMarketOrders />
               </div>
@@ -43,13 +43,13 @@ class Home extends React.Component {
           </div>
           <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{width:'20vw'}}>
             <PanelWrapper style={{flex:'1'}}>
-              <PanelHeader title="Order Book" />
+              <PanelHeader title={intl.get('pc_panels.order_book')}  />
               <HelperOfDepth />
             </PanelWrapper>
             { false && !collapsed &&
               <div className="mtpanel">
                 <PanelWrapper style={{height:'40vh'}}>
-                  <PanelHeader title="Trade History" />
+                  <PanelHeader title={intl.get('pc_panels.trade_history')} />
                   <ListMarketFills />
                 </PanelWrapper>
               </div>
@@ -57,7 +57,7 @@ class Home extends React.Component {
           </div>
           <div className="col mpanel mr0 mb0 d-flex flex-column" style={{}}>
             <PanelWrapper style={{flex:'1'}}>
-              <PanelHeader title="Charts" />
+              <PanelHeader title={intl.get('pc_panels.charts')} />
               <Kline />
             </PanelWrapper>
           </div>
