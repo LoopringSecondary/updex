@@ -14,12 +14,12 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="orderDetail">
-        <UiContainers.Drawer position="right" id="orderDetail" showMask={true} level={null} width="27.5vw" style={{height:'100%'}}>
+        <UiContainers.Drawer position="right" id="orderDetail" showMask={true} level={null} width="25vw" style={{height:'100%'}}>
           <OrderDetail />
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="placeOrderSteps" >
-        <UiContainers.Drawer position="right" wrapperClassName="orderConfirm" id="placeOrderSteps" level={'all'} width="27.5vw" style={{margin:'0 auto',height:'100%'}}>
+        <UiContainers.Drawer position="right" wrapperClassName="orderConfirm" id="placeOrderSteps" level={'all'} width="28vw" style={{margin:'0 auto',height:'100%'}}>
           <PlaceOrderSteps />
         </UiContainers.Drawer>
       </Containers.Layers>

@@ -11,7 +11,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="authOfPC">
-        <UiContainers.Drawer position="right" id="authOfPC" maskClosable={false} showMask={true} width="25vw" style={{margin:'0 auto',padding:'0px 0px',height:'100%'}}>
+        <UiContainers.Drawer position="right" id="authOfPC" maskClosable={false} showMask={true} width="30vw" style={{margin:'0 auto',padding:'0px 0px',height:'100%'}}>
           <Auth />
         </UiContainers.Drawer>
       </Containers.Layers>

@@ -340,10 +340,10 @@ export default {
     market_trade: '市场'
   },
   set_theme: {
-    dark_grey: '沉稳深灰',
+    dark_grey: '沉稳灰',
     white: '简洁白',
     purple: '魅力紫',
-    blue: '经典深蓝'
+    blue: '经典蓝'
   },
   set_layout: {
     l1: '经典 4 列布局',
