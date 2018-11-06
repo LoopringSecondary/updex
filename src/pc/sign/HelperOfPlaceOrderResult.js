@@ -38,6 +38,22 @@ const PlaceOrderResult = (props) => {
   if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') {
     signResult = signByLooprStep(placeOrderSteps, circulrNotify)
   }
+  switch(placeOrderSteps.task) {
+    case 'sign':
+
+      break;
+    case 'signP2P':
+
+      break;
+    case 'cancelOrder':
+
+      break;
+    case 'convert':
+
+      break;
+    default:
+      throw new Error(`Unsupported task type:${placeOrderSteps.task}`)
+  }
   return (
     <div className="bg-white-light">
         {
