@@ -41,7 +41,7 @@ class OrderQrcode extends React.Component{
     return (
        <div className="bg-white" style={{height:'100%'}}>
         <div className="p25 text-center fs12 color-black-1">
-          Share this page to your friends
+          {intl.get('p2p_order.share_page')}
           <Icon className="text-primary primary fs12 ml15 cursor-pointer" onClick={()=>hideLayer({id:'orderQrcode'})} key="1" type="close"/>
         </div>
         <div className="text-center bg-white-light ml25 mr25 pl15 pr15 pb15">
@@ -52,8 +52,8 @@ class OrderQrcode extends React.Component{
           <div className="p5 d-inline-block" style={{background:'#fff'}}>
             <QRCode value={JSON.stringify(value)} size={220} level='H'/>
           </div>
-          <Button type="primary" size="small" className="mt15 border-none bg-primary-light text-primary fs12 d-block w-100">
-            <Icon type="apple" className="mr5" theme="filled" />请使用 UP Wallet iOS 版进行扫码吃单
+          <Button type="primary" size="small" className="mt15 border-none bg-primary-light text-primary fs12 d-block w-100" onClick={() => window.open('https://upwallet.io')}>
+            <Icon type="apple" className="mr5" theme="filled" />{intl.get('p2p_order.scan_with_upwallet')}
           </Button>
 
         </div>

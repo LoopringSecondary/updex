@@ -394,7 +394,9 @@ export default {
     amount_to_buy:'Amount to buy',
     set_sell_amount:"Set sell amount",
     count:"Order split count",
-    set_count:"Set order split count "
+    set_count:"Set order split count ",
+    share_page : 'Share this page with your friends',
+    scan_with_upwallet: 'Please scan the QR code and submit with your UP Wallet'
   },
   sign: {
     not_signed: "You may have some items not signed",

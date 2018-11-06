@@ -58,7 +58,9 @@ const PlaceOrderResult = (props) => {
       throw new Error(`Unsupported task type:${placeOrderSteps.task}`)
   }
   const back = () => {
-    dispatch({type:'layers/hideLayer', payload:{id:'placeOrderSteps'}})
+    if(placeOrderSteps.task === 'sign') {
+      dispatch({type:'layers/hideLayer', payload:{id:'placeOrderSteps'}})
+    }
     dispatch({type:'layers/hideLayer', payload:{id:'helperOfSignStepPC'}})
   }
   return (
