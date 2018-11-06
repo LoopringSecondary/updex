@@ -337,7 +337,7 @@ export default {
     dark_grey: 'Dark Grey',
     white: 'White',
     purple: 'Purple',
-    blue: 'Blue'
+    blue: 'Dark Blue'
   },
   set_layout: {
     l1: 'Classic 4 Column ',
