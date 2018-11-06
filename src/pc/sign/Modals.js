@@ -7,7 +7,7 @@ import HelperOfSignSteps from './HelperOfSignSteps'
 export function HelperOfSignStepsModal(){
 	return (
 		<Containers.Layers id="helperOfSignStepPC">
-		  <UiContainers.Drawer id="helperOfSignStepPC" position="right" width="30vw" style={{height:'100%'}}>
+		  <UiContainers.Drawer id="helperOfSignStepPC" position="right" width="28vw" style={{height:'100%'}}>
 		    <HelperOfSignSteps />
 		  </UiContainers.Drawer>
 		</Containers.Layers>
