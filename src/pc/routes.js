@@ -48,9 +48,9 @@ const Logged = ()=>{
         <Tokens.Modals />
         <Account.Modals />
         <P2PModals />
-        <SettingsModals />
         <SignModals />
         <AuthModals />
+        <SettingsModals />
         <Heads />
       </div>
     )

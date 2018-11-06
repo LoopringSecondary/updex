@@ -27,44 +27,45 @@ class Home extends React.Component {
         <div className="row no-gutters" style={{flex:'1'}}>
           <div className="col d-flex flex-column" style={{flex:'1'}}>
             <PanelWrapper style={{flex:'1'}} className="mpanel mr0 mb0">
-              <PanelHeader title="Kline Chart" />
+              <PanelHeader title={intl.get('pc_panels.charts')} />
               <Kline />
             </PanelWrapper>
-            <div className="row no-gutters ml0 mr0" style={{height:'25vh'}}>
-              <div className="col">
-                <PanelWrapper style={{height:'100%'}} className="mlpanel mtpanel">
-                  <PanelHeader title="My Orders" />
-                  <HelperOfMyMarketOrders />
+            <div className="row no-gutters ml0 mr0 mtpanel" style={{height:'320px'}}>
+              <div className="col-6" style={{height:'100%'}}>
+                <PanelWrapper className="mlpanel" style={{flex:'1',height:'100%'}}>
+                  <PanelHeader title={intl.get('pc_panels.my_orders')} />
+                  <div style={{flex:'1',overflow:'auto'}}>
+                    <HelperOfMyMarketOrders />
+                  </div>
                 </PanelWrapper>
               </div>
-              {
-                false &&
-                <div className="col-auto">
-                  <PanelWrapper style={{height:'100%', width:'25rem'}} className="mtpanel mlpanel">
-                    <PanelHeader title="My Wallet" />
+              <div className="col-6" style={{height:'100%'}}>
+                <PanelWrapper className="mlpanel" style={{flex:'1',height:'100%'}}>
+                  <PanelHeader title={intl.get('pc_panels.my_wallet')} />
+                  <div style={{flex:'1',overflow:'auto'}}>
                     <HelperOfBalance />
-                  </PanelWrapper>
-                </div>
-              }
+                  </div>
+                </PanelWrapper>
+              </div>
             </div>
           </div>
           <div className="col-auto d-flex flex-column mlpanel mtpanel">
             <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
               <div className="col-auto" style={{height:'100%'}}>
                 <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'25rem'}} className="">
-                  <PanelHeader title="Order Book" />
+                  <PanelHeader title={intl.get('pc_panels.order_book')}  />
                   <HelperOfDepth />
                 </PanelWrapper>
               </div>
               <div className="col-auto" style={{height:'100%'}}>
                 <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'25rem'}} className="mlpanel">
-                  <PanelHeader title="Trade History" />
+                  <PanelHeader title={intl.get('pc_panels.trade_history')} />
                   <ListMarketFills />
                 </PanelWrapper>
               </div>
             </div>
-            <PanelWrapper className="mtpanel">
-              <PanelHeader title="Place Order" />
+            <PanelWrapper className="mtpanel" style={{height:'320px'}}>
+              <PanelHeader title={intl.get('pc_panels.place_order')} />
               <div className="row no-gutters ml0 mr0 mtpanel">
                 <div className="col-auto" style={{width:'25rem'}}>
                   <PlaceOrderFormNoSide side="buy" location={location} match={match} />

@@ -4,6 +4,8 @@ import {connect} from 'dva'
 import { Icon as WebIcon,Tooltip } from 'antd';
 import PanelHeader from './PanelHeader'
 import PanelWrapper from './PanelWrapper'
+import intl from 'react-intl-universal'
+
 class Sidebar extends React.Component {
   constructor(props) {
     super(props);
@@ -43,6 +45,7 @@ class Sidebar extends React.Component {
                   <div className="text-center cursor-pointer bg-primary m-auto circle-45 center-center">
                     <WebIcon type="line-chart" theme="" className="fs20 color-black" />
                   </div>
+                  <div className="fs12 text-primary text-center mt5">{intl.get('pc_sidebar.market_trade')}</div>
                 </div>
               </Tooltip>
               <Tooltip title="P2P Trade" placement="right">
@@ -50,13 +53,15 @@ class Sidebar extends React.Component {
                   <div onClick={()=>showLayer('p2p')} className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="team" theme="" className="fs20" />
                   </div>
+                  <div className="fs12 text-primary text-center mt5">{intl.get('pc_sidebar.p2p_trade')}</div>
                 </div>
               </Tooltip>
-              <Tooltip title="My Orders" placement="right">
+              <Tooltip title={intl.get('pc_panels.my_orders')} placement="right">
                 <div className="pt15">
                   <div onClick={clickUser} className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="solution" theme="" className="fs20" />
                   </div>
+                  <div className="fs12 text-primary text-center mt5">{intl.get('pc_sidebar.my_orders')}</div>
                 </div>
               </Tooltip>
               <Tooltip title="My Wallet" placement="right">
@@ -64,6 +69,7 @@ class Sidebar extends React.Component {
                   <div onClick={clickUser} className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="property-safety" theme="" className="fs20" />
                   </div>
+                  <div className="fs12 text-primary text-center mt5">{intl.get('pc_sidebar.my_wallet')}</div>
                 </div>
               </Tooltip>
             </div>

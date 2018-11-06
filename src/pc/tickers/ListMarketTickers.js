@@ -15,7 +15,7 @@ export const Sorter = ({className,style={},isActive,direction})=>{
   return (
     <div className={`${className}`} style={{paddingLeft:'1px',...style}}>
       <div style={{position:'absolute',top:'0.1rem'}} className={`lh10 fs6 ${isActive && direction=== 'up' ? 'text-primary' : ''}`} >▲</div>
-      <div style={{position:'absolute',top:'0.8rem'}} className={`lh10 fs6 ${isActive && direction=== 'down' ? 'text-primary': ''}`}>▼</div>
+      <div style={{position:'absolute',top:'0.5rem'}} className={`lh10 fs6 ${isActive && direction=== 'down' ? 'text-primary': ''}`}>▼</div>
     </div>
   )
   // return (
@@ -114,7 +114,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
       markets.toggleFavor(item)
     }
     return (
-      <div style={{paddingTop:'0.7rem',paddingBottom:'0.7rem'}} className="row ml0 mr0 pl15 pr15 align-items-center no-gutters hover-default zb-b-b" onClick={gotoDetail}>
+      <div className="row ml0 mr0 pl15 pr15 pt5 pb5 align-items-center no-gutters hover-default zb-b-b" onClick={gotoDetail}>
         <div className="col-auto pr10" onClick={toggleTickerFavored.bind(this, item.market)}>
           {
             favored[item.market] &&
@@ -127,7 +127,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
         </div>
         <div className="col-4 text-left">
           <div className="">
-            <span className="fs12 color-black-1">{tokens.left} / {tokens.right}</span>
+            <span className="fs13 color-black">{tokens.left} / {tokens.right}</span>
           </div>
           <div className="fs12 lh15">
               <span hidden className="fs12 color-black-4">{intl.get('common.volume')} </span>
@@ -257,23 +257,23 @@ class ListMarketTickers extends React.Component {
       const tickerItems = []
       favoredTickers.sort(sorter)
       if(marketGroups && Object.keys(marketGroups).length > 0) {
-        tabs.push({ title: <div className="fs16">{intl.get('ticker_list.title_favorites')}</div> })
+        tabs.push({ title: <div className="fs14">{intl.get('ticker_list.title_favorites')}</div> })
         tickerItems.push(<TickerList key={'fav'} items={favoredTickers} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
         const keys = Object.keys(marketGroups)
         const wethIndex = keys.findIndex(item=> item === 'WETH')
         if(wethIndex > -1) {
           keys.splice(wethIndex, 1);
-          tabs.push({title: <div className="fs16">{'WETH'}</div>})
+          tabs.push({title: <div className="fs14">{'WETH'}</div>})
           tickerItems.push(<TickerList key={'WETH'} items={getMarketTickersBySymbol('WETH',allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
         }
         const lrcIndex = keys.findIndex(item=> item === 'LRC')
         if(lrcIndex > -1) {
           keys.splice(lrcIndex, 1);
-          tabs.push({title: <div className="fs16">{'LRC'}</div>})
+          tabs.push({title: <div className="fs14">{'LRC'}</div>})
           tickerItems.push(<TickerList key={'LRC'} items={getMarketTickersBySymbol('LRC',allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
         }
         keys.forEach(item => {
-          tabs.push({title: <div className="fs16">{item}</div>})
+          tabs.push({title: <div className="fs14">{item}</div>})
           tickerItems.push(<TickerList key={item} items={getMarketTickersBySymbol(item,allTickers)} loading={list.loading} dispatch={dispatch} tickersList={list}/>)
         })
       }

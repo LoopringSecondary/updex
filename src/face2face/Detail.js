@@ -98,7 +98,7 @@ function OrderDetail(props) {
         <div className="divider 1px zb-b-t"></div>
       </div>
       <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
-        <div className="bg-white">
+        <div className="bg-white mt10">
           <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_status_title')}</div>
           <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
@@ -138,7 +138,7 @@ function OrderDetail(props) {
           </div>
         </div>
         {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&
-         <Button className="fs14 mt10 ml10 mr10" type="primary" onClick={()=>showQR(order,orderFm,tokens)}>{intl.get('p2p_order.share_qr')}</Button>
+         <Button className="fs14 m15" type="primary" onClick={()=>showQR(order,orderFm,tokens)}>{intl.get('p2p_order.share_qr')}</Button>
         }
       </div>
     </div>

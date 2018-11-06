@@ -15,7 +15,7 @@ import Worth from 'modules/settings/Worth'
 
 const Item = List.Item;
 
-// Í¨¹ı×Ô¶¨Òå moneyKeyboardWrapProps ĞŞ¸´ĞéÄâ¼üÅÌ¹ö¶¯´©Í¸ÎÊÌâ
+// é€šè¿‡è‡ªå®šä¹‰ moneyKeyboardWrapProps ä¿®å¤è™šæ‹Ÿé”®ç›˜æ»šåŠ¨ç©¿é€é—®é¢˜
 // https://github.com/ant-design/ant-design-mobile/issues/307
 // https://github.com/ant-design/ant-design-mobile/issues/163
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
@@ -277,13 +277,13 @@ class PlaceOrderForm extends React.Component {
               extra={
                 <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
                   {
-                    price>0 && <span className="color-black-4 fs12">¡Ö<Worth amount={price} symbol={tokens.right}/></span>
+                    price>0 && <span className="color-black-4 fs12 mr15">â‰ˆ<Worth amount={price} symbol={tokens.right}/></span>
                   }
-                  <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.right}</span>
+                  <span className="color-black-1 d-inline-block w-35">{tokens.right}</span>
                 </div>
               }
               onChange={priceChange}
-            ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.price")}</div></InputItem>
+            ><div className="fs13 color-black-1 pr5 text-default w-50">{intl.get("common.price")}</div></InputItem>
             <InputItem
               type="text"
               placeholder={amountPrecision > 0 ? `0.${'0'.repeat(amountPrecision)}` : '0'}
@@ -293,10 +293,10 @@ class PlaceOrderForm extends React.Component {
               className="circle h-default mt15 text-number"
               extra={
                 <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
-                  <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.left}</span>
+                  <span className="color-black-1 d-inline-block w-35">{tokens.left}</span>
                 </div>
               }
-            ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.amount")}</div></InputItem>
+            ><div className="fs13 color-black-1 pr5 text-default w-50">{intl.get("common.amount")}</div></InputItem>
             <Item
               className="overflow-visible"
               style={{marginTop:'-0.5rem',marginBottom:'-1.3rem'}}
@@ -320,10 +320,10 @@ class PlaceOrderForm extends React.Component {
               className="circle h-default mt15 text-number"
               extra={
                 <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
-                  <span className="color-black-3 d-inline-block" style={{width:'35px'}}>{tokens.right}</span>
+                  <span className="color-black-1 d-inline-block w-35">{tokens.right}</span>
                 </div>
               }
-            ><div className="fs13 color-black-1 pr5 text-default" style={{width:'50px'}}>{intl.get("common.total")}</div></InputItem>
+            ><div className="fs13 color-black-1 pr5 text-default w-50">{intl.get("common.total")}</div></InputItem>
 
             <Button onClick={toConfirm} className={`fs16 p10 border-none d-flex align-items-center justify-content-center w-100 d-block mt15 ${submitEnable ? " " : "t-light-bak"} ${side==='buy' ? 'bg-success' : 'bg-error'}`} type={"primary"} disabled={false && !submitEnable}>
                 <div className="lh20">

@@ -12,6 +12,7 @@ import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import copy from 'copy-to-clipboard';
 import Notification from 'LoopringUI/components/Notification'
+import ListMyFills from 'mobile/fills/ListMyFills'
 
 class UserCenter extends React.Component {
   render() {
@@ -63,7 +64,7 @@ class UserCenter extends React.Component {
                 [
                   { title: <div className={`pt5 pb5 fs16 d-block w-100 text-center`}>{intl.get('user_center.my_assets')}</div> },
                   { title: <div className={`pt5 pb5 fs16 d-block w-100 text-center`}>{intl.get('user_center.my_orders')}</div> },
-                  // { title: <div onClick={changeTab.bind(this,'fills')} className={`pt5 pb5 fs16 d-block w-100 text-center ${isActive('fills') ? 'text-primary' : 'color-black'}`}>{intl.get('user_center.my_fills')}</div> },
+                  { title: <div className={`pt5 pb5 fs16 d-block w-100 text-center`}>{intl.get('user_center.my_fills')}</div> },
                 ]
               }
               initialPage={0}
@@ -80,6 +81,12 @@ class UserCenter extends React.Component {
                 <Containers.Orders id="MyOpenOrders" alias="orders" initstate={{}}>
                   <PullRefreshOrders />
                 </Containers.Orders>
+              </div>
+              <div>
+                <div className="divider 1px zb-b-b"></div>
+                <Containers.Fills id="MyFills" alias="fills" initstate={{}}>
+                  <ListMyFills />
+                </Containers.Fills>
               </div>
             </Tabs>
             <div className="pb50"></div>
