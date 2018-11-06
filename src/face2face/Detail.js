@@ -6,10 +6,9 @@ import { connect } from 'dva'
 import { OrderFm } from 'modules/orders/OrderFm'
 import Worth from 'modules/settings/Worth'
 import storage from 'modules/storage'
-import TokenFm from "modules/tokens/TokenFm";
+import DetailFills from '../dex/orders/DetailFills'
 import {toFixed} from 'LoopringJS/common/formatter'
-
-
+import TokenFm from "modules/tokens/TokenFm";
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -31,7 +30,6 @@ function OrderDetail(props) {
   const {originalOrder:{tokenS,tokenB,amountS,amountB}} = order
   const tokensFm = new TokenFm({symbol:tokenS})
   const tokenbFm = new TokenFm({symbol:tokenB})
-
   const showLayer = (payload={})=>{
     dispatch({
       type:'layers/showLayer',
@@ -48,8 +46,6 @@ function OrderDetail(props) {
       }
     })
   }
-
-
 
   const showQR = (order,orderFm,tokens) => {
    const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
@@ -84,7 +80,7 @@ function OrderDetail(props) {
   }
   const tokens = orderFm.getTokens()
   return (
-    <div className="bg-fill position-relative" style={{height:"100%"}}>
+    <div className="bg-fill position-relative" style={{height:"100%",overflow:'auto'}}>
       <div className="position-absolute w-100" style={{zIndex:'1000'}}>
         <NavBar
           className="bg-white"
@@ -97,19 +93,24 @@ function OrderDetail(props) {
             <Icon key="1" type="question-circle-o"/>,
           ]}
         >
-          <div className="color-black">{intl.get('common.order')}</div>
+          <div className="color-black">{intl.get('order_detail.page_title')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
-      <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
-        <div className="mt10 bg-white">
-          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_basic')}</div>
+      <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
+        <div className="bg-white mt10">
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_status_title')}</div>
           <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
+          </div>
+        </div>
+        <div className="bg-white mt10">
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_basic_title')}</div>
+          <div className="">
             <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
             <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
-            { false && <OrderMetaItem label={intl.get('order.price')} value={
+            {false && <OrderMetaItem label={intl.get('order.price')} value={
               <div>
                 <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }
               </div>
@@ -130,8 +131,14 @@ function OrderDetail(props) {
             <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
           </div>
         </div>
+        <div className="bg-white mt10">
+          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_fills_title')}</div>
+          <div className="" style={{borderRadius:'0rem'}}>
+            <DetailFills order={order} />
+          </div>
+        </div>
         {(order.status === "ORDER_OPENED" || order.status ==="ORDER_WAIT_SUBMIT_RING") && storage.orders.getP2POrder(order.originalOrder.hash) &&
-         <Button className="fs14 mt10 ml10 mr10" type="primary" onClick={()=>showQR(order,orderFm,tokens)}>{intl.get('p2p_order.share_qr')}</Button>
+         <Button className="fs14 m15" type="primary" onClick={()=>showQR(order,orderFm,tokens)}>{intl.get('p2p_order.share_qr')}</Button>
         }
       </div>
     </div>

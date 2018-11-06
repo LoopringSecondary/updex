@@ -1,5 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
+import { connect } from 'dva'
 import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
@@ -21,10 +22,11 @@ const OrderMetaItem = (props) => {
   )
 }
 
-export default class OrderQrcode extends React.Component{
+class OrderQrcode extends React.Component{
 
   render(){
     const {value,data:{orderFm,tokens}} = this.props.orderQrcode
+    const {dispatch} = this.props
     const {originalOrder:{tokenS,tokenB,amountS,amountB,validUntil}} = orderFm.order
     const tokensFm = new TokenFm({symbol:tokenS})
     const tokenbFm = new TokenFm({symbol:tokenB})
@@ -39,12 +41,20 @@ export default class OrderQrcode extends React.Component{
       }
       share(content)
     };
+    const hideLayer = (payload={})=>{
+      dispatch({
+        type:'layers/hideLayer',
+        payload:{
+          ...payload
+        }
+      })
+    }
     return(
       <div className="bg-white">
         <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
           <div className="row">
             <div className="col-auto text-left pl20 pr20">
-              <Icon type='close' className="text-primary"onClick={()=>{}}/>
+              <Icon type='close' className="text-primary" onClick={()=>hideLayer({id:'orderQrcode'})} />
             </div>
             <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">
@@ -83,3 +93,5 @@ export default class OrderQrcode extends React.Component{
     )
   }
 }
+
+export default connect()(OrderQrcode)
