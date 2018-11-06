@@ -9,13 +9,22 @@ class Sidebar extends React.Component {
     super(props);
   }
   render(){
-    const {match,location,dispatch,collapsed} = this.props;
+    const {match,location,dispatch,collapsed,address} = this.props;
     const showLayer = (id)=>{
       dispatch({
         type:"layers/showLayer",
         payload:{id}
       })
     }
+
+    const clickUser = ()=>{
+      if(address){
+        showLayer('usercenter')
+      }else{
+        showLayer('authOfPC')
+      }
+    }
+
     const collapsedWidth = collapsed ? '6rem' : '35rem'
     return (
       <div className="d-flex flex-column w-60" style={{height:'100vh',transition:'all 0s'}}>
@@ -45,14 +54,14 @@ class Sidebar extends React.Component {
               </Tooltip>
               <Tooltip title="My Orders" placement="right">
                 <div className="pt15">
-                  <div  className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
+                  <div onClick={clickUser} className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="solution" theme="" className="fs20" />
                   </div>
                 </div>
               </Tooltip>
               <Tooltip title="My Wallet" placement="right">
                 <div className="pt15">
-                  <div  className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
+                  <div onClick={clickUser} className="text-center cursor-pointer text-primary bg-primary-light hover-bg-primary m-auto circle-45 center-center">
                     <WebIcon type="property-safety" theme="" className="fs20" />
                   </div>
                 </div>
@@ -64,7 +73,7 @@ class Sidebar extends React.Component {
   }
 }
 
-export default connect(({layers})=>{
+export default connect(({layers,wallet:{address}})=>{
   let collapsed
   if(layers.SidebarOfMarkets){
     collapsed = !layers.SidebarOfMarkets.visible
@@ -72,6 +81,7 @@ export default connect(({layers})=>{
     collapsed = true // default value
   }
   return {
-    collapsed
+    collapsed,
+    address
   }
 })(Sidebar)
