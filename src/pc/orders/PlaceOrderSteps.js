@@ -13,8 +13,6 @@ import { Page, Pages } from 'LoopringUI/components/Pages'
 import { connect } from 'dva'
 import config from 'common/config'
 import storage from 'modules/storage'
-import HelperOfTTL from './HelperOfTTL'
-import {HelperOfSignStepsModal} from '../sign/Modals'
 
 const OrderMetaItem = (props) => {
   const {label, value, showArrow = false, onClick = () => {}} = props
@@ -213,17 +211,6 @@ class PlaceOrderSteps extends React.Component {
             </div>
           }/>
         </Pages>
-        <Containers.Layers id="settings">
-          <UiContainers.Drawer position="right" id="settings" width="480px"  style={{margin:'0 auto',height:'100%'}}>
-            <Settings />
-          </UiContainers.Drawer>
-        </Containers.Layers>
-        <Containers.Layers id="helperOfTTL">
-          <UiContainers.Drawer position="right" id="helperOfTTL" width="480px"  style={{margin:'0 auto',height:'100%'}}>
-            <HelperOfTTL />
-          </UiContainers.Drawer>
-        </Containers.Layers>
-        <HelperOfSignStepsModal />
     </div>
     )
   }
