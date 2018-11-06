@@ -15,7 +15,7 @@ import Worth from 'modules/settings/Worth'
 
 const Item = List.Item;
 
-// Í¨¹ı×Ô¶¨Òå moneyKeyboardWrapProps ĞŞ¸´ĞéÄâ¼üÅÌ¹ö¶¯´©Í¸ÎÊÌâ
+// é€šè¿‡è‡ªå®šä¹‰ moneyKeyboardWrapProps ä¿®å¤è™šæ‹Ÿé”®ç›˜æ»šåŠ¨ç©¿é€é—®é¢˜
 // https://github.com/ant-design/ant-design-mobile/issues/307
 // https://github.com/ant-design/ant-design-mobile/issues/163
 const isIPhone = new RegExp('\\biPhone\\b|\\biPod\\b', 'i').test(window.navigator.userAgent);
@@ -277,7 +277,7 @@ class PlaceOrderForm extends React.Component {
               extra={
                 <div style={{width:'auto',textAlign:'right'}} className="fs13 lh20">
                   {
-                    price>0 && <span className="color-black-4 fs12 mr15"> ¡Ö<Worth amount={price} symbol={tokens.right}/></span>
+                    price>0 && <span className="color-black-4 fs12 mr15">â‰ˆ<Worth amount={price} symbol={tokens.right}/></span>
                   }
                   <span className="color-black-1 d-inline-block w-35">{tokens.right}</span>
                 </div>
