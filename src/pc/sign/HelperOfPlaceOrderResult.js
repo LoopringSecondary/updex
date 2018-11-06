@@ -37,41 +37,47 @@ const PlaceOrderResult = (props) => {
   let signResult = placeOrderSteps.step
   if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') {
     signResult = signByLooprStep(placeOrderSteps, circulrNotify)
+  } else {
+    signResult = error ? 3 : 2
   }
+  let succDesc = '', failedDesc = ''
   switch(placeOrderSteps.task) {
     case 'sign':
-
-      break;
-    case 'signP2P':
-
+      succDesc = intl.get('sign.submit_success')
+      failedDesc = intl.get('sign.submit_success')
       break;
     case 'cancelOrder':
-
+      succDesc = intl.get('sign.cancel_success')
+      failedDesc = intl.get('sign.cancel_failed')
       break;
     case 'convert':
-
+      succDesc = intl.get('sign.convert_success')
+      failedDesc = intl.get('sign.convert_failed')
       break;
     default:
       throw new Error(`Unsupported task type:${placeOrderSteps.task}`)
+  }
+  const back = () => {
+    dispatch({type:'layers/hideLayer', payload:{id:'placeOrderSteps'}})
+    dispatch({type:'layers/hideLayer', payload:{id:'helperOfSignStepPC'}})
   }
   return (
     <div className="bg-white-light">
         {
           signResult === 2 &&
-          <div className="text-center p35">
+          <div className="text-center p35 pb50">
             <i className={`fs50 icon-success color-success`}></i>
-            <div className="fs18 color-black-1">{intl.get('sign.submit_success')}</div>
-            {false && <div className="mt10">
-              <Button className="m5" type="default">{intl.get('place_order_result.view_order')} </Button>
-              <Button className="m5" type="default" onClick={gotToTrade}> {intl.get('place_order_result.continue_place_order')} </Button>
-            </div>}
+            <div className="fs18 color-black-1 mb15">{succDesc}</div>
+            <div className="mt25 text-center">
+              <Button className="h-35 fs14 center-center m-auto" style={{width:'75%'}} type="primary" size="small" onClick={back}>{intl.get('common.back')}</Button>
+            </div>
           </div>
         }
         {
           signResult === 3 &&
           <div className="text-center p35">
             <Icon type="close-circle" className="fs50 color-error" />
-            <div className="fs18 mt15 mb10 color-black-1">{intl.get('sign.submit_failed')}</div>
+            <div className="fs18 mt15 mb10 color-black-1">{failedDesc}</div>
             {error && <Alert message={error} size="small" type="error" theme="light" icon={false}/>}
             {false && <div className="mt10">
               <Button className="m5" type="default" onClick={gotToTrade}> {intl.get('place_order_result.back_to_trade')} </Button>
