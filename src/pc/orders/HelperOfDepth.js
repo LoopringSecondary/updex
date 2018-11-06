@@ -65,7 +65,7 @@ class HelperOfDepth extends React.Component {
             <div style={{width:'30%'}} className="col-auto zb-b-b text-right pl5 pr15 pt5 pb5 font-weight-normal color-black-4">{intl.get("common.total")} {tokens.right}</div>
           </div>
           <div className="pt30"></div>
-          <div className="text-number pt5 pb5 position-relative" style={{flex:1,zIndex:0,overflow:'auto'}} ref="sellEnd">
+          <div className="text-number pt5 pb5 position-relative" style={{flex:1,zIndex:0,overflow:'auto'}}>
               <div className="d-flex flex-column justify-content-end" style={{minHeight:'100%'}}>
                 {
                   sell && sell.reverse().map((item, index) =>
@@ -88,6 +88,7 @@ class HelperOfDepth extends React.Component {
                   )
                 }
               </div>
+            <div ref="sellEnd"></div>
           </div>
           <div className="zb-b-t">
             {

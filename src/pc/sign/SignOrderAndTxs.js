@@ -6,9 +6,11 @@ import {connect} from 'dva'
 import Notification from 'LoopringUI/components/Notification'
 import eachLimit from 'async/eachLimit';
 import * as uiFormatter from 'modules/formatter/common'
+import storage from 'modules/storage'
+import { toHex } from 'LoopringJS/common/formatter'
 
 const PlaceOrderSign = (props) => {
-  const {placeOrderSteps, wallet, dispatch} = props
+  const {placeOrderSteps, p2pOrder, wallet, dispatch} = props
   const {unsign, signed} = placeOrderSteps
   let actualSigned = signed && wallet ? signed.filter(item => item !== undefined && item !== null) : []
   let submitDatas = signed && unsign.length === actualSigned.length ? (
@@ -129,6 +131,14 @@ const PlaceOrderSign = (props) => {
       } else {
         dispatch({type:'placeOrderSteps/signed', payload: {signResult:1, error:''}})
         dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder:true}})
+        const order = placeOrderSteps.unsign.find((item) => item.type === 'order')
+        if(order && order.completeOrder && order.completeOrder.authPrivateKey) {
+          storage.orders.storeP2POrder({
+            auth: order.completeOrder.authPrivateKey,
+            hash: toHex(window.RELAY.order.getOrderHash(order.completeOrder)),
+            count: p2pOrder.count
+          })
+        }
       }
     });
   }
@@ -225,6 +235,7 @@ const PlaceOrderSign = (props) => {
 function mapToProps(state) {
   return {
     placeOrderSteps: state.placeOrderSteps,
+    p2pOrder: state.p2pOrder,
     wallet:state.wallet
   }
 }

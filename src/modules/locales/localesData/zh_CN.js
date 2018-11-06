@@ -156,6 +156,7 @@ const actions = {
   generate_qrcode: '生成二维码',
   reset: '重置',
   continue: '继续',
+  continue_placeorder: '继续下单',
   to_unlock: '去解锁',
   transfer_cancel: '不，取消发送',
   transfer_send: '是的，马上发送',
@@ -406,8 +407,14 @@ export default {
     type_approve: '{token}授权',
     type_cancel_order: '签名取消订单',
     type_convert: '转换WETH',
-    submit_success: '提交成功！',
-    submit_failed: '提交失败',
+    submit_success: '订单提交成功！',
+    submit_failed: '订单提交失败',
+    cancel_success: '订单取消成功',
+    cancel_failed: '订单取消失败',
+    convert_success: '转换成功',
+    convert_failed: '转换失败',
+    p2p_submit_success: 'P2P订单生成成功',
+    p2p_submit_failed: 'P2P订单生成失败'
   },
   // -----------
   // transaction
