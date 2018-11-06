@@ -771,10 +771,10 @@ export default {
     pre:"地址"
   },
   pc_sidebar:{
-    market_trade:'市场交易',
-    p2p_trade:"P2P交易",
-    my_orders:"我的订单",
-    my_wallet:"我的钱包",
+    market_trade:'交易',
+    p2p_trade:"P2P",
+    my_orders:"订单",
+    my_wallet:"钱包",
   },
   pc_panels:{
     place_order:'挂单交易',

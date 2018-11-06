@@ -34,13 +34,13 @@ class Home extends React.Component {
           <div className="col-auto d-flex flex-column mlpanel mtpanel">
             <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
               <div className="col-auto" style={{height:'100%'}}>
-                <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'25rem'}} className="">
+                <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'24rem'}} className="">
                   <PanelHeader title={intl.get('pc_panels.order_book')}  />
                   <HelperOfDepth />
                 </PanelWrapper>
               </div>
               <div className="col-auto" style={{height:'100%'}}>
-                <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'25rem'}} className="mlpanel">
+                <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'24rem'}} className="mlpanel">
                   <PanelHeader title={intl.get('pc_panels.trade_history')} />
                   <ListMarketFills />
                 </PanelWrapper>
@@ -49,23 +49,14 @@ class Home extends React.Component {
             <PanelWrapper className="mtpanel">
               <PanelHeader title={intl.get('pc_panels.place_order')} />
               <div className="row no-gutters ml0 mr0 mtpanel">
-                <div className="col-auto" style={{width:'25rem'}}>
+                <div className="col-auto" style={{width:'24rem'}}>
                   <PlaceOrderFormNoSide side="buy" location={location} match={match} />
                 </div>
-                <div className="col-6" style={{width:'25rem'}}>
+                <div className="col-6" style={{width:'24rem'}}>
                   <PlaceOrderFormNoSide side="sell" location={location} match={match} />
                 </div>
               </div>
             </PanelWrapper>
-            {
-              false &&
-              <PanelWrapper className="mtpanel" style={{height:'36.5rem'}}>
-                <PanelHeader title={intl.get('pc_panels.my_orders')} />
-                <div style={{flex:'1',overflow:'auto'}}>
-                  <HelperOfMyMarketOrders />
-                </div>
-              </PanelWrapper>
-            }
           </div>
         </div>
       </div>
