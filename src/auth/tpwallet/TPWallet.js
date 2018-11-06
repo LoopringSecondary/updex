@@ -112,14 +112,7 @@ export default class TPWallet extends Wallet {
       })
     })
   }
-
-  async setConfigs() {
-    await super.setConfigs();
-    this.rewardAddress = (await this.getRewardAddress()).result
-    return this;
-  }
-
   share(message){
-    callApi('device.share', message, null)
+    callApi('device.share', message)
   }
 }

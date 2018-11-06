@@ -30,15 +30,13 @@ export default class OrderQrcode extends React.Component{
     const tokenbFm = new TokenFm({symbol:tokenB})
     const shareOrder = () => {
       const content = {type:'p2pOrder',content:value}
-      const extra = {
+      content.extra = {
         validUntil:toNumber(validUntil).toString(),
         amountB:tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB)),
         amountS:tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS)),
         tokenS,
         tokenB
       }
-      content.extra = extra
-      console.log(JSON.stringify(content))
       share(content)
     };
     return(
@@ -49,7 +47,7 @@ export default class OrderQrcode extends React.Component{
             </div>
             <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">
-              {/*<Icon type='share-alt' className="text-primary"onClick={shareOrder}/>*/}
+              <Icon type='share-alt' className="text-primary"onClick={shareOrder}/>
             </div>
           </div>
         </div>

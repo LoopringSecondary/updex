@@ -220,14 +220,13 @@ function PlaceOrderSteps (props) {
     const content = {type:'p2pOrder',content:p2pOrder.qrcode}
     const tokensFm = new TokenFm({symbol:tokenS})
     const tokenbFm = new TokenFm({symbol:tokenB})
-    const extra = {
+    content.extra = {
       validUntil:validUntil.unix().toString(),
       amountB:tokenbFm.toPricisionFixed(amountB),
       amountS:tokensFm.toPricisionFixed(amountS),
       tokenS,
       tokenB
     }
-    content.extra = extra
     share(content)
   };
 
@@ -308,7 +307,7 @@ function PlaceOrderSteps (props) {
                 </div>
                 <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
                 <div className="col-auto color-white pl20 pr20">
-                  {/*<Icon type='share-alt' className="text-primary"onClick={shareOrder}/>*/}
+                  <Icon type='share-alt' className="text-primary"onClick={shareOrder}/>
                 </div>
               </div>
             </div>
