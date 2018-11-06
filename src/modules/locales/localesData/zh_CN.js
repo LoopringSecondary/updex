@@ -396,7 +396,9 @@ export default {
     amount_to_buy:'买入数量',
     set_sell_amount:"设定售出数量",
     count:"订单拆分份数",
-    set_count:"设置订单拆分份数"
+    set_count:"设置订单拆分份数",
+    share_page : '分享页面给你的朋友',
+    scan_with_upwallet: '请使用UP Wallet手机版进行扫码吃单'
   },
   sign: {
     not_signed: '您还未完成签名',
