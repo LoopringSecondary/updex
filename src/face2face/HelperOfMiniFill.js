@@ -33,7 +33,7 @@ class HelperOfMiniFill extends React.Component {
         >
           <div className="color-black-1">{intl.get('p2p_order.set_count')}</div>
         </NavBar>
-        <div className="zb-b-b mt10 p15 pt30" style={{height:'25vh'}}>
+        <div className="zb-b-b mt10 p15 pt30 center-center" style={{height:'15rem'}}>
           <Stepper
             showNumber
             className="bg-white-light circle text-primary"
