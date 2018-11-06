@@ -44,6 +44,7 @@ export default class OrderQrcode extends React.Component{
         <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
           <div className="row">
             <div className="col-auto text-left pl20 pr20">
+              <Icon type='close' className="text-primary"onClick={()=>{}}/>
             </div>
             <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">

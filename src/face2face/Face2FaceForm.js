@@ -96,7 +96,7 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                    value={amountS}
                   extra={
-                    <div className="fs14 cursor-pointer zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div className="fs14 cursor-pointer zb-b-l color-black-1 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} >
                         {p2pOrder.tokenS} <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                       </div>
@@ -118,7 +118,7 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                   value={amountB}
                   extra={
-                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-3 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-1 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                         {p2pOrder.tokenB}
                         <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                     </div>
@@ -135,7 +135,7 @@ class Face2FaceForm extends React.Component {
                   arrow={false}
                   onClick={()=>showLayer({id:'helperOfPrice'})}
                   extra={
-                   <div className="fs14 color-black-4 cursor-pointer d-flex align-items-center justify-content-center">
+                   <div className="fs14 color-black-1 cursor-pointer d-flex align-items-center justify-content-center">
                     { price >0 && <span>
                       1 {p2pOrder.tokenS} = {`${toNumber(toFixed(1/price,8))} ${p2pOrder.tokenB}`} ≈ <Worth amount={1/price} symbol={p2pOrder.tokenB}/>
                       </span>
