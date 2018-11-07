@@ -549,6 +549,8 @@ export default {
     actions_trade: words.trade,
     actions_convert_eth_to_weth: '转换 ETH 为 WETH',
     actions_convert_weth_to_eth: '转换 WETH 为 ETH',
+    select_token: '选择币种',
+    search_token_holder: '搜索'
   },
   // -----------
   // transfer
