@@ -5,8 +5,8 @@ export default {
     // ["@babel/transform-runtime",{regenerator:true}],
 	],
   // multipage:true,
-  // entry:'./src/assets/css/themes/*.less',
-  // outputPath:'dist/themes',
+  entry:'./src/assets/css/themes/*.less',
+  outputPath:'dist/themes',
   // output:{
   //  path:'dist/themes',
   //  filename:'[name].css',
