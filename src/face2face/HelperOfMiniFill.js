@@ -1,6 +1,6 @@
 import React from 'react'
-import {Icon, NavBar, PickerView,Stepper} from 'antd-mobile';
-import {Input} from 'antd'
+import {NavBar, PickerView,Stepper} from 'antd-mobile';
+import {Input,Icon} from 'antd'
 import {connect} from 'dva'
 import intl from 'react-intl-universal'
 import { toNumber } from 'LoopringJS/common/formatter'
@@ -42,12 +42,12 @@ class HelperOfMiniFill extends React.Component {
           mode="light"
           onLeftClick={() => hideLayer({id:'helperOfMiniFill'})}
           leftContent={[
-            <span key='1' className=""><Icon type="cross"/></span>,
+            <span key='1' className=""><Icon type="close"/></span>,
           ]}
         >
           <div className="color-black-1">{intl.get('p2p_order.set_count')}</div>
         </NavBar>
-        <div className="zb-b-b mt10 p15 pt30 center-center" style={{height:'15rem'}}>
+        <div className="zb-b-b mt10 p15 pt30 center-center" style={{height:'10rem'}}>
           {/*<Stepper*/}
             {/*showNumber*/}
             {/*className="bg-white-light circle text-primary"*/}
@@ -58,10 +58,10 @@ class HelperOfMiniFill extends React.Component {
             {/*onChange={countChange}*/}
           {/*/>*/}
           <Input
-            className="bg-light-white"
+            className=""
             value={count} onChange={countChange}
-            addonBefore={<div className="cursor-pointer" onClick={minus}><Icon type="minus-square" theme="filled" /></div>}
-            addonAfter={<div className="cursor-pointer" onClick={plus}><Icon type="plus-square" theme="filled" /></div>}
+            addonBefore={<div className="cursor-pointer text-primary" onClick={minus}><Icon type="minus" className="fs18" /></div>}
+            addonAfter={<div className="cursor-pointer text-primary" onClick={plus}><Icon type="plus" className="fs18" /></div>}
           />
         </div>
       </div>

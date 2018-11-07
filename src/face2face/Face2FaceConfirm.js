@@ -14,9 +14,9 @@ import storage from 'modules/storage'
 import Worth from 'modules/settings/Worth'
 
 const OrderMetaItem = (props) => {
-  const {label, value,showArrow=false,onClick=()=>{}} = props
+  const {label, value,showArrow=false,onClick=()=>{},className=""} = props
   return (
-    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding:'10px 0px'}}>
+    <div onClick={onClick} className={`row ml0 mr0 pl15 pr15 pt10 pb10 zb-b-b no-gutters ${className}`}>
       <div className="col-auto">
         <div className="fs13 color-black-2 text-left">{label}</div>
       </div>
@@ -161,8 +161,8 @@ function PlaceOrderSteps (props) {
                 {intl.get('p2p_order.order_title')}
               </div>
             </NavBar>
-            <div className="p15 bg-white">
-              <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center zb-b-b">
+            <div className="pt15 pb15 bg-white">
+              <div className="pt15 pb30 row ml0 mr0 no-gutters align-items-center justify-content-center zb-b-b">
                 <div className="col-auto">
                   <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center circle-40" style={{}}>
                     <i className={`icon-token-${tokenS} fs24`}/>
@@ -192,10 +192,12 @@ function PlaceOrderSteps (props) {
               }/>
               <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
               <OrderMetaItem label={intl.get('common.ttl')} showArrow={true}
-                             value={<div onClick={showLayer.bind(this,{id:'helperOfTTL'})} className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
+                              className="hover-default" onClick={showLayer.bind(this,{id:'helperOfTTL'})} 
+                             value={<div className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
               <OrderMetaItem label={intl.get('p2p_order.count')} showArrow={true}
-                             value={<div onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}  className="text-primary"><span className="mr5">{count}</span></div>}/>
-              <Button type="primary" className="mt15" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
+                            className="hover-default" onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}
+                             value={<div  className="text-primary cursor-pointer pl40"><span className="mr5">{count}</span></div>}/>
+              <Button type="primary" className="m15" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
             </div>
           </div>
         }/>
