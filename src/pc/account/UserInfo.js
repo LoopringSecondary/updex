@@ -52,7 +52,7 @@ class UserInfo extends React.Component {
       }
     }
     return (
-      <div onClick={clickUser} className="cursor-pointer" style={{height:'100%'}}>
+      <div onClick={clickUser} className="cursor-pointer hover-default" style={{height:'100%'}}>
         {
           !address &&
           <div className="pl25 pr25 d-flex align-items-center" style={{height:'100%'}}>

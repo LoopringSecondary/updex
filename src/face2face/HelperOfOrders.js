@@ -144,7 +144,7 @@ class Face2FaceOrders extends React.Component {
                 const orderFm = new OrderFm(item)
                 const tokens = orderFm.getTokens()
                 return (
-                  <tr key={index} className="color-black-2" onClick={() => gotoDetail(item)}>
+                  <tr key={index} className="color-black-2 hover-default" onClick={() => gotoDetail(item)}>
                     <td className="zb-b-b pt10 pb10 pl5 pr5 text-left">
                     </td>
                     <td className="zb-b-b pt10 pb10 pl0 pr5 text-left align-top">

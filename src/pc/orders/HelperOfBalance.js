@@ -77,16 +77,15 @@ const HelperOfBalance = (props)=>{
           </tr>
         </thead>
         <tbody className="">
-            <div className="pb5"></div>
             {
               relatedTokens.map((token,index)=>
-                <tr key={index} onClick={()=>{}}>
-                  <td className="pl15 pr15 pt5 pb5 color-black-2 text-left">
+                <tr key={index} className="hover-default zb-b-b" onClick={()=>{}}>
+                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-left">
                     {token.symbol}
                     <span hidden className="color-black-3 ml5">{token.name}</span>
                   </td>
-                  <td className="pl15 pr15 pt5 pb5 color-black-2 text-left">{toFixed(token.balance, 8)}</td>
-                  <td hidden className="pl15 pr15 pt5 pb5 color-black-2 text-left">
+                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-left">{toFixed(token.balance, 8)}</td>
+                  <td hidden className="pl15 pr15 pt10 pb10 color-black-2 text-left">
                     {
                       token.symbol !== 'ETH' && index === 0 && <Switch size="small" loading={false} />
                     }
@@ -94,17 +93,19 @@ const HelperOfBalance = (props)=>{
                       token.symbol !== 'ETH' && index === 1 && <Switch size="small" loading={false} checked={false} />
                     }
                   </td>
-                  <td hidden className="pl15 pr15 pt5 pb5 color-black-2 text-left">0.00</td>
-                  <td className="pl15 pr15 pt5 pb5 color-black-2 text-right text-nowrap">
-                    {
-                         token.symbol === 'ETH' &&
-                      <Button onClick={gotoConvert.bind(this,{token:"ETH"})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
-                    }
-                    {
-                       token.symbol === 'WETH' &&
-                      <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.convert')}</Button>
-                    }
-                    <Button onClick={gotoReceive.bind(this,{token:token.symbol})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="fs12 d-inline-block border-none bg-primary-light text-primary ml5" size="small">{intl.get('common.receive')}</Button>
+                  <td hidden className="pl15 pr15 pt10 pb10 color-black-2 text-left">0.00</td>
+                  <td className="pl15 pr15 pt10 pb10 color-black-2 text-right text-nowrap align-middel h-100">
+                    <div className="d-flex align-items-center justify-content-end w100 h100">
+                      {
+                           token.symbol === 'ETH' &&
+                        <Button onClick={gotoConvert.bind(this,{token:"ETH"})} type="primary" className="fs12 h-25 lh-25 d-inline-block border-none bg-primary-light text-primary mr10" size="small">{intl.get('common.convert')}</Button>
+                      }
+                      {
+                         token.symbol === 'WETH' &&
+                        <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" className="fs12 h-25 lh-25 d-inline-block border-none bg-primary-light text-primary mr10" size="small">{intl.get('common.convert')}</Button>
+                      }
+                      <Button onClick={gotoReceive.bind(this,{token:token.symbol})} type="primary" className="fs12 h-25 lh-25 d-inline-block border-none bg-primary-light text-primary" size="small">{intl.get('common.receive')}</Button>
+                    </div>
                   </td>
                 </tr>
               )
