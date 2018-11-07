@@ -272,9 +272,9 @@ export default {
     step_sign: 'Sign On Mobile',
     step_result: 'Result',
     qrcode_overdue: 'QRcode is overdue, please place order again',
-    instruction_download: 'Download UpWallet App',
+    instruction_download: 'Download UpWallet iOS App',
     instruction_scan: 'Open your UpWallet, scan the QRcode and submit',
-    instruction_warn: '* The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
+    instruction_warn: 'The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
     waiting_sign: 'Waiting for your operations on UpWallet to sign and submit',
   },
   place_order_by_ledger: {
@@ -607,9 +607,9 @@ export default {
   },
   unlock_by_upwallet: {
     title:'Unlock With UpWallet',
-    instruction_download: 'Download UpWallet',
+    instruction_download: 'Download UP Wallet iOS',
     instruction_scan: 'Open your Upwallet，scan the QRcode and confirm',
-    instruction_warn: '* The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
+    instruction_warn: 'The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
   },
   unlock_by_ledger:{
     title:'Unlock With Ledger',

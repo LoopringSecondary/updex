@@ -280,9 +280,9 @@ export default {
     step_sign: '使用APP签名',
     step_result: '签名结果',
     qrcode_overdue: '二维码已过期，请重新下单生成新二维码',
-    instruction_download: '下载UpWallet App',
+    instruction_download: '下载UpWallet iOS APP ',
     instruction_scan: '打开您的UpWallet，扫描二维码，确认信息完成签名，并提交订单',
-    instruction_warn: '* 二维码有效时间24小时，请尽快完成扫码操作，过期后请重新下单生成二维码',
+    instruction_warn: '二维码有效时间24小时，请尽快完成扫码操作，过期后请重新下单生成二维码',
     waiting_sign: '等待手机对订单进行签名提交',
   },
   place_order_by_ledger: {
@@ -608,7 +608,7 @@ export default {
   },
   unlock_by_upwallet: {
     title:'使用UpWallet扫码登录',
-    instruction_download: '下载UpWallet',
+    instruction_download: '下载 UP Wallet iOS',
     instruction_scan: '打开您的UpWallet，扫描二维码，确认信息',
     instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
   },

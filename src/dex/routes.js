@@ -38,6 +38,7 @@ const Logged = ()=>{
       <div>
         <Switch>
           <Route path={`/dex/markets`} exact component={Markets} />
+          <Route path={`/dex/comingsoon`} exact component={Pages.ComingSoon} />
           <Route path={`/dex/markets/search/:type`} exact component={MarketsSearch} />
           <Route path={`/dex/markets/:market`} component={MarketDetail} />
           <Route path={`/dex/placeOrder`} exact component={PlaceOrder} />
@@ -48,7 +49,7 @@ const Logged = ()=>{
           <Route path={`/dex/todos`} exact component={ListTodos} />
           <Route path={`/dex/messages`} exact component={Pages.Todo} />
           <Route path={`/dex/settings`} exact component={Pages.Todo} />
-          <Redirect from="/dex" to="/dex/placeOrder" />
+          <Redirect from="/dex" to="/dex/comingsoon" />
         </Switch>
         <CommonModals />
         <Orders.Modals />

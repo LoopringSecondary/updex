@@ -20,7 +20,7 @@ const get = ()=>{
         language: userAgent.getLanguage() || 'en-US',
         currency: userAgent.getLanguage() === 'zh-CN' ? 'CNY':"USD",
         timezone: "UTC+00:00",
-        layout: "1",
+        layout: "3",
         changeColor: "red-green+",
         theme: "darkgrey",
       },

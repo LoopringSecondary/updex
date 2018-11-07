@@ -55,7 +55,7 @@ class Face2FacePage extends React.Component {
         <div className="bg-fill" style={{height:'100%'}}>
           <div className="bg-white">
             <NavBar
-              className=""
+              className="bg-white"
               mode="light"
               leftContent={[
                 <span onClick={()=>hideLayer({id:'p2p'})} className="text-primary cursor-pointer" key="1"><WebIcon type="close" theme="" /></span>
