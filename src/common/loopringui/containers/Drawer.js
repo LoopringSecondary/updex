@@ -11,6 +11,7 @@ const DrawerWrapper = (props)=>{
     showMask=true,
     level='all', // all, null, className, id, tagName, array
     mask,closable=false,maskClosable=false,apisOnly=false,wrapClassName="",className="",
+    zIndex=1000,
     style,
     ...rest
   } = props
@@ -28,6 +29,7 @@ const DrawerWrapper = (props)=>{
     visible:module.visible,
     onClose:module.hideLayer && module.hideLayer.bind(this),
     destroyOnClose:true,
+    zIndex,
   }
   const childProps = {...rest}
   return (
