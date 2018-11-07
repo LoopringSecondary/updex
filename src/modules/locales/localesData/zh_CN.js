@@ -616,6 +616,7 @@ export default {
     ledger_connect_failed_step2: "在设备上将该选项设置为'yes': Settings->Browser support",
     ledger_connect_failed_step3: "在设备上选择'Ethereum app'并进入",
     unlock_again_button: '全做完了？尝试解锁',
+    close_helper: '关闭'
   },
   unlock_by_metaMask: {
     title:'使用MetaMask浏览器插件解锁'

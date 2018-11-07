@@ -615,6 +615,7 @@ export default {
     ledger_connect_failed_step2: "Set this to 'yes': Settings->Browser support",
     ledger_connect_failed_step3: "Enter into Ethereum app",
     unlock_again_button: 'All Done? Try to Unlock',
+    close_helper: 'Close'
   },
   unlock_by_metaMask: {
     title:'Unlock With MetaMask Browser Plug-in'
