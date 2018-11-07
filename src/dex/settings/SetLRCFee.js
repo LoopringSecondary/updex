@@ -44,7 +44,7 @@ function Settings(props) {
       </div>
       <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
         <div className="bg-white settings pb10">
-            <List className="mt10 no-border text-left position-relative" >
+            <List className="no-border text-left position-relative" >
               <List.Item className="overflow-visible pt15 pb15" style={{height:'auto'}}>
                 <div className="ml25 mr25">
                   <Slider

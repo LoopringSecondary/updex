@@ -158,7 +158,7 @@ class PlaceOrderSteps extends React.Component {
           ]}
         >
           <div className="color-black-1 fs16">
-            Order Confirm
+          {intl.get('place_order_confirm.page_title')}
           </div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>

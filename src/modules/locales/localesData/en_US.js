@@ -374,6 +374,7 @@ export default {
     tips:"The fee must be larger than a gas of an eth transaction for matching miner."
   },
   place_order_confirm: {
+    page_title:'Order Confirmation',
     qrcode_security: '*For your order\'s security, your QR code will only generated once and not be stored locally. Make sure to save it properly, any one who received your QR code could take your order',
     no_cost_gas: 'The operations of sign and submit order will not cost gas',
     sign_and_submit: 'Sign and Submit'

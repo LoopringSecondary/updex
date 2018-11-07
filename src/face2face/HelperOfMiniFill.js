@@ -58,9 +58,10 @@ class HelperOfMiniFill extends React.Component {
             {/*onChange={countChange}*/}
           {/*/>*/}
           <Input
-                  value={count} onChange={countChange}
-                  addonBefore={<div onClick={minus}><Icon type="minus-square" theme="filled" /></div>}
-                  addonAfter={<div onClick={plus}><Icon type="plus-square" theme="filled" /></div>}
+            className="bg-light-white"
+            value={count} onChange={countChange}
+            addonBefore={<div className="cursor-pointer" onClick={minus}><Icon type="minus-square" theme="filled" /></div>}
+            addonAfter={<div className="cursor-pointer" onClick={plus}><Icon type="plus-square" theme="filled" /></div>}
           />
         </div>
       </div>

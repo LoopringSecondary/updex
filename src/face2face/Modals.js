@@ -33,7 +33,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="face2FaceConfirm">
-        <UiContainers.Drawer id="face2FaceConfirm" position="right" className="h-100" style={{height:'100%',width:"27.5rem",margin:'0 auto'}}>
+        <UiContainers.Drawer id="face2FaceConfirm" position="right" className="h-100" style={{height:'100%',width:"32.5rem",margin:'0 auto'}}>
           <Face2FaceConfirm />
         </UiContainers.Drawer>
       </Containers.Layers>

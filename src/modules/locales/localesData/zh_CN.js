@@ -249,6 +249,7 @@ export default {
     help: '帮助'
   },
   place_order_confirm: {
+    page_title:'订单确认',
     qrcode_security: '*为了您订单的安全，二维码只会生成一次并且不会保存在任何地方。请确认妥善保存二维码，任何收到您二维码的人都有可能吃掉您的订单。',
     no_cost_gas: '签名和下单不会消耗油费',
     sign_and_submit: '签名并下单'

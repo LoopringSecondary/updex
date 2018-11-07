@@ -17,11 +17,11 @@ const OrderMetaItem = (props) => {
   const {label, value,showArrow=false,onClick=()=>{}} = props
   return (
     <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding:'10px 0px'}}>
-      <div className="col">
+      <div className="col-auto">
         <div className="fs13 color-black-2 text-left">{label}</div>
       </div>
-      <div className="col-auto text-right">
-        <div className="fs13 color-black-1 text-wrap text-left">{value}</div>
+      <div className="col text-right">
+        <div className="fs13 color-black-1 text-wrap text-right">{value}</div>
       </div>
       {
         !!showArrow &&
