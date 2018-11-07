@@ -68,31 +68,52 @@ html, body {
     color:#fff !important;
   }
 }
-
-
 .am-tabs-default-bar{
   &:extend(.bg-white);
   // background: transparent !important;
 }
 .zb-b-t {
-    background-position: left top;
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color));
+    border-top: 1px solid @border-color;
 }
 .zb-b-b {
-    background-position: left bottom;
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color));
+    border-bottom: 1px solid @border-color;
 }
 .zb-b-tb {
-    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color)), -webkit-gradient(linear, left top, left bottom, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color));
-    background-position: top, bottom
+    border-top: @border-color 1px solid;
+    border-bottom: @border-color 1px solid;
+    background-image: none
 }
 .zb-b-l {
-    background-position: left top;
-    background-image: -webkit-gradient(linear, right top, left top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color))
+    border-left: 1px solid @border-color;
 }
+
 .zb-b-r {
-    background-position: right top;
-    background-image: -webkit-gradient(linear, left top, right top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color))
+    border-right: 1px solid @border-color;
+}
+.zb-b {
+    border: 1px solid @border-color;
+}
+@media screen and (-webkit-min-device-pixel-ratio: 2) {
+	.zb-b-t {
+	    background-position: left top;
+	    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color));
+	}
+	.zb-b-b {
+	    background-position: left bottom;
+	    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color));
+	}
+	.zb-b-tb {
+	    background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color)), -webkit-gradient(linear, left top, left bottom, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color));
+	    background-position: top, bottom
+	}
+	.zb-b-l {
+	    background-position: left top;
+	    background-image: -webkit-gradient(linear, right top, left top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color))
+	}
+	.zb-b-r {
+	    background-position: right top;
+	    background-image: -webkit-gradient(linear, left top, right top, color-stop(0.5, transparent), color-stop(0.5, @border-color), to(@border-color))
+	}
 }
 .am-tabs-default-bar-tab::after{
 	background: transparent !important;
