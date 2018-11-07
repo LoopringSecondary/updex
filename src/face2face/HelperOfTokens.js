@@ -61,9 +61,9 @@ class HelperOfTokens extends React.Component {
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          <div className="color-black-1">Select Token</div>
+          <div className="color-black-1">{intl.get('token_list.select_token')}</div>
         </NavBar>
-        <SearchBar placeholder="Search" className="selectable" maxLength={8} value={filter} onChange={filterChange}/>
+        <SearchBar placeholder={intl.get('token_list.search_token_holder')} className="selectable" maxLength={8} value={filter} onChange={filterChange}/>
         <div className="divider 1px zb-b-t"></div>
         <div className="no-border">
           <List className="">
