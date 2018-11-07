@@ -129,7 +129,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
           <div className="">
             <span className="fs13 color-black">{tokens.left} / {tokens.right}</span>
           </div>
-          <div className="fs12 lh15">
+          <div className="fs12 lh20">
               <span hidden className="fs12 color-black-4">{intl.get('common.volume')} </span>
               <span className="fs12 color-black-4 text-number">{tickerFm.getVol()}</span>
               <span className="fs12 color-black-4"> {tokens.right}</span>
@@ -137,7 +137,7 @@ export const TickerItem = ({item,actions,key,tickersList,dispatch})=>{
         </div>
         <div className="col text-left pr15 pl5 text-number">
           <div className="fs12 color-black-1">{formatPrice(tokens.left, tokens.right, tickerFm.getLast())}</div>
-          <div className="fs12 color-black-4 lh15"><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
+          <div className="fs12 color-black-4 lh20"><Worth amount={formatPrice(tokens.left, tokens.right, tickerFm.getLast())} symbol={tokens.right}/></div>
         </div>
         <div className="col-auto text-right text-number">
           {

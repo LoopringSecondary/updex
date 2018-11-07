@@ -34,13 +34,13 @@ class Home extends React.Component {
           <div className="col-auto d-flex flex-column mlpanel mtpanel">
             <div className="row no-gutters ml0 mr0" style={{flex:1}}>
               <div className="col-6" style={{height:'100%'}}>
-                <PanelWrapper style={{height:'100%',paddingBottom:'0.7rem',width:'25rem'}} className="">
+                <PanelWrapper style={{height:'100%',width:'25rem'}} className="pb5">
                   <PanelHeader title={intl.get('pc_panels.order_book')}  />
                   <HelperOfDepth />
                 </PanelWrapper>
               </div>
               <div className="col-6" style={{height:'100%'}}>
-                <PanelWrapper style={{height:'100%',paddingBottom:'0.5rem',width:'25rem'}} className="mlpanel">
+                <PanelWrapper style={{height:'100%',width:'25rem'}} className="mlpanel pb5">
                   <PanelHeader title={intl.get('pc_panels.trade_history')} />
                   <ListMarketFills />
                 </PanelWrapper>
