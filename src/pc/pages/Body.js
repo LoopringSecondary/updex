@@ -24,7 +24,7 @@ class Home extends React.Component {
          <Header className="" />
         </div>
         <div className="row no-gutters ml0 mr0" style={{flex:'1'}}>
-          <div className="col-auo d-flex flex-column mpanel mr0 mb0" style={{width:'20vw'}}>
+          <div className="col-auo d-flex flex-column mpanel mr0 mb0" style={{width:'25rem'}}>
             <PanelWrapper className="pb5">
               <PanelHeader title={intl.get('pc_panels.place_order')} />
               <div className="pt5"></div>
@@ -41,7 +41,7 @@ class Home extends React.Component {
               </div>
             </PanelWrapper>
           </div>
-          <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{width:'18vw'}}>
+          <div className="col-auto mpanel mr0 mb0 d-flex flex-column" style={{width:'22.5rem'}}>
             <PanelWrapper style={{flex:'1'}}>
               <PanelHeader title={intl.get('pc_panels.order_book')}  />
               <HelperOfDepth />
@@ -62,7 +62,7 @@ class Home extends React.Component {
             </PanelWrapper>
           </div>
           { collapsed &&
-            <div className="col-auto mpanel mr0 mb0  d-flex flex-column" style={{width:'16vw'}}>
+            <div className="col-auto mpanel mr0 mb0  d-flex flex-column"  style={{width:'20rem'}}>
               <PanelWrapper style={{flex:'1'}}>
                 <PanelHeader title={intl.get('fill_list.trade_history')} />
                 <ListMarketFills />

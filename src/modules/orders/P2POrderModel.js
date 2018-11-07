@@ -128,7 +128,7 @@ export default {
       const {count} = payload
       return {
         ...state,
-        count:count|| state.count
+        count:count
       }
     }
   },
