@@ -29,6 +29,13 @@ function Settings(props) {
         type: 'settings/preferenceChange',
         payload: settings
       })
+      dispatch({
+        type:'sockets/filtersChange',
+        payload:{
+          id:'marketcap',
+          currency
+        }
+      })
     }
   }
   return (
@@ -58,7 +65,7 @@ function Settings(props) {
             </List>
         </div>
       </div>
-      
+
     </div>
   )
 }
