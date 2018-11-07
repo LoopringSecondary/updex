@@ -97,3 +97,26 @@ export function share(content) {
   return signOrder(content)
 
 }
+
+export function scanQRCode() {
+  if (window.Wallet) {
+    return window.Wallet.scanQRCode()
+  }
+  const walletType = storage.wallet.getUnlockedType()
+  switch (walletType) {
+    case 'imtoken':
+      if (window.imToken) {
+        window.Wallet = new Imtoken(window.imToken)
+      }
+      break
+    case 'loopr':
+      window.Wallet = new Loopr()
+      break
+    case 'tpwallet':
+      window.Wallet = new TPWallet()
+      break
+    default :
+      window.Wallet = new Mock()
+  }
+  return scanQRCode()
+}
