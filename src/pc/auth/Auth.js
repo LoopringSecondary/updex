@@ -158,6 +158,8 @@ class Auth extends React.Component {
   }
 
   chooseAddress = (path)=>{
+    this.setState({connectingLedger:true, showLedgerHelper:false})
+    this.props.dispatch({type: 'layers/hideLayer', payload: {id: 'chooseLedgerAddress'}});
     let ledger = null
     connectLedger().then(res => {
       if (!res.error) {
@@ -170,16 +172,17 @@ class Auth extends React.Component {
       if (!resp.error) {
         const {address} = resp.result;
         window.RELAY.account.register(address)
-        // routeActions.gotoPath('/pc/trade/lrc-weth')
         this.props.dispatch({type:'wallet/unlockLedgerWallet',payload:{ledger, dpath:path, address}});
         this.props.dispatch({type: 'layers/hideLayer', payload: {id: 'authOfPC'}})
         this.props.dispatch({type: 'sockets/unlocked'});
+        this.setState({connectingLedger:false})
         Notification.open({type:'success',description:intl.get('notifications.title.unlock_suc')});
       } else {
         throw new Error(resp.error)
       }
     }).catch(e=>{
-      Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
+      this.setState({connectingLedger:false, showLedgerHelper:true})
+      // Notification.open({type: 'error', message: intl.get('notifications.title.unlock_fail'), description: intl.get('notifications.message.ledger_connect_failed')})
     });
   }
 
