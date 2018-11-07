@@ -33,6 +33,7 @@ function SetForm(props) {
       })
       setLocale(language);
       routeActions.gotoPath('/') // temp solutions to fix bug not re-render
+      hideLayer({id:'setLanguage'})
     }
   }
   return (

@@ -36,6 +36,7 @@ function Settings(props) {
           currency
         }
       })
+      hideLayer({id:'setCurrency'})
     }
   }
   return (
