@@ -31,10 +31,15 @@ const PlaceOrderResult = (props) => {
           const orderFm = new OrderFm(order);
           const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
           showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder},data:{tokens:orderFm.getTokens(),orderFm}})
+          dispatch({type:'layers/hideLayer', payload:{id:'p2p'}})
+          dispatch({type:'layers/hideLayer', payload:{id:'face2FaceConfirm'}})
+          dispatch({type:'layers/hideLayer', payload:{id:'helperOfSignStepPC'}})
         }else{
           Toast.fail('This Order is completed, canceled or expired')
         }
       }
+    }).catch(e => {
+      Toast.fail(e)
     })
   }
 
@@ -48,17 +53,16 @@ const PlaceOrderResult = (props) => {
         const order = res.result
         order.originalOrder.authPrivateKey = original.completeOrder.authPrivateKey;
         if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
-          dispatch({
-            type: 'layers/showLayer',
-            payload: {
-              id: 'p2pOrderDetail',
-              order,
-            }
-          })
+          dispatch({type: 'layers/showLayer', payload: {id: 'p2pOrderDetail', order,}})
+          dispatch({type:'layers/hideLayer', payload:{id:'p2p'}})
+          dispatch({type:'layers/hideLayer', payload:{id:'face2FaceConfirm'}})
+          dispatch({type:'layers/hideLayer', payload:{id:'helperOfSignStepPC'}})
         }else{
           Toast.fail('This Order is completed, canceled or expired')
         }
       }
+    }).catch(e => {
+      Toast.fail(e)
     })
   }
 
