@@ -55,7 +55,7 @@ class Face2FacePage extends React.Component {
         <div className="bg-fill" style={{height:'100%'}}>
           <div className="bg-white">
             <NavBar
-              className="zb-b-b"
+              className=""
               mode="light"
               leftContent={[
                 <span onClick={()=>hideLayer({id:'p2p'})} className="text-primary cursor-pointer" key="1"><WebIcon type="close" theme="" /></span>
@@ -68,7 +68,9 @@ class Face2FacePage extends React.Component {
                 {intl.get('p2p_order.order_title')}
               </div>
             </NavBar>
+            <div className="divider 1px zb-b-t"></div>
           </div>
+          
           <div className="bg-white">
             <Face2FaceForm side="sell" showLayer={showLayer} />
           </div>

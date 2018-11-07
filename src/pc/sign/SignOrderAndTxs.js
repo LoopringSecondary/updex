@@ -219,14 +219,12 @@ const PlaceOrderSign = (props) => {
   }
   return (
     <div className="">
-      <div className="bg-white-light p15" style={{minHeight:'25rem',borderRadius:'0rem'}}>
+      <div className="bg-white-light p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>
         <div className="color-black-3 fs14 pb10 zb-b-b">You Need To Do </div>
         {
           unsign && unsign.map((item, index)=><TxHeader key={index} tx={item} index={index} />)
         }
-      </div>
-      <div className="mt20">
-        <Button className="w-100 d-block" size="large" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
+        <Button className="w-100 d-block mt45 mb10" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
       </div>
     </div>
   );
