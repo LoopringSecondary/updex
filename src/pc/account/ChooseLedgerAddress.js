@@ -51,8 +51,6 @@ function ChooseLedgerAddress({dispatch, pageNum, dpath, customPath, addresses,ch
     if(chooseAddress){
       chooseAddress(dpath.concat(`/${index}`))
     }
-    dispatch({type: 'layers/hideLayer', payload: {id: 'chooseLedgerAddress'}});
-    dispatch({type:'determineWallet/reset'})
   };
 
   return (
