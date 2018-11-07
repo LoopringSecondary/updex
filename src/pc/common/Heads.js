@@ -13,7 +13,7 @@ class Heads extends React.Component {
         {
           true && theme === 'purple' &&
           <Helmet>
-             <link rel="stylesheet" type="text/css" href="./themes/theme-purple-110701.css" />
+             <link rel="stylesheet" type="text/css" href="./themes/theme-purple-110702.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}
              {changeColor === 'red+green-' && <body className="red-up-green-down" />}
           </Helmet>
@@ -21,7 +21,7 @@ class Heads extends React.Component {
         {
           true && theme === 'darkgrey' && 
           <Helmet>
-             <link rel="stylesheet" type="text/css" href="./themes/theme-darkgrey-110701.css" />
+             <link rel="stylesheet" type="text/css" href="./themes/theme-darkgrey-110702.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}
              {changeColor === 'red+green-' && <body className="red-up-green-down" />}
           </Helmet>
@@ -29,7 +29,7 @@ class Heads extends React.Component {
         {
           true && theme === 'white' && 
           <Helmet>
-             <link rel="stylesheet" type="text/css" href="./themes/theme-white-110701.css" />
+             <link rel="stylesheet" type="text/css" href="./themes/theme-white-110702.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}
              {changeColor === 'red+green-' && <body className="red-up-green-down" />}
           </Helmet>
@@ -37,7 +37,7 @@ class Heads extends React.Component {
         {
           true && theme === 'blue' && 
           <Helmet>
-             <link rel="stylesheet" type="text/css" href="./themes/theme-blue-110701.css" />
+             <link rel="stylesheet" type="text/css" href="./themes/theme-blue-110702.css" />
              {changeColor === 'red-green+' && <body className="red-down-green-down" />}
              {changeColor === 'red+green-' && <body className="red-up-green-down" />}
           </Helmet>
