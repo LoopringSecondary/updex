@@ -6,7 +6,7 @@ import HelperOfGas from 'mobile/common/HelperOfGas'
 export function HelperOfGasModal(){
   return (
     <Containers.Layers id="helperOfGas">
-      <UiContainers.Drawer id="helperOfGas" position="right" width="480px" style={{height:'100%'}}>
+      <UiContainers.Drawer id="helperOfGas" position="right" width="27.5rem" style={{height:'100%'}}>
         <HelperOfGas />
       </UiContainers.Drawer>
     </Containers.Layers>

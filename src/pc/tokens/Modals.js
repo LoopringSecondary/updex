@@ -10,7 +10,7 @@ function Modals(props) {
   return (
     <div>
       <Containers.Layers id="receiveToken">
-          <UiContianers.Drawer id="receiveToken" position="right" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
+          <UiContianers.Drawer id="receiveToken" position="right" className="h100" style={{width:'27.5rem',margin:'0 auto',height:'100%'}}>
             <Receive/>
           </UiContianers.Drawer>
       </Containers.Layers>
@@ -20,12 +20,12 @@ function Modals(props) {
           </UiContianers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfTokenActions">
-          <UiContianers.Panels id="helperOfTokenActions" position="right"  className="rs h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
+          <UiContianers.Panels id="helperOfTokenActions" position="right"  className="rs h100" style={{width:'27.5rem',margin:'0 auto',height:'100%'}}>
             <HelperOfTokenActions />
           </UiContianers.Panels>
       </Containers.Layers>
       <Containers.Layers id="convertToken" >
-        <UiContianers.Drawer id="convertToken" closable={false} position="right" className="h100" style={{width:'480px',margin:'0 auto',height:'100%'}}>
+        <UiContianers.Drawer id="convertToken" closable={false} position="right" className="h100" style={{width:'27.5rem',margin:'0 auto',height:'100%'}}>
           <Convert />
         </UiContianers.Drawer>
       </Containers.Layers>
