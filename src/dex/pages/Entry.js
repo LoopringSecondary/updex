@@ -7,7 +7,7 @@ import { Icon as WebIcon } from 'antd'
 import UserCenter from '../account/UserCenter'
 import Markets from '../tickers/Markets'
 import PlaceOrder from '../orders/PlaceOrderForm'
-
+import {signTx, signOrder, scanQRCode} from 'common/utils/signUtils'
 
 class Entry extends React.Component {
   constructor(props) {
@@ -17,8 +17,53 @@ class Entry extends React.Component {
     const {match,location} = this.props;
     const {url} = match;
     const {pathname} = location;
-    const scan = ()=>{
 
+    const sign = (data) => {
+      switch(data.type) {
+        case 'order':
+
+          break;
+        case 'cancelOrder':
+
+          break;
+        case 'approve':
+
+          break;
+        case 'approveZero':
+
+          break;
+        case 'convert':
+
+          break;
+        case 'resendTx':
+
+          break;
+        case 'transfer':
+
+          break;
+        default:
+          throw new Error(`Unsupported type:${data.type}`)
+      }
+    }
+
+    const scan = ()=>{
+      scanQRCode().then(qrcode => {
+        const code = JSON.parse(qrcode)
+        switch(code.type) {
+          case 'UUID': // UUID
+            // updateScanLogin(owner, uuid, r, s, v, timstamp)
+            break;
+          case 'sign': // [{type:'', data:''}]
+          case 'cancelOrder': // original order
+          case 'convert': // {tx: '', owner: ''}
+            // getTempStore(hash)
+            break;
+          default:
+            throw new Error(`Unsupported type:${code.type}`)
+        }
+      }).catch(e => {
+        // TODO notify
+      })
     }
     return (
       <div className="d-flex align-items-center justfiy-content-center" style={{height:'100vh'}}>
