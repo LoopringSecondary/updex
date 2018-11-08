@@ -321,12 +321,12 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
   let failed = false
   const warn = new Array(), error = new Array()
   if(balanceS.balance.lt(tradeInfo.amountS)) {
-    error.push({type:"BalanceNotEnough", value:{symbol:tradeInfo.tokenS, balance:cutDecimal(balanceS.balance,6), required:ceilDecimal(tradeInfo.amountS.minus(balanceS.balance),6)}})
+    error.push({type:"BalanceNotEnough", value:{symbol:tradeInfo.tokenS, balance:cutDecimal(balanceS.balance,6), required:ceilDecimal(tradeInfo.amountS,6)}})
     failed = true
   }
   const pendingAllowance = fm.toBig(isApproving(txs, tradeInfo.tokenS) ? isApproving(txs, tradeInfo.tokenS).div('1e'+configSell.digits) : balanceS.allowance);
   if(pendingAllowance.lt(tradeInfo.amountS)) {
-    warn.push({type:"AllowanceNotEnough", value:{symbol:tradeInfo.tokenS, allowance:cutDecimal(pendingAllowance,6), required:ceilDecimal(tradeInfo.amountS.minus(balanceS.allowance),6)}})
+    warn.push({type:"AllowanceNotEnough", value:{symbol:tradeInfo.tokenS, allowance:cutDecimal(pendingAllowance,6), required:ceilDecimal(tradeInfo.amountS,6)}})
     approveCount += 1
     if(pendingAllowance.gt(0)) approveCount += 1
   }
@@ -338,7 +338,7 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
 
   console.log(gas.toNumber())
   if(ethBalance.balance.lt(gas)){
-    error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
+    error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas,6)}})
     failed = true
   }
   if(failed) {
