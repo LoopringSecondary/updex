@@ -17,8 +17,54 @@ class Entry extends React.Component {
     const {match,location} = this.props;
     const {url} = match;
     const {pathname} = location;
-    const scan = ()=>{
 
+    const sign = (data) => {
+      switch(data.type) {
+        case 'order':
+
+          break;
+        case 'cancelOrder':
+
+          break;
+        case 'approve':
+
+          break;
+        case 'approveZero':
+
+          break;
+        case 'convert':
+
+          break;
+        case 'resendTx':
+
+          break;
+        case 'transfer':
+
+          break;
+        default:
+          throw new Error(`Unsupported type:${data.type}`)
+      }
+    }
+
+    const scan = ()=>{
+      const code = {type:'', value:'hash'}
+      // getTempStore(hash)
+      switch(code.type) {
+        case 'UUID': // UUID
+
+          break;
+        case 'sign': // [{type:'', data:''}]
+
+          break;
+        case 'cancelOrder': // original order
+
+          break;
+        case 'convert': // {tx: '', owner: ''}
+
+          break;
+        default:
+          throw new Error(`Unsupported type:${code.type}`)
+      }
     }
     return (
       <div className="d-flex align-items-center justfiy-content-center" style={{height:'100vh'}}>
