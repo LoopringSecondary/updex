@@ -1,12 +1,10 @@
 import React from 'react'
 import {Redirect, Route, Switch } from 'dva/router'
+import {connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
 import { TabBar,Button } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
-import UserCenter from '../account/UserCenter'
-import Markets from '../tickers/Markets'
-import PlaceOrder from '../orders/PlaceOrderForm'
 import {signTx, signOrder, scanQRCode} from 'common/utils/signUtils'
 
 class Entry extends React.Component {
@@ -14,7 +12,7 @@ class Entry extends React.Component {
     super(props);
   }
   render(){
-    const {match,location} = this.props;
+    const {match,location,dispatch} = this.props;
     const {url} = match;
     const {pathname} = location;
 
@@ -65,16 +63,25 @@ class Entry extends React.Component {
         // TODO notify
       })
     }
+    const showLayer = (payload = {}) => {
+      dispatch({
+        type: 'layers/showLayer',
+        payload: {
+          ...payload
+        }
+      })
+    }
     return (
       <div className="d-flex align-items-center justfiy-content-center" style={{height:'100vh'}}>
         <div className="text-center w-100 p15">
           <Button onClick={routeActions.gotoPath.bind(this,'/dex/placeOrder')} className="d-block w-100 mt15" type="primary"> Go To Market Trade </Button>
           <Button onClick={routeActions.gotoPath.bind(this,'/face2face')} className="d-block w-100 mt15" type="primary"> Go To P2P Trade </Button>
           <Button onClick={scan} className="d-block w-100 mt15" type="primary"> Scan Qrcode </Button>
+          <Button onClick={()=>showLayer({id:'signMessages'})} className="d-block w-100 mt15" type="primary"> Show Messages </Button>
         </div>
       </div>
     )
   }
 }
 
-export default Entry
+export default connect()(Entry)
