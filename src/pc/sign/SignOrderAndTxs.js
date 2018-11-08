@@ -205,12 +205,12 @@ const PlaceOrderSign = (props) => {
         <div className="col-auto ">
           {signed[index] &&
           <div className="color-success">
-            {intl.get('place_order_sign.signed')} <Icon className="ml5" type="check-circle"  />
+            <Icon className="mr5" type="check-circle" theme="filled"  />{intl.get('place_order_sign.signed')} 
           </div>
           }
           {!signed[index] &&
           <div className="">
-            <a className="text-primary cursor-pointer" onClick={sign.bind(this, tx, index)}>{intl.get('place_order_sign.unsigned')} <Icon className="" type="right"  /></a>
+            <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={sign.bind(this, tx, index)}>{intl.get('place_order_sign.unsigned')}</Button>
           </div>
           }
         </div>
@@ -224,7 +224,7 @@ const PlaceOrderSign = (props) => {
         {
           unsign && unsign.map((item, index)=><TxHeader key={index} tx={item} index={index} />)
         }
-        <Button className="w-100 d-block mt45 mb10" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
+        <Button className="w-100 d-block mt30 mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
       </div>
     </div>
   );

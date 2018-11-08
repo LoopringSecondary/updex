@@ -155,7 +155,7 @@ class TVChartContainer extends React.PureComponent {
         }
       },
       interval: this.state.resolution,
-      //timeframe: '1M',
+      timeframe: '42D',
       // toolbar_bg: "rgba(0,0,0,0)",
 			container_id: this.state.containerId,
 			library_path: '/charting_library/',
