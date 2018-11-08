@@ -10,7 +10,7 @@ import storage from 'modules/storage'
 import { toHex } from 'LoopringJS/common/formatter'
 
 const SignMessages = (props) => {
-  const {dispatch} = props
+  const {sign, dispatch} = props
   const unsignMessages = [
     {type:'order',token:'LRC'},
     {type:'cancelOrder',token:'LRC'},
@@ -24,7 +24,7 @@ const SignMessages = (props) => {
   }
   const actualSigned = []
   const handelSubmit = ()=>{}
-  const sign = ()=>{}
+  const signMessage = ()=>{}
   const Description = ({tx}) => {
     switch(tx.type) {
       case 'order':
@@ -99,7 +99,7 @@ const SignMessages = (props) => {
 
 function mapToProps(state) {
   return {
-    p2pOrder: state.p2pOrder,
+    sign: state.sign,
     wallet:state.wallet
   }
 }
