@@ -7,7 +7,7 @@ import { TabBar,Button,Modal } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import {signTx, signOrder, scanQRCode,signMessage} from 'common/utils/signUtils'
 import moment from 'moment'
-
+import Notification from 'LoopringUI/components/Notification'
 
 class Entry extends React.Component {
   constructor(props) {
@@ -24,13 +24,21 @@ class Entry extends React.Component {
           return
         }
         const code = JSON.parse(res.result)
-
         switch(code.type) {
-          case 'UUID': // UUID
+          case 'UUID':
             const timestamp = moment().unix().toString();
             signMessage(timestamp).then(res => {
               window.RELAY.account.notifyScanLogin({sign:{...res.result,owner:window.Wallet.address,timestamp},uuid:code.value}).then(resp => {
               if(resp.result){
+                Notification.open({
+                  message: intl.get('notifications.title.auth_suc'),
+                  type: 'success'
+                })
+              }else{
+                Notification.open({
+                  message: res.error.message,
+                  type: 'error'
+                })
               }
               })
             })
