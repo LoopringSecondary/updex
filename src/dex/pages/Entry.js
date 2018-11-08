@@ -20,7 +20,29 @@ class Entry extends React.Component {
 
     const sign = (data) => {
       switch(data.type) {
-        
+        case 'order':
+
+          break;
+        case 'cancelOrder':
+
+          break;
+        case 'approve':
+
+          break;
+        case 'approveZero':
+
+          break;
+        case 'convert':
+
+          break;
+        case 'resendTx':
+
+          break;
+        case 'transfer':
+
+          break;
+        default:
+          throw new Error(`Unsupported type:${data.type}`)
       }
     }
 
@@ -41,7 +63,7 @@ class Entry extends React.Component {
 
           break;
         default:
-          throw new Error(`Unsupported task type:${code.type}`)
+          throw new Error(`Unsupported type:${code.type}`)
       }
     }
     return (
