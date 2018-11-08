@@ -15,24 +15,23 @@ import config from 'common/config'
 import storage from 'modules/storage'
 
 const OrderMetaItem = (props) => {
-  const {label, value, showArrow = false, onClick = () => {}} = props
+  const {label, value,showArrow=false,onClick=()=>{},className=""} = props
   return (
-    <div onClick={onClick} className="row ml0 mr0 zb-b-t no-gutters" style={{padding: '10px 15px'}}>
-      <div className="col">
-        <div className="fs14 color-black-2 lh30 text-left">{label}</div>
+    <div onClick={onClick} className={`row ml0 mr0 pl15 pr15 pt10 pb10 zb-b-b no-gutters ${className}`}>
+      <div className="col-auto">
+        <div className="fs13 color-black-2 text-left">{label}</div>
       </div>
-      <div className="col-auto text-right">
-        <div className="fs14 color-black-1 text-wrap lh30 text-left">{value}</div>
+      <div className="col text-right">
+        <div className="fs13 color-black-1 text-wrap text-right">{value}</div>
       </div>
       {
         !!showArrow &&
         <div className="col-auto text-right">
-          <div className="fs14 text-primary text-wrap lh30 text-left ml5">
-            <Icon type="right"/>
+          <div className="fs13 text-primary text-wrap text-left ml5">
+            <Icon type="right" />
           </div>
         </div>
       }
-
     </div>
   )
 }
@@ -200,8 +199,8 @@ class PlaceOrderSteps extends React.Component {
                   </div>
                 }
                 <OrderMetaItem label={intl.get("common.price")} value={`${priceInput} ${pair}`} />
-                <OrderMetaItem showArrow={true} onClick={()=>showLRCFee()} label={intl.get('common.lrc_fee')} value={<div className="text-primary cursor-pointer">{lrcFeeValue} LRC({settings.trading.lrcFee/10}%)</div>} />
-                <OrderMetaItem showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary cursor-pointer">{validSince.format('YYYY-MM-DD HH:mm')} ~ {validUntil.format('YYYY-MM-DD HH:mm')}</div>}  />
+                <OrderMetaItem className="hover-default" showArrow={true} onClick={()=>showLRCFee()} label={intl.get('common.lrc_fee')} value={<div className="text-primary cursor-pointer">{lrcFeeValue} LRC({settings.trading.lrcFee/10}%)</div>} />
+                <OrderMetaItem className="hover-default" showArrow={true} onClick={()=>showTTL()} label={intl.get('common.ttl')} value={<div className="text-primary cursor-pointer">{validSince.format('YYYY-MM-DD HH:mm')} ~ {validUntil.format('YYYY-MM-DD HH:mm')}</div>}  />
                 <div className="divider 1px zb-b-t"></div>
                 <div className="pt15 pb15 color-black-3 fs12 text-center">
                   <Icon className="mr5" type="exclamation-circle-o" />{intl.get('place_order_confirm.no_cost_gas')}

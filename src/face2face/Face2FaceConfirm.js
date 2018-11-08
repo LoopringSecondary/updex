@@ -164,7 +164,7 @@ function PlaceOrderSteps (props) {
             <div className="pt15 pb15 bg-white">
               <div className="pt15 pb30 row ml0 mr0 no-gutters align-items-center justify-content-center zb-b-b">
                 <div className="col-auto">
-                  <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center circle-40" style={{}}>
+                  <div className="bg-primary color-white d-flex align-items-center justify-content-center circle-40" style={{}}>
                     <i className={`icon-token-${tokenS} fs24`}/>
                   </div>
                 </div>
@@ -172,7 +172,7 @@ function PlaceOrderSteps (props) {
                   <Icon type="swap" className={`text-primary fs20`}/>
                 </div>
                 <div className="col-auto">
-                  <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center  circle-40" style={{}}>
+                  <div className="bg-primary color-white d-flex align-items-center justify-content-center  circle-40" style={{}}>
                     <i className={`icon-token-${tokenB} fs24`}/>
                   </div>
                 </div>

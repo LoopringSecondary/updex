@@ -73,7 +73,7 @@ class Face2FaceForm extends React.Component {
           <div className="row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} className="col center-center cursor-pointer">
               <span hidden className="mr10 text-primary fs14">{p2pOrder.tokenS}</span>
-              <div className="bg-primary-light text-primary circle-40 center-center hover-bg-primary">
+              <div className="bg-primary color-white circle-40 center-center hover-bg-primary">
                 <i className={`icon-token-${p2pOrder.tokenS} fs24`}/>
               </div>
             </div>
@@ -83,7 +83,7 @@ class Face2FaceForm extends React.Component {
               </div>
             </div>
             <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="col center-center cursor-pointer">
-              <div className="bg-primary-light text-primary circle-40 center-center hover-bg-primary">
+              <div className="bg-primary color-white circle-40 center-center hover-bg-primary">
                 <i className={`icon-token-${p2pOrder.tokenB}  fs24`}/>
               </div>
               <span hidden className="ml10 text-primary fs14">{p2pOrder.tokenB}</span>
