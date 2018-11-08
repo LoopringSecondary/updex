@@ -17,8 +17,13 @@ class Entry extends React.Component {
     const {match,location} = this.props;
     const {url} = match;
     const {pathname} = location;
-    const scan = ()=>{
 
+    const sign = (data) => {
+
+    }
+
+    const scan = ()=>{
+      const code = {type:'', data:''}
     }
     return (
       <div className="d-flex align-items-center justfiy-content-center" style={{height:'100vh'}}>
