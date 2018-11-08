@@ -1,17 +1,24 @@
 import config from 'common/config'
 import { toBig } from 'LoopringJS/common/formatter'
-import {Toast} from 'antd-mobile'
 const MODULES = 'sign'
 export default {
   namespace: MODULES,
   state: {
+    task:'', //sign, cancelOrder, convert
     qrcode: {},
-    unsigned:null,
+    unsigned:null, //{type:order, data:{}},{type:approve, data:{}}  type:[order, approve, approveZero, cancelOrder, convert, cancelTx, resendTx, transfer]
     signed:null,
   },
   effects: {
     * init ({payload = {}}, {put}) {
       //yield put({ type: 'tokenChange',payload});
+    },
+    * unsigned({ payload={} }, { put }) {
+      const {task, unsigned} = payload
+      yield put({ type: 'taskChange',payload:{task}});
+      yield put({ type: 'unsignedChange',payload:{unsigned}})
+      yield put({ type: 'signedChange',payload:{signed:[]}})
+      yield put({ type: 'qrcodeChange',payload:{qrcode:''}});
     },
   },
   reducers: {
@@ -21,6 +28,14 @@ export default {
         qrcode: {},
         unsigned:null,
         signed:null,
+      }
+    },
+    taskChange(state, action) {
+      const {payload} = action
+      let {task} = payload
+      return {
+        ...state,
+        task
       }
     },
     qrcodeChange (state, action) {

@@ -17,7 +17,11 @@ class Entry extends React.Component {
     const {pathname} = location;
 
     const scan = ()=>{
-      dispatch({type:'sign/signedChange',payload:{signed}})
+      // TODO test
+      const unsigned = {}
+      dispatch({type:'sign/unsigned',payload:{unsigned}})
+
+
       scanQRCode().then(qrcode => {
         const code = JSON.parse(qrcode)
         switch(code.type) {
@@ -28,6 +32,9 @@ class Entry extends React.Component {
           case 'cancelOrder': // original order
           case 'convert': // {tx: '', owner: ''}
             // getTempStore(hash)
+            break;
+          case 'P2P':
+            // getOrderByHash
             break;
           default:
             throw new Error(`Unsupported type:${code.type}`)

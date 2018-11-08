@@ -391,11 +391,11 @@ export async function generateSignData({tradeInfo, order, completeOrder, address
       const tokenConfig = config.getTokenBySymbol(item.value.symbol);
       if (item.value.allowance > 0) {
         const cancel = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:'0x0', nonce:fm.toHex(nonce)})
-        unsigned.push({type: 'tx', data:cancel, description: `Cancel ${item.value.symbol} allowance`, address})
+        unsigned.push({type: 'approveZero', data:cancel, description: `Cancel ${item.value.symbol} allowance`, address})
         nonce = nonce + 1;
       }
       const approve = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:'0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', nonce:fm.toHex(nonce)})
-      unsigned.push({type: 'tx', data:approve, description: `Approve ${item.value.symbol} allowance`, address})
+      unsigned.push({type: 'approve', data:approve, description: `Approve ${item.value.symbol} allowance`, address})
       nonce = nonce + 1;
     });
   }
