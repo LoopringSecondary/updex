@@ -19,11 +19,30 @@ class Entry extends React.Component {
     const {pathname} = location;
 
     const sign = (data) => {
-
+      switch(data.type) {
+        
+      }
     }
 
     const scan = ()=>{
-      const code = {type:'', data:''}
+      const code = {type:'', value:'hash'}
+      // getTempStore(hash)
+      switch(code.type) {
+        case 'UUID': // UUID
+
+          break;
+        case 'sign': // [{type:'', data:''}]
+
+          break;
+        case 'cancelOrder': // original order
+
+          break;
+        case 'convert': // {tx: '', owner: ''}
+
+          break;
+        default:
+          throw new Error(`Unsupported task type:${code.type}`)
+      }
     }
     return (
       <div className="d-flex align-items-center justfiy-content-center" style={{height:'100vh'}}>
