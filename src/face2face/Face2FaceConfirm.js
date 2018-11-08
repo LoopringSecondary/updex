@@ -41,7 +41,7 @@ const OrderMetaItem = (props) => {
 }
 
 function PlaceOrderSteps (props) {
-  const {p2pOrder, balance, settings, marketcap, gas,pendingTx, dispatch} = props
+  const {p2pOrder, balance, settings, marketcap, gas,pendingTx, dispatch,socket} = props
   const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
   let {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
   amountS =  toBig(amountS)
@@ -67,6 +67,10 @@ function PlaceOrderSteps (props) {
     })
   }
   const next = async (page) => {
+    if(!socket){
+      Notification.open({description:intl.get('notifications.message.wait_for_load_data'),type: 'error'});
+      return
+    }
     const tradeInfo = {}
     tradeInfo.amountB = amountB
     tradeInfo.amountS = amountS
@@ -94,8 +98,8 @@ function PlaceOrderSteps (props) {
       dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
       return
     }
-    if (tradeInfo.error) {
-      tradeInfo.error.map(item => {
+    if (tradeInfo.error && tradeInfo.error[0]) {
+      const item = tradeInfo.error[0]
         if (item.value.symbol === 'ETH') {
           Notification.open({
             message: intl.get('notifications.title.place_order_failed'),
@@ -129,7 +133,6 @@ function PlaceOrderSteps (props) {
             )
           })
         }
-      })
       dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
       return
     }
@@ -346,6 +349,7 @@ function mapToProps (state) {
     settings: state.settings,
     pendingTx: state.pendingTx,
     gas: state.gas,
+    socket:state.sockets.socket
   }
 }
 

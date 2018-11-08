@@ -76,9 +76,8 @@ class TakerConfirm extends React.Component {
     }
 
     const submitRing = async () => {
-
       if(!socket){
-        Notification.open({description:'Please wait for loading data',type: 'error'});
+        Notification.open({description:intl.get('notifications.message.wait_for_load_data'),type: 'error'});
         return
       }
       const address = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
@@ -98,7 +97,7 @@ class TakerConfirm extends React.Component {
         return
       }
 
-      if (tradeInfo.error) {
+      if (tradeInfo.error && tradeInfo.error[0]) {
           const item =  tradeInfo.error[0]
           if(item.value.symbol.toLowerCase() === 'eth'){
             Notification.open({

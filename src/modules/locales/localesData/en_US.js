@@ -117,6 +117,7 @@ const notifications = {
     submit_ring_fail:'Submit ring failed'
   },
   message: {
+    wait_for_load_data:"Please wait for loading data",
     place_order_price_high:"Your price is 5% higher than the market price.",
     place_order_price_low:"Your price is 5% lower than the market price.",
     wallet_locked: 'Your wallet seems locked yet, please unlock first',

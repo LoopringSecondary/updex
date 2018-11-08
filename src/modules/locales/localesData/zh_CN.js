@@ -119,6 +119,7 @@ const notifications = {
     submit_ring_fail:'提交环路失败'
   },
   message: {
+    wait_for_load_data:"请等待数据加载完毕",
     place_order_price_high:"您当前的价格高于市场价5%",
     place_order_price_low:"您当前的价格低于市场价5%",
     wallet_locked: '您的钱包还未解锁，请先解锁后再继续操作',
