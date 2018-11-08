@@ -58,6 +58,22 @@ class DexHomeLayout extends React.Component {
           >
             <TabBar.Item
               title={
+                <span className={isActive('/dex/home') ? 'text-primary' : ''}>Home{intl.get('common.home')}</span>
+              }
+              key="home"
+              icon={
+                <i className="icon-home color-primary-light-bak"></i>
+              }
+              selectedIcon={
+                <i className="icon-home text-primary"></i>
+              }
+              selected={isActive('/dex/home')}
+              onPress={() => {
+                changeTab('home')
+              }}
+            />
+            <TabBar.Item
+              title={
                 <span className={isActive('/dex/markets') ? 'text-primary' : ''}>{intl.get('common.markets')}</span>
               }
               key="markets"
