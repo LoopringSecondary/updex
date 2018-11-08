@@ -3,7 +3,7 @@ import {Redirect, Route, Switch } from 'dva/router'
 import {connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
-import { TabBar,Button } from 'antd-mobile'
+import { TabBar,Button,Modal } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import {signTx, signOrder, scanQRCode,signMessage} from 'common/utils/signUtils'
 import moment from 'moment'
@@ -24,6 +24,7 @@ class Entry extends React.Component {
           return
         }
         const code = JSON.parse(res.result)
+
         switch(code.type) {
           case 'UUID': // UUID
             const timestamp = moment().unix().toString();
@@ -43,8 +44,8 @@ class Entry extends React.Component {
             dispatch({type:'sign/unsigned',payload:{unsigned}})
             showLayer({id:'signMessages'})
             break;
-          case 'P2P': // {"type":"P2P","value":{"auth":"4f66f318a5bccf372309abcfdef7166e7a35ea61627f5f80454f8d1a563a7f52","hash":"0x0d0ab8aa96b7637e0caede417be2c1dcdc328545086165a61daa9aebe98e8080","count":1}}
-            // getOrderByHash
+          case 'P2P':
+           window.handleP2POrder(res);
             break;
           default:
             throw new Error(`Unsupported type:${code.type}`)
