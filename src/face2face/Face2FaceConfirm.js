@@ -200,10 +200,14 @@ function PlaceOrderSteps (props) {
           hash: signedOrder.orderHash,
           count
         })
-        const qrcode = JSON.stringify({
+        let qrcode = JSON.stringify({
           type: 'P2P',
           value: {auth: unsignedOrder.completeOrder.authPrivateKey, hash: signedOrder.orderHash, count}
         })
+
+        if(storage.wallet.getUnlockedType() === 'imtoken'){
+          qrcode = qrcode.replace(/"/g,"\\\"");
+        }
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})
       }
