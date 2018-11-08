@@ -3,13 +3,14 @@ import {Redirect, Route, Switch } from 'dva/router'
 import {connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
-import { TabBar,Button,Modal } from 'antd-mobile'
+import {TabBar, Button, Modal, Toast} from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import {signTx, signOrder, scanQRCode,signMessage} from 'common/utils/signUtils'
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
 
 class Entry extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -43,23 +44,41 @@ class Entry extends React.Component {
               })
             })
             break;
-          case 'sign': // [{type:'', data:''}]
-          case 'cancelOrder': // original order
-          case 'convert': // {tx: '', owner: ''}
-            // getTempStore(code.hash)
-            //TODO TEST
-            const unsigned = [{"type":"order","data":{"owner":"0xebA7136A36DA0F5e16c6bDBC739c716Bb5B65a00","delegateAddress":"0x17233e07c67d086464fD408148c3ABB56245FA64","protocol":"0x8d8812b72d1e4ffCeC158D25f56748b7d67c1e78","tokenB":"0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2","tokenS":"0xef68e7c694f40c8202821edf525de3782458639f","amountB":"0x10a741a462780000","amountS":"0xa688906bd8b00000","lrcFee":"0x41c7dce2eb5a0000","validSince":"0x5be3cea8","validUntil":"0x5be52028","marginSplitPercentage":50,"buyNoMoreThanAmountB":false,"walletAddress":"0x56447c02767ba621f103c0f3dbf564dbcacf284b","orderType":"market_order","authAddr":"0x26b8ba9b1a1c31bd62415ac0e830742f2b003a18","authPrivateKey":"a92f9b5153450426399f2287cec258a9994c3669d30fe35cbd6f240fd13f763d"}}]
-            dispatch({type:'sign/unsigned',payload:{unsigned}})
-            showLayer({id:'signMessages'})
+          case 'sign':
+          case 'cancelOrder':
+          case 'convert':
+            window.RELAY.order.getTempStore({key:code.value}).then(resp => {
+              if(resp.error) {
+                throw `Unsupported type:${code.type}`
+              }
+              let unsigned = null
+              switch(code.type) {
+                case 'sign': // [{type:'', data:''}]
+                  unsigned = JSON.parse(resp.result)
+                  break;
+                case 'cancelOrder': // original order
+                  unsigned = [{type:'cancelOrder', data:JSON.parse(resp.result)}]
+                  break;
+                case 'convert': // {tx: '', owner: ''}
+                  unsigned = [{type:'convert', data:JSON.parse(resp.result).tx}]
+                  break;
+                default:
+                  throw `Unsupported type:${code.type}`
+              }
+              dispatch({type:'sign/unsigned',payload:{unsigned}})
+              showLayer({id:'signMessages'})
+            }).catch(e=>{
+
+            })
             break;
           case 'P2P':
            window.handleP2POrder(res);
             break;
           default:
-            throw new Error(`Unsupported type:${code.type}`)
+            throw `Unsupported type:${code.type}`
         }
       }).catch(e => {
-        // TODO notify
+        // Toast.fail(e, 10, null, false)
       })
     }
     const showLayer = (payload = {}) => {
