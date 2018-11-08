@@ -5,7 +5,9 @@ import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
 import { TabBar,Button } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
-import {signTx, signOrder, scanQRCode} from 'common/utils/signUtils'
+import {signTx, signOrder, scanQRCode,signMessage} from 'common/utils/signUtils'
+import moment from 'moment'
+
 
 class Entry extends React.Component {
   constructor(props) {
@@ -17,11 +19,20 @@ class Entry extends React.Component {
     const {pathname} = location;
 
     const scan = ()=>{
-      scanQRCode().then(qrcode => {
-        const code = JSON.parse(qrcode)
+      scanQRCode().then(res => {
+        if(!res.result){
+          return
+        }
+        const code = JSON.parse(res.result)
         switch(code.type) {
           case 'UUID': // UUID
-            // updateScanLogin(owner, uuid, r, s, v, timstamp)
+            const timestamp = moment().unix().toString();
+            signMessage(timestamp).then(res => {
+              window.RELAY.account.notifyScanLogin({sign:{...res.result,owner:window.Wallet.address,timestamp},uuid:code.value}).then(resp => {
+              if(resp.result){
+              }
+              })
+            })
             break;
           case 'sign': // [{type:'', data:''}]
           case 'cancelOrder': // original order
