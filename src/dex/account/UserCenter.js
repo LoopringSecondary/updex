@@ -49,7 +49,7 @@ class UserCenter extends React.Component {
         <div className="0">
           <div className="bg-white position-fixed w-100" style={{zIndex:'1000'}}>
             <NavBar
-                className="zb-b-b" 
+                className="" 
                 mode="light"
                 onLeftClick={showNotification}
                 leftContent={[
@@ -63,6 +63,7 @@ class UserCenter extends React.Component {
                 {intl.get('usercenter.page_title')}
               </div>
             </NavBar>
+            <div className="divider 1px zb-b-b"></div>
           </div>
           <div className="pt40 bg-white"></div>
           <div className="bg-white pt30 pb30 text-center">
