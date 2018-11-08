@@ -12,11 +12,11 @@ import {signTx, signMessage, signOrder} from 'common/utils/signUtils'
 
 const SignMessages = (props) => {
   const {sign, wallet, dispatch} = props
-  const {unsign, signed} = sign
+  const {unsigned, signed} = sign
   let actualSigned = signed && wallet ? signed.filter(item => item !== undefined && item !== null) : []
-  let submitDatas = signed && unsign.length === actualSigned.length ? (
+  let submitDatas = signed && unsigned.length === actualSigned.length ? (
     signed.map((item, index) => {
-      return {type:item.type, signed: item, unsigned:unsign[index], index}
+      return {type:item.type, signed: item, unsigned:unsigned[index], index}
     })
   ) : new Array()
 
@@ -81,7 +81,7 @@ const SignMessages = (props) => {
       <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
         <div className="col text-left">
           <div className="color-black-1">
-            {index+1}.&nbsp;&nbsp;<Description tx={tx}/> hahah
+            {index+1}.&nbsp;&nbsp;<Description tx={tx}/>
           </div>
         </div>
         <div className="col-auto ">
@@ -107,6 +107,7 @@ const SignMessages = (props) => {
       }
     })
   }
+
   return (
     <div className="bg-fill">
       <NavBar
@@ -123,9 +124,9 @@ const SignMessages = (props) => {
       <div className="divider 1px zb-b-b"></div>
       <div className="bg-white p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>
         {
-          unsign && unsign.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
+          unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
         }
-        <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
+        <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsigned || unsigned.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
       </div>
     </div>
   );
