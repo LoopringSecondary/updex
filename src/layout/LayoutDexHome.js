@@ -22,32 +22,6 @@ class DexHomeLayout extends React.Component {
     const isActive = (path) => {
       return pathname.indexOf(path) > -1
     }
-    let todos = 0
-    const lrcFee  = allocates['frozenLrcFee'] || 0 ;
-    const symbols = Object.keys(allocates)
-    if(balance.items.length !== 0){
-      symbols.forEach((symbol, index) => {
-        if(symbol.toLocaleLowerCase() !== "frozenlrcfee"){
-          const value = allocates[symbol]
-          console.log(allocates)
-          const assets = getBalanceBySymbol({balances: balance.items, symbol: symbol})
-          let selling = toBig(value)
-          if (symbol.toUpperCase() === 'LRC') {
-            selling = selling.plus(toBig(lrcFee))
-          }
-          if (selling.gt(assets.balance)) {
-            todos = todos + 1
-          }
-          let allowance = assets.allowance
-          if (selling.gt(allowance)) {
-            todos = todos + 1
-          }
-        }
-      })
-    }
-
-    todos = todos + txs.filter(tx => tx.type.toLowerCase() === 'convert_income').length
-
     return (
       <div style={{}}>
         {this.props.children}
@@ -97,21 +71,6 @@ class DexHomeLayout extends React.Component {
               selected={isActive('/dex/placeOrder')}
               onPress={() => {
                 changeTab('placeOrder')
-              }}
-            />
-            <TabBar.Item
-              badge={todos}
-              icon={<i className="icon-bell color-primary-light-bak" style={{position: 'relative', top: '2px'}}/>}
-              selectedIcon={<i className="icon-bell text-primary" style={{position: 'relative', top: '2px'}}/>}
-              title={<span className={isActive('/dex/notifications') ? 'text-primary' : ''}
-                           style={{position: 'relative', top: '0px'}}>
-                            {false && intl.get('todos.tab_title')}
-                            {intl.get('todo_list.todo_list_title')}
-                           </span>}
-              key="Notifications"
-              selected={isActive('/dex/notifications')}
-              onPress={() => {
-                changeTab('notifications')
               }}
             />
             <TabBar.Item
