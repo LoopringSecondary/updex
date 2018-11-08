@@ -3,11 +3,14 @@ import {Redirect, Route, Switch } from 'dva/router'
 import {connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
-import { TabBar,Button } from 'antd-mobile'
+import {TabBar, Button, Modal, Toast} from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
-import {signTx, signOrder, scanQRCode} from 'common/utils/signUtils'
+import {signTx, signOrder, scanQRCode,signMessage} from 'common/utils/signUtils'
+import moment from 'moment'
+import Notification from 'LoopringUI/components/Notification'
 
 class Entry extends React.Component {
+
   constructor(props) {
     super(props);
   }
@@ -17,30 +20,65 @@ class Entry extends React.Component {
     const {pathname} = location;
 
     const scan = ()=>{
-      // TODO test
-      const unsigned = {}
-      dispatch({type:'sign/unsigned',payload:{unsigned}})
-
-
-      scanQRCode().then(qrcode => {
-        const code = JSON.parse(qrcode)
+      scanQRCode().then(res => {
+        if(!res.result){
+          return
+        }
+        const code = JSON.parse(res.result)
         switch(code.type) {
-          case 'UUID': // UUID
-            // updateScanLogin(owner, uuid, r, s, v, timstamp)
+          case 'UUID':
+            const timestamp = moment().unix().toString();
+            signMessage(timestamp).then(res => {
+              window.RELAY.account.notifyScanLogin({sign:{...res.result,owner:window.Wallet.address,timestamp},uuid:code.value}).then(resp => {
+              if(resp.result){
+                Notification.open({
+                  message: intl.get('notifications.title.auth_suc'),
+                  type: 'success'
+                })
+              }else{
+                Notification.open({
+                  message: res.error.message,
+                  type: 'error'
+                })
+              }
+              })
+            })
             break;
-          case 'sign': // [{type:'', data:''}]
-          case 'cancelOrder': // original order
-          case 'convert': // {tx: '', owner: ''}
-            // getTempStore(hash)
+          case 'sign':
+          case 'cancelOrder':
+          case 'convert':
+            window.RELAY.order.getTempStore({key:code.value}).then(resp => {
+              if(resp.error) {
+                throw `Unsupported type:${code.type}`
+              }
+              let unsigned = null
+              switch(code.type) {
+                case 'sign': // [{type:'', data:''}]
+                  unsigned = JSON.parse(resp.result)
+                  break;
+                case 'cancelOrder': // original order
+                  unsigned = [{type:'cancelOrder', data:JSON.parse(resp.result)}]
+                  break;
+                case 'convert': // {tx: '', owner: ''}
+                  unsigned = [{type:'convert', data:JSON.parse(resp.result).tx}]
+                  break;
+                default:
+                  throw `Unsupported type:${code.type}`
+              }
+              dispatch({type:'sign/unsigned',payload:{unsigned}})
+              showLayer({id:'signMessages'})
+            }).catch(e=>{
+
+            })
             break;
           case 'P2P':
-            // getOrderByHash
+           window.handleP2POrder(res);
             break;
           default:
-            throw new Error(`Unsupported type:${code.type}`)
+            throw `Unsupported type:${code.type}`
         }
       }).catch(e => {
-        // TODO notify
+        // Toast.fail(e, 10, null, false)
       })
     }
     const showLayer = (payload = {}) => {

@@ -4,18 +4,16 @@ const MODULES = 'sign'
 export default {
   namespace: MODULES,
   state: {
-    task:'', //sign, cancelOrder, convert
     qrcode: {},
-    unsigned:null, //{type:order, data:{}},{type:approve, data:{}}  type:[order, approve, approveZero, cancelOrder, convert, cancelTx, resendTx, transfer]
-    signed:null,
+    unsigned:[], //{type:order, data:{}},{type:approve, data:{}}  type:[order, approve, approveZero, cancelOrder, convert, cancelTx, resendTx, transfer]
+    signed:[],
   },
   effects: {
     * init ({payload = {}}, {put}) {
       //yield put({ type: 'tokenChange',payload});
     },
     * unsigned({ payload={} }, { put }) {
-      const {task, unsigned} = payload
-      yield put({ type: 'taskChange',payload:{task}});
+      const {unsigned} = payload
       yield put({ type: 'unsignedChange',payload:{unsigned}})
       yield put({ type: 'signedChange',payload:{signed:[]}})
       yield put({ type: 'qrcodeChange',payload:{qrcode:''}});
@@ -26,16 +24,8 @@ export default {
       return {
         ...state,
         qrcode: {},
-        unsigned:null,
-        signed:null,
-      }
-    },
-    taskChange(state, action) {
-      const {payload} = action
-      let {task} = payload
-      return {
-        ...state,
-        task
+        unsigned:[],
+        signed:[],
       }
     },
     qrcodeChange (state, action) {
