@@ -304,7 +304,7 @@ class Auth extends React.Component {
             true &&
             <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
-                <img className="h-30 circle" src={require('../../assets/images/imtoken.png')} alt=""/>
+                <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
               </div>
               <div className="col text-left">
                 <div className="fs16 color-black-1 text-left">imToken</div>
@@ -399,13 +399,13 @@ class Auth extends React.Component {
           </Spin>
           {
             placeOrderSteps.step === 0 &&
-            <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55"
+            <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-white-light hover-bg-primary h-55"
                 pt5 pb5  style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
-                <i className="icon-eye color-black-1 fs22"></i>
+                <i className="icon-eye color-black-2 fs22"></i>
               </div>
               <div className="col text-left">
-                <div className="fs16 color-black-1 text-left">{intl.get('unlock_by_address.tap')}</div>
+                <div className="fs16 color-black-2 text-left">{intl.get('unlock_by_address.tap')}</div>
               </div>
               <div className="col-auto text-right">
                 <div className="fs14 text-wrap text-left">

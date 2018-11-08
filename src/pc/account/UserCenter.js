@@ -41,13 +41,14 @@ class UserCenter extends React.Component {
                   <WebIcon type="close" className="fs14 color-black-1 text-primary cursor-pointer" />
                 ]}
                 rightContent={[
-                  <WebIcon type="poweroff" onClick={() => logout()} className="fs14 text-primary cursor-pointer" />
+                  <WebIcon type="poweroff" className="fs14 circle-30 center-center bg-white-light text-primary hover-bg-primary cursor-pointer color-white" onClick={() => logout()} />
                 ]}
             >
               <div className="text-center color-black">
                 {intl.get('usercenter.page_title')}
               </div>
             </NavBar>
+            <div className="1px divider zb-b-b"></div>
           </div>
           <div className="pt40 bg-white"></div>
           <div className="bg-white pt50 pb50 text-center">
