@@ -328,7 +328,21 @@ export default {
   },
   sign: {
     not_signed: "You may have some items not signed",
-    to_sign: "To Sign"
+    to_sign: "To Sign",
+    signed_failed: 'Signed Failed',
+    type_sign_order: 'Sign Original Order',
+    type_cancel_allowance: 'Cancel {token} approval',
+    type_approve: '{token} approval',
+    type_cancel_order: 'Sign Cancel Order',
+    type_convert: 'Convert WETH',
+    submit_success: 'Submit Order Successfully',
+    submit_failed: 'Submit Order Failed',
+    cancel_success: 'Cancel Order Successfully',
+    cancel_failed: 'Cancel Order Failed',
+    convert_success: 'Convert Successfully',
+    convert_failed: 'Convert Failed',
+    p2p_submit_success: 'Generate P2P Order Successfully',
+    p2p_submit_failed: 'Generate P2P Order Failed'
   },
   // -----------
   // transaction

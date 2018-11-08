@@ -1,6 +1,6 @@
 import React from 'react';
 import {Collapse, Form, Icon, Input} from 'antd'
-import {Button,NavBar} from 'antd-mobile'
+import {Button, NavBar, Toast} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import Notification from 'LoopringUI/components/Notification'
@@ -11,16 +11,14 @@ import { toHex } from 'LoopringJS/common/formatter'
 import {signTx, signMessage, signOrder} from 'common/utils/signUtils'
 
 const SignMessages = (props) => {
-  const {sign, wallet, dispatch} = props
-  const {unsign, signed} = sign
-  let actualSigned = signed && wallet ? signed.filter(item => item !== undefined && item !== null) : []
-  let submitDatas = signed && unsign.length === actualSigned.length ? (
+  const {sign, dispatch} = props
+  const {unsigned, signed} = sign
+  let actualSigned = signed ? signed.filter(item => item !== undefined && item !== null) : []
+  let submitDatas = signed && unsigned.length === actualSigned.length ? (
     signed.map((item, index) => {
-      return {type:item.type, signed: item, unsigned:unsign[index], index}
+      return {type:item.type, signed: item, unsigned:unsigned[index], index}
     })
   ) : new Array()
-
-  const handelSubmit = ()=>{}
 
   async function signMessage(item, index, e) {
     e.preventDefault()
@@ -30,11 +28,17 @@ const SignMessages = (props) => {
       switch(item.type) {
         case 'order':
           signResult = await signOrder(item.data)
+          if(signResult.error) {
+            throw signResult.error.message
+          }
           signResult.powNonce = 100;
           break;
         case 'cancelOrder':
           const timestamp = item.data.timestamp
           const cancelOrder = await signMessage(timestamp)
+          if(cancelOrder.error) {
+            throw cancelOrder.error.message
+          }
           signResult = {sign:{...cancelOrder, owner:window.Wallet.address, timestamp}, ...item.data};
           break;
         case 'approve':
@@ -43,6 +47,9 @@ const SignMessages = (props) => {
         case 'resendTx':
         case 'transfer':
           signResult = await signTx(item.data)
+          if(signResult.error) {
+            throw signResult.error.message
+          }
           break;
         default:
           throw new Error(`Unsupported sign type:${item.type}`)
@@ -50,13 +57,72 @@ const SignMessages = (props) => {
       signed[index] = {type: item.type, data:signResult};
       dispatch({type:'sign/signedChange',payload:{signed}})
     } catch(e) {
-      console.error(e)
-      Notification.open({
-        message: intl.get('sign.signed_failed'),
-        type: "error",
-        description: e.message
-      });
+      Toast.success(e, 10, null, false)
     }
+  }
+
+  function UserError(message) {
+    this.message = message;
+  }
+
+  async function handelSubmit() {
+    if(submitDatas.length === 0) {
+      Notification.open({
+        message: intl.get('notifications.title.place_order_failed'),
+        type: "error",
+        description: intl.get('notifications.message.some_items_not_signed')
+      });
+      return
+    }
+    eachLimit(submitDatas, 1, async function (item, callback) {
+      const signedItem = item.signed
+      const unsignedItem = item.unsigned
+      // order, approve, cancelOrder, convert, cancelTx, resendTx, transfer
+      switch(item.type) {
+        case 'order':
+          const orderRes = await window.RELAY.order.placeOrder(signedItem.data)
+          if (orderRes.error) {
+            callback(new UserError(orderRes.error.message))
+          } else {
+            signed[item.index].orderHash = orderRes.result
+            callback()
+          }
+          break;
+        case 'cancelOrder':
+          const cancelRes = await window.RELAY.order.cancelOrder(signedItem.data)
+          if (!cancelRes.error) {
+            callback()
+          } else {
+            callback(new UserError(cancelRes.error.message))
+          }
+          break;
+        case 'approve':
+        case 'approveZero':
+        case 'convert':
+        case 'resendTx':
+        case 'transfer':
+          const txRes = await window.ETH.sendRawTransaction(signedItem.data)
+          // console.log('...tx:', response, signedItem)
+          if (txRes.error) {
+            callback(new UserError(txRes.error.message))
+          } else {
+            signed[item.index].txHash = txRes.result
+            window.RELAY.account.notifyTransactionSubmitted({txHash: txRes.result, rawTx:unsignedItem.data, from: window.Wallet.address});
+            callback()
+          }
+          break;
+        default:
+          throw new Error(`Unsupported sign type:${item.type}`)
+      }
+    }, function (error) {
+      if(error){
+        Toast.fail(error.message, 3, null, false)
+      } else {
+        Toast.success('Success', 3, null, false)
+        dispatch({type: 'layers/hideLayer', payload: {id:'signMessages'}})
+        //TODO notify
+      }
+    });
   }
 
   const Description = ({tx}) => {
@@ -81,7 +147,7 @@ const SignMessages = (props) => {
       <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
         <div className="col text-left">
           <div className="color-black-1">
-            {index+1}.&nbsp;&nbsp;<Description tx={tx}/> hahah
+            {index+1}.&nbsp;&nbsp;<Description tx={tx}/>
           </div>
         </div>
         <div className="col-auto ">
@@ -107,6 +173,7 @@ const SignMessages = (props) => {
       }
     })
   }
+
   return (
     <div className="bg-fill">
       <NavBar
@@ -123,9 +190,9 @@ const SignMessages = (props) => {
       <div className="divider 1px zb-b-b"></div>
       <div className="bg-white p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>
         {
-          unsign && unsign.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
+          unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
         }
-        <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsign || unsign.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
+        <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsigned || unsigned.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
       </div>
     </div>
   );
@@ -134,7 +201,6 @@ const SignMessages = (props) => {
 function mapToProps(state) {
   return {
     sign: state.sign,
-    wallet:state.wallet
   }
 }
 

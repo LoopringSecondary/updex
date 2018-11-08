@@ -330,7 +330,21 @@ no_open_orders: '{market}暂无有效订单',
   },
   sign: {
     not_signed: '您还未完成签名',
-    to_sign: '去签名'
+    to_sign: '去签名',
+    signed_failed: '签名失败',
+    type_sign_order: '签名原始订单',
+    type_cancel_allowance: '取消{token}授权',
+    type_approve: '{token}授权',
+    type_cancel_order: '签名取消订单',
+    type_convert: '转换WETH',
+    submit_success: '订单提交成功！',
+    submit_failed: '订单提交失败',
+    cancel_success: '订单取消成功',
+    cancel_failed: '订单取消失败',
+    convert_success: '转换成功',
+    convert_failed: '转换失败',
+    p2p_submit_success: 'P2P订单生成成功',
+    p2p_submit_failed: 'P2P订单生成失败'
   },
   // -----------
   // transaction
