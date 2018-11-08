@@ -41,7 +41,7 @@ class UserCenter extends React.Component {
                   <WebIcon type="close" className="fs14 color-black-1 text-primary cursor-pointer" />
                 ]}
                 rightContent={[
-                  <WebIcon type="poweroff" className="fs14 circle-30 center-center bg-white-light text-primary hover-bg-primary cursor-pointer color-white" onClick={() => logout()} />
+                  <WebIcon type="poweroff" className="fs14 circle-30 center-center bg-primary-light text-primary hover-bg-primary cursor-pointer color-white" onClick={() => logout()} />
                 ]}
             >
               <div className="text-center color-black">
