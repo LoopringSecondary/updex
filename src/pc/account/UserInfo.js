@@ -28,23 +28,23 @@ class UserInfo extends React.Component {
     if(unlockType){
       switch (unlockType) {
         case 'address':
-          icon = <i className="icon-eye fs20"></i>
+          icon = <i className="icon-eye"></i>
           title = "Watch-Only Wallet"
           break;
         case 'metaMask':
-          icon = <i className="icon-Metamaskwallet fs20"></i>
+          icon = <i className="icon-Metamaskwallet"></i>
           title = "MetaMask"
           break;
         case 'ledger':
-          icon = <i className="icon-ledgerwallet fs20"></i>
+          icon = <i className="icon-ledgerwallet"></i>
           title = "Ledger"
           break;
         case 'loopr':
-          icon = <i className="icon-loopr fs20"></i>
+          icon = <i className="icon-loopr"></i>
           title = "Loopr Wallet"
           break;
         case 'upWallet':
-          icon = <img style={{height: '24px'}} src={require('../../assets/images/up-logo-notext.png')} alt=""/>
+          icon = <img className="h-25" src={require('../../assets/images/up-logo-notext-white.png')} alt=""/>
           title = "UP Wallet"
           break;
         default:
@@ -61,14 +61,15 @@ class UserInfo extends React.Component {
         }
         {
           !!address &&
-          <div className="row no-gutters ml0 mr0 align-items-center pl25 pr25" style={{height:'100%'}}>
-            <div className="col-auto pr10 text-primary">
+          <div className="row no-gutters ml0 mr0 align-items-center pl30 pr30 bg-primary circle ml10 mr10 position-relative" style={{height:'80%',top:'9.5%'}}>
+            <div className="col-auto color-white fs22 pr10">
               {icon}
             </div>
             <div className="col">
-              <div className="fs12 text-primary">{getShortAddress(address)}</div>
-              <div className="fs12 text-primary lh15">{title}</div>
+              <div className="fs13 color-white color-white">{getShortAddress(address)}</div>
+              <div className="fs12 color-white color-white lh15">{title}</div>
             </div>
+           
           </div>
         }
       </div>
