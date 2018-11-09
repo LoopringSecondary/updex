@@ -323,6 +323,7 @@ class Auth extends React.Component {
               <AntdModal
                 title={intl.get('wallet_meta.unlock_steps_title')}
                 visible={metaMask.refreshModalVisible}
+                zIndex={1091}
                 maskClosable={false}
                 onOk={()=>refresh()}
                 onCancel={()=>hideModal()}
@@ -363,6 +364,7 @@ class Auth extends React.Component {
               visible={this.state.showLedgerHelper}
               maskClosable={false}
               onOk={()=>{}}
+              zIndex={1091}
               onCancel={()=>hideLedgerHelper()}
               okText={null}
               cancelText={null}

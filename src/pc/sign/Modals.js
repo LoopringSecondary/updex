@@ -26,3 +26,4 @@ export default Modals
 // zIndex note:
 // sign: 1100
 // settings: 1090-1091
+// auth: 1090-1091
