@@ -23,6 +23,14 @@ export default {
       storage.settings.set(newState)
       return newState
     },
+    settingsChange(state, { payload }) {
+      let newState =  {
+        ...state,
+        ...payload
+      };
+      storage.settings.set(newState)
+      return newState
+    },
     tradingChange(state, { payload }) {
       let newState =  {
         ...state,

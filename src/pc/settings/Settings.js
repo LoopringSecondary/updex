@@ -26,51 +26,6 @@ function Settings(props) {
       }
     })
   }
-  const languages = [
-    { value: 'en-US', label: 'English',checked: settings.preference.language === 'en-US'},
-    { value: 'zh-CN', label: '中文',checked: settings.preference.language === 'zh-CN'},
-  ];
-  const currencys = [
-    { value: 'USD', label: 'USD',checked: settings.preference.currency === 'USD'},
-    { value: 'CNY', label: 'CNY',checked: settings.preference.currency === 'CNY' },
-  ];
-  const ttls = [
-    { value: 0, label: '1 Month',checked:true},
-    { value: 1, label: '1 Week',checked:false },
-    { value: 2, label: '1 Day',checked:false },
-    { value: 3, label: '1 Hour',checked:false },
-    { value: 4, label: 'Custom',checked:false },
-  ];
-
-  const languageChange = (language)=>{
-    if(language) {
-      settings.preference.language = language
-      dispatch({
-        type: 'settings/preferenceChange',
-        payload: settings
-      })
-      setLocale(language);
-    }
-  }
-
-  const currencyChange = (currency) => {
-    if(currency) {
-      settings.preference.currency = currency
-      dispatch({
-        type: 'settings/preferenceChange',
-        payload: settings
-      })
-    }
-  }
-
-  const lrcFeeChange = (lrcFeePermillage) => {
-    settings.trading.lrcFee = lrcFeePermillage
-    dispatch({
-      type: 'settings/preferenceChange',
-      payload: settings
-    })
-  }
-
   const language = settings.preference.language === 'en-US' ? 'English' : '中文'
   const unit = intl.get(`common.${settings.trading.timeToLiveUnit}`)
   return (
@@ -134,6 +89,18 @@ function Settings(props) {
                 <span className="color-black-1">{intl.get('settings.time_to_live')}</span>
               </List.Item>
             </List>
+            <List className="mt10 no-border text-left" renderHeader={() => <div className="fs14 color-black-3 mb5 mt15 pl15">{intl.get('common.mode')}</div>}>
+              <List.Item onClick={()=>showLayer({id:'setIsDeveloper'})} className="overflow-visible" extra={
+                <div>
+                  {settings.isDeveloper && intl.get('set_is_developer.opened')}
+                  {!settings.isDeveloper && intl.get('set_is_developer.closed')}
+                </div>
+              } arrow="horizontal" >
+                <WebIcon type="experiment" className="mr10 text-primary fs16" />
+                <span className="color-black-1">{intl.get('set_is_developer.page_title')}</span>
+              </List.Item>
+            </List>
+
         </div>
       </div>
       
