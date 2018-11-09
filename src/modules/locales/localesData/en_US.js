@@ -74,7 +74,8 @@ const words = {
     no_data:'No Data',
     no_data_custom:'No {title}',
     loading:'Loading...',
-  }
+  },
+  mode:'Mode',
 }
 const types = {
   trade_side: {
@@ -612,6 +613,11 @@ export default {
     instruction_warn: 'The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
     ios_only:'Only iOS Wallet Support For Now',
   },
+  unlock_by_imtoken: {
+    title:'Unlock With imToken',
+    instruction_scan: 'Open your imToken，scan the QRcode and confirm',
+    instruction_warn: 'The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
+  },
   unlock_by_ledger:{
     title:'Unlock With Ledger',
     unlock_steps_title: 'Failed to connect with your Ledger device, you could follow these advices and try again',
@@ -787,5 +793,13 @@ export default {
     my_orders:"My Orders",
     order_book:"Order Book",
     trade_history:"Trade History",
+  },
+  set_is_developer:{
+    page_title:'Developer Mode',
+    closed:'Closed',
+    opened:'Opened',
+  },
+  coming_soon:{
+    visit_on_pc:"Please visit https://circulr.loopring.io on PC",
   },
 }

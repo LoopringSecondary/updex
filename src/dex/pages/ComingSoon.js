@@ -32,7 +32,7 @@ class ComingSoon extends React.Component{
             <div className="fs20 font-weight-bold mt10 text-primary">UP DEX</div>
           </div>
           <div className="m15 p15 color-white fs13">
-            <Icon type="desktop" className="color-white mr5" /> 请通过电脑访问 http://dex.upwallet.io
+            <Icon type="desktop" className="color-white mr5" /> {intl.get('coming_soon.visit_on_pc')}
           </div>
         </div>
       </div>

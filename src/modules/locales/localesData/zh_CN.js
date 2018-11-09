@@ -75,7 +75,8 @@ const words = {
     no_data: '暂无数据',
     no_data_custom: '暂无{title}',
     loading: '加载中...',
-  }
+  },
+  mode:'模式',
 }
 
 const types = {
@@ -613,6 +614,11 @@ export default {
     instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
     ios_only:'目前仅 iOS Wallet 支持扫码登录',
   },
+  unlock_by_imtoken: {
+    title:'使用imToken扫码登录',
+    instruction_scan: '打开您的imToken，扫描二维码，确认信息',
+    instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
+  },
   unlock_by_ledger:{
     title:'使用Ledger钱包解锁',
     unlock_steps_title: '与您的Ledger设备连接失败, 您可以参照以下建议',
@@ -791,5 +797,13 @@ export default {
     order_book:"最新挂单",
     trade_history:"最新成交",
   },
+  set_is_developer:{ 
+    page_title:'开发者模式',
+    closed:'关闭',
+    opened:'开启',
+  },
+  coming_soon:{
+    visit_on_pc:"请在电脑端访问 https://circulr.loopring.io ",
+  }, 
 }
 
