@@ -45,7 +45,7 @@ const Logged = (props)=>{
           <Route path={`/dex/convert/:token`} component={Convert} />
           <Route path={`/dex/notifications`} component={Notifications} />
           <Route path={`/dex/todos`} exact component={ListTodos} />
-          <Redirect from="/dex" to= {`/dex/entry${props.location.search}`} />
+          <Redirect from="/dex" to= {`/dex/placeOrder`} />
         </Switch>
         <CommonModals />
         <Orders.Modals />

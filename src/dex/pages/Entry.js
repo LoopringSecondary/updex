@@ -7,6 +7,7 @@ import {Button,Modal} from 'antd-mobile'
 import {scanQRCode, signMessage, signOrder, signTx} from 'common/utils/signUtils'
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
+import Home from './Home'
 
 class Entry extends React.Component {
 
@@ -167,16 +168,20 @@ class Entry extends React.Component {
       })
     }
     return (
-      <div className="d-flex align-items-center justfiy-content-center" style={{height: '100vh'}}>
-        <div className="text-center w-100 p15">
-          <Button onClick={routeActions.gotoPath.bind(this, '/dex/placeOrder')} className="d-block w-100 mt15"
-                  type="primary"> Go To Market Trade </Button>
-          <Button onClick={routeActions.gotoPath.bind(this, '/face2face')} className="d-block w-100 mt15"
-                  type="primary"> Go To P2P Trade </Button>
-          <Button onClick={scan} className="d-block w-100 mt15" type="primary"> Scan Qrcode </Button>
-          <Button onClick={() => this.showLayer({id: 'signMessages'})} className="d-block w-100 mt15" type="primary"> Show
-            Messages </Button>
-        </div>
+      <div className="" >
+        <Home />
+        {
+          false &&
+            <div className="text-center w-100 p15">
+                <Button onClick={routeActions.gotoPath.bind(this, '/dex/placeOrder')} className="d-block w-100 mt15"
+                        type="primary"> Go To Market Trade </Button>
+                <Button onClick={routeActions.gotoPath.bind(this, '/face2face')} className="d-block w-100 mt15"
+                        type="primary"> Go To P2P Trade </Button>
+                <Button onClick={scan} className="d-block w-100 mt15" type="primary"> Scan Qrcode </Button>
+                <Button onClick={() => this.showLayer({id: 'signMessages'})} className="d-block w-100 mt15" type="primary"> Show
+                  Messages </Button>
+            </div>
+        }
       </div>
     )
   }

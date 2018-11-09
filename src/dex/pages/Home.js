@@ -11,9 +11,7 @@ class Home extends React.Component {
     super(props);
   }
   render(){
-    const {match,location} = this.props;
     return (
-      <LayoutDexHome {...this.props}>
         <div className="">
           {
             false &&
@@ -34,18 +32,16 @@ class Home extends React.Component {
           {
              true && 
              <div className="pt25 pb25 zb-b-b text-center bg-white">
-               <div className="circle-50 m-auto center-center fs25 bg-primary-light text-primary font-weight-bold">
-                 <Icon type="scan" />
-               </div>
-               <div className="fs16 color-black-1 font-weight-bold mt5">UP DEX</div>
-               <div className="fs14 color-black-1">A Decentralized Exchange Built on Loopring</div>
+               <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
+               <div className="fs16 color-black-1 font-weight-bold mt5">LoopringDEX on imToken</div>
+               <div className="fs14 color-black-1">A New Version is Coming Soon</div>
              </div>
            }
            <div className="bg-white"><div className="1px divider zb-b-b"></div></div>
            <div className="">
               <div className="row no-gutters bg-white">
                 <div className="col-12">
-                  <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={()=>routeActions.gotoPath('/dex/placeOrder')}>
+                  <div className="text-left pl10 pr10 pt15 pb15 zb-b-b">
                     <div className="row no-gutters align-items-center">
                       <div className="col-auto">
                         <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="line-chart" /></div>
@@ -55,13 +51,13 @@ class Home extends React.Component {
                         <div className="fs12 color-black-1 lh15">Public trade with everyone </div>
                       </div>
                       <div className="col-auto">
-                        <Button className="h-25 lh-25 fs12" type="primary" size="small">Trade</Button>
+                        <Button className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Coming</Button>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-12 zb-b-l">
-                  <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={()=>routeActions.gotoPath('/face2face')}>
+                  <div className="text-left pl10 pr10 pt15 pb15 zb-b-b">
                     <div className="row no-gutters align-items-center">
                       <div className="col-auto">
                         <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="team" /></div>
@@ -71,13 +67,13 @@ class Home extends React.Component {
                         <div className="fs12 color-black-1 lh15">Privacy trade between friends</div>
                       </div>
                       <div className="col-auto">
-                        <Button className="h-25 lh-25 fs12" type="primary" size="small">Trade</Button>
+                        <Button className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Coming</Button>
                       </div>
                     </div>
                   </div>
                 </div>
                 <div className="col-12 zb-b-l">
-                  <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={()=>routeActions.gotoPath('/face2face')}>
+                  <div className="text-left pl10 pr10 pt15 pb15 zb-b-b">
                     <div className="row no-gutters align-items-center">
                       <div className="col-auto">
                         <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="scan" /></div>
@@ -87,7 +83,7 @@ class Home extends React.Component {
                         <div className="fs12 color-black-1 lh15">Trade evrerywhere by scanning simplely</div>
                       </div>
                       <div className="col-auto">
-                        <Button className="h-25 lh-25 fs12" type="primary" size="small">Trade</Button>
+                        <Button className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Coming</Button>
                       </div>
                     </div>
                   </div>
@@ -104,7 +100,7 @@ class Home extends React.Component {
                 </div>
               }
               {
-                true &&
+                false &&
                 <div className="row no-gutters bg-white mt15">
                   <div className="col-12">
                     <div className="text-left p10 zb-b-b" onClick={()=>routeActions.gotoPath('/dex/placeOrder')}>
@@ -158,7 +154,6 @@ class Home extends React.Component {
            </div>
            
         </div>
-      </LayoutDexHome>
     )
   }
 }
