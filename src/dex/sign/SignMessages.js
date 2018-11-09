@@ -14,7 +14,7 @@ class SignMessages extends React.Component {
 
   render(){
     const {sign, dispatch} = this.props
-    const {unsigned, signed} = sign
+    const {unsigned, signed, qrcode} = sign
     let actualSigned = signed ? signed.filter(item => item !== undefined && item !== null) : []
     let submitDatas = signed && unsigned.length === actualSigned.length ? (
       signed.map((item, index) => {
@@ -118,10 +118,17 @@ class SignMessages extends React.Component {
       }, function (error) {
         if(error){
           Toast.fail(error.message, 3, null, false)
+          window.RELAY.account.notifyCircular({
+            "owner" : window.Wallet.address,
+            "body" : {hash: qrcode.value, "status" : "txFailed"}
+          })
         } else {
-          Toast.success('Success', 3, null, false)
+          Toast.success(intl.get('notifications.title.operation_succ'), 3, null, false)
           dispatch({type: 'layers/hideLayer', payload: {id:'signMessages'}})
-          //TODO notify
+          window.RELAY.account.notifyCircular({
+            "owner" : window.Wallet.address,
+            "body" : {hash: qrcode.value, "status" : "accept"}
+          })
         }
       });
     }
@@ -159,7 +166,7 @@ class SignMessages extends React.Component {
             }
             {!signed[index] &&
             <div className="">
-              <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>签名{intl.get('place_order_sign.unsigned')}</Button>
+              <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
             </div>
             }
           </div>
@@ -186,7 +193,7 @@ class SignMessages extends React.Component {
           ]}
           rightContent={[]}
         >
-          Sign Messages
+          {intl.get('sign.title')}
         </NavBar>
         <div className="divider 1px zb-b-b"></div>
         <div className="bg-white p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>

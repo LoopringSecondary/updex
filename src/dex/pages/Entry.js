@@ -33,8 +33,13 @@ class Entry extends React.Component {
       case 'sign':
       case 'cancelOrder':
       case 'convert':
-        window.RELAY.order.getTempStore({key:routeActions.location.getQueryByName(this.props, 'value')}).then(resp => {
-          if (resp.error) {
+        window.RELAY.account.notifyCircular({
+          "owner" : window.Wallet.address,
+          "body" : {hash: value, "status" : "received"}
+        })
+        const hash = routeActions.location.getQueryByName(this.props, 'value')
+        window.RELAY.order.getTempStore({key: hash}).then(resp => {
+          if(resp.error) {
             throw `Unsupported type:${type}`
           }
           let unsigned = null
@@ -51,16 +56,18 @@ class Entry extends React.Component {
             default:
               throw `Unsupported type:${type}`
           }
-          dispatch({type: 'sign/unsigned', payload: {unsigned}})
-          this.showLayer({id: 'signMessages'})
-        }).catch(e => {
-
+          dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value:hash}}})
+          this.showLayer({id:'signMessages'})
+        }).catch(e=> {
+          window.RELAY.account.notifyCircular({
+            "owner": window.Wallet.address,
+            "body": {hash: value, "status": "reject"}
+          })
         })
         break;
       default:
     }
   }
-
 
   authtoLogin = (uuid) => {
     const timestamp = moment().unix().toString();
@@ -83,7 +90,8 @@ class Entry extends React.Component {
       })
     })
   }
-   showLayer = (payload = {}) => {
+
+  showLayer = (payload = {}) => {
     this.props.dispatch({
       type: 'layers/showLayer',
       payload: {
@@ -102,16 +110,20 @@ class Entry extends React.Component {
           return
         }
         const type = routeActions.search.getQueryByName(res.result, 'type')
-
+        const value = routeActions.search.getQueryByName(res.result, 'value')
         switch (type) {
           case 'UUID':
-            this.authtoLogin(routeActions.search.getQueryByName(res.result, 'value'));
+            this.authtoLogin(value);
             break;
           case 'sign':
           case 'cancelOrder':
           case 'convert':
-            window.RELAY.order.getTempStore({key: routeActions.search.getQueryByName(res.result, 'value')}).then(resp => {
-              if (resp.error) {
+            window.RELAY.account.notifyCircular({
+              "owner" : window.Wallet.address,
+              "body" : {hash: value, "status" : "received"}
+            })
+            window.RELAY.order.getTempStore({key: value}).then(resp => {
+              if(resp.error) {
                 throw `Unsupported type:${type}`
               }
               let unsigned = null
@@ -128,10 +140,13 @@ class Entry extends React.Component {
                 default:
                   throw `Unsupported type:${type}`
               }
-              dispatch({type: 'sign/unsigned', payload: {unsigned}})
-              this.showLayer({id: 'signMessages'})
-            }).catch(e => {
-
+              dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value}}})
+              this.showLayer({id:'signMessages'})
+            }).catch(e=> {
+              window.RELAY.account.notifyCircular({
+                "owner": window.Wallet.address,
+                "body": {hash: value, "status": "reject"}
+              })
             })
             break;
           case 'P2P':
