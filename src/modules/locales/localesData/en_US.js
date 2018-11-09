@@ -75,7 +75,7 @@ const words = {
     no_data_custom:'No {title}',
     loading:'Loading...',
   },
-  mode:'模式',
+  mode:'Mode',
 }
 const types = {
   trade_side: {

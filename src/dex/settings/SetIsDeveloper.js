@@ -24,15 +24,13 @@ function Settings(props) {
     { value: false, label: intl.get('set_is_developer.closed'),checked: settings.isDeveloper === false },
   ];
   const isDeveloperChange = (isDeveloper) => {
-    if(isDeveloper) {
-      settings.isDeveloper = isDeveloper
-      dispatch({
-        type: 'settings/settingsChange',
-        payload: {
-          ...settings
-        }
-      })
-    }
+    settings.isDeveloper = isDeveloper
+    dispatch({
+      type: 'settings/settingsChange',
+      payload: {
+        ...settings
+      }
+    })
   }
   return (
     <div className="bg-white position-relative" style={{height:'100%'}}>
