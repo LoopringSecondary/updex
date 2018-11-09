@@ -43,7 +43,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="orderQrcode">
-        <UiContainers.Drawer id="orderQrcode" position="right" className="h-100" style={{height:'100%',width:"32.5rem",margin:'0 auto'}}>
+        <UiContainers.Drawer id="orderQrcode" zIndex={1091} position="right" className="h-100" style={{height:'100%',width:"32.5rem",margin:'0 auto'}}>
           <OrderQrcode/>
         </UiContainers.Drawer>
       </Containers.Layers>

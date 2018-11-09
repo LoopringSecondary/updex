@@ -47,7 +47,7 @@ class OrderQrcode extends React.Component{
         <div className="text-center bg-white-light ml25 mr25 pl15 pr15 pb15">
           <div className="pt25 pb25 center-center">
             <img className="h-45" src={require('../assets/images/up-logo-notext.png')} alt=""/>
-            <span className="fs20 font-weight-bold ml10 text-primary">UP DEX</span>
+            <span className="fs20 font-weight-bold ml10 text-primary">Circulr DEX</span>
           </div>
           <div className="p5 d-inline-block" style={{background:'#fff'}}>
             <QRCode value={JSON.stringify(value)} size={220} level='H'/>
