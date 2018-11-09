@@ -611,6 +611,7 @@ export default {
     instruction_download: '下载 UP Wallet iOS',
     instruction_scan: '打开您的UpWallet，扫描二维码，确认信息',
     instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
+    ios_only:'目前仅 iOS Wallet 支持扫码登录',
   },
   unlock_by_ledger:{
     title:'使用Ledger钱包解锁',

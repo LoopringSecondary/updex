@@ -23,7 +23,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="p2pOrderDetail">
-        <UiContainers.Drawer id="p2pOrderDetail" position="right" className="h-100" style={{height:'100%',width:"27.5rem",margin:'0 auto'}}>
+        <UiContainers.Drawer id="p2pOrderDetail" position="right" className="h-100" style={{height:'100%',width:"32.5rem",margin:'0 auto'}}>
           <OrderDetail />
         </UiContainers.Drawer>
       </Containers.Layers>
@@ -43,7 +43,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="orderQrcode">
-        <UiContainers.Drawer id="orderQrcode" position="right" className="h-100" style={{height:'100%',width:"27.5rem",margin:'0 auto'}}>
+        <UiContainers.Drawer id="orderQrcode" position="right" className="h-100" style={{height:'100%',width:"32.5rem",margin:'0 auto'}}>
           <OrderQrcode/>
         </UiContainers.Drawer>
       </Containers.Layers>

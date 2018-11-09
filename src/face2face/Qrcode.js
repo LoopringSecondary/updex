@@ -53,7 +53,7 @@ class OrderQrcode extends React.Component{
             <QRCode value={JSON.stringify(value)} size={220} level='H'/>
           </div>
           <Button type="primary" size="small" className="mt15 border-none bg-primary-light text-primary fs12 d-block w-100" onClick={() => window.open('https://upwallet.io')}>
-            <Icon type="apple" className="mr5" theme="filled" />{intl.get('p2p_order.scan_with_upwallet')}
+            <Icon type="mobile" className="mr5" theme="" />{intl.get('p2p_order.scan_with_upwallet')}
           </Button>
 
         </div>
