@@ -44,7 +44,7 @@ const PlaceOrderResult = (props) => {
   switch(placeOrderSteps.task) {
     case 'sign':
       succDesc = intl.get('sign.submit_success')
-      failedDesc = intl.get('sign.submit_success')
+      failedDesc = intl.get('sign.submit_failed')
       break;
     case 'cancelOrder':
       succDesc = intl.get('sign.cancel_success')

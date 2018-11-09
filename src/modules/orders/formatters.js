@@ -94,6 +94,9 @@ export function formatPriceByMarket(price, marketConfig) {
 
 export function formatAmountByMarket(amount, tokenConfig, marketConfig) {
   if(amount && amount.toString() !== '0') {
+    if(fm.toBig(amount).gt(100000000)) {
+      return '100000000'
+    }
     const amountPrecision = tokenConfig.precision - marketConfig.pricePrecision
     if (amountPrecision > 0) {
       const amountArr = amount.toString().split(".")
