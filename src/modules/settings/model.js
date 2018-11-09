@@ -23,13 +23,10 @@ export default {
       storage.settings.set(newState)
       return newState
     },
-    modeChange(state, { payload }) {
+    settingsChange(state, { payload }) {
       let newState =  {
         ...state,
-        preference: {
-          ...state.mode,
-          ...payload
-        }
+        ...payload
       };
       storage.settings.set(newState)
       return newState

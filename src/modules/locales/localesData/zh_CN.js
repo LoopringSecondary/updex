@@ -75,7 +75,8 @@ const words = {
     no_data: '暂无数据',
     no_data_custom: '暂无{title}',
     loading: '加载中...',
-  }
+  },
+  mode:'模式',
 }
 
 const types = {
@@ -791,5 +792,10 @@ export default {
     order_book:"最新挂单",
     trade_history:"最新成交",
   },
+  set_is_developer:{ 
+    page_title:'开发者模式',
+    closed:'关闭',
+    opened:'开启',
+  }
 }
 

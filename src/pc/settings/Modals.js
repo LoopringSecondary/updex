@@ -8,7 +8,7 @@ import SetLayout from './SetLayout'
 import SetLRCFee from 'mobile/settings/SetLRCFee'
 import SetTheme from 'mobile/settings/SetTheme'
 import SetTTL from 'mobile/settings/SetTTL'
-import SetMode from 'mobile/settings/SetMode'
+import SetIsDeveloper from 'mobile/settings/SetIsDeveloper'
 
 export function SetLanguageModal(){
   return (
@@ -19,11 +19,11 @@ export function SetLanguageModal(){
     </Containers.Layers>
   )
 }
-export function SetModeModal(){
+export function SetIsDeveloperModal(){
   return (
-    <Containers.Layers id="setMode">
-      <UiContainers.Drawer id="setMode" position="right" zIndex={1091} style={{margin:'0 auto',height:'100%',width:'27.5rem'}}>
-        <SetMode />
+    <Containers.Layers id="setIsDeveloper">
+      <UiContainers.Drawer id="setIsDeveloper" position="right" zIndex={1091} style={{margin:'0 auto',height:'100%',width:'27.5rem'}}>
+        <SetIsDeveloper />
       </UiContainers.Drawer>
     </Containers.Layers>
   )
@@ -89,6 +89,7 @@ function Modals(props) {
       <SetLRCFeeModal />
       <SetThemeModal />
       <SetTTLModal />
+      <SetIsDeveloperModal />
     </div>
   )
 }

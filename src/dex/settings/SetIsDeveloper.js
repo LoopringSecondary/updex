@@ -18,16 +18,19 @@ function Settings(props) {
       }
     })
   }
+  
   const options = [
-    { value: true, label: intl.get('set_mode.yes'),checked: settings.mode.isDeveloper === true},
-    { value: false, label: intl.get('set_mode.no'),checked: settings.mode.isDeveloper === false },
+    { value: true, label: intl.get('set_is_developer.opened'),checked: settings.isDeveloper === true},
+    { value: false, label: intl.get('set_is_developer.closed'),checked: settings.isDeveloper === false },
   ];
-  const modeChange = (isDeveloper) => {
+  const isDeveloperChange = (isDeveloper) => {
     if(isDeveloper) {
-      settings.mode.isDeveloper = isDeveloper
+      settings.isDeveloper = isDeveloper
       dispatch({
-        type: 'settings/modeChange',
-        payload: settings
+        type: 'settings/settingsChange',
+        payload: {
+          ...settings
+        }
       })
     }
   }
@@ -37,13 +40,13 @@ function Settings(props) {
         <NavBar
           className="bg-white"
           isDeveloper="light"
-          onLeftClick={()=>hideLayer({id:'setisDeveloper'})}
+          onLeftClick={()=>hideLayer({id:'setIsDeveloper'})}
           leftContent={[
-            <span key='1' className=""><WebIcon type="close"/></span>,
+            <span key='1' className="text-primary "><WebIcon type="close"/></span>,
           ]}
           rightContent={[]}
         >
-          <div className="color-black">{intl.get('settings.isDeveloper')}开发者模式</div>
+          <div className="color-black">{intl.get('set_is_developer.page_title')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
@@ -51,7 +54,7 @@ function Settings(props) {
         <div className="bg-white settings pb10">
             <List className="no-border text-left">
               {options.map(i => (
-                <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => modeChange(i.value)}>
+                <RadioItem className="zb-b-b" key={i.value} checked={i.checked} onChange={() => isDeveloperChange(i.value)}>
                   {i.label}
                 </RadioItem>
               ))}

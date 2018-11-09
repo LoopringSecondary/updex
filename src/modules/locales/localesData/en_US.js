@@ -74,7 +74,8 @@ const words = {
     no_data:'No Data',
     no_data_custom:'No {title}',
     loading:'Loading...',
-  }
+  },
+  mode:'模式',
 }
 const types = {
   trade_side: {
@@ -787,5 +788,10 @@ export default {
     my_orders:"My Orders",
     order_book:"Order Book",
     trade_history:"Trade History",
+  },
+  set_is_developer:{
+    page_title:'Developer Mode',
+    closed:'Closed',
+    opened:'Opened',
   },
 }
