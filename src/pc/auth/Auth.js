@@ -281,7 +281,7 @@ class Auth extends React.Component {
         <div className="pl15 pr15">
           <div className="text-center pt50 pb30">
             <img className="h-50" src={require('../../assets/images/up-logo-notext.png')} alt=""/>
-            <div className="text-primary fs20 font-weight-bold mt5">UP DEX</div>
+            <div className="text-primary fs20 font-weight-bold mt5">Circulr DEX</div>
           </div>
         </div>
         <div className="">
