@@ -123,7 +123,7 @@ class SignMessages extends React.Component {
             "body" : {hash: qrcode.value, "status" : "txFailed"}
           })
         } else {
-          Toast.success(intl.get('notifications.title.place_order_success'), 3, null, false)
+          Toast.success(intl.get('notifications.title.operation_succ'), 3, null, false)
           dispatch({type: 'layers/hideLayer', payload: {id:'signMessages'}})
           window.RELAY.account.notifyCircular({
             "owner" : window.Wallet.address,
@@ -166,7 +166,7 @@ class SignMessages extends React.Component {
             }
             {!signed[index] &&
             <div className="">
-              <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>签名{intl.get('place_order_sign.unsigned')}</Button>
+              <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
             </div>
             }
           </div>
@@ -193,7 +193,7 @@ class SignMessages extends React.Component {
           ]}
           rightContent={[]}
         >
-          Sign Messages
+          {intl.get('sign.title')}
         </NavBar>
         <div className="divider 1px zb-b-b"></div>
         <div className="bg-white p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>

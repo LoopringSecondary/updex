@@ -117,7 +117,8 @@ const notifications = {
     place_order_price_confirm:'您确定要继续下单吗?',
     submit_ring_suc:'提交环路成功',
     submit_ring_fail:'提交环路失败',
-    auth_suc:"授权成功"
+    auth_suc:"授权成功",
+    operation_succ:'操作成功'
   },
   message: {
     place_order_price_high:"您当前的价格高于市场价5%",
@@ -155,7 +156,9 @@ const actions = {
   place_buy_order: '提交买单',
   place_sell_order: '提交卖单',
   all_assets: '全部资产',
-  fills_of_all_markets: '查看全部市场成交'
+  fills_of_all_markets: '查看全部市场成交',
+  sign:"签名",
+  submit:"提交"
 }
 
 const time_unit = {
@@ -330,6 +333,7 @@ no_open_orders: '{market}暂无有效订单',
     set_count:"设置订单拆分份数"
   },
   sign: {
+    title:"签名信息",
     not_signed: '您还未完成签名',
     to_sign: '去签名',
     signed_failed: '签名失败',

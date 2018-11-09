@@ -65,6 +65,15 @@ export default  {
         return null
       }
     },
+  },
+  search:{
+    getQueryByName:(search,name)=>{
+      if(name && search){
+        return getParameterByName(name,search)
+      }else{
+        return null
+      }
+    },
   }
 }
 

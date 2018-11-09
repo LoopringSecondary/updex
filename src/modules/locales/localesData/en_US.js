@@ -115,7 +115,8 @@ const notifications = {
     place_order_price_confirm:"Are you sure you want to continue ?",
     submit_ring_suc:'Submit ring successfully',
     submit_ring_fail:'Submit ring failed',
-    auth_suc:"Authorization Successfully"
+    auth_suc:"Authorization Successfully",
+    operation_succ:"Operation Successfully"
   },
   message: {
     place_order_price_high:"Your price is 5% higher than the market price.",
@@ -153,7 +154,9 @@ const actions = {
   place_buy_order: "Place Buy Order",
   place_sell_order: "Place Sell Order",
   all_assets: "All Assets",
-  fills_of_all_markets: "Fills of all markets"
+  fills_of_all_markets: "Fills of all markets",
+  sign:"Sign",
+  submit:"Submit"
 }
 
 const time_unit = {
@@ -328,6 +331,7 @@ export default {
     set_count:"Set order split count "
   },
   sign: {
+    title:"Sign Messages",
     not_signed: "You may have some items not signed",
     to_sign: "To Sign",
     signed_failed: 'Signed Failed',
