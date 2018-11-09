@@ -301,7 +301,7 @@ class Auth extends React.Component {
             </div>
           </div>
           {
-            false &&
+            true &&
             <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
                 <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
