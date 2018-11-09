@@ -48,7 +48,7 @@ class SignSteps extends React.Component {
 
   generateQRCode(placeOrderSteps, p2pOrder, dispatch) {
     if (!placeOrderSteps.qrcode && placeOrderSteps.unsign && placeOrderSteps.unsign.length > 0 && !this.state.generating) {
-      if(placeOrderSteps.task !== 'sign' && placeOrderSteps.unsign.length > 1) {
+      if(placeOrderSteps.task !== 'sign' && placeOrderSteps.task !== 'signP2P' && placeOrderSteps.unsign.length > 1) {
         throw new Error('Illegal argument : parameter unsign length could larger than 1 only when task equals sign')
       }
       let origin = {}
