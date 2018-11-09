@@ -281,6 +281,9 @@ class ListMarketTickers extends React.Component {
       const search = (keyword) => {
         this.setState({keyword})
       }
+      const clear = (keyword) => {
+        alert('clearclearclear')
+      }
       return (
         <div>
           <SearchBar
@@ -288,7 +291,8 @@ class ListMarketTickers extends React.Component {
             onChange={(keyword)=>search(keyword)}
             className="bg-none"
             style={{marginTop:'0.2rem',marginBottom:'0.1rem'}}
-            showCancelButton={false}
+            value={this.state.keyword}
+            showCancelButton={true}
           />
           <div className="divider 1px zb-b-t"></div>
           {this.state.keyword &&
