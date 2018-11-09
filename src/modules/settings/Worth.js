@@ -1,5 +1,5 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import {connect} from 'dva'
 import {toFixed, getDisplaySymbol} from 'LoopringJS/common/formatter'
 import {calculateWorthInLegalCurrency} from '../orders/formatters'
 
