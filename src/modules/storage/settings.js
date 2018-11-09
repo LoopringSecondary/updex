@@ -24,6 +24,9 @@ const get = ()=>{
         changeColor: "red-green+",
         theme: "darkgrey",
       },
+      mode: {
+        isDeveloper: false,
+      },
       trading: {
         contract: {
           version: latestContract.version,

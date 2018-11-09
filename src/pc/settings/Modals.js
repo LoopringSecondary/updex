@@ -8,6 +8,7 @@ import SetLayout from './SetLayout'
 import SetLRCFee from 'mobile/settings/SetLRCFee'
 import SetTheme from 'mobile/settings/SetTheme'
 import SetTTL from 'mobile/settings/SetTTL'
+import SetMode from 'mobile/settings/SetMode'
 
 export function SetLanguageModal(){
   return (
@@ -18,6 +19,16 @@ export function SetLanguageModal(){
     </Containers.Layers>
   )
 }
+export function SetModeModal(){
+  return (
+    <Containers.Layers id="setMode">
+      <UiContainers.Drawer id="setMode" position="right" zIndex={1091} style={{margin:'0 auto',height:'100%',width:'27.5rem'}}>
+        <SetMode />
+      </UiContainers.Drawer>
+    </Containers.Layers>
+  )
+}
+
 export function SetCurrencyModal(){
   return (
     <Containers.Layers id="setCurrency">
