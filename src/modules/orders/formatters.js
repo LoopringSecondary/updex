@@ -362,7 +362,7 @@ export async function signP2POrder(tradeInfo, address) {
   order.lrcFee = fm.toHex(0);
   order.validSince = fm.toHex(tradeInfo.validSince);
   order.validUntil = fm.toHex(tradeInfo.validUntil);
-  order.marginSplitPercentage = Number(tradeInfo.marginSplit);
+  order.marginSplitPercentage = 0;
   order.buyNoMoreThanAmountB = true;
   order.walletAddress = (storage.wallet.getRewardAddress()) || config.getWalletAddress()
   order.orderType = tradeInfo.orderType
