@@ -9,7 +9,7 @@ import CountDown from 'LoopringUI/components/CountDown';
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
 import {Icon} from "antd";
-import {NavBar} from "antd-mobile";
+import {NavBar,Button} from "antd-mobile";
 
 const dpath = "m/44'/60'/0'";
 
@@ -85,6 +85,10 @@ class Auth extends React.Component {
                 		</div>
                 	</span>
                 </div>
+                <Button type="primary" size="small" className="mt10 border-none bg-primary-light text-primary fs12 d-block" onClick={() => window.open('https://upwallet.io')}>
+                  <Icon type="apple" className="mr5 fs14" theme="filled" />
+                  {intl.get('unlock_by_upwallet.ios_only')}
+                </Button>
                 <div className="bg-white-light p15 text-left lh25 mt15 fs12">
                   1. {unlockWith === 'loopr' ? intl.get('unlock_by_loopr.instruction_download') : intl.get('unlock_by_upwallet.instruction_download')}
                   <a href="https://upwallet.io" target='_blank' className="text-primary ml5">{intl.get('actions.download')}</a>
