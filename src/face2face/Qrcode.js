@@ -7,6 +7,7 @@ import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
 import TokenFm from "modules/tokens/TokenFm";
 import {toFixed,toNumber} from 'LoopringJS/common/formatter'
+import config from 'common/config'
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -24,6 +25,7 @@ const OrderMetaItem = (props) => {
 
 class OrderQrcode extends React.Component{
   render(){
+    const {wallet} = this.props
     const {value,data:{orderFm,tokens}} = this.props.orderQrcode
     const {originalOrder:{tokenS,tokenB,amountS,amountB,validUntil}} = orderFm.order
     const tokensFm = new TokenFm({symbol:tokenS})
@@ -36,6 +38,12 @@ class OrderQrcode extends React.Component{
           ...payload
         }
       })
+    }
+    let qrcode = ''
+    if(wallet.unlockType === 'imToken') {
+      qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?type=${value.type}&auth=${value.value.auth}&count=${value.value.count}&hash=${value.value.hash}`
+    } else {
+      qrcode = JSON.stringify(value)
     }
 
     return (
@@ -50,7 +58,7 @@ class OrderQrcode extends React.Component{
             <span className="fs20 font-weight-bold ml10 text-primary">UP DEX</span>
           </div>
           <div className="p5 d-inline-block" style={{background:'#fff'}}>
-            <QRCode value={JSON.stringify(value)} size={220} level='H'/>
+            <QRCode value={qrcode} size={220} level='H'/>
           </div>
           <Button type="primary" size="small" className="mt15 border-none bg-primary-light text-primary fs12 d-block w-100" onClick={() => window.open('https://upwallet.io')}>
             <Icon type="mobile" className="mr5" theme="" />{intl.get('p2p_order.scan_with_upwallet')}
@@ -83,4 +91,10 @@ class OrderQrcode extends React.Component{
   }
 }
 
-export default connect()(OrderQrcode)
+function mapToProps(state) {
+  return {
+    wallet:state.wallet
+  }
+}
+
+export default connect(mapToProps)(OrderQrcode)
