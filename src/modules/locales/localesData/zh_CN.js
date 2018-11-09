@@ -811,6 +811,9 @@ export default {
     page_title:'开发者模式',
     closed:'关闭',
     opened:'开启',
-  }
+  },
+  coming_soon:{
+    visit_on_pc:"请在电脑端访问 https://circulr.loopring.io ",
+  }, 
 }
 

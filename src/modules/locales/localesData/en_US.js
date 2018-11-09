@@ -809,4 +809,7 @@ export default {
     closed:'Closed',
     opened:'Opened',
   },
+  coming_soon:{
+    visit_on_pc:"Please visit https://circulr.loopring.io on PC",
+  },
 }
