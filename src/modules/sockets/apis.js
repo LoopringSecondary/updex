@@ -5,7 +5,7 @@ import storage from '../storage/'
 import {toBig, toFixed} from 'LoopringJS/common/formatter'
 import intl from "react-intl-universal";
 import Notification from 'LoopringUI/components/Notification'
-import {LooprAccount, UpWalletAccount} from "common/wallets/account";
+import {LooprAccount, UpWalletAccount, ImTokenAccount} from "common/wallets/account";
 
 const updateItems = (items,id)=>{
   const dispatch = require('../../index.js').default._store.dispatch
@@ -54,6 +54,10 @@ const updateScannedAddress = (item, id) => {
       case 'upWallet':
         window.WALLET = new UpWalletAccount(item.owner);
         dispatch({type: "wallet/unlockUpWallet", payload: {address: item.owner}});
+        break;
+      case 'imToken':
+        window.WALLET = new ImTokenAccount(item.owner);
+        dispatch({type: "wallet/unlockImToken", payload: {address: item.owner}});
         break;
     }
     window.RELAY.account.register(item.owner)

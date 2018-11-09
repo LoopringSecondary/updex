@@ -286,6 +286,16 @@ export default {
     instruction_warn: '二维码有效时间24小时，请尽快完成扫码操作，过期后请重新下单生成二维码',
     waiting_sign: '等待手机对订单进行签名提交',
   },
+  place_order_by_imtoken: {
+    title: '使用imToken手机版签名',
+    step_qrcode: '使用imToken扫码',
+    step_sign: '在imToken上完成签名',
+    step_result: '签名结果',
+    qrcode_overdue: '二维码已过期，请重新下单生成新二维码',
+    instruction_scan: '打开您的imToken，扫描二维码，确认信息完成签名，并提交订单',
+    instruction_warn: '二维码有效时间24小时，请尽快完成扫码操作，过期后请重新下单生成二维码',
+    waiting_sign: '等待手机对订单进行签名提交',
+  },
   place_order_by_ledger: {
     title: '使用Ledger下单',
     connect: '连接 Leager',

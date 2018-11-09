@@ -3,6 +3,7 @@ import {
   AddressAccount,
   LooprAccount,
   UpWalletAccount,
+  ImTokenAccount,
   MetaMaskAccount,
   LedgerAccount
 } from "common/wallets/account";
@@ -23,6 +24,10 @@ const unlockWithLoopr = (address) => {
 
 const unlockWithUpWallet = (address) => {
   window.WALLET = new UpWalletAccount(address);
+}
+
+const unlockWithImToken = (address) => {
+  window.WALLET = new ImTokenAccount(address);
 }
 
 const unlockWithLedger = (ledger, dpath) => {
@@ -53,6 +58,10 @@ export default {
             break;
           case 'upWallet':
             dispatch({type:'unlockUpWallet', payload:{address:unlockedAddress}})
+            dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
+            break;
+          case 'imToken':
+            dispatch({type:'unlockImToken', payload:{address:unlockedAddress}})
             dispatch({type:"layers/hideLayer", payload:{id:'authOfPC'}})
             break;
           case 'ledger':
@@ -134,6 +143,12 @@ export default {
       const unlockType = 'upWallet';
       const {address} = payload
       unlockWithUpWallet(address)
+      yield put({type: 'unlockWallet', payload: {...payload, unlockType}})
+    },
+    * unlockImToken({payload}, {put}) {
+      const unlockType = 'imToken';
+      const {address} = payload
+      unlockWithImToken(address)
       yield put({type: 'unlockWallet', payload: {...payload, unlockType}})
     },
     * unlockMetaMaskWallet({payload}, {put}) {

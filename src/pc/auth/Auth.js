@@ -193,7 +193,7 @@ class Auth extends React.Component {
   }
 
   render () {
-    const {metaMask, placeOrderSteps, dispatch} = this.props
+    const {metaMask, placeOrderSteps, settings, dispatch} = this.props
     const chromeExtention = {
       'Opera' : "https://addons.opera.com/extensions/details/metamask/",
       'Chrome' : "https://chrome.google.com/webstore/detail/nkbihfbeogaeaoehlefnkodbefgpgknn",
@@ -310,6 +310,7 @@ class Auth extends React.Component {
             </div>
           </div>
           {
+            settings.isDeveloper &&
             <div onClick={()=>unlockTypeChanged('imToken')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
                 <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
@@ -437,7 +438,8 @@ function mapStateToProps (state) {
     uuid:state.sockets.addressUnlock.extra.uuid,
     scanAddress:state.scanAddress,
     metaMask:state.metaMask,
-    placeOrderSteps:state.placeOrderSteps
+    placeOrderSteps:state.placeOrderSteps,
+    settings:state.settings
   }
 }
 

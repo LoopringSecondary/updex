@@ -14,6 +14,7 @@ import HelperOfPlaceP2POrderResult from './HelperOfPlaceP2POrderResult'
 import SignByLoopr from './SignByLoopr'
 import storage from 'modules/storage'
 import { toHex } from 'LoopringJS/common/formatter'
+import config from 'common/config'
 
 const signByLooprStep = (placeOrderSteps, circulrNotify) => {
   const hashItem = getSocketAuthorizationByHash(placeOrderSteps.hash, circulrNotify)
@@ -91,7 +92,12 @@ class SignSteps extends React.Component {
       this.setState({generating:true})
       window.RELAY.order.setTempStore(hash, origin).then(res => {
         const signWith = window.WALLET.getUnlockType()
-        const qrcode = JSON.stringify({type, value: hash})
+        let qrcode = ''
+        if(placeOrderSteps.signWith === 'imToken'){
+          qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?type=${type}&value=${hash}`
+        } else {
+          qrcode = JSON.stringify({type, value: hash})
+        }
         const time = moment().valueOf()
         dispatch({type: 'placeOrderSteps/qrcodeGenerated', payload: {signWith, qrcode, hash, time}})
         if (!res.error) {
@@ -106,7 +112,7 @@ class SignSteps extends React.Component {
 
   check(props) {
     const {placeOrderSteps, p2pOrder, dispatch} = props
-    if((placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') && !placeOrderSteps.qrcode){
+    if((placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet' || placeOrderSteps.signWith === 'imToken') && !placeOrderSteps.qrcode){
       this.generateQRCode(placeOrderSteps, p2pOrder, dispatch)
     }
   }
@@ -137,6 +143,13 @@ class SignSteps extends React.Component {
         step1 = intl.get('place_order_by_upwallet.step_qrcode')
         step2 = intl.get('place_order_by_upwallet.step_sign')
         step3 = intl.get('place_order_by_upwallet.step_result')
+        break;
+      case 'imToken':
+        step = signByLooprStep(placeOrderSteps, circulrNotify)
+        title = intl.get('place_order_by_imtoken.title')
+        step1 = intl.get('place_order_by_imtoken.step_qrcode')
+        step2 = intl.get('place_order_by_imtoken.step_sign')
+        step3 = intl.get('place_order_by_imtoken.step_result')
         break;
       case 'metaMask':
         if(placeOrderSteps.unsign && placeOrderSteps.signed) {
@@ -190,7 +203,7 @@ class SignSteps extends React.Component {
             step === 0 &&
             <div className="mt15">
               {
-                (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
+                (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet' || placeOrderSteps.signWith === 'imToken') &&
                 <SignByLoopr placeOrderSteps={placeOrderSteps} dispatch={dispatch}/>
               }
             </div>
@@ -200,7 +213,7 @@ class SignSteps extends React.Component {
             <div className="mt15">
               <div className="">
                 {
-                  (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') &&
+                  (placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet' || placeOrderSteps.signWith === 'imToken') &&
                   <div className="text-center pt40 pb40 pl15 pr15 bg-white-light">
                     <Icon type="clock-circle" className="fs36 text-primary" />
                     <div className="mt15 color-black-1">

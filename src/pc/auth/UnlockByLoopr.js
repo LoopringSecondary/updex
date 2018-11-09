@@ -42,7 +42,7 @@ class Auth extends React.Component {
   }
 
   render () {
-    const {scanAddress, dispatch} = this.props
+    const {scanAddress, settings, dispatch} = this.props
     let targetTime = moment().valueOf() + 600000;
 
     const countDownOnEnd = () => {
@@ -88,14 +88,14 @@ class Auth extends React.Component {
       )
     }
 
+    const unlockWith = storage.wallet.getLoopringUnlockWith()
     let qrcode = ''
-    if(true) {
+    if(unlockWith === 'imToken') {
       qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?type=UUID&value=${scanAddress.UUID}`
     } else {
       qrcode = JSON.stringify({type:'UUID', value:scanAddress.UUID})
     }
 
-    const unlockWith = storage.wallet.getLoopringUnlockWith()
     let title = ''
     switch(unlockWith) {
       case 'loopr':
@@ -170,6 +170,7 @@ class Auth extends React.Component {
 function mapStateToProps (state) {
   return {
     scanAddress:state.scanAddress,
+    settings:state.settings
   }
 }
 

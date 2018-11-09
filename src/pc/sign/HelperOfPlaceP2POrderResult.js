@@ -8,6 +8,7 @@ import {getSocketAuthorizationByHash} from 'modules/orders/formatters'
 import { toHex } from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
 import { OrderFm } from 'modules/orders/OrderFm'
+import config from 'common/config'
 
 const PlaceOrderResult = (props) => {
   const {placeOrderSteps, circulrNotify, p2pOrder, dispatch} = props
@@ -30,7 +31,13 @@ const PlaceOrderResult = (props) => {
         if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
           const orderFm = new OrderFm(order);
           const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
-          showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder},data:{tokens:orderFm.getTokens(),orderFm}})
+          let qrcode = ''
+          if(placeOrderSteps.signWith === 'imToken'){
+            qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?type=P2P&value=${p2pOrder}`
+          } else {
+            qrcode = JSON.stringify({type:'P2P', value: p2pOrder})
+          }
+          showLayer({id:'orderQrcode',value:{qrcode},data:{tokens:orderFm.getTokens(),orderFm}})
           dispatch({type:'layers/hideLayer', payload:{id:'p2p'}})
           dispatch({type:'layers/hideLayer', payload:{id:'face2FaceConfirm'}})
           dispatch({type:'layers/hideLayer', payload:{id:'helperOfSignStepPC'}})
@@ -105,7 +112,7 @@ const PlaceOrderResult = (props) => {
     return step
   }
   let signResult = placeOrderSteps.step
-  if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') {
+  if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet' || placeOrderSteps.signWith === 'imToken') {
     signResult = signByLooprStep(placeOrderSteps, circulrNotify)
   }
   const getSignP2P = () => {

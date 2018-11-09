@@ -278,6 +278,16 @@ export default {
     instruction_warn: 'The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
     waiting_sign: 'Waiting for your operations on UpWallet to sign and submit',
   },
+  place_order_by_imtoken: {
+    title: 'Sign With ImToken',
+    step_qrcode: 'Scan QRcode',
+    step_sign: 'Sign On Mobile',
+    step_result: 'Result',
+    qrcode_overdue: 'QRcode is overdue, please place order again',
+    instruction_scan: 'Open your imToken, scan the QRcode and submit',
+    instruction_warn: 'The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
+    waiting_sign: 'Waiting for your operations on imToken to sign and submit',
+  },
   place_order_by_ledger: {
     title: 'Sign With Ledger',
     connect: 'Connect Leager',

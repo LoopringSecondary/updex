@@ -35,7 +35,7 @@ class UserInfo extends React.Component {
           icon = <i className="icon-Metamaskwallet"></i>
           title = "MetaMask"
           break;
-        case 'imtoken':
+        case 'imToken':
           icon = <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
           title = "imToken"
           break;
