@@ -1,5 +1,6 @@
 import React from 'react';
-import {Alert, Button, Icon} from 'antd'
+import {Alert, Icon} from 'antd'
+import {Button} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions';
@@ -82,7 +83,7 @@ const PlaceOrderResult = (props) => {
             <div className="fs18 mt15 mb10 color-black-1">{failedDesc}</div>
             {error && <Alert message={error} size="small" type="error" theme="light" icon={false}/>}
             {false && <div className="mt10">
-              <Button className="m5" type="default" onClick={gotToTrade}> {intl.get('place_order_result.back_to_trade')} </Button>
+              <Button className="m5 h-35" type="primary" onClick={gotToTrade}> {intl.get('place_order_result.back_to_trade')} </Button>
             </div>}
           </div>
         }
