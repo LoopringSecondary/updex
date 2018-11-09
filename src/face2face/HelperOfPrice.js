@@ -31,7 +31,7 @@ const HelperOfPrice = (props)=>{
           </span>
         </div>
         <div className="fs14 color-black-3 lh20 text-left">
-          Global Price 
+          {intl.get('common.global_price')}
           <span className="ml10">
             1 {tokenS} ≈ <Worth amount={1} symbol={tokenS}/>
           </span>
@@ -45,7 +45,7 @@ const HelperOfPrice = (props)=>{
           </span>
         </div>
         <div className="fs14 color-black-3 lh20 text-left">
-            Global Price 
+            {intl.get('common.global_price')}
             <span className="ml10">
               1 {tokenB} ≈ <Worth amount={1} symbol={tokenB}/>
             </span>
