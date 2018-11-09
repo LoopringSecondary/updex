@@ -176,28 +176,28 @@ class PlaceOrderForm extends React.Component {
         })
         return
       }
-      let allowed = false
-      let currency = preference.currency;
-      let priceSymbol = getDisplaySymbol(currency)
-      if(currency === 'USD') {
-        priceSymbol = '10' + priceSymbol
-        if(totalWorth.gt(10)) {
-          allowed = true
-        }
-      } else {
-        priceSymbol = '50' + priceSymbol
-        if(totalWorth.gt(50)) {
-          allowed = true
-        }
-      }
-      if(!allowed) {
-        Notification.open({
-          message:intl.get('notifications.title.not_allowed_place_order_worth'),
-          description:intl.get('notifications.message.not_allowed_place_order_worth', {worth: priceSymbol}),
-          type:'error'
-        })
-        return
-      }
+      // let allowed = false
+      // let currency = preference.currency;
+      // let priceSymbol = getDisplaySymbol(currency)
+      // if(currency === 'USD') {
+      //   priceSymbol = '10' + priceSymbol
+      //   if(totalWorth.gt(10)) {
+      //     allowed = true
+      //   }
+      // } else {
+      //   priceSymbol = '50' + priceSymbol
+      //   if(totalWorth.gt(50)) {
+      //     allowed = true
+      //   }
+      // }
+      // if(!allowed) {
+      //   Notification.open({
+      //     message:intl.get('notifications.title.not_allowed_place_order_worth'),
+      //     description:intl.get('notifications.message.not_allowed_place_order_worth', {worth: priceSymbol}),
+      //     type:'error'
+      //   })
+      //   return
+      // }
       const validSince = moment()
       let validUntil = null
       switch(trading.timeToLiveUnit) {
@@ -206,7 +206,6 @@ class PlaceOrderForm extends React.Component {
         case 'week': validUntil = moment().add(trading.timeToLive, 'weeks'); break;
         case 'month': validUntil = moment().add(trading.timeToLive, 'months'); break;
       }
-      console.log(1111, trading.timeToLive, trading.timeToLiveUnit, validUntil.format('MM-DD HH:mm'))
       dispatch({type:'placeOrder/validTimeChange', payload:{validSince, validUntil}})
       showLayer({id:'placeOrderSteps'})
     }
