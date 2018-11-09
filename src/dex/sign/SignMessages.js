@@ -14,7 +14,7 @@ class SignMessages extends React.Component {
 
   render(){
     const {sign, dispatch} = this.props
-    const {unsigned, signed} = sign
+    const {unsigned, signed, qrcode} = sign
     let actualSigned = signed ? signed.filter(item => item !== undefined && item !== null) : []
     let submitDatas = signed && unsigned.length === actualSigned.length ? (
       signed.map((item, index) => {
@@ -118,10 +118,17 @@ class SignMessages extends React.Component {
       }, function (error) {
         if(error){
           Toast.fail(error.message, 3, null, false)
+          window.RELAY.account.notifyCircular({
+            "owner" : window.Wallet.address,
+            "body" : {hash: qrcode.value, "status" : "txFailed"}
+          })
         } else {
-          Toast.success('Success', 3, null, false)
+          Toast.success(intl.get('notifications.title.place_order_success'), 3, null, false)
           dispatch({type: 'layers/hideLayer', payload: {id:'signMessages'}})
-          //TODO notify
+          window.RELAY.account.notifyCircular({
+            "owner" : window.Wallet.address,
+            "body" : {hash: qrcode.value, "status" : "accept"}
+          })
         }
       });
     }

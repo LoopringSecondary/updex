@@ -47,6 +47,10 @@ class Entry extends React.Component {
           case 'sign':
           case 'cancelOrder':
           case 'convert':
+            window.RELAY.account.notifyCircular({
+              "owner" : window.Wallet.address,
+              "body" : {hash: code.value, "status" : "received"}
+            })
             window.RELAY.order.getTempStore({key:code.value}).then(resp => {
               if(resp.error) {
                 throw `Unsupported type:${code.type}`
@@ -65,10 +69,13 @@ class Entry extends React.Component {
                 default:
                   throw `Unsupported type:${code.type}`
               }
-              dispatch({type:'sign/unsigned',payload:{unsigned}})
+              dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:code}})
               showLayer({id:'signMessages'})
             }).catch(e=>{
-
+              window.RELAY.account.notifyCircular({
+                "owner" : window.Wallet.address,
+                "body" : {hash: code.value, "status" : "reject"}
+              })
             })
             break;
           case 'P2P':
