@@ -613,6 +613,11 @@ export default {
     instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
     ios_only:'目前仅 iOS Wallet 支持扫码登录',
   },
+  unlock_by_imtoken: {
+    title:'使用imToken扫码登录',
+    instruction_scan: '打开您的imToken，扫描二维码，确认信息',
+    instruction_warn: '* 二维码有效时间10分钟，请尽快扫描确认。过期后请重新扫描',
+  },
   unlock_by_ledger:{
     title:'使用Ledger钱包解锁',
     unlock_steps_title: '与您的Ledger设备连接失败, 您可以参照以下建议',

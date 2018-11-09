@@ -126,6 +126,12 @@ class Auth extends React.Component {
     this.showLayer({id:'unlockByLoopr'})
   };
 
+  unlockByImtoken = () => {
+    storage.wallet.setLoopringUnlockWith('imToken')
+    this.loopringUnlock()
+    this.showLayer({id:'unlockByLoopr'})
+  };
+
   connectToMetamask = () => {
     this.checkMetaMaskState()
     const {dispatch} = this.props
@@ -247,6 +253,9 @@ class Auth extends React.Component {
         case 'upWallet':
           this.unlockByUpWallet();
           break;
+        case 'imToken':
+          this.unlockByImtoken();
+          break;
         case 'metaMask':
           const state = this.checkMetaMaskState()
           if(!browserType || browserType === 'Others' || (browserSupported && state === 'notInstalled')) {
@@ -301,8 +310,7 @@ class Auth extends React.Component {
             </div>
           </div>
           {
-            true &&
-            <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
+            <div onClick={()=>unlockTypeChanged('imToken')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
                 <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
               </div>

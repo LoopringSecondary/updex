@@ -170,6 +170,10 @@ function getRemoteConfig() {
     })
 }
 
+function getUrl (type) {
+  return config.urls[type]
+}
+
 export default {
   getTokenBySymbol,
   getTokenByAddress,
@@ -193,4 +197,5 @@ export default {
   getWallets,
   getCustomTokens,
   getRemoteConfig,
+  getUrl
 }

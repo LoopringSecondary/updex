@@ -14,6 +14,9 @@
   "demoAccount":"0xeba7136a36da0f5e16c6bdbc739c716bb5b65a00",
   "localStorageVersion":201809251505,
   "walletAddress":"0x56447c02767ba621f103c0f3dbf564dbcacf284b",
+  "urls":{
+    "imtoken": "https://10.137.111.51:8000"
+  },
   "contracts": [
     {
       "address": "0x8d8812b72d1e4ffCeC158D25f56748b7d67c1e78",

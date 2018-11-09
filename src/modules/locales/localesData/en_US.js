@@ -612,6 +612,11 @@ export default {
     instruction_warn: 'The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
     ios_only:'Only iOS Wallet Support For Now',
   },
+  unlock_by_imtoken: {
+    title:'Unlock With imToken',
+    instruction_scan: 'Open your imToken，scan the QRcode and confirm',
+    instruction_warn: 'The QRcode is valid for 10 minute, please scan as soon as possible. When expired, please scan the new QRcode generated automatically',
+  },
   unlock_by_ledger:{
     title:'Unlock With Ledger',
     unlock_steps_title: 'Failed to connect with your Ledger device, you could follow these advices and try again',
