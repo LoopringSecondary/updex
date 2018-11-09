@@ -3,7 +3,7 @@ import {Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
-import {Button} from 'antd-mobile'
+import {Button,Modal} from 'antd-mobile'
 import {scanQRCode, signMessage, signOrder, signTx} from 'common/utils/signUtils'
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
@@ -105,63 +105,62 @@ class Entry extends React.Component {
     const {dispatch} = this.props;
     const scan = () => {
       scanQRCode().then(res => {
-        if (!res.result) {
-          return
-        }
-        const type = routeActions.search.getQueryByName(res.result, 'type');
-        switch (type) {
-          case 'UUID':
+        if (res.result) {
+          const type = routeActions.search.getQueryByName(res.result, 'type');
+          switch (type) {
+            case 'UUID':
               this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
-            break;
-          case 'sign':
-          case 'cancelOrder':
-          case 'convert':
-            const hash = routeActions.search.getQueryByName(res.result, 'value')
-            window.RELAY.account.notifyCircular({
-              "owner" : window.Wallet.address,
-              "body" : {hash, "status" : "received"}
-            })
-            window.RELAY.order.getTempStore({key:hash}).then(resp => {
-              if(resp.error) {
-                throw `Unsupported type:${type}`
-              }
-              let unsigned = null
-              switch (type) {
-                case 'sign': // [{type:'', data:''}]
-                  unsigned = JSON.parse(resp.result)
-                  break;
-                case 'cancelOrder': // original order
-                  unsigned = [{type: 'cancelOrder', data: JSON.parse(resp.result)}]
-                  break;
-                case 'convert': // {tx: '', owner: ''}
-                  unsigned = [{type: 'convert', data: JSON.parse(resp.result).tx}]
-                  break;
-                default:
-                  throw `Unsupported type:${type}`
-              }
-              dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value}}})
-              this.showLayer({id:'signMessages'})
-            }).catch(e=> {
+              break;
+            case 'sign':
+            case 'cancelOrder':
+            case 'convert':
+              const hash = routeActions.search.getQueryByName(res.result, 'value')
               window.RELAY.account.notifyCircular({
-                "owner": window.Wallet.address,
-                "body": {hash: value, "status": "reject"}
+                "owner" : window.Wallet.address,
+                "body" : {hash, "status" : "received"}
               })
-            })
-            break;
-          case 'P2P':
-            const content = {}
-            const result = {}
-            const value = {}
-            value.hash = routeActions.search.getQueryByName(res.result, 'hash')
-            value.auth = routeActions.search.getQueryByName(res.result, 'auth')
-            value.count = Number(routeActions.search.getQueryByName(res.result, 'count'))
-            result.value =value
-            result.type = "P2P"
-            content.result = JSON.stringify(result)
-            window.handleP2POrder(content)
-            break;
-          default:
-            throw `Unsupported type:${type}`
+              window.RELAY.order.getTempStore({key:hash}).then(resp => {
+                if(resp.error) {
+                  throw `Unsupported type:${type}`
+                }
+                let unsigned = null
+                switch (type) {
+                  case 'sign': // [{type:'', data:''}]
+                    unsigned = JSON.parse(resp.result)
+                    break;
+                  case 'cancelOrder': // original order
+                    unsigned = [{type: 'cancelOrder', data: JSON.parse(resp.result)}]
+                    break;
+                  case 'convert': // {tx: '', owner: ''}
+                    unsigned = [{type: 'convert', data: JSON.parse(resp.result).tx}]
+                    break;
+                  default:
+                    throw `Unsupported type:${type}`
+                }
+                dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value}}})
+                this.showLayer({id:'signMessages'})
+              }).catch(e=> {
+                window.RELAY.account.notifyCircular({
+                  "owner": window.Wallet.address,
+                  "body": {hash: value, "status": "reject"}
+                })
+              })
+              break;
+            case 'P2P':
+              const content = {}
+              const result = {}
+              const value = {}
+              value.hash = routeActions.search.getQueryByName(res.result, 'hash')
+              value.auth = routeActions.search.getQueryByName(res.result, 'auth')
+              value.count = Number(routeActions.search.getQueryByName(res.result, 'count'))
+              result.value =value
+              result.type = "P2P"
+              content.result = JSON.stringify(result)
+              window.handleP2POrder(content)
+              break;
+            default:
+              throw `Unsupported type:${type}`
+          }
         }
       }).catch(e => {
         // Toast.fail(e, 10, null, false)
