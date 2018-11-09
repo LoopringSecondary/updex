@@ -27,7 +27,7 @@ const UnLogged = ()=>{
 }
 }
 const Logged = ()=>{
-  const isLogged =  !!(window.Wallet && window.Wallet.address)
+  const isLogged =  !!(storage.wallet.address)
   if(isLogged){
     return (
       <div>
