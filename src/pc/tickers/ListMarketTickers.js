@@ -292,7 +292,7 @@ class ListMarketTickers extends React.Component {
             className="bg-none"
             style={{marginTop:'0.2rem',marginBottom:'0.1rem'}}
             value={this.state.keyword}
-            showCancelButton={true}
+            showCancelButton={false}
           />
           <div className="divider 1px zb-b-t"></div>
           {this.state.keyword &&
