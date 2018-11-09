@@ -3,9 +3,8 @@ import {Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
-import {TabBar, Button, Modal, Toast} from 'antd-mobile'
-import {Icon as WebIcon} from 'antd'
-import {signTx, signOrder, scanQRCode, signMessage} from 'common/utils/signUtils'
+import {Button} from 'antd-mobile'
+import {scanQRCode, signMessage, signOrder, signTx} from 'common/utils/signUtils'
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
 
@@ -16,7 +15,7 @@ class Entry extends React.Component {
     const type = routeActions.location.getQueryByName(this.props, 'type')
     switch (type) {
       case "UUID":
-        this.authtoLogin(routeActions.location.getQueryByName(this.props, 'value'));
+        this.authToLogin(routeActions.location.getQueryByName(this.props, 'value'));
         break;
       case "P2P":
         const res = {}
@@ -69,25 +68,27 @@ class Entry extends React.Component {
     }
   }
 
-  authtoLogin = (uuid) => {
+  authToLogin = (uuid) => {
     const timestamp = moment().unix().toString();
     signMessage(timestamp).then(res => {
-      window.RELAY.account.notifyScanLogin({
-        sign: {...res.result, owner: window.Wallet.address, timestamp},
-        uuid
-      }).then(resp => {
-        if (resp.result) {
-          Notification.open({
-            description: intl.get('notifications.title.auth_suc'),
-            type: 'success'
-          })
-        } else {
-          Notification.open({
-            description: res.error.message,
-            type: 'error'
-          })
-        }
-      })
+      if(res.result){
+        window.RELAY.account.notifyScanLogin({
+          sign: {...res.result, owner: window.Wallet.address, timestamp},
+          uuid
+        }).then(resp => {
+          if (resp.result) {
+            Notification.open({
+              description: intl.get('notifications.title.auth_suc'),
+              type: 'success'
+            })
+          } else {
+            Notification.open({
+              description: res.error.message,
+              type: 'error'
+            })
+          }
+        })
+      }
     })
   }
 
@@ -101,28 +102,26 @@ class Entry extends React.Component {
   }
 
   render() {
-    const {match, location, dispatch} = this.props;
-
-
+    const {dispatch} = this.props;
     const scan = () => {
       scanQRCode().then(res => {
         if (!res.result) {
           return
         }
-        const type = routeActions.search.getQueryByName(res.result, 'type')
-        const value = routeActions.search.getQueryByName(res.result, 'value')
+        const type = routeActions.search.getQueryByName(res.result, 'type');
         switch (type) {
           case 'UUID':
-            this.authtoLogin(value);
+              this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
             break;
           case 'sign':
           case 'cancelOrder':
           case 'convert':
+            const hash = routeActions.search.getQueryByName(res.result, 'value')
             window.RELAY.account.notifyCircular({
               "owner" : window.Wallet.address,
-              "body" : {hash: value, "status" : "received"}
+              "body" : {hash, "status" : "received"}
             })
-            window.RELAY.order.getTempStore({key: value}).then(resp => {
+            window.RELAY.order.getTempStore({key:hash}).then(resp => {
               if(resp.error) {
                 throw `Unsupported type:${type}`
               }
