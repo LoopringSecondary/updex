@@ -13,10 +13,10 @@ export default {
       //yield put({ type: 'tokenChange',payload});
     },
     * unsigned({ payload={} }, { put }) {
-      const {unsigned} = payload
+      const {unsigned, qrcode} = payload
       yield put({ type: 'unsignedChange',payload:{unsigned}})
       yield put({ type: 'signedChange',payload:{signed:[]}})
-      yield put({ type: 'qrcodeChange',payload:{qrcode:''}});
+      yield put({ type: 'qrcodeChange',payload:{qrcode}});
     },
   },
   reducers: {
