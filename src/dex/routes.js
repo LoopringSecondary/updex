@@ -28,7 +28,7 @@ const UnLogged = ()=>{
     )
 }
 }
-const Logged = ()=>{
+const Logged = (props)=>{
   const isLogged =  !!(window.Wallet && window.Wallet.address)
   if(isLogged){
     return (
@@ -45,7 +45,7 @@ const Logged = ()=>{
           <Route path={`/dex/convert/:token`} component={Convert} />
           <Route path={`/dex/notifications`} component={Notifications} />
           <Route path={`/dex/todos`} exact component={ListTodos} />
-          <Redirect from="/dex" to="/dex/entry" />
+          <Redirect from="/dex" to= {`/dex/entry${props.location.search}`} />
         </Switch>
         <CommonModals />
         <Orders.Modals />
