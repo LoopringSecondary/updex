@@ -181,6 +181,11 @@ class TakerConfirm extends React.Component {
                     if (resp.result) {
                       Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
                       hideLayer({id: 'takerConfirm'})
+                      window.RELAY.account.notifyTransactionSubmitted({
+                        txHash: resp.result,
+                        rawTx: tx,
+                        from: address
+                      })
                     } else {
                       Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
                     }

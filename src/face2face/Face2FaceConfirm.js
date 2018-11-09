@@ -188,7 +188,7 @@ function PlaceOrderSteps (props) {
         dispatch({type:'p2pOrder/setFetchOrder',payload:{fetchOrder:true}});
         Notification.open({
           message: intl.get('notifications.title.place_order_success'),
-          description: 'successfully submit order',
+          description: intl.get('notifications.title.place_order_success'),
           type: 'info'
         })
 
@@ -206,7 +206,8 @@ function PlaceOrderSteps (props) {
         })
 
         if(storage.wallet.getUnlockedType() === 'imtoken'){
-          qrcode = qrcode.replace(/"/g,"\\\"");
+          const url  = window.location.href.split('#')[0].concat('#/auth/imtoken')
+          qrcode = url.concat(`?type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
         }
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})

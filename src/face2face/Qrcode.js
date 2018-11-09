@@ -7,6 +7,8 @@ import intl from 'react-intl-universal'
 import TokenFm from "modules/tokens/TokenFm";
 import {toFixed,toNumber} from 'LoopringJS/common/formatter'
 import { share } from '../common/utils/signUtils'
+import storage from 'modules/storage'
+
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -30,6 +32,12 @@ class OrderQrcode extends React.Component{
     const {originalOrder:{tokenS,tokenB,amountS,amountB,validUntil}} = orderFm.order
     const tokensFm = new TokenFm({symbol:tokenS})
     const tokenbFm = new TokenFm({symbol:tokenB})
+    let qrcodeContent = JSON.stringify(value)
+    if(storage.wallet.getUnlockedType() === 'imtoken'){
+      const url  = window.location.href.split('#')[0].concat('#/auth/imtoken')
+      qrcodeContent  = url.concat(`?type=P2P&auth=${value.value.auth}&hash=${value.value.hash}&count=${value.value.count}`);
+    }
+
     const shareOrder = () => {
       const content = {type:'p2pOrder',content:value}
       content.extra = {
@@ -64,7 +72,7 @@ class OrderQrcode extends React.Component{
         </div>
         <div className="text-center mt15">
           <div className="p15 d-inline-block" style={{background:'#fff'}}>
-            <QRCode value={JSON.stringify(value)} size={240} level='H'/>
+            <QRCode value={qrcodeContent} size={240} level='H'/>
           </div>
         </div>
         <div className="m15 zb-b-t p15 text-center">
