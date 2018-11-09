@@ -35,6 +35,10 @@ class UserInfo extends React.Component {
           icon = <i className="icon-Metamaskwallet"></i>
           title = "MetaMask"
           break;
+        case 'imtoken':
+          icon = <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
+          title = "imToken"
+          break;
         case 'ledger':
           icon = <i className="icon-ledgerwallet"></i>
           title = "Ledger"
@@ -61,13 +65,13 @@ class UserInfo extends React.Component {
         }
         {
           !!address &&
-          <div className="row no-gutters ml0 mr0 align-items-center pl30 pr30 bg-primary circle ml10 mr10 position-relative" style={{height:'80%',top:'9.5%'}}>
+          <div className="row no-gutters ml0 mr0 align-items-center pl30 pr30 bg-primary circle ml10 mr10 position-relative" style={{height:'78%',top:'11%'}}>
             <div className="col-auto color-white fs22 pr10">
               {icon}
             </div>
             <div className="col">
-              <div className="fs13 color-white color-white">{getShortAddress(address)}</div>
-              <div className="fs12 color-white color-white lh15">{title}</div>
+              <div className="fs13 color-white color-white" style={{lineHeight:"1em"}}>{getShortAddress(address)}</div>
+              <div className="fs12 color-white color-white mt5" style={{lineHeight:"1em"}}>{title}</div>
             </div>
            
           </div>
