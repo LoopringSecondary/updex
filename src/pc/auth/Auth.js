@@ -301,7 +301,7 @@ class Auth extends React.Component {
             </div>
           </div>
           {
-            true &&
+            false &&
             <div onClick={()=>unlockTypeChanged('loopr')} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
                 <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
@@ -401,7 +401,7 @@ class Auth extends React.Component {
           </Spin>
           {
             placeOrderSteps.step === 0 &&
-            <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-white-light hover-bg-primary h-55"
+            <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row mt15 ml15 mr15 p15 no-gutters align-items-center bg-white-light-bak bg-primary h-55"
                 pt5 pb5  style={{borderRadius:'50em'}}>
               <div className="col-auto text-left pl15 w-60">
                 <i className="icon-eye color-black-2 fs22"></i>

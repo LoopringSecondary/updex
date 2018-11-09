@@ -4,9 +4,11 @@ export default {
     ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": true },'antd'],
     // ["@babel/transform-runtime",{regenerator:true}],
 	],
+  hash:true,
   // multipage:true,
   // entry:'./src/assets/css/themes/*.less',
   // outputPath:'dist/themes',
+  // hash:false,
   // output:{
   //  path:'dist/themes',
   //  filename:'[name].css',
@@ -16,7 +18,7 @@ export default {
   // },
   // extraBabelPresets: ["@babel/env",'@babel/react'],
   disableCSSModules: true,
-  hash:true,
+  
 	"alias":{
     "LoopringJS":`loopring.js/lib`,
     "LoopringUI":`${__dirname}/src/common/loopringui/`,
