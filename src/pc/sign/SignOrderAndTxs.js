@@ -19,7 +19,6 @@ const PlaceOrderSign = (props) => {
     })
   ) : new Array()
 
-
   async function sign(item, index, e) {
     e.preventDefault()
     e.stopPropagation()
@@ -50,6 +49,7 @@ const PlaceOrderSign = (props) => {
           const owner = await window.WALLET.getAddress()
           signResult = {sign:{...cancelOrder, owner, timestamp}, ...item.data};
           break;
+        case 'tx':
         case 'approve':
         case 'approveZero':
         case 'convert':
@@ -107,6 +107,7 @@ const PlaceOrderSign = (props) => {
             callback(cancelRes.error)
           }
           break;
+        case 'tx':
         case 'approve':
         case 'approveZero':
         case 'convert':
@@ -165,6 +166,13 @@ const PlaceOrderSign = (props) => {
 
   const Description = ({tx}) => {
     switch(tx.type) {
+      case 'tx':
+        if(tx.title === 'approve') {
+          return intl.get('sign.type_approve', {token:tx.token})
+        } else if(tx.title === 'approveZero') {
+          return intl.get('sign.type_cancel_allowance', {token:tx.token})
+        }
+        return ''
       case 'order':
         return intl.get('sign.type_sign_order')
       case 'cancelOrder':
