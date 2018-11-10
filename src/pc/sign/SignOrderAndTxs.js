@@ -50,6 +50,7 @@ const PlaceOrderSign = (props) => {
           const owner = await window.WALLET.getAddress()
           signResult = {sign:{...cancelOrder, owner, timestamp}, ...item.data};
           break;
+        case 'tx':
         case 'approve':
         case 'approveZero':
         case 'convert':
@@ -107,6 +108,7 @@ const PlaceOrderSign = (props) => {
             callback(cancelRes.error)
           }
           break;
+        case 'tx':
         case 'approve':
         case 'approveZero':
         case 'convert':
