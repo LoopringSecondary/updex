@@ -401,7 +401,8 @@ export default {
     count:"订单拆分份数",
     set_count:"设置订单拆分份数",
     share_page : '截图并分享给你的朋友',
-    scan_with_upwallet: '请使用UP Wallet手机版进行扫码吃单'
+    scan_with_upwallet: '请使用UP Wallet手机版进行扫码吃单',
+    visit_later:'网页 P2P 交易正在维护中，请稍后访问！',
   },
   sign: {
     not_signed: '您还未完成签名',

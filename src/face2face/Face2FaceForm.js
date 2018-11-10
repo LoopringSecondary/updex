@@ -155,7 +155,10 @@ class Face2FaceForm extends React.Component {
               </List>
             </div>
           </div>
-          <Button className="mt15" onClick={submitOrder} type="primary">{intl.get('common.exchange')}</Button>
+          <div  className="mt15 text-primary border-none fs13 text-center">
+            <WebIcon type="tool" /> {intl.get('p2p_order.visit_later')}
+          </div>
+          <Button disabled className="mt15 cursor-not-allowed"  onClick={submitOrder} type="primary">{intl.get('common.exchange')}</Button>
         </div>
       </div>
     );
