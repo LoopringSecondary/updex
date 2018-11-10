@@ -151,7 +151,7 @@ function PlaceOrderSteps (props) {
       signedOrder.powNonce = 100
       let failed = false;
      const txs = unsigned.filter(item => item.type === 'tx')
-      eachOfLimit(txs, 1, async (item) => {
+      eachOfLimit(txs, 1, async (item,key,callback) => {
         signTx(item.data).then(res => {
           if (res.result) {
             window.ETH.sendRawTransaction(res.result).then(resp => {
@@ -161,8 +161,13 @@ function PlaceOrderSteps (props) {
                   rawTx: item.data,
                   from: window.Wallet.address
                 })
+                callback()
+              }else{
+                callback(resp.error)
               }
             })
+          }else{
+            callback(res.error)
           }
         })
       }, function (e) {
