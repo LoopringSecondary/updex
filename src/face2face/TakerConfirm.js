@@ -126,7 +126,7 @@ class TakerConfirm extends React.Component {
         return
       }
       try {
-        const {unsigned} = await orderFormatter.signP2POrder(tradeInfo, (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress())
+        const {unsigned} = await orderFormatter.signP2POrder(tradeInfo,address)
         const signResult = await signOrder(completeOrder)
         if (signResult.error) {
           Notification.open({
@@ -138,6 +138,7 @@ class TakerConfirm extends React.Component {
         }
         const signedOrder = {...completeOrder, ...signResult.result,powNonce : 100}
         const txs = unsigned.filter(item => item.type === 'tx');
+        console.log(JSON.stringify(txs))
         eachOfLimit(txs, 1, async (item,key,callback) => {
           signTx(item.data).then(res => {
             if (res.result) {
@@ -146,7 +147,7 @@ class TakerConfirm extends React.Component {
                   window.RELAY.account.notifyTransactionSubmitted({
                     txHash: resp.result,
                     rawTx: item.data,
-                    from: window.Wallet.address
+                    from: address
                   })
                   callback()
                 }else {
@@ -165,7 +166,7 @@ class TakerConfirm extends React.Component {
               type: 'error'
             })
           }else{
-            const nonce = txs.length >0 ? toHex(toNumber(txs[txs.length -1].nonce) + 1) :toHex((await window.RELAY.account.getNonce(address)).result)
+            const nonce = txs.length >0 ? toHex(toNumber(txs[txs.length -1].data.nonce) + 1) :toHex((await window.RELAY.account.getNonce(address)).result)
             const tx = {
               value: '0x0',
               gasLimit: config.getGasLimitByType('submitRing').gasLimit,
@@ -176,7 +177,7 @@ class TakerConfirm extends React.Component {
               data:Contracts.LoopringProtocol.encodeSubmitRing([{...signedOrder},{...makerOrder.originalOrder,
                 tokenS:config.getTokenBySymbol(makerOrder.originalOrder.tokenS).address,
                 tokenB:config.getTokenBySymbol(makerOrder.originalOrder.tokenB).address,
-                owner:makerOrder.originalOrder.address,marginSplitPercentage:toNumber(makerOrder.originalOrder.marginSplitPercentage)}],(storage.wallet.getRewardAddress()) || config.getWalletAddress())
+                owner:makerOrder.originalOrder.address,marginSplitPercentage:toNumber(makerOrder.originalOrder.marginSplitPercentage)}],address)
           };
             window.RELAY.order.placeOrder({...signedOrder,authPrivateKey:''}).then(response=> {
               signTx(tx).then(res => {
@@ -185,6 +186,11 @@ class TakerConfirm extends React.Component {
                     if (resp.result) {
                       Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
                       hideLayer({id: 'takerConfirm'})
+                      window.RELAY.account.notifyTransactionSubmitted({
+                        txHash: resp.result,
+                        rawTx: tx,
+                        from: address
+                      })
                     } else {
                       Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
                     }
