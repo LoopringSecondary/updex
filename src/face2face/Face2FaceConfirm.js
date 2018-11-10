@@ -42,7 +42,7 @@ function PlaceOrderSteps (props) {
   let {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
   amountS =  toBig(amountS)
   amountB = toBig(amountB)
-  const validSince = p2pOrder.validSince || moment()
+  const validSince = p2pOrder.validSince || moment().subtract(1, 'hours')
   const validUntil = p2pOrder.validUntil || moment().add(1, 'months')
   const price = toFixed(amountS.div(amountB), 4)
 
