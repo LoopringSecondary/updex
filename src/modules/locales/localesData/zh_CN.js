@@ -77,6 +77,7 @@ const words = {
     loading: '加载中...',
   },
   mode:'模式',
+  global_price:'全网价',
 }
 
 const types = {
@@ -399,8 +400,9 @@ export default {
     set_sell_amount:"设定售出数量",
     count:"订单拆分份数",
     set_count:"设置订单拆分份数",
-    share_page : '分享页面给你的朋友',
-    scan_with_upwallet: '请使用UP Wallet手机版进行扫码吃单'
+    share_page : '截图并分享给你的朋友',
+    scan_with_upwallet: '请使用UP Wallet手机版进行扫码吃单',
+    visit_later:'网页 P2P 交易正在维护中，请稍后访问！',
   },
   sign: {
     not_signed: '您还未完成签名',

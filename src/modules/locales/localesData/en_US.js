@@ -76,6 +76,7 @@ const words = {
     loading:'Loading...',
   },
   mode:'Mode',
+  global_price:'Global Price',
 }
 const types = {
   trade_side: {
@@ -397,8 +398,9 @@ export default {
     set_sell_amount:"Set sell amount",
     count:"Order split count",
     set_count:"Set order split count ",
-    share_page : 'Share this page with your friends',
-    scan_with_upwallet: 'Please scan the QR code and submit with your UP Wallet'
+    share_page : 'Take a screenshot and share it with your friends',
+    scan_with_upwallet: 'Please scan the QR code and submit with your UP Wallet',
+    visit_later:"P2P Of Web is Maintaining, please visit later!",
   },
   sign: {
     not_signed: "You may have some items not signed",
@@ -802,4 +804,5 @@ export default {
   coming_soon:{
     visit_on_pc:"Please visit https://circulr.loopring.io on PC",
   },
+
 }

@@ -417,6 +417,23 @@ class Auth extends React.Component {
               </div>
             </div>
           }
+          {
+            true &&
+            <div onClick={()=>{}} className="cursor-not-allowed row mt15 ml15 mr15 p15 no-gutters align-items-center bg-primary h-55" style={{borderRadius:'50em'}}>
+              <div className="col-auto text-left pl15 w-60">
+                <img className="h-25" src={require('../../assets/images/imtoken-white.png')} alt=""/>
+              </div>
+              <div className="col text-left">
+                <div className="fs16 color-black-1 text-left">imToken</div>
+              </div>
+              <div className="col-auto text-right">
+                <div className="fs14 text-wrap text-left">
+                  <span className="fs13 color-black-2 mr5">{intl.get('common.comingsoon')}</span>
+                  <Icon className="color-black-2" type="right"/>
+                </div>
+              </div>
+            </div>
+          }
         </div>
       </div>
     )
