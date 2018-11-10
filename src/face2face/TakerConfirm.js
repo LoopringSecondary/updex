@@ -37,8 +37,8 @@ class TakerConfirm extends React.Component {
   render () {
     const {dispatch, takerConfirm, gas,balance,pendingTx,socket} = this.props
     const {makerOrder} = takerConfirm
-    const validSince = monent()
-    const validUntil = monent().add(1, 'd')
+    const validSince = monent().subtract(1, 'hours')
+    const validUntil = monent().add(2, 'd')
     const order = {}
     order.delegateAddress = makerOrder.originalOrder.delegateAddress
     order.protocol = makerOrder.originalOrder.protocol
@@ -138,7 +138,6 @@ class TakerConfirm extends React.Component {
         }
         const signedOrder = {...completeOrder, ...signResult.result,powNonce : 100}
         const txs = unsigned.filter(item => item.type === 'tx');
-        console.log(JSON.stringify(txs))
         eachOfLimit(txs, 1, async (item,key,callback) => {
           signTx(item.data).then(res => {
             if (res.result) {
