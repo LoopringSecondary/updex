@@ -14,9 +14,9 @@ import NumberOfTodos from "../dex/notifications/NumberOfTodos";
 
 class Face2FacePage extends React.Component {
 
-  // componentDidMount(){
-  //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"8dfe21ff4efb74f89274c13b32a19489edd2597171dba74421ec2985f12ced60","hash":"0x7693ebf0018da0d78f15db979482509f6bb4424e82d3689217016c04382b4e45","count":1}})})
-  // }
+  componentDidMount(){
+     window.handleP2POrder({result:JSON.stringify({value:{"auth":"353dfae76f2fa7956b293ce26ccaaf7d7b6e6c0b1c7bf329e6f0c533a7076b5a","hash":"0x8d6a064415b246065c297f47858cb84d57c3186726a5451fbb4b7f654dc39035","count":1}})})
+  }
   render() {
     const {dispatch,placeOrder} = this.props
     const {side,pair} = placeOrder

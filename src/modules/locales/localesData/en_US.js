@@ -325,7 +325,9 @@ export default {
     amount_to_buy:'Amount to buy',
     set_sell_amount:"Set sell amount",
     count:"Order split count",
-    set_count:"Set order split count "
+    set_count:"Set order split count ",
+    maker_balance_not_enough:"{token} balance of maker order is not enough,current is {balance}, required is {required} ",
+    maker_allowance_not_enough:"{token} allowance of maker order is not enough,current is {allowance}, required is {required}"
   },
   sign: {
     not_signed: "You may have some items not signed",
