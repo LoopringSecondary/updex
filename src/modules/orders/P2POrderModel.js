@@ -1,8 +1,8 @@
 import config from 'common/config'
 import { toBig } from 'LoopringJS/common/formatter'
 import {Toast} from 'antd-mobile'
-const MODULES = 'p2pOrder'
 import intl from 'react-intl-universal'
+const MODULES = 'p2pOrder'
 
 export default {
   namespace: MODULES,
