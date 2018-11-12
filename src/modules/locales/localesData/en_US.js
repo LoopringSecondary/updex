@@ -75,6 +75,19 @@ const words = {
     loading:'Loading...',
   }
 }
+const errors = {
+  10001:'Sorry, system error, please try again later',
+  32000:'Sorry, balance is not enough to submit order',
+  50001:'Sorry, selling order does not exist, could not complete this order',
+  50002:'Sorry, only p2p order could be submitted, could not complete this order',
+  50003:'Sorry, selling order already dealt with another buying order, please try with other orders',
+  50004:'Sorry, selling and buying price did not match between two orders, could not complete this order',
+  50005:'Sorry, owner of buying order is the same as selling\'s, could not complete this order',
+  50006:'Sorry, buying order has expired, please try with other orders',
+  50007:'Sorry, undealt amount of order is too small, could not complete this order',
+  50008:'Sorry, buying order does not exist, could not complete this order',
+}
+
 const types = {
   trade_side: {
     sell: words.sell,
@@ -170,6 +183,7 @@ export default {
     ...words,
     ...validation_messages,
     ...time_unit,
+    ...errors
   },
   notifications,
   actions,

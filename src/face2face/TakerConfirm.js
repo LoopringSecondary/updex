@@ -84,24 +84,24 @@ class TakerConfirm extends React.Component {
         Notification.open({description: intl.get('notifications.message.wait_for_load_data'), type: 'error'});
         return
       }
-      const makerOrderErrors = await orderFormatter.verifyMakerOrder(makerOrder.originalOrder,makerOrder.count);
+      const makerOrderErrors = await orderFormatter.verifyMakerOrder(makerOrder.originalOrder, makerOrder.count);
       if (makerOrderErrors.length > 0) {
         const item = makerOrderErrors[0]
-        if(item.type === "BalanceNotEnough"){
+        if (item.type === "BalanceNotEnough") {
           Notification.open({
             description: intl.get('p2p_order.maker_balance_not_enough', {
               required: item.value.required,
-              balance:item.value.balance,
+              balance: item.value.balance,
               token: item.value.symbol
             }),
             type: 'error',
           })
         }
-        if(item.type === "AllowanceNotEnough"){
+        if (item.type === "AllowanceNotEnough") {
           Notification.open({
             description: intl.get('p2p_order.maker_allowance_not_enough', {
               required: item.value.required,
-              allowance:item.value.balance,
+              allowance: item.value.balance,
               token: item.value.symbol
             }),
             type: 'error',
@@ -223,7 +223,18 @@ class TakerConfirm extends React.Component {
                 marginSplitPercentage: toNumber(makerOrder.originalOrder.marginSplitPercentage)
               }], address)
             };
-            window.RELAY.order.placeOrderForP2P({...signedOrder, authPrivateKey: ''},makerOrder.originalOrder.hash).then(response => {
+            window.RELAY.order.placeOrderForP2P({
+              ...signedOrder,
+              authPrivateKey: ''
+            }, makerOrder.originalOrder.hash).then(response => {
+              if (response.error) {
+                Notification.open({
+                  message: intl.get('notifications.title.place_order_failed'),
+                  description: response.error.code ? intl.get('common.errors' + response.error.message) : response.error.message,
+                  type: 'error'
+                })
+                return;
+              }
               signTx(tx).then(res => {
                 if (res.result) {
                   window.RELAY.ring.submitRingForP2P({
@@ -240,7 +251,11 @@ class TakerConfirm extends React.Component {
                         from: address
                       })
                     } else {
-                      Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
+                      Notification.open({
+                        message: intl.get('notifications.title.submit_ring_fail'),
+                        description: resp.error.code ? intl.get('common.errors' + resp.error.message) : resp.error.message,
+                        type: 'error'
+                      })
                     }
                   })
                 } else {
