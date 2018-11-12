@@ -30,7 +30,7 @@ class Face2FaceForm extends React.Component {
     function validateAmountS(value) {
       if(p2pOrder.tokenS) {
         const tokenBalance = getBalanceBySymbol({balances:balance, symbol:p2pOrder.tokenS, toUnit:true})
-        return tokenBalance.balance.gt(value)
+        return tokenBalance.balance.gte(value)
       } else {
         return false
       }
@@ -64,6 +64,7 @@ class Face2FaceForm extends React.Component {
         Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
         return
       }
+      // 验证历史订单
       showLayer({id:'face2FaceConfirm'})
     }
     const price = amountB && toBig(amountB).gt(0) && amountS && toBig(amountS).gt(0) ? toFixed(toBig(amountS).div(amountB), 8) : toFixed(toBig(0),8)
