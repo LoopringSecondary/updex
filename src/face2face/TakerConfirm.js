@@ -223,7 +223,7 @@ class TakerConfirm extends React.Component {
                 marginSplitPercentage: toNumber(makerOrder.originalOrder.marginSplitPercentage)
               }], address)
             };
-            window.RELAY.order.placeOrder({...signedOrder, authPrivateKey: ''}).then(response => {
+            window.RELAY.order.placeOrderForP2P({...signedOrder, authPrivateKey: ''},makerOrder.originalOrder.hash).then(response => {
               signTx(tx).then(res => {
                 if (res.result) {
                   window.RELAY.ring.submitRingForP2P({

@@ -76,7 +76,6 @@ const words = {
     loading: '加载中...',
   }
 }
-
 const types = {
   trade_side: {
     sell: words.sell,
@@ -329,7 +328,8 @@ no_open_orders: '{market}暂无有效订单',
     count:"订单拆分份数",
     set_count:"设置订单拆分份数",
     maker_balance_not_enough:"maker 订单的{token} 余额不足,当前余额是 {balance},需要{required}",
-    maker_allowance_not_enough:"maker 订单的{token} 授权不足,当前授权是 {allowance},需要{required}"
+    maker_allowance_not_enough:"maker 订单的{token} 授权不足,当前授权是 {allowance},需要{required}",
+    allowance_not_enough:'{token} 授权不足,当前授权是 {allowance},需要{required}'
   },
   sign: {
     not_signed: '您还未完成签名',
