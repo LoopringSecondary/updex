@@ -45,7 +45,7 @@ class Face2FaceOrders extends React.Component {
       orderType:"p2p_order"
     }).then(res => {
       if (res.result) {
-        const total = res.result.total / pageSize + res.result.total % pageSize ? 1 : 0
+        const total = Math.ceil(res.result.total / pageSize)
         this.setState({orders: res.result.data, total, loading: false})
       } else {
         this.setState({loading: false})
@@ -56,7 +56,7 @@ class Face2FaceOrders extends React.Component {
   pageChange = (page) => {
     this.setState({loading:true})
     const {pageSize} = this.state
-    const pageIndex = page.current
+    const pageIndex = page
     const owner = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
     window.RELAY.order.getOrders({
       owner,
@@ -66,8 +66,8 @@ class Face2FaceOrders extends React.Component {
       orderType:"p2p_order"
     }).then(res => {
       if (res.result) {
-        const total = res.result.total / pageSize + res.result.total % pageSize ? 1 : 0
-        this.setState({orders: res.result.data, total, pageIndex: pageIndex + 1,loading:false})
+        const total = Math.ceil(res.result.total / pageSize)
+        this.setState({orders: res.result.data, total, pageIndex: pageIndex,loading:false})
       }else{
         this.setState({loading:false})
       }
