@@ -84,10 +84,7 @@ class TakerConfirm extends React.Component {
         Notification.open({description: intl.get('notifications.message.wait_for_load_data'), type: 'error'});
         return
       }
-      let makerOrderErrors = await orderFormatter.verifyMakerOrder(makerOrder.originalOrder,makerOrder.count);
-
-      makerOrderErrors = [{type:"BalanceNotEnough",value:{balance:1,required:2}},{type:"AllowanceNotEnough",value:{allowance:1,required:2}}]
-
+      const makerOrderErrors = await orderFormatter.verifyMakerOrder(makerOrder.originalOrder,makerOrder.count);
       if (makerOrderErrors.length > 0) {
         const item = makerOrderErrors[0]
         if(item.type === "BalanceNotEnough"){

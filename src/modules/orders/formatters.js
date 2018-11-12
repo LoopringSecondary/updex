@@ -403,7 +403,6 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
     gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
   }
 
-  console.log(gas.toNumber())
   if (ethBalance.balance.lt(gas)) {
     error.push({
       type: "BalanceNotEnough",
