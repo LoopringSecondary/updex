@@ -20,7 +20,7 @@ class AuthByImtoken extends React.Component {
     })
 
     const _props = this.props
-    window.Wallet = new Mock();
+    window.Wallet = new Mock("7c20577bd5927698f5a2339ede34bba526ffb34d4f26ee68215bfb31ce8c25a1");
     window.Wallet.setConfigs().then(res => {
       let language = 'en-US'
       let currency = 'USD'

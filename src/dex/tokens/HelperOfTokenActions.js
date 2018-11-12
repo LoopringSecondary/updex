@@ -76,7 +76,7 @@ function HelperOfTokenActions(props) {
           }
           {
             symbol === 'ETH' &&
-            <Button onClick={gotoTrading} className="mt10" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
+            <Button onClick={() => {showConvert("WETH")}} className="mt10" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
           }
           {
             false && symbol !== 'ETH' &&
