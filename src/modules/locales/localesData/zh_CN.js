@@ -403,6 +403,8 @@ export default {
     share_page : '截图并分享给你的朋友',
     scan_with_upwallet: '请使用UP Wallet手机版进行扫码吃单',
     visit_later:'网页 P2P 交易正在维护中，请稍后访问！',
+    frozen_balance_not_enough:'有效订单中占用了{amount}{token}(市场单和P2P订单)，累加当前订单卖出后余额不足，请减少当前订单卖出数量或取消历史订单',
+    allowance_not_enough:'请先在资产列表中授权{token}，生效后才可以继续下单'
   },
   sign: {
     not_signed: '您还未完成签名',

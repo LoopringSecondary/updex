@@ -6,11 +6,18 @@ import { getBalanceBySymbol, isValidNumber } from 'modules/tokens/TokenFm'
 import { getDisplaySymbol, toBig, toFixed, toHex ,toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import Worth from 'modules/settings/Worth'
+import TokenFm from 'modules/tokens/TokenFm'
+import config from 'common/config'
+import {p2pVerification} from 'modules/orders/formatters'
 
 class Face2FaceForm extends React.Component {
+  state = {
+    submitLoading:false
+  }
   render() {
-    const {balance, p2pOrder, dispatch} = this.props
-    const {amountB,amountS} = p2pOrder
+    const {balance, p2pOrder, pendingTx, gas, dispatch} = this.props
+    const {amountB,amountS,tokenS,tokenB} = p2pOrder
+    const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
     const showLayer = (payload={})=>{
       dispatch({
         type:'layers/showLayer',
@@ -55,7 +62,7 @@ class Face2FaceForm extends React.Component {
         dispatch({type:'p2pOrder/amountChange', payload:{'amountS':value}})
       }
     }
-    const submitOrder = ()=>{
+    const submitOrder = async ()=>{
       if(!amountB || !amountS || !isValidNumber(amountB)  || !isValidNumber(amountS) || !Number(amountB) || !Number(amountS)) {
         Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
         return
@@ -64,8 +71,34 @@ class Face2FaceForm extends React.Component {
         Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
         return
       }
-      // 验证历史订单
-      showLayer({id:'face2FaceConfirm'})
+      this.setState({submitLoading:true})
+      const tradeInfo = {}
+      tradeInfo.amountB = toBig(amountB)
+      tradeInfo.amountS = toBig(amountS)
+      tradeInfo.tokenB = tokenB
+      tradeInfo.tokenS = tokenS
+      try {
+        await p2pVerification(balance, tradeInfo, pendingTx ? pendingTx.items : [], gasPrice)
+      } catch (e) {
+        Toast.fail(e.message, 3, null, false);
+        this.setState({submitLoading:false})
+        return
+      }
+      if (tradeInfo.error && tradeInfo.error.length > 0) {
+        tradeInfo.error.map(item => {
+          switch(item.type) {
+            case 'BalanceNotEnough':
+              Toast.fail(intl.get('p2p_order.frozen_balance_not_enough',{amount:item.value.required, token:item.value.symbol}), 8, null, false);
+              break;
+            case 'AllowanceNotEnough':
+              Toast.fail(intl.get('p2p_order.allowance_not_enough',{token:item.value.symbol}), 8, null, false);
+              break;
+          }
+        })
+      } else {
+        showLayer({id:'face2FaceConfirm'})
+      }
+      this.setState({submitLoading:false})
     }
     const price = amountB && toBig(amountB).gt(0) && amountS && toBig(amountS).gt(0) ? toFixed(toBig(amountS).div(amountB), 8) : toFixed(toBig(0),8)
     return (
@@ -156,7 +189,7 @@ class Face2FaceForm extends React.Component {
               </List>
             </div>
           </div>
-          <Button className="mt15"  onClick={submitOrder} type="primary">{intl.get('common.exchange')}</Button>
+          <Button className="mt15"  onClick={submitOrder} type="primary" disabled={this.state.submitLoading}>{intl.get('common.exchange')}</Button>
         </div>
       </div>
     );
@@ -164,10 +197,14 @@ class Face2FaceForm extends React.Component {
 }
 export default connect(({
   sockets,
-  p2pOrder
+  p2pOrder,
+  pendingTx,
+  gas
 }) => ({
   p2pOrder:p2pOrder,
   balance:sockets.balance.items,
+  pendingTx:pendingTx,
+  gas:gas,
 }))(Face2FaceForm)
 
 
