@@ -217,7 +217,8 @@ export default {
     expired: '已过期',
     pending: '打包中',
     canceling: '取消中',
-    waiting:"撮合中"
+    waiting:"撮合中",
+    locked:"已锁定"
   },
   order_side: {
     sell: words.sell,
@@ -343,7 +344,8 @@ no_open_orders: '{market}暂无有效订单',
     set_count:"设置订单拆分份数",
     maker_balance_not_enough:"maker 订单的{token} 余额不足,当前余额是 {balance},需要{required}",
     maker_allowance_not_enough:"maker 订单的{token} 授权不足,当前授权是 {allowance},需要{required}",
-    allowance_not_enough:'{token} 授权不足,当前授权是 {allowance},需要{required}'
+    allowance_not_enough:'{token} 授权不足,当前授权是 {allowance},需要{required}',
+    invalid_order:"该订单已经完成，失效或者被取消"
   },
   sign: {
     not_signed: '您还未完成签名',

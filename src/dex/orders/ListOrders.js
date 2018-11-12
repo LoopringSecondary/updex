@@ -466,5 +466,8 @@ export const renders = {
     if (status === 'ORDER_CANCELLING') {
       return <span className="color-black-2">{intl.get("order_status.canceling")}</span>
     }
+    if(status === "ORDER_P2P_LOCKED"){
+      return <span className="color-black-2">{intl.get("order_status.locked")}</span>
+    }
   },
 }

@@ -2,6 +2,8 @@ import config from 'common/config'
 import { toBig } from 'LoopringJS/common/formatter'
 import {Toast} from 'antd-mobile'
 const MODULES = 'p2pOrder'
+import intl from 'react-intl-universal'
+
 export default {
   namespace: MODULES,
   state: {
@@ -38,7 +40,7 @@ export default {
                 }
               })
             }else{
-              Toast.fail('This Order is completed, canceled or expired')
+              Toast.fail(intl.get('p2p_order.invalid_order'))
             }
           }
         })

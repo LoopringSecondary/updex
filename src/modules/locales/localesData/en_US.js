@@ -216,7 +216,8 @@ export default {
     expired: 'Expired',
     pending: "Pending",
     canceling: "Canceling",
-    waiting:"Matching"
+    waiting:"Matching",
+    locked:"Locked"
   },
   order_side: {
     sell: words.sell,
@@ -341,7 +342,8 @@ export default {
     count:"Order split count",
     set_count:"Set order split count ",
     maker_balance_not_enough:"{token} balance of maker order is not enough,current is {balance}, required is {required} ",
-    maker_allowance_not_enough:"{token} allowance of maker order is not enough,current is {allowance}, required is {required}"
+    maker_allowance_not_enough:"{token} allowance of maker order is not enough,current is {allowance}, required is {required}",
+    invalid_order:"This order is completed, canceled , expired"
   },
   sign: {
     not_signed: "You may have some items not signed",
