@@ -30,7 +30,7 @@ class Face2FaceForm extends React.Component {
     function validateAmountS(value) {
       if(p2pOrder.tokenS) {
         const tokenBalance = getBalanceBySymbol({balances:balance, symbol:p2pOrder.tokenS, toUnit:true})
-        return tokenBalance.balance.gt(value)
+        return tokenBalance.balance.gte(value)
       } else {
         return false
       }
