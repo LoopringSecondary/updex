@@ -57,7 +57,7 @@ const HelperOfBalance = (props)=>{
             <th className="text-left zb-b-b pl15 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.token')}</th>
             <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.balance')} </th>
             <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">Available</th>
-            <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">Tradable</th>
+            <th className="text-center zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">Tradable</th>
             <th className="text-right zb-b-b pl5 pr15 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.actions')}</th>
           </tr>
         </thead>
@@ -75,8 +75,9 @@ const HelperOfBalance = (props)=>{
                   <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
                     <div className="lh15 color-black-1">{toFixed(token.balance,8)}</div>
                   </td>
-                  <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                    <EnableSwitch symbol={token.symbol} />
+                  <td className="text-center pl5 pr5 pt10 pb10 zb-b-b color-black-2">
+                    {false && <EnableSwitch symbol={token.symbol} />}
+                    {true && <Icon type="check-circle" theme="filled" className="color-success" />}
                   </td>
                   <td className="text-right pl5 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
