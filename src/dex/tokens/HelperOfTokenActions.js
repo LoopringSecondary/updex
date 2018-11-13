@@ -39,16 +39,7 @@ class HelperOfTokenActions extends  React.Component{
     window.RELAY.account.getEstimatedAllocatedAllowance({owner,delegateAddress:config.getDelegateAddress(),token:symbol}).then(res => {
       if(res.result){
         let sale = toBig(res.result)
-        if(symbol.toLowerCase() === 'lrc'){
-          window.RELAY.account.getFrozenLrcFee({owner,delegateAddress:config.getDelegateAddress()}).then(resp => {
-            if(resp.result){
-              sale = sale.plus(toBig(resp.result))
-            }
-            this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
-          })
-        }else{
-          this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
-        }
+        this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
       }
     })
 
