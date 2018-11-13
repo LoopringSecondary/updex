@@ -347,7 +347,7 @@ function mapStatetoProps(state) {
   return {
     gas: state.gas,
     balance: state.sockets.balance.items,
-    pendingTx: state.pendingTx,
+    pendingTx: state.sockets.pendingTx,
     socket: state.sockets.socket
   }
 }
