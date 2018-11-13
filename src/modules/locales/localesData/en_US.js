@@ -401,7 +401,7 @@ export default {
     share_page : 'Take a screenshot and share it with your friends',
     scan_with_upwallet: 'Please scan the QR code and submit with your UP Wallet',
     visit_later:"P2P Of Web is Maintaining, please visit later!",
-    frozen_balance_not_enough:'There has {amount}{token} in your available order(market and P2P orders), your balance is not enough when added to current order',
+    frozen_balance_not_enough:'There has {frozen}{token} in your available orders(market and P2P), your balance is not enough to place this order, you could cancel historical orders or reduce sell amount to continue',
     allowance_not_enough:'Please enable {token} first in assets list, you can continue place order after allowance takes effect'
   },
   sign: {

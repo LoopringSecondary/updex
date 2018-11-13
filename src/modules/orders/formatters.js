@@ -332,7 +332,7 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
   const token = new TokenFm({symbol: tradeInfo.tokenS})
   const frozenAmount = token.getUnitAmount(frozenSell.result)
   if(balanceS.balance.lt(frozenAmount.plus(tradeInfo.amountS))) {
-    error.push({type:"BalanceNotEnough", value:{symbol:tradeInfo.tokenS, balance:cutDecimal(balanceS.balance,6), required:ceilDecimal(frozenAmount.plus(tradeInfo.amountS).minus(balanceS.balance),6)}})
+    error.push({type:"BalanceNotEnough", value:{symbol:tradeInfo.tokenS, balance:cutDecimal(balanceS.balance,6), frozen:ceilDecimal(frozenAmount,6), required:ceilDecimal(frozenAmount.plus(tradeInfo.amountS).minus(balanceS.balance),6)}})
     failed = true
   }
   const pendingAllowance = fm.toBig(isApproving(txs, tradeInfo.tokenS) ? isApproving(txs, tradeInfo.tokenS).div('1e'+configSell.digits) : balanceS.allowance);
