@@ -2,6 +2,7 @@ import React from 'react'
 import {FillFm} from 'modules/fills/formatters'
 import {Spin} from 'antd'
 import intl from 'react-intl-universal'
+import config from 'common/config'
 
 export default class Fills extends React.Component {
   state = {
@@ -17,7 +18,7 @@ export default class Fills extends React.Component {
     const {order} = this.props;
     let hash = order.originalOrder.hash
     // hash = '0xd8c1aa755d35c9570b58c227ab66d72a38d4c291fc7ca5693aff5a8fdc523836'
-    window.RELAY.ring.getFills({pageSize, pageIndex, orderHash: hash}).then(res => {
+    window.RELAY.ring.getFills({delegateAddress:order.originalOrder.delegateAddress, pageSize, pageIndex, orderHash: hash, orderType:order.originalOrder.orderType}).then(res => {
       if (!res.error) {
         this.setState({fills: res.result.data, loading: false, total: res.result.total})
       }else{
@@ -25,21 +26,6 @@ export default class Fills extends React.Component {
       }
     })
   }
-
-   onChange = (page, pageSize) => {
-     const {order} = this.props;
-    this.setState({
-      loading: true,
-      pageIndex: page,
-      pageSize: pageSize
-    }, () =>   window.RELAY.ring.getFills({pageIndex: page, pageSize: pageSize, orderHash: order.originalOrder.hash}).then(res => {
-      if (!res.error) {
-        this.setState({fills: res.result.data, loading: false, total: res.result.total})
-      }else{
-        this.setState({fills: [], loading: false, total: 0})
-      }
-    }));
-  };
 
   render(){
     const {fills,loading,pageSize,pageIndex,total} = this.state;
