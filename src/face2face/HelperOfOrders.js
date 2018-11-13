@@ -198,11 +198,14 @@ class Face2FaceOrders extends React.Component {
             </tbody>
           </table>
           {
-          orders && orders.length > 0 &&
+          orders && orders.length > 0 && total > 1 &&
           <div className="p5">
-          <Pagination className="fs14 s-small custom-pagination" total={total} current={pageIndex}
-          onChange={this.pageChange}/>
+            <Pagination className="fs14 s-small custom-pagination" total={total} current={pageIndex} onChange={this.pageChange}/>
           </div>
+          }
+          {
+            (!orders || orders.length === 0 || total <= 1) &&
+            <div className="pt10" />
           }
         </Spin>
       </div>
