@@ -677,6 +677,14 @@ no_open_orders: '{market}暂无有效订单',
     description_4: '用户隐私政策',
     agree: '我同意'
   },
+  token_actions:{
+    balance:'当前余额',
+    available:'可用金额',
+    selling:'挂单金额',
+    lack:'缺少金额',
+    enable_label:'是否授权（是否允许代币被撮合交易）',
+    enable_label_simple:'是否授权',
+  },
   ...modules.pages,
   ...modules.types,
 }

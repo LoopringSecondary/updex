@@ -108,11 +108,11 @@ class HelperOfTokenActions extends  React.Component{
           <div className="color-black">{symbol}</div>
         </NavBar>
         <div className="pt15">
-          <MetaItem  label={"Balance total"} value={toNumber(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(balance.balance)))}/>
-          <MetaItem  label={"Balance on sale"} value={toNumber(sale)}/>
-          {available.gte(0) && <MetaItem  label={"Balance available"} value={toNumber(tokenFm.toPricisionFixed(available))}/>}
-          {available.lt(0) && <MetaItem  label={"Balance lack"} value={toNumber(tokenFm.toPricisionFixed(available.times(-1)))}/>}
-          <MetaItem  label={"Tradable"} value={<EnableSwitch symbol={symbol} />}/>
+          <MetaItem  label={intl.get('token_actions.balance')} value={toNumber(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(balance.balance)))}/>
+          <MetaItem  label={intl.get('token_actions.selling')} value={toNumber(sale)}/>
+          {available.lt(0) && <MetaItem  label={intl.get('token_actions.lack')} value={toNumber(tokenFm.toPricisionFixed(available.times(-1)))}/>}
+          {available.gte(0) && <MetaItem  label={intl.get('token_actions.available')} value={toNumber(tokenFm.toPricisionFixed(available))}/>}
+          <MetaItem  label={intl.get('token_actions.enable_label')} value={<EnableSwitch symbol={symbol} />}/>
           <div className="divider 1px zb-b-t"></div>
           <div className="">
             {symbol === 'WETH' &&

@@ -672,6 +672,14 @@ export default {
     description_4: "Privacy Policy",
     agree: "I Agree"
   },
+  token_actions:{
+    balance:'Balance',
+    available:'Available',
+    selling:'Selling',
+    lack:'Lack Of',
+    enable_label:'Make Token Tradable',
+    enable_label_simple:'Tradable',
+  },
   ...modules.pages,
   ...modules.types,
 }

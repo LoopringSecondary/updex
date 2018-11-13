@@ -101,16 +101,16 @@ function OrderDetail(props) {
         <div className="divider 1px zb-b-t"></div>
       </div>
       <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
-        <div className="mt5">
-          <div className="fs14 color-black text-left pt10 pb5 pl15 zb-b-b">{intl.get('order_detail.order_status_title')}</div>
-          <div className="bg-white">
+        <div className="bg-white mt10">
+          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_status_title')}</div>
+          <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
           </div>
         </div>
-        <div className="mt5">
-          <div className="fs14 color-black text-left pt10 pb5 pl15 zb-b-b">{intl.get('order_detail.order_basic_title')}</div>
-          <div className="bg-white">
+        <div className="bg-white mt10">
+          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_basic_title')}</div>
+          <div className="">
             <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
             <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
             {false && <OrderMetaItem label={intl.get('order.price')} value={
@@ -134,9 +134,9 @@ function OrderDetail(props) {
             <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
           </div>
         </div>
-        <div className="mt5">
-          <div className="fs14 color-black text-left pt10 pb5 pl15 zb-b-b">{intl.get('order_detail.order_fills_title')}</div>
-          <div className="bg-white" style={{borderRadius:'0rem'}}>
+        <div className="bg-white mt10">
+          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_fills_title')}</div>
+          <div className="" style={{borderRadius:'0rem'}}>
             <DetailFills order={order} />
           </div>
         </div>

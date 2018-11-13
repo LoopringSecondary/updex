@@ -11,15 +11,16 @@ const ListItem = ({item})=>{
   const fillFm = new FillFm(item)
   return (
     <div className="fs12 pt10 pb10 zb-b-b">
-      <div className="row no-gutters ml0 mr0 pb10">
+      <div className="row no-gutters ml0 mr0 pb5">
         <div className="col text-left pl10 ">
-          <a href={`https://etherscan.io/tx/${fillFm.getTxHash()}`} target="_blank" className="text-primary">{getShortAddress(fillFm.getTxHash())}</a>
+          <a href={`https://etherscan.io/tx/${fillFm.getTxHash()}`} target="_blank" className="text-primary cursor-pointer">{getShortAddress(fillFm.getTxHash())}</a>
+          <span className="color-black-3"> ( txHash ) </span>
         </div>
         <div className="col-auto pr10">
           <div className="color-black-3">{fillFm.getCreateTime()}</div>
         </div>
       </div>
-      <div className="row no-gutters ml0 mr0 pt10 zb-b-t">
+      <div className="row no-gutters ml0 mr0">
         <div className="col-6 text-left pl10">
           <div className="color-black-2">
               <span style={{width:'3.5rem'}} className="d-inline-block color-black-2">{intl.get('common.sell')}</span>

@@ -7,7 +7,6 @@ import { formatter } from 'modules/formatter/FormatNumber'
 
 export class FillFm{
   constructor(fill={}){
-    console.log('fill',fill)
     this.fill = fill
   }
   getRingIndex(){
