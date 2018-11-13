@@ -1,3 +1,4 @@
+import modules from './en_US'
 const words = {
   all: '全部',
   time: '时间',
@@ -671,6 +672,8 @@ no_open_orders: '{market}暂无有效订单',
     description_3: '和',
     description_4: '用户隐私政策',
     agree: '我同意'
-  }
+  },
+  ...modules.pages,
+  ...modules.types,
 }
 

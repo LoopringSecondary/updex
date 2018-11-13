@@ -54,28 +54,28 @@ function OrderDetail(props) {
 
   const orderStatus = (item) => {
     if (item.status === 'ORDER_OPENED') {
-      return intl.get("order_status.opened")
+      return <span className="text-primary">{intl.get("order_status.opened")}</span>
     }
     if (item.status === 'ORDER_FINISHED') {
-      return intl.get("order_status.completed")
+      return <span className="color-success">{intl.get("order_status.completed")}</span>
     }
     if (item.status === 'ORDER_CANCELLED') {
-      return intl.get("order_status.canceled")
+      return <span className="color-black-3">{intl.get("order_status.canceled")}</span>
     }
     if (item.status === 'ORDER_CUTOFF') {
-      return intl.get("order_status.canceled")
+      return <span className="color-black-3">{intl.get("order_status.canceled")}</span>
     }
     if (item.status === 'ORDER_EXPIRE') {
-      return intl.get("order_status.expired")
+      return <span className="color-black-3">{intl.get("order_status.expired")}</span>
     }
     if (item.status === 'ORDER_PENDING') {
-      return intl.get("order_status.pending")
+      return <span className="text-primary">{intl.get("order_status.pending")}</span>
     }
     if (item.status === 'ORDER_CANCELLING') {
-      return intl.get("order_status.canceling")
+      return <span className="text-primary">{intl.get("order_status.canceling")}</span>
     }
     if (item.status === 'ORDER_WAIT_SUBMIT_RING') {
-      return intl.get("order_status.waiting")
+      return <span className="text-primary">{intl.get("order_status.waiting")}</span>
     }
   }
   const tokens = orderFm.getTokens()
