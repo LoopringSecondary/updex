@@ -77,6 +77,9 @@ function OrderDetail(props) {
     if (item.status === 'ORDER_WAIT_SUBMIT_RING') {
       return <span className="text-primary">{intl.get("order_status.waiting")}</span>
     }
+    if(item.status === "ORDER_P2P_LOCKED"){
+      return <span className="text-primary">{intl.get("order_status.locked")}</span>
+    }
   }
   const tokens = orderFm.getTokens()
   return (
