@@ -17,6 +17,7 @@ const words = {
   total: '总计',
   advanced: '高级',
   worth: '价值',
+  fee: '费用',
   lrc_fee: '手续费',
   lrc_fee_tips: 'xxxxx',
   lrc_reward: 'LRC 撮合奖励',

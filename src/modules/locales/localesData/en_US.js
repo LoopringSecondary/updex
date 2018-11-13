@@ -17,6 +17,7 @@ const words = {
   total: 'Total',
   advanced: "Advanced",
   worth: "Worth",
+  fee: 'Fee',
   lrc_fee: 'Trading Fee',
   lrc_fee_tips: 'xxxxx',
   lrc_reward: 'LRC Reward',

@@ -7,6 +7,7 @@ import { formatter } from 'modules/formatter/FormatNumber'
 
 export class FillFm{
   constructor(fill={}){
+    console.log('fill',fill)
     this.fill = fill
   }
   getRingIndex(){
@@ -51,8 +52,14 @@ export class FillFm{
     const tf = new TokenFm({symbol:this.fill.tokenS})
     return `${tf.toPricisionFixed(tf.getUnitAmount(this.fill.amountS))} ${this.fill.tokenS}`
   }
+  getMarket(){
+    return this.fill.market
+  }
   getSide(){
     return this.fill.side
+  }
+  getTxHash(){
+    return this.fill.txHash
   }
   getTotal(){
     const fmS = this.fill.side.toLowerCase() === 'buy' ? new TokenFm({symbol: this.fill.tokenS}) : new TokenFm({symbol: this.fill.tokenB});
