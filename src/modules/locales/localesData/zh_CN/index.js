@@ -1,4 +1,4 @@
-import p2p form './p2p'
+import p2p from './p2p'
 
 export default {
   common: {

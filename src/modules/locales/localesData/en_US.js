@@ -1,3 +1,4 @@
+import modules from './en_US/index.js'
 const words = {
   all: 'All',
   time: 'Time',
@@ -183,7 +184,8 @@ export default {
     ...words,
     ...validation_messages,
     ...time_unit,
-    ...errors
+    ...errors,
+    ...modules.common
   },
   notifications,
   actions,
@@ -666,5 +668,7 @@ export default {
     description_3: "and",
     description_4: "Privacy Policy",
     agree: "I Agree"
-  }
+  },
+  ...modules.pages,
+  ...modules.types,
 }

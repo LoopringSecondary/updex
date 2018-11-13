@@ -1,4 +1,4 @@
-import modules from './en_US'
+import modules from './zh_CN/index.js'
 const words = {
   all: '全部',
   time: '时间',
@@ -185,7 +185,8 @@ export default {
     ...words,
     ...validation_messages,
     ...time_unit,
-    ...errors
+    ...errors,
+    ...modules.common
   },
   notifications,
   actions,
