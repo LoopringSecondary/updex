@@ -347,7 +347,9 @@ no_open_orders: '{market}暂无有效订单',
     maker_balance_not_enough:"maker 订单的{token} 余额不足,当前余额是 {balance},需要{required}",
     maker_allowance_not_enough:"maker 订单的{token} 授权不足,当前授权是 {allowance},需要{required}",
     allowance_not_enough:'{token} 授权不足,当前授权是 {allowance},需要{required}',
-    invalid_order:"该订单已经完成，失效或者被取消"
+    invalid_order:"该订单已经完成，失效或者被取消",
+    frozen_balance_not_enough:'有效订单中占用了{frozen}{token}(市场单和P2P订单)，累加当前订单卖出数量后余额不足，请减少当前订单卖出数量或取消历史订单',
+    p2p_allowance_not_enough:'请先在资产列表中授权{token}，生效后才可以继续下单'
   },
   sign: {
     not_signed: '您还未完成签名',
