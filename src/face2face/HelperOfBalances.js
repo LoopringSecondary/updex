@@ -12,6 +12,7 @@ import intl from 'react-intl-universal'
 import config from "../common/config";
 import storage from 'modules/storage'
 import mapLimit from 'async/mapLimit';
+import Available from 'modules/tokens/Available'
 
 class HelperOfBalance extends React.Component {
 
@@ -19,10 +20,8 @@ class HelperOfBalance extends React.Component {
     relatedTokens: []
   }
 
-  componentDidMount() {
-    const {tokenS, tokenB, balance} = this.props
-    const _this = this
-    const owner = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
+  render() {
+    const {tokenS, tokenB, balance, dispatch} = this.props
     const relatedTokens = []
     const balanceS = {
       symbol: tokenS,
@@ -37,29 +36,6 @@ class HelperOfBalance extends React.Component {
     relatedTokens.push(balanceS)
     relatedTokens.push(balanceB)
 
-    mapLimit(relatedTokens, 1, async (item, callback) => {
-      window.RELAY.account.getEstimatedAllocatedAllowance({
-        owner,
-        delegateAddress: config.getDelegateAddress(),
-        token: item.symbol
-      }).then(res => {
-        if (res.result) {
-          let sale = toBig(res.result)
-          const tokenFm = new TokenFM({symbol: item.symbol})
-          callback(null, {...item, sale: toBig(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale)))})
-        } else {
-          callback(null, {...item, sale: toBig(0)})
-        }
-      })
-
-    }, function (e, result) {
-      _this.setState({relatedTokens: result})
-    })
-  }
-
-  render() {
-    const {dispatch} = this.props
-    const {relatedTokens} = this.state
     const showLayer = (payload = {}) => {
       dispatch({
         type: 'layers/showLayer',
@@ -107,43 +83,45 @@ class HelperOfBalance extends React.Component {
           </thead>
           <tbody>
           {
-            relatedTokens.map((token, index) =>
-              <tr key={index}>
-                <td className="text-left pl15 pr5 pt10 pb10 zb-b-b color-black-2">
-                  {token.symbol}
-                  <span hidden className="color-black-3 ml5">{token.name} </span>
-                </td>
-                <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                  <div className="lh15 color-black-1">{toFixed(token.balance, 8)}</div>
-                </td>
-                <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                  <div className="lh15 color-black-1">{available(token)}</div>
-                </td>
-                <td className="text-center pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                  {token.allowance.lt(1e6) &&
-                  <EnableSwitch symbol={token.symbol}/>}
-                  {token.allowance.gte(1e6) && <Icon type="check-circle" theme="filled" className="color-success"/>}
-                </td>
-                <td className="text-right pl5 pr15 pt10 pb10 zb-b-b color-black-2">
-                  {
-                    token.symbol === 'WETH' &&
-                    <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none"
-                            style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
-                            onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
-                      <Icon className="fs10" type="ellipsis"/>
-                    </Button>
-                  }
-                  {
-                    token.symbol !== 'WETH' &&
-                    <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none"
-                            style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
-                            onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
-                      <Icon className="fs10" type="ellipsis"/>
-                    </Button>
-                  }
-                </td>
-              </tr>
-            )
+            relatedTokens.map((token, index) =>{
+              return (
+                <tr key={index}>
+                  <td className="text-left pl15 pr5 pt10 pb10 zb-b-b color-black-2">
+                    {token.symbol}
+                    <span hidden className="color-black-3 ml5">{token.name} </span>
+                  </td>
+                  <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
+                    <div className="lh15 color-black-1">{toFixed(token.balance, 8)}</div>
+                  </td>
+                  <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
+                    <div className="lh15 color-black-1"><Available symbol={token.symbol}/></div>
+                  </td>
+                  <td className="text-center pl5 pr5 pt10 pb10 zb-b-b color-black-2">
+                    {token.allowance.lt(1e6) &&
+                    <EnableSwitch symbol={token.symbol}/>}
+                    {token.allowance.gte(1e6) && <Icon type="check-circle" theme="filled" className="color-success"/>}
+                  </td>
+                  <td className="text-right pl5 pr15 pt10 pb10 zb-b-b color-black-2">
+                    {
+                      token.symbol === 'WETH' &&
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none"
+                              style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
+                              onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
+                        <Icon className="fs10" type="ellipsis"/>
+                      </Button>
+                    }
+                    {
+                      token.symbol !== 'WETH' &&
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none"
+                              style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
+                              onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
+                        <Icon className="fs10" type="ellipsis"/>
+                      </Button>
+                    }
+                  </td>
+                </tr>
+              )
+            })
           }
           </tbody>
         </table>
