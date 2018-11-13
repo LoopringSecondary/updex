@@ -70,6 +70,12 @@ export class OrderFm {
   getTokens() {
     return commonFm.getTokensByMarket(this.getMarketPair())
   }
+  getTokenS() {
+    return this.order.originalOrder.tokenS
+  }
+  getTokenB() {
+    return this.order.originalOrder.tokenB
+  }
   getPrice(){
     if(this.order.originalOrder){
       const tokenB = config.getTokenBySymbol(this.order.originalOrder.tokenB);
@@ -104,7 +110,15 @@ export class OrderFm {
     const tf = new TokenFm({symbol:this.order.originalOrder.tokenB})
     return `${tf.toPricisionFixed(tf.getUnitAmount(this.order.originalOrder.amountB))} ${this.order.originalOrder.tokenB}`
   }
+  getAmountB() {
+    const tf = new TokenFm({symbol:this.order.originalOrder.tokenB})
+    return `${tf.toPricisionFixed(tf.getUnitAmount(this.order.originalOrder.amountB))} ${this.order.originalOrder.tokenB}`
+  }
   getSell() {
+    const tf = new TokenFm({symbol:this.order.originalOrder.tokenS})
+    return `${tf.toPricisionFixed(tf.getUnitAmount(this.order.originalOrder.amountS))} ${this.order.originalOrder.tokenS}`
+  }
+  getAmountS() {
     const tf = new TokenFm({symbol:this.order.originalOrder.tokenS})
     return `${tf.toPricisionFixed(tf.getUnitAmount(this.order.originalOrder.amountS))} ${this.order.originalOrder.tokenS}`
   }

@@ -5,7 +5,7 @@ import intl from 'react-intl-universal';
 import config from '../../common/config'
 import routeActions from 'common/utils/routeActions'
 import EnableSwitch from './EnableSwitch'
-import  TokenFormatter,{getBalanceBySymbol} from 'modules/tokens/TokenFm'
+import  TokenFormatter from 'modules/tokens/TokenFm'
 import {toNumber,toBig} from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
 
@@ -39,16 +39,7 @@ class HelperOfTokenActions extends  React.Component{
     window.RELAY.account.getEstimatedAllocatedAllowance({owner,delegateAddress:config.getDelegateAddress(),token:symbol}).then(res => {
       if(res.result){
         let sale = toBig(res.result)
-        if(symbol.toLowerCase() === 'lrc'){
-          window.RELAY.account.getFrozenLrcFee({owner,delegateAddress:config.getDelegateAddress()}).then(resp => {
-            if(resp.result){
-              sale = sale.plus(toBig(resp.result))
-            }
-            this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
-          })
-        }else{
-          this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
-        }
+        this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
       }
     })
 
@@ -117,7 +108,7 @@ class HelperOfTokenActions extends  React.Component{
           <div className="color-black">{symbol}</div>
         </NavBar>
         <div className="pt15">
-          <MetaItem  label={"Balance total"} value={toNumber(tokenFm.toPricisionFixed(toBig(balance.balance)))}/>
+          <MetaItem  label={"Balance total"} value={toNumber(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(balance.balance)))}/>
           <MetaItem  label={"Balance on sale"} value={toNumber(sale)}/>
           {available.gte(0) && <MetaItem  label={"Balance available"} value={toNumber(tokenFm.toPricisionFixed(available))}/>}
           {available.lt(0) && <MetaItem  label={"Balance lack"} value={toNumber(tokenFm.toPricisionFixed(available.times(-1)))}/>}
