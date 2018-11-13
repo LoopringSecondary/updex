@@ -1,3 +1,4 @@
+import modules from './zh_CN/index.js'
 const words = {
   all: '全部',
   time: '时间',
@@ -184,7 +185,8 @@ export default {
     ...words,
     ...validation_messages,
     ...time_unit,
-    ...errors
+    ...errors,
+    ...modules.common
   },
   notifications,
   actions,
@@ -673,6 +675,8 @@ no_open_orders: '{market}暂无有效订单',
     description_3: '和',
     description_4: '用户隐私政策',
     agree: '我同意'
-  }
+  },
+  ...modules.pages,
+  ...modules.types,
 }
 
