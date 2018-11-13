@@ -5,6 +5,21 @@ import intl from 'react-intl-universal';
 import config from '../../common/config'
 import routeActions from 'common/utils/routeActions'
 
+
+const MetaItem = (props) => {
+  const {label, value} = props
+  return (
+    <div className="row ml0 mr0 pt10 pb10 pl15 pr15 zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
+      <div className="col">
+        <div className="fs14 color-black-2 text-left">{label}</div>
+      </div>
+      <div className="col-auto text-right">
+        <div className="fs14 color-black-2 text-wrap text-left">{value}</div>
+      </div>
+    </div>
+  )
+}
+
 function HelperOfTokenActions(props) {
   const {helperOfTokenActions,dispatch} = props
   const {symbol,hideBuy} = helperOfTokenActions
@@ -58,36 +73,34 @@ function HelperOfTokenActions(props) {
             <span key='1' className=""><Icon type="cross"/></span>,
           ]}
         >
-          <div className="color-black">{symbol} {intl.get('common.actions')}</div>
+          <div className="color-black">{symbol}</div>
         </NavBar>
-        <div className="p10">
-          <Button onClick={showReceive} className="" type="primary">{intl.get('common.receive')} {symbol}</Button>
-          {
-            isSupportedTrading() && !hideBuy &&
-            <Button onClick={gotoTrading} className="mt10" type="primary">{intl.get('common.buy')} {symbol}</Button>
-          }
-
-          {
-            (false && symbol.toUpperCase() !== 'WETH' && symbol.toUpperCase() !== 'ETH') &&
-            <Button onClick={()=>window.toast('ComingSoon')} disabled className="mt10" type="">Enable {symbol}</Button>
-          }
-          {symbol === 'WETH' &&
-                <Button className="mt10" type="primary" onClick={() => {showConvert("ETH")}}>{intl.get('convert.convert_eth_title')}</Button>
-          }
-          {
-            symbol === 'ETH' &&
-            <Button onClick={() => {showConvert("WETH")}} className="mt10" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
-          }
-          {
-            false && symbol !== 'ETH' &&
-            <List.Item arrow="horizontal" extra="5" disabled>
-              View {symbol} Orders
-            </List.Item>
-          }
-          {false &&  <List.Item arrow="horizontal" extra={<div className="fs14">{`wallet's ${symbol} is sufficient`}</div>} disabled>
-            Switch Wallet
-          </List.Item>
-          }
+        <div className="pt15">
+          <MetaItem  label={"Balance total"} value={"20,000,000.0000"}/>
+          <MetaItem  label={"Balance on sale"} value={"10,000,000.0000"}/>
+          <MetaItem  label={"Balance available"} value={"10,000,000.0000"}/>
+          <MetaItem  label={"Tradable"} value={"Yes"}/>
+          <div className="divider 1px zb-b-t"></div>
+          <div className="">
+            {symbol === 'WETH' &&
+                  <Button className="m10 fs14" type="primary" onClick={() => {showConvert("ETH")}}>{intl.get('convert.convert_eth_title')}</Button>
+            }
+            {
+              symbol === 'ETH' &&
+              <Button onClick={() => {showConvert("WETH")}} className="m10 fs14" type="primary"> {intl.get('convert.convert_weth_title')}</Button>
+            }
+            {
+              false && isSupportedTrading() && !hideBuy &&
+              <Button onClick={gotoTrading} className="mt10" type="primary">{intl.get('common.buy')} {symbol}</Button>
+            }
+            <Button onClick={showReceive} className="m10 fs14" type="primary">{intl.get('common.receive')} {symbol}</Button>
+            {
+              false && symbol !== 'ETH' &&
+              <List.Item arrow="horizontal" extra="5" disabled>
+                View {symbol} Orders
+              </List.Item>
+            }
+          </div>
         </div>
     </div>
   )

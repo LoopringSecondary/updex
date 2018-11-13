@@ -24,17 +24,34 @@ const HelperOfPrice = (props)=>{
         <div className="color-black-1">{intl.get('helper_of_price.title')}</div>
       </NavBar>
       <div className="zb-b-b p15">
-        <div className="fs14 color-black-2 mb5 text-left">{intl.get('helper_of_price.sell_price', {token:tokenS})}</div>
-        <div className="fs12 color-black-3 lh20 text-left">
-          1 {tokenS} ≈ {price1} {tokenB} ≈ <Worth amount={price1} symbol={tokenB}/>
+        <div className="fs14 color-black-1 mb5 text-left">
+          {intl.get('common.sell')} {intl.get('common.price')}
+          <span className="ml10">
+            1 {tokenS} = {price1} {tokenB} ≈ <Worth amount={price1} symbol={tokenB}/>
+          </span>
+        </div>
+        <div className="fs14 color-black-3 lh20 text-left">
+          {intl.get('common.global_price')}
+          <span className="ml10">
+            1 {tokenS} ≈ <Worth amount={1} symbol={tokenS}/>
+          </span>
         </div>
       </div>
       <div className="zb-b-b p10">
-        <div className="fs14 color-black-2 mb5 text-left">{intl.get('helper_of_price.buy_price', {token:tokenB})}</div>
-        <div className="fs12 color-black-3 lh20 text-left">
-          1 {tokenB} ≈ {price2} {tokenS} ≈ <Worth amount={price2} symbol={tokenS}/>
+        <div className="fs14 color-black-1 mb5 text-left">
+          {intl.get('common.buy')} {intl.get('common.price')}
+          <span className="ml10">
+            1 {tokenB} = {price2} {tokenS} ≈ <Worth amount={price2} symbol={tokenS}/>
+          </span>
+        </div>
+        <div className="fs14 color-black-3 lh20 text-left">
+            {intl.get('common.global_price')}
+            <span className="ml10">
+              1 {tokenB} ≈ <Worth amount={1} symbol={tokenB}/>
+            </span>
         </div>
       </div>  
+
     </div>
   )
 }
