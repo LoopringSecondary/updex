@@ -41,6 +41,7 @@ class SignMessages extends React.Component {
             }
             signResult = {sign:{...cancelOrder.result, owner:window.Wallet.address, timestamp}, ...item.data};
             break;
+          case 'tx':
           case 'approve':
           case 'approveZero':
           case 'convert':
@@ -97,6 +98,7 @@ class SignMessages extends React.Component {
               callback(new UserError(cancelRes.error.message))
             }
             break;
+          case 'tx':
           case 'approve':
           case 'approveZero':
           case 'convert':

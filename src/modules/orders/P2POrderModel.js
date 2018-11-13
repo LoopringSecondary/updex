@@ -26,7 +26,7 @@ export default {
           } else {
             const order = res.result
             order.originalOrder.authPrivateKey = auth;
-            if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
+            // if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
               dispatch({
                 type: 'layers/showLayer',
                 payload: {
@@ -37,9 +37,9 @@ export default {
                   }
                 }
               })
-            }else{
-              Toast.fail('This Order is completed, canceled or expired')
-            }
+            // }else{
+            //   Toast.fail('This Order is completed, canceled or expired')
+            // }
           }
         })
       };
