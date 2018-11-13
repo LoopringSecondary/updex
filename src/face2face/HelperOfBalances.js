@@ -97,25 +97,23 @@ class HelperOfBalance extends React.Component {
                     <div className="lh15 color-black-1"><Available symbol={token.symbol}/></div>
                   </td>
                   <td className="text-center pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                    {token.allowance.lt(1e6) &&
-                    <EnableSwitch symbol={token.symbol}/>}
-                    {token.allowance.gte(1e6) && <Icon type="check-circle" theme="filled" className="color-success"/>}
+                    <EnableSwitch symbol={token.symbol}/>
                   </td>
                   <td className="text-right pl5 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
                       token.symbol === 'WETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none"
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary color-white border-none"
                               style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
                               onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
-                        <Icon className="fs10" type="ellipsis"/>
+                        <Icon className="fs12" type="ellipsis"/>
                       </Button>
                     }
                     {
                       token.symbol !== 'WETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none"
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary color-white border-none"
                               style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
                               onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
-                        <Icon className="fs10" type="ellipsis"/>
+                        <Icon className="fs12" type="ellipsis"/>
                       </Button>
                     }
                   </td>

@@ -1,6 +1,6 @@
 import React from 'react'
 import {connect} from 'dva'
-import {Switch} from 'antd'
+import {Switch,Icon} from 'antd'
 import config from '../../common/config'
 import storage from 'modules/storage'
 import {toBig, toHex, toNumber} from "LoopringJS/common/formatter";
@@ -75,10 +75,17 @@ class EnableSwitch extends React.Component {
         })
       }
     };
-
-    return (
-      <Switch size={size} onChange={onChange} defaultChecked = {pendingAllowance.gt(1e6)}  loading={loading && pendingAllowance.gt(1e6)} disabled={pendingAllowance.gt(1e6)}/>
-    )
+      
+    if(balance){
+      if(toBig(balance.allowance).lt(1e8)){
+        return <Switch size={size} onChange={onChange} defaultChecked = {pendingAllowance.gt(1e6)}  loading={loading && pendingAllowance.gt(1e6)} disabled={pendingAllowance.gt(1e6)}/>
+      }else{
+        return <Icon type="check-circle" theme="filled" className="color-success"/>
+      }
+    }else{
+      return <span className="">--</span>
+    }
+    
   }
 }
 
