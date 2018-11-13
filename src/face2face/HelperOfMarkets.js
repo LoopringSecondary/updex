@@ -17,8 +17,8 @@ const HelperOfMarkets = (props)=>{
   	    <thead>
   	      <tr className="">
   	        <th className="text-left zb-b-b pl15 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.token')}</th>
-  	        <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.price')}</th>
-  	        <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.exchange')}</th>
+  	        <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.global_price')}</th>
+  	        <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.exchange_ratio')}</th>
   	      </tr>
   	    </thead>
   	    <tbody>
