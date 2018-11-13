@@ -4,6 +4,7 @@ import {List,Button,NavBar,Icon} from 'antd-mobile';
 import intl from 'react-intl-universal';
 import config from '../../common/config'
 import routeActions from 'common/utils/routeActions'
+import EnableSwitch from './EnableSwitch'
 
 
 const MetaItem = (props) => {
@@ -79,7 +80,7 @@ function HelperOfTokenActions(props) {
           <MetaItem  label={"Balance total"} value={"20,000,000.0000"}/>
           <MetaItem  label={"Balance on sale"} value={"10,000,000.0000"}/>
           <MetaItem  label={"Balance available"} value={"10,000,000.0000"}/>
-          <MetaItem  label={"Tradable"} value={"Yes"}/>
+          <MetaItem  label={"Tradable"} value={<EnableSwitch symbol={symbol} />}/>
           <div className="divider 1px zb-b-t"></div>
           <div className="">
             {symbol === 'WETH' &&

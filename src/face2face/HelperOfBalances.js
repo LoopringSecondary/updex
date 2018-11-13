@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Button } from 'antd-mobile';
-import { Switch,Icon } from 'antd';
+import { Icon } from 'antd';
+import EnableSwitch from '../dex/tokens/EnableSwitch';
 import routeActions from 'common/utils/routeActions'
 import {getTokensByMarket} from 'modules/formatter/common'
 import * as tokenFormatter from 'modules/tokens/TokenFm'
@@ -75,7 +76,7 @@ const HelperOfBalance = (props)=>{
                     <div className="lh15 color-black-1">{toFixed(token.balance,8)}</div>
                   </td>
                   <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                    <Switch size="small" />
+                    <EnableSwitch symbol={token.symbol} />
                   </td>
                   <td className="text-right pl5 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
