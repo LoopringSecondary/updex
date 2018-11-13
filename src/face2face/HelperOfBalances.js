@@ -85,6 +85,11 @@ class HelperOfBalance extends React.Component {
     const gotoAll = (payload) => {
     }
 
+    const available = (token) => {
+      const value = token.balance.minus(token.sale)
+      return value.gt(0) ? toFixed(value, 8) : 0
+    }
+
     return (
       <div className="fs20">
         <table className="w-100 fs12">
@@ -112,7 +117,7 @@ class HelperOfBalance extends React.Component {
                   <div className="lh15 color-black-1">{toFixed(token.balance, 8)}</div>
                 </td>
                 <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                  <div className="lh15 color-black-1">{toFixed(token.balance.minus(token.sale), 8)}</div>
+                  <div className="lh15 color-black-1">{available(token)}</div>
                 </td>
                 <td className="text-center pl5 pr5 pt10 pb10 zb-b-b color-black-2">
                   {token.allowance.lt(1e6) &&
