@@ -5,6 +5,9 @@ import intl from 'react-intl-universal';
 import config from '../../common/config'
 import routeActions from 'common/utils/routeActions'
 import EnableSwitch from './EnableSwitch'
+import  TokenFormatter,{getBalanceBySymbol} from 'modules/tokens/TokenFm'
+import {toNumber,toBig} from 'LoopringJS/common/formatter'
+import storage from 'modules/storage'
 
 
 const MetaItem = (props) => {
@@ -21,51 +24,88 @@ const MetaItem = (props) => {
   )
 }
 
-function HelperOfTokenActions(props) {
-  const {helperOfTokenActions,dispatch} = props
-  const {symbol,hideBuy} = helperOfTokenActions
-  const showLayer = (payload = {}) => {
-    dispatch({
-      type: 'layers/showLayer',
-      payload: {
-        ...payload
-      }
-    })
-  }
-  const hideLayer = (payload = {}) => {
-    dispatch({
-      type: 'layers/hideLayer',
-      payload: {
-        ...payload
-      }
-    })
-  }
-  const showReceive = (payload = {})=>{
-    hideLayer({id:'helperOfTokenActions'})
-    showLayer({id:'receiveToken',symbol})
+class HelperOfTokenActions extends  React.Component{
+
+  state={
+    sale:0
   }
 
-  const showConvert = (token) => {
-    hideLayer({id:'helperOfTokenActions'})
-    routeActions.gotoPath(`/dex/convert/${token}`)
+  componentWillMount(){
+
+    const {helperOfTokenActions} = this.props
+    const {symbol} = helperOfTokenActions
+    const tokenFm = new TokenFormatter({symbol})
+    const owner = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
+    window.RELAY.account.getEstimatedAllocatedAllowance({owner,delegateAddress:config.getDelegateAddress(),token:symbol}).then(res => {
+      if(res.result){
+        let sale = toBig(res.result)
+        if(symbol.toLowerCase() === 'lrc'){
+          window.RELAY.account.getFrozenLrcFee({owner,delegateAddress:config.getDelegateAddress()}).then(resp => {
+            if(resp.result){
+              sale = sale.plus(toBig(resp.result))
+            }
+            this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
+          })
+        }else{
+          this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
+        }
+      }
+    })
+
+
   }
 
-  const isSupportedTrading = () => {
-    const market = config.getTokenSupportedMarket(symbol)
-    return !!market
-  }
-  const gotoTrading = () => {
-    hideLayer({id:'helperOfTokenActions'})
-    const market = symbol.toLowerCase() === 'lrc'? 'LRC-WETH' : config.getTokenSupportedMarket(symbol)
-    if (market) {
-      routeActions.gotoPath(`/dex/placeOrder/${market}`)
-      return
+  render(){
+    const {helperOfTokenActions,balances,dispatch} = this.props
+    const {symbol,hideBuy} = helperOfTokenActions
+    const balance  = balances.find(item =>item.symbol.toLowerCase() === symbol.toLowerCase())
+    const tokenFm = new TokenFormatter({symbol})
+    const {sale} =  this.state
+    const available = tokenFm.getUnitAmount(balance.balance).minus(sale)
+
+
+    const showLayer = (payload = {}) => {
+      dispatch({
+        type: 'layers/showLayer',
+        payload: {
+          ...payload
+        }
+      })
     }
-    routeActions.gotoPath(`/dex/placeOrder`)
-  }
+    const hideLayer = (payload = {}) => {
+      dispatch({
+        type: 'layers/hideLayer',
+        payload: {
+          ...payload
+        }
+      })
+    }
+    const showReceive = (payload = {})=>{
+      hideLayer({id:'helperOfTokenActions'})
+      showLayer({id:'receiveToken',symbol})
+    }
 
-  return (
-    <div className="bg-white h100">
+    const showConvert = (token) => {
+      hideLayer({id:'helperOfTokenActions'})
+      routeActions.gotoPath(`/dex/convert/${token}`)
+    }
+
+    const isSupportedTrading = () => {
+      const market = config.getTokenSupportedMarket(symbol)
+      return !!market
+    }
+    const gotoTrading = () => {
+      hideLayer({id:'helperOfTokenActions'})
+      const market = symbol.toLowerCase() === 'lrc'? 'LRC-WETH' : config.getTokenSupportedMarket(symbol)
+      if (market) {
+        routeActions.gotoPath(`/dex/placeOrder/${market}`)
+        return
+      }
+      routeActions.gotoPath(`/dex/placeOrder`)
+    }
+
+    return (
+      <div className="bg-white h100">
         <NavBar
           className="zb-b-b"
           mode="light"
@@ -77,14 +117,15 @@ function HelperOfTokenActions(props) {
           <div className="color-black">{symbol}</div>
         </NavBar>
         <div className="pt15">
-          <MetaItem  label={"Balance total"} value={"20,000,000.0000"}/>
-          <MetaItem  label={"Balance on sale"} value={"10,000,000.0000"}/>
-          <MetaItem  label={"Balance available"} value={"10,000,000.0000"}/>
+          <MetaItem  label={"Balance total"} value={toNumber(tokenFm.toPricisionFixed(toBig(balance.balance)))}/>
+          <MetaItem  label={"Balance on sale"} value={toNumber(sale)}/>
+          {available.gte(0) && <MetaItem  label={"Balance available"} value={toNumber(tokenFm.toPricisionFixed(available))}/>}
+          {available.lt(0) && <MetaItem  label={"Balance lack"} value={toNumber(tokenFm.toPricisionFixed(available.times(-1)))}/>}
           <MetaItem  label={"Tradable"} value={<EnableSwitch symbol={symbol} />}/>
           <div className="divider 1px zb-b-t"></div>
           <div className="">
             {symbol === 'WETH' &&
-                  <Button className="m10 fs14" type="primary" onClick={() => {showConvert("ETH")}}>{intl.get('convert.convert_eth_title')}</Button>
+            <Button className="m10 fs14" type="primary" onClick={() => {showConvert("ETH")}}>{intl.get('convert.convert_eth_title')}</Button>
             }
             {
               symbol === 'ETH' &&
@@ -103,7 +144,18 @@ function HelperOfTokenActions(props) {
             }
           </div>
         </div>
-    </div>
-  )
+      </div>
+    )
+  }
 }
-export default connect()(HelperOfTokenActions)
+
+function mapStateToProps(state) {
+
+  return {
+    balances:state.sockets.balance.items
+  }
+
+}
+
+
+export default connect(mapStateToProps)(HelperOfTokenActions)

@@ -24,7 +24,7 @@ const HelperOfBalance = (props)=>{
   const balanceS = {
     symbol:tokenS,
     name:tokenS,
-    ...tokenFormatter.getBalanceBySymbol({balances:balance, symbol:tokenS, toUnit:true}),
+    ...tokenFormatter.getBalanceBySymbol({balances:balance, symbol:tokenS.toLowerCase(), toUnit:true}),
   }
   const balanceB = {
     symbol:tokenB,
@@ -76,20 +76,20 @@ const HelperOfBalance = (props)=>{
                     <div className="lh15 color-black-1">{toFixed(token.balance,8)}</div>
                   </td>
                   <td className="text-center pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                    {false && <EnableSwitch symbol={token.symbol} />}
-                    {true && <Icon type="check-circle" theme="filled" className="color-success" />}
+                    {token.allowance.lt(1e100) && <EnableSwitch symbol={token.symbol} />}
+                    {token.allowance.gte(1e100) && <Icon type="check-circle" theme="filled" className="color-success" />}
                   </td>
                   <td className="text-right pl5 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
                       token.symbol === 'WETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none" style={{height:'2.4rem',lineHeight:'2.4rem'}} type="primary" size="small" onClick={showLayer.bind(this,{id:'helperOfTokenActions'})}>
-                      {intl.get('common.convert')} <Icon className="fs10" type="down" />
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none" style={{height:'2.4rem',lineHeight:'2.4rem'}} type="primary" size="small" onClick={showLayer.bind(this,{id:'helperOfTokenActions',symbol:token.symbol})}>
+                      <Icon className="fs10" type="ellipsis" />
                       </Button>
                     }
                     {
                       token.symbol !== 'WETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none" style={{height:'2.4rem',lineHeight:'2.4rem'}} type="primary" size="small" onClick={showLayer.bind(this,{id:'helperOfTokenActions'})}>
-                      {intl.get('common.receive')} <Icon className="fs10" type="down" />
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary-light text-primary border-none" style={{height:'2.4rem',lineHeight:'2.4rem'}} type="primary" size="small" onClick={showLayer.bind(this,{id:'helperOfTokenActions',symbol:token.symbol})}>
+                      <Icon className="fs10" type="ellipsis" />
                       </Button>
                     }
                   </td>
