@@ -5,12 +5,18 @@ import { Icon } from 'antd';
 import { toBig, toFixed, toNumber } from 'LoopringJS/common/formatter'
 import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
+import {calculateWorthInLegalCurrency} from "../modules/orders/formatters";
 
 const HelperOfMarkets = (props)=>{
-  const {p2pOrder, dispatch} = props
-  const {amountB, amountS, tokenS, tokenB} = p2pOrder
-  const priceSB = amountB && amountS && toBig(amountS).gt(0) ? toFixed(toBig(amountB).div(amountS), 8) : 0 // TODO
-  const priceBS = amountB && amountS && toBig(amountB).gt(0) ? toFixed(toBig(amountS).div(amountB), 8) : 0 // TODO
+  const {p2pOrder, marketcap, dispatch} = props
+  const {tokenS, tokenB} = p2pOrder
+
+  const worthS = calculateWorthInLegalCurrency(marketcap.items, tokenS, 1)
+  const worthB = calculateWorthInLegalCurrency(marketcap.items, tokenB, 1)
+
+  const priceB = worthS && worthB && worthB.gt(0) ? toFixed(worthS.div(worthB), 8) : 0
+  const priceS = worthS && worthB && worthS.gt(0) ? toFixed(worthB.div(worthS), 8) : 0
+
   return (
     <div className="bg-white" style={{}}>
   	  <table className="w-100 fs12">
@@ -30,7 +36,7 @@ const HelperOfMarkets = (props)=>{
                 <Worth amount={1} symbol={tokenS}/>
               </td>
               <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                {priceSB} {tokenB}
+                {priceB} {tokenB}
               </td>
               
             </tr>
@@ -42,7 +48,7 @@ const HelperOfMarkets = (props)=>{
                 <Worth amount={1} symbol={tokenB}/>
               </td>
               <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                {priceBS} {tokenS}
+                {priceS} {tokenS}
               </td>
             </tr>
   	    </tbody>
@@ -52,9 +58,11 @@ const HelperOfMarkets = (props)=>{
 }
 
 export default connect(({
-  p2pOrder
+  p2pOrder,
+  sockets
 }) => ({
-  p2pOrder:p2pOrder
+  p2pOrder:p2pOrder,
+  marketcap:sockets.marketcap
 }))(HelperOfMarkets)
 
 
