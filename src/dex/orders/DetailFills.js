@@ -2,6 +2,8 @@ import React from 'react'
 import {FillFm} from 'modules/fills/formatters'
 import {Spin} from 'antd'
 import intl from 'react-intl-universal'
+import config from 'common/config'
+import {Pagination} from "antd-mobile";
 
 export default class Fills extends React.Component {
   state = {
@@ -16,30 +18,29 @@ export default class Fills extends React.Component {
     const {pageSize, pageIndex} = this.state;
     const {order} = this.props;
     let hash = order.originalOrder.hash
-    // hash = '0xd8c1aa755d35c9570b58c227ab66d72a38d4c291fc7ca5693aff5a8fdc523836'
-    window.RELAY.ring.getFills({pageSize, pageIndex, orderHash: hash}).then(res => {
+    window.RELAY.ring.getFills({delegateAddress:order.originalOrder.delegateAddress, pageSize, pageIndex, orderHash: hash, orderType:order.originalOrder.orderType}).then(res => {
       if (!res.error) {
-        this.setState({fills: res.result.data, loading: false, total: res.result.total})
+        const total = Math.ceil(res.result.total / pageSize)
+        this.setState({fills: res.result.data, loading: false, total})
       }else{
-        this.setState({loading: false})
+        this.setState({fills: [], loading: false, total: 0})
       }
     })
   }
 
-   onChange = (page, pageSize) => {
-     const {order} = this.props;
-    this.setState({
-      loading: true,
-      pageIndex: page,
-      pageSize: pageSize
-    }, () =>   window.RELAY.ring.getFills({pageIndex: page, pageSize: pageSize, orderHash: order.originalOrder.hash}).then(res => {
+  onChange = (page) => {
+    const {order} = this.props;
+    const {pageSize} = this.state;
+    this.setState({loading: true, pageIndex: page, pageSize})
+    window.RELAY.ring.getFills({delegateAddress:order.originalOrder.delegateAddress, pageIndex: page, pageSize, orderHash: order.originalOrder.hash, orderType:order.originalOrder.orderType}).then(res => {
       if (!res.error) {
-        this.setState({fills: res.result.data, loading: false, total: res.result.total})
+        const total = Math.ceil(res.result.total / pageSize)
+        this.setState({fills: res.result.data, loading: false, total})
       }else{
         this.setState({fills: [], loading: false, total: 0})
       }
-    }));
-  };
+    })
+  }
 
   render(){
     const {fills,loading,pageSize,pageIndex,total} = this.state;
@@ -84,7 +85,7 @@ export default class Fills extends React.Component {
                   })
                 }
                 {
-                  !loading && fills.length == 0 &&
+                  !loading && fills.length === 0 &&
                   <tr>
                     <td className="pt10 pb10 pl5 pr5 text-center color-black-4 fs13" colSpan='100'>
                       {intl.get("common.list.no_data")}
@@ -93,6 +94,16 @@ export default class Fills extends React.Component {
                 }
             </tbody>
           </table>
+          {
+            fills && fills.length > 0 && total > 1 &&
+            <div className="p5">
+              <Pagination className="fs14 s-small custom-pagination" total={total} current={pageIndex} onChange={this.onChange}/>
+            </div>
+          }
+          {
+            (!fills || fills.length === 0 || total <= 1) &&
+            <div className="pt10" />
+          }
         </Spin>
       </div>
     )
