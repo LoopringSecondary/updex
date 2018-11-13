@@ -367,50 +367,37 @@ export async function signOrder(tradeInfo, wallet) {
 
 export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
   const configSell = config.getTokenBySymbol(tradeInfo.tokenS)
-  const ethBalance = getBalanceBySymbol({balances, symbol: 'ETH', toUnit: true})
+  const ethBalance = getBalanceBySymbol({balances, symbol:'ETH', toUnit:true})
   const approveGasLimit = config.getGasLimitByType('approve').gasLimit
-  const balanceS = tokenFormatter.getBalanceBySymbol({balances, symbol: tradeInfo.tokenS, toUnit: true})
+  const balanceS = tokenFormatter.getBalanceBySymbol({balances, symbol:tradeInfo.tokenS, toUnit:true})
   let approveCount = 0
   let failed = false
   const warn = new Array(), error = new Array()
-  if (balanceS.balance.lt(tradeInfo.amountS)) {
-    error.push({
-      type: "BalanceNotEnough",
-      value: {
-        symbol: tradeInfo.tokenS,
-        balance: cutDecimal(balanceS.balance, 6),
-        required: ceilDecimal(tradeInfo.amountS, 6)
-      }
-    })
+  let frozenSell = await window.RELAY.account.getEstimatedAllocatedAllowance({owner:storage.wallet.getUnlockedAddress(), token:tradeInfo.tokenS, delegateAddress:config.getDelegateAddress()})
+  if(frozenSell.error) {
+    throw new Error(frozenSell.error.message)
+  }
+  const token = new TokenFm({symbol: tradeInfo.tokenS})
+  const frozenAmount = token.getUnitAmount(frozenSell.result)
+  if(balanceS.balance.lt(frozenAmount.plus(tradeInfo.amountS))) {
+    error.push({type:"BalanceNotEnough", value:{symbol:tradeInfo.tokenS, balance:cutDecimal(balanceS.balance,6), frozen:ceilDecimal(frozenAmount,6), required:ceilDecimal(frozenAmount.plus(tradeInfo.amountS).minus(balanceS.balance),6)}})
     failed = true
   }
-  const pendingAllowance = fm.toBig(isApproving(txs, tradeInfo.tokenS) ? isApproving(txs, tradeInfo.tokenS).div('1e' + configSell.digits) : balanceS.allowance);
-  if (pendingAllowance.lt(tradeInfo.amountS)) {
-    warn.push({
-      type: "AllowanceNotEnough",
-      value: {
-        symbol: tradeInfo.tokenS,
-        allowance: cutDecimal(pendingAllowance, 6),
-        required: ceilDecimal(tradeInfo.amountS, 6)
-      }
-    })
-    approveCount += 1
-    if (pendingAllowance.gt(0)) approveCount += 1
-  }
-  let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
-
-  if (tradeInfo.roleType === 'taker') {
-    gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
-  }
-
-  if (ethBalance.balance.lt(gas)) {
-    error.push({
-      type: "BalanceNotEnough",
-      value: {symbol: 'ETH', balance: cutDecimal(ethBalance.balance, 6), required: ceilDecimal(gas, 6)}
-    })
+  const pendingAllowance = fm.toBig(isApproving(txs, tradeInfo.tokenS) ? isApproving(txs, tradeInfo.tokenS).div('1e'+configSell.digits) : balanceS.allowance);
+  if(pendingAllowance.lt(tradeInfo.amountS)) {
+    error.push({type:"AllowanceNotEnough", value:{symbol:tradeInfo.tokenS, allowance:cutDecimal(pendingAllowance,6), required:ceilDecimal(tradeInfo.amountS.minus(balanceS.allowance),6)}})
     failed = true
   }
-  if (failed) {
+  // let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
+  // if(tradeInfo.roleType === 'taker'){
+  //   gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
+  // }
+  //
+  // if(ethBalance.balance.lt(gas)){
+  //   error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
+  //   failed = true
+  // }
+  if(failed) {
     tradeInfo.error = error
     return
   }
