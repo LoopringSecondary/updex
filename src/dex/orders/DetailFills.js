@@ -69,14 +69,13 @@ export default class Fills extends React.Component {
                           <div className="color-black-1">{fillFm.getPrice()} </div>
                           <div className="color-black-3">{fillFm.getCreateTime()}</div>
                         </td>
-                        <td className="pl10 pr5 pt10 pb10 zb-b-b color-black-1 text-left align-middle ">
-                         <div>{fillFm.getLRCFee()}</div>
+                        <td className="pl10 pr10 pt10 pb10 zb-b-b color-black-1 text-right align-middle ">
+                         {fillFm.getLRCFee()}
                         </td>
                         <td hidden className="pl10 pr5 pt10 pb10 zb-b-b text-left align-middle">
                           { item.side === 'buy' && <div className="color-success">{intl.get('common.buy')}</div> }
                           { item.side === 'sell' && <div className="color-error">{intl.get('common.sell')}</div> }
                         </td>
-                        
                         <td hidden className="pl5 pr5 pt10 pb10 zb-b-b text-right color-black-2 align-middle text-nowrap">
                           {fillFm.getLRCFee()}
                         </td>
