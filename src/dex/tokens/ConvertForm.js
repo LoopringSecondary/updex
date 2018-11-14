@@ -13,6 +13,7 @@ import Worth from 'modules/settings/Worth'
 import { signTx } from '../../common/utils/signUtils'
 import ConvertHelperOfBalance from './ConvertHelperOfBalance'
 import { keccakHash } from 'LoopringJS/common/utils'
+import {generateApproveTx} from "../../modules/orders/formatters";
 
 const WETH = Contracts.WETH
 
@@ -45,13 +46,8 @@ class Convert extends React.Component {
   }
 
   render () {
-<<<<<<< HEAD
-    const {dispatch, balance, amount, gas} = this.props
-    const {token, loading} = this.state
-=======
     const {dispatch, balance, amount, gas,convertToken} = this.props
     const {token,loading} = this.state
->>>>>>> embed
     const address = storage.wallet.getUnlockedAddress()
     const assets = getBalanceBySymbol({balances: balance.items, symbol: token, toUnit: true})
     const other_assets = getBalanceBySymbol({balances: balance.items, symbol: token.toUpperCase() === 'ETH' ? 'WETH' : 'ETH', toUnit: true})
@@ -121,49 +117,30 @@ class Convert extends React.Component {
         chainId: config.getChainId(),
         value
       }
-<<<<<<< HEAD
       if (owner) {
         tx.nonce = toHex((await window.RELAY.account.getNonce(address)).result)
       }
-      const hash = keccakHash(JSON.stringify(tx))
-      const temData = {hash, tx}
-      if (owner) {
-        temData.owner = storage.wallet.getUnlockedAddress()
-      }
-      window.RELAY.order.setTempStore(hash, JSON.stringify(temData)).then(res => {
-        _this.setState({hash})
-        if (!res.error) {
-          // hideLayer({id: 'placeOrderSteps'})
-          dispatch({
-            type: 'sockets/queryChange',
-            payload: {id: 'circulrNotify', extra: {hash}}
-=======
+      dispatch({type: 'task/setTask', payload: {task:'signP2P', unsign:{type: 'convert', data:tx}}})
 
-      signTx(tx).then(res => {
-        if (res.result) {
-          window.ETH.sendRawTransaction(res.result).then(resp => {
-            if (resp.result) {
-              window.RELAY.account.notifyTransactionSubmitted({
-                txHash: resp.result,
-                rawTx: tx,
-                from: address
-              })
-              Toast.success(intl.get('notifications.title.convert_suc'), 3, null, false)
-              hideLayer({id: 'convertToken'})
-              if(convertToken.token){
-                showLayer({id:"notifications"})
-              }else{
-                routeActions.gotoPath('/dex/todos');
-              }
-            } else {
-              Toast.fail(intl.get('notifications.title.convert_fail') + ':' + resp.error.message, 3, null, false)
-            }
->>>>>>> embed
-          })
-          showLayer({id: 'helperOfSign', type: 'convert', data: {type: 'convert', value: hash}})
-        }
-        this.setState({loading: false})
-      })
+      // signTx(tx).then(res => {
+      //   if (res.result) {
+      //     window.ETH.sendRawTransaction(res.result).then(resp => {
+      //       if (resp.result) {
+      //         window.RELAY.account.notifyTransactionSubmitted({
+      //           txHash: resp.result,
+      //           rawTx: tx,
+      //           from: address
+      //         })
+      //         Toast.success(intl.get('notifications.title.convert_suc'), 3, null, false)
+      //         hideLayer({id: 'convertToken'})
+      //         if(convertToken.token){
+      //           showLayer({id:"notifications"})
+      //         }else{
+      //           routeActions.gotoPath('/dex/todos');
+      //         }
+      //       } else {
+      //         Toast.fail(intl.get('notifications.title.convert_fail') + ':' + resp.error.message, 3, null, false)
+      //       }
     }
 
     const amountChange = (value) => {

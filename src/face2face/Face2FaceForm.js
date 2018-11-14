@@ -85,7 +85,8 @@ class Face2FaceForm extends React.Component {
         this.setState({submitLoading:false})
         return
       }
-      if (tradeInfo.error && tradeInfo.error.length > 0) {
+      const error = tradeInfo.error.concat(tradeInfo.warn)
+      if (error && error.length > 0) {
         tradeInfo.error.map(item => {
           switch(item.type) {
             case 'BalanceNotEnough':
