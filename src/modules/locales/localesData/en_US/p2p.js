@@ -1,5 +1,5 @@
 const words = {
-  markets_reference: 'Markets Reference',
+  reference_markets: 'Markets Reference',
   global_price: 'Global Price',
   exchange_ratio: 'Exchange Ratio',
 }

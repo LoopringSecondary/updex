@@ -74,7 +74,7 @@ class Face2FacePage extends React.Component {
             <Face2FaceForm side="sell" showLayer={showLayer} />
           </div>
           <div className="bg-white mt10">
-            <div className="fs16 pt10 pb10 pl15 color-black-1">{intl.get('common.markets_reference')}</div>
+            <div className="fs16 pt10 pb10 pl15 color-black-1 zb-b-b">{intl.get('common.reference_markets')}</div>
             <div className="zb-b-t">
               <HelperOfMarkets />
             </div>

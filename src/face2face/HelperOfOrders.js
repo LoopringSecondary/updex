@@ -167,9 +167,9 @@ class Face2FaceOrders extends React.Component {
                     </td>
                     <td className="zb-b-b pt10 pb10 pl0 pr5 text-left align-top">
                       <div className="">
-                        <span className="font-weight-bold">{orderFm.getTokenS()} → {orderFm.getTokenB()}</span>
+                        <span className="">{orderFm.getTokenS()} → {orderFm.getTokenB()}</span>
                       </div>
-                      <div className="color-black-3 fs12">
+                      <div className="fs12">
                         <span className="">{orderFm.getCreateTime()}</span>
                       </div>
                     </td>

@@ -17,6 +17,7 @@ const words = {
   total: 'Total',
   advanced: "Advanced",
   worth: "Worth",
+  fee: 'Fee',
   lrc_fee: 'Trading Fee',
   lrc_fee_tips: 'xxxxx',
   lrc_reward: 'LRC Reward',
@@ -74,7 +75,8 @@ const words = {
     no_data:'No Data',
     no_data_custom:'No {title}',
     loading:'Loading...',
-  }
+  },
+  available:'Available',
 }
 const errors = {
   10001:'Sorry, system error, please try again later',
@@ -670,6 +672,14 @@ export default {
     description_3: "and",
     description_4: "Privacy Policy",
     agree: "I Agree"
+  },
+  token_actions:{
+    balance:'Balance',
+    available:'Available',
+    selling:'Selling',
+    lack:'Lack Of',
+    enable_label:'Make Token Tradable',
+    enable_label_simple:'Tradable',
   },
   ...modules.pages,
   ...modules.types,

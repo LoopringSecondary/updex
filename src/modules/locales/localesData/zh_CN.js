@@ -17,6 +17,7 @@ const words = {
   total: '总计',
   advanced: '高级',
   worth: '价值',
+  fee: '费用',
   lrc_fee: '手续费',
   lrc_fee_tips: 'xxxxx',
   lrc_reward: 'LRC 撮合奖励',
@@ -75,7 +76,9 @@ const words = {
     no_data: '暂无数据',
     no_data_custom: '暂无{title}',
     loading: '加载中...',
-  }
+  },
+  available:'可用',
+
 }
 const errors = {
   10001:'抱歉，系统错误，请稍后重试',
@@ -675,6 +678,14 @@ no_open_orders: '{market}暂无有效订单',
     description_3: '和',
     description_4: '用户隐私政策',
     agree: '我同意'
+  },
+  token_actions:{
+    balance:'当前余额',
+    available:'可用金额',
+    selling:'挂单金额',
+    lack:'缺少金额',
+    enable_label:'是否授权（是否允许代币交易）',
+    enable_label_simple:'是否授权',
   },
   ...modules.pages,
   ...modules.types,
