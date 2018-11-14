@@ -13,6 +13,7 @@ import config from "../common/config";
 import storage from 'modules/storage'
 import mapLimit from 'async/mapLimit';
 import Available from 'modules/tokens/Available'
+import TokenFm from "modules/tokens/TokenFm";
 
 class HelperOfBalance extends React.Component {
 
@@ -84,6 +85,7 @@ class HelperOfBalance extends React.Component {
           <tbody>
           {
             relatedTokens.map((token, index) =>{
+              const tf = new TokenFm({symbol:token.symbol})
               return (
                 <tr key={index}>
                   <td className="text-left pl15 pr5 pt10 pb10 zb-b-b color-black-2">
@@ -91,7 +93,7 @@ class HelperOfBalance extends React.Component {
                     <span hidden className="color-black-3 ml5">{token.name} </span>
                   </td>
                   <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
-                    <div className="lh15 color-black-1">{toFixed(token.balance, 8)}</div>
+                    <div className="lh15 color-black-1">{tf.shorterPrecision(token.balance)}</div>
                   </td>
                   <td className="text-left pl5 pr5 pt10 pb10 zb-b-b color-black-2">
                     <div className="lh15 color-black-1"><Available symbol={token.symbol}/></div>
