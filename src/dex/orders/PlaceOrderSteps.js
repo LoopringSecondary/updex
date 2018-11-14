@@ -84,6 +84,7 @@ class PlaceOrderSteps extends React.Component {
     }
   }
 
+<<<<<<< HEAD
   render () {
     const {placeOrder, settings, marketcap, dispatch} = this.props
     const {side, pair, priceInput, amountInput, validSince, validUntil} = placeOrder
@@ -96,6 +97,39 @@ class PlaceOrderSteps extends React.Component {
         payload: {
           ...payload
         }
+=======
+  const next = async (page) => {
+    hideLayer({id:'placeOrderSteps'})
+    let order = {};
+    order.owner = storage.wallet.getUnlockedAddress()
+    order.delegateAddress = config.getDelegateAddress();
+    order.protocol = settings.trading.contract.address;
+    const tokenB =  side.toLowerCase() === "buy" ? config.getTokenBySymbol(tokens.left) : config.getTokenBySymbol(tokens.right);
+    const tokenS = side.toLowerCase() === "sell" ? config.getTokenBySymbol(tokens.left) : config.getTokenBySymbol(tokens.right);
+    order.tokenB = tokenB.address;
+    order.tokenS = tokenS.address;
+    order.amountB = toHex(toBig(side.toLowerCase() === "buy" ? amountInput : total).times('1e' + tokenB.digits));
+    order.amountS = toHex(toBig(side.toLowerCase() === "sell" ? amountInput : total).times('1e' + tokenS.digits));
+    order.lrcFee = toHex(toBig(lrcFeeValue).times(1e18));
+    order.validSince = toHex(validSince.unix());
+    order.validUntil = toHex(validUntil.unix());
+    order.marginSplitPercentage = 50;
+    order.buyNoMoreThanAmountB = side.toLowerCase() === "buy";
+    order.walletAddress = (storage.wallet.getRewardAddress()) || config.getWalletAddress()
+    order.orderType = 'market_order'
+    const authAccount = createWallet()
+    order.authAddr = authAccount.getAddressString();
+    order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString());
+    dispatch({type:'placeOrder/rawOrderChange', payload:{rawOrder:order}})
+    // TODO 验证钱包类型
+    // page.gotoPage({id:'wallet'})
+    const signResult = await signOrder(order)
+    if(signResult.error) {
+      Notification.open({
+        message:intl.get('notifications.title.place_order_failed'),
+        description:signResult.error.message,
+        type:'error'
+>>>>>>> embed
       })
     }
     const hideLayer = (payload = {}) => {

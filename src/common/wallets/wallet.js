@@ -45,6 +45,10 @@ export default class Wallet {
     throw new Error('unimplemented')
   }
 
+  share(message){
+    throw new Error('unimplemented')
+  }
+
   /**
    *
    * @param tx rawTx
@@ -61,7 +65,7 @@ export default class Wallet {
     return this.signMessage(toHex(packedOrder))
   }
 
-  setConfigs = async () => {
+  async setConfigs() {
     this.address =  (await this.getCurrentAccount()).result
     this.language = (await this.getLanguage()).result
     this.currency = (await this.getCurrency()).result

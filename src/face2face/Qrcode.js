@@ -37,7 +37,6 @@ class OrderQrcode extends React.Component{
         }
       })
     }
-
     return (
        <div className="bg-white" style={{height:'100%'}}>
         <div className="p25 text-center fs12 color-black-1">

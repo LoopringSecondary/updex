@@ -9,18 +9,10 @@ import storage from 'modules/storage'
 
 import Privacy from './terms/Privacy'
 import Terms from './terms/Terms'
-import routeActions from 'common/utils/routeActions'
+
 
 
 const UnLogged = (props)=>{
-
-  const isLogged = !!(window.Wallet && window.Wallet.address)
-  if(isLogged){
-    let to = routeActions.location.getQueryByName(props,'to')
-    console.log('auth  props.location.search to', to);
-    if(!to){ to='/dex' }
-    return <Redirect to={to} />
-  }else{
     return (
       <Switch>
          <Route path={`/auth`} exact component={Auth} />
@@ -28,7 +20,6 @@ const UnLogged = (props)=>{
          <Route path={`/auth/privacy`} exact component={Privacy} />
        </Switch>
     )
-  }
 }
 
 export default class Routes extends React.Component {

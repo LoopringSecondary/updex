@@ -3,7 +3,7 @@ import { Button, Icon, InputItem, List, NavBar, Toast,Modal } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
-import { toBig, toHex, toNumber } from 'LoopringJS/common/formatter'
+import { toBig, toHex, toNumber,toFixed } from 'LoopringJS/common/formatter'
 import Contracts from 'LoopringJS/ethereum/contracts/Contracts'
 import TokenFormatter, { getBalanceBySymbol, isValidNumber } from '../../modules/tokens/TokenFm'
 import config from '../../common/config'
@@ -36,12 +36,22 @@ class Convert extends React.Component {
     const {match} = this.props
     if (match && match.params && match.params.token) {
       this.setState({token: match.params.token})
+      return
+    }
+    const {convertToken:{token}} = this.props
+    if(token){
+      this.setState({token})
     }
   }
 
   render () {
+<<<<<<< HEAD
     const {dispatch, balance, amount, gas} = this.props
     const {token, loading} = this.state
+=======
+    const {dispatch, balance, amount, gas,convertToken} = this.props
+    const {token,loading} = this.state
+>>>>>>> embed
     const address = storage.wallet.getUnlockedAddress()
     const assets = getBalanceBySymbol({balances: balance.items, symbol: token, toUnit: true})
     const other_assets = getBalanceBySymbol({balances: balance.items, symbol: token.toUpperCase() === 'ETH' ? 'WETH' : 'ETH', toUnit: true})
@@ -111,6 +121,7 @@ class Convert extends React.Component {
         chainId: config.getChainId(),
         value
       }
+<<<<<<< HEAD
       if (owner) {
         tx.nonce = toHex((await window.RELAY.account.getNonce(address)).result)
       }
@@ -126,6 +137,28 @@ class Convert extends React.Component {
           dispatch({
             type: 'sockets/queryChange',
             payload: {id: 'circulrNotify', extra: {hash}}
+=======
+
+      signTx(tx).then(res => {
+        if (res.result) {
+          window.ETH.sendRawTransaction(res.result).then(resp => {
+            if (resp.result) {
+              window.RELAY.account.notifyTransactionSubmitted({
+                txHash: resp.result,
+                rawTx: tx,
+                from: address
+              })
+              Toast.success(intl.get('notifications.title.convert_suc'), 3, null, false)
+              hideLayer({id: 'convertToken'})
+              if(convertToken.token){
+                showLayer({id:"notifications"})
+              }else{
+                routeActions.gotoPath('/dex/todos');
+              }
+            } else {
+              Toast.fail(intl.get('notifications.title.convert_fail') + ':' + resp.error.message, 3, null, false)
+            }
+>>>>>>> embed
           })
           showLayer({id: 'helperOfSign', type: 'convert', data: {type: 'convert', value: hash}})
         }
@@ -170,7 +203,7 @@ class Convert extends React.Component {
                     type="money"
                     onChange={amountChange}
                     moneyKeyboardAlign="right"
-                    value={amount>=0 ? amount : null}
+                    value={amount}
                     extra={<div className="fs14 color-black-3 ml5">{fromToken}</div>}
                     className="circle h-default fs18"
                     placeholder={intl.get('common.amount')}

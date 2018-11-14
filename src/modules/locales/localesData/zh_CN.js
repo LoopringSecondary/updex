@@ -1,3 +1,4 @@
+import modules from './zh_CN/index.js'
 const words = {
   all: '全部',
   time: '时间',
@@ -16,6 +17,7 @@ const words = {
   total: '总计',
   advanced: '高级',
   worth: '价值',
+  fee: '费用',
   lrc_fee: '手续费',
   lrc_fee_tips: 'xxxxx',
   lrc_reward: 'LRC 撮合奖励',
@@ -78,6 +80,20 @@ const words = {
   },
   mode:'模式',
   global_price:'全网价',
+  available:'可用',
+
+}
+const errors = {
+  10001:'抱歉，系统错误，请稍后重试',
+  32000:'抱歉，用户余额不足或者下单总量已经超过余额上限',
+  50001:'抱歉，无法获取到扫描订单信息',
+  50002:'抱歉，扫描二维码订单必须是P2P订单',
+  50003:'抱歉，扫描到的订单，目前无法成交，请稍后重试',
+  50004:'抱歉，双方订单数额不匹配，请核对后重新下单',
+  50005:'抱歉，买单和卖单地址相同，请核对后重新下单',
+  50006:'抱歉，订单已过期，请扫描其他二维码后重新下单',
+  50007:'抱歉，订单未成交数额过小，已无法下单成交',
+  50008:'抱歉，无法获取当前下单信息，请稍后重试'
 }
 
 const types = {
@@ -125,6 +141,7 @@ const notifications = {
     submit_ring_fail:'提交环路失败'
   },
   message: {
+    wait_for_load_data:"请等待数据加载完毕",
     place_order_price_high:"您当前的价格高于市场价5%",
     place_order_price_low:"您当前的价格低于市场价5%",
     wallet_locked: '您的钱包还未解锁，请先解锁后再继续操作',
@@ -183,6 +200,8 @@ export default {
     ...words,
     ...validation_messages,
     ...time_unit,
+    ...errors,
+    ...modules.common
   },
   notifications,
   actions,
@@ -215,7 +234,8 @@ export default {
     expired: '已过期',
     pending: '打包中',
     canceling: '取消中',
-    waiting:"撮合中"
+    waiting:"撮合中",
+    locked:"已锁定"
   },
   order_side: {
     sell: words.sell,
@@ -403,6 +423,12 @@ export default {
     share_page : '截图并分享给你的朋友',
     scan_with_upwallet: '请使用UP Wallet手机版进行扫码吃单',
     visit_later:'网页 P2P 交易正在维护中，请稍后访问！',
+    maker_balance_not_enough:"maker 订单的{token} 余额不足,当前余额是 {balance},需要{required}",
+    maker_allowance_not_enough:"maker 订单的{token} 授权不足,当前授权是 {allowance},需要{required}",
+    allowance_not_enough:'{token} 授权不足,当前授权是 {allowance},需要{required}',
+    invalid_order:"该订单已经完成，失效或者被取消",
+    frozen_balance_not_enough:'有效订单中占用了{frozen}{token}(市场单和P2P订单)，累加当前订单卖出数量后余额不足，请减少当前订单卖出数量或取消历史订单',
+    p2p_allowance_not_enough:'请先在资产列表中授权{token}，生效后才可以继续下单'
   },
   sign: {
     not_signed: '您还未完成签名',
@@ -747,6 +773,9 @@ export default {
   notification_list:{
     page_title:"消息",
   },
+  notification_list:{
+    page_title:"消息",
+  },
   todo_list: {
     todo_list_title: '任务',
     title_allowance_not_enough: '{symbol} 还未授权交易',
@@ -807,5 +836,16 @@ export default {
   coming_soon:{
     visit_on_pc:"请在电脑端访问 https://circulr.loopring.io ",
   }, 
+  token_actions:{
+    balance:'当前余额',
+    available:'可用金额',
+    selling:'挂单金额',
+    lack:'缺少金额',
+    enable_label:'是否授权（是否允许代币交易）',
+    enable_label_simple:'是否授权',
+    enable_tip:"授权{token}进行交易需要消耗以太坊油费"
+  },
+  ...modules.pages,
+  ...modules.types,
 }
 
