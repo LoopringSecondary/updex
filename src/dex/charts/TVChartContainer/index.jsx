@@ -27,7 +27,7 @@ class TVChartContainer extends React.PureComponent {
   }
 
   componentWillReceiveProps(newProps) {
-    const {pair, themeName} = newProps
+    const {pair, themeName='darkgrey'} = newProps
     if (this.tvWidget !== null && this.tvWidget._ready) {
       this.setState({barsLoaded: false})
       this.tvWidget.chart().setSymbol(pair, () => {})

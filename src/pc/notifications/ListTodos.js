@@ -140,7 +140,7 @@ const TodoItem = (props) => {
       <div className="">
         <div className="row ml0 mr0 pl10 pr10 pt15 align-items-center no-gutters" onClick={() => {}}>
           <div className="col-auo pr15 color-black text-center">
-            <WebIcon className="color-error fs16" type="exclamation-circle"/>
+            <WebIcon className="color-error fs16" type="exclamation-circle" theme="filled"/>
           </div>
           <div className="col text-left">
             <div>
@@ -152,7 +152,7 @@ const TodoItem = (props) => {
         </div>
         <div className="row ml0 mr0 pl10 pr10 pb15 pt5 align-items-center zb-b-b no-gutters" onClick={() => {}}>
           <div className="col-auo pr15 text-center color-white">
-            <WebIcon className="color-white fs16" type="exclamation-circle"/>
+            <WebIcon className="color-white fs16" style={{opacity:0}} type="exclamation-circle"/>
           </div>
           <div className="col fs14 color-black-3 pr30">
             <div className="row no-gutters ml0 mr0 ">

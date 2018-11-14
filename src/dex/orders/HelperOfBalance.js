@@ -88,13 +88,13 @@ const HelperOfBalance = (props)=>{
                   <td className="pl5 pr10 pt10 pb10 zb-b-b color-black-2 text-right text-nowrap">
                     {
                       token.symbol === 'WETH' &&
-                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" className="h-25 d-inline-block ml10 color-white border-none" size="small">
                         <Icon className="fs12" type="ellipsis" />
                       </Button>
                     }
                     {
                       token.symbol !== 'WETH' &&
-                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" className="h-25 d-inline-block ml10 color-white border-none" size="small">
                         <Icon className="fs12" type="ellipsis" />
                       </Button>
                     }

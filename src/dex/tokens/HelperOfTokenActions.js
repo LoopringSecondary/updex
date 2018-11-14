@@ -94,7 +94,7 @@ class HelperOfTokenActions extends  React.Component{
     return (
       <div className="bg-white h100">
         <NavBar
-          className="zb-b-b"
+          className=""
           mode="light"
           onLeftClick={() => hideLayer({id:'helperOfTokenActions'})}
           leftContent={[
@@ -103,6 +103,7 @@ class HelperOfTokenActions extends  React.Component{
         >
           <div className="color-black">{symbol}</div>
         </NavBar>
+        <div className="divider 1px zb-b-b"></div>
         <div className="pt15">
           <MetaItem  label={intl.get('token_actions.balance')} value={toNumber(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(balance ? balance.balance : 0)))}/>
           <MetaItem  label={intl.get('token_actions.selling')} value={toNumber(sale)}/>
