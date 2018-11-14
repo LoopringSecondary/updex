@@ -354,6 +354,7 @@ no_open_orders: '{market}暂无有效订单',
     frozen_balance_not_enough:'有效订单中占用了{frozen}{token}(市场单和P2P订单)，累加当前订单卖出数量后余额不足，请减少当前订单卖出数量或取消历史订单',
     p2p_allowance_not_enough:'请先在资产列表中授权{token}，生效后才可以继续下单',
     fill_amount:'成交数量',
+    fill_count:"成交份数"
   },
   sign: {
     not_signed: '您还未完成签名',
