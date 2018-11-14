@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'dva';
 import {Button} from 'antd-mobile';
-import {Icon} from 'antd';
+import {Icon,Spin} from 'antd';
 import EnableSwitch from '../dex/tokens/EnableSwitch';
 import routeActions from 'common/utils/routeActions'
 import {getTokensByMarket} from 'modules/formatter/common'
@@ -21,7 +21,7 @@ class HelperOfBalance extends React.Component {
   }
 
   render() {
-    const {tokenS, tokenB, balance, dispatch} = this.props
+    const {tokenS, tokenB, balance, loading,dispatch} = this.props
     const relatedTokens = []
     const balanceS = {
       symbol: tokenS,
@@ -67,7 +67,7 @@ class HelperOfBalance extends React.Component {
     }
 
     return (
-      <div className="fs20">
+      <Spin spinning={loading} className="fs20">
         <table className="w-100 fs12">
           <thead>
           <tr className="">
@@ -123,7 +123,7 @@ class HelperOfBalance extends React.Component {
           }
           </tbody>
         </table>
-      </div>
+      </Spin>
     )
   }
 }
@@ -132,7 +132,7 @@ export default connect(({
                           p2pOrder: {tokenS, tokenB},
                           sockets,
                         }) => ({
-  tokenS, tokenB, balance: sockets.balance.items
+  tokenS, tokenB, balance: sockets.balance.items,loading: sockets.balance.loading
 }))(HelperOfBalance)
 
 
