@@ -36,7 +36,9 @@ class Available extends React.Component {
     const {symbol, balance}= this.props
     const {sale}= this.state
     const tokenBalance = getBalanceBySymbol({balances: balance, symbol: symbol.toLowerCase(), toUnit: true})
-    return this.available(tokenBalance, sale)
+    const available = this.available(tokenBalance, sale)
+    const tokenFm = new TokenFM({symbol})
+    return tokenFm.shorterPrecision(available)
   }
 }
 
