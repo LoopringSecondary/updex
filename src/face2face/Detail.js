@@ -27,7 +27,7 @@ function OrderDetail(props) {
   const {p2pOrderDetail,dispatch} = props
   const {order} = p2pOrderDetail;
   const orderFm = new OrderFm(order);
-  const {originalOrder:{tokenS,tokenB,amountS,amountB},dealtAmountS,dealtAmountB} = order
+  const {originalOrder:{tokenS,tokenB,amountS,amountB}} = order
   const tokensFm = new TokenFm({symbol:tokenS})
   const tokenbFm = new TokenFm({symbol:tokenB})
   const showLayer = (payload={})=>{
@@ -47,7 +47,6 @@ function OrderDetail(props) {
     })
   }
   const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
-  const fillPercentage = toFixed(toBig(dealtAmountS).div(toBig(amountS)).times(100),2)
 
   const showQR = (order,orderFm,tokens) => {
     showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder},data:{tokens,orderFm}})
@@ -107,6 +106,7 @@ function OrderDetail(props) {
           <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
+            <OrderMetaItem label={intl.get('p2p_order.fill_amount')} value={`${orderFm.getFilledAmount(true,true)}`}/>
           </div>
         </div>
         <div className="bg-white mt10">
@@ -133,7 +133,6 @@ function OrderDetail(props) {
 
             <OrderMetaItem label={intl.get('order.LRCFee')} value={orderFm.getLRCFee()}/>
             <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
-            <OrderMetaItem label={intl.get('p2p_order.fill_percent')} value={fillPercentage + "%"}/>
           </div>
         </div>
         <div className="bg-white mt10">
