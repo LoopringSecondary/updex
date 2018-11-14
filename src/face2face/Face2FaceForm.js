@@ -70,6 +70,7 @@ class Face2FaceForm extends React.Component {
         Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
         return
       }
+<<<<<<< HEAD
       this.setState({submitLoading:true})
       const tradeInfo = {}
       tradeInfo.amountB = toBig(amountB)
@@ -98,6 +99,10 @@ class Face2FaceForm extends React.Component {
         showLayer({id:'face2FaceConfirm'})
       }
       this.setState({submitLoading:false})
+=======
+      // 验证历史订单
+      showLayer({id:'face2FaceConfirm'})
+>>>>>>> 0425dc76760ea91936cb99b145d22897d3a0367b
     }
     const price = amountB && toBig(amountB).gt(0) && amountS && toBig(amountS).gt(0) ? toFixed(toBig(amountS).div(amountB), 8) : toFixed(toBig(0),8)
     return (
