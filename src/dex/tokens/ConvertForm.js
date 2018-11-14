@@ -121,26 +121,6 @@ class Convert extends React.Component {
         tx.nonce = toHex((await window.RELAY.account.getNonce(address)).result)
       }
       dispatch({type: 'task/setTask', payload: {task:'signP2P', unsign:{type: 'convert', data:tx}}})
-
-      // signTx(tx).then(res => {
-      //   if (res.result) {
-      //     window.ETH.sendRawTransaction(res.result).then(resp => {
-      //       if (resp.result) {
-      //         window.RELAY.account.notifyTransactionSubmitted({
-      //           txHash: resp.result,
-      //           rawTx: tx,
-      //           from: address
-      //         })
-      //         Toast.success(intl.get('notifications.title.convert_suc'), 3, null, false)
-      //         hideLayer({id: 'convertToken'})
-      //         if(convertToken.token){
-      //           showLayer({id:"notifications"})
-      //         }else{
-      //           routeActions.gotoPath('/dex/todos');
-      //         }
-      //       } else {
-      //         Toast.fail(intl.get('notifications.title.convert_fail') + ':' + resp.error.message, 3, null, false)
-      //       }
     }
 
     const amountChange = (value) => {
