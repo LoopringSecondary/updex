@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'dva'
 import { Button } from 'antd-mobile'
-import { Icon} from 'antd'
+import { Icon,Spin} from 'antd'
 import EnableSwitch from '../tokens/EnableSwitch'
 import routeActions from 'common/utils/routeActions'
 import { getTokensByMarket } from 'modules/formatter/common'
@@ -11,7 +11,7 @@ import intl from 'react-intl-universal'
 import Available from 'modules/tokens/Available'
 
 const HelperOfBalance = (props)=>{
-  const {dispatch,pair,balance} = props
+  const {dispatch,pair,balance,loading} = props
   const marketTokens = getTokensByMarket(pair)
   const showLayer = (payload={})=>{
     dispatch({
@@ -60,7 +60,7 @@ const HelperOfBalance = (props)=>{
   }
 
   return (
-    <div className="fs20">
+    <Spin spinning={loading} className="fs20">
       <table className="w-100 fs12">
         <thead>
           <tr className="">
@@ -107,14 +107,14 @@ const HelperOfBalance = (props)=>{
       <div className="zb-b-b color-black-4 text-center pt10 pb10 fs13" onClick={routeActions.gotoPath.bind(this,'/dex/usercenter/assets')}>
         <span className="">{intl.get('common.all')} {intl.get('common.assets')}</span>
       </div>
-    </div>
+    </Spin>
   )
 }
 export default connect(({
   placeOrder:{pair},
   sockets,
 })=>({
-  pair,balance:sockets.balance.items
+  pair,balance:sockets.balance.items,loading:sockets.balance.loading,
 }))(HelperOfBalance)
 
 

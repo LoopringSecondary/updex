@@ -686,6 +686,7 @@ no_open_orders: '{market}暂无有效订单',
     lack:'缺少金额',
     enable_label:'是否授权（是否允许代币交易）',
     enable_label_simple:'是否授权',
+    enable_tip:"授权{token}进行交易需要消耗以太坊油费"
   },
   ...modules.pages,
   ...modules.types,
