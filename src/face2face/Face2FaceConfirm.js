@@ -253,11 +253,7 @@ function PlaceOrderSteps(props) {
   };
 
   return (
-<<<<<<< HEAD
     <div className="bg-white" style={{height:'100%'}}>
-=======
-    <div className="bg-white h-100 h100">
->>>>>>> embed
       <Pages active="order">
         <Page id="order" render={({page}) =>
           <div>
@@ -280,16 +276,7 @@ function PlaceOrderSteps(props) {
             <div className="pt15 pb15 bg-white">
               <div className="pt15 pb30 row ml0 mr0 no-gutters align-items-center justify-content-center zb-b-b">
                 <div className="col-auto">
-<<<<<<< HEAD
                   <div className="bg-primary color-white d-flex align-items-center justify-content-center circle-40" style={{}}>
-=======
-                  <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center"
-                       style={{
-                         width: '4rem',
-                         height: '4rem',
-                         borderRadius: '50em',
-                       }}>
->>>>>>> embed
                     <i className={`icon-token-${tokenS} fs24`}/>
                   </div>
                 </div>
@@ -297,37 +284,18 @@ function PlaceOrderSteps(props) {
                   <Icon type="swap" className={`text-primary fs20`}/>
                 </div>
                 <div className="col-auto">
-<<<<<<< HEAD
                   <div className="bg-primary color-white d-flex align-items-center justify-content-center  circle-40" style={{}}>
-=======
-                  <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center"
-                       style={{
-                         width: '4rem',
-                         height: '4rem',
-                         borderRadius: '50em',
-                       }}>
->>>>>>> embed
                     <i className={`icon-token-${tokenB} fs24`}/>
                   </div>
                 </div>
               </div>
               <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
-
-
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
-<<<<<<< HEAD
-              {false &&  <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>}
-              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
-=======
-              {false && <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>}
-              <OrderMetaItem label={intl.get('common.buy') + ' ' + intl.get('order.price')} value={
->>>>>>> embed
                 <span>
                   {`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
                 </span>
               }/>
-<<<<<<< HEAD
               <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
                 <span>
                   {`1 ${tokenS} = ${Number(toFixed(1/price,8))} ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>
@@ -341,22 +309,6 @@ function PlaceOrderSteps(props) {
                             className="hover-default" onClick={showLayer.bind(this,{id:'helperOfMiniFill'})}
                              value={<div  className="text-primary cursor-pointer pl40"><span className="mr5">{count}</span></div>}/>
               <Button type="primary" className="m15" onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
-=======
-              <OrderMetaItem label={intl.get('common.sell') + ' ' + intl.get('order.price')} value={
-                <span>
-                  {`1 ${tokenS} = ${Number(toFixed(1 / price, 8))} ${tokenB} ≈`} <Worth amount={1 / price}
-                                                                                        symbol={tokenB}/>
-                </span>
-              }/>
-              <OrderMetaItem label={intl.get('common.ttl')} showArrow={true}
-                             value={<div onClick={showLayer.bind(this, {id: 'helperOfTTL'})}
-                                         className="text-primary">{`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}</div>}/>
-              <OrderMetaItem label={intl.get('p2p_order.count')} showArrow={true}
-                             value={<div onClick={showLayer.bind(this, {id: 'helperOfMiniFill'})}
-                                         className="text-primary"><span className="mr5">{count}</span></div>}/>
-              <Button type="primary" className="mt15"
-                      onClick={next.bind(this, page)}>{intl.get('place_order_confirm.sign_and_submit')}</Button>
->>>>>>> embed
             </div>
           </div>
         }/>

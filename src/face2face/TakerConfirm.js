@@ -320,8 +320,6 @@ class TakerConfirm extends React.Component {
               </div>
             </div>
           </div>
-<<<<<<< HEAD
-          {false &&  <OrderMetaItem label={intl.get('common.price')} value={`${price} ${order.tokenS}/${order.tokenB}`}/>}
           <OrderMetaItem label={intl.get('common.sell')} value={`${tokensFm.toPricisionFixed(tokensFm.getUnitAmount(order.amountS))} ${order.tokenS} `}/>
           <OrderMetaItem label={intl.get('common.buy')} value={`${tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(order.amountB))} ${order.tokenB} `}/>
           <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
@@ -335,30 +333,6 @@ class TakerConfirm extends React.Component {
                   {`1 ${order.tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS)),8))} ${order.tokenB} ≈`} <Worth amount={tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS))} symbol={order.tokenB}/>
                 </span>
           }/>
-=======
-          <OrderMetaItem label={intl.get('common.sell')}
-                         value={`${tokensFm.toPricisionFixed(tokensFm.getUnitAmount(order.amountS))} ${order.tokenS} `}/>
-          <OrderMetaItem label={intl.get('common.buy')}
-                         value={`${tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(order.amountB))} ${order.tokenB} `}/>
-          {false &&
-          <OrderMetaItem label={intl.get('common.price')} value={`${Number(price)} ${order.tokenS}/${order.tokenB}`}/>}
-          <OrderMetaItem label={intl.get('common.buy') + ' ' + intl.get('order.price')} value={
-            <span>
-                  {`1 ${order.tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(order.amountS).div(tokenbFm.getUnitAmount(order.amountB)), 8))} ${order.tokenS} ≈`}
-              <Worth amount={tokensFm.getUnitAmount(order.amountS).div(tokenbFm.getUnitAmount(order.amountB))}
-                     symbol={order.tokenS}/>
-                </span>
-          }/>
-
-          <OrderMetaItem label={intl.get('common.sell') + ' ' + intl.get('order.price')} value={
-            <span>
-                  {`1 ${order.tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS)), 8))} ${order.tokenB} ≈`}
-              <Worth amount={tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS))}
-                     symbol={order.tokenB}/>
-                </span>
-          }/>
-
->>>>>>> embed
           <OrderMetaItem label={intl.get('common.ttl')}
                          value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}/>
           <Button type="primary" className="mt15" onClick={submitRing}>{intl.get('common.exchange')}</Button>
