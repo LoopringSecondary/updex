@@ -66,7 +66,7 @@ const HelperOfBalance = (props)=>{
           <tr className="">
             <th className="text-left zb-b-b pl10 pr5 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.token')}</th>
             <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.balance')}</th>
-            <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('token_actions.available')}</th>
+            <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.available')}</th>
             <th className="text-center zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('token_actions.enable_label_simple')}</th>
             <th className="text-right zb-b-b pl5 pr10 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.actions')}</th>
           </tr>
@@ -88,14 +88,14 @@ const HelperOfBalance = (props)=>{
                   <td className="pl5 pr10 pt10 pb10 zb-b-b color-black-2 text-right text-nowrap">
                     {
                       token.symbol === 'WETH' &&
-                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 bg-primary-light border-none text-primary" size="small">
-                        {intl.get('common.convert')} <Icon className="fs10" type="down" />
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                        <Icon className="fs12" type="ellipsis" />
                       </Button>
                     }
                     {
                       token.symbol !== 'WETH' &&
-                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 bg-primary-light border-none text-primary" size="small">
-                        {intl.get('common.receive')} <Icon className="fs10" type="down" />
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                        <Icon className="fs12" type="ellipsis" />
                       </Button>
                     }
                   </td>

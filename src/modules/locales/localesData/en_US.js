@@ -75,7 +75,8 @@ const words = {
     no_data:'No Data',
     no_data_custom:'No {title}',
     loading:'Loading...',
-  }
+  },
+  available:'Available',
 }
 const errors = {
   10001:'Sorry, system error, please try again later',

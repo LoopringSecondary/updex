@@ -75,7 +75,7 @@ class HelperOfBalance extends React.Component {
               className="text-left zb-b-b pl15 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.token')}</th>
             <th
               className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.balance')} </th>
-            <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('token_actions.available')}</th>
+            <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.available')}</th>
             <th className="text-center zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('token_actions.enable_label_simple')}</th>
             <th
               className="text-right zb-b-b pl5 pr15 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.actions')}</th>
