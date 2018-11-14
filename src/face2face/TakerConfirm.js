@@ -1,16 +1,16 @@
 import React from 'react'
 import config from '../common/config'
-import { toHex, toBig, toFixed,clearHexPrefix ,toNumber} from 'LoopringJS/common/formatter'
+import {toHex, toBig, toFixed, clearHexPrefix, toNumber} from 'LoopringJS/common/formatter'
 import monent from 'moment'
-import { Icon } from 'antd'
-import { Button,NavBar } from 'antd-mobile'
+import {Icon} from 'antd'
+import {Button, NavBar} from 'antd-mobile'
 import storage from 'modules/storage'
 import Contracts from 'LoopringJS/ethereum/contracts/Contracts'
-import { connect } from 'dva'
-import { signTx,signOrder } from '../common/utils/signUtils'
-import { Toast } from 'antd-mobile/lib/index'
+import {connect} from 'dva'
+import {signTx, signOrder} from '../common/utils/signUtils'
+import {Toast} from 'antd-mobile/lib/index'
 import intl from 'react-intl-universal'
-import { createWallet } from 'LoopringJS/ethereum/account'
+import {createWallet} from 'LoopringJS/ethereum/account'
 import Notification from 'LoopringUI/components/Notification'
 import * as orderFormatter from 'modules/orders/formatters'
 import eachOfLimit from "async/eachOfLimit";
@@ -34,11 +34,11 @@ const OrderMetaItem = (props) => {
 
 class TakerConfirm extends React.Component {
 
-  render () {
-    const {dispatch, takerConfirm, gas,balance,pendingTx,socket} = this.props
+  render() {
+    const {dispatch, takerConfirm, gas, balance, pendingTx, socket} = this.props
     const {makerOrder} = takerConfirm
-    const validSince = monent()
-    const validUntil = monent().add(1, 'd')
+    const validSince = monent().subtract(1, 'hours')
+    const validUntil = monent().add(2, 'd')
     const order = {}
     order.delegateAddress = makerOrder.originalOrder.delegateAddress
     order.protocol = makerOrder.originalOrder.protocol
@@ -62,9 +62,13 @@ class TakerConfirm extends React.Component {
     order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString());
     order.orderType = 'p2p_order'
 
-    const completeOrder = {...order,tokenS :config.getTokenBySymbol(order.tokenS).address,tokenB:config.getTokenBySymbol(order.tokenB).address }
-    const tokensFm = new TokenFm({symbol:order.tokenS})
-    const tokenbFm = new TokenFm({symbol:order.tokenB})
+    const completeOrder = {
+      ...order,
+      tokenS: config.getTokenBySymbol(order.tokenS).address,
+      tokenB: config.getTokenBySymbol(order.tokenB).address
+    }
+    const tokensFm = new TokenFm({symbol: order.tokenS})
+    const tokenbFm = new TokenFm({symbol: order.tokenB})
     const price = toFixed(order.amountS / order.amountB, 4);
     const hideLayer = (payload = {}) => {
       dispatch({
@@ -76,16 +80,50 @@ class TakerConfirm extends React.Component {
     }
 
     const submitRing = async () => {
-
-      if(!socket){
-        Notification.open({description:'Please wait for loading data',type: 'error'});
+      if (!socket) {
+        Notification.open({description: intl.get('notifications.message.wait_for_load_data'), type: 'error'});
         return
       }
+      const makerOrderErrors = await orderFormatter.verifyMakerOrder(makerOrder.originalOrder, makerOrder.count);
+      if (makerOrderErrors.length > 0) {
+        const item = makerOrderErrors[0]
+        if (item.type === "BalanceNotEnough") {
+          Notification.open({
+            description: intl.get('p2p_order.maker_balance_not_enough', {
+              required: item.value.required,
+              balance: item.value.balance,
+              token: item.value.symbol
+            }),
+            type: 'error',
+          })
+        }
+        if (item.type === "AllowanceNotEnough") {
+          Notification.open({
+            description: intl.get('p2p_order.maker_allowance_not_enough', {
+              required: item.value.required,
+              allowance: item.value.balance,
+              token: item.value.symbol
+            }),
+            type: 'error',
+          })
+        }
+        return;
+      }
+
       const address = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
       const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current).times(1e9))
-      const tradeInfo = {...order,marginSplit:0,roleType:'taker',validSince:validSince.unix(),validUntil:validUntil.unix(),milliLrcFee:0,amountS:tokensFm.getUnitAmount(order.amountS),amountB:tokenbFm.getUnitAmount(order.amountB),
-        gasLimit:config.getGasLimitByType('approve').gasLimit,
-        gasPrice}
+      const tradeInfo = {
+        ...order,
+        marginSplit: 0,
+        roleType: 'taker',
+        validSince: validSince.unix(),
+        validUntil: validUntil.unix(),
+        milliLrcFee: 0,
+        amountS: tokensFm.getUnitAmount(order.amountS),
+        amountB: tokenbFm.getUnitAmount(order.amountB),
+        gasLimit: config.getGasLimitByType('approve').gasLimit,
+        gasPrice
+      }
       try {
         await orderFormatter.p2pVerification(balance, tradeInfo, pendingTx ? pendingTx.items : [], toBig(gasPrice).div(1e9))
       } catch (e) {
@@ -98,36 +136,39 @@ class TakerConfirm extends React.Component {
         return
       }
 
-      if (tradeInfo.error) {
-          const item =  tradeInfo.error[0]
-          if(item.value.symbol.toLowerCase() === 'eth'){
-            Notification.open({
-              message: intl.get('notifications.title.place_order_failed'),
-              description: intl.get('notifications.message.eth_is_required_when_place_order', {required: item.value.required}),
-              type: 'error',
-              actions: (
-                <div>
-                  <Button className="alert-btn mr5" onClick={() => dispatch({
-                    type: 'layers/showLayer',
-                    payload: {id: 'receiveToken', symbol: item.value.symbol}
-                  })}>
-                    {`${intl.get('actions.receive')} ${item.value.symbol}`}
-                  </Button>
-                </div>
-              )
-            })
-          }else{
-            Notification.open({
-              message: intl.get('notifications.title.place_order_failed'),
-              description: intl.get('notifications.message.token_required_when_place_order', {required: item.value.required,token:item.value.symbol}),
-              type: 'error',
-            })
-          }
+      if (tradeInfo.error && tradeInfo.error[0]) {
+        const item = tradeInfo.error[0]
+        if (item.value.symbol.toLowerCase() === 'eth') {
+          Notification.open({
+            message: intl.get('notifications.title.place_order_failed'),
+            description: intl.get('notifications.message.eth_is_required_when_place_order', {required: item.value.required}),
+            type: 'error',
+            actions: (
+              <div>
+                <Button className="alert-btn mr5" onClick={() => dispatch({
+                  type: 'layers/showLayer',
+                  payload: {id: 'receiveToken', symbol: item.value.symbol}
+                })}>
+                  {`${intl.get('actions.receive')} ${item.value.symbol}`}
+                </Button>
+              </div>
+            )
+          })
+        } else {
+          Notification.open({
+            message: intl.get('notifications.title.place_order_failed'),
+            description: intl.get('notifications.message.token_required_when_place_order', {
+              required: item.value.required,
+              token: item.value.symbol
+            }),
+            type: 'error',
+          })
+        }
         dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
         return
       }
       try {
-        const {unsigned} = await orderFormatter.signP2POrder(tradeInfo, (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress())
+        const {unsigned} = await orderFormatter.signP2POrder(tradeInfo, address)
         const signResult = await signOrder(completeOrder)
         if (signResult.error) {
           Notification.open({
@@ -137,9 +178,9 @@ class TakerConfirm extends React.Component {
           })
           return
         }
-        const signedOrder = {...completeOrder, ...signResult.result,powNonce : 100}
+        const signedOrder = {...completeOrder, ...signResult.result, powNonce: 100}
         const txs = unsigned.filter(item => item.type === 'tx');
-        eachOfLimit(txs, 1, async (item,key,callback) => {
+        eachOfLimit(txs, 1, async (item, key, callback) => {
           signTx(item.data).then(res => {
             if (res.result) {
               window.ETH.sendRawTransaction(res.result).then(resp => {
@@ -147,14 +188,14 @@ class TakerConfirm extends React.Component {
                   window.RELAY.account.notifyTransactionSubmitted({
                     txHash: resp.result,
                     rawTx: item.data,
-                    from: window.Wallet.address
+                    from: address
                   })
                   callback()
-                }else {
+                } else {
                   callback(resp.error)
                 }
               })
-            }else{
+            } else {
               callback(res.error)
             }
           })
@@ -165,8 +206,8 @@ class TakerConfirm extends React.Component {
               description: e.message,
               type: 'error'
             })
-          }else{
-            const nonce = txs.length >0 ? toHex(toNumber(txs[txs.length -1].nonce) + 1) :toHex((await window.RELAY.account.getNonce(address)).result)
+          } else {
+            const nonce = txs.length > 0 ? toHex(toNumber(txs[txs.length - 1].data.nonce) + 1) : toHex((await window.RELAY.account.getNonce(address)).result)
             const tx = {
               value: '0x0',
               gasLimit: config.getGasLimitByType('submitRing').gasLimit,
@@ -174,15 +215,33 @@ class TakerConfirm extends React.Component {
               to: order.protocol,
               gasPrice,
               nonce,
-              data:Contracts.LoopringProtocol.encodeSubmitRing([{...signedOrder},{...makerOrder.originalOrder,
-                tokenS:config.getTokenBySymbol(makerOrder.originalOrder.tokenS).address,
-                tokenB:config.getTokenBySymbol(makerOrder.originalOrder.tokenB).address,
-                owner:makerOrder.originalOrder.address,marginSplitPercentage:toNumber(makerOrder.originalOrder.marginSplitPercentage)}],(storage.wallet.getRewardAddress()) || config.getWalletAddress())
-          };
-            window.RELAY.order.placeOrder({...signedOrder,authPrivateKey:''}).then(response=> {
+              data: Contracts.LoopringProtocol.encodeSubmitRing([{...signedOrder}, {
+                ...makerOrder.originalOrder,
+                tokenS: config.getTokenBySymbol(makerOrder.originalOrder.tokenS).address,
+                tokenB: config.getTokenBySymbol(makerOrder.originalOrder.tokenB).address,
+                owner: makerOrder.originalOrder.address,
+                marginSplitPercentage: toNumber(makerOrder.originalOrder.marginSplitPercentage)
+              }], address)
+            };
+            window.RELAY.order.placeOrderForP2P({
+              ...signedOrder,
+              authPrivateKey: ''
+            }, makerOrder.originalOrder.hash).then(response => {
+              if (response.error) {
+                Notification.open({
+                  message: intl.get('notifications.title.place_order_failed'),
+                  description: response.error.code ? intl.get('common.errors' + response.error.message) : response.error.message,
+                  type: 'error'
+                })
+                return;
+              }
               signTx(tx).then(res => {
                 if (res.result) {
-                  window.RELAY.ring.submitRingForP2P({makerOrderHash:makerOrder.originalOrder.hash,rawTx:res.result,takerOrderHash:response.result}).then(resp => {
+                  window.RELAY.ring.submitRingForP2P({
+                    makerOrderHash: makerOrder.originalOrder.hash,
+                    rawTx: res.result,
+                    takerOrderHash: response.result
+                  }).then(resp => {
                     if (resp.result) {
                       Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
                       hideLayer({id: 'takerConfirm'})
@@ -192,7 +251,11 @@ class TakerConfirm extends React.Component {
                         from: address
                       })
                     } else {
-                      Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + resp.error.message, 3, null, false)
+                      Notification.open({
+                        message: intl.get('notifications.title.submit_ring_fail'),
+                        description: resp.error.code ? intl.get('common.errors' + resp.error.message) : resp.error.message,
+                        type: 'error'
+                      })
                     }
                   })
                 } else {
@@ -212,11 +275,11 @@ class TakerConfirm extends React.Component {
     }
 
     return (
-      <div className="bg-white" style={{height:'100%'}}>
+      <div className="bg-white" style={{height: '100%'}}>
         <NavBar
           className="zb-b-b"
           mode="light"
-          onLeftClick={() => hideLayer({id:'takerConfirm'})}
+          onLeftClick={() => hideLayer({id: 'takerConfirm'})}
           leftContent={[
             <span key='1' className=""><Icon type="close"/></span>,
           ]}
@@ -247,18 +310,25 @@ class TakerConfirm extends React.Component {
               </div>
             </div>
           </div>
-          <OrderMetaItem label={intl.get('common.sell')} value={`${tokensFm.toPricisionFixed(tokensFm.getUnitAmount(order.amountS))} ${order.tokenS} `}/>
-          <OrderMetaItem label={intl.get('common.buy')} value={`${tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(order.amountB))} ${order.tokenB} `}/>
-          {false &&  <OrderMetaItem label={intl.get('common.price')} value={`${Number(price)} ${order.tokenS}/${order.tokenB}`}/>}
-          <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+          <OrderMetaItem label={intl.get('common.sell')}
+                         value={`${tokensFm.toPricisionFixed(tokensFm.getUnitAmount(order.amountS))} ${order.tokenS} `}/>
+          <OrderMetaItem label={intl.get('common.buy')}
+                         value={`${tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(order.amountB))} ${order.tokenB} `}/>
+          {false &&
+          <OrderMetaItem label={intl.get('common.price')} value={`${Number(price)} ${order.tokenS}/${order.tokenB}`}/>}
+          <OrderMetaItem label={intl.get('common.buy') + ' ' + intl.get('order.price')} value={
             <span>
-                  {`1 ${order.tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(order.amountS).div(tokenbFm.getUnitAmount(order.amountB)),8))} ${order.tokenS} ≈`} <Worth amount={tokensFm.getUnitAmount(order.amountS).div(tokenbFm.getUnitAmount(order.amountB))} symbol={order.tokenS}/>
+                  {`1 ${order.tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(order.amountS).div(tokenbFm.getUnitAmount(order.amountB)), 8))} ${order.tokenS} ≈`}
+              <Worth amount={tokensFm.getUnitAmount(order.amountS).div(tokenbFm.getUnitAmount(order.amountB))}
+                     symbol={order.tokenS}/>
                 </span>
           }/>
 
-          <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+          <OrderMetaItem label={intl.get('common.sell') + ' ' + intl.get('order.price')} value={
             <span>
-                  {`1 ${order.tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS)),8))} ${order.tokenB} ≈`} <Worth amount={tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS))} symbol={order.tokenB}/>
+                  {`1 ${order.tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS)), 8))} ${order.tokenB} ≈`}
+              <Worth amount={tokenbFm.getUnitAmount(order.amountB).div(tokensFm.getUnitAmount(order.amountS))}
+                     symbol={order.tokenB}/>
                 </span>
           }/>
 
@@ -272,13 +342,13 @@ class TakerConfirm extends React.Component {
 
 }
 
-function mapStatetoProps (state) {
+function mapStatetoProps(state) {
 
   return {
     gas: state.gas,
     balance: state.sockets.balance.items,
-    pendingTx: state.pendingTx,
-    socket:state.sockets.socket
+    pendingTx: state.sockets.pendingTx,
+    socket: state.sockets.socket
   }
 }
 

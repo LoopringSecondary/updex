@@ -60,7 +60,7 @@ export default class MockWallet extends Wallet {
       if(this.key){
         resolve({result: this.wallet.getAddress()})
       }else{
-        resolve({result: "0x56447C02767BA621f103C0f3DbF564dbcacF284b"})
+        resolve({result: "0xBd8e06Fbe2727DA28aC99150BE29C920007bdE3c"})
       }
     })
   }

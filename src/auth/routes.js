@@ -7,7 +7,7 @@ import AuthByTPWallet from './tpwallet/AuthByTPWallet'
 import Auth from './index.js'
 import Privacy from './terms/Privacy'
 import Terms from './terms/Terms'
-import routeActions from 'common/utils/routeActions'
+
 
 
 const UnLogged = (props)=>{
