@@ -11,30 +11,15 @@ import {connect} from 'dva'
 import moment from 'moment'
 import {toHex, toFixed, toBig} from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
-<<<<<<< HEAD
 import Worth from 'modules/settings/Worth'
+import {share} from '../common/utils/signUtils'
+import TokenFm from "modules/tokens/TokenFm";
 
 const OrderMetaItem = (props) => {
   const {label, value,showArrow=false,onClick=()=>{},className=""} = props
   return (
     <div onClick={onClick} className={`row ml0 mr0 pl15 pr15 pt10 pb10 zb-b-b no-gutters ${className}`}>
       <div className="col-auto">
-=======
-import {signOrder, signTx} from '../common/utils/signUtils'
-import eachOfLimit from 'async/eachOfLimit'
-import Worth from 'modules/settings/Worth'
-import {share} from '../common/utils/signUtils'
-import TokenFm from "modules/tokens/TokenFm";
-
-const OrderMetaItem = (props) => {
-  const {
-    label, value, showArrow = false, onClick = () => {
-    }
-  } = props
-  return (
-    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding: '10px 0px'}}>
-      <div className="col">
->>>>>>> embed
         <div className="fs13 color-black-2 text-left">{label}</div>
       </div>
       <div className="col text-right">
@@ -53,13 +38,8 @@ const OrderMetaItem = (props) => {
   )
 }
 
-<<<<<<< HEAD
-function PlaceOrderSteps (props) {
-  const {p2pOrder, balance, settings, marketcap, gas,pendingTx, dispatch} = props
-=======
 function PlaceOrderSteps(props) {
   const {p2pOrder, balance, settings, marketcap, gas, pendingTx, dispatch, socket} = props
->>>>>>> embed
   const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
   let {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
   amountS = toBig(amountS)
@@ -148,87 +128,7 @@ function PlaceOrderSteps(props) {
     }
     try {
       const {order, unsigned} = await orderFormatter.signP2POrder(tradeInfo, (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress())
-<<<<<<< HEAD
       dispatch({type: 'task/setTask', payload: {task:'signP2P', unsign:unsigned}})
-=======
-      const signResult = await signOrder(order)
-      if (signResult.error) {
-        Notification.open({
-          message: intl.get('notifications.title.place_order_failed'),
-          description: signResult.error.message,
-          type: 'error'
-        })
-        return
-      }
-      const signedOrder = {...order, ...signResult.result}
-      signedOrder.powNonce = 100
-      // let failed = false;
-      // const txs = unsigned.filter(item => item.type === 'tx')
-      // eachOfLimit(txs, 1, async (item, key, callback) => {
-      //   signTx(item.data).then(res => {
-      //     if (res.result) {
-      //       window.ETH.sendRawTransaction(res.result).then(resp => {
-      //         if (resp.result) {
-      //           window.RELAY.account.notifyTransactionSubmitted({
-      //             txHash: resp.result,
-      //             rawTx: item.data,
-      //             from: window.Wallet.address
-      //           })
-      //           callback()
-      //         } else {
-      //           callback(resp.error)
-      //         }
-      //       })
-      //     } else {
-      //       callback(res.error)
-      //     }
-      //   })
-      // }, function (e) {
-      //   if (e) {
-      //     failed = true
-      //     Notification.open({
-      //       message: intl.get('notifications.title.place_order_failed'),
-      //       description: e.message,
-      //       type: 'error'
-      //     })
-      //   }
-      // })
-      //
-      // if (failed) {
-      //   return
-      // }
-      const response = await window.RELAY.order.placeOrder(signedOrder)
-      // console.log('...submit order :', response)
-      if (response.error) {
-        Notification.open({
-          message: intl.get('notifications.title.place_order_failed'),
-          description: response.error.message,
-          type: 'error'
-        })
-      } else {
-        dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder: true}});
-        Notification.open({
-          message: intl.get('notifications.title.place_order_success'),
-          description: 'successfully submit order',
-          type: 'info'
-        })
-
-        signedOrder.orderHash = response.result
-        dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
-        const unsignedOrder = unsigned.find(item => item.type === 'order')
-        storage.orders.storeP2POrder({
-          auth: unsignedOrder.completeOrder.authPrivateKey,
-          hash: signedOrder.orderHash,
-          count
-        })
-        const qrcode = JSON.stringify({
-          type: 'P2P',
-          value: {auth: unsignedOrder.completeOrder.authPrivateKey, hash: signedOrder.orderHash, count}
-        })
-        dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
-        page.gotoPage({id: 'qrcode'})
-      }
->>>>>>> embed
     } catch (e) {
       Notification.open({
         message: intl.get('notifications.title.place_order_failed'),

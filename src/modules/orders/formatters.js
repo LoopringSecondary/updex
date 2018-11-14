@@ -7,9 +7,10 @@ import contracts from 'LoopringJS/ethereum/contracts/Contracts'
 import {createWallet} from 'LoopringJS/ethereum/account';
 import * as tokenFormatter from 'modules/tokens/TokenFm'
 import Notification from 'LoopringUI/components/Notification'
+import {Toast} from "antd-mobile";
+import intl from "react-intl-universal";
+import TokenFm from 'modules/tokens/TokenFm'
 import storage from 'modules/storage'
-import TokenFm from "../tokens/TokenFm";
-
 
 const integerReg = new RegExp("^[0-9]*$")
 const amountReg = new RegExp("^(([0-9]+\\.[0-9]*[1-9][0-9]*)|([0-9]*[1-9][0-9]*\\.[0-9]+)|([0-9]*[1-9][0-9]*))$")
@@ -393,18 +394,20 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
   }
   const pendingAllowance = fm.toBig(isApproving(txs, tradeInfo.tokenS) ? isApproving(txs, tradeInfo.tokenS).div('1e'+configSell.digits) : balanceS.allowance);
   if(pendingAllowance.lt(tradeInfo.amountS)) {
-    error.push({type:"AllowanceNotEnough", value:{symbol:tradeInfo.tokenS, allowance:cutDecimal(pendingAllowance,6), required:ceilDecimal(tradeInfo.amountS.minus(balanceS.allowance),6)}})
-    failed = true
+    warn.push({type:"AllowanceNotEnough", value:{symbol:tradeInfo.tokenS, allowance:cutDecimal(pendingAllowance,6), required:ceilDecimal(tradeInfo.amountS.minus(balanceS.allowance),6)}})
+    approveCount += 1
+    if (pendingAllowance.gt(0)) approveCount += 1
   }
-  // let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
-  // if(tradeInfo.roleType === 'taker'){
-  //   gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
-  // }
-  //
-  // if(ethBalance.balance.lt(gas)){
-  //   error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
-  //   failed = true
-  // }
+
+  if(tradeInfo.roleType === 'taker'){
+    let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
+    gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
+    if(ethBalance.balance.lt(gas)){
+      error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
+      failed = true
+    }
+  }
+
   if(failed) {
     tradeInfo.error = error
     return
@@ -484,33 +487,12 @@ export async function generateSignData({tradeInfo, order, completeOrder, address
     approveWarn.forEach(item => {
       const tokenConfig = config.getTokenBySymbol(item.value.symbol);
       if (item.value.allowance > 0) {
-<<<<<<< HEAD
         const cancel = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:'0x0', nonce:fm.toHex(nonce)})
         unsigned.push({type: 'tx', data:cancel, description: `Cancel ${item.value.symbol} allowance`, title:'approveZero', token:item.value.symbol, address})
         nonce = nonce + 1;
       }
       const approve = generateApproveTx({symbol:item.value.symbol, gasPrice, gasLimit, amount:'0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff', nonce:fm.toHex(nonce)})
       unsigned.push({type: 'tx', data:approve, description: `Approve ${item.value.symbol} allowance`, title:'approve', token:item.value.symbol, address})
-=======
-        const cancel = generateApproveTx({
-          symbol: item.value.symbol,
-          gasPrice,
-          gasLimit,
-          amount: '0x0',
-          nonce: fm.toHex(nonce)
-        })
-        unsigned.push({type: 'tx', data: cancel, description: `Cancel ${item.value.symbol} allowance`, address})
-        nonce = nonce + 1;
-      }
-      const approve = generateApproveTx({
-        symbol: item.value.symbol,
-        gasPrice,
-        gasLimit,
-        amount: '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
-        nonce: fm.toHex(nonce)
-      })
-      unsigned.push({type: 'tx', data: approve, description: `Approve ${item.value.symbol} allowance`, address})
->>>>>>> embed
       nonce = nonce + 1;
     });
   }

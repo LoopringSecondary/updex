@@ -773,9 +773,6 @@ export default {
   notification_list:{
     page_title:"消息",
   },
-  notification_list:{
-    page_title:"消息",
-  },
   todo_list: {
     todo_list_title: '任务',
     title_allowance_not_enough: '{symbol} 还未授权交易',

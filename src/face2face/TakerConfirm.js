@@ -51,15 +51,6 @@ class TakerConfirm extends React.Component {
       amountS = toBig(makerOrder.originalOrder.amountB).idiv(makerOrder.count).plus(1)
     }
     order.amountS = toHex(amountS)
-<<<<<<< HEAD
-    order.lrcFee = '0x0'
-    order.validSince = toHex(Math.ceil(validSince.valueOf() / 1e3))
-    order.validUntil = toHex(Math.ceil(validUntil.valueOf() / 1e3))
-    order.marginSplitPercentage = 0
-    order.buyNoMoreThanAmountB = true
-    order.walletAddress = config.getWalletAddress()
-    const authAccount = createWallet()
-=======
     order.lrcFee = '0x0';
     order.validSince = toHex(Math.ceil(validSince.valueOf() / 1e3));
     order.validUntil = toHex(Math.ceil(validUntil.valueOf() / 1e3));
@@ -67,7 +58,6 @@ class TakerConfirm extends React.Component {
     order.buyNoMoreThanAmountB = true;
     order.walletAddress = (storage.wallet.getRewardAddress()) || config.getWalletAddress()
     const authAccount = createWallet();
->>>>>>> embed
     order.authAddr = authAccount.getAddressString();
     order.authPrivateKey = clearHexPrefix(authAccount.getPrivateKeyString());
     order.orderType = 'p2p_order'

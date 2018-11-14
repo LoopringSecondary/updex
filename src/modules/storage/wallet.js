@@ -38,7 +38,7 @@ export default {
   getUnlockedType,
   clearUnlockedAddress,
   setLoopringUnlockWith,
-  getLoopringUnlockWith
+  getLoopringUnlockWith,
   setRewardAddress,
   getRewardAddress
 }
