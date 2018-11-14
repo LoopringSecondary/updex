@@ -350,8 +350,8 @@ export default {
     invalid_order:"This order is completed, canceled , expired",
     frozen_balance_not_enough:'There has {frozen}{token} in your available orders(market and P2P), your balance is not enough to place this order, you could cancel historical orders or reduce sell amount to continue',
     p2p_allowance_not_enough:'Please enable {token} first in assets list, you can continue place order after allowance takes effect',
-    fill_amount:'Fill Amount',
-    fill_count:"Fill Count"
+    fill_amount:'Filled Amount',
+    fill_count:"Filled Count"
   },
   sign: {
     not_signed: "You may have some items not signed",
