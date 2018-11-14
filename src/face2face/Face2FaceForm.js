@@ -14,6 +14,7 @@ class Face2FaceForm extends React.Component {
   state = {
     submitLoading:false
   }
+
   render() {
     const {balance, p2pOrder, pendingTx, gas, dispatch} = this.props
     const {amountB,amountS,tokenS,tokenB} = p2pOrder

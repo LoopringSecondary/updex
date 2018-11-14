@@ -127,7 +127,7 @@ class Face2FaceOrders extends React.Component {
                 {intl.get('common.market')}
               </th>
               <th
-                className="text-left pl5 pr5 pt5 pb5 font-weight-normal color-black-4 zb-b-b">{intl.get('common.price')}</th>
+                className="text-left pl5 pr5 pt5 pb5 font-weight-normal color-black-4 zb-b-b">{intl.get('common.amount')}</th>
               <th
                 className="text-left pl5 pr5 pt5 pb5 font-weight-normal color-black-4 zb-b-b">{intl.get('order.filled')}</th>
               <th hidden
@@ -149,23 +149,18 @@ class Face2FaceOrders extends React.Component {
                     </td>
                     <td className="zb-b-b pt10 pb10 pl0 pr5 text-left align-top">
                       <div className="">
-                        <span className="font-weight-bold">{tokens.left}-{tokens.right}</span>
+                        <span className="">{orderFm.getTokenS()} → {orderFm.getTokenB()}</span>
                       </div>
-                      <div className="color-black-3 fs12">
+                      <div className="fs12">
                         <span className="">{orderFm.getCreateTime()}</span>
                       </div>
                     </td>
 
                     <td className="zb-b-b pt10 pb10 pl5 pr5 text-left text-nowrap align-top">
-                      <div>{orderFm.getPrice()}</div>
-                      <div className="color-black-3 fs12"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/>
-                      </div>
+                      <div>{orderFm.getAmountS()}</div>
+                      <div>{orderFm.getAmountB()}</div>
                     </td>
-                    <td className="zb-b-b pt10 pb10 pl5 pr5 text-left text-nowrap align-top">
-                      <div>{orderFm.getFilledAmount()}</div>
-                      <div className="color-black-3 fs12">{orderFm.getAmount()}</div>
-                    </td>
-                    <td hidden className="zb-b-b p10 text-right text-nowrap">{orderFm.getFilledPercent()}%</td>
+                    <td className="zb-b-b p10 text-left text-nowrap">{orderFm.getFilledPercent()}%</td>
                     <td hidden className="zb-b-b p10 text-right text-nowrap">{orderFm.getLRCFee()}</td>
                     <td className="zb-b-b p10 text-center">
                       {renders.status(orderFm, item.originalOrder, cancelOrder.bind(this, item))}
@@ -185,11 +180,14 @@ class Face2FaceOrders extends React.Component {
             </tbody>
           </table>
           {
-          orders && orders.length > 0 &&
+          orders && orders.length > 0 && total > 1 &&
           <div className="p5">
-          <Pagination className="fs14 s-small custom-pagination" total={total} current={pageIndex}
-          onChange={this.pageChange}/>
+            <Pagination className="fs14 s-small custom-pagination" total={total} current={pageIndex} onChange={this.pageChange}/>
           </div>
+          }
+          {
+            (!orders || orders.length === 0 || total <= 1) &&
+            <div className="pt10" />
           }
         </Spin>
       </div>

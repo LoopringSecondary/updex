@@ -4,11 +4,12 @@ import storage from 'modules/storage'
 import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
 import TokenModals from '../dex/tokens/Modals'
-import CommonModals from '../dex/common/Modals'
+
+import CommonModals from '../components/Modals'
+import NotificationsModals from '../dex/notifications/Modals'
 
 const Logged = (props)=>{
   const isLogged = true
-
   if(isLogged){
     return (
       <div>
@@ -18,6 +19,7 @@ const Logged = (props)=>{
         <Face2FaceModals />
         <TokenModals />
         <CommonModals />
+        <NotificationsModals />
       </div>
     )
   }else{
