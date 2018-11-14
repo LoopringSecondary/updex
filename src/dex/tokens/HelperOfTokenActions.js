@@ -42,8 +42,6 @@ class HelperOfTokenActions extends  React.Component{
         this.setState({sale:tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale))})
       }
     })
-
-
   }
 
   render(){
@@ -52,9 +50,7 @@ class HelperOfTokenActions extends  React.Component{
     const balance  = balances.find(item =>item.symbol.toLowerCase() === symbol.toLowerCase())
     const tokenFm = new TokenFormatter({symbol})
     const {sale} =  this.state
-    const available = tokenFm.getUnitAmount(balance.balance).minus(sale)
-
-
+    const available = balance ? tokenFm.getUnitAmount(balance.balance).minus(sale):toBig(0)
     const showLayer = (payload = {}) => {
       dispatch({
         type: 'layers/showLayer',
@@ -108,7 +104,7 @@ class HelperOfTokenActions extends  React.Component{
           <div className="color-black">{symbol}</div>
         </NavBar>
         <div className="pt15">
-          <MetaItem  label={intl.get('token_actions.balance')} value={toNumber(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(balance.balance)))}/>
+          <MetaItem  label={intl.get('token_actions.balance')} value={toNumber(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(balance ? balance.balance : 0)))}/>
           <MetaItem  label={intl.get('token_actions.selling')} value={toNumber(sale)}/>
           {available.lt(0) && <MetaItem  label={intl.get('token_actions.lack')} value={toNumber(tokenFm.toPricisionFixed(available.times(-1)))}/>}
           {available.gte(0) && <MetaItem  label={intl.get('token_actions.available')} value={toNumber(tokenFm.toPricisionFixed(available))}/>}

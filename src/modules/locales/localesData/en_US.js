@@ -680,6 +680,7 @@ export default {
     lack:'Lack Of',
     enable_label:'Make Token Tradable',
     enable_label_simple:'Tradable',
+    enable_tip:"Enable {token} will cost ETH gas"
   },
   ...modules.pages,
   ...modules.types,
