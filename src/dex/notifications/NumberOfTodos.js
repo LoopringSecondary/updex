@@ -17,7 +17,6 @@ class NumberOfTodos extends React.Component {
       symbols.forEach((symbol, index) => {
         if(symbol.toLocaleLowerCase() !== "frozenlrcfee"){
           const value = allocates[symbol]
-          console.log(allocates)
           const assets = getBalanceBySymbol({balances: balance.items, symbol: symbol})
           let selling = toBig(value)
           if (symbol.toUpperCase() === 'LRC') {
@@ -38,9 +37,9 @@ class NumberOfTodos extends React.Component {
     if(hasBadge){
       return <Badge count={numberofTodos} className="s-small">{this.props.children}</Badge>
     }else{
-      return `${numberofTodos}`  
+      return `${numberofTodos}`
     }
-    
+
   }
 }
 export default connect((state)=>({
