@@ -190,6 +190,7 @@ export async function tradeVerification(balances, walletState, tradeInfo, sell, 
   const approveGasLimit = config.getGasLimitByType('approve').gasLimit
   let frozenSell = await window.RELAY.account.getEstimatedAllocatedAllowance({
     owner: walletState.address,
+    delegateAddress:config.getDelegateAddress(),
     token: sell.symbol
   })
   if (frozenSell.error) {
@@ -236,7 +237,10 @@ export async function tradeVerification(balances, walletState, tradeInfo, sell, 
     }
   } else {
     //lrc balance not enough, lrcNeed = frozenLrc + lrcFee
-    const frozenLrcFee = await window.RELAY.account.getFrozenLrcFee(walletState.address)
+    const frozenLrcFee = await window.RELAY.account.getFrozenLrcFee({
+      owner: walletState.address,
+      delegateAddress:config.getDelegateAddress()
+    })
     if (frozenLrcFee.error) {
       throw new Error(frozenLrcFee.error.message)
     }
@@ -251,6 +255,7 @@ export async function tradeVerification(balances, walletState, tradeInfo, sell, 
     }
     const frozenLrcInOrderResult = await window.RELAY.account.getEstimatedAllocatedAllowance({
       owner: walletState.address,
+      delegateAddress:config.getDelegateAddress(),
       token: 'LRC'
     })
     if (frozenLrcInOrderResult.error) {
