@@ -1,26 +1,29 @@
 import React from 'react'
-import { Icon } from 'antd'
-import { Button,NavBar } from 'antd-mobile'
+import {Icon} from 'antd'
+import {Button, NavBar} from 'antd-mobile'
 import config from 'common/config'
 import intl from 'react-intl-universal'
 import * as orderFormatter from 'modules/orders/formatters'
 import Notification from 'LoopringUI/components/Notification'
 import QRCode from 'qrcode.react'
-import { Page, Pages } from 'LoopringUI/components/Pages'
-import { connect } from 'dva'
+import {Page, Pages} from 'LoopringUI/components/Pages'
+import {connect} from 'dva'
 import moment from 'moment'
-import { toHex, toFixed,toBig,toNumber } from 'LoopringJS/common/formatter'
+import {toHex, toFixed, toBig, toNumber} from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
-import { signOrder, signTx } from '../common/utils/signUtils'
+import {signOrder, signTx} from '../common/utils/signUtils'
 import eachOfLimit from 'async/eachOfLimit'
 import Worth from 'modules/settings/Worth'
-import { share } from '../common/utils/signUtils'
+import {share} from '../common/utils/signUtils'
 import TokenFm from "modules/tokens/TokenFm";
 
 const OrderMetaItem = (props) => {
-  const {label, value,showArrow=false,onClick=()=>{}} = props
+  const {
+    label, value, showArrow = false, onClick = () => {
+    }
+  } = props
   return (
-    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding:'10px 0px'}}>
+    <div onClick={onClick} className="row ml0 mr0 pl0 pr0 zb-b-b no-gutters" style={{padding: '10px 0px'}}>
       <div className="col">
         <div className="fs13 color-black-2 text-left">{label}</div>
       </div>
@@ -31,7 +34,7 @@ const OrderMetaItem = (props) => {
         !!showArrow &&
         <div className="col-auto text-right">
           <div className="fs13 text-primary text-wrap text-left ml5">
-            <Icon type="right" />
+            <Icon type="right"/>
           </div>
         </div>
       }
@@ -99,17 +102,17 @@ function PlaceOrderSteps(props) {
       return
     }
 
-    const errors = tradeInfo.error ? tradeInfo.error.filter(item => item.value.symbol !== 'ETH' ): []
-    if (errors.length>0) {
+    const errors = tradeInfo.error ? tradeInfo.error.filter(item => item.value.symbol !== 'ETH') : []
+    if (errors.length > 0) {
       const item = errors[0]
       Notification.open({
-          message: intl.get('notifications.title.place_order_failed'),
-          description: intl.get('notifications.message.token_required_when_place_order', {
-            required: item.value.required,
-            token: item.value.symbol
-          }),
-          type: 'error',
-        })
+        message: intl.get('notifications.title.place_order_failed'),
+        description: intl.get('notifications.message.token_required_when_place_order', {
+          required: item.value.required,
+          token: item.value.symbol
+        }),
+        type: 'error',
+      })
       dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
       return
     }
@@ -206,8 +209,8 @@ function PlaceOrderSteps(props) {
         })
 
         if(storage.wallet.getUnlockedType() === 'imtoken'){
-          const url  = window.location.href.split('#')[0].concat('#/auth/imtoken')
-          qrcode = url.concat(`?type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
+        const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
+         qrcode = url.concat(`?to=\/dex\/entry&type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
         }
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})
