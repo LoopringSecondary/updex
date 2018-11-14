@@ -20,7 +20,7 @@ class EnableSwitch extends React.Component {
     const balance  = balances.find(item =>item.symbol.toLowerCase() === symbol.toLowerCase())
     const tokenFm = new TokenFormatter({symbol})
     const loading = !!isApproving(pendingTx.items, symbol)
-    const pendingAllowance = toBig(loading ? tokenFm.getUnitAmount(isApproving(pendingTx.items, symbol)) : balance ? balance.allowance : toBig(0))
+    const pendingAllowance = toBig(loading ? tokenFm.getUnitAmount(isApproving(pendingTx.items, symbol)) : (balance ? balance.allowance : toBig(0)))
 
     const onChange = async (checked) => {
       if (checked) {

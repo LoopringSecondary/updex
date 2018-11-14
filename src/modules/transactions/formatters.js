@@ -156,18 +156,19 @@ export const getValues = (symbol, value)=>{
 export function isApproving(pendingTxs, symbol) {
   if (symbol && pendingTxs) {
     const approveTxs = pendingTxs.filter(tx => tx.type === 'approve' && tx.symbol.toLowerCase() === symbol.toLowerCase());
-    approveTxs.sort((a, b) => b.nonce - a.nonce);
     if (approveTxs.length > 0) {
+      approveTxs.sort((a, b) => b.nonce - a.nonce);
       return toBig(approveTxs[0].value);
     }
+    return null
   }
 }
 
 export function lastApprovingTx (pendingTxs, symbol) {
   if (symbol && pendingTxs) {
     const approveTxs = pendingTxs.filter(tx => tx.type === 'approve' && tx.symbol.toLowerCase() === symbol.toLowerCase());
-    approveTxs.sort((a, b) => b.nonce - a.nonce);
     if (approveTxs.length > 0) {
+      approveTxs.sort((a, b) => toNumber(b.nonce) - toNumber(a.nonce));
       return approveTxs[0];
     }
     return null
