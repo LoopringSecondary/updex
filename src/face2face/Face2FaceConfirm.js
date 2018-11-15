@@ -9,7 +9,7 @@ import QRCode from 'qrcode.react'
 import {Page, Pages} from 'LoopringUI/components/Pages'
 import {connect} from 'dva'
 import moment from 'moment'
-import {toHex, toFixed, toBig} from 'LoopringJS/common/formatter'
+import {toHex, toFixed, toBig, toNumber} from 'LoopringJS/common/formatter'
 import storage from 'modules/storage'
 import {signOrder, signTx} from '../common/utils/signUtils'
 import eachOfLimit from 'async/eachOfLimit'
@@ -102,17 +102,17 @@ function PlaceOrderSteps(props) {
       return
     }
 
-    const errors = tradeInfo.error ? tradeInfo.error.filter(item => item.value.symbol !== 'ETH' ): []
-    if (errors.length>0) {
+    const errors = tradeInfo.error ? tradeInfo.error.filter(item => item.value.symbol !== 'ETH') : []
+    if (errors.length > 0) {
       const item = errors[0]
       Notification.open({
-          message: intl.get('notifications.title.place_order_failed'),
-          description: intl.get('notifications.message.token_required_when_place_order', {
-            required: item.value.required,
-            token: item.value.symbol
-          }),
-          type: 'error',
-        })
+        message: intl.get('notifications.title.place_order_failed'),
+        description: intl.get('notifications.message.token_required_when_place_order', {
+          required: item.value.required,
+          token: item.value.symbol
+        }),
+        type: 'error',
+      })
       dispatch({type: 'p2pOrder/loadingChange', payload: {loading: false}})
       return
     }
@@ -203,10 +203,15 @@ function PlaceOrderSteps(props) {
           hash: signedOrder.orderHash,
           count
         })
-        const qrcode = JSON.stringify({
+        let qrcode = JSON.stringify({
           type: 'P2P',
           value: {auth: unsignedOrder.completeOrder.authPrivateKey, hash: signedOrder.orderHash, count}
         })
+
+        if(storage.wallet.getUnlockedType() === 'imtoken'){
+        const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
+         qrcode = url.concat(`?to=\/dex\/entry&type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
+        }
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})
       }

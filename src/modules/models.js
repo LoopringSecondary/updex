@@ -18,6 +18,7 @@ export default [
   // require('./wallet/model').default,
   require('./settings/gasModel').default,
   require('./settings/ttlModel').default,
+  require('./sign/SignModel').default,
 ]
 
 

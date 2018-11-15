@@ -1,17 +1,19 @@
 import React from 'react'
-import { Icon } from 'antd'
-import { connect } from 'dva'
+import {Icon} from 'antd'
+import {connect} from 'dva'
 import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
 import TokenFm from "modules/tokens/TokenFm";
-import {toFixed,toNumber} from 'LoopringJS/common/formatter'
-import { share } from '../common/utils/signUtils'
+import {toFixed, toNumber} from 'LoopringJS/common/formatter'
+import {share} from '../common/utils/signUtils'
+import storage from 'modules/storage'
+
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
   return (
-    <div className="row ml0 mr0 pt10 pb10  zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
+    <div className="row ml0 mr0 pt10 pb10  zb-b-b no-gutters align-items-center" style={{padding: '7px 0px'}}>
       <div className="col">
         <div className="fs14 color-black-1 text-left">{label}</div>
       </div>
@@ -22,29 +24,34 @@ const OrderMetaItem = (props) => {
   )
 }
 
-class OrderQrcode extends React.Component{
+class OrderQrcode extends React.Component {
 
-  render(){
-    const {value,data:{orderFm,tokens}} = this.props.orderQrcode
+  render() {
+    const {value, data: {orderFm, tokens}} = this.props.orderQrcode
     const {dispatch} = this.props
-    const {originalOrder:{tokenS,tokenB,amountS,amountB,validUntil}} = orderFm.order
-    const tokensFm = new TokenFm({symbol:tokenS})
-    const tokenbFm = new TokenFm({symbol:tokenB})
+    const {originalOrder: {tokenS, tokenB, amountS, amountB, validUntil}} = orderFm.order
+    const tokensFm = new TokenFm({symbol: tokenS})
+    const tokenbFm = new TokenFm({symbol: tokenB})
+    let qrcodeContent = JSON.stringify(value)
+    if(storage.wallet.getUnlockedType() === 'imtoken') {
+      const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
+       qrcodeContent = url.concat(`?to=\/dex\/entry&type=P2P&auth=${value.value.auth}&hash=${value.value.hash}&count=${value.value.count}`);
+    }
     const shareOrder = () => {
-      const content = {type:'p2pOrder',content:value}
+      const content = {type: 'p2pOrder', content: value}
       content.extra = {
-        validUntil:toNumber(validUntil).toString(),
-        amountB:tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB)),
-        amountS:tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS)),
+        validUntil: toNumber(validUntil).toString(),
+        amountB: tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB)),
+        amountS: tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS)),
         tokenS,
         tokenB
       }
       share(content)
     };
-    const hideLayer = (payload={})=>{
+    const hideLayer = (payload = {}) => {
       dispatch({
-        type:'layers/hideLayer',
-        payload:{
+        type: 'layers/hideLayer',
+        payload: {
           ...payload
         }
       })
@@ -52,47 +59,51 @@ class OrderQrcode extends React.Component{
     const fillCount = Math.ceil(toNumber(orderFm.getFilledPercent()) / 100 * value.value.count)
 
 
-    return(
+    return (
       <div className="bg-white">
         <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
           <div className="row">
             <div className="col-auto text-left pl20 pr20">
-              <Icon type='close' className="text-primary" onClick={()=>hideLayer({id:'orderQrcode'})} />
+              <Icon type='close' className="text-primary" onClick={() => hideLayer({id: 'orderQrcode'})}/>
             </div>
             <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">
-              <Icon type='share-alt' className="text-primary"onClick={shareOrder}/>
+              <Icon type='share-alt' className="text-primary" onClick={shareOrder}/>
             </div>
           </div>
         </div>
         <div className="text-center mt15">
-          <div className="p15 d-inline-block" style={{background:'#fff'}}>
-            <QRCode value={JSON.stringify(value)} size={240} level='H'/>
+          <div className="p15 d-inline-block" style={{background: '#fff'}}>
+            <QRCode value={qrcodeContent} size={240} level='H'/>
           </div>
         </div>
         <div className="m15 zb-b-t p15 text-center">
           <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
           <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
-          <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
+          <OrderMetaItem label={intl.get('common.buy') + ' ' + intl.get('order.price')} value={
             <span>
-                  {`1 ${tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB)),8))} ${tokenS} ≈`} <Worth amount={tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB))} symbol={tokenS}/>
+                  {`1 ${tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB)), 8))} ${tokenS} ≈`}
+              <Worth amount={tokensFm.getUnitAmount(amountS).div(tokenbFm.getUnitAmount(amountB))} symbol={tokenS}/>
                 </span>
           }/>
 
-          <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
+          <OrderMetaItem label={intl.get('common.sell') + ' ' + intl.get('order.price')} value={
             <span>
-                  {`1 ${tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS)),8))} ${tokenB} ≈`} <Worth amount={tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS))} symbol={tokenB}/>
+                  {`1 ${tokenS} = ${Number(toFixed(tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS)), 8))} ${tokenB} ≈`}
+              <Worth amount={tokenbFm.getUnitAmount(amountB).div(tokensFm.getUnitAmount(amountS))} symbol={tokenB}/>
                 </span>
           }/>
 
           {false && <OrderMetaItem label={intl.get('order.price')} value={
             <div>
-              <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {Number(orderFm.getPrice())} { tokens.right }
+              <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()}
+                                                         symbol={tokens.right}/></span> {Number(orderFm.getPrice())} {tokens.right}
             </div>
           }/>}
           <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
-          <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}% （${fillCount}/${value.value.count}）`}/>
-          <OrderMetaItem label={intl.get('p2p_order.fill_amount')} value={`${orderFm.getFilledAmount(true,true)}`}/>
+          <OrderMetaItem label={intl.get('order.filled')}
+                         value={`${orderFm.getFilledPercent()}% （${fillCount}/${value.value.count}）`}/>
+          <OrderMetaItem label={intl.get('p2p_order.fill_amount')} value={`${orderFm.getFilledAmount(true, true)}`}/>
         </div>
       </div>
     )

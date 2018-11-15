@@ -251,7 +251,6 @@ class PlaceOrderForm extends React.Component {
           <div className="segmented-fs16">
             <SegmentedControl
               values={[menu1, menu2]}
-              style={{height:'4rem'}}
               className={`m-auto side-${side}`}
               selectedIndex={side === 'buy' ? 0 : 1}
               onChange={sideChange}
@@ -267,9 +266,9 @@ class PlaceOrderForm extends React.Component {
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
               className="circle h-default mt15"
               extra={
-                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                <div className="fs14 cursor-pointer color-black-1 d-flex align-items-center justify-content-center w-50" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                   <span className="color-black-3 d-inline-block">{tokens.right}</span>
-                  <div className="text-primary text-right pr10 text-nowrap" style={{position:'absolute',top:'1rem',width:'7rem',marginLeft:'-7rem'}}>
+                  <div className="text-primary text-right pr10 text-nowrap" style={{position:'absolute',marginLeft:'-100%'}}>
                     {
                       price>0 && <span className="color-black-4 fs12">≈ <Worth amount={price} symbol={tokens.right}/></span>
                     }
@@ -288,9 +287,9 @@ class PlaceOrderForm extends React.Component {
               moneyKeyboardWrapProps={moneyKeyboardWrapProps}
               className="circle h-default mt15"
               extra={
-                <div className="fs14 cursor-pointer color-black-3 zb-b-l d-flex align-items-center justify-content-center" style={{width:'6.5rem',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                <div className="fs14 cursor-pointer color-black-1 d-flex align-items-center justify-content-center w-50" style={{position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                   <span className="color-black-3 d-inline-block">{tokens.left}</span>
-                  <div onClick={showAmountHelper} className="text-primary cursor-pointer text-right pr10 text-nowrap" style={{position:'absolute',top:'1rem',width:'3rem',left:'-3rem'}}>
+                  <div onClick={showAmountHelper} className="text-primary cursor-pointer text-right pr10 text-nowrap" style={{position:'absolute',marginLeft:'-100%'}}>
                     <WebIcon className="text-primary fs14" type="sliders"/>
                   </div>
                 </div>

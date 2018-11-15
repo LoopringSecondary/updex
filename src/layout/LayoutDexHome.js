@@ -3,6 +3,7 @@ import { Link, Redirect, Route, Switch } from 'dva/router'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
 import { TabBar } from 'antd-mobile'
+import { Icon } from 'antd'
 import { connect } from 'dva'
 import { toBig } from 'LoopringJS/common/formatter'
 import { getBalanceBySymbol } from '../modules/tokens/TokenFm'
@@ -22,6 +23,7 @@ class DexHomeLayout extends React.Component {
     const isActive = (path) => {
       return pathname.indexOf(path) > -1
     }
+
     let todos = 0
     const lrcFee  = allocates['frozenLrcFee'] || 0 ;
     const symbols = Object.keys(allocates)
@@ -57,6 +59,22 @@ class DexHomeLayout extends React.Component {
           >
             <TabBar.Item
               title={
+                <span className={isActive('/dex/home') ? 'text-primary' : ''}>Home{intl.get('common.home')}</span>
+              }
+              key="home"
+              icon={
+                <i className="icon-home color-primary-light-bak"></i>
+              }
+              selectedIcon={
+                <i className="icon-home text-primary"></i>
+              }
+              selected={isActive('/dex/home')}
+              onPress={() => {
+                changeTab('home')
+              }}
+            />
+            <TabBar.Item
+              title={
                 <span className={isActive('/dex/markets') ? 'text-primary' : ''}>{intl.get('common.markets')}</span>
               }
               key="markets"
@@ -80,21 +98,6 @@ class DexHomeLayout extends React.Component {
               selected={isActive('/dex/placeOrder')}
               onPress={() => {
                 changeTab('placeOrder')
-              }}
-            />
-            <TabBar.Item
-              badge={todos}
-              icon={<i className="icon-bell color-primary-light-bak" style={{position: 'relative', top: '2px'}}/>}
-              selectedIcon={<i className="icon-bell text-primary" style={{position: 'relative', top: '2px'}}/>}
-              title={<span className={isActive('/dex/notifications') ? 'text-primary' : ''}
-                           style={{position: 'relative', top: '0px'}}>
-                            {false && intl.get('todos.tab_title')}
-                            {intl.get('todo_list.todo_list_title')}
-                           </span>}
-              key="Notifications"
-              selected={isActive('/dex/notifications')}
-              onPress={() => {
-                changeTab('notifications')
               }}
             />
             <TabBar.Item
