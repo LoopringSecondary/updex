@@ -287,7 +287,6 @@ class TakerConfirm extends React.Component {
           <div className="color-black-1">{intl.get('p2p_order.order_title')}</div>
         </NavBar>
         <div className="p20 bg-white">
-          {this.state.test}
           <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div className="col-auto">
               <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center" style={{
