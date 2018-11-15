@@ -178,11 +178,9 @@ class PlaceOrderForm extends React.Component {
         })
         return
       }
-      const tokenB = side.toLowerCase() === 'buy' ? config.getTokenBySymbol(tokens.left) : config.getTokenBySymbol(tokens.right)
-      const tokenS = side.toLowerCase() === 'sell' ? config.getTokenBySymbol(tokens.left) : config.getTokenBySymbol(tokens.right)
       const tradeInfo = {}
-      tradeInfo.amountB = toBig(toBig(side.toLowerCase() === 'buy' ? amount : total).times('1e' + tokenB.digits))
-      tradeInfo.amountS = toBig(side.toLowerCase() === 'sell' ? amount : total).times('1e' + tokenS.digits)
+      tradeInfo.amountB = toBig(toBig(side.toLowerCase() === 'buy' ? amount : total))
+      tradeInfo.amountS = toBig(side.toLowerCase() === 'sell' ? amount : total)
       tradeInfo.tokenB = buy.token
       tradeInfo.tokenS = sell.token
       try {
