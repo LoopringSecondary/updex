@@ -9,7 +9,8 @@ import * as tokenFormatter from 'modules/tokens/TokenFm'
 import {toFixed } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import Available from 'modules/tokens/Available'
-
+import Devices from 'LoopringUI/responsives/Devices'
+import Responsive from 'react-responsive'
 const HelperOfBalance = (props)=>{
   const {dispatch,pair,balance,loading} = props
   const marketTokens = getTokensByMarket(pair)
@@ -74,7 +75,7 @@ const HelperOfBalance = (props)=>{
         <tbody>
             {
               relatedTokens.map((token,index)=>
-                <tr key={index} onClick={()=>{}}>
+                <tr key={index} onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} className="hover-default">
                   <td className="pl10 pr5 pt10 pb10 zb-b-b color-black-2 text-left">
                     {token.symbol}
                   </td>
@@ -88,13 +89,13 @@ const HelperOfBalance = (props)=>{
                   <td className="pl5 pr10 pt10 pb10 zb-b-b color-black-2 text-right text-nowrap">
                     {
                       token.symbol === 'WETH' &&
-                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" className="h-25 d-inline-block ml10 color-white border-none" size="small">
                         <Icon className="fs12" type="ellipsis" />
                       </Button>
                     }
                     {
                       token.symbol !== 'WETH' &&
-                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" className="h-25 d-inline-block ml10 color-white border-none" size="small">
                         <Icon className="fs12" type="ellipsis" />
                       </Button>
                     }
@@ -104,9 +105,17 @@ const HelperOfBalance = (props)=>{
             }
         </tbody>
       </table>
-      <div className="zb-b-b color-black-4 text-center pt10 pb10 fs13" onClick={routeActions.gotoPath.bind(this,'/dex/usercenter/assets')}>
-        <span className="">{intl.get('common.all')} {intl.get('common.assets')}</span>
-      </div>
+      <Devices.NotDesktop>
+          <div className="zb-b-b color-black-3 text-center pt10 pb10 fs13 cursor-pointer hover-default" onClick={routeActions.gotoPath.bind(this,'/dex/usercenter/assets')}>
+            <span className="">{intl.get('common.all')} {intl.get('common.assets')}</span>
+          </div>
+      </Devices.NotDesktop>
+      <Devices.IsDesktop1>
+          <div className="zb-b-b color-black-3 text-center pt10 pb10 fs13 cursor-pointer hover-default" onClick={showLayer.bind(this,{id:'usercenter'})}>
+            <span className="">{intl.get('common.all')} {intl.get('common.assets')}</span>
+          </div>
+      </Devices.IsDesktop1>
+      
     </Spin>
   )
 }

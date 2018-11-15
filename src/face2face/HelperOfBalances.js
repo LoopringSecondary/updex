@@ -87,7 +87,7 @@ class HelperOfBalance extends React.Component {
             relatedTokens.map((token, index) =>{
               const tf = new TokenFm({symbol:token.symbol})
               return (
-                <tr key={index}>
+                <tr key={index} className="hover-default" onClick={(e)=>{e.stopPropagation();showLayer({id:'helperOfTokenActions',symbol:token.symbol,hideBuy:true})}}>
                   <td className="text-left pl15 pr5 pt10 pb10 zb-b-b color-black-2">
                     {token.symbol}
                     <span hidden className="color-black-3 ml5">{token.name} </span>
