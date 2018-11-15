@@ -22,7 +22,7 @@ class TVChartContainer extends React.PureComponent {
   tvWidget = null;
 
   componentDidMount() {
-    const {pair, themeName} = this.props
+    const {pair, themeName='darkgrey'} = this.props
 	  this.initChart(pair, themeName)
   }
 
