@@ -31,13 +31,8 @@ const PlaceOrderResult = (props) => {
         if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
           const orderFm = new OrderFm(order);
           const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
-          let qrcode = ''
-          if(placeOrderSteps.signWith === 'imToken'){
-            qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/entry&type=P2P&value=${p2pOrder}`
-          } else {
-            qrcode = JSON.stringify({type:'P2P', value: p2pOrder})
-          }
-          showLayer({id:'orderQrcode',value:{qrcode},data:{tokens:orderFm.getTokens(),orderFm}})
+          let qrcode = {type:'P2P', value: p2pOrder}
+          showLayer({id:'orderQrcode',value:qrcode,data:{tokens:orderFm.getTokens(),orderFm}})
           dispatch({type:'layers/hideLayer', payload:{id:'p2p'}})
           dispatch({type:'layers/hideLayer', payload:{id:'face2FaceConfirm'}})
           dispatch({type:'layers/hideLayer', payload:{id:'helperOfSignStepPC'}})
