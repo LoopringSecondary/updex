@@ -12,6 +12,7 @@ import storage from 'modules/storage'
 import { signMessage } from '../../common/utils/signUtils'
 import TokenFm from '../../modules/tokens/TokenFm'
 import routeActions from 'common/utils/routeActions'
+import Devices from 'LoopringUI/responsives/Devices'
 
 const HelperOfMyOrders = ({orders = {}, dispatch}) => {
   const market = orders.filters.market
@@ -52,6 +53,15 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
       }
     })
   }
+  const showLayer = (payload) => {
+    dispatch({
+      type: 'layers/showLayer',
+      payload: {
+        ...payload
+      }
+    })
+  }
+
   const cancelOrder = (item, e) => {
     e.stopPropagation()
     const tokenb = item.originalOrder.tokenB
@@ -215,10 +225,20 @@ const HelperOfMyOrders = ({orders = {}, dispatch}) => {
       </table>
       {
         orders.items && orders.items.length > 0 &&
-        <div className="zb-b-b color-black-4 text-center pt10 pb10 fs13" onClick={routeActions.gotoPath.bind(this,'/dex/usercenter/orders')}>
-          <span className="">{intl.get('common.all')} {intl.get('common.orders')}</span>
+        <div>
+          <Devices.NotDesktop>
+              <div className="zb-b-b color-black-4 text-center pt10 pb10 fs13 hover-default" onClick={routeActions.gotoPath.bind(this,'/dex/usercenter/orders')}>
+                <span className="">{intl.get('common.all')} {intl.get('common.orders')}</span>
+              </div>
+          </Devices.NotDesktop>
+          <Devices.IsDesktop1>
+              <div className="zb-b-b color-black-4 text-center pt10 pb10 fs13 hover-default" onClick={showLayer.bind(this,{id:'usercenter'})}>
+                <span className="">{intl.get('common.all')} {intl.get('common.orders')}</span>
+              </div>
+          </Devices.IsDesktop1>
         </div>
       }
+      
     </div>
 
   )

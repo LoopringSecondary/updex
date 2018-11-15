@@ -114,6 +114,8 @@ const PlaceOrderResult = (props) => {
   let signResult = placeOrderSteps.step
   if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet' || placeOrderSteps.signWith === 'imToken') {
     signResult = signByLooprStep(placeOrderSteps, circulrNotify)
+  } else {
+    signResult = error ? 3 : 2
   }
   const getSignP2P = () => {
     const order = unsign.find((item) => item.type === 'order')

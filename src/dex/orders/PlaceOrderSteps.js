@@ -12,7 +12,6 @@ import config from 'common/config'
 import storage from 'modules/storage'
 import { keccakHash } from 'LoopringJS/common/utils'
 
-
 const OrderMetaItem = (props) => {
   const {label, value, showArrow = false, onClick = () => {}} = props
   return (

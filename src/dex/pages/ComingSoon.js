@@ -29,7 +29,7 @@ class ComingSoon extends React.Component{
         <div className="text-center w-100">
           <div className="pt15 pb15 zb-b-b">
             <img className="h-45" src={require('../../assets/images/up-logo-notext.png')} alt=""/>
-            <div className="fs20 font-weight-bold mt10 text-primary">UP DEX</div>
+            <div className="fs20 font-weight-bold mt10 text-primary">Circulr DEX</div>
           </div>
           <div className="m15 p15 color-white fs13">
             <Icon type="desktop" className="color-white mr5" /> {intl.get('coming_soon.visit_on_pc')}

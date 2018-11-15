@@ -38,7 +38,7 @@ export default {
   },
   "html": {
     "template": "./public/index.ejs",
-    "favicon": './src/assets/images/favicon.ico'
+    "favicon": './src/assets/images/favicon-up.ico'
   },
   sass:{},
   ignoreMomentLocale:true,

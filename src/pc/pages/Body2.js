@@ -6,7 +6,7 @@ import PlaceOrderFormNoSide from '../orders/PlaceOrderFormNoSide';
 import HelperOfDepth from '../orders/HelperOfDepth';
 import HelperOfMyMarketOrders from 'mobile/orders/HelperOfMyMarketOrders';
 import ListMarketFills from '../fills/ListMarketFills';
-import HelperOfBalance from '../orders/HelperOfBalance';
+import HelperOfBalance from 'mobile/orders/HelperOfBalance';
 import Kline from 'mobile/charts/Kline';
 import Header from './Header'
 import PanelHeader from './PanelHeader'

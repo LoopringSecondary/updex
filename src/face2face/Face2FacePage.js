@@ -5,16 +5,17 @@ import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import { getTokensByMarket } from 'modules/formatter/common'
 import HelperOfOrders from './HelperOfOrders'
-import HelperOfBalances from './HelperOfBalances'
+import HelperOfBalances from 'mobile/orders/HelperOfBalance'
 import HelperOfMarkets from './HelperOfMarkets'
 import Face2FaceForm from './Face2FaceForm'
 import intl from 'react-intl-universal'
 import {store} from "../index";
+import NumberOfTodos from "../dex/notifications/NumberOfTodos";
 
 class Face2FacePage extends React.Component {
 
   // componentDidMount(){
-  //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"45447993b644a00d7d6aaa4351482d29c4c4a0909704169df0262681281ec443","hash":"0x390809f080bfd439f66f762efa15276fee9d7377c8f8e4001c7ffb443040866d","count":1}})})
+  //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"27b72006191a23d621fbe2c1491558f5c992e58c5149c070baa7bb7a233a1d98","hash":"0x17192de7258b5ce7423e3ddf27a08cc53f60d87ed412b94299846a4cbe121d1d","count":1}})})
   // }
   render() {
     const {dispatch,placeOrder} = this.props
@@ -70,12 +71,12 @@ class Face2FacePage extends React.Component {
             </NavBar>
             <div className="divider 1px zb-b-t"></div>
           </div>
-          
+
           <div className="bg-white">
             <Face2FaceForm side="sell" showLayer={showLayer} />
           </div>
-          <div hidden className="bg-white mt10">
-            <div className="fs16 pt10 pb10 pl15 color-black-1">{intl.get('common.markets')}</div>
+          <div className="bg-white mt10">
+            <div className="fs16 pt10 pb10 pl15 color-black-1 zb-b-b">{intl.get('common.reference_markets')}</div>
             <div className="zb-b-t">
               <HelperOfMarkets />
             </div>

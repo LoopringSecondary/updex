@@ -1,5 +1,5 @@
 import {toBig, toNumber,toFixed} from "LoopringJS/common/formatter";
-import {formatLength,toUnitAmount,toDecimalsAmount} from "../formatter/common";
+import {formatLength, toUnitAmount, toDecimalsAmount, getFormatNum} from "../formatter/common";
 import config from 'common/config'
 import validator from 'LoopringJS/common/validator'
 
@@ -55,6 +55,22 @@ export default class TokenFm {
   toFormatLength(amount,ceil){
    return formatLength(amount,ceil)
   }
+  shorterPrecision(amount, precision) {
+    return precisionShorter(amount, precision)
+  }
+}
+
+const precisionShorter = (value, precision) => {
+  const p = precision === undefined ? 8 : precision
+  if(isNaN(value)) return toFixed(0, p);
+  const x = toBig(value)
+  if(x.lt(99)) {
+    return toFixed(x, p);
+  }
+  if(x.lt(9999)) {
+    return toFixed(x, 4);
+  }
+  return toFixed(x, 0);
 }
 
 export function getBalanceBySymbol({balances, symbol, toUnit}) {

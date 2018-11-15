@@ -19,8 +19,9 @@ import CommonModals from './common/Modals'
 import storage from 'modules/storage'
 import UserAgent from 'common/utils/useragent'
 
+
 const UnLogged = ()=>{
-  const isLogged =  !!(window.Wallet && window.Wallet.address)
+  const isLogged =  !!(storage.wallet.getUnlockedAddress())
   if(isLogged){
     return <Redirect to="/dex" />
   }else{

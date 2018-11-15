@@ -3,7 +3,7 @@ import { Button, Icon, InputItem, List, NavBar, Toast,Modal } from 'antd-mobile'
 import { Icon as WebIcon } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
-import { toBig, toHex, toNumber } from 'LoopringJS/common/formatter'
+import { toBig, toHex, toNumber,toFixed } from 'LoopringJS/common/formatter'
 import Contracts from 'LoopringJS/ethereum/contracts/Contracts'
 import TokenFormatter, { getBalanceBySymbol, isValidNumber } from '../../modules/tokens/TokenFm'
 import config from '../../common/config'
@@ -13,6 +13,7 @@ import Worth from 'modules/settings/Worth'
 import { signTx } from '../../common/utils/signUtils'
 import ConvertHelperOfBalance from './ConvertHelperOfBalance'
 import { keccakHash } from 'LoopringJS/common/utils'
+import {generateApproveTx} from "../../modules/orders/formatters";
 
 const WETH = Contracts.WETH
 
@@ -36,12 +37,17 @@ class Convert extends React.Component {
     const {match} = this.props
     if (match && match.params && match.params.token) {
       this.setState({token: match.params.token})
+      return
+    }
+    const {convertToken:{token}} = this.props
+    if(token){
+      this.setState({token})
     }
   }
 
   render () {
-    const {dispatch, balance, amount, gas} = this.props
-    const {token, loading} = this.state
+    const {dispatch, balance, amount, gas,convertToken} = this.props
+    const {token,loading} = this.state
     const address = storage.wallet.getUnlockedAddress()
     const assets = getBalanceBySymbol({balances: balance.items, symbol: token, toUnit: true})
     const other_assets = getBalanceBySymbol({balances: balance.items, symbol: token.toUpperCase() === 'ETH' ? 'WETH' : 'ETH', toUnit: true})
@@ -114,23 +120,7 @@ class Convert extends React.Component {
       if (owner) {
         tx.nonce = toHex((await window.RELAY.account.getNonce(address)).result)
       }
-      const hash = keccakHash(JSON.stringify(tx))
-      const temData = {hash, tx}
-      if (owner) {
-        temData.owner = storage.wallet.getUnlockedAddress()
-      }
-      window.RELAY.order.setTempStore(hash, JSON.stringify(temData)).then(res => {
-        _this.setState({hash})
-        if (!res.error) {
-          // hideLayer({id: 'placeOrderSteps'})
-          dispatch({
-            type: 'sockets/queryChange',
-            payload: {id: 'circulrNotify', extra: {hash}}
-          })
-          showLayer({id: 'helperOfSign', type: 'convert', data: {type: 'convert', value: hash}})
-        }
-        this.setState({loading: false})
-      })
+      dispatch({type: 'task/setTask', payload: {task:'signP2P', unsign:{type: 'convert', data:tx}}})
     }
 
     const amountChange = (value) => {
@@ -170,7 +160,7 @@ class Convert extends React.Component {
                     type="money"
                     onChange={amountChange}
                     moneyKeyboardAlign="right"
-                    value={amount>=0 ? amount : null}
+                    value={amount}
                     extra={<div className="fs14 color-black-3 ml5">{fromToken}</div>}
                     className="circle h-default fs18"
                     placeholder={intl.get('common.amount')}
