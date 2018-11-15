@@ -192,6 +192,7 @@ function PlaceOrderSteps(props) {
               <OrderMetaItem label={intl.get('common.type')} value={intl.get('p2p_order.user_center_p2p')}/>
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
+              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
                 <span>
                   {`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
                 </span>
@@ -233,12 +234,7 @@ function PlaceOrderSteps(props) {
             <div className="zb-b-t p15 mt15">
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>
               <OrderMetaItem label={intl.get('common.sell')} value={`${amountS} ${tokenS}`}/>
-              {false && <OrderMetaItem label={intl.get('order.price')} value={`${price} ${tokenS}/${tokenB}`}/>}
-              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={
-                <span>
-                  {`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/>
-                </span>
-              }/>
+              <OrderMetaItem label={intl.get('common.buy')+' '+intl.get('order.price')} value={<span>{`1 ${tokenB} = ${Number(price)} ${tokenS} ≈`} <Worth amount={price} symbol={tokenS}/></span>} />
               <OrderMetaItem label={intl.get('common.sell')+' '+intl.get('order.price')} value={
                 <span>
                   {`1 ${tokenS} = ${Number(toFixed(1/price,8))} ${tokenB} ≈`} <Worth amount={1/price} symbol={tokenB}/>

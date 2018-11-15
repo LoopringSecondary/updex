@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
-import { Button } from 'antd-mobile'
+import { Button,SegmentedControl } from 'antd-mobile'
 import { connect } from 'dva'
 import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
@@ -52,17 +52,35 @@ class OrderQrcode extends React.Component{
           <Icon className="text-primary primary fs12 ml15 cursor-pointer" onClick={()=>hideLayer({id:'orderQrcode'})} key="1" type="close"/>
         </div>
         <div className="text-center bg-white-light ml25 mr25 pl15 pr15 pb15">
-          <div className="pt25 pb25 center-center">
-            <img className="h-45" src={require('../assets/images/up-logo-notext.png')} alt=""/>
-            <span className="fs20 font-weight-bold ml10 text-primary">Circulr DEX</span>
+          {
+            true &&
+            <div className="pt25 pb10 center-center">
+              <img className="h-40" src={require('../assets/images/up-logo-notext.png')} alt=""/>
+              <span className="fs18 font-weight-bold ml10 text-primary">Circulr DEX</span>
+            </div>
+          }
+          {
+            false &&
+            <div  className="pt15">
+              <SegmentedControl
+                values={["imToken", "UP Wallet"]}
+                className={`m-auto`}
+                selectedIndex={true ? 0 : 1}
+                style={{width:"240px"}}
+                onChange={()=>{}}
+              />
+            </div>
+          }
+          
+          <div className="pt15 d-inline-block" >
+            <div className="p5" style={{background:'#fff'}}>
+              
+              <QRCode value={qrcode} size={220} level='H'/>
+            </div>
+            <div className="mt15 border-none bg-primary color-white fs12 d-block circle h-30 lh-30 center-center">
+              <img className="h-15 mr10" src={require('../assets/images/imtoken-white.png')} alt=""/>请分享给 imToken 用户来吃单
+            </div>
           </div>
-          <div className="p5 d-inline-block" style={{background:'#fff'}}>
-            <QRCode value={qrcode} size={220} level='H'/>
-          </div>
-          <Button type="primary" size="small" className="mt15 border-none bg-primary-light text-primary fs12 d-block w-100" onClick={() => window.open('https://upwallet.io')}>
-            <Icon type="mobile" className="mr5" theme="" />{intl.get('p2p_order.scan_with_upwallet')}
-          </Button>
-
         </div>
         <div className="zb-b-t pt15 pb15 ml25 mr25 text-center bg-white-light">
           {false && <OrderMetaItem label={intl.get('order.price')} value={
