@@ -84,7 +84,7 @@ class EnableSwitch extends React.Component {
     };
     if(balance){
       if(toBig(balance.allowance).lt(1e8)){
-        return <Switch size={size} onChange={onChange} defaultChecked = {pendingAllowance.gt(1e8)}  loading={loading && pendingAllowance.gt(1e8)} disabled={pendingAllowance.gt(1e8)}/>
+        return <Switch size={size} onChange={onChange} checked = {pendingAllowance.gt(1e8)}  loading={loading && pendingAllowance.gt(1e8)} disabled={pendingAllowance.gt(1e8)}/>
       }else{
         return <Icon type="check-circle" theme="filled" className="color-success"/>
       }

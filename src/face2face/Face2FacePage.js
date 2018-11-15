@@ -5,7 +5,7 @@ import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import { getTokensByMarket } from 'modules/formatter/common'
 import HelperOfOrders from './HelperOfOrders'
-import HelperOfBalances from './HelperOfBalances'
+import HelperOfBalances from 'mobile/orders/HelperOfBalance'
 import HelperOfMarkets from './HelperOfMarkets'
 import Face2FaceForm from './Face2FaceForm'
 import intl from 'react-intl-universal'
@@ -71,7 +71,7 @@ class Face2FacePage extends React.Component {
             </NavBar>
             <div className="divider 1px zb-b-t"></div>
           </div>
-          
+
           <div className="bg-white">
             <Face2FaceForm side="sell" showLayer={showLayer} />
           </div>
