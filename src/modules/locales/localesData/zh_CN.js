@@ -132,7 +132,9 @@ const notifications = {
     enable_fail: '授权失败',
     place_order_price_confirm:'您确定要继续下单吗?',
     submit_ring_suc:'提交环路成功',
-    submit_ring_fail:'提交环路失败'
+    submit_ring_fail:'提交环路失败',
+    auth_suc:"授权成功",
+    operation_succ:'操作成功'
   },
   message: {
     wait_for_load_data:"请等待数据加载完毕",
@@ -173,7 +175,9 @@ const actions = {
   place_buy_order: '提交买单',
   place_sell_order: '提交卖单',
   all_assets: '全部资产',
-  fills_of_all_markets: '查看全部市场成交'
+  fills_of_all_markets: '查看全部市场成交',
+  sign:"签名",
+  submit:"提交"
 }
 
 const time_unit = {
@@ -359,8 +363,23 @@ no_open_orders: '{market}暂无有效订单',
     fill_count:"成交份数"
   },
   sign: {
+    title:"签名信息",
     not_signed: '您还未完成签名',
-    to_sign: '去签名'
+    to_sign: '去签名',
+    signed_failed: '签名失败',
+    type_sign_order: '签名原始订单',
+    type_cancel_allowance: '取消{token}授权',
+    type_approve: '{token}授权',
+    type_cancel_order: '签名取消订单',
+    type_convert: '转换WETH',
+    submit_success: '订单提交成功！',
+    submit_failed: '订单提交失败',
+    cancel_success: '订单取消成功',
+    cancel_failed: '订单取消失败',
+    convert_success: '转换成功',
+    convert_failed: '转换失败',
+    p2p_submit_success: 'P2P订单生成成功',
+    p2p_submit_failed: 'P2P订单生成失败'
   },
   // -----------
   // transaction

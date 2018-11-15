@@ -1,6 +1,6 @@
 import React from 'react'
-import { List, InputItem,Button,WingBlank,Slider, Tabs, WhiteSpace, Badge,SegmentedControl, NavBar, Icon,Modal,Switch,Steps } from 'antd-mobile'
-import { Icon as WebIcon,Switch as WebSwitch} from 'antd'
+import { List, InputItem,Button,WingBlank,Slider, Tabs, WhiteSpace, Badge,SegmentedControl, NavBar, Modal,Switch,Steps } from 'antd-mobile'
+import { Icon,Switch as WebSwitch} from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import LayoutDexHome from '../../layout/LayoutDexHome'
@@ -70,8 +70,8 @@ class PlaceOrderPage extends React.Component {
           <NavBar
             className="bg-white"
             mode="light"
-            leftContent={null && [
-              <span onClick={()=>{}} className="" key="1"><WebIcon type="question-circle-o" /></span>,
+            leftContent={[
+              <span className="" key="1"  onClick={() => routeActions.gotoPath(`/dex/markets/${pair}`) }><Icon className="text-primary" type="bell" /></span>
             ]}
             rightContent={[
               <span className="" key="1"  onClick={() => routeActions.gotoPath(`/dex/markets/${pair}`) }><i className="icon-chart"></i></span>
@@ -81,7 +81,7 @@ class PlaceOrderPage extends React.Component {
               {pair}<i className="ml5 icon-chevron-down"></i>
             </div>
           </NavBar>
-          <div className="no-underline tabs-no-border h-50 place-order-form bg-white" style={{marginTop:'0px'}}>
+          <div className="no-underline tabs-no-border place-order-form bg-white" style={{marginTop:'0px'}}>
             <div className="divider 1px zb-b-t"></div>
             <PlaceOrderForm showLayer={showLayer} />
           </div>
