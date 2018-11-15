@@ -49,6 +49,9 @@ class OrderQrcode extends React.Component{
         }
       })
     }
+    const fillCount = Math.ceil(toNumber(orderFm.getFilledPercent()) / 100 * value.value.count)
+
+
     return(
       <div className="bg-white">
         <div className="p15 color-black-1 fs18 zb-b-b text-center no-gutters">
@@ -88,6 +91,8 @@ class OrderQrcode extends React.Component{
             </div>
           }/>}
           <OrderMetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
+          <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}% （${fillCount}/${value.value.count}）`}/>
+          <OrderMetaItem label={intl.get('p2p_order.fill_amount')} value={`${orderFm.getFilledAmount(true,true)}`}/>
         </div>
       </div>
     )

@@ -7,7 +7,7 @@ import { OrderFm } from 'modules/orders/OrderFm'
 import Worth from 'modules/settings/Worth'
 import storage from 'modules/storage'
 import DetailFills from '../dex/orders/DetailFills'
-import {toFixed} from 'LoopringJS/common/formatter'
+import {toFixed,toBig,toNumber} from 'LoopringJS/common/formatter'
 import TokenFm from "modules/tokens/TokenFm";
 
 const OrderMetaItem = (props) => {
@@ -46,9 +46,9 @@ function OrderDetail(props) {
       }
     })
   }
+  const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
 
   const showQR = (order,orderFm,tokens) => {
-   const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
     showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder},data:{tokens,orderFm}})
   }
 
@@ -106,6 +106,7 @@ function OrderDetail(props) {
           <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
+            <OrderMetaItem label={intl.get('p2p_order.fill_amount')} value={`${orderFm.getFilledAmount(true,true)}`}/>
           </div>
         </div>
         <div className="bg-white mt10">
