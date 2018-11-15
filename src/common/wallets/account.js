@@ -261,6 +261,40 @@ export class UpWalletAccount extends Account
   }
 }
 
+export class ImTokenAccount extends Account
+{
+  constructor (address)
+  {
+    super();
+    this.address = address
+  }
+
+  async getAddress ()
+  {
+    return this.address
+  }
+
+  getUnlockType ()
+  {
+    return 'imToken'
+  }
+
+  async signMessage (message)
+  {
+    throw new Error('Unsupported method')
+  }
+
+  async signEthereumTx (rawTx)
+  {
+    throw new Error('Unsupported method')
+  }
+
+  async signOrder (order)
+  {
+    throw new Error('Unsupported method')
+  }
+}
+
 export class LedgerAccount extends Account
 {
     constructor (ledger, dpath)

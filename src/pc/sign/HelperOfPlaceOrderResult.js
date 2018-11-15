@@ -36,7 +36,7 @@ const PlaceOrderResult = (props) => {
     return step
   }
   let signResult = placeOrderSteps.step
-  if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet') {
+  if(placeOrderSteps.signWith === 'loopr' || placeOrderSteps.signWith === 'upWallet' || placeOrderSteps.signWith === 'imToken') {
     signResult = signByLooprStep(placeOrderSteps, circulrNotify)
   } else {
     signResult = error ? 3 : 2
