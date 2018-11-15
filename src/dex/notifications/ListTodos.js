@@ -239,9 +239,9 @@ function ListTodos (props) {
         const assets = getBalanceBySymbol({balances: balance.items, symbol: symbol, toUnit: true})
         const unitBalance = assets.balance
         let selling = tf.getUnitAmount(value)
-        if (symbol.toUpperCase() === 'LRC') {
-          selling = toNumber(selling) + toNumber(tf.getUnitAmount(lrcFee))
-        }
+        // if (symbol.toUpperCase() === 'LRC') {
+        //   selling = toNumber(selling) + toNumber(tf.getUnitAmount(lrcFee))
+        // }
         if (toNumber(unitBalance) < toNumber(selling)) {
           data.push({
             symbol: symbol,
