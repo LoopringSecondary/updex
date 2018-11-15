@@ -11,7 +11,7 @@ import Relay from 'LoopringJS/relay/relay'
 import Notification from 'LoopringUI/components/Notification'
 import intl from 'react-intl-universal'
 import {configs} from './common/config/data'
-
+import {privateKeytoAddress} from 'LoopringJS/ethereum/account'
 
 const latestVersion = Number(configs.localStorageVersion)
 const oldVersion = Number(storage.getLocalStorageVersion())

@@ -15,7 +15,7 @@
   "localStorageVersion":201809251505,
   "walletAddress":"0xBd8e06Fbe2727DA28aC99150BE29C920007bdE3c",
   "urls":{
-    "imtoken": "http://10.137.111.51:8000"
+    "imtoken": "http://192.168.100.100:8001"
   },
   "contracts": [
     {
