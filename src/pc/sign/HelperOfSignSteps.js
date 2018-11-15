@@ -94,7 +94,7 @@ class SignSteps extends React.Component {
         const signWith = window.WALLET.getUnlockType()
         let qrcode = ''
         if(placeOrderSteps.signWith === 'imToken'){
-          qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?type=${type}&value=${hash}`
+          qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/entry&type=${type}&value=${hash}`
         } else {
           qrcode = JSON.stringify({type, value: hash})
         }

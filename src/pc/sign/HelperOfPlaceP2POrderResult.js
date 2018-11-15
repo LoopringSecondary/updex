@@ -33,7 +33,7 @@ const PlaceOrderResult = (props) => {
           const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
           let qrcode = ''
           if(placeOrderSteps.signWith === 'imToken'){
-            qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?type=P2P&value=${p2pOrder}`
+            qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/entry&type=P2P&value=${p2pOrder}`
           } else {
             qrcode = JSON.stringify({type:'P2P', value: p2pOrder})
           }
