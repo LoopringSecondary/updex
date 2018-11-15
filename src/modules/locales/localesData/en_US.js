@@ -1,3 +1,4 @@
+import modules from './en_US/index.js'
 const words = {
   all: 'All',
   time: 'Time',
@@ -16,6 +17,7 @@ const words = {
   total: 'Total',
   advanced: "Advanced",
   worth: "Worth",
+  fee: 'Fee',
   lrc_fee: 'Trading Fee',
   lrc_fee_tips: 'xxxxx',
   lrc_reward: 'LRC Reward',
@@ -76,7 +78,22 @@ const words = {
     loading:'Loading...',
   },
   mode:'Mode',
+  global_price:'Global Price',
+  available:'Available',
 }
+const errors = {
+  10001:'Sorry, system error, please try again later',
+  32000:'Sorry, balance is not enough to submit order',
+  50001:'Sorry, selling order does not exist, could not complete this order',
+  50002:'Sorry, only p2p order could be submitted, could not complete this order',
+  50003:'Sorry, selling order already dealt with another buying order, please try with other orders',
+  50004:'Sorry, selling and buying price did not match between two orders, could not complete this order',
+  50005:'Sorry, owner of buying order is the same as selling\'s, could not complete this order',
+  50006:'Sorry, buying order has expired, please try with other orders',
+  50007:'Sorry, undealt amount of order is too small, could not complete this order',
+  50008:'Sorry, buying order does not exist, could not complete this order',
+}
+
 const types = {
   trade_side: {
     sell: words.sell,
@@ -122,6 +139,7 @@ const notifications = {
     submit_ring_fail:'Submit ring failed'
   },
   message: {
+    wait_for_load_data:"Please wait for loading data",
     place_order_price_high:"Your price is 5% higher than the market price.",
     place_order_price_low:"Your price is 5% lower than the market price.",
     wallet_locked: 'Your wallet seems locked yet, please unlock first',
@@ -180,6 +198,8 @@ export default {
     ...words,
     ...validation_messages,
     ...time_unit,
+    ...errors,
+    ...modules.common
   },
   notifications,
   actions,
@@ -212,7 +232,8 @@ export default {
     expired: 'Expired',
     pending: "Pending",
     canceling: "Canceling",
-    waiting:"Matching"
+    waiting:"Matching",
+    locked:"Locked"
   },
   order_side: {
     sell: words.sell,
@@ -397,8 +418,14 @@ export default {
     set_sell_amount:"Set sell amount",
     count:"Order split count",
     set_count:"Set order split count ",
-    share_page : 'Share this page with your friends',
-    scan_with_upwallet: 'Please scan the QR code and submit with your UP Wallet'
+    share_page : 'Take a screenshot and share it with your friends',
+    scan_with_upwallet: 'Please scan the QR code and submit with your UP Wallet',
+    visit_later:"P2P Of Web is Maintaining, please visit later!",
+    maker_balance_not_enough:"{token} balance of maker order is not enough,current is {balance}, required is {required} ",
+    maker_allowance_not_enough:"{token} allowance of maker order is not enough,current is {allowance}, required is {required}",
+    invalid_order:"This order is completed, canceled , expired",
+    frozen_balance_not_enough:'There has {frozen}{token} in your available orders(market and P2P), your balance is not enough to place this order, you could cancel historical orders or reduce sell amount to continue',
+    p2p_allowance_not_enough:'Please enable {token} first in assets list, you can continue place order after allowance takes effect'
   },
   sign: {
     not_signed: "You may have some items not signed",
@@ -802,4 +829,15 @@ export default {
   coming_soon:{
     visit_on_pc:"Please visit https://circulr.loopring.io on PC",
   },
+  token_actions:{
+    balance:'Balance',
+    available:'Available',
+    selling:'Selling',
+    lack:'Lack Of',
+    enable_label:'Make Token Tradable',
+    enable_label_simple:'Tradable',
+    enable_tip:"Enable {token} will cost ETH gas"
+  },
+  ...modules.pages,
+  ...modules.types,
 }

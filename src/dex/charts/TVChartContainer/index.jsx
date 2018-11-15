@@ -22,12 +22,12 @@ class TVChartContainer extends React.PureComponent {
   tvWidget = null;
 
   componentDidMount() {
-    const {pair, themeName} = this.props
+    const {pair, themeName='darkgrey'} = this.props
 	  this.initChart(pair, themeName)
   }
 
   componentWillReceiveProps(newProps) {
-    const {pair, themeName} = newProps
+    const {pair, themeName='darkgrey'} = newProps
     if (this.tvWidget !== null && this.tvWidget._ready) {
       this.setState({barsLoaded: false})
       this.tvWidget.chart().setSymbol(pair, () => {})

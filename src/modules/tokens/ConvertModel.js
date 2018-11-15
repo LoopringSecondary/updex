@@ -4,7 +4,7 @@ import {toBig} from "LoopringJS/common/formatter";
 export default {
   namespace: 'convert',
   state: {
-    amount: toBig(0),
+    amount: '',
     isMax: false,
     gasPrice: 10,
     gasLimit: 200000,

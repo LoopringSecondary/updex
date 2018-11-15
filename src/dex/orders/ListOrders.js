@@ -433,7 +433,7 @@ export const renders = {
     }
 
     if (status === 'ORDER_FINISHED') {
-      return <span className="color-success"><WebIcon type="check-circle" /></span>
+      return <span className="color-success"><WebIcon type="check-circle" theme="filled" /></span>
     }
     if (status === 'ORDER_CANCELLED') {
       return <span className="color-black-4">{intl.get("order_status.canceled")}</span>
@@ -445,10 +445,13 @@ export const renders = {
       return <span className="color-black-4">{intl.get("order_status.expired")}</span>
     }
     if (status === 'ORDER_PENDING') {
-      return <span className="color-black-2">{intl.get("order_status.pending")}</span>
+      return <span className="text-primary">{intl.get("order_status.pending")}</span>
     }
     if (status === 'ORDER_CANCELLING') {
-      return <span className="color-black-2">{intl.get("order_status.canceling")}</span>
+      return <span className="text-primary">{intl.get("order_status.canceling")}</span>
+    }
+    if(status === "ORDER_P2P_LOCKED"){
+      return <span className="text-primary">{intl.get("order_status.locked")}</span>
     }
   },
 }

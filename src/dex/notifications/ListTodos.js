@@ -162,7 +162,7 @@ const TodoItem = (props) => {
       <div className="">
         <div className="row ml0 mr0 pl10 pr10 pt15 align-items-center no-gutters" onClick={() => {}}>
           <div className="col-auo pr15 color-black text-center">
-            <WebIcon className="color-error fs16" type="exclamation-circle"/>
+            <WebIcon className="color-error fs16" type="exclamation-circle" theme="filled"/>
           </div>
           <div className="col text-left">
             <div>

@@ -24,6 +24,13 @@ const setLoopringUnlockWith = (unlock) => {
 const getLoopringUnlockWith = () => {
   return localStorage.loopringUnlockWith
 }
+const setRewardAddress = (address) => {
+  localStorage.rewardAddress =  address;
+};
+
+const getRewardAddress = () => {
+  return  localStorage.rewardAddress
+};
 
 export default {
   storeUnlockedAddress,
@@ -31,6 +38,8 @@ export default {
   getUnlockedType,
   clearUnlockedAddress,
   setLoopringUnlockWith,
-  getLoopringUnlockWith
+  getLoopringUnlockWith,
+  setRewardAddress,
+  getRewardAddress
 }
 
