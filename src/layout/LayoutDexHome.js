@@ -32,9 +32,9 @@ class DexHomeLayout extends React.Component {
           console.log(allocates)
           const assets = getBalanceBySymbol({balances: balance.items, symbol: symbol})
           let selling = toBig(value)
-          if (symbol.toUpperCase() === 'LRC') {
-            selling = selling.plus(toBig(lrcFee))
-          }
+          // if (symbol.toUpperCase() === 'LRC') {
+          //   selling = selling.plus(toBig(lrcFee))
+          // }
           if (selling.gt(assets.balance)) {
             todos = todos + 1
           }
