@@ -90,10 +90,10 @@ class Face2FaceForm extends React.Component {
         tradeInfo.error.forEach(item => {
           switch(item.type) {
             case 'BalanceNotEnough':
-              Toast.fail(intl.get('p2p_order.frozen_balance_not_enough',{frozen:item.value.frozen, require:item.value.required, token:item.value.symbol}), 8, null, false);
+              Toast.fail(intl.get('p2p_order.frozen_balance_not_enough',{frozen:item.value.frozen, require:item.value.required, token:item.value.symbol}), 5, null, false);
               break;
             case 'AllowanceNotEnough':
-              Toast.fail(intl.get('p2p_order.p2p_allowance_not_enough',{token:item.value.symbol}), 8, null, false);
+              Toast.fail(intl.get('p2p_order.p2p_allowance_not_enough',{token:item.value.symbol}), 5, null, false);
               break;
           }
         })
