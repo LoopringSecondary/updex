@@ -2,6 +2,8 @@ import Wallet from 'common/wallets/wallet';
 import config from './config'
 import {toNumber,addHexPrefix} from 'LoopringJS/common/formatter'
 import {keccakHash} from 'LoopringJS/common/utils'
+import {storage} from 'modules/storage'
+
 
 export default class Imtoken extends Wallet {
 
@@ -64,7 +66,7 @@ export default class Imtoken extends Wallet {
 
   signMessage(message) {
     return new Promise((resolve) => {
-      this.imtoken.callAPI('transaction.personalSign', {message:keccakHash(message),address:window.web3.eth.defaultAccount}, (error,result) => {
+      this.imtoken.callAPI('transaction.personalSign', {message:keccakHash(message),address:storage.wallet.getUnlockedAddress()}, (error,result) => {
         if(error){
           resolve({error})
         }else{
@@ -81,7 +83,7 @@ export default class Imtoken extends Wallet {
     const imTx = {...tx};
     imTx.gas = tx.gasLimit;
     delete  imTx.gasLimit;
-    imTx.from = window.web3.eth.defaultAccount
+    imTx.from = storage.wallet.getUnlockedAddress()
     imTx.feeCustomizable = !!feeCustomizable
     return new Promise((resolve) => {
       this.imtoken.callAPI('transaction.signTransaction', imTx, (error,result) => {
