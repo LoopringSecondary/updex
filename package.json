@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "start": "roadhog server",
+    "start-https":"roadhog server HTTPS=true",
     "build": "roadhog build",
     "deploy-gh-pages": "gh-pages -d dist",
     "lint": "eslint --ext .js src test"
@@ -18,8 +19,8 @@
     "loopring.js": "2.0.11",
     "moment": "2.20.1",
     "qrcode.react": "0.7.2",
-    "react": "16.2.0",
-    "react-dom": "16.2.0",
+    "react": "16.3.0",
+    "react-dom": "16.3.0",
     "react-intl-universal": "1.11.2",
     "socket.io-client": "2.0.4",
     "useragent.js": "0.5.6"
