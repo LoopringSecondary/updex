@@ -22,7 +22,8 @@ class EnableSwitch extends React.Component {
     const loading = !!isApproving(pendingTx.items, symbol)
     const pendingAllowance = toBig(loading ? tokenFm.getUnitAmount(isApproving(pendingTx.items, symbol)) : balance ? balance.allowance : toBig(0))
 
-    const onChange = async (checked) => {
+    const onChange = async (checked,e) => {
+      console.log('EnableSwitch',e)
       if (checked) {
         Modal.alert(`${intl.get('todo_list.actions_enable')} ${symbol}`,intl.get('token_actions.enable_tip',{token:symbol}),[
           { text: intl.get('common.cancel'), onPress: () => console.log('cancel') },
@@ -53,7 +54,11 @@ class EnableSwitch extends React.Component {
     };
     if(balance){
       if(toBig(balance.allowance).lt(1e8)){
-        return <Switch size={size} onChange={onChange} checked = {pendingAllowance.gt(1e8)}  loading={loading && pendingAllowance.gt(1e8)} disabled={pendingAllowance.gt(1e8)}/>
+        return (
+          <span onClick={(e)=>{ e.preventDefault();e.stopPropagation() }}>
+            <Switch size={size} onChange={onChange} checked = {pendingAllowance.gt(1e8)}  loading={loading && pendingAllowance.gt(1e8)} disabled={pendingAllowance.gt(1e8)}/>  
+          </span>
+        )
       }else{
         return <Icon type="check-circle" theme="filled" className="color-success"/>
       }
