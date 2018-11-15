@@ -7,7 +7,7 @@ import { OrderFm } from 'modules/orders/OrderFm'
 import Worth from 'modules/settings/Worth'
 import storage from 'modules/storage'
 import DetailFills from '../dex/orders/DetailFills'
-import {toFixed} from 'LoopringJS/common/formatter'
+import {toFixed,toBig,toNumber} from 'LoopringJS/common/formatter'
 import TokenFm from "modules/tokens/TokenFm";
 
 const OrderMetaItem = (props) => {
@@ -46,36 +46,39 @@ function OrderDetail(props) {
       }
     })
   }
+  const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
 
   const showQR = (order,orderFm,tokens) => {
-   const p2pOrder = storage.orders.getP2POrder(order.originalOrder.hash)
     showLayer({id:'orderQrcode',value:{type:'P2P',value:p2pOrder},data:{tokens,orderFm}})
   }
 
   const orderStatus = (item) => {
     if (item.status === 'ORDER_OPENED') {
-      return intl.get("order_status.opened")
+      return <span className="text-primary">{intl.get("order_status.opened")}</span>
     }
     if (item.status === 'ORDER_FINISHED') {
-      return intl.get("order_status.completed")
+      return <span className="color-success">{intl.get("order_status.completed")}</span>
     }
     if (item.status === 'ORDER_CANCELLED') {
-      return intl.get("order_status.canceled")
+      return <span className="color-black-3">{intl.get("order_status.canceled")}</span>
     }
     if (item.status === 'ORDER_CUTOFF') {
-      return intl.get("order_status.canceled")
+      return <span className="color-black-3">{intl.get("order_status.canceled")}</span>
     }
     if (item.status === 'ORDER_EXPIRE') {
-      return intl.get("order_status.expired")
+      return <span className="color-black-3">{intl.get("order_status.expired")}</span>
     }
     if (item.status === 'ORDER_PENDING') {
-      return intl.get("order_status.pending")
+      return <span className="text-primary">{intl.get("order_status.pending")}</span>
     }
     if (item.status === 'ORDER_CANCELLING') {
-      return intl.get("order_status.canceling")
+      return <span className="text-primary">{intl.get("order_status.canceling")}</span>
     }
     if (item.status === 'ORDER_WAIT_SUBMIT_RING') {
-      return intl.get("order_status.waiting")
+      return <span className="text-primary">{intl.get("order_status.waiting")}</span>
+    }
+    if(item.status === "ORDER_P2P_LOCKED"){
+      return <span className="text-primary">{intl.get("order_status.locked")}</span>
     }
   }
   const tokens = orderFm.getTokens()
@@ -99,14 +102,15 @@ function OrderDetail(props) {
       </div>
       <div className="pt45 pb30" style={{overflow:'auto',height:'100%'}}>
         <div className="bg-white mt10">
-          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_status_title')}</div>
+          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_status_title')}</div>
           <div className="">
             <OrderMetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
             <OrderMetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
+            <OrderMetaItem label={intl.get('p2p_order.fill_amount')} value={`${orderFm.getFilledAmount(true,true)}`}/>
           </div>
         </div>
         <div className="bg-white mt10">
-          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_basic_title')}</div>
+          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_basic_title')}</div>
           <div className="">
             <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
             <OrderMetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
@@ -132,7 +136,7 @@ function OrderDetail(props) {
           </div>
         </div>
         <div className="bg-white mt10">
-          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_fills_title')}</div>
+          <div className="fs14 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.order_fills_title')}</div>
           <div className="" style={{borderRadius:'0rem'}}>
             <DetailFills order={order} />
           </div>

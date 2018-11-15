@@ -1,15 +1,17 @@
 import React from 'react'
 import { connect } from 'dva'
 import { Button } from 'antd-mobile'
-import { Icon as WebIcon, Switch } from 'antd'
+import { Icon,Spin} from 'antd'
+import EnableSwitch from '../tokens/EnableSwitch'
 import routeActions from 'common/utils/routeActions'
 import { getTokensByMarket } from 'modules/formatter/common'
 import * as tokenFormatter from 'modules/tokens/TokenFm'
 import {toFixed } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
+import Available from 'modules/tokens/Available'
 
 const HelperOfBalance = (props)=>{
-  const {dispatch,pair,balance} = props
+  const {dispatch,pair,balance,loading} = props
   const marketTokens = getTokensByMarket(pair)
   const showLayer = (payload={})=>{
     dispatch({
@@ -33,13 +35,13 @@ const HelperOfBalance = (props)=>{
   }
   relatedTokens.push(balanceL)
   relatedTokens.push(balanceR)
-  if(tokens.right === 'WETH') {
-    relatedTokens.push({
-      symbol:'ETH',
-      name:'ETH',
-      ...tokenFormatter.getBalanceBySymbol({balances:balance, symbol:'ETH', toUnit:true})
-    })
-  }
+  // if(tokens.right === 'WETH') {
+  //   relatedTokens.push({
+  //     symbol:'ETH',
+  //     name:'ETH',
+  //     ...tokenFormatter.getBalanceBySymbol({balances:balance, symbol:'ETH', toUnit:true})
+  //   })
+  // }
   const gotoReceive = (payload)=>{
     showLayer({id:'receiveToken',...payload})
   }
@@ -58,47 +60,44 @@ const HelperOfBalance = (props)=>{
   }
 
   return (
-    <div className="fs20">
+    <Spin spinning={loading} className="fs20">
       <table className="w-100 fs12">
         <thead>
           <tr className="">
-            <th className="text-left zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.token')}</th>
-            <th className="text-left zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.balance')}</th>
-            <th hidden className="text-left zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4 text-nowrap">交易授权</th>
-            <th hidden className="text-left zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4">{intl.get('helper_of_market_order.selling')}</th>
-            <th className="text-right zb-b-b pl10 pr10 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.actions')}</th>
+            <th className="text-left zb-b-b pl10 pr5 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.token')}</th>
+            <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-4 text-nowrap">{intl.get('common.balance')}</th>
+            <th className="text-left zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('common.available')}</th>
+            <th className="text-center zb-b-b pl5 pr5 pt5 pb5 font-weight-normal color-black-3">{intl.get('token_actions.enable_label_simple')}</th>
+            <th className="text-right zb-b-b pl5 pr10 pt5 pb5 font-weight-normal color-black-4">{intl.get('common.actions')}</th>
           </tr>
         </thead>
         <tbody>
             {
               relatedTokens.map((token,index)=>
                 <tr key={index} onClick={()=>{}}>
-                  <td className="pl10 pr10 pt10 pb10 zb-b-b color-black-2 text-left">
+                  <td className="pl10 pr5 pt10 pb10 zb-b-b color-black-2 text-left">
                     {token.symbol}
-                    <span hidden className="color-black-3 ml5">{token.name}</span>
                   </td>
-                  <td className="pl10 pr10 pt10 pb10 zb-b-b color-black-2 text-left">{toFixed(token.balance, 8)}</td>
-                  <td hidden className="pl10 pr10 pt10 pb10 zb-b-b color-black-2 text-left">
-                    {
-                      token.symbol !== 'ETH' && index === 0 && <Switch size="small" loading={true} />
-                    }
-                    {
-                      token.symbol !== 'ETH' && index === 1 && <Switch size="small" loading={false} checked={true} />
-                    }
+                  <td className="pl5 pr5 pt10 pb10 zb-b-b color-black-2 text-left">{toFixed(token.balance, 8)}</td>
+                  <td className="pl5 pr5 pt10 pb10 zb-b-b color-black-2 text-left">
+                    <div className="lh15 color-black-1"><Available symbol={token.symbol}/></div>
                   </td>
-                  <td hidden className="pl10 pr10 pt10 pb10 zb-b-b color-black-2 text-left">0.00</td>
-                  <td className="pl10 pr10 pt10 pb10 zb-b-b color-black-2 text-right text-nowrap">
+                  <td className="text-center pl5 pr5 pt10 pb10 zb-b-b color-black-2">
+                    <EnableSwitch symbol={token.symbol} />
+                  </td>
+                  <td className="pl5 pr10 pt10 pb10 zb-b-b color-black-2 text-right text-nowrap">
                     {
-                      false && token.symbol === 'ETH' &&
-                      <Button onClick={gotoConvert.bind(this,{token:"ETH"})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block" size="small">{intl.get('common.convert')}</Button>
+                      token.symbol === 'WETH' &&
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                        <Icon className="fs12" type="ellipsis" />
+                      </Button>
                     }
                     {
-                      false && token.symbol === 'WETH' &&
-                      <Button onClick={gotoConvert.bind(this,{token:'WETH'})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block" size="small">{intl.get('common.convert')}</Button>
+                      token.symbol !== 'WETH' &&
+                      <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'2.4rem',lineHeight:'2.6rem'}} className="d-inline-block ml10 color-white border-none" size="small">
+                        <Icon className="fs12" type="ellipsis" />
+                      </Button>
                     }
-                    <Button onClick={showActions.bind(this,{symbol:token.symbol,hideBuy:true})} type="primary" style={{height:'24px',lineHeight:'24px'}} className="d-inline-block ml10 bg-primary-light border-none text-primary" size="small">
-                      <WebIcon type="ellipsis" />
-                    </Button>
                   </td>
                 </tr>
               )
@@ -108,14 +107,14 @@ const HelperOfBalance = (props)=>{
       <div className="zb-b-b color-black-4 text-center pt10 pb10 fs13" onClick={routeActions.gotoPath.bind(this,'/dex/usercenter/assets')}>
         <span className="">{intl.get('common.all')} {intl.get('common.assets')}</span>
       </div>
-    </div>
+    </Spin>
   )
 }
 export default connect(({
   placeOrder:{pair},
   sockets,
 })=>({
-  pair,balance:sockets.balance.items
+  pair,balance:sockets.balance.items,loading:sockets.balance.loading,
 }))(HelperOfBalance)
 
 

@@ -11,18 +11,17 @@ class NumberOfTodos extends React.Component {
   render() {
     const {balance, txs, allocates,hasBadge=true} = this.props
     let numberofTodos = 0
-    const lrcFee  = allocates['frozenLrcFee'] || 0 ;
+    // const lrcFee  = allocates['frozenLrcFee'] || 0 ;
     const symbols = Object.keys(allocates)
     if(balance.items.length !== 0){
       symbols.forEach((symbol, index) => {
         if(symbol.toLocaleLowerCase() !== "frozenlrcfee"){
           const value = allocates[symbol]
-          console.log(allocates)
           const assets = getBalanceBySymbol({balances: balance.items, symbol: symbol})
           let selling = toBig(value)
-          if (symbol.toUpperCase() === 'LRC') {
-            selling = selling.plus(toBig(lrcFee))
-          }
+          // if (symbol.toUpperCase() === 'LRC') {
+          //   selling = selling.plus(toBig(lrcFee))
+          // }
           if (selling.gt(assets.balance)) {
             numberofTodos = numberofTodos + 1
           }
@@ -38,9 +37,9 @@ class NumberOfTodos extends React.Component {
     if(hasBadge){
       return <Badge count={numberofTodos} className="s-small">{this.props.children}</Badge>
     }else{
-      return `${numberofTodos}`  
+      return `${numberofTodos}`
     }
-    
+
   }
 }
 export default connect((state)=>({

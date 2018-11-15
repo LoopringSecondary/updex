@@ -15,7 +15,7 @@ import NumberOfTodos from "../dex/notifications/NumberOfTodos";
 class Face2FacePage extends React.Component {
 
   // componentDidMount(){
-  //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"8dfe21ff4efb74f89274c13b32a19489edd2597171dba74421ec2985f12ced60","hash":"0x7693ebf0018da0d78f15db979482509f6bb4424e82d3689217016c04382b4e45","count":1}})})
+  //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"27b72006191a23d621fbe2c1491558f5c992e58c5149c070baa7bb7a233a1d98","hash":"0x17192de7258b5ce7423e3ddf27a08cc53f60d87ed412b94299846a4cbe121d1d","count":1}})})
   // }
   render() {
     const {dispatch,placeOrder} = this.props
@@ -59,8 +59,7 @@ class Face2FacePage extends React.Component {
               className="zb-b-b"
               mode="light"
               leftContent={[
-                <NumberOfTodos><span onClick={()=>showLayer({id:'notifications'})} className="text-primary fs16" key="1"><WebIcon type="bell" theme="" /></span></NumberOfTodos>,
-                <span hidden onClick={()=>showLayer({id:'settings'})} className="text-primary" key="1"><WebIcon type="setting" theme="" /></span>
+                <NumberOfTodos key="1"><span onClick={()=>showLayer({id:'notifications'})} className="text-primary fs16" key="1"><WebIcon type="bell" theme="" /></span></NumberOfTodos>,
               ]}
               rightContent={[
                 <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="" /></span>
@@ -74,8 +73,8 @@ class Face2FacePage extends React.Component {
           <div className="bg-white">
             <Face2FaceForm side="sell" showLayer={showLayer} />
           </div>
-          <div hidden className="bg-white mt10">
-            <div className="fs16 pt10 pb10 pl15 color-black-1">{intl.get('common.markets')}</div>
+          <div className="bg-white mt10">
+            <div className="fs16 pt10 pb10 pl15 color-black-1 zb-b-b">{intl.get('common.reference_markets')}</div>
             <div className="zb-b-t">
               <HelperOfMarkets />
             </div>
