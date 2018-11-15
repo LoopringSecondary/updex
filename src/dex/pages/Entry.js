@@ -8,7 +8,7 @@ import {scanQRCode, signMessage, signOrder, signTx} from 'common/utils/signUtils
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
 import Home from './Home'
-import ScanQrcode from '../scanQrcode/ScanQrcode'
+import ScanQrcode from '../scan/ScanQrcode'
 
 class Entry extends React.Component {
 
