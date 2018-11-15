@@ -70,6 +70,7 @@ class Face2FacePage extends React.Component {
               </div>
             </NavBar>
           </div>
+          <div className="divider 1px zb-b-t"></div>
           <div className="bg-white">
             <Face2FaceForm side="sell" showLayer={showLayer} />
           </div>

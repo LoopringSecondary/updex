@@ -129,11 +129,11 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                    value={amountS}
                   extra={
-                    <div className="fs14 cursor-pointer zb-b-l color-black-1 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div className="fs14 cursor-pointer zb-b-l color-black-1 d-flex align-items-center justify-content-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                       <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'sell'})} >
                         {p2pOrder.tokenS} <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                       </div>
-                      <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})}  className="fs16 text-primary" style={{position:'absolute',top:'1rem',width:'3.5rem',left:'-3.5rem'}}>
+                      <div onClick={showLayer.bind(this,{id:"helperOfAmount",symbol:p2pOrder.tokenS})}  className="fs16 text-primary" style={{position:'absolute',marginLeft:'-100%'}}>
                         <WebIcon type="sliders" />
                       </div>
                     </div>
@@ -141,7 +141,7 @@ class Face2FaceForm extends React.Component {
                   className="circle h-default fs18"
                   placeholder={intl.get('p2p_order.amount_to_sell')}
                 >
-                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                  <div className="fs14 color-black-1 w-40">
                     {intl.get('common.sell')}
                   </div>
                 </InputItem>
@@ -151,7 +151,7 @@ class Face2FaceForm extends React.Component {
                   moneyKeyboardAlign="left"
                   value={amountB}
                   extra={
-                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-1 d-flex align-items-center justify-content-center" style={{width:'7.5rem',textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
+                    <div onClick={showLayer.bind(this,{id:"helperOfTokens",side:'buy'})} className="fs14 cursor-pointer text-justify zb-b-l color-black-1 d-flex align-items-center justify-content-center w-75" style={{textAlign:'justify',position:'absolute',right:0,top:'0',bottom:'0',margin:'auto'}} >
                         {p2pOrder.tokenB}
                         <WebIcon className="fs12" type="caret-down" style={{marginLeft:'0.2rem'}}/>
                     </div>
@@ -159,7 +159,7 @@ class Face2FaceForm extends React.Component {
                   className="circle h-default fs18 mt15"
                   placeholder={intl.get('p2p_order.amount_to_buy')}
                 >
-                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                  <div className="fs14 color-black-1 w-40">
                     {intl.get('common.buy')}
                   </div>
                 </InputItem>
@@ -181,7 +181,7 @@ class Face2FaceForm extends React.Component {
                     </div>
                   }
                 >
-                  <div className="fs14 color-black-1" style={{width:'4rem'}}>
+                  <div className="fs14 color-black-1 w-40">
                     {intl.get('common.price')}
                   </div>
                 </List.Item>

@@ -8,6 +8,7 @@ import {scanQRCode, signMessage, signOrder, signTx} from 'common/utils/signUtils
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
 import Home from './Home'
+import ScanQrcode from '../scanQrcode/ScanQrcode'
 
 class Entry extends React.Component {
 
@@ -169,7 +170,7 @@ class Entry extends React.Component {
     }
     return (
       <div className="" >
-        <Home />
+        <ScanQrcode />
         {
           false &&
             <div className="text-center w-100 p15">

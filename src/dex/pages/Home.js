@@ -14,7 +14,7 @@ class Home extends React.Component {
     return (
         <div className="">
           {
-            false &&
+            true &&
             <NavBar
               className="bg-white"
               mode="light"

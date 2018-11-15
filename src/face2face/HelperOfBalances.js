@@ -104,16 +104,14 @@ class HelperOfBalance extends React.Component {
                   <td className="text-right pl5 pr15 pt10 pb10 zb-b-b color-black-2">
                     {
                       token.symbol === 'WETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary color-white border-none"
-                              style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary color-white border-none h-25" type="primary" size="small"
                               onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
                         <Icon className="fs12" type="ellipsis"/>
                       </Button>
                     }
                     {
                       token.symbol !== 'WETH' &&
-                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary color-white border-none"
-                              style={{height: '2.4rem', lineHeight: '2.4rem'}} type="primary" size="small"
+                      <Button className="fs12 d-inline-block pl15 pr15 bg-primary color-white border-none h-25" type="primary" size="small"
                               onClick={showLayer.bind(this, {id: 'helperOfTokenActions', symbol: token.symbol})}>
                         <Icon className="fs12" type="ellipsis"/>
                       </Button>
