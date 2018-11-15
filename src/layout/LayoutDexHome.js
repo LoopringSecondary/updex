@@ -37,10 +37,10 @@ class DexHomeLayout extends React.Component {
               }
               key="home"
               icon={
-                <i className="icon-home color-primary-light-bak"></i>
+                <Icon type="appstore" theme="filled" className="color-primary-light-bak" />
               }
               selectedIcon={
-                <i className="icon-home text-primary"></i>
+                <Icon type="appstore" theme="filled" className="text-primary" />
               }
               selected={isActive('/dex/home')}
               onPress={() => {
@@ -53,10 +53,10 @@ class DexHomeLayout extends React.Component {
               }
               key="markets"
               icon={
-                <i className="icon-market color-primary-light-bak"></i>
+                <Icon type="sliders" theme="filled" className="color-primary-light-bak" />
               }
               selectedIcon={
-                <i className="icon-market text-primary"></i>
+                <Icon type="sliders" theme="filled" className="text-primary" />
               }
               selected={isActive('/dex/markets')}
               onPress={() => {
@@ -64,8 +64,12 @@ class DexHomeLayout extends React.Component {
               }}
             />
             <TabBar.Item
-              icon={<i className="icon-trade-m color-primary-light-bak"/>}
-              selectedIcon={<i className="icon-trade-m text-primary"/>}
+              icon={
+                <Icon type="interation" theme="filled" className="color-primary-light-bak" />
+              }
+              selectedIcon={
+                <Icon type="interation" theme="filled" className="text-primary" />
+              }
               title={<span
                 className={isActive('/dex/placeOrder') ? 'text-primary' : ''}>{intl.get('common.trade')}</span>}
               key="placeOrder"

@@ -3,7 +3,7 @@ import {Redirect, Route, Switch } from 'dva/router'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
 import { NavBar,Button } from 'antd-mobile'
-import { Icon } from 'antd'
+import { Icon,Spin } from 'antd'
 import UserCenter from '../account/UserCenter'
 import Markets from '../tickers/Markets'
 import PlaceOrder from '../orders/PlaceOrderForm'
@@ -21,7 +21,7 @@ class Home extends React.Component {
           mode="light"
           onLeftClick={() => {}}
           leftContent={[
-            <span key="1" className="color-black-1"><Icon  type="home" /></span>,
+            <span key="1" className="text-primary"><Icon  type="home" /></span>,
           ]}
           rightContent={null && [
             <span  key="1" className="text-primary" onClick={()=>{}}><Icon type="scan" /></span>
