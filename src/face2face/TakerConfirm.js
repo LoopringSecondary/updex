@@ -180,8 +180,6 @@ class TakerConfirm extends React.Component {
         }
         const signedOrder = {...completeOrder, ...signResult.result, powNonce: 100}
         const txs = unsigned.filter(item => item.type === 'tx');
-        Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
-        return ;
         eachOfLimit(txs, 1, async (item, key, callback) => {
           signTx(item.data).then(res => {
             if (res.result) {
