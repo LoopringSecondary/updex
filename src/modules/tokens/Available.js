@@ -11,21 +11,21 @@ class Available extends React.Component {
     sale : toBig(0)
   }
 
-  componentDidMount() {
-    const {symbol}= this.props
-    const owner = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
-    window.RELAY.account.getEstimatedAllocatedAllowance({
-      owner,
-      delegateAddress: config.getDelegateAddress(),
-      token: symbol
-    }).then(res => {
-      if (res.result) {
-        let sale = toBig(res.result)
-        const tokenFm = new TokenFM({symbol})
-        this.setState({sale : toBig(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale)))})
-      }
-    })
-  }
+  // componentDidMount() {
+  // const {symbol}= this.props
+  // const owner = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
+  // window.RELAY.account.getEstimatedAllocatedAllowance({
+  //   owner,
+  //   delegateAddress: config.getDelegateAddress(),
+  //   token: symbol
+  // }).then(res => {
+  //   if (res.result) {
+  //     let sale = toBig(res.result)
+  //     const tokenFm = new TokenFM({symbol})
+  //     this.setState({sale : toBig(tokenFm.toPricisionFixed(tokenFm.getUnitAmount(sale)))})
+  //   }
+  // })
+  // }
 
   available = (tokenBalance, sale) => {
     const value = tokenBalance.balance.minus(sale)
@@ -33,15 +33,21 @@ class Available extends React.Component {
   }
 
   render() {
-    const {symbol, balance}= this.props
-    const {sale}= this.state
+    const {symbol, allocates, balance}= this.props
     const tokenBalance = getBalanceBySymbol({balances: balance, symbol: symbol.toLowerCase(), toUnit: true})
-    const available = this.available(tokenBalance, sale)
+    let selling = toBig(0)
+    Object.keys(allocates).forEach((sym, index) => {
+      if (sym.toLocaleLowerCase() === symbol.toLocaleLowerCase()) {
+        selling = toBig(allocates[sym])
+      }
+    })
     const tokenFm = new TokenFM({symbol})
+    const available = this.available(tokenBalance, tokenFm.getUnitAmount(selling))
     return tokenFm.shorterPrecision(available)
   }
 }
 
 export default connect(({sockets})=>({
-  balance: sockets.balance.items
+  balance: sockets.balance.items,
+  allocates: sockets.orderAllocateChange.items,
 }))(Available)
