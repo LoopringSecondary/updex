@@ -25,7 +25,7 @@ class EnableSwitch extends React.Component {
     const onChange = async (checked) => {
       if (checked) {
         Modal.alert(`${intl.get('todo_list.actions_enable')} ${symbol}`,intl.get('token_actions.enable_tip',{token:symbol}),[
-          { text: intl.get('common.cancel'), onPress: () => console.log('cancel') },
+          { text: intl.get('common.cancel'), onPress: () =>{} },
           { text: intl.get('common.ok'), onPress: async () =>{
               const txs = []
               const {gas} = this.props;
@@ -67,7 +67,7 @@ class EnableSwitch extends React.Component {
               }, async function (e) {
                 if(!e){
                   Notification.open({
-                    description:intl.get('notifications.title.enable_suc'),
+                    description:intl.get('notifications.message.tx_submit_suc') + `(${intl.get('notifications.message.tx_pending')})`,
                     type: 'success',
                   })
                 }else{
@@ -84,7 +84,7 @@ class EnableSwitch extends React.Component {
     };
     if(balance){
       if(toBig(balance.allowance).lt(1e8)){
-        return <Switch size={size} onChange={onChange} defaultChecked = {pendingAllowance.gt(1e8)}  loading={loading && pendingAllowance.gt(1e8)} disabled={pendingAllowance.gt(1e8)}/>
+        return <Switch size={size} onChange={onChange} checked={pendingAllowance.gt(1e8)}  loading={loading && pendingAllowance.gt(1e8)} disabled={pendingAllowance.gt(1e8)}/>
       }else{
         return <Icon type="check-circle" theme="filled" className="color-success"/>
       }

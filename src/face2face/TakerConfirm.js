@@ -101,7 +101,7 @@ class TakerConfirm extends React.Component {
           Notification.open({
             description: intl.get('p2p_order.maker_allowance_not_enough', {
               required: item.value.required,
-              allowance: item.value.balance,
+              allowance: toNumber(item.value.allowance),
               token: item.value.symbol
             }),
             type: 'error',

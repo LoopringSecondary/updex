@@ -23,6 +23,32 @@ class DexHomeLayout extends React.Component {
     const isActive = (path) => {
       return pathname.indexOf(path) > -1
     }
+
+    let todos = 0
+    const lrcFee  = allocates['frozenLrcFee'] || 0 ;
+    const symbols = Object.keys(allocates)
+    if(balance.items.length !== 0){
+      symbols.forEach((symbol, index) => {
+        if(symbol.toLocaleLowerCase() !== "frozenlrcfee"){
+          const value = allocates[symbol]
+          const assets = getBalanceBySymbol({balances: balance.items, symbol: symbol})
+          let selling = toBig(value)
+          // if (symbol.toUpperCase() === 'LRC') {
+          //   selling = selling.plus(toBig(lrcFee))
+          // }
+          if (selling.gt(assets.balance)) {
+            todos = todos + 1
+          }
+          let allowance = assets.allowance
+          if (selling.gt(allowance)) {
+            todos = todos + 1
+          }
+        }
+      })
+    }
+
+    todos = todos + txs.filter(tx => tx.type.toLowerCase() === 'convert_income').length
+
     return (
       <div style={{}}>
         {this.props.children}
