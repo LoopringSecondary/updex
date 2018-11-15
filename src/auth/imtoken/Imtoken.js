@@ -2,7 +2,7 @@ import Wallet from 'common/wallets/wallet';
 import config from './config'
 import {toNumber,addHexPrefix} from 'LoopringJS/common/formatter'
 import {keccakHash} from 'LoopringJS/common/utils'
-import {storage} from 'modules/storage'
+import storage from 'modules/storage'
 
 
 export default class Imtoken extends Wallet {
