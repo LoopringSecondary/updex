@@ -191,7 +191,7 @@ function PlaceOrderSteps(props) {
         dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder: true}});
         Notification.open({
           message: intl.get('notifications.title.place_order_success'),
-          description: 'successfully submit order',
+          description: intl.get('notifications.message.place_order_success'),
           type: 'info'
         })
 

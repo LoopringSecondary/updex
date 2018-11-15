@@ -67,7 +67,7 @@ class EnableSwitch extends React.Component {
               }, async function (e) {
                 if(!e){
                   Notification.open({
-                    description:intl.get('notifications.title.enable_suc'),
+                    description:intl.get('notifications.message.tx_submit_suc') + `(${intl.get('notifications.message.tx_pending')})`,
                     type: 'success',
                   })
                 }else{
