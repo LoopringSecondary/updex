@@ -136,6 +136,8 @@ const notifications = {
   },
   message: {
     wait_for_load_data:"Please wait for loading data",
+    tx_pending:'Tx is pending',
+    tx_submit_suc:"Tx is submitted successfully",
     place_order_price_high:"Your price is 5% higher than the market price.",
     place_order_price_low:"Your price is 5% lower than the market price.",
     wallet_locked: 'Your wallet seems locked yet, please unlock first',

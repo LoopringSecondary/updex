@@ -385,25 +385,44 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
   const token = new TokenFm({symbol: tradeInfo.tokenS})
   const frozenAmount = token.getUnitAmount(frozenSell.result)
   if(balanceS.balance.lt(frozenAmount.plus(tradeInfo.amountS))) {
-    error.push({type:"BalanceNotEnough", value:{symbol:tradeInfo.tokenS, balance:cutDecimal(balanceS.balance,6), frozen:ceilDecimal(frozenAmount,6), required:ceilDecimal(frozenAmount.plus(tradeInfo.amountS).minus(balanceS.balance),6)}})
+    error.push({
+      type:"BalanceNotEnough",
+      value:{
+        symbol:tradeInfo.tokenS,
+        balance:cutDecimal(balanceS.balance,6),
+        frozen:frozenAmount.gt(0) ? ceilDecimal(frozenAmount,6) : 0,
+        required:ceilDecimal(frozenAmount.plus(tradeInfo.amountS).minus(balanceS.balance),6)
+      }
+    })
     failed = true
   }
   const pendingAllowance = fm.toBig(isApproving(txs, tradeInfo.tokenS) ? isApproving(txs, tradeInfo.tokenS).div('1e'+configSell.digits) : balanceS.allowance);
   if(pendingAllowance.lt(tradeInfo.amountS)) {
-    warn.push({type:"AllowanceNotEnough", value:{symbol:tradeInfo.tokenS, allowance:cutDecimal(pendingAllowance,6), required:ceilDecimal(tradeInfo.amountS.minus(balanceS.allowance),6)}})
+    warn.push({
+      type:"AllowanceNotEnough",
+      value:{symbol:tradeInfo.tokenS,
+        allowance:cutDecimal(pendingAllowance,6),
+        required:ceilDecimal(tradeInfo.amountS.minus(balanceS.allowance),6)
+      }
+    })
     approveCount += 1
     if (pendingAllowance.gt(0)) approveCount += 1
   }
-
   if(tradeInfo.roleType === 'taker'){
     let gas = fm.toBig(gasPrice).div(1e9).times(fm.toBig(approveGasLimit).times(approveCount))
     gas = gas.plus(fm.toBig(gasPrice).div(1e9).times(400000))
     if(ethBalance.balance.lt(gas)){
-      error.push({type:"BalanceNotEnough", value:{symbol:'ETH', balance:cutDecimal(ethBalance.balance,6), required:ceilDecimal(gas.minus(ethBalance.balance),6)}})
+      error.push({
+        type:"BalanceNotEnough",
+        value:{
+          symbol:'ETH',
+          balance:cutDecimal(ethBalance.balance,6),
+          required:ceilDecimal(gas.minus(ethBalance.balance),6)
+        }
+      })
       failed = true
     }
   }
-
   if(failed) {
     tradeInfo.error = error
     return
