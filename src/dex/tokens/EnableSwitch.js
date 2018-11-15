@@ -16,7 +16,7 @@ import intl from 'react-intl-universal'
 
 class EnableSwitch extends React.Component {
   render() {
-    const {symbol, size = "small", balances,pendingTx} = this.props
+    const {symbol, size = "small", balances,pendingTx,dispatch} = this.props
     const balance  = balances.find(item =>item.symbol.toLowerCase() === symbol.toLowerCase())
     const tokenFm = new TokenFormatter({symbol})
     const loading = !!isApproving(pendingTx.items, symbol)
@@ -41,43 +41,12 @@ class EnableSwitch extends React.Component {
                 to: config.getTokenBySymbol(symbol).address
               }
               if (pendingAllowance.gt(0)) {
-                txs.push({...tx, nonce,data:Contracts.ERC20Token.encodeInputs('approve', {_spender: config.getDelegateAddress(), _value:"0x0"})})
+                txs.push({type:'approveZero',data:{...tx, nonce,data:Contracts.ERC20Token.encodeInputs('approve', {_spender: config.getDelegateAddress(), _value:"0x0"})}})
                 nonce = toHex(toNumber(nonce) +1)
               }
-              txs.push({...tx,nonce,data:Contracts.ERC20Token.encodeInputs('approve', {_spender: config.getDelegateAddress(), _value:"0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"})})
-              eachOfLimit(txs, 1, async (item, key, callback) => {
-                signTx(item).then(res => {
-                  if (res.result) {
-                    window.ETH.sendRawTransaction(res.result).then(resp => {
-                      if (resp.result) {
-                        window.RELAY.account.notifyTransactionSubmitted({
-                          txHash: resp.result,
-                          rawTx: item,
-                          from: address
-                        })
-                        callback()
-                      } else {
-                        callback(resp.error)
-                      }
-                    })
-                  } else {
-                    callback(res.error)
-                  }
-                })
-              }, async function (e) {
-                if(!e){
-                  Notification.open({
-                    description:intl.get('notifications.title.enable_suc'),
-                    type: 'success',
-                  })
-                }else{
-                  Notification.open({
-                    description:intl.get('notifications.title.enable_fail') + e.message,
-                    type: 'error',
-                  })
-                }
-              })
-            } },
+              txs.push({type:'approve',data:{...tx,nonce,data:Contracts.ERC20Token.encodeInputs('approve', {_spender: config.getDelegateAddress(), _value:"0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"})}})
+              dispatch({type: 'task/setTask', payload: {task:'sign', unsign:txs}})
+            }},
         ])
 
       }
