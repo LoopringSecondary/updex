@@ -10,7 +10,7 @@ import {toFixed } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import Available from 'modules/tokens/Available'
 import Devices from 'LoopringUI/responsives/Devices'
-import Responsive from 'react-responsive'
+
 const HelperOfBalance = (props)=>{
   const {dispatch,pair,balance,loading} = props
   const marketTokens = getTokensByMarket(pair)
