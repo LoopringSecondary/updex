@@ -3,7 +3,7 @@ import { Button, InputItem, List, SegmentedControl, Toast ,Modal} from 'antd-mob
 import { Icon as WebIcon,Affix } from 'antd'
 import { connect } from 'dva'
 import { getTokensByMarket } from 'modules/formatter/common'
-import { getDisplaySymbol, toBig,toNumber} from 'LoopringJS/common/formatter'
+import { getDisplaySymbol, toBig,toNumber, toHex } from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import * as orderFormatter from 'modules/orders/formatters'
 import moment from 'moment'
@@ -68,7 +68,8 @@ class PlaceOrderForm extends React.Component {
   }
 
   render(){
-    const {dispatch,placeOrder,marketcap,balance,preference,trading,lastPrice} = this.props
+    const {dispatch,placeOrder,marketcap,balance,preference,trading,lastPrice, pendingTx, gas} = this.props
+    const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
     const {side,pair} = placeOrder
     const tokens = getTokensByMarket(pair)
     const marketConfig = config.getMarketBySymbol(tokens.left, tokens.right)
@@ -185,7 +186,7 @@ class PlaceOrderForm extends React.Component {
       }
     }
 
-    const submitOrder = () => {
+    const submitOrder = async () => {
       const total = toBig(price).times(amount)
       const totalWorth = orderFormatter.calculateWorthInLegalCurrency(marketcap, tokens.right, total)
       if(!totalWorth.gt(0)) {
@@ -196,32 +197,39 @@ class PlaceOrderForm extends React.Component {
         })
         return
       }
-      // let allowed = false
-      // let currency = preference.currency;
-      // let priceSymbol = getDisplaySymbol(currency)
-      // if(currency === 'USD') {
-      //   priceSymbol = '10' + priceSymbol
-      //   if(totalWorth.gt(10)) {
-      //     allowed = true
-      //   }
-      // } else {
-      //   priceSymbol = '50' + priceSymbol
-      //   if(totalWorth.gt(50)) {
-      //     allowed = true
-      //   }
-      // }
-      // if(!allowed) {
-      //   Notification.open({
-      //     message:intl.get('notifications.title.not_allowed_place_order_worth'),
-      //     description:intl.get('notifications.message.not_allowed_place_order_worth', {worth: priceSymbol}),
-      //     type:'error'
-      //   })
-      //   return
-      // }
-      const validSince = moment()
-      const validUntil = moment().add(1, 'months')
-      dispatch({type:'placeOrder/validTimeChange', payload:{validSince, validUntil}})
-      showLayer({id:'placeOrderSteps'})
+      const tradeInfo = {}
+      tradeInfo.amountB = toBig(toBig(side.toLowerCase() === 'buy' ? amount : total))
+      tradeInfo.amountS = toBig(side.toLowerCase() === 'sell' ? amount : total)
+      tradeInfo.tokenB = buy.token
+      tradeInfo.tokenS = sell.token
+      try {
+        await orderFormatter.p2pVerification(balance, tradeInfo, pendingTx ? pendingTx.items : [], gasPrice)
+      } catch (e) {
+        Toast.fail(e.message, 3, null, false);
+        this.setState({submitLoading:false})
+        return
+      }
+      if (tradeInfo.error && tradeInfo.error.length > 0) {
+        tradeInfo.error.forEach(item => {
+          switch (item.type) {
+            case 'BalanceNotEnough':
+              Toast.fail(intl.get('p2p_order.frozen_balance_not_enough', {
+                frozen: item.value.frozen,
+                require: item.value.required,
+                token: item.value.symbol
+              }), 8, null, false);
+              break;
+            case 'AllowanceNotEnough':
+              Toast.fail(intl.get('p2p_order.p2p_allowance_not_enough', {token: item.value.symbol}), 8, null, false);
+              break;
+          }
+        })
+      } else {
+        const validSince = moment()
+        const validUntil = moment().add(1, 'months')
+        dispatch({type:'placeOrder/validTimeChange', payload:{validSince, validUntil}})
+        showLayer({id:'placeOrderSteps'})
+      }
     }
 
     const showAmountHelper = () => {
@@ -347,15 +355,19 @@ class PlaceOrderForm extends React.Component {
 
 }
 export default connect(({
-                          placeOrder,
-                          sockets:{tickers, balance, marketcap},
-                          settings:{preference,trading}
-                        })=>({
+  placeOrder,
+  sockets:{tickers, balance, marketcap},
+  settings:{preference,trading},
+  pendingTx,
+  gas
+})=>({
   placeOrder,
   lastPrice:tickers.item.loopr ? tickers.item.loopr.last : null,
   balance:balance.items ? balance.items : null,
   marketcap:marketcap.items ? marketcap.items : null,
-  preference,trading
+  preference,trading,
+  pendingTx:pendingTx,
+  gas:gas,
 }))(PlaceOrderForm)
 
 
