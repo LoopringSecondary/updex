@@ -85,7 +85,9 @@ class Face2FaceForm extends React.Component {
         this.setState({submitLoading:false})
         return
       }
-      const error = tradeInfo.error ? tradeInfo.warn.concat(tradeInfo.error) : tradeInfo.warn
+      let error = new Array()
+      if(tradeInfo.error) error = error.concat(tradeInfo.error)
+      if(tradeInfo.warn) error = error.concat(tradeInfo.warn)
       if (error && error.length > 0) {
         error.forEach(item => {
           switch(item.type) {

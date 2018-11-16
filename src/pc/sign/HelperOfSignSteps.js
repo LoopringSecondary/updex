@@ -61,10 +61,11 @@ class SignSteps extends React.Component {
           break;
         case 'signP2P':
           type = 'sign'
-          const unsign = new Array()
-          placeOrderSteps.unsign.forEach(item => {
-            unsign.push({type:item.type, data:item.data})
-          })
+          // const unsign = new Array()
+          // placeOrderSteps.unsign.forEach(item => {
+          //   unsign.push({type:item.type, data:item.data})
+          // })
+          const unsign = placeOrderSteps.unsign
           const order = placeOrderSteps.unsign.find((item) => item.type === 'order')
           if(order && order.completeOrder.authPrivateKey) {
             storage.orders.storeP2POrder({
@@ -94,7 +95,7 @@ class SignSteps extends React.Component {
         const signWith = window.WALLET.getUnlockType()
         let qrcode = ''
         if(placeOrderSteps.signWith === 'imToken'){
-          qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/entry&type=${type}&value=${hash}`
+          qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/scan&type=${type}&value=${hash}`
         } else {
           qrcode = JSON.stringify({type, value: hash})
         }
