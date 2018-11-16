@@ -31,7 +31,7 @@ class PlaceOrderForm extends React.Component {
   componentWillReceiveProps(newProps) {
     const {marketcap,dispatch, placeOrder,lastPrice,balance} = newProps;
     const {pair,side,priceChanged,priceInput} = placeOrder;
-    if (this.props.marketcap !== newProps.marketcap && newProps.marketcap.length > 0 && !priceChanged) {
+    if ((this.props.marketcap !== newProps.marketcap|| Number(priceInput) === 0) && newProps.marketcap.length > 0 && !priceChanged) {
       const tokens = getTokensByMarket(pair)
       const currentPrice = orderFormatter.getMarketPrice(marketcap,tokens.left, tokens.right);
       let mPrice = currentPrice || lastPrice || 0
