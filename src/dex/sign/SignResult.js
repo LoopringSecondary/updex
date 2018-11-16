@@ -43,8 +43,7 @@ class SignResult extends React.Component {
           mode="light"
           onLeftClick={() => hideLayer({id: 'signResult'})}
           leftContent={[
-            <span className="text-primary circle-30 bg-primary-light center-center fs14"><Icon key="1"
-                                                                                               type="close"/></span>,
+            <span className="text-primary fs14"  key="1"><Icon type="close"/></span>,
           ]}
           rightContent={[]}
         >

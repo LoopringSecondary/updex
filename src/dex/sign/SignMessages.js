@@ -193,7 +193,7 @@ class SignMessages extends React.Component {
             }
             {!signed[index] &&
             <div className="">
-              <Button className="cursor-pointer fs12 h-30 pl15 pr15" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
+              <Button className="cursor-pointer fs12 h-35 pl20 pr20" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
             </div>
             }
           </div>
@@ -216,14 +216,14 @@ class SignMessages extends React.Component {
           mode="light"
           onLeftClick={() => hideLayer({id:'signMessages'})}
           leftContent={[
-            <span className="text-primary circle-30 bg-primary-light center-center fs14"><Icon key="1" type="close" /></span>,
+            <span className="text-primary center-center fs14" key="1"><Icon type="close" /></span>,
           ]}
           rightContent={[]}
         >
           {intl.get('sign.title')}
         </NavBar>
         <div className="divider 1px zb-b-b"></div>
-        <div className="p15 zb-b-b" style={{minHeight:'8rem',borderRadius:'0rem'}}>
+        <div className="p15" style={{minHeight:'6rem'}}>
           {
             unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
           }

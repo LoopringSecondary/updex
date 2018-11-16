@@ -16,6 +16,7 @@ import * as orderFormatter from 'modules/orders/formatters'
 import eachOfLimit from "async/eachOfLimit";
 import TokenFm from 'modules/tokens/TokenFm'
 import Worth from 'modules/settings/Worth'
+import HelperOfBalances from './HelperOfBalances'
 
 
 const OrderMetaItem = (props) => {
@@ -282,9 +283,9 @@ class TakerConfirm extends React.Component {
     }
 
     return (
-      <div className="bg-white" style={{height: '100%'}}>
+      <div className="bg-fill" style={{height: '100%',overflow:'auto'}}>
         <NavBar
-          className="zb-b-b"
+          className="bg-whi"
           mode="light"
           onLeftClick={() => hideLayer({id: 'takerConfirm'})}
           leftContent={[
@@ -296,11 +297,7 @@ class TakerConfirm extends React.Component {
         <div className="p20 bg-white">
           <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div className="col-auto">
-              <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center" style={{
-                width: '4rem',
-                height: '4rem',
-                borderRadius: '50em',
-              }}>
+              <div className="bg-primary-light text-primary circle-50 center-center">
                 <i className={`icon-token-${order.tokenS} fs24`}/>
               </div>
             </div>
@@ -308,11 +305,7 @@ class TakerConfirm extends React.Component {
               <Icon type="swap" className={`color-black-1 fs20`}/>
             </div>
             <div className="col-auto">
-              <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center" style={{
-                width: '4rem',
-                height: '4rem',
-                borderRadius: '50em',
-              }}>
+              <div className="bg-primary-light text-primary circle-50 center-center">
                 <i className={`icon-token-${order.tokenB} fs24`}/>
               </div>
             </div>
@@ -321,8 +314,6 @@ class TakerConfirm extends React.Component {
                          value={`${tokensFm.toPricisionFixed(tokensFm.getUnitAmount(order.amountS))} ${order.tokenS} `}/>
           <OrderMetaItem label={intl.get('common.buy')}
                          value={`${tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(order.amountB))} ${order.tokenB} `}/>
-          {false &&
-          <OrderMetaItem label={intl.get('common.price')} value={`${Number(price)} ${order.tokenS}/${order.tokenB}`}/>}
           <OrderMetaItem label={intl.get('common.buy') + ' ' + intl.get('order.price')} value={
             <span>
                   {`1 ${order.tokenB} = ${Number(toFixed(tokensFm.getUnitAmount(order.amountS).div(tokenbFm.getUnitAmount(order.amountB)), 8))} ${order.tokenS} ≈`}
@@ -342,6 +333,9 @@ class TakerConfirm extends React.Component {
           <OrderMetaItem label={intl.get('common.ttl')}
                          value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}/>
           <Button type="primary" className="mt15" onClick={submitRing}>{intl.get('common.exchange')}</Button>
+        </div>
+        <div className="bg-whhite mt10">
+          <HelperOfBalances />
         </div>
       </div>
     )
