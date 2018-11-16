@@ -9,21 +9,33 @@ import {signTx, signMessage, signOrder} from 'common/utils/signUtils'
 
 class Login extends React.Component {
 
-  authToLogin = () => {
+  state ={
+    signed:false,
+    content:null
+  }
+
+
+
+  sign = () => {
     const {login:{uuid}} = this.props
     const timestamp = moment().unix().toString();
     signMessage(timestamp).then(res => {
       if (res.result) {
-        window.RELAY.account.notifyScanLogin({
-          sign: {...res.result, owner: window.Wallet.address, timestamp},
-          uuid
-        }).then(resp => {
-          if (resp.result) {
-            this.showLayer({id:'signResult',type:'login'})
-          } else {
-            this.showLayer({id:'signResult',error:resp.error})
-          }
-        })
+        this.setState({signed:true,content:{
+            sign: {...res.result, owner: window.Wallet.address, timestamp},
+            uuid
+          }})
+      }
+    })
+  }
+
+  authToLogin = () => {
+    const {content} = this.state
+    window.RELAY.account.notifyScanLogin(content).then(resp => {
+      if (resp.result) {
+        this.showLayer({id:'signResult',type:'login'})
+      } else {
+        this.showLayer({id:'signResult',error:resp.error})
       }
     })
   }
@@ -47,8 +59,8 @@ class Login extends React.Component {
   }
 
 render(){
-
-  return (
+    const {signed} = this.state
+    return (
     <div className="bg-white">
       <NavBar
         className="bg-white"
@@ -62,11 +74,27 @@ render(){
         {intl.get('sign.title')}
       </NavBar>
       <div className="divider 1px zb-b-b"></div>
-      <div className="p15 zb-b-b" style={{minHeight:'8rem',borderRadius:'0rem'}}>
-        {intl.get('scan.login_title')}
+      <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
+        <div className="col text-left">
+          <div className="color-black-1">
+            {1}.&nbsp;&nbsp; {intl.get('scan.login_title')}
+          </div>
+        </div>
+        <div className="col-auto ">
+          {signed &&
+          <div className="color-success">
+            <Icon className="mr5" type="check-circle" theme="filled"  />{intl.get('place_order_sign.signed')}
+          </div>
+          }
+          {!signed &&
+          <div className="">
+            <Button className="cursor-pointer fs12 h-30 pl15 pr15" type="primary" size="small" onClick={this.sign}>{intl.get('actions.sign')}</Button>
+          </div>
+          }
+        </div>
       </div>
       <div className="p15">
-        <Button className="d-block mb0" size="" type="primary" onClick={this.authToLogin} > {intl.get('actions.submit')} </Button>
+        <Button className="d-block mb0" size="" type="primary" onClick={this.authToLogin} disabled={!signed} > {intl.get('actions.submit')} </Button>
       </div>
     </div>
   );
