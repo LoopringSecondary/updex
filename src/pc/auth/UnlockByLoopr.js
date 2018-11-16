@@ -91,7 +91,7 @@ class Auth extends React.Component {
     const unlockWith = storage.wallet.getLoopringUnlockWith()
     let qrcode = ''
     if(unlockWith === 'imToken') {
-      qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/entry&type=UUID&value=${scanAddress.UUID}`
+      qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/scan&type=UUID&value=${scanAddress.UUID}`
     } else {
       qrcode = JSON.stringify({type:'UUID', value:scanAddress.UUID})
     }
