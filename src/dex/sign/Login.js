@@ -4,7 +4,7 @@ import {Button, NavBar, Toast} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import moment from "moment/moment";
-import {signTx, signMessage, signOrder} from 'common/utils/signUtils'
+import {signMessage} from 'common/utils/signUtils'
 
 
 class Login extends React.Component {
@@ -17,7 +17,7 @@ class Login extends React.Component {
 
 
   sign = () => {
-    const {login:{uuid}} = this.props
+    const {login:{uuid}} = this.props;
     const timestamp = moment().unix().toString();
     signMessage(timestamp).then(res => {
       if (res.result) {
@@ -83,7 +83,7 @@ render(){
         <div className="col-auto ">
           {signed &&
           <div className="color-success">
-            <Icon className="mr5" type="check-circle" theme="filled"  />{intl.get('place_order_sign.signed')}
+            <Icon className="mr5" type="check-circle" theme="filled"  />{intl.get('sign.signed')}
           </div>
           }
           {!signed &&
