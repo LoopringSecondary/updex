@@ -44,7 +44,7 @@ class OrderQrcode extends React.Component {
       if (storage.wallet.getUnlockedType() === 'imtoken') {
         content = {}
         content.title = intl.get('common.loopring_p2p');
-        content.message = `${toNumber(tokensFm.toPricisionFixed(amountS.div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(amountB.div(value.value.count)))} ${tokenB}`;
+        content.message = `${intl.get('common.loopring_p2p')}:${toNumber(tokensFm.toPricisionFixed(amountS.div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(amountB.div(value.value.count)))} ${tokenB}`;
         content.url = qrcodeContent
       } else {
         content = {type: 'p2pOrder', content: qrcodeContent}
