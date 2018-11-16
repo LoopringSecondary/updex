@@ -708,13 +708,16 @@ export default {
   },
   scan:{
     title:"Operation Result",
+    login_title:"Authorization to login",
     result:{
       place_order_suc:"Place order successfully",
       convert_suc:"Succeed to submit convert tx",
       cancel_order_suc:"Cancel order successfully",
       approve_suc:"Succeed to submit approval tx",
       login_suc:"Succeed to auth to login in",
-      fail:"Operation Failed"
+      fail:"Operation Failed",
+      unsupported_type:'Unsupported Type ({type})',
+      unrecognized_type:'Unrecognized Type'
     },
     tip:{
       confirm_web:'Please check the website',

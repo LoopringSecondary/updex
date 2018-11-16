@@ -713,13 +713,16 @@ no_open_orders: '{market}暂无有效订单',
   },
   scan:{
     title:"操作结果",
+    login_title:"授权登录",
     result:{
       place_order_suc:"下单成功",
       convert_suc:"转换交易发送成功，等待交易确认",
       cancel_order_suc:"取消订单成功",
       approve_suc:"授权交易发送成功，等待交易确认",
       login_suc:"登录授权成功",
-      fail:"操作失败"
+      fail:"操作失败",
+      unsupported_type:'不支持的类型 ({type})',
+      unrecognized_type:'未识别的类型'
     },
     tip:{
       confirm_web:'请确认网页端是否正常',

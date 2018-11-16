@@ -14,11 +14,12 @@ class ScanContainer extends React.Component {
     const {dispatch} = this.props
     Toast.loading(intl.get('common.list.loading'), 0, null, false);
     const type = routeActions.location.getQueryByName(this.props, 'type')
+    const v = routeActions.location.getQueryByName(this.props, 'value')
     try {
       switch (type) {
         case "UUID":
           setTimeout(() => Toast.hide(), 500);
-          this.authToLogin(routeActions.location.getQueryByName(this.props, 'value'));
+          this.showLayer({id:'login',uuid:routeActions.location.getQueryByName(this.props, 'value')})
           break;
         case "P2P":
           const res = {}
@@ -37,12 +38,11 @@ class ScanContainer extends React.Component {
         case 'convert':
           window.RELAY.account.notifyCircular({
             "owner": window.Wallet.address,
-            "body": {hash: value, "status": "received"}
+            "body": {hash: v, "status": "received"}
           })
-          const hash = routeActions.location.getQueryByName(this.props, 'value')
-          window.RELAY.order.getTempStore({key: hash}).then(resp => {
+          window.RELAY.order.getTempStore({key: v}).then(resp => {
             if (resp.error) {
-              throw `Unsupported type:${type}`
+              throw  intl.get('scan.result.unsupported_type',{type})
             }
             let unsigned = null
             switch (type) {
@@ -56,44 +56,27 @@ class ScanContainer extends React.Component {
                 unsigned = [{type: 'convert', data: JSON.parse(resp.result).tx}]
                 break;
               default:
-                throw `Unsupported type:${type}`
+                throw  intl.get('scan.result.unsupported_type',{type})
             }
-            dispatch({type: 'sign/unsigned', payload: {unsigned, qrcode: {type, value: hash}}})
+            dispatch({type: 'sign/unsigned', payload: {unsigned, qrcode: {type, value: v}}})
             Toast.hide();
             this.showLayer({id: 'signMessages'})
           }).catch(e => {
             Toast.hide();
             window.RELAY.account.notifyCircular({
               "owner": window.Wallet.address,
-              "body": {hash: value, "status": "reject"}
+              "body": {hash: v, "status": "reject"}
             })
           })
           break;
         default:
           setTimeout(() => Toast.hide(), 500);
-          dispatch({type: 'layers/showLayer', payload: {id: 'signResult', error: {message: "未识别的类型"}}})
+          dispatch({type: 'layers/showLayer', payload: {id: 'signResult', error: {message:intl.get('scan.result.unrecognized_type')}}})
       }
     } catch (e) {
+      dispatch({type: 'layers/showLayer', payload: {id: 'signResult', error: e}})
       setTimeout(() => Toast.hide(), 500);
     }
-  }
-
-  authToLogin = (uuid) => {
-    const timestamp = moment().unix().toString();
-    signMessage(timestamp).then(res => {
-      if (res.result) {
-        window.RELAY.account.notifyScanLogin({
-          sign: {...res.result, owner: window.Wallet.address, timestamp},
-          uuid
-        }).then(resp => {
-          if (resp.result) {
-              this.showLayer({id:'signResult',type:'login'})
-          } else {
-            this.showLayer({id:'signResult',error:resp.error})
-          }
-        })
-      }
-    })
   }
 
   showLayer = (payload = {}) => {
@@ -111,19 +94,20 @@ class ScanContainer extends React.Component {
       scanQRCode().then(res => {
         if (res.result) {
           const type = routeActions.search.getQueryByName(res.result, 'type');
+          const v = routeActions.search.getQueryByName(res.result, 'value')
           switch (type) {
             case 'UUID':
-              this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
+              this.showLayer({id:'login',uuid:routeActions.search.getQueryByName(res.result, 'value')})
+              // this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
               break;
             case 'sign':
             case 'cancelOrder':
             case 'convert':
-              const hash = routeActions.search.getQueryByName(res.result, 'value')
               window.RELAY.account.notifyCircular({
                 "owner": window.Wallet.address,
-                "body": {hash, "status": "received"}
+                "body": {hash:v, "status": "received"}
               })
-              window.RELAY.order.getTempStore({key: hash}).then(resp => {
+              window.RELAY.order.getTempStore({key: v}).then(resp => {
                 if (resp.error) {
                   throw `Unsupported type:${type}`
                 }
@@ -141,12 +125,12 @@ class ScanContainer extends React.Component {
                   default:
                     throw `Unsupported type:${type}`
                 }
-                dispatch({type: 'sign/unsigned', payload: {unsigned, qrcode: {type, value}}})
+                dispatch({type: 'sign/unsigned', payload: {unsigned, qrcode: {type, value:v}}})
                 this.showLayer({id: 'signMessages'})
               }).catch(e => {
                 window.RELAY.account.notifyCircular({
                   "owner": window.Wallet.address,
-                  "body": {hash: value, "status": "reject"}
+                  "body": {hash: v, "status": "reject"}
                 })
               })
               break;
