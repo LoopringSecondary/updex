@@ -712,6 +712,7 @@ no_open_orders: '{market}暂无有效订单',
     enable_tip:"授权{token}进行交易需要消耗以太坊油费"
   },
   scan:{
+    title:"操作结果",
     result:{
       place_order_suc:"下单成功",
       convert_suc:"转换交易发送成功，等待交易确认",
