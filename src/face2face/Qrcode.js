@@ -35,7 +35,7 @@ class OrderQrcode extends React.Component {
     let qrcodeContent = JSON.stringify(value)
     if(storage.wallet.getUnlockedType() === 'imtoken') {
       const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
-       qrcodeContent = url.concat(`?to=\/dex\/entry&type=P2P&auth=${value.value.auth}&hash=${value.value.hash}&count=${value.value.count}`);
+       qrcodeContent = url.concat(`?to=\/dex\/scan&type=P2P&auth=${value.value.auth}&hash=${value.value.hash}&count=${value.value.count}`);
     }
     const shareOrder = () => {
       const content = {type: 'p2pOrder', content: value}

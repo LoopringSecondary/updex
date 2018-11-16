@@ -210,7 +210,7 @@ function PlaceOrderSteps(props) {
 
         if(storage.wallet.getUnlockedType() === 'imtoken'){
         const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
-         qrcode = url.concat(`?to=\/dex\/entry&type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
+         qrcode = url.concat(`?to=\/dex\/scan&type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
         }
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})

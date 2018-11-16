@@ -3,13 +3,11 @@ import {Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
-import {Button,Modal,Toast} from 'antd-mobile'
+import {Toast} from 'antd-mobile'
 import {scanQRCode, signMessage} from 'common/utils/signUtils'
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
-import Home from './Home'
-import ScanQrcode from '../scan/ScanQrcode'
-import SignResult from '../sign/SignResult'
+import ScanQRCode from './ScanQrcode'
 
 class ScanContainer extends React.Component {
 
@@ -177,7 +175,7 @@ class ScanContainer extends React.Component {
     }
     return (
       <div className="" >
-        <ScanQrcode  onScan = {scan}/>
+        <ScanQRCode  onScan = {scan}/>
       </div>
     )
   }

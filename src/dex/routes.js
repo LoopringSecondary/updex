@@ -16,7 +16,7 @@ import CommonModals from '../components/Modals'
 import SignModals from './sign/Modals'
 import Face2FaceModals from '../face2face/Modals'
 import storage from 'modules/storage'
-
+import ScanQrcode from './scan/ScanContainer'
 
 const UnLogged = ()=>{
   const isLogged =  !!(storage.wallet.getUnlockedAddress())
@@ -35,7 +35,7 @@ const Logged = (props)=>{
       <div>
         <Switch>
           <Route path={`/dex/entry`} exact component={Pages.Entry} />
-          <Route path={`/dex/scan`} exact component={Pages.Entry} />
+          <Route path={`/dex/scan`} exact component={ScanQrcode} />
           <Route path={`/dex/home`} exact component={Pages.Home} />
           <Route path={`/dex/markets`} exact component={Markets} />
           <Route path={`/dex/markets/search/:type`} exact component={MarketsSearch} />
