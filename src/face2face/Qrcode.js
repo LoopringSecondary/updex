@@ -68,7 +68,7 @@ class OrderQrcode extends React.Component {
             </div>
             <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">
-              <Icon type='share-alt' className="text-primary" onClick={shareOrder}/>
+              {false &&  <Icon type='share-alt' className="text-primary" onClick={shareOrder}/>}
             </div>
           </div>
         </div>
