@@ -188,7 +188,7 @@ class SignMessages extends React.Component {
           <div className="col-auto ">
             {signed[index] &&
             <div className="color-success">
-              <Icon className="mr5" type="check-circle" theme="filled"  />{intl.get('place_order_sign.signed')}
+              <Icon className="mr5" type="check-circle" theme="filled"  />{intl.get('sign.signed')}
             </div>
             }
             {!signed[index] &&
