@@ -192,7 +192,7 @@ export default {
     ...words,
     ...validation_messages,
     ...time_unit,
-    ...errors,
+    errors,
     ...modules.common
   },
   notifications,

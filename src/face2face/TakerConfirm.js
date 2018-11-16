@@ -87,6 +87,12 @@ class TakerConfirm extends React.Component {
       const makerOrderErrors = await orderFormatter.verifyMakerOrder(makerOrder.originalOrder, makerOrder.count);
       if (makerOrderErrors.length > 0) {
         const item = makerOrderErrors[0]
+        if(item.type === 'sameOwner'){
+          Notification.open({
+            description: intl.get('common.errors.' + item.value.errorCode),
+            type: 'error',
+          })
+        }
         if (item.type === "BalanceNotEnough") {
           Notification.open({
             description: intl.get('p2p_order.maker_balance_not_enough', {
@@ -230,7 +236,7 @@ class TakerConfirm extends React.Component {
               if (response.error) {
                 Notification.open({
                   message: intl.get('notifications.title.place_order_failed'),
-                  description: response.error.code ? intl.get('common.errors' + response.error.message) : response.error.message,
+                  description: response.error.code ? intl.get('common.errors.' + response.error.message) : response.error.message,
                   type: 'error'
                 })
                 return;
@@ -253,7 +259,7 @@ class TakerConfirm extends React.Component {
                     } else {
                       Notification.open({
                         message: intl.get('notifications.title.submit_ring_fail'),
-                        description: resp.error.code ? intl.get('common.errors' + resp.error.message) : resp.error.message,
+                        description: resp.error.code ? intl.get('common.errors.' + resp.error.message) : resp.error.message,
                         type: 'error'
                       })
                     }
