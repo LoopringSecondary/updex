@@ -62,7 +62,7 @@ class SignResult extends React.Component {
             message={<div className="fs12">{error.message}</div>}
           />
           <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={() => {
-           this.hideLayer({id: 'signResult'}); routeActions.gotoPath('/dex/scan')}} >继续扫码</Button>
+           hideLayer({id: 'signResult'}); routeActions.gotoPath('/dex/scan')}} >继续扫码</Button>
         </div>}
       </div>
     );
