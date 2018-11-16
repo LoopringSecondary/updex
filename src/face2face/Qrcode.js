@@ -42,7 +42,7 @@ class OrderQrcode extends React.Component{
     let qrcode = ''
     if(wallet.unlockType === 'imToken') {
       console.log(1111, value)
-      qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/entry&type=${value.type}&auth=${value.value.auth}&count=${value.value.count}&hash=${value.value.hash}`
+      qrcode = `${config.getUrl('imtoken')}/#/auth/imtoken?to=\/dex\/scan&type=${value.type}&auth=${value.value.auth}&count=${value.value.count}&hash=${value.value.hash}`
     } else {
       qrcode = JSON.stringify(value)
     }
