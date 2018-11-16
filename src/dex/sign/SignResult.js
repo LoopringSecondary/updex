@@ -21,7 +21,7 @@ class SignResult extends React.Component {
       hideLayer({id:'signResult'})
     }
     const unUpdated = ()=>{
-      Modal.alert('网页未同步更新？', null, [
+      Modal.alert('网页端还未同步更新？', null, [
         { text: '继续等待', onPress: () => console.log('cancel') },
         { text: '再次扫码', onPress: () => console.log('ok') },
       ])
@@ -44,7 +44,7 @@ class SignResult extends React.Component {
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled" />}
             title={<div className="fs20">登录签名成功</div>}
-            message={<div className="fs12">请确认PC端是否已经登录</div>}
+            message={<div className="fs12">请确认网页端是否已经登录</div>}
           />
           <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={updated}><Icon className="mr5" type="desktop" />已登录</Button>
           <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={unUpdated}><Icon className="mr5" type="desktop" />未登录</Button>
@@ -53,7 +53,7 @@ class SignResult extends React.Component {
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled" />}
             title={<div className="fs20">下单签名成功</div>}
-            message={<div className="fs12">请确认PC是否已更新</div>}
+            message={<div className="fs12">请确认网页端是否已更新</div>}
           />
           <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={updated}><Icon className="mr5" type="desktop" />已更新</Button>
           <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={unUpdated}><Icon className="mr5" type="desktop" />未更新</Button>
@@ -62,7 +62,7 @@ class SignResult extends React.Component {
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled" />}
             title={<div className="fs20">取消订单签名成功</div>}
-            message={<div className="fs12">请确认PC是否已更新</div>}
+            message={<div className="fs12">请确认网页端是否已更新</div>}
           />
           <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={updated}><Icon className="mr5" type="desktop" />已更新</Button>
           <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={unUpdated}><Icon className="mr5" type="desktop" />未更新</Button>

@@ -58,11 +58,13 @@ class Face2FacePage extends React.Component {
             <NavBar
               className="zb-b-b"
               mode="light"
+              onLeftClick={routeActions.gotoPath.bind(this,'/dex/home')}
               leftContent={[
-                <NumberOfTodos key="1"><span onClick={()=>showLayer({id:'notifications'})} className="text-primary fs16" key="1"><WebIcon type="bell" theme="" /></span></NumberOfTodos>,
+                <WebIcon key="1" type="home" theme="" />
               ]}
               rightContent={[
-                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary" key="1"><WebIcon type="question-circle" theme="" /></span>
+                <NumberOfTodos key="1"><span onClick={()=>showLayer({id:'notifications'})} className="text-primary fs16 mr10" key="1"><WebIcon type="bell" /></span></NumberOfTodos>,
+                <span onClick={()=>showLayer({id:'helperOfFAQ'})} className="text-primary ml10" key="2"><WebIcon type="question-circle" /></span>
               ]}
             >
               <div className="color-black">

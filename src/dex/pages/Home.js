@@ -13,7 +13,7 @@ class Home extends React.Component {
   render(){
     return (
         <LayoutDexHome className="" {...this.props}>
-          <div>
+          <div className="bg-white">
             <NavBar
               className="bg-white"
               mode="light"
@@ -33,11 +33,11 @@ class Home extends React.Component {
                <div className="fs20 color-black-1 mt10">LoopringDEX</div>
                <div className="fs12 color-black-2">A New Version is Coming Soon</div>
              </div>
-             <div className="bg-white"><div className="1px divider zb-b-b"></div></div>
+             <div className=""><div className="1px divider zb-b-b"></div></div>
              <div className="">
-                <div className="row no-gutters bg-white">
+                <div className="row no-gutters">
                   <div className="col-12">
-                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b">
+                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/dex/placeOrder')}>
                       <div className="row no-gutters align-items-center">
                         <div className="col-auto">
                           <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="line-chart" /></div>
@@ -47,13 +47,13 @@ class Home extends React.Component {
                           <div className="fs12 color-black-2 lh15">Public trade with everyone </div>
                         </div>
                         <div className="col-auto">
-                          <Button onClick={routeActions.gotoPath.bind(this,'/dex/placeOrder')} className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
+                          <Button  className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="col-12 zb-b-l">
-                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b">
+                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/face2face')}>
                       <div className="row no-gutters align-items-center">
                         <div className="col-auto">
                           <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="team" /></div>
@@ -63,13 +63,13 @@ class Home extends React.Component {
                           <div className="fs12 color-black-2 lh15">Privacy trade between friends</div>
                         </div>
                         <div className="col-auto">
-                          <Button onClick={routeActions.gotoPath.bind(this,'/face2face')} className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
+                          <Button className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="col-12 zb-b-l">
-                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b">
+                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/dex/entry')} >
                       <div className="row no-gutters align-items-center">
                         <div className="col-auto">
                           <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="scan" /></div>
@@ -79,7 +79,7 @@ class Home extends React.Component {
                           <div className="fs12 color-black-2 lh15">Trade evrerywhere by scanning simplely</div>
                         </div>
                         <div className="col-auto">
-                          <Button onClick={routeActions.gotoPath.bind(this,'/dex/entry')} className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
+                          <Button className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
                         </div>
                       </div>
                     </div>
@@ -145,8 +145,6 @@ class Home extends React.Component {
 
                   </div>
                 }
-                <div className="pb50"></div>
-                <div className="pb50"></div>
              </div>
           </div>
         </LayoutDexHome>

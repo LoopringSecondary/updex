@@ -15,7 +15,7 @@ class Home extends React.Component {
   render(){
     const {} = this.props;
     return (
-      <div style={{ }}>
+      <div className="bg-white" style={{ }}>
         <NavBar
           className="bg-white"
           mode="light"
@@ -34,7 +34,7 @@ class Home extends React.Component {
            <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
            <div className="fs20 color-black-1 mt15">路印扫码交易</div>
            <div className="fs12 color-black-2 mt5">一个钱包在手，轻易扫码多个去中心化交易所</div>
-           <div className="row no-gutters bg-white align-items-center">
+           <div className="row no-gutters bg-white align-items-center mt10">
              <div className="col">
                <div className="text-center pl5 pr5 pt15 pb15 zb-b-b">
                 <div className="circle-35 center-center m-auto bg-primary-light text-primary fs16"><Icon type="user" /></div>
