@@ -711,6 +711,23 @@ no_open_orders: '{market}暂无有效订单',
     enable_label_simple:'是否授权',
     enable_tip:"授权{token}进行交易需要消耗以太坊油费"
   },
+  scan:{
+    result:{
+      place_order_suc:"下单成功",
+      convert_suc:"转换交易发送成功，等待交易确认",
+      cancel_order_suc:"取消订单成功",
+      approve_suc:"授权交易发送成功，等待交易确认",
+      login_suc:"登录授权成功",
+      fail:"操作失败"
+    },
+    tip:{
+      confirm_web:'请确认网页端是否正常',
+      suc:"如果网页端已自动同步，关闭当前页面即可",
+      fresh:"如果网页端无反应，您可以继续等待或者刷新网页端",
+      fresh_again:"如果网页端刷新后结果不正常，您需要再次尝试扫码",
+      again:"继续扫码"
+    }
+  },
   ...modules.pages,
   ...modules.types,
 }

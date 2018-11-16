@@ -706,6 +706,23 @@ export default {
     enable_label_simple:'Tradable',
     enable_tip:"Enable {token} will cost ETH gas"
   },
+  scan:{
+    result:{
+      place_order_suc:"Place order successfully",
+      convert_suc:"Succeed to submit convert tx",
+      cancel_order_suc:"Cancel order successfully",
+      approve_suc:"Succeed to submit approval tx",
+      login_suc:"Succeed to auth to login in",
+      fail:"Operation Failed"
+    },
+    tip:{
+      confirm_web:'Please check the website请确认网页端是否正常',
+      suc:"If the website is operating normally,please close current page",
+      fresh:"If the website is unchanged，please refresh the website and check the result",
+      fresh_again:"If the website result is not updated, please scan the QR code again",
+      again:"Continue to scan"
+    }
+  },
   ...modules.pages,
   ...modules.types,
 }
