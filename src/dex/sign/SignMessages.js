@@ -136,7 +136,11 @@ class SignMessages extends React.Component {
     }
 
     const Description = ({tx}) => {
-      switch(tx.type) {
+      let type = tx.type
+      if(type === 'tx' && tx.title) {
+        type = tx.title
+      }
+      switch(type) {
         case 'order':
           return intl.get('sign.type_sign_order')
         case 'cancelOrder':
