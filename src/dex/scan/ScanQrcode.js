@@ -73,7 +73,7 @@ class Home extends React.Component {
            </div>
            <div className="p15">
             <Button type="primary" className=""><Icon type="scan" className="mr5" />扫码</Button>
-            <Button onClick={routeActions.gotoPath.bind(this,'/dex/home')} type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />返回</Button>
+            <Button onClick={routeActions.gotoPath.bind(this,'/dex/home')} type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />首页</Button>
            </div>
          </div>
          <div className="p15">
