@@ -1,5 +1,4 @@
 import React from 'react'
-import {Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
@@ -13,6 +12,7 @@ class ScanContainer extends React.Component {
 
   componentDidMount() {
     const {dispatch}  = this.props
+    Toast.info(intl.get('common.list.loading'),0,null,false);
     const type = routeActions.location.getQueryByName(this.props, 'type')
     switch (type) {
       case "UUID":
@@ -28,7 +28,8 @@ class ScanContainer extends React.Component {
         result.value =value
         result.type = "P2P"
         res.result = JSON.stringify(result)
-        window.handleP2POrder(res)
+        setTimeout(() => Toast.hide(),500);
+        window.handleP2POrder(res);
         break;
       case 'sign':
       case 'cancelOrder':
@@ -57,8 +58,10 @@ class ScanContainer extends React.Component {
               throw `Unsupported type:${type}`
           }
           dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value:hash}}})
+          Toast.hide();
           this.showLayer({id:'signMessages'})
         }).catch(e=> {
+          Toast.hide();
           window.RELAY.account.notifyCircular({
             "owner": window.Wallet.address,
             "body": {hash: value, "status": "reject"}
@@ -66,6 +69,7 @@ class ScanContainer extends React.Component {
         })
         break;
       default:
+        setTimeout(() => Toast.hide(),500);
     }
   }
 
@@ -105,13 +109,11 @@ class ScanContainer extends React.Component {
   render() {
     const {dispatch} = this.props;
     const scan = () => {
-      Toast.info(intl.get('common.list.load'),0)
       scanQRCode().then(res => {
         if (res.result) {
           const type = routeActions.search.getQueryByName(res.result, 'type');
           switch (type) {
             case 'UUID':
-              Toast.hide()
               this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
               break;
             case 'sign':
@@ -140,11 +142,9 @@ class ScanContainer extends React.Component {
                   default:
                     throw `Unsupported type:${type}`
                 }
-                Toast.hide()
                 dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value}}})
                 this.showLayer({id:'signMessages'})
               }).catch(e=> {
-                Toast.hide();
                 window.RELAY.account.notifyCircular({
                   "owner": window.Wallet.address,
                   "body": {hash: value, "status": "reject"}
@@ -161,11 +161,9 @@ class ScanContainer extends React.Component {
               result.value =value
               result.type = "P2P"
               content.result = JSON.stringify(result)
-              Toast.hide()
               window.handleP2POrder(content)
               break;
             default:
-              Toast.hide();
               throw `Unsupported type:${type}`
           }
         }

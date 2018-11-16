@@ -8,7 +8,7 @@ import Notification from 'LoopringUI/components/Notification'
 class SignResult extends React.Component {
 
   render(){
-    const {dispatch} = this.props
+    const {dispatch,signResult} = this.props
     const hideLayer = (payload = {}) => {
       dispatch({
         type: 'layers/hideLayer',
