@@ -365,6 +365,7 @@ export default {
     not_signed: "You may have some items not signed",
     to_sign: "To Sign",
     signed_failed: 'Signed Failed',
+    signed: "Signed",
     type_sign_order: 'Sign Original Order',
     type_cancel_allowance: 'Cancel {token} approval',
     type_approve: '{token} approval',
