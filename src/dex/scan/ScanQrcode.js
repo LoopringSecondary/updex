@@ -8,26 +8,12 @@ class Home extends React.Component {
   render(){
     const {onScan} = this.props;
     return (
-      <div className="bg-white" style={{ }}>
-        <NavBar
-          className="bg-white"
-          mode="light"
-          onLeftClick={() => {}}
-          leftContent={null && [
-            <span key="1" className="text-primary"><Icon  type="home" /></span>,
-          ]}
-          rightContent={null && [
-            <span  key="1" className="text-primary" onClick={()=>{}}><Icon type="scan" /></span>
-          ]}
-        >
-          <div className="color-black-1 fs16">LoopringDEX</div>
-        </NavBar>
-        <div className="divider 1px zb-b-t"></div>
+      <div className="" style={{ }}>
          <div className="pt25 zb-b-b text-center bg-white">
            <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
            <div className="fs20 color-black-1 mt15">路印扫码交易</div>
-           <div className="fs12 color-black-2 mt5">一个钱包在手，轻易扫码多个去中心化交易所</div>
-           <div className="row no-gutters bg-white align-items-center mt10">
+           <div className="fs12 color-black-2 mt5">随时随地地在所有路印DEX上安全交易</div>
+           <div className="row no-gutters bg-white align-items-center mt10" onClick={onScan}>
              <div className="col">
                <div className="text-center pl5 pr5 pt15 pb15 zb-b-b">
                 <div className="circle-35 center-center m-auto bg-primary-light text-primary fs16"><Icon type="user" /></div>
@@ -66,7 +52,7 @@ class Home extends React.Component {
            </div>
            <div className="p15">
             <Button type="primary" className="" onClick={onScan}><Icon type="scan" className="mr5" />扫码</Button>
-            <Button onClick={routeActions.gotoPath.bind(this,'/dex/home')} type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />返回</Button>
+            <Button onClick={routeActions.gotoPath.bind(this,'/dex/home')} type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />首页</Button>
            </div>
          </div>
          <div className="p15">
