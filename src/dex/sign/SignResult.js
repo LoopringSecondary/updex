@@ -19,17 +19,25 @@ class SignResult extends React.Component {
         }
       })
     }
-    const updated = () => {
-      hideLayer({id: 'signResult'})
+
+    const getTitle = () => {
+      switch (type){
+        case 'order':
+          return intl.get('scan.result.place_order_suc')
+        case 'convert':
+          return intl.get('scan.result.convert_suc')
+        case 'cancel_order':
+          return intl.get('scan.result.cancel_order_suc')
+        case 'approve':
+          return intl.get('scan.result.approve_suc')
+        case 'login':
+          return intl.get('scan.result.login_suc')
+      }
     }
-    const unUpdated = () => {
-      Modal.alert('网页端还未同步更新？', null, [
-        {text: '继续等待', onPress: () => console.log('cancel')},
-        {text: '再次扫码', onPress: () => console.log('ok')},
-      ])
-    }
+
+
     return (
-      <div className="bg-fill" style={{maxHeight: '100%', overflow: 'auto'}}>
+      <div className="bg-white" style={{maxHeight: '100%', overflow: 'auto'}}>
         <NavBar
           className="bg-white"
           mode="light"
@@ -46,23 +54,23 @@ class SignResult extends React.Component {
         {!error && <div className="bg-white p15" style={{}}>
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled"/>}
-            title={<div className="fs20">签名成功</div>}
-            message={<div className="fs12">请确认网页端是否正常</div>}
+            title={<div className="fs20">{getTitle()}</div>}
+            message={<div className="fs12">{intl.get('scan.tip.confirm_web')}</div>}
           />
           <div className="pt15 pb15 fs12 color-black3 lh25 text-left">
-            <div>1. 如果网页端已自动同步，关闭当前页面即可</div>
-            <div>2. 如果网页端无反应，您可以继续等待或者刷新网页端</div>
-            <div>3. 如果网页端刷新后结果不正常，您需要再次尝试扫码</div>
+            <div>1. {intl.get('scan.tip.suc')}</div>
+            <div>2. {intl.get('scan.tip.fresh')}</div>
+            <div>3. {intl.get('scan.tip.fresh_again')}</div>
           </div>
         </div>}
         {!!error && <div className="bg-white p15" style={{}}>
           <Result
             img={<Icon className="color-error fs50 center-center color-white" type="close-circle" theme="filled"/>}
-            title={<div className="fs20">操作失败</div>}
+            title={<div className="fs20">{intl.get('scan.result.fail')}</div>}
             message={<div className="fs12">{error.message}</div>}
           />
           <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={() => {
-           hideLayer({id: 'signResult'}); routeActions.gotoPath('/dex/scan')}} >继续扫码</Button>
+           hideLayer({id: 'signResult'}); routeActions.gotoPath('/dex/scan')}} >{intl.get('scan.tip.again')}</Button>
         </div>}
       </div>
     );
