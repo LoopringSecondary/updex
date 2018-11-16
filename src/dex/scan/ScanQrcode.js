@@ -73,6 +73,7 @@ class Home extends React.Component {
            </div>
            <div className="p15">
             <Button type="primary" className=""><Icon type="scan" className="mr5" />扫码</Button>
+            <Button type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />返回</Button>
            </div>
          </div>
       </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Collapse, Form, Icon, Input} from 'antd'
+import {Icon} from 'antd'
 import {Button, NavBar, Toast} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
@@ -216,4 +216,4 @@ function mapToProps(state) {
   }
 }
 
-export default Form.create()(connect(mapToProps)(SignMessages));
+export default connect(mapToProps)(SignMessages)
