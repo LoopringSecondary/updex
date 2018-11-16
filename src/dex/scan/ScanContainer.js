@@ -42,7 +42,7 @@ class ScanContainer extends React.Component {
           const hash = routeActions.location.getQueryByName(this.props, 'value')
           window.RELAY.order.getTempStore({key: hash}).then(resp => {
             if (resp.error) {
-              throw `Unsupported type:${type}`
+              throw  intl.get('scan.result.unsupported_type',{type})
             }
             let unsigned = null
             switch (type) {
@@ -56,7 +56,7 @@ class ScanContainer extends React.Component {
                 unsigned = [{type: 'convert', data: JSON.parse(resp.result).tx}]
                 break;
               default:
-                throw `Unsupported type:${type}`
+                throw  intl.get('scan.result.unsupported_type',{type})
             }
             dispatch({type: 'sign/unsigned', payload: {unsigned, qrcode: {type, value: hash}}})
             Toast.hide();
@@ -71,9 +71,10 @@ class ScanContainer extends React.Component {
           break;
         default:
           setTimeout(() => Toast.hide(), 500);
-          dispatch({type: 'layers/showLayer', payload: {id: 'signResult', error: {message: "未识别的类型"}}})
+          dispatch({type: 'layers/showLayer', payload: {id: 'signResult', error: {message:intl.get('scan.result.unrecognized_type')}}})
       }
     } catch (e) {
+      dispatch({type: 'layers/showLayer', payload: {id: 'signResult', error: e}})
       setTimeout(() => Toast.hide(), 500);
     }
   }

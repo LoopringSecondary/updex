@@ -714,7 +714,9 @@ export default {
       cancel_order_suc:"Cancel order successfully",
       approve_suc:"Succeed to submit approval tx",
       login_suc:"Succeed to auth to login in",
-      fail:"Operation Failed"
+      fail:"Operation Failed",
+      unsupported_type:'Unsupported Type ({type})',
+      unrecognized_type:'Unrecognized Type'
     },
     tip:{
       confirm_web:'Please check the website',
