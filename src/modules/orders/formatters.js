@@ -431,8 +431,13 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
 }
 
 export async function verifyMakerOrder(order,count) {
-  const res = await window.RELAY.account.getBalance({owner: order.address, delegateAddress: order.delegateAddress})
   const makerOrderError = []
+  if(order.address.toLowerCase() === storage.wallet.getUnlockedAddress()){
+    makerOrderError.push({type:"sameOwner",value:{errorCode:50005}})
+    return makerOrderError;
+  }
+
+  const res = await window.RELAY.account.getBalance({owner: order.address, delegateAddress: order.delegateAddress})
   if (res.result) {
     const tokens_balance = res.result.tokens.find(item => item.symbol.toLowerCase() === order.tokenS.toLowerCase());
     const tokenFm = new TokenFm({symbol:tokens_balance.symbol});
