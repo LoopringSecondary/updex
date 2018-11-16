@@ -80,7 +80,7 @@ class TakerConfirm extends React.Component {
     }
 
     const submitRing = async () => {
-      if (!socket) {
+      if (!socket || balance.length === 0) {
         Notification.open({description: intl.get('notifications.message.wait_for_load_data'), type: 'error'});
         return
       }
