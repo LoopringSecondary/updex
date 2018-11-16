@@ -172,6 +172,7 @@ class Entry extends React.Component {
     return (
       <div className="" >
         <ScanQrcode />
+        {intl.get('common.price')}
         {
           true &&
           <div className="text-center w-100 p15">

@@ -22,7 +22,7 @@ import HelperOfBalances from './HelperOfBalances'
 const OrderMetaItem = (props) => {
   const {label, value} = props
   return (
-    <div className="row ml0 mr0 pl0 pr0 zb-b-t no-gutters" style={{padding: '7px 0px'}}>
+    <div className="row ml0 mr0 pl15 pr15 zb-b-t no-gutters" style={{padding: '7px 0px'}}>
       <div className="col">
         <div className="fs14 color-black-1 lh25 text-left">{label}</div>
       </div>
@@ -285,7 +285,7 @@ class TakerConfirm extends React.Component {
     return (
       <div className="bg-fill" style={{height: '100%',overflow:'auto'}}>
         <NavBar
-          className="bg-whi"
+          className="bg-white"
           mode="light"
           onLeftClick={() => hideLayer({id: 'takerConfirm'})}
           leftContent={[
@@ -294,7 +294,7 @@ class TakerConfirm extends React.Component {
         >
           <div className="color-black-1">{intl.get('p2p_order.order_title')}</div>
         </NavBar>
-        <div className="p20 bg-white">
+        <div className="pt20 pb20 bg-white">
           <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div className="col-auto">
               <div className="bg-primary-light text-primary circle-50 center-center">
@@ -334,7 +334,8 @@ class TakerConfirm extends React.Component {
                          value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}/>
           <Button type="primary" className="mt15" onClick={submitRing}>{intl.get('common.exchange')}</Button>
         </div>
-        <div className="bg-whhite mt10">
+        <div className="bg-white mt10">
+          <div className="pt15 pb15 fs14">{intl.get('common.my_assets')}</div>
           <HelperOfBalances />
         </div>
       </div>
