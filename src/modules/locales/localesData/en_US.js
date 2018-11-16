@@ -188,11 +188,12 @@ const time_unit = {
 }
 
 export default {
+
   common: {
     ...words,
     ...validation_messages,
     ...time_unit,
-    ...errors,
+    errors:{...errors},
     ...modules.common
   },
   notifications,
