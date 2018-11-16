@@ -110,6 +110,7 @@ class Entry extends React.Component {
       scanQRCode().then(res => {
         if (res.result) {
           const type = routeActions.search.getQueryByName(res.result, 'type');
+          const v = routeActions.search.getQueryByName(res.result, 'value')
           switch (type) {
             case 'UUID':
               this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
@@ -117,12 +118,11 @@ class Entry extends React.Component {
             case 'sign':
             case 'cancelOrder':
             case 'convert':
-              const hash = routeActions.search.getQueryByName(res.result, 'value')
               window.RELAY.account.notifyCircular({
                 "owner" : window.Wallet.address,
-                "body" : {hash, "status" : "received"}
+                "body" : {hash:v, "status" : "received"}
               })
-              window.RELAY.order.getTempStore({key:hash}).then(resp => {
+              window.RELAY.order.getTempStore({key:v}).then(resp => {
                 if(resp.error) {
                   throw `Unsupported type:${type}`
                 }
@@ -140,12 +140,12 @@ class Entry extends React.Component {
                   default:
                     throw `Unsupported type:${type}`
                 }
-                dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value}}})
+                dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value:v}}})
                 this.showLayer({id:'signMessages'})
               }).catch(e=> {
                 window.RELAY.account.notifyCircular({
                   "owner": window.Wallet.address,
-                  "body": {hash: value, "status": "reject"}
+                  "body": {hash: v, "status": "reject"}
                 })
               })
               break;
