@@ -31,6 +31,7 @@ function Settings(props) {
         ...settings
       }
     })
+    hideLayer({id:'setIsDeveloper'})
   }
   return (
     <div className="bg-white position-relative" style={{height:'100%'}}>
