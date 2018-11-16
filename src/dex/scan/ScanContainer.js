@@ -69,6 +69,7 @@ class ScanContainer extends React.Component {
         })
         break;
       default:
+        setTimeout(() => Toast.hide(),500);
     }
   }
 
