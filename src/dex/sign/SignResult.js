@@ -48,7 +48,7 @@ class SignResult extends React.Component {
           ]}
           rightContent={[]}
         >
-          Result
+          {intl.get('scan.title')}
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
         {!error && <div className="bg-white p15" style={{}}>

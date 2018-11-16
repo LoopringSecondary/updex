@@ -707,6 +707,7 @@ export default {
     enable_tip:"Enable {token} will cost ETH gas"
   },
   scan:{
+    title:"Operation Result",
     result:{
       place_order_suc:"Place order successfully",
       convert_suc:"Succeed to submit convert tx",
@@ -716,7 +717,7 @@ export default {
       fail:"Operation Failed"
     },
     tip:{
-      confirm_web:'Please check the website请确认网页端是否正常',
+      confirm_web:'Please check the website',
       suc:"If the website is operating normally,please close current page",
       fresh:"If the website is unchanged，please refresh the website and check the result",
       fresh_again:"If the website result is not updated, please scan the QR code again",
