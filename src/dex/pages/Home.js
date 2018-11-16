@@ -30,8 +30,8 @@ class Home extends React.Component {
             <div className="divider 1px zb-b-t"></div>
              <div className="pt25 pb25 zb-b-b text-center bg-white">
                <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
-               <div className="fs24 color-black-1 mt10">LoopringDEX</div>
-               <div className="fs14 color-black-1">A New Version is Coming Soon</div>
+               <div className="fs20 color-black-1 mt10">LoopringDEX</div>
+               <div className="fs12 color-black-2">A New Version is Coming Soon</div>
              </div>
              <div className="bg-white"><div className="1px divider zb-b-b"></div></div>
              <div className="">
@@ -43,8 +43,8 @@ class Home extends React.Component {
                           <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="line-chart" /></div>
                         </div>
                         <div className="col">
-                          <div className="fs14 color-black-1 font-weight-bold">Market Trade</div>
-                          <div className="fs12 color-black-1 lh15">Public trade with everyone </div>
+                          <div className="fs16 color-black-1">Market Trade</div>
+                          <div className="fs12 color-black-2 lh15">Public trade with everyone </div>
                         </div>
                         <div className="col-auto">
                           <Button onClick={routeActions.gotoPath.bind(this,'/dex/placeOrder')} className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
@@ -59,8 +59,8 @@ class Home extends React.Component {
                           <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="team" /></div>
                         </div>
                         <div className="col">
-                          <div className="fs14 color-black-1 font-weight-bold">P2P Trade</div>
-                          <div className="fs12 color-black-1 lh15">Privacy trade between friends</div>
+                          <div className="fs16 color-black-1">P2P Trade</div>
+                          <div className="fs12 color-black-2 lh15">Privacy trade between friends</div>
                         </div>
                         <div className="col-auto">
                           <Button onClick={routeActions.gotoPath.bind(this,'/face2face')} className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
@@ -75,8 +75,8 @@ class Home extends React.Component {
                           <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="scan" /></div>
                         </div>
                         <div className="col">
-                          <div className="fs14 color-black-1 font-weight-bold">QRcode Trade</div>
-                          <div className="fs12 color-black-1 lh15">Trade evrerywhere by scanning simplely</div>
+                          <div className="fs16 color-black-1">QRcode Trade</div>
+                          <div className="fs12 color-black-2 lh15">Trade evrerywhere by scanning simplely</div>
                         </div>
                         <div className="col-auto">
                           <Button onClick={routeActions.gotoPath.bind(this,'/dex/entry')} className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>

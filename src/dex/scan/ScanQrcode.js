@@ -33,7 +33,7 @@ class Home extends React.Component {
          <div className="pt25 zb-b-b text-center bg-white">
            <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
            <div className="fs20 color-black-1 mt15">路印扫码交易</div>
-           <div className="fs13 color-black-3 mt5">一个钱包在手，轻易扫码多个去中心化交易所</div>
+           <div className="fs12 color-black-2 mt5">一个钱包在手，轻易扫码多个去中心化交易所</div>
            <div className="row no-gutters bg-white align-items-center">
              <div className="col">
                <div className="text-center pl5 pr5 pt15 pb15 zb-b-b">

@@ -185,24 +185,26 @@ class SignMessages extends React.Component {
     }
 
     return (
-      <div className="bg-fill">
+      <div className="bg-white">
         <NavBar
           className="bg-white"
           mode="light"
           onLeftClick={() => hideLayer({id:'signMessages'})}
           leftContent={[
-            <span className="color-black-1"><Icon key="1" type="close" /></span>,
+            <span className="text-primary circle-30 bg-primary-light center-center fs14"><Icon key="1" type="close" /></span>,
           ]}
           rightContent={[]}
         >
           {intl.get('sign.title')}
         </NavBar>
         <div className="divider 1px zb-b-b"></div>
-        <div className="bg-white p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>
+        <div className="p15 zb-b-b" style={{minHeight:'10rem',borderRadius:'0rem'}}>
           {
             unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
           }
-          <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsigned || unsigned.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
+        </div>
+        <div className="p15">
+          <Button className="d-block mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsigned || unsigned.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
         </div>
       </div>
     );

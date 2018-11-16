@@ -172,18 +172,18 @@ class Entry extends React.Component {
     return (
       <div className="" >
         <ScanQrcode />
-        <SignResult />
         {
-          false &&
-            <div className="text-center w-100 p15">
-                <Button onClick={routeActions.gotoPath.bind(this, '/dex/placeOrder')} className="d-block w-100 mt15"
-                        type="primary"> Go To Market Trade </Button>
-                <Button onClick={routeActions.gotoPath.bind(this, '/face2face')} className="d-block w-100 mt15"
-                        type="primary"> Go To P2P Trade </Button>
-                <Button onClick={scan} className="d-block w-100 mt15" type="primary"> Scan Qrcode </Button>
-                <Button onClick={() => this.showLayer({id: 'signMessages'})} className="d-block w-100 mt15" type="primary"> Show
-                  Messages </Button>
-            </div>
+          true &&
+          <div className="text-center w-100 p15">
+              <Button size="small" onClick={routeActions.gotoPath.bind(this, '/dex/placeOrder')} className="d-block w-100 mt5"
+                      type="primary"> Go To Market Trade </Button>
+              <Button size="small" onClick={routeActions.gotoPath.bind(this, '/face2face')} className="d-block w-100 mt5"
+                      type="primary"> Go To P2P Trade </Button>
+              <Button size="small" onClick={scan} className="d-block w-100 mt5" type="primary"> Scan Qrcode </Button>
+              <Button size="small" onClick={() => this.showLayer({id: 'signMessages'})} className="d-block w-100 mt5" type="primary"> Show
+                Messages </Button>
+              <Button size="small" onClick={() => this.showLayer({id: 'signResult'})} className="d-block w-100 mt5" type="primary"> Sign Result </Button>
+          </div>
         }
       </div>
     )
