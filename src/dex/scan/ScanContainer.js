@@ -30,7 +30,6 @@ class ScanContainer extends React.Component {
           result.value = value
           result.type = "P2P"
           res.result = JSON.stringify(result)
-          setTimeout(() => Toast.hide(), 500);
           window.handleP2POrder(res);
           break;
         case 'sign':

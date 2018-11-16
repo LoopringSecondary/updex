@@ -29,6 +29,7 @@ export default {
             const order = res.result
             order.originalOrder.authPrivateKey = auth;
             if (order.status === 'ORDER_OPENED' || order.status === 'ORDER_WAIT_SUBMIT_RING') {
+              Toast.hide();
               dispatch({
                 type: 'layers/showLayer',
                 payload: {
