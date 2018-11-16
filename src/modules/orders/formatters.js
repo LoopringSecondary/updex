@@ -432,7 +432,7 @@ export async function p2pVerification(balances, tradeInfo, txs, gasPrice) {
 
 export async function verifyMakerOrder(order,count) {
   const makerOrderError = []
-  if(order.address.toLowerCase() === storage.wallet.getUnlockedAddress()){
+  if(order.address.toLowerCase() === storage.wallet.getUnlockedAddress().toLowerCase()){
     makerOrderError.push({type:"sameOwner",value:{errorCode:50005}})
     return makerOrderError;
   }
