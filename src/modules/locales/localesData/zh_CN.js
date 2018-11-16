@@ -78,7 +78,7 @@ const words = {
     loading: '加载中...',
   },
   available:'可用',
-
+  loopring_p2p:"路印P2P订单"
 }
 const errors = {
   10001:'抱歉，系统错误，请稍后重试',

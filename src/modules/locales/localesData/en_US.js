@@ -77,6 +77,7 @@ const words = {
     loading:'Loading...',
   },
   available:'Available',
+  loopring_p2p:"Loopring P2P order"
 }
 const errors = {
   10001:'Sorry, system error, please try again later',

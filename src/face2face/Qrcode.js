@@ -38,13 +38,23 @@ class OrderQrcode extends React.Component {
        qrcodeContent = url.concat(`?to=\/dex\/scan&type=P2P&auth=${value.value.auth}&hash=${value.value.hash}&count=${value.value.count}`);
     }
     const shareOrder = () => {
-      const content = {type: 'p2pOrder', content: value}
-      content.extra = {
-        validUntil: toNumber(validUntil).toString(),
-        amountB: tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB)),
-        amountS: tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS)),
-        tokenS,
-        tokenB
+      let content;
+      const tokensFm = new TokenFm({symbol: tokenS})
+      const tokenbFm = new TokenFm({symbol: tokenB})
+      if (storage.wallet.getUnlockedType() === 'imtoken') {
+        content = {}
+        content.title = intl.get('common.loopring_p2p');
+        content.message = `${toNumber(tokensFm.toPricisionFixed(amountS.div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(amountB.div(value.value.count)))} ${tokenB}`;
+        content.url = qrcodeContent
+      } else {
+        content = {type: 'p2pOrder', content: qrcodeContent}
+        content.extra = {
+          validUntil: validUntil.unix().toString(),
+          amountB: tokenbFm.toPricisionFixed(amountB),
+          amountS: tokensFm.toPricisionFixed(amountS),
+          tokenS,
+          tokenB
+        }
       }
       share(content)
     };

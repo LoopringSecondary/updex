@@ -144,43 +144,7 @@ function PlaceOrderSteps(props) {
       }
       const signedOrder = {...order, ...signResult.result}
       signedOrder.powNonce = 100
-      // let failed = false;
-      // const txs = unsigned.filter(item => item.type === 'tx')
-      // eachOfLimit(txs, 1, async (item, key, callback) => {
-      //   signTx(item.data).then(res => {
-      //     if (res.result) {
-      //       window.ETH.sendRawTransaction(res.result).then(resp => {
-      //         if (resp.result) {
-      //           window.RELAY.account.notifyTransactionSubmitted({
-      //             txHash: resp.result,
-      //             rawTx: item.data,
-      //             from: window.Wallet.address
-      //           })
-      //           callback()
-      //         } else {
-      //           callback(resp.error)
-      //         }
-      //       })
-      //     } else {
-      //       callback(res.error)
-      //     }
-      //   })
-      // }, function (e) {
-      //   if (e) {
-      //     failed = true
-      //     Notification.open({
-      //       message: intl.get('notifications.title.place_order_failed'),
-      //       description: e.message,
-      //       type: 'error'
-      //     })
-      //   }
-      // })
-      //
-      // if (failed) {
-      //   return
-      // }
       const response = await window.RELAY.order.placeOrder(signedOrder)
-      // console.log('...submit order :', response)
       if (response.error) {
         Notification.open({
           message: intl.get('notifications.title.place_order_failed'),
@@ -208,9 +172,9 @@ function PlaceOrderSteps(props) {
           value: {auth: unsignedOrder.completeOrder.authPrivateKey, hash: signedOrder.orderHash, count}
         })
 
-        if(storage.wallet.getUnlockedType() === 'imtoken'){
-        const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
-         qrcode = url.concat(`?to=\/dex\/scan&type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
+        if (storage.wallet.getUnlockedType() === 'imtoken') {
+          const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
+          qrcode = url.concat(`?to=\/dex\/scan&type=P2P&auth=${unsignedOrder.completeOrder.authPrivateKey}&hash=${signedOrder.orderHash}&count=${count}`);
         }
         dispatch({type: 'p2pOrder/qrcodeChange', payload: {qrcode}})
         page.gotoPage({id: 'qrcode'})
@@ -225,15 +189,23 @@ function PlaceOrderSteps(props) {
   }
 
   const shareOrder = () => {
-    const content = {type: 'p2pOrder', content: p2pOrder.qrcode}
+    let content;
     const tokensFm = new TokenFm({symbol: tokenS})
     const tokenbFm = new TokenFm({symbol: tokenB})
-    content.extra = {
-      validUntil: validUntil.unix().toString(),
-      amountB: tokenbFm.toPricisionFixed(amountB),
-      amountS: tokensFm.toPricisionFixed(amountS),
-      tokenS,
-      tokenB
+    if (storage.wallet.getUnlockedType() === 'imtoken') {
+      content = {}
+      content.title = intl.get('common.loopring_p2p');
+      content.message = `${tokensFm.toPricisionFixed(amountS.div(count))} ${tokenS} => ${tokenbFm.toPricisionFixed(amountB.div(count))} ${tokenB}`;
+      content.url = p2pOrder.qrcode
+    } else {
+      content = {type: 'p2pOrder', content: p2pOrder.qrcode}
+      content.extra = {
+        validUntil: validUntil.unix().toString(),
+        amountB: tokenbFm.toPricisionFixed(amountB),
+        amountS: tokensFm.toPricisionFixed(amountS),
+        tokenS,
+        tokenB
+      }
     }
     share(content)
   };
@@ -322,7 +294,7 @@ function PlaceOrderSteps(props) {
                 </div>
                 <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
                 <div className="col-auto color-white pl20 pr20">
-                  {false &&  <Icon type='share-alt' className="text-primary" onClick={shareOrder}/>}
+                  <Icon type='share-alt' className="text-primary" onClick={shareOrder}/>
                 </div>
               </div>
             </div>
