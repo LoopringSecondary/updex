@@ -1,19 +1,12 @@
 import React from 'react'
-import {Redirect, Route, Switch } from 'dva/router'
 import routeActions from 'common/utils/routeActions'
-import intl from 'react-intl-universal'
-import { NavBar,Button } from 'antd-mobile'
-import { Icon,Spin } from 'antd'
-import UserCenter from '../account/UserCenter'
-import Markets from '../tickers/Markets'
-import PlaceOrder from '../orders/PlaceOrderForm'
+import {Button, NavBar} from 'antd-mobile'
+import {Icon} from 'antd'
 
 class Home extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+
   render(){
-    const {} = this.props;
+    const {onScan} = this.props;
     return (
       <div className="bg-white" style={{ }}>
         <NavBar
@@ -72,7 +65,7 @@ class Home extends React.Component {
              </div>
            </div>
            <div className="p15">
-            <Button type="primary" className=""><Icon type="scan" className="mr5" />扫码</Button>
+            <Button type="primary" className="" onClick={onScan}><Icon type="scan" className="mr5" />扫码</Button>
             <Button onClick={routeActions.gotoPath.bind(this,'/dex/home')} type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />返回</Button>
            </div>
          </div>
