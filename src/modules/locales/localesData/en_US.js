@@ -708,6 +708,7 @@ export default {
   },
   scan:{
     title:"Operation Result",
+    login_title:"Authorization to login",
     result:{
       place_order_suc:"Place order successfully",
       convert_suc:"Succeed to submit convert tx",

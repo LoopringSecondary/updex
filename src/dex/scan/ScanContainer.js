@@ -18,7 +18,7 @@ class ScanContainer extends React.Component {
       switch (type) {
         case "UUID":
           setTimeout(() => Toast.hide(), 500);
-          this.authToLogin(routeActions.location.getQueryByName(this.props, 'value'));
+          this.showLayer({id:'login',uuid:routeActions.location.getQueryByName(this.props, 'value')})
           break;
         case "P2P":
           const res = {}
@@ -79,24 +79,6 @@ class ScanContainer extends React.Component {
     }
   }
 
-  authToLogin = (uuid) => {
-    const timestamp = moment().unix().toString();
-    signMessage(timestamp).then(res => {
-      if (res.result) {
-        window.RELAY.account.notifyScanLogin({
-          sign: {...res.result, owner: window.Wallet.address, timestamp},
-          uuid
-        }).then(resp => {
-          if (resp.result) {
-              this.showLayer({id:'signResult',type:'login'})
-          } else {
-            this.showLayer({id:'signResult',error:resp.error})
-          }
-        })
-      }
-    })
-  }
-
   showLayer = (payload = {}) => {
     this.props.dispatch({
       type: 'layers/showLayer',
@@ -114,7 +96,8 @@ class ScanContainer extends React.Component {
           const type = routeActions.search.getQueryByName(res.result, 'type');
           switch (type) {
             case 'UUID':
-              this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
+              this.showLayer({id:'login',uuid:routeActions.search.getQueryByName(res.result, 'value')})
+              // this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
               break;
             case 'sign':
             case 'cancelOrder':

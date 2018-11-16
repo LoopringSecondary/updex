@@ -713,6 +713,7 @@ no_open_orders: '{market}暂无有效订单',
   },
   scan:{
     title:"操作结果",
+    login_title:"授权登录",
     result:{
       place_order_suc:"下单成功",
       convert_suc:"转换交易发送成功，等待交易确认",
