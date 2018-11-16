@@ -33,7 +33,6 @@ class SignResult extends React.Component {
         case 'login':
           return intl.get('scan.result.login_suc')
       }
-
     }
 
 
