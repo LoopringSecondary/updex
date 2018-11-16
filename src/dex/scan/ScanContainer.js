@@ -12,7 +12,7 @@ class ScanContainer extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props
-    Toast.info(intl.get('common.list.loading'), 0, null, false);
+    Toast.loading(intl.get('common.list.loading'), 0, null, false);
     const type = routeActions.location.getQueryByName(this.props, 'type')
     try {
       switch (type) {
@@ -88,15 +88,9 @@ class ScanContainer extends React.Component {
           uuid
         }).then(resp => {
           if (resp.result) {
-            Notification.open({
-              description: intl.get('notifications.title.auth_suc'),
-              type: 'success'
-            })
+              this.showLayer({id:'signResult',type:'login'})
           } else {
-            Notification.open({
-              description: res.error.message,
-              type: 'error'
-            })
+            this.showLayer({id:'signResult',error:resp.error})
           }
         })
       }
