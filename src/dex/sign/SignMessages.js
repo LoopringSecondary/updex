@@ -179,9 +179,9 @@ class SignMessages extends React.Component {
 
     const MessageItem = ({tx,index})=>{
       return (
-        <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
+        <div className="row p15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
           <div className="col text-left">
-            <div className="color-black-1">
+            <div className="color-black-1 fs16">
               {index+1}.&nbsp;&nbsp;<Description tx={tx}/>
             </div>
           </div>
@@ -193,7 +193,7 @@ class SignMessages extends React.Component {
             }
             {!signed[index] &&
             <div className="">
-              <Button className="cursor-pointer fs12 h-35 pl20 pr20" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
+              <Button className="cursor-pointer fs12 h-35 center-center pl15 pr15" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
             </div>
             }
           </div>
@@ -223,11 +223,12 @@ class SignMessages extends React.Component {
           {intl.get('sign.title')}
         </NavBar>
         <div className="divider 1px zb-b-b"></div>
-        <div className="p15" style={{minHeight:'6rem'}}>
+        <div className="" style={{minHeight:'7rem'}}>
           {
             unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
           }
         </div>
+
         <div className="p15">
           <Button className="d-block mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsigned || unsigned.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
         </div>
