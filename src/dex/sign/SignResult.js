@@ -29,7 +29,7 @@ class SignResult extends React.Component {
       ])
     }
     return (
-      <div className="bg-fill" style={{maxHeight: '100%', overflow: 'auto'}}>
+      <div className="bg-white" style={{maxHeight: '100%', overflow: 'auto'}}>
         <NavBar
           className="bg-white"
           mode="light"
