@@ -70,6 +70,7 @@ class ScanContainer extends React.Component {
         break;
       default:
         setTimeout(() => Toast.hide(),500);
+        dispatch({type:'layers/showLayer',payload:{id:'signResult',error:{message:"未识别的类型"}}})
     }
   }
 
