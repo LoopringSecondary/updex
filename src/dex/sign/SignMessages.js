@@ -67,6 +67,24 @@ class SignMessages extends React.Component {
       this.message = message;
     }
 
+    const analyticAction = () => {
+      if(!submitDatas || submitDatas.length === 0) {
+        return ''
+      }
+      if(submitDatas.find(item => item.type === 'cancelOrder')) {
+        return 'cancelOrder'
+      }
+      if(submitDatas.find(item => item.type === 'convert')) {
+        return 'convert'
+      }
+      if(submitDatas.find(item => item.type === 'order')) {
+        return 'order'
+      }
+      if(submitDatas.find(item => item.type === 'approve')) {
+        return 'approve'
+      }
+    }
+
     async function handelSubmit() {
       if(submitDatas.length === 0) {
         Notification.open({
@@ -118,19 +136,23 @@ class SignMessages extends React.Component {
             throw new Error(`Unsupported sign type:${item.type}`)
         }
       }, function (error) {
+        let action = analyticAction()
+        Toast.info(action, 3)
         if(error){
-          Toast.fail(error.message, 3, null, false)
+          // Toast.fail(error.message, 3, null, false)
           window.RELAY.account.notifyCircular({
             "owner" : window.Wallet.address,
             "body" : {hash: qrcode.value, "status" : "txFailed"}
           })
+          dispatch({type: 'layers/showLayer', payload: {id:'signResult', type:action, error:error.message}})
         } else {
-          Toast.success(intl.get('notifications.title.operation_succ'), 3, null, false)
+          // Toast.success(intl.get('notifications.title.operation_succ'), 3, null, false)
           dispatch({type: 'layers/hideLayer', payload: {id:'signMessages'}})
           window.RELAY.account.notifyCircular({
             "owner" : window.Wallet.address,
             "body" : {hash: qrcode.value, "status" : "accept"}
           })
+          dispatch({type: 'layers/showLayer', payload: {id:'signResult', type:action}})
         }
       });
     }
@@ -172,7 +194,7 @@ class SignMessages extends React.Component {
             }
             {!signed[index] &&
             <div className="">
-              <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
+              <Button className="cursor-pointer fs12 h-30 pl15 pr15" type="primary" size="small" onClick={signInfo.bind(this, tx, index)}>{intl.get('actions.sign')}</Button>
             </div>
             }
           </div>
@@ -202,7 +224,7 @@ class SignMessages extends React.Component {
           {intl.get('sign.title')}
         </NavBar>
         <div className="divider 1px zb-b-b"></div>
-        <div className="p15 zb-b-b" style={{minHeight:'10rem',borderRadius:'0rem'}}>
+        <div className="p15 zb-b-b" style={{minHeight:'8rem',borderRadius:'0rem'}}>
           {
             unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
           }
