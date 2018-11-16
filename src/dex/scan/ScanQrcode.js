@@ -20,7 +20,7 @@ class Home extends React.Component {
           className="bg-white"
           mode="light"
           onLeftClick={() => {}}
-          leftContent={[
+          leftContent={null && [
             <span key="1" className="text-primary"><Icon  type="home" /></span>,
           ]}
           rightContent={null && [
@@ -32,8 +32,8 @@ class Home extends React.Component {
         <div className="divider 1px zb-b-t"></div>
          <div className="pt25 zb-b-b text-center bg-white">
            <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
-           <div className="fs20 color-black-1 mt15">扫码交易</div>
-           <div className="fs13 color-black-3 mt5">简单安全的去中心化交易方式</div>
+           <div className="fs20 color-black-1 mt15">路印扫码交易</div>
+           <div className="fs13 color-black-3 mt5">一个钱包在手，轻易扫码多个去中心化交易所</div>
            <div className="row no-gutters bg-white align-items-center">
              <div className="col">
                <div className="text-center pl5 pr5 pt15 pb15 zb-b-b">
@@ -73,7 +73,12 @@ class Home extends React.Component {
            </div>
            <div className="p15">
             <Button type="primary" className=""><Icon type="scan" className="mr5" />扫码</Button>
-            <Button type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />返回</Button>
+            <Button onClick={routeActions.gotoPath.bind(this,'/dex/home')} type="default" className="bg-primary-light text-primary border-none mt15"><Icon type="home" className="mr5" />返回</Button>
+           </div>
+         </div>
+         <div className="p15">
+           <div className="color-black-3 fs12 lh20">
+            1. 可以对任何支持路印协议的去中心化交易所进行扫码交易。目前支持 UP DEX,Circulr DEX等
            </div>
          </div>
       </div>

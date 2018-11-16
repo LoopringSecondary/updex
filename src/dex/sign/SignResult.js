@@ -38,8 +38,8 @@ class SignResult extends React.Component {
             title={<div className="fs24">登录签名成功</div>}
             message={<div className="fs13">请确认PC端是否已经登录</div>}
           />
-          <Button className="w-100 d-block mt15 mb0 fs14" size="" type="primary" onClick={()=>{}}><Icon className="mr5" type="desktop" />已登录</Button>
-          <Button className="w-100 d-block mt15 mb0 fs14" size="" type="default" onClick={()=>{}}><Icon className="mr5" type="desktop" />未登录</Button>
+          <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={()=>{}}><Icon className="mr5" type="desktop" />已登录</Button>
+          <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={()=>{}}><Icon className="mr5" type="desktop" />未登录</Button>
         </div>
         <div className="bg-white p15" style={{}}>
           <Result
@@ -47,8 +47,8 @@ class SignResult extends React.Component {
             title={<div className="fs24">下单签名成功</div>}
             message={<div className="fs13">请确认PC是否已更新</div>}
           />
-          <Button className="w-100 d-block mt15 mb0 fs14" size="" type="primary" onClick={()=>{}}><Icon className="mr5" type="desktop" />已更新</Button>
-          <Button className="w-100 d-block mt15 mb0 fs14" size="" type="default" onClick={()=>{}}><Icon className="mr5" type="desktop" />未微耕</Button>
+          <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={()=>{}}><Icon className="mr5" type="desktop" />已更新</Button>
+          <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={()=>{}}><Icon className="mr5" type="desktop" />未更新</Button>
         </div>
         <div className="bg-white p15" style={{}}>
           <Result
@@ -56,8 +56,8 @@ class SignResult extends React.Component {
             title={<div className="fs24">取消订单签名成功</div>}
             message={<div className="fs13">请确认PC是否已更新</div>}
           />
-          <Button className="w-100 d-block mt15 mb0 fs14" size="" type="primary" onClick={()=>{}}><Icon className="mr5" type="desktop" />已更新</Button>
-          <Button className="w-100 d-block mt15 mb0 fs14" size="" type="default" onClick={()=>{}}><Icon className="mr5" type="desktop" />未更新</Button>
+          <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={()=>{}}><Icon className="mr5" type="desktop" />已更新</Button>
+          <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={()=>{}}><Icon className="mr5" type="desktop" />未更新</Button>
         </div>
         <div className="bg-white p15" style={{}}>
           <Result
