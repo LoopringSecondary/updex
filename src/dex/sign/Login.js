@@ -78,7 +78,7 @@ render(){
       <div className="" style={{minHeight:'6rem',borderRadius:'0rem'}}>
         <div className="row p15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
           <div className="col text-left">
-            <div className="color-black-1">
+            <div className="color-black-1 fs16">
               {1}.&nbsp;&nbsp; {intl.get('scan.login_title')}
             </div>
           </div>
@@ -90,7 +90,7 @@ render(){
             }
             {!signed &&
             <div className="">
-              <Button className="cursor-pointer fs12 h-30 pl15 pr15" type="primary" size="small" onClick={this.sign}>{intl.get('actions.sign')}</Button>
+              <Button className="cursor-pointer fs12 h-35 center-center pl15 pr15" type="primary" size="small" onClick={this.sign}>{intl.get('actions.sign')}</Button>
             </div>
             }
           </div>
