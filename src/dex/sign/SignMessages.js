@@ -137,9 +137,8 @@ class SignMessages extends React.Component {
         }
       }, function (error) {
         let action = analyticAction()
-        Toast.info(action, 3)
         if(error){
-          // Toast.fail(error.message, 3, null, false)
+          //Toast.fail(error.message, 3, null, false)
           window.RELAY.account.notifyCircular({
             "owner" : window.Wallet.address,
             "body" : {hash: qrcode.value, "status" : "txFailed"}
