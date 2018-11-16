@@ -33,6 +33,7 @@ class Login extends React.Component {
     const {content} = this.state
     window.RELAY.account.notifyScanLogin(content).then(resp => {
       if (resp.result) {
+        this.hideLayer({id:'login'});
         this.showLayer({id:'signResult',type:'login'})
       } else {
         this.showLayer({id:'signResult',error:resp.error})
@@ -74,6 +75,7 @@ render(){
         {intl.get('sign.title')}
       </NavBar>
       <div className="divider 1px zb-b-b"></div>
+      <div className="p15 zb-b-b" style={{minHeight:'8rem',borderRadius:'0rem'}}>
       <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
         <div className="col text-left">
           <div className="color-black-1">
@@ -92,6 +94,7 @@ render(){
           </div>
           }
         </div>
+      </div>
       </div>
       <div className="p15">
         <Button className="d-block mb0" size="" type="primary" onClick={this.authToLogin} disabled={!signed} > {intl.get('actions.submit')} </Button>
