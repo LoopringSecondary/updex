@@ -69,7 +69,7 @@ class Home extends React.Component {
                     </div>
                   </div>
                   <div className="col-12 zb-b-l">
-                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/dex/entry')} >
+                    <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/dex/scan')} >
                       <div className="row no-gutters align-items-center">
                         <div className="col-auto">
                           <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="scan" /></div>
