@@ -44,28 +44,37 @@ class SignResult extends React.Component {
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled" />}
             title={<div className="fs20">登录签名成功</div>}
-            message={<div className="fs12">请确认网页端是否已经登录</div>}
+            message={<div className="fs12">请确认网页端是否正常</div>}
           />
-          <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={updated}><Icon className="mr5" type="desktop" />已登录</Button>
-          <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={unUpdated}><Icon className="mr5" type="desktop" />未登录</Button>
+          <div className="pt15 pb15 fs12 color-black3 lh25 text-left">
+            <div>1. 如果网页端已自动同步，关闭当前页面即可</div>
+            <div>2. 如果网页端无反应，您可以继续等待或者刷新网页端</div>
+            <div>3. 如果网页端刷新后结果不正常，您需要再次尝试扫码</div>
+          </div>
         </div>
         <div className="bg-white p15" style={{}}>
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled" />}
             title={<div className="fs20">下单签名成功</div>}
-            message={<div className="fs12">请确认网页端是否已更新</div>}
+            message={<div className="fs12">请确认网页端是否正常</div>}
           />
-          <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={updated}><Icon className="mr5" type="desktop" />已更新</Button>
-          <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={unUpdated}><Icon className="mr5" type="desktop" />未更新</Button>
+          <div className="pt15 pb15 fs12 color-black3 lh25 text-left">
+            <div>1. 如果网页端已自动同步，关闭当前页面即可</div>
+            <div>2. 如果网页端无反应，您可以继续等待或者刷新网页端</div>
+            <div>3. 如果网页端刷新后结果不正常，您需要再次尝试扫码</div>
+          </div>
         </div>
         <div className="bg-white p15" style={{}}>
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled" />}
             title={<div className="fs20">取消订单签名成功</div>}
-            message={<div className="fs12">请确认网页端是否已更新</div>}
+            message={<div className="fs12">请确认网页端是否正常</div>}
           />
-          <Button className="w-100 d-block mt15 mb0 fs16" size="" type="primary" onClick={updated}><Icon className="mr5" type="desktop" />已更新</Button>
-          <Button className="w-100 d-block mt15 mb0 fs16 bg-primary-light text-primary border-none mt15" size="" type="default" onClick={unUpdated}><Icon className="mr5" type="desktop" />未更新</Button>
+          <div className="pt15 pb15 fs12 color-black3 lh25 text-left">
+            <div>1. 如果网页端已自动同步，关闭当前页面即可</div>
+            <div>2. 如果网页端无反应，您可以继续等待或者刷新网页端</div>
+            <div>3. 如果网页端刷新后结果不正常，您需要再次尝试扫码</div>
+          </div>
         </div>
         <div className="bg-white p15" style={{}}>
           <Result

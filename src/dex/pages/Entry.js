@@ -3,7 +3,7 @@ import {Redirect, Route, Switch} from 'dva/router'
 import {connect} from 'dva'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
-import {Button,Modal} from 'antd-mobile'
+import {Button,Modal,Toast} from 'antd-mobile'
 import {scanQRCode, signMessage, signOrder, signTx} from 'common/utils/signUtils'
 import moment from 'moment'
 import Notification from 'LoopringUI/components/Notification'
@@ -16,6 +16,7 @@ class Entry extends React.Component {
   componentDidMount() {
     const {dispatch}  = this.props
     const type = routeActions.location.getQueryByName(this.props, 'type')
+    const v = routeActions.location.getQueryByName(this.props, 'value')
     switch (type) {
       case "UUID":
         this.authToLogin(routeActions.location.getQueryByName(this.props, 'value'));
@@ -37,10 +38,9 @@ class Entry extends React.Component {
       case 'convert':
         window.RELAY.account.notifyCircular({
           "owner" : window.Wallet.address,
-          "body" : {hash: value, "status" : "received"}
+          "body" : {hash: v, "status" : "received"}
         })
-        const hash = routeActions.location.getQueryByName(this.props, 'value')
-        window.RELAY.order.getTempStore({key: hash}).then(resp => {
+        window.RELAY.order.getTempStore({key: v}).then(resp => {
           if(resp.error) {
             throw `Unsupported type:${type}`
           }
@@ -58,12 +58,12 @@ class Entry extends React.Component {
             default:
               throw `Unsupported type:${type}`
           }
-          dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value:hash}}})
+          dispatch({type:'sign/unsigned',payload:{unsigned, qrcode:{type, value:v}}})
           this.showLayer({id:'signMessages'})
         }).catch(e=> {
           window.RELAY.account.notifyCircular({
             "owner": window.Wallet.address,
-            "body": {hash: value, "status": "reject"}
+            "body": {hash: v, "status": "reject"}
           })
         })
         break;
