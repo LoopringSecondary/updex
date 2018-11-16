@@ -228,7 +228,6 @@ class SignMessages extends React.Component {
             unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
           }
         </div>
-
         <div className="p15">
           <Button className="d-block mb0" size="" type="primary" onClick={handelSubmit} disabled={!signed || !unsigned || unsigned.length !== actualSigned.length}> {intl.get('actions.submit')} </Button>
         </div>
