@@ -113,7 +113,6 @@ class ScanContainer extends React.Component {
           const type = routeActions.search.getQueryByName(res.result, 'type');
           switch (type) {
             case 'UUID':
-              Toast.hide();
               this.authToLogin(routeActions.search.getQueryByName(res.result, 'value'));
               break;
             case 'sign':
@@ -164,7 +163,6 @@ class ScanContainer extends React.Component {
               window.handleP2POrder(content)
               break;
             default:
-              Toast.hide();
               throw `Unsupported type:${type}`
           }
         }
