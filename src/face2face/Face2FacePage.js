@@ -13,7 +13,7 @@ import {store} from "../index";
 import NumberOfTodos from "../dex/notifications/NumberOfTodos";
 
 class Face2FacePage extends React.Component {
-
+  
   // componentDidMount(){
   //    window.handleP2POrder({result:JSON.stringify({value:{"auth":"27b72006191a23d621fbe2c1491558f5c992e58c5149c070baa7bb7a233a1d98","hash":"0x17192de7258b5ce7423e3ddf27a08cc53f60d87ed412b94299846a4cbe121d1d","count":1}})})
   // }
