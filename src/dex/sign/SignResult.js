@@ -57,7 +57,7 @@ class SignResult extends React.Component {
             title={<div className="fs20">{getTitle()}</div>}
             message={<div className="fs12">{intl.get('scan.tip.confirm_web')}</div>}
           />
-          <div className="pt15 pb15 fs12 color-black3 lh25 text-left">
+          <div className="pt15 pb15 fs12 color-black3 lh25 text-left m-auto" style={{width:'80%'}}>
             <div>1. {intl.get('scan.tip.suc')}</div>
             <div>2. {intl.get('scan.tip.fresh')}</div>
             <div>3. {intl.get('scan.tip.fresh_again')}</div>
