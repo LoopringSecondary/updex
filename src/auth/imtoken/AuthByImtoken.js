@@ -6,8 +6,15 @@ import routeActions from 'common/utils/routeActions'
 import { connect } from 'dva'
 import storage from 'modules/storage'
 import intl from 'react-intl-universal'
+import {setLocale} from "../../common/utils/localeSetting";
 
 class AuthByImtoken extends React.Component {
+
+
+  // componentWillMount(){
+  //   setLocale(storage.settings.get().preference.language)
+  // }
+
 
   componentDidMount () {
     const _props = this.props
@@ -54,8 +61,7 @@ class AuthByImtoken extends React.Component {
         }
       }, 1000)
     } else {
-      const location = _props.location
-      const language = location.search.replace(`?locale=`, '')
+      const language = routeActions.location.getQueryByName(_props, 'locale')
       _props.dispatch({type: 'locales/setLocale', payload: {locale: language}})
     }
   }

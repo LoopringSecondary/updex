@@ -9,7 +9,6 @@ const locales = {
 };
 
 export function setLocale(value) {
-  console.log('locales:',value);
   switch (value) {
     case "zh-CN" :
       moment.locale('zh-cn');
