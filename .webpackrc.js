@@ -35,8 +35,9 @@ export default {
   "externals": {
     "lodash": "window.lodash",
     "loopring.js":"window.loopring",
-    // "moment": "window.moment",
-    // "antd": "window.antd",
+    "moment": "window.moment",
+    "antd": "window.antd",
+    // "antd-mobile": "window.antdm",
     "react": "window.React",
     "react-dom": "window.ReactDOM"
   },
