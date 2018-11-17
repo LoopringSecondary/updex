@@ -249,6 +249,7 @@ class TakerConfirm extends React.Component {
                     takerOrderHash: response.result
                   }).then(resp => {
                     if (resp.result) {
+                      dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder: true}});
                       Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
                       hideLayer({id: 'takerConfirm'})
                       window.RELAY.account.notifyTransactionSubmitted({
