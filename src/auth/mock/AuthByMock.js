@@ -20,7 +20,7 @@ class AuthByImtoken extends React.Component {
       Toast.success('Load complete !!!')
     })
     const _props = this.props
-    window.Wallet = new Mock();
+    window.Wallet = new Mock("398d91b8800c1075283589cddc0ea0c8e4d95ca14f9d4bf8ea5af52ee8bb7737");
     window.Wallet.setConfigs().then(res => {
       let language = 'en-US'
       let currency = 'USD'
