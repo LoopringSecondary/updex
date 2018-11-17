@@ -49,11 +49,6 @@ export default class Wallet {
     throw new Error('unimplemented')
   }
 
-  scanQRCode(){
-
-    throw new Error('unimplemented')
-  }
-
   /**
    *
    * @param tx rawTx

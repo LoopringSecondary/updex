@@ -31,18 +31,7 @@ class AuthByImtoken extends React.Component {
         })
         _props.dispatch({type: 'locales/setLocale', payload: {locale: window.Wallet.language}})
         Toast.hide()
-        let to = routeActions.location.getQueryByName(this.props,'to');
-        if (to) {
-          let search = _props.location.search.substr(1);
-          const params = search.split("&").filter(item => item.indexOf("to=" + to) === -1)
-          if (params.length > 0) {
-            routeActions.gotoPath(to.concat("?").concat(params.join("&")))
-          } else {
-            routeActions.gotoPath(to)
-          }
-        } else {
-          routeActions.gotoPath('/dex'.concat(_props.location.search))
-        }
+        routeActions.gotoPath('/dex')
       }
       // Modal.alert('handler start :imtoken not exsits')
       // window.addEventListener('sdkReady', handler)
@@ -79,18 +68,7 @@ class AuthByImtoken extends React.Component {
         _props.dispatch({type: 'sockets/unlocked'})
         _props.dispatch({type: 'locales/setLocale', payload: {locale: window.Wallet.language}})
         Toast.hide()
-        let to = routeActions.location.getQueryByName(this.props,'to');
-        if (to) {
-          let search = _props.location.search.substr(1);
-          const params = search.split("&").filter(item => item.indexOf("to=" + to) === -1)
-          if (params.length > 0) {
-            routeActions.gotoPath(to.concat("?").concat(params.join("&")))
-          } else {
-            routeActions.gotoPath(to)
-          }
-        } else {
-          routeActions.gotoPath('/dex'.concat(_props.location.search))
-        }
+        routeActions.gotoPath('/dex')
       })
     } else {
       window.addEventListener('sdkReady', function () {
@@ -107,18 +85,7 @@ class AuthByImtoken extends React.Component {
           _props.dispatch({type: 'sockets/unlocked'})
           _props.dispatch({type: 'locales/setLocale', payload: {locale: window.Wallet.language}})
           Toast.hide()
-          let to = routeActions.location.getQueryByName(this.props,'to');
-          if (to) {
-            let search = _props.location.search.substr(1);
-            const params = search.split("&").filter(item => item.indexOf("to=" + to) === -1)
-            if (params.length > 0) {
-              routeActions.gotoPath(to.concat("?").concat(params.join("&")))
-            } else {
-              routeActions.gotoPath(to)
-            }
-          } else {
-            routeActions.gotoPath('/dex'.concat(_props.location.search))
-          }
+          routeActions.gotoPath('/dex')
         })
       })
     }

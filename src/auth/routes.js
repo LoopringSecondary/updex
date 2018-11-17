@@ -11,7 +11,6 @@ import Terms from './terms/Terms'
 
 
 const UnLogged = (props)=>{
-
     return (
       <Switch>
          <Route path={`/auth`} exact component={Auth} />

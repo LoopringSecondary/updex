@@ -130,9 +130,7 @@ const notifications = {
     enable_fail:'Enable failed',
     place_order_price_confirm:"Are you sure you want to continue ?",
     submit_ring_suc:'Submit ring successfully',
-    submit_ring_fail:'Submit ring failed',
-    auth_suc:"Authorization Successfully",
-    operation_succ:"Operation Successfully"
+    submit_ring_fail:'Submit ring failed'
   },
   message: {
     wait_for_load_data:"Please wait for loading data",
@@ -173,9 +171,7 @@ const actions = {
   place_buy_order: "Place Buy Order",
   place_sell_order: "Place Sell Order",
   all_assets: "All Assets",
-  fills_of_all_markets: "Fills of all markets",
-  sign:"Sign",
-  submit:"Submit"
+  fills_of_all_markets: "Fills of all markets"
 }
 
 const time_unit = {
@@ -360,23 +356,8 @@ export default {
     fill_count:"Filled Count"
   },
   sign: {
-    title:"Sign Messages",
     not_signed: "You may have some items not signed",
-    to_sign: "To Sign",
-    signed_failed: 'Signed Failed',
-    type_sign_order: 'Sign Original Order',
-    type_cancel_allowance: 'Cancel {token} approval',
-    type_approve: '{token} approval',
-    type_cancel_order: 'Sign Cancel Order',
-    type_convert: 'Convert WETH',
-    submit_success: 'Submit Order Successfully',
-    submit_failed: 'Submit Order Failed',
-    cancel_success: 'Cancel Order Successfully',
-    cancel_failed: 'Cancel Order Failed',
-    convert_success: 'Convert Successfully',
-    convert_failed: 'Convert Failed',
-    p2p_submit_success: 'Generate P2P Order Successfully',
-    p2p_submit_failed: 'Generate P2P Order Failed'
+    to_sign: "To Sign"
   },
   // -----------
   // transaction
