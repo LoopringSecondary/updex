@@ -31,6 +31,15 @@ export default {
       extraBabelPlugins: ['dva-hmr'],
     },
   },
+  ignoreMomentLocale:true,
+  "externals": {
+    "lodash": "window.lodash",
+    "loopring.js":"window.loopring",
+    // "moment": "window.moment",
+    // "antd": "window.antd",
+    "react": "window.React",
+    "react-dom": "window.ReactDOM"
+  },
 
 }
 

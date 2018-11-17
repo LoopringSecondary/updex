@@ -43,8 +43,7 @@ class SignResult extends React.Component {
           mode="light"
           onLeftClick={() => hideLayer({id: 'signResult'})}
           leftContent={[
-            <span className="text-primary circle-30 bg-primary-light center-center fs14"><Icon key="1"
-                                                                                               type="close"/></span>,
+            <span className="text-primary fs14"  key="1"><Icon type="close"/></span>,
           ]}
           rightContent={[]}
         >
@@ -54,10 +53,10 @@ class SignResult extends React.Component {
         {!error && <div className="bg-white p15" style={{}}>
           <Result
             img={<Icon className="color-success fs50 center-center color-white" type="check-circle" theme="filled"/>}
-            title={<div className="fs20">{getTitle()}</div>}
-            message={<div className="fs12">{intl.get('scan.tip.confirm_web')}</div>}
+            title={<div className="fs24">{getTitle()}</div>}
+            message={<div className="fs14">{intl.get('scan.tip.confirm_web')}</div>}
           />
-          <div className="pt15 pb15 fs12 color-black3 lh25 text-left m-auto" style={{width:'80%'}}>
+          <div className="pt15 pb15 fs12 color-black3 lh25 text-left m-auto" style={{width:'90%'}}>
             <div>1. {intl.get('scan.tip.suc')}</div>
             <div>2. {intl.get('scan.tip.fresh')}</div>
             <div>3. {intl.get('scan.tip.fresh_again')}</div>
@@ -70,7 +69,7 @@ class SignResult extends React.Component {
             message={<div className="fs12">{error.message}</div>}
           />
           <Button className="w-100 d-block mt15 mb0" size="" type="primary" onClick={() => {
-           hideLayer({id: 'signResult'}); routeActions.gotoPath('/dex/scan')}} >{intl.get('scan.tip.again')}</Button>
+           hideLayer({id: 'signResult'}); hideLayer({id: 'signMessages'}); routeActions.gotoPath('/dex/scan')}} >{intl.get('scan.tip.again')}</Button>
         </div>}
       </div>
     );

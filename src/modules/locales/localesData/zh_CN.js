@@ -363,7 +363,7 @@ no_open_orders: '{market}暂无有效订单',
     fill_count:"成交份数"
   },
   sign: {
-    title:"签名信息",
+    title:"签名",
     not_signed: '您还未完成签名',
     to_sign: '去签名',
     signed_failed: '签名失败',
