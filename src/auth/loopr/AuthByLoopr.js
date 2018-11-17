@@ -36,18 +36,7 @@ class Routes extends React.Component {
           })
         }
       },1000)
-      let to = routeActions.location.getQueryByName(this.props,'to');
-      if (to) {
-        let search = _this.props.location.search.substr(1);
-        const params = search.split("&").filter(item => item.indexOf("to=" + to) === -1)
-        if (params.length > 0) {
-          routeActions.gotoPath(to.concat("?").concat(params.join("&")))
-        } else {
-          routeActions.gotoPath(to)
-        }
-      } else {
-        routeActions.gotoPath('/dex'.concat(_this.props.location.search))
-      }
+      routeActions.gotoPath('/dex')
     }
   }
 
@@ -74,18 +63,7 @@ class Routes extends React.Component {
         })
       }
     },1000)
-    let to = routeActions.location.getQueryByName(this.props,'to');
-    if (to) {
-      let search = _this.props.location.search.substr(1);
-      const params = search.split("&").filter(item => item.indexOf("to=" + to) === -1)
-      if (params.length > 0) {
-        routeActions.gotoPath(to.concat("?").concat(params.join("&")))
-      } else {
-        routeActions.gotoPath(to)
-      }
-    } else {
-      routeActions.gotoPath('/dex'.concat(_this.props.location.search))
-    }
+    routeActions.gotoPath('/dex')
   }
 
   render () {

@@ -8,7 +8,8 @@ import CommonModals from '../components/Modals'
 import NotificationsModals from '../dex/notifications/Modals'
 
 const Logged = (props)=>{
-  const isLogged = !!(storage.wallet.getUnlockedAddress())
+  // const isLogged = !!(window.Wallet && window.Wallet.address)
+  const isLogged =  !!(storage.wallet.getUnlockedAddress())
   if(isLogged){
     return (
       <div>

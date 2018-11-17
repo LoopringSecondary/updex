@@ -13,8 +13,6 @@ import UserCenter from './account/UserCenter'
 import Notifications from './notifications/Notifications'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
-import SignModals from './sign/Modals'
-import Face2FaceModals from '../face2face/Modals'
 import storage from 'modules/storage'
 
 
@@ -28,14 +26,12 @@ const UnLogged = ()=>{
     )
 }
 }
-const Logged = (props)=>{
+const Logged = ()=>{
   const isLogged =  !!(storage.wallet.getUnlockedAddress())
   if(isLogged){
     return (
       <div>
         <Switch>
-          <Route path={`/dex/entry`} exact component={Pages.Entry} />
-          <Route path={`/dex/home`} exact component={Pages.Home} />
           <Route path={`/dex/markets`} exact component={Markets} />
           <Route path={`/dex/markets/search/:type`} exact component={MarketsSearch} />
           <Route path={`/dex/markets/:market`} component={MarketDetail} />
@@ -45,14 +41,14 @@ const Logged = (props)=>{
           <Route path={`/dex/convert/:token`} component={Convert} />
           <Route path={`/dex/notifications`} component={Notifications} />
           <Route path={`/dex/todos`} exact component={ListTodos} />
-          <Redirect from="/dex" to= {`/dex/placeOrder`} />
+          <Route path={`/dex/messages`} exact component={Pages.Todo} />
+          <Route path={`/dex/settings`} exact component={Pages.Todo} />
+          <Redirect from="/dex" to="/dex/placeOrder" />
         </Switch>
         <CommonModals />
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />
-        <SignModals />
-        <Face2FaceModals />
       </div>
     )
   }else{

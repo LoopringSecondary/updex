@@ -57,7 +57,6 @@
 .am-segment-item{
   // border-color:@brand-primary-light !important;
   border:none !important;
-  height:4rem * @times;
   background: @brand-primary-light !important;
   &.am-segment-item-selected{
     background: @brand-primary !important;
@@ -95,7 +94,7 @@
     // color:#fff !important;
   }
 .segmented-fs16{
-  .am-segment-item{font-size: 1.6rem * @times !important;}
+  .am-segment-item{font-size: 1.6rem !important;}
 }
 
 // ========
@@ -103,7 +102,7 @@
 // ========
 
 .am-button-small{
-  padding:0px 1rem * @times !important;
+  padding:0px 1rem !important;
 }
 .am-button-primary.am-button-disabled{
   // opacity: 1 !important;
@@ -143,7 +142,7 @@
 // ========
 
 .am-slider-handle{
-  border:0.2rem * @times solid @brand-primary !important;
+  border:0.2rem solid @brand-primary !important;
   background: @brand-primary !important;
   
 }
@@ -160,19 +159,18 @@
 
 .placeOrder{
   .am-slider-handle{
-    width:1.1rem * @times;
-    height:1.1rem * @times;
-    margin-left:-0.55rem * @times;
-    margin-top:-0.4rem * @times;
+    width:1.1rem;
+    height:1.1rem;
+    margin-left:-0.55rem;
+    margin-top:-0.55rem;
   }
   .am-slider-rail{
     background:@bg-white-light !important;
-    height:0.35rem * @times !important;
   }
   .am-slider-dot{
-    bottom:-0.17rem * @times !important;
-    width:0.9rem * @times;
-    height:0.9rem * @times;
+    bottom:-0.15rem !important;
+    width:0.9rem;
+    height:0.9rem;
     &.am-slider-dot-active{
       background-color:@brand-primary !important;
       border-color:@brand-primary !important;  
@@ -210,11 +208,11 @@
   }
 }
 .am-tab-bar-bar .am-tab-bar-tab-icon{
-  margin-top: 0.3rem * @times;
-  font-size:1.6rem * @times;
+  margin-top: 3px;
+  font-size:1.6rem;
 }
 .am-tab-bar-bar .am-tab-bar-tab-title{
-  font-size:1.3rem * @times;
+  font-size:1.3rem;
   margin-top: 1px;
 }
 
@@ -245,10 +243,10 @@
     border-radius:@radius-sm;
   }
   &.s-lg{
-    height: 4.4rem * @times;
-    line-height: 3.6rem * @times;
-    padding-top:.4rem * @times;
-    padding-bottom:.4rem * @times;
+    height: 4.4rem;
+    line-height: 3.6rem;
+    padding-top:.4rem;
+    padding-bottom:.4rem;
 }
   &.t-primary{
     background: fade(@brand-primary,5%);
@@ -307,7 +305,7 @@
 }
 .settings{
   .am-list-body{
-    border-radius:0rem * @times !important;
+    border-radius:0rem !important;
     // border: 1px solid @border-color !important;
   }
   .am-radio-item{
@@ -325,9 +323,9 @@
 }
 
 .am-list-item.am-input-item{
-  height: 5.0rem * @times !important;
+  height: 5.0rem !important;
   &.h-default{
-    height:4.4rem * @times !important;
+    height:4.4rem !important;
   }
 }
 .am-list-item{
@@ -346,7 +344,7 @@
   }
 }
 .am-list-item.h-default{
-  height:4.4rem * @times !important;
+  height:4.4rem !important;
 }
 
 .am-list-header{
@@ -379,7 +377,7 @@
     text-align: left !important;
   }
   .ant-input-affix-wrapper .ant-input:not(:last-child){
-    padding-left:1.5rem * @times !important;
+    padding-left:1.5rem !important;
   }
 }
 
@@ -395,30 +393,30 @@
 // ========
 // article
 // ========
-.article{ padding:1.5rem * @times; background: #fff; }
-.article section{ margin-bottom: 2.5rem * @times; }
+.article{ padding:1.5rem; background: #fff; }
+.article section{ margin-bottom: 2.5rem; }
 .article h1{ margin:0; }
 .article h4{ margin:0; font-size: 14px; }
 .article h3{ font-size: 16px; }
-.article .header{text-align: center; margin: 2.5rem * @times 0; }
+.article .header{text-align: center; margin: 2.5rem 0; }
 .article .header small{ opacity: 0.6 }
 .article p{}
 
 .am-pagination.custom-pagination{
   .am-button{
-    height:3.2rem * @times !important;
-    line-height:3.2rem * @times !important;
+    height:3.2rem !important;
+    line-height:3.2rem !important;
     background: @brand-primary-light !important;
     border:none !important;
     color:@brand-primary;
     &::before{
       border:none !important;
     }
-    font-size:1.4rem * @times !important;
-    margin-top: .5rem * @times;
+    font-size:1.4rem !important;
+    margin-top: .5rem;
   }
   .am-pagination-wrap{
-    font-size:1.4rem * @times !important;
+    font-size:1.4rem !important;
     &:extend(.color-black-3);
     .active{
       &:extend(.color-black-2);
@@ -433,27 +431,26 @@
 
 }
 .mpanel{
-  margin:0.5rem * @times;
+  margin:0.6rem;
 }
 .mtpanel{
-  margin-top:0.5rem * @times;
+  margin-top:0.6rem;
 }
 .mrpanel{
-  margin-right:0.5rem * @times;
+  margin-right:0.6rem;
 }
 .mlpanel{
-  margin-left:0.5rem * @times;
+  margin-left:0.6rem;
 }
 .mbpanel{
-  margin-bottom:0.5rem * @times;
+  margin-bottom:0.6rem;
 }
 
 .am-list-item .am-input-control input{
-  font-size:1.6rem * @times !important;
-  line-height:100% !important;
+  font-size:1.6rem !important;
 }
 .fake-input-placeholder{
-  font-size:1.4rem * @times;
+  font-size:1.4rem;
 }
 
 .am-list-item .am-input-control .fake-input-container .fake-input.focus:after{
@@ -469,9 +466,7 @@
 .am-tabs-default-bar-tab{
   cursor:pointer;
 }
-.am-radio-item{
-  cursor:pointer !important;
-}
+
 .ant-radio-checked .ant-radio-inner{
   background: @brand-primary !important;
 }
@@ -495,13 +490,6 @@
 .am-stepper.showNumber{
   width:75%;
 }
-
-.am-modal-wrap{
-  z-index:1001;
-}
-
-.am-navbar-light{background:transparent}
-.am-list-body div:not(:last-child) .am-list-line {border-bottom:none !important;}
 
 
 

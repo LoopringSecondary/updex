@@ -2,8 +2,7 @@ import Wallet from 'common/wallets/wallet';
 import config from './config'
 import {toNumber,addHexPrefix} from 'LoopringJS/common/formatter'
 import {keccakHash} from 'LoopringJS/common/utils'
-import {callApi} from "../tpwallet/bridge";
-import {Modal} from 'antd-mobile'
+
 
 export default class Imtoken extends Wallet {
 
@@ -88,23 +87,6 @@ export default class Imtoken extends Wallet {
       })
     })
   }
-
-  share(message){
-    this.imtoken.callAPI('native.share', message)
-  }
-
-  scanQRCode(){
-    return new Promise((resolve) => {
-      this.imtoken.callAPI('native.scanQRCode', function (err, text) {
-        if(err) {
-          resolve({error:err})
-        } else {
-          resolve({result:text})
-        }
-      })
-    })
-  }
-
 }
 
 
