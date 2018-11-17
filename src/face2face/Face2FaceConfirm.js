@@ -194,15 +194,14 @@ function PlaceOrderSteps(props) {
     const tokensFm = new TokenFm({symbol: tokenS})
     const tokenbFm = new TokenFm({symbol: tokenB})
     if (storage.wallet.getUnlockedType() === 'imtoken') {
-      content = {}
-      content.title = intl.get('common.loopring_p2p');
-      content.message = `${tokensFm.toPricisionFixed(amountS.div(count))} ${tokenS} => ${tokenbFm.toPricisionFixed(amountB.div(count))} ${tokenB}`;
-      content.url = p2pOrder.qrcode
-      // QRCodeNode.toDataURL(p2pOrder.qrcode,function (err, url) {
-      //   content.title = intl.get('common.loopring_p2p');
-      //   content.message = `${tokensFm.toPricisionFixed(amountS.div(count))} ${tokenS} => ${tokenbFm.toPricisionFixed(amountB.div(count))} ${tokenB}`;
-      //   content.url = url
-      // })
+      QRCodeNode.toDataURL(p2pOrder.qrcode,function (err, url) {
+        content = {}
+        content.title = intl.get('common.loopring_p2p');
+      //  content.message = `${tokensFm.toPricisionFixed(amountS.div(count))} ${tokenS} => ${tokenbFm.toPricisionFixed(amountB.div(count))} ${tokenB}`;
+        content.url = url
+        content.type='image/png'
+        share(content)
+      })
     } else {
       content = {type: 'p2pOrder', content: p2pOrder.qrcode}
       content.extra = {
@@ -212,8 +211,9 @@ function PlaceOrderSteps(props) {
         tokenS,
         tokenB
       }
+      share(content)
     }
-    share(content)
+
   };
 
   return (
