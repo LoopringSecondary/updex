@@ -41,23 +41,22 @@ class OrderQrcode extends React.Component {
       let content;
       const tokensFm = new TokenFm({symbol: tokenS})
       const tokenbFm = new TokenFm({symbol: tokenB})
-      QRCodeNode.toDataURL(qrcodeContent,function (err, url) {
-
-        content = {}
-        content.title = intl.get('common.loopring_p2p');
-        // content.message = `${intl.get('common.loopring_p2p')}:${toNumber(tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS).div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB).div(value.value.count)))} ${tokenB}`;
-        content.url = url
-        content.type='image/png'
-        console.log(url)
-        share(content)
-      })
-
-      return;
+      // QRCodeNode.toDataURL(qrcodeContent,function (err, url) {
+      //
+      //   content = {}
+      //   content.title = intl.get('common.loopring_p2p');
+      //   // content.message = `${intl.get('common.loopring_p2p')}:${toNumber(tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS).div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB).div(value.value.count)))} ${tokenB}`;
+      //   content.url = url
+      //   content.type='image/png'
+      //   share(content)
+      // })
+      //
+      // return;
 
       if (storage.wallet.getUnlockedType() === 'imtoken') {
         content = {}
         content.title = intl.get('common.loopring_p2p');
-        content.message = `${intl.get('common.loopring_p2p')}:${toNumber(tokensFm.toPricisionFixed(amountS.div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(amountB.div(value.value.count)))} ${tokenB}`;
+        content.message = `${intl.get('common.loopring_p2p')}:${toNumber(tokensFm.toPricisionFixed(tokensFm.getUnitAmount(amountS).div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(tokenbFm.getUnitAmount(amountB).div(value.value.count)))} ${tokenB}`;
         content.url = qrcodeContent
       } else {
         content = {type: 'p2pOrder', content: qrcodeContent}
