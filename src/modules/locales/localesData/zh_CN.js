@@ -383,7 +383,8 @@ no_open_orders: '{market}暂无有效订单',
     convert_failed: '转换失败',
     p2p_submit_success: 'P2P订单生成成功',
     p2p_submit_failed: 'P2P订单生成失败',
-    submitting:"提交中..."
+    submitting:"提交中...",
+    sign_and_submit:'签名并提交'
   },
   // -----------
   // transaction

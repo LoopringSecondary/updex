@@ -168,86 +168,27 @@ class PlaceOrderSign extends React.Component {
         Toast.hide();
         Toast.fail(e, 3, null, false)
       })
-
-
-
     }
 
-    async function doSubmit() {
-      Toast.loading(intl.get('sign.submitting'), 0, null, false);
-      const txs = submitDatas.filter(item => item.type === 'tx');
-      eachLimit(txs, 1, async function (item, callback) {
-        const signedItem = item.signed
-        const unsignedItem = item.unsigned
-        const txRes = await window.ETH.sendRawTransaction(signedItem.data)
-        // console.log('...tx:', response, signedItem)
-        if (txRes.error) {
-          callback(new UserError(txRes.error.message))
-        } else {
-          signed[item.index].txHash = txRes.result
-          window.RELAY.account.notifyTransactionSubmitted({txHash: txRes.result, rawTx:unsignedItem.data, from: address});
-          callback()
-        }
-      }, function (error) {
-        if(error){
-          dispatch({type:'placeOrderSteps/signed', payload: {signResult:2, error:error.message}})
-          Toast.hide();
-        } else {
-          window.RELAY.order.placeOrderForP2P({...takerOrderSigned.data, authPrivateKey: ''}, makerOrder.originalOrder.hash).then(response=>{
-            console.log(1, response)
-            console.log(11, response.result, toHex(window.RELAY.order.getOrderHash({...takerOrderSigned.data, authPrivateKey: ''})))
-            if (response.error) {
-              Toast.hide();
-              Toast.fail(response.error.code ? intl.get('common.errors.' + response.error.message) : response.error.message, 3, null, false)
-              return
-            }
-            signTx(submitRingRawTx.data).then(res => {
-              console.log(2, res)
-              if (res.result) {
-                window.RELAY.ring.submitRingForP2P({makerOrderHash: makerOrder.originalOrder.hash, rawTx: res.result, takerOrderHash: response.result}).then(resp => {
-                  console.log(3, resp)
-                  if (resp.result) {
-                    Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
-                    dispatch({type: 'layers/hideLayer', payload: {id: 'helperOfSign'}})
-                    window.RELAY.account.notifyTransactionSubmitted({
-                      txHash: resp.result,
-                      rawTx: takerOrderSigned.data,
-                      from: address
-                    })
-                  } else {
-                    Toast.hide();
-                    Toast.fail(resp.error.code ? intl.get('common.errors.' + resp.error.message) : resp.error.message, 3, null, false)
-                  }
-                })
-              } else {
-                Toast.hide();
-                Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + res.error.message, 3, null, false)
-              }
-            })
-          })
-        }
-      });
-    }
-
-    async function handelSubmit() {
-      if(!signed || unsign.length !== actualSigned.length) {
-        Notification.open({
-          message: intl.get('sign.signed_failed'),
-          type: "error",
-          description: 'to sign'
-        });
-        return
-      }
-      if(unsign.length > 0 && unsign.length !== actualSigned.length) {
-        Notification.open({
-          message: intl.get('sign.signed_failed'),
-          type: "error",
-          description: intl.get('notifications.message.some_items_not_signed')
-        });
-        return
-      }
-      await doSubmit()
-    }
+    // async function handelSubmit() {
+    //   if(!signed || unsign.length !== actualSigned.length) {
+    //     Notification.open({
+    //       message: intl.get('sign.signed_failed'),
+    //       type: "error",
+    //       description: 'to sign'
+    //     });
+    //     return
+    //   }
+    //   if(unsign.length > 0 && unsign.length !== actualSigned.length) {
+    //     Notification.open({
+    //       message: intl.get('sign.signed_failed'),
+    //       type: "error",
+    //       description: intl.get('notifications.message.some_items_not_signed')
+    //     });
+    //     return
+    //   }
+    //   await doSubmit()
+    // }
 
     const Description = ({tx}) => {
       switch(tx.type) {
@@ -342,7 +283,7 @@ class PlaceOrderSign extends React.Component {
                     <div className="">
                       {
                         item.type === 'submitRing' &&
-                        <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" disabled={!this.state.enableSubmitRing} onClick={sign.bind(this, item, index)}>{intl.get('actions.submit')}</Button>
+                        <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" disabled={!this.state.enableSubmitRing} onClick={sign.bind(this, item, index)}>{intl.get('sign.sign_and_submit')}</Button>
                       }
                       {
                         item.type !== 'submitRing' &&
