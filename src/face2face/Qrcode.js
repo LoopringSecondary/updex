@@ -5,10 +5,10 @@ import QRCode from 'qrcode.react'
 import Worth from 'modules/settings/Worth'
 import intl from 'react-intl-universal'
 import TokenFm from "modules/tokens/TokenFm";
-import {toFixed, toNumber} from 'LoopringJS/common/formatter'
+import {toFixed, toNumber,toBig} from 'LoopringJS/common/formatter'
 import {share} from '../common/utils/signUtils'
 import storage from 'modules/storage'
-
+import QRCodeNode from 'qrcode'
 
 const OrderMetaItem = (props) => {
   const {label, value} = props
@@ -33,8 +33,8 @@ class OrderQrcode extends React.Component {
     const tokensFm = new TokenFm({symbol: tokenS})
     const tokenbFm = new TokenFm({symbol: tokenB})
     let qrcodeContent = JSON.stringify(value)
-    if(storage.wallet.getUnlockedType() === 'imtoken') {
-      const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
+    if(storage.wallet.getUnlockedType() === 'imtoken' || true) {
+        const url = window.location.href.split('#')[0].concat('#/auth/imtoken')
        qrcodeContent = url.concat(`?to=\/dex\/scan&type=P2P&auth=${value.value.auth}&hash=${value.value.hash}&count=${value.value.count}`);
     }
     const shareOrder = () => {
@@ -42,10 +42,13 @@ class OrderQrcode extends React.Component {
       const tokensFm = new TokenFm({symbol: tokenS})
       const tokenbFm = new TokenFm({symbol: tokenB})
       if (storage.wallet.getUnlockedType() === 'imtoken') {
-        content = {}
-        content.title = intl.get('common.loopring_p2p');
-        content.message = `${intl.get('common.loopring_p2p')}:${toNumber(tokensFm.toPricisionFixed(amountS.div(value.value.count)))} ${tokenS} => ${toNumber(tokenbFm.toPricisionFixed(amountB.div(value.value.count)))} ${tokenB}`;
-        content.url = qrcodeContent
+        QRCodeNode.toDataURL(qrcodeContent,function (err, url) {
+          content = {}
+          content.title = intl.get('common.loopring_p2p');
+          content.url = url
+          content.type='image/png'
+          share(content)
+        })
       } else {
         content = {type: 'p2pOrder', content: qrcodeContent}
         content.extra = {
@@ -55,8 +58,9 @@ class OrderQrcode extends React.Component {
           tokenS,
           tokenB
         }
+        share(content)
       }
-      share(content)
+
     };
     const hideLayer = (payload = {}) => {
       dispatch({
@@ -78,13 +82,13 @@ class OrderQrcode extends React.Component {
             </div>
             <div className="col">{intl.get('p2p_order.user_center_p2p')}</div>
             <div className="col-auto color-white pl20 pr20">
-              {false &&  <Icon type='share-alt' className="text-primary" onClick={shareOrder}/>}
+             <Icon type='share-alt' className="text-primary" onClick={shareOrder}/>
             </div>
           </div>
         </div>
         <div className="text-center mt15">
           <div className="p15 d-inline-block" style={{background: '#fff'}}>
-            <QRCode value={qrcodeContent} size={240} level='H'/>
+            <QRCode  value={qrcodeContent} size={240} level='H'/>
           </div>
         </div>
         <div className="m15 zb-b-t p15 text-center">
