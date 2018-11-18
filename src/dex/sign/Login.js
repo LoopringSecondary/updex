@@ -75,7 +75,7 @@ render(){
         {intl.get('sign.title')}
       </NavBar>
       <div className="divider 1px zb-b-b"></div>
-      <div className="" style={{minHeight:'6rem',borderRadius:'0rem'}}>
+      <div className="" style={{minHeight:'30vh',borderRadius:'0rem'}}>
         <div className="row p15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
           <div className="col text-left">
             <div className="color-black-1 fs16">

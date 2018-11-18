@@ -223,7 +223,7 @@ class SignMessages extends React.Component {
           {intl.get('sign.title')}
         </NavBar>
         <div className="divider 1px zb-b-b"></div>
-        <div className="" style={{minHeight:'7rem'}}>
+        <div className="" style={{minHeight:'35vh'}}>
           {
             unsigned && unsigned.map((item, index)=><MessageItem key={index} tx={item} index={index} />)
           }
