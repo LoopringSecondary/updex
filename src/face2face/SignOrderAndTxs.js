@@ -17,7 +17,6 @@ class PlaceOrderSign extends React.Component {
 
   state = {
     enableSubmitRing:false,
-    test:''
   }
 
   SubmitRingRawTx = async (unsigned, makerOrder, signedTakerOrder, gasPrice) => {
@@ -324,7 +323,6 @@ class PlaceOrderSign extends React.Component {
       <div className="">
         <div className="bg-white-light p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>
           <div className="color-black-3 fs14 pb10 zb-b-b">You Need To Do </div>
-          <div>{this.state.test}</div>
           {
             unsign && unsign.map((item, index)=>{
               return (
