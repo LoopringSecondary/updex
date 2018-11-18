@@ -34,6 +34,10 @@ const OrderMetaItem = (props) => {
 
 class TakerConfirm extends React.Component {
 
+  state = {
+    test : ''
+  }
+
   render() {
     const {dispatch, takerConfirm, gas, balance, pendingTx, socket} = this.props
     const {makerOrder} = takerConfirm
@@ -174,104 +178,116 @@ class TakerConfirm extends React.Component {
         return
       }
       try {
-        const {unsigned} = await orderFormatter.signP2POrder(tradeInfo, address)
-        const signResult = await signOrder(completeOrder)
-        if (signResult.error) {
-          Notification.open({
-            message: intl.get('notifications.title.place_order_failed'),
-            description: signResult.error.message,
-            type: 'error'
-          })
-          return
-        }
-        const signedOrder = {...completeOrder, ...signResult.result, powNonce: 100}
-        const txs = unsigned.filter(item => item.type === 'tx');
-        eachOfLimit(txs, 1, async (item, key, callback) => {
-          signTx(item.data).then(res => {
-            if (res.result) {
-              window.ETH.sendRawTransaction(res.result).then(resp => {
-                if (resp.result) {
-                  window.RELAY.account.notifyTransactionSubmitted({
-                    txHash: resp.result,
-                    rawTx: item.data,
-                    from: address
-                  })
-                  callback()
-                } else {
-                  callback(resp.error)
-                }
-              })
-            } else {
-              callback(res.error)
-            }
-          })
-        }, async function (e) {
-          if (e) {
+        const unsigned = await orderFormatter.generateSignData({tradeInfo, order:completeOrder, completeOrder, address}) //[{type:order}, {type:tx}]
+        unsigned.push({type: 'submitRing'})
+
+        console.log(1, unsigned, window.WALLET.getUnlockType())
+        Toast.info(window.WALLET.getUnlockType(), 3)
+        this.setState({test:unsigned})
+        dispatch({type:'placeOrderSteps/unsign', payload: {task:'sign', unsign:unsigned, signWith:window.WALLET.getUnlockType()}})
+        dispatch({type: 'layers/showLayer', payload: {id: 'helperOfSign'}})
+
+
+        if(false) {
+          const signResult = await signOrder(completeOrder)
+          if (signResult.error) {
             Notification.open({
               message: intl.get('notifications.title.place_order_failed'),
-              description: e.message,
+              description: signResult.error.message,
               type: 'error'
             })
-          } else {
-            const nonce = txs.length > 0 ? toHex(toNumber(txs[txs.length - 1].data.nonce) + 1) : toHex((await window.RELAY.account.getNonce(address)).result)
-            const tx = {
-              value: '0x0',
-              gasLimit: config.getGasLimitByType('submitRing').gasLimit,
-              chainId: config.getChainId(),
-              to: order.protocol,
-              gasPrice,
-              nonce,
-              data: Contracts.LoopringProtocol.encodeSubmitRing([{...signedOrder}, {
-                ...makerOrder.originalOrder,
-                tokenS: config.getTokenBySymbol(makerOrder.originalOrder.tokenS).address,
-                tokenB: config.getTokenBySymbol(makerOrder.originalOrder.tokenB).address,
-                owner: makerOrder.originalOrder.address,
-                marginSplitPercentage: toNumber(makerOrder.originalOrder.marginSplitPercentage)
-              }], address)
-            };
-            window.RELAY.order.placeOrderForP2P({
-              ...signedOrder,
-              authPrivateKey: ''
-            }, makerOrder.originalOrder.hash).then(response => {
-              if (response.error) {
-                Notification.open({
-                  message: intl.get('notifications.title.place_order_failed'),
-                  description: response.error.code ? intl.get('common.errors.' + response.error.message) : response.error.message,
-                  type: 'error'
-                })
-                return;
-              }
-              signTx(tx).then(res => {
-                if (res.result) {
-                  window.RELAY.ring.submitRingForP2P({
-                    makerOrderHash: makerOrder.originalOrder.hash,
-                    rawTx: res.result,
-                    takerOrderHash: response.result
-                  }).then(resp => {
-                    if (resp.result) {
-                      dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder: true}});
-                      Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
-                      hideLayer({id: 'takerConfirm'})
-                      window.RELAY.account.notifyTransactionSubmitted({
-                        txHash: resp.result,
-                        rawTx: tx,
-                        from: address
-                      })
-                    } else {
-                      Notification.open({
-                        message: intl.get('notifications.title.submit_ring_fail'),
-                        description: resp.error.code ? intl.get('common.errors.' + resp.error.message) : resp.error.message,
-                        type: 'error'
-                      })
-                    }
-                  })
-                } else {
-                  Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + res.error.message, 3, null, false)
-                }
-              })
-            })
+            return
           }
-        })
+          const signedOrder = {...completeOrder, ...signResult.result, powNonce: 100}
+          const txs = unsigned.filter(item => item.type === 'tx');
+          eachOfLimit(txs, 1, async (item, key, callback) => {
+            signTx(item.data).then(res => {
+              if (res.result) {
+                window.ETH.sendRawTransaction(res.result).then(resp => {
+                  if (resp.result) {
+                    window.RELAY.account.notifyTransactionSubmitted({
+                      txHash: resp.result,
+                      rawTx: item.data,
+                      from: address
+                    })
+                    callback()
+                  } else {
+                    callback(resp.error)
+                  }
+                })
+              } else {
+                callback(res.error)
+              }
+            })
+          }, async function (e) {
+            if (e) {
+              Notification.open({
+                message: intl.get('notifications.title.place_order_failed'),
+                description: e.message,
+                type: 'error'
+              })
+            } else {
+              const nonce = txs.length > 0 ? toHex(toNumber(txs[txs.length - 1].data.nonce) + 1) : toHex((await window.RELAY.account.getNonce(address)).result)
+              const tx = {
+                value: '0x0',
+                gasLimit: config.getGasLimitByType('submitRing').gasLimit,
+                chainId: config.getChainId(),
+                to: order.protocol,
+                gasPrice,
+                nonce,
+                data: Contracts.LoopringProtocol.encodeSubmitRing([{...signedOrder}, {
+                  ...makerOrder.originalOrder,
+                  tokenS: config.getTokenBySymbol(makerOrder.originalOrder.tokenS).address,
+                  tokenB: config.getTokenBySymbol(makerOrder.originalOrder.tokenB).address,
+                  owner: makerOrder.originalOrder.address,
+                  marginSplitPercentage: toNumber(makerOrder.originalOrder.marginSplitPercentage)
+                }], address)
+              };
+              window.RELAY.order.placeOrderForP2P({
+                ...signedOrder,
+                authPrivateKey: ''
+              }, makerOrder.originalOrder.hash).then(response => {
+                if (response.error) {
+                  Notification.open({
+                    message: intl.get('notifications.title.place_order_failed'),
+                    description: response.error.code ? intl.get('common.errors.' + response.error.message) : response.error.message,
+                    type: 'error'
+                  })
+                  return;
+                }
+                signTx(tx).then(res => {
+                  if (res.result) {
+                    window.RELAY.ring.submitRingForP2P({
+                      makerOrderHash: makerOrder.originalOrder.hash,
+                      rawTx: res.result,
+                      takerOrderHash: response.result
+                    }).then(resp => {
+                      if (resp.result) {
+                        dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder: true}});
+                        Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
+                        hideLayer({id: 'takerConfirm'})
+                        window.RELAY.account.notifyTransactionSubmitted({
+                          txHash: resp.result,
+                          rawTx: tx,
+                          from: address
+                        })
+                      } else {
+                        Notification.open({
+                          message: intl.get('notifications.title.submit_ring_fail'),
+                          description: resp.error.code ? intl.get('common.errors.' + resp.error.message) : resp.error.message,
+                          type: 'error'
+                        })
+                      }
+                    })
+                  } else {
+                    Toast.fail(intl.get('notifications.title.submit_ring_fail') + ':' + res.error.message, 3, null, false)
+                  }
+                })
+              })
+            }
+          })
+        }
+
       } catch (e) {
         Notification.open({
           message: intl.get('notifications.title.place_order_failed'),
@@ -294,6 +310,7 @@ class TakerConfirm extends React.Component {
           <div className="color-black-1">{intl.get('p2p_order.order_title')}</div>
         </NavBar>
         <div className="p20 bg-white">
+          {this.state.test}
           <div className="pb20 row ml0 mr0 no-gutters align-items-center justify-content-center">
             <div className="col-auto">
               <div className="bg-primary-light text-primary d-flex align-items-center justify-content-center" style={{
