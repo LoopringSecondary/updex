@@ -1,4 +1,4 @@
-// import '@babel/polyfill'
+import '@babel/polyfill'
 import dva from 'dva'
 import { models } from './modules'
 import { message } from 'antd'
