@@ -45,7 +45,6 @@ class PlaceOrderSign extends React.Component {
     const address = (window.Wallet && window.Wallet.address) || storage.wallet.getUnlockedAddress()
     const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current).times(1e9))
     const {unsign, makerOrder, signed} = placeOrderSteps
-    console.log(111, signed)
     const takerOrderSigned = signed.find((n) => n && n.type === 'order')
     let submitRingRawTx = unsign.find((n) => n.type === 'submitRing') || {}
     if(takerOrderSigned) {
@@ -120,7 +119,6 @@ class PlaceOrderSign extends React.Component {
     async function signAndDoSubmit() {
       Toast.loading(intl.get('sign.submitting'), 0, null, false);
       signTx(submitRingRawTx.data).then(signSubmitRing => {
-        console.log(1, signSubmitRing)
         if (signSubmitRing.result) {
           const txs = submitDatas.filter(item => item.type === 'tx');
           eachLimit(txs, 1, async function (item, callback) {
@@ -141,13 +139,11 @@ class PlaceOrderSign extends React.Component {
               Toast.fail(error, 3, null, false)
             } else {
               window.RELAY.order.placeOrderForP2P({...takerOrderSigned.data, authPrivateKey: ''}, makerOrder.originalOrder.hash).then(placeOrder=>{
-                console.log(2, placeOrder)
                 if (placeOrder.error) {
                   Toast.hide();
                   Toast.fail(placeOrder.error.code ? intl.get('common.errors.' + placeOrder.error.message) : placeOrder.error.message, 3, null, false)
                 } else {
                   window.RELAY.ring.submitRingForP2P({makerOrderHash: makerOrder.originalOrder.hash, rawTx: signSubmitRing.result, takerOrderHash:placeOrder.result}).then(submitRing=> {
-                    console.log(3, submitRing)
                     if (submitRing.result) {
                       Toast.hide();
                       Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
