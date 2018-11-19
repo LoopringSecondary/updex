@@ -238,10 +238,10 @@ class TakerConfirm extends React.Component {
 
           <OrderMetaItem label={intl.get('common.ttl')}
                          value={`${validSince.format('MM-DD HH:mm')} ~ ${validUntil.format('MM-DD HH:mm')}`}/>
-          <Button type="primary" className="mt15" onClick={submitRing}>{intl.get('common.exchange')}</Button>
+          <Button type="primary" className="mt15 ml15 mr15" onClick={submitRing}>{intl.get('common.exchange')}</Button>
         </div>
         <div className="bg-white mt10">
-          <div className="pt15 pb15 fs14">{intl.get('common.my_assets')}</div>
+          <div className="pt15 pb15 fs14">{intl.get('user_center.my_assets')}</div>
           <HelperOfBalances />
         </div>
       </div>
