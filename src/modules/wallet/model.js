@@ -117,6 +117,7 @@ export default {
       storage.wallet.storeUnlockedAddress(unlockType, address);
       // yield call(register, {owner:payload.address});
       yield put({type: 'unlock', payload});
+      yield put({type: 'sockets/unlocked'});
       yield put({type: 'placeOrder/unlock'});
     },
     * unlockAddressWallet({payload}, {put}) {
