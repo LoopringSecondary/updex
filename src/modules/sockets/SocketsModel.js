@@ -6,7 +6,7 @@ const namespace = 'sockets'
 let initState = {
   items: [],
   item: {},
-  loading: true,
+  loading: false,
   loaded: false,
   page:{
     total:0,
@@ -163,9 +163,9 @@ export default {
       yield put({type:'fetch',payload:{id:'estimatedGasPrice'}})
       yield put({type:'fetch',payload:{id:'circulrNotify'}})
       yield put({type:'fetch',payload:{id:'tickersOfSource'}})
-      if(storage.wallet.getUnlockedAddress()){
-         yield put({type:'unlocked'})
-      }
+      // if(storage.wallet.getUnlockedAddress()){
+      //    yield put({type:'unlocked'})
+      // }
       if(!window.emitEvents) window.emitEvents = []
       for (var i =  window.emitEvents.length - 1; i >= 0; i--) {
         yield put(window.emitEvents[i])

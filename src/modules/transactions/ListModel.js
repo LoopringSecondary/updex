@@ -143,7 +143,6 @@ export default {
 
     // filters 变化时 page.current也必须变化
     filtersChangeStart(state,action){
-      debugger;
       console.log('filtersChangeStart:',action);
       let {payload} = action
       let {id} = payload
