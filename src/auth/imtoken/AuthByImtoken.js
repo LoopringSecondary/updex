@@ -56,7 +56,9 @@ class AuthByImtoken extends React.Component {
       }, 1000)
     } else {
       const language = routeActions.location.getQueryByName(_props, 'locale')
-      _props.dispatch({type: 'locales/setLocale', payload: {locale: language}})
+      // _props.dispatch({type: 'locales/setLocale', payload: {locale: language}})
+      console.log(language)
+      setLocale(language)
     }
   }
 
