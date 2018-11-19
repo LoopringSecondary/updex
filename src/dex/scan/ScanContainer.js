@@ -12,9 +12,11 @@ class ScanContainer extends React.Component {
 
   componentDidMount() {
     const {dispatch} = this.props
-    Toast.loading(intl.get('common.list.loading'), 0, null, false);
     const type = routeActions.location.getQueryByName(this.props, 'type')
-    const v = routeActions.location.getQueryByName(this.props, 'value')
+    if(!type){
+      return
+    }
+    Toast.loading(intl.get('common.list.loading'), 0, null, false);
     try {
       switch (type) {
         case "UUID":
@@ -36,6 +38,7 @@ class ScanContainer extends React.Component {
         case 'sign':
         case 'cancelOrder':
         case 'convert':
+          const v = routeActions.location.getQueryByName(this.props, 'value')
           window.RELAY.account.notifyCircular({
             "owner": window.Wallet.address,
             "body": {hash: v, "status": "received"}
