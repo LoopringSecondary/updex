@@ -10,7 +10,7 @@ import {setLocale} from "../../common/utils/localeSetting";
 
 class AuthByImtoken extends React.Component {
 
-  componentDidMount () {
+  componentWillMount () {
     const _props = this.props
     const address = storage.wallet.getUnlockedAddress()
     if (address) {
@@ -57,7 +57,6 @@ class AuthByImtoken extends React.Component {
     } else {
       const language = routeActions.location.getQueryByName(_props, 'locale')
       // _props.dispatch({type: 'locales/setLocale', payload: {locale: language}})
-      console.log(language)
       setLocale(language)
     }
   }
