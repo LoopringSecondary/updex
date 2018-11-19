@@ -150,7 +150,6 @@ export default {
     * customChange({payload}, {put, select}) {
       const {customPath, dpath, walletType, mnemonic} = yield select((state) => state.determineWallet);
       const path = payload.customPath;
-      debugger;
       if (customPath === dpath) {
         if (path) {
           switch (walletType) {
