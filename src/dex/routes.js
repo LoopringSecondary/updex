@@ -14,7 +14,6 @@ import Notifications from './notifications/Notifications'
 import ListTodos from './notifications/ListTodos'
 import CommonModals from '../components/Modals'
 import SignModals from './sign/Modals'
-import Face2FaceModals from '../face2face/Modals'
 import storage from 'modules/storage'
 import ScanQrcode from './scan/ScanContainer'
 
@@ -53,7 +52,6 @@ const Logged = (props)=>{
         <Tokens.Modals />
         <Account.Modals />
         <SignModals />
-        <Face2FaceModals />
       </div>
     )
   }else{
