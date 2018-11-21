@@ -360,3 +360,4 @@ function mapStatetoProps(state) {
 }
 
 export default connect(mapStatetoProps)(TakerConfirm)
+

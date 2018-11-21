@@ -513,7 +513,7 @@ export async function generateSignData({tradeInfo, order, completeOrder, address
           amount: '0x0',
           nonce: fm.toHex(nonce)
         })
-        unsigned.push({type: 'tx', data: cancel, description: `Cancel ${item.value.symbol} allowance`, address})
+        unsigned.push({type: 'tx', data: cancel, description: `Cancel ${item.value.symbol} allowance`, title:'approveZero', token:item.value.symbol, address})
         nonce = nonce + 1;
       }
       const approve = generateApproveTx({
@@ -523,7 +523,7 @@ export async function generateSignData({tradeInfo, order, completeOrder, address
         amount: '0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff',
         nonce: fm.toHex(nonce)
       })
-      unsigned.push({type: 'tx', data: approve, description: `Approve ${item.value.symbol} allowance`, address})
+      unsigned.push({type: 'tx', data: approve, description: `Approve ${item.value.symbol} allowance`, title:'approve', token:item.value.symbol, address})
       nonce = nonce + 1;
     });
   }

@@ -225,9 +225,9 @@ class PlaceOrderForm extends React.Component {
           }
         })
       } else {
-        const validSince = moment()
+        const validSince = moment().subtract(1, 'hours')
         const validUntil = moment().add(1, 'months')
-        dispatch({type:'placeOrder/validTimeChange', payload:{validSince, validUntil}})
+        dispatch({type:'ttl/validTimeChange', payload:{validSince, validUntil}})
         showLayer({id:'placeOrderSteps'})
       }
     }

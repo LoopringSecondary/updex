@@ -45,7 +45,7 @@ function Modals(props) {
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfTTL">
-        <UiContainers.Popups id="helperOfTTL" className="h-100" style={{height:'100%'}}>
+        <UiContainers.Popups id="helperOfTTL" className="" style={{height:'100%'}}>
           <HelperOfTTL />
         </UiContainers.Popups>
       </Containers.Layers>
