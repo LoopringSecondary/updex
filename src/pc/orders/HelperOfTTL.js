@@ -15,9 +15,8 @@ class TTLForm extends React.Component {
     if(validUntil) defaultTo = validUntil
 
     function timeToLiveValueChange(e) {
-      const start = moment()
       const end = moment(e)
-      dispatch({type:'ttl/validTimeChange', payload:{validSince: start, validUntil: end}})
+      dispatch({type:'ttl/validTimeChange', payload:{validUntil: end}})
     }
 
     const hideLayer = (payload = {}) => {
