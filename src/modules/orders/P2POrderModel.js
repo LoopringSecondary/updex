@@ -11,8 +11,6 @@ export default {
     tokenB: 'WETH',
     amountS: '',
     amountB: '',
-    validSince: null,
-    validUntil: null,
     loading: false,
     qrcode: '',
     fetchOrder:false,
@@ -98,15 +96,6 @@ export default {
       return {
         ...state,
         qrcode
-      }
-    },
-    validTimeChange (state, action) {
-      let {payload} = action
-      const {validSince, validUntil} = payload
-      return {
-        ...state,
-        validSince,
-        validUntil
       }
     },
     setFetchOrder(state,{payload}){
