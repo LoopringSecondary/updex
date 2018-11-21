@@ -2,7 +2,7 @@ import React from 'react'
 import Containers from 'modules/containers'
 import UiContainers from 'LoopringUI/containers'
 import HelperOfTokens from './HelperOfTokens'
-import HelperOfTTL from './HelperOfTTL'
+import HelperOfTTL from 'mobile/orders/HelperOfTTL'
 import HelperOfMiniFill from './HelperOfMiniFill'
 import HelperOfAmount from './HelperOfAmount'
 import HelperOfFAQ from './HelperOfFAQ'
@@ -48,7 +48,7 @@ function Modals(props) {
         </UiContainers.Drawer>
       </Containers.Layers>
       <Containers.Layers id="helperOfTTL">
-        <UiContainers.Drawer id="helperOfTTL" position="right" className="h-100" style={{height:'100%',width:"27.5rem",margin:'0 auto'}}>
+        <UiContainers.Drawer id="helperOfTTL" zIndex={1091} position="right" className="h-100" style={{height:'100%',width:"27.5rem",margin:'0 auto'}}>
           <HelperOfTTL />
         </UiContainers.Drawer>
       </Containers.Layers>

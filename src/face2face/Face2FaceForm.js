@@ -9,6 +9,7 @@ import Worth from 'modules/settings/Worth'
 import TokenFm from 'modules/tokens/TokenFm'
 import config from 'common/config'
 import {p2pVerification} from 'modules/orders/formatters'
+import moment from 'moment'
 
 class Face2FaceForm extends React.Component {
   state = {
@@ -102,6 +103,9 @@ class Face2FaceForm extends React.Component {
       } else {
         showLayer({id:'face2FaceConfirm'})
       }
+      const validSince = moment().subtract(1, 'hours')
+      const validUntil = moment().add(1, 'months')
+      dispatch({type:'ttl/validTimeChange', payload:{validSince, validUntil}})
       this.setState({submitLoading:false})
     }
     const price = amountB && toBig(amountB).gt(0) && amountS && toBig(amountS).gt(0) ? toFixed(toBig(amountS).div(amountB), 8) : toFixed(toBig(0),8)

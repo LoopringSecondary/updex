@@ -39,13 +39,13 @@ const OrderMetaItem = (props) => {
 }
 
 function PlaceOrderSteps(props) {
-  const {p2pOrder, balance, settings, marketcap, gas, pendingTx, dispatch, socket} = props
+  const {p2pOrder, balance, settings, marketcap, gas, pendingTx, dispatch, socket, ttl} = props
   const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
   let {tokenS, tokenB, amountS, amountB, count = 1} = p2pOrder
   amountS = toBig(amountS)
   amountB = toBig(amountB)
-  const validSince = p2pOrder.validSince || moment().subtract(1, 'hours')
-  const validUntil = p2pOrder.validUntil || moment().add(1, 'months')
+  const validSince = ttl.validSince || moment().subtract(1, 'hours')
+  const validUntil = ttl.validUntil || moment().add(1, 'months')
   const price = toFixed(amountS.div(amountB), 8)
 
   const showLayer = (payload = {}) => {
@@ -261,7 +261,8 @@ function mapToProps(state) {
     settings: state.settings,
     pendingTx: state.sockets.pendingTx,
     gas: state.gas,
-    socket: state.sockets.socket
+    socket: state.sockets.socket,
+    ttl: state.ttl
   }
 }
 
