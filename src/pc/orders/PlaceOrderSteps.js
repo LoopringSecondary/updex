@@ -85,8 +85,9 @@ class PlaceOrderSteps extends React.Component {
   }
 
   render () {
-    const {placeOrder, settings, marketcap, dispatch,placeOrderSteps} = this.props
-    const {pair, priceInput, amountInput, validSince, validUntil} = placeOrder
+    const {placeOrder, settings, marketcap, dispatch,placeOrderSteps, ttl} = this.props
+    const {pair, priceInput, amountInput} = placeOrder
+    const {validSince, validUntil} = ttl
     let side = placeOrderSteps.side ? placeOrderSteps.side : placeOrder.side
     
     const total = toBig(amountInput).times(toBig(priceInput)).toString(10)
@@ -220,7 +221,8 @@ function mapToProps (state) {
     placeOrder: state.placeOrder,
     settings: state.settings,
     marketcap: state.sockets.marketcap.items,
-    auth: state.sockets.circulrNotify.item
+    auth: state.sockets.circulrNotify.item,
+    ttl: state.ttl
   }
 }
 
