@@ -24,8 +24,6 @@ export default {
    unsigned:null,
    signed:null,
    confirmButtonState : 1, //1:init, 2:loading, 3:submitted
-   validSince: null,
-   validUntil: null,
   },
   effects:{
     *init({ payload={} }, { put }) {
@@ -261,15 +259,6 @@ export default {
         rawOrder
       }
     },
-    validTimeChange(state, action) {
-      let {payload} = action
-      const {validSince, validUntil} = payload
-      return {
-        ...state,
-        validSince,
-        validUntil
-      }
-    }
   },
 };
 

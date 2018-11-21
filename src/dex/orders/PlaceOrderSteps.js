@@ -103,8 +103,9 @@ const PlaceOrderResult = ({
   );
 };
 function PlaceOrderSteps(props) {
-  const {placeOrder, settings, marketcap, dispatch} = props
-  const {side, pair, priceInput, amountInput, validSince, validUntil} = placeOrder
+  const {placeOrder, settings, marketcap, dispatch, ttl} = props
+  const {side, pair, priceInput, amountInput} = placeOrder
+  const {validSince, validUntil} = ttl
   const total = toBig(amountInput).times(toBig(priceInput)).toString(10)
   const tokens = getTokensByMarket(pair)
   const lrcFeeValue = orderFormatter.calculateLrcFee(marketcap, total, settings.trading.lrcFee, tokens.right)
@@ -287,7 +288,8 @@ function mapToProps(state) {
   return {
     placeOrder:state.placeOrder,
     settings:state.settings,
-    marketcap:state.sockets.marketcap.items
+    marketcap:state.sockets.marketcap.items,
+    ttl:state.ttl
   }
 }
 export default connect(mapToProps)(PlaceOrderSteps)
