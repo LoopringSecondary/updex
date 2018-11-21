@@ -12,7 +12,6 @@ import Settings from './Settings'
 import OrderDetail from './Detail'
 import OrderQrcode from './Qrcode'
 import TakerConfirm from './TakerConfirm'
-import SignOrderAndTxs from './SignOrderAndTxs'
 
 function Modals(props) {
   return (
@@ -72,12 +71,8 @@ function Modals(props) {
           <HelperOfAmount />
         </UiContainers.Popups>
       </Containers.Layers>
-      <Containers.Layers id="helperOfSign">
-        <UiContainers.Popups id="helperOfSign">
-          <SignOrderAndTxs />
-        </UiContainers.Popups>
-      </Containers.Layers>
     </div>
   )
 }
 export default Modals
+
