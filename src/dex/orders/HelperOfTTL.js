@@ -9,15 +9,15 @@ import storage from 'modules/storage'
 
 class TTLForm extends React.Component {
   render() {
-    const { placeOrder,dispatch } = this.props
-    const {validUntil} = placeOrder
+    const { ttl,dispatch } = this.props
+    const {validUntil} = ttl
     let defaultTo = moment().add(1, 'months')
     if(validUntil) defaultTo = validUntil
 
     function timeToLiveValueChange(e) {
       const start = moment()
       const end = moment(e)
-      dispatch({type:'placeOrder/validTimeChange', payload:{validSince: start, validUntil: end}})
+      dispatch({type:'ttl/validTimeChange', payload:{validSince: start, validUntil: end}})
     }
 
     const hideLayer = (payload = {}) => {
@@ -56,7 +56,7 @@ class TTLForm extends React.Component {
 }
 function mapToProps(state) {
   return {
-    placeOrder:state.placeOrder,
+    ttl:state.ttl,
     settings:state.settings,
   }
 }
