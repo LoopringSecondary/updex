@@ -202,7 +202,7 @@ class PlaceOrderForm extends React.Component {
           }
         })
       } else {
-        const validSince = moment()
+        const validSince = moment().subtract(1, 'hours')
         let validUntil = null
         switch(trading.timeToLiveUnit) {
           case 'hour': validUntil = moment().add(trading.timeToLive, 'hours'); break;
@@ -210,7 +210,7 @@ class PlaceOrderForm extends React.Component {
           case 'week': validUntil = moment().add(trading.timeToLive, 'weeks'); break;
           case 'month': validUntil = moment().add(trading.timeToLive, 'months'); break;
         }
-        dispatch({type:'placeOrder/validTimeChange', payload:{validSince, validUntil}})
+        dispatch({type:'ttl/validTimeChange', payload:{validSince, validUntil}})
         showLayer({id:'placeOrderSteps'})
       }
     }
