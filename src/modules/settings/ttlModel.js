@@ -23,11 +23,14 @@ export default {
     validTimeChange (state, action) {
       let {payload} = action
       const {validSince, validUntil} = payload
+      const since = validSince ? validSince : state.validSince
+      const until = validUntil ? validUntil : state.validUntil
       return {
         ...state,
-        validSince,
-        validUntil
+        validSince : since,
+        validUntil : until
       }
     },
   },
 }
+
