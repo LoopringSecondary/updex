@@ -7,6 +7,7 @@ import { Icon } from 'antd'
 import { connect } from 'dva'
 import { toBig } from 'LoopringJS/common/formatter'
 import { getBalanceBySymbol } from '../modules/tokens/TokenFm'
+import storage from 'modules/storage'
 
 class DexHomeLayout extends React.Component {
   constructor (props) {
@@ -14,15 +15,33 @@ class DexHomeLayout extends React.Component {
   }
 
   render () {
-    const {balance, txs, allocates} = this.props
+    const {} = this.props
     const url = routeActions.match.getUrl(this.props)
     const pathname = routeActions.location.getPathname(this.props)
-    const changeTab = (path) => {
-      routeActions.gotoPath(`/dex/${path}`)
-    }
     const isActive = (path) => {
       return pathname.indexOf(path) > -1
     }
+    const {dispatch} = this.props
+    const address =  storage.wallet.getUnlockedAddress()
+    const showLayer = (payload = {}) => {
+      dispatch({
+        type: 'layers/showLayer',
+        payload: {...payload}
+      })
+    } 
+    const changeTab = (path) => {
+      if( path === 'usercenter'){
+        if(address && address !== 'undefined' &&  address !== 'null'){
+          routeActions.gotoPath(`/dex/${path}`)
+        }else {
+          console.log('changeTab usercenter')
+          showLayer({id:'authOfMobile'})
+        }
+      }else{
+        routeActions.gotoPath(`/dex/${path}`)
+      }
+    }
+
     return (
       <div style={{}}>
         {this.props.children}
@@ -100,12 +119,9 @@ class DexHomeLayout extends React.Component {
 
 function mapStateToProps (state) {
   return {
-    balance: state.sockets.balance,
-    txs: state.sockets.pendingTx.items,
-    allocates: state.sockets.orderAllocateChange.items,
   }
 }
 
-export default connect(mapStateToProps)(DexHomeLayout)
+export default connect()(DexHomeLayout)
 
 
