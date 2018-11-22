@@ -25,11 +25,11 @@ class Home extends React.Component {
                 <span  key="1" className="text-primary" onClick={()=>{}}><Icon type="scan" /></span>
               ]}
             >
-            Home
+            <div className="color-black">Home</div>
             </NavBar>
             <div className="divider 1px zb-b-t"></div>
              <div className="pt25 pb25 zb-b-b text-center bg-white">
-               <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
+               <img className="h-50" src={require('../../assets/images/up-logo-notext-filled.png')} alt=""/>
                <div className="fs20 color-black-1 mt10">LoopringDEX</div>
                <div className="fs12 color-black-2">A New Version is Coming Soon</div>
              </div>
