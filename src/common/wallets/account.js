@@ -1,22 +1,22 @@
 import validator from 'LoopringJS/ethereum/validator';
-import {addHexPrefix, clearHexPrefix, formatAddress, formatKey, toBuffer, toHex, toNumber} from 'LoopringJS/common/formatter';
+import {
+  addHexPrefix,
+  clearHexPrefix,
+  formatAddress,
+  formatKey,
+  toBuffer,
+  toHex,
+  toNumber
+} from 'LoopringJS/common/formatter';
 import {decryptKeystoreToPkey, pkeyToKeystore} from 'LoopringJS/ethereum/keystore';
-import {privateToAddress, privateToPublic, publicToAddress, sha3, hashPersonalMessage, ecsign} from 'ethereumjs-util';
+import {ecsign, hashPersonalMessage, privateToAddress, privateToPublic, publicToAddress, sha3} from 'ethereumjs-util';
 import {mnemonictoPrivatekey} from 'LoopringJS/ethereum/mnemonic';
 import {generateMnemonic} from 'bip39';
-import {trimAll} from 'LoopringJS/common/utils';
+import {keccakHash, trimAll} from 'LoopringJS/common/utils';
 import HDKey from 'hdkey';
-import EthTransaction from 'ethereumjs-tx';
 import {getOrderHash} from 'LoopringJS/relay/rpc/order';
-import * as Trezor from 'LoopringJS/ethereum/trezor';
-import * as Ledger from 'LoopringJS/ethereum/ledger';
-import * as MetaMask from 'LoopringJS/ethereum/metaMask';
 import Wallet from 'ethereumjs-wallet';
-import { keccakHash } from 'LoopringJS/common/utils'
-import moment from 'moment'
 import {LedgerAccount as LedgerAcc, MetaMaskAccount as MetaMaskAcc} from 'LoopringJS/ethereum/account'
-import intl from "react-intl-universal";
-import Notification from 'LoopringUI/components/Notification'
 
 const wallets = require('LoopringJS/config/wallets.json');
 const LoopringWallet = wallets.find(wallet => trimAll(wallet.name).toLowerCase() === 'loopringwallet');

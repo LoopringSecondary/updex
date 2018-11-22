@@ -28,7 +28,7 @@ class DexHomeLayout extends React.Component {
         type: 'layers/showLayer',
         payload: {...payload}
       })
-    } 
+    }
     const changeTab = (path) => {
       if( path === 'usercenter'){
         if(address && address !== 'undefined' &&  address !== 'null'){
@@ -52,7 +52,7 @@ class DexHomeLayout extends React.Component {
           >
             <TabBar.Item
               title={
-                <span className={isActive('/dex/home') ? 'text-primary' : ''}>Home{intl.get('common.home')}</span>
+                <span className={isActive('/dex/home') ? 'text-primary' : ''}>{intl.get('common.home')}</span>
               }
               key="home"
               icon={

@@ -73,6 +73,7 @@ const words = {
   order_book:"订单表",
   next_step:'下一步',
   exchange:"兑换",
+  home:'首页',
   list: {
     no_data: '暂无数据',
     no_data_custom: '暂无{title}',
@@ -835,14 +836,14 @@ export default {
     order_book:"最新挂单",
     trade_history:"最新成交",
   },
-  set_is_developer:{ 
+  set_is_developer:{
     page_title:'开发者模式',
     closed:'关闭',
     opened:'开启',
   },
   coming_soon:{
     visit_on_pc:"请在电脑端访问 https://circulr.loopring.io ",
-  }, 
+  },
   token_actions:{
     balance:'当前余额',
     available:'可用金额',
