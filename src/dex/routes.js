@@ -40,11 +40,9 @@ const Logged = (props)=>{
         <Route path={`/dex/placeOrder`} exact component={PlaceOrder} />
         <Route path={`/dex/placeOrder/:market`} exact component={PlaceOrder} />
         <Route path={`/dex/usercenter`} component={UserCenter} />
-        <Route path={`/dex/convert/:token`} component={Convert} />
         <Route path={`/dex/notifications`} component={Notifications} />
         <Route path={`/dex/todos`} exact component={ListTodos} />
-        <Route path={`/dex/messages`} exact component={Pages.Todo} />
-        <Route path={`/dex/settings`} exact component={Pages.Todo} />
+        <Redirect from="/" to="/dex/home" />
         <Redirect from="/dex" to="/dex/home" />
       </Switch>
       <CommonModals />
@@ -63,7 +61,7 @@ export default class Routes extends React.Component {
   render() {
     return (
       <Switch>
-        <Route path={`/dex`}  component={Logged} />
+        <Route path={`/`}  component={Logged} />
       </Switch>
     );
   }
