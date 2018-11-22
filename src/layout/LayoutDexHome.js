@@ -3,40 +3,26 @@ import { Link, Redirect, Route, Switch } from 'dva/router'
 import routeActions from 'common/utils/routeActions'
 import intl from 'react-intl-universal'
 import { TabBar } from 'antd-mobile'
+import { Icon } from 'antd'
 import { connect } from 'dva'
-import storage from 'modules/storage'
+import { toBig } from 'LoopringJS/common/formatter'
+import { getBalanceBySymbol } from '../modules/tokens/TokenFm'
 
 class DexHomeLayout extends React.Component {
   constructor (props) {
     super(props)
   }
+
   render () {
-    const address =  storage.wallet.getUnlockedAddress()
+    const {balance, txs, allocates} = this.props
     const url = routeActions.match.getUrl(this.props)
     const pathname = routeActions.location.getPathname(this.props)
-    const {dispatch} = this.props
-    const showLayer = (payload = {}) => {
-      dispatch({
-        type: 'layers/showLayer',
-        payload: {...payload}
-      })
-    } 
     const changeTab = (path) => {
-      if( path === 'usercenter'){
-        if(address && address !== 'undefined' &&  address !== 'null'){
-          routeActions.gotoPath(`/dex/${path}`)
-        }else {
-          console.log('changeTab usercenter')
-          showLayer({id:'authOfMobile'})
-        }
-      }else{
-        routeActions.gotoPath(`/dex/${path}`)
-      }
+      routeActions.gotoPath(`/dex/${path}`)
     }
     const isActive = (path) => {
       return pathname.indexOf(path) > -1
     }
-    
     return (
       <div style={{}}>
         {this.props.children}
@@ -47,14 +33,30 @@ class DexHomeLayout extends React.Component {
           >
             <TabBar.Item
               title={
+                <span className={isActive('/dex/home') ? 'text-primary' : ''}>Home{intl.get('common.home')}</span>
+              }
+              key="home"
+              icon={
+                <Icon type="appstore" theme="filled" className="color-primary-light-bak" />
+              }
+              selectedIcon={
+                <Icon type="appstore" theme="filled" className="text-primary" />
+              }
+              selected={isActive('/dex/home')}
+              onPress={() => {
+                changeTab('home')
+              }}
+            />
+            <TabBar.Item
+              title={
                 <span className={isActive('/dex/markets') ? 'text-primary' : ''}>{intl.get('common.markets')}</span>
               }
               key="markets"
               icon={
-                <i className="icon-market color-primary-light-bak"></i>
+                <Icon type="sliders" theme="filled" className="color-primary-light-bak" />
               }
               selectedIcon={
-                <i className="icon-market text-primary"></i>
+                <Icon type="sliders" theme="filled" className="text-primary" />
               }
               selected={isActive('/dex/markets')}
               onPress={() => {
@@ -62,8 +64,12 @@ class DexHomeLayout extends React.Component {
               }}
             />
             <TabBar.Item
-              icon={<i className="icon-trade-m color-primary-light-bak"/>}
-              selectedIcon={<i className="icon-trade-m text-primary"/>}
+              icon={
+                <Icon type="interation" theme="filled" className="color-primary-light-bak" />
+              }
+              selectedIcon={
+                <Icon type="interation" theme="filled" className="text-primary" />
+              }
               title={<span
                 className={isActive('/dex/placeOrder') ? 'text-primary' : ''}>{intl.get('common.trade')}</span>}
               key="placeOrder"
@@ -92,6 +98,14 @@ class DexHomeLayout extends React.Component {
   }
 }
 
-export default connect()(DexHomeLayout)
+function mapStateToProps (state) {
+  return {
+    balance: state.sockets.balance,
+    txs: state.sockets.pendingTx.items,
+    allocates: state.sockets.orderAllocateChange.items,
+  }
+}
+
+export default connect(mapStateToProps)(DexHomeLayout)
 
 
