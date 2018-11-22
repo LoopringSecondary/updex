@@ -14,7 +14,7 @@ class Auth extends React.Component {
   }
   componentWillReceiveProps(newProps){
     const {uuid,item} = newProps
-    if(uuid === item.uuid){
+    if(uuid && uuid === item.uuid){
       // Modal.alert(intl.get('notifications.title.log_in_suc'))
       storage.wallet.storeUnlockedAddress('address', item.owner)
       window.RELAY.account.register(item.address)
