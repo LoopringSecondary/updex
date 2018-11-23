@@ -73,6 +73,17 @@ class Auth extends React.Component {
       }
     })
   }
+  hideLayer = (payload = {}) => {
+    const {dispatch} = this.props
+    dispatch({
+      type:"layers/hideLayer",
+      payload:{
+        ...payload
+      }
+    })
+  }
+
+
   render () {
     const {uuid,item,dispatch} = this.props
     const {address} = this.state;
