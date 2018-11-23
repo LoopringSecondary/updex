@@ -85,7 +85,7 @@ class Auth extends React.Component {
           <List className="no-border am-list-bg-none selectable">
             <InputItem
               type="text"
-              onChange={()=>{}}
+              onChange={(value)=>{this.setState({address:value})}}
               value={address}
               className="circle h-default color-black-2 fs13"
               placeholder="Paste ETH address"
@@ -96,7 +96,7 @@ class Auth extends React.Component {
           </List>
           <Button onClick={this.authByAddress} className="mt20 fs18" type="primary">Unlock</Button>
         </div>
-        
+
       </div>
     )
   }

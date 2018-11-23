@@ -34,7 +34,6 @@ class DexHomeLayout extends React.Component {
         if(address && address !== 'undefined' &&  address !== 'null'){
           routeActions.gotoPath(`/dex/${path}`)
         }else {
-          console.log('changeTab usercenter')
           showLayer({id:'authOfMobile'})
         }
       }else{

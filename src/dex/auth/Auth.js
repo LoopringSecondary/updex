@@ -41,7 +41,7 @@ class Auth extends React.Component {
       const data = {type: 'UUID', value: uuid}
       window.location = `${wallet}://${JSON.stringify(data)}`
     }
-    
+
   }
 
   authByAddress = () => {
@@ -131,7 +131,7 @@ class Auth extends React.Component {
               </div>
             </div>
           </div>
-          <div onClick={()=>_this.showLayer({id:'unlockByAddress'})} className="cursor-pointer row ml15 mr15 p15 no-gutters align-items-center bg-primary"
+          <div onClick={()=>{_this.hideLayer({id:"authOfMobile"}); _this.showLayer({id:'unlockByAddress'})}} className="cursor-pointer row ml15 mr15 p15 no-gutters align-items-center bg-primary"
                style={{padding: '0px 0px',borderRadius:'50em'}}>
             <div className="col-auto text-left ml5 mr15 w-25">
               <i className="icon-eye color-black-1 fs20"></i>
