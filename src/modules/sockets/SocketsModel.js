@@ -138,9 +138,10 @@ export default {
       yield put({type:'fetch',payload:{id:'loopringTickers'}})
       yield put({type:'fetch',payload:{id:'estimatedGasPrice'}})
       yield put({type:'fetch',payload:{id:'tickersOfSource'}})
-      // if(storage.wallet.getUnlockedAddress()){
-      //    yield put({type:'unlocked'})
-      // }
+      // fix : no balance bug when refresh
+      if(storage.wallet.getUnlockedAddress()){
+         yield put({type:'unlocked'})
+      }
       if(!window.emitEvents) window.emitEvents = []
       for (var i =  window.emitEvents.length - 1; i >= 0; i--) {
         yield put(window.emitEvents[i])
