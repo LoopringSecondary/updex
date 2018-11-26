@@ -40,14 +40,14 @@ class Home extends React.Component {
                     <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/dex/placeOrder')}>
                       <div className="row no-gutters align-items-center">
                         <div className="col-auto">
-                          <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="line-chart" /></div>
+                          <div className="circle-45 center-center bg-primary color-white mr10 fs20"><Icon type="line-chart" /></div>
                         </div>
                         <div className="col">
                           <div className="fs16 color-black-1">Market Trade</div>
                           <div className="fs12 color-black-2 lh15">Public trade with everyone </div>
                         </div>
                         <div className="col-auto">
-                          <Button  className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
+                          <Button  className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">Trade</Button>
                         </div>
                       </div>
                     </div>
@@ -56,14 +56,14 @@ class Home extends React.Component {
                     <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/face2face')}>
                       <div className="row no-gutters align-items-center">
                         <div className="col-auto">
-                          <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="team" /></div>
+                          <div className="circle-45 center-center bg-primary color-white mr10 fs20"><Icon type="team" /></div>
                         </div>
                         <div className="col">
                           <div className="fs16 color-black-1">P2P Trade</div>
                           <div className="fs12 color-black-2 lh15">Privacy trade between friends</div>
                         </div>
                         <div className="col-auto">
-                          <Button className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
+                          <Button className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">Trade</Button>
                         </div>
                       </div>
                     </div>
@@ -72,14 +72,14 @@ class Home extends React.Component {
                     <div className="text-left pl10 pr10 pt15 pb15 zb-b-b" onClick={routeActions.gotoPath.bind(this,'/dex/scan')} >
                       <div className="row no-gutters align-items-center">
                         <div className="col-auto">
-                          <div className="circle-45 center-center bg-primary-light text-primary mr10 fs20"><Icon type="scan" /></div>
+                          <div className="circle-45 center-center bg-primary color-white mr10 fs20"><Icon type="scan" /></div>
                         </div>
                         <div className="col">
                           <div className="fs16 color-black-1">QRcode Trade</div>
                           <div className="fs12 color-black-2 lh15">Trade evrerywhere by scanning simplely</div>
                         </div>
                         <div className="col-auto">
-                          <Button className="h-25 lh-25 fs12 color-fff" type="primary" size="small">Trade</Button>
+                          <Button className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">Trade</Button>
                         </div>
                       </div>
                     </div>
@@ -88,7 +88,7 @@ class Home extends React.Component {
                 {
                   false && 
                   <div className="pt25 pb25 zb-b-b text-center bg-white">
-                    <div className="circle-50 m-auto center-center fs25 bg-primary-light text-primary font-weight-bold">
+                    <div className="circle-50 m-auto center-center fs25 bg-primary color-white font-weight-bold">
                       <Icon type="scan" />
                     </div>
                     <div className="fs16 color-black-1 font-weight-bold mt10">UP DEX</div>
@@ -107,7 +107,7 @@ class Home extends React.Component {
                       <div className="text-left pl10 pr5 pt15 pb15" onClick={()=>routeActions.gotoPath('/dex/scan')}>
                         <div className="row no-gutters align-items-center">
                           <div className="col-auto">
-                            <div className="circle-35 center-center bg-primary-light text-primary mr10 fs14 font-weight-bold">01</div>
+                            <div className="circle-35 center-center bg-primary color-white mr10 fs14 font-weight-bold">01</div>
                           </div>
                           <div className="col">
                             <div className="fs13 color-black-1">Feature 01</div>
@@ -120,7 +120,7 @@ class Home extends React.Component {
                       <div className="text-left pl10 pr5 pt15 pb15" onClick={()=>routeActions.gotoPath('/face2face')}>
                         <div className="row no-gutters align-items-center">
                           <div className="col-auto">
-                            <div className="circle-35 center-center bg-primary-light text-primary mr10 fs14 font-weight-bold">02</div>
+                            <div className="circle-35 center-center bg-primary color-white mr10 fs14 font-weight-bold">02</div>
                           </div>
                           <div className="col">
                             <div className="fs13 color-black-1">Feature 02</div>
@@ -133,7 +133,7 @@ class Home extends React.Component {
                       <div className="text-left pl10 pr5 pt15 pb15" onClick={()=>routeActions.gotoPath('/face2face')}>
                         <div className="row no-gutters align-items-center">
                           <div className="col-auto">
-                            <div className="circle-35 center-center bg-primary-light text-primary mr10 fs14 font-weight-bold">03</div>
+                            <div className="circle-35 center-center bg-primary color-white mr10 fs14 font-weight-bold">03</div>
                           </div>
                           <div className="col">
                             <div className="fs13 color-black-1">Feature 03</div>
