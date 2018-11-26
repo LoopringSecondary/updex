@@ -21,6 +21,13 @@ if (latestVersion > oldVersion) {
 }
 window.Toast = Toast
 
+window.onload = function() {
+  document.addEventListener('message', function(e) {
+    alert("code push get updated :"+e.data)
+    window.postMessage("webview内部发送消息给RN")
+  });
+}
+
 // TODO fixbug
 // const host = storage.settings.get().relay.selected;
 const host = configs.relays[0].value
