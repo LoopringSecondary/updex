@@ -74,7 +74,8 @@ class HelperOfTokenActions extends  React.Component{
 
     const showConvert = (token) => {
       hideLayer({id:'helperOfTokenActions'})
-      routeActions.gotoPath(`/dex/convert/${token}`)
+      showLayer({id:'convertToken',symbol})
+      // routeActions.gotoPath(`/dex/convert/${token}`)
     }
 
     const isSupportedTrading = () => {
