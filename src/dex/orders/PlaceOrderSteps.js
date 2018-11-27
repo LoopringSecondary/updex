@@ -131,7 +131,7 @@ function PlaceOrderSteps(props) {
   }
   const showLRCFee = () => {
     // hideLayer({id:'placeOrderSteps'})
-    showLayer({id:'settings'})
+    showLayer({id:'setLRCFee'})
   }
 
   const next = async (page) => {
