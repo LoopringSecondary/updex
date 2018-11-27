@@ -4,6 +4,8 @@ import UiContainers from 'LoopringUI/containers'
 import SignMessages from './SignMessages'
 import SignResult from './SignResult'
 import Login  from './Login'
+import TakerConfirm  from '../../face2face/TakerConfirm'
+import SignOrderAndTxs from '../../face2face/SignOrderAndTxs'
 
 
 function Modals(props) {
@@ -22,6 +24,16 @@ function Modals(props) {
       <Containers.Layers id="login">
         <UiContainers.Popups id="login" className="" style={{height:'100%'}}>
           <Login />
+        </UiContainers.Popups>
+      </Containers.Layers>
+      <Containers.Layers id="takerConfirm">
+        <UiContainers.Popups id="takerConfirm" className="h-100" style={{height:'100%'}} >
+          <TakerConfirm />
+        </UiContainers.Popups>
+      </Containers.Layers>
+      <Containers.Layers id="helperOfSign">
+        <UiContainers.Popups id="helperOfSign">
+          <SignOrderAndTxs />
         </UiContainers.Popups>
       </Containers.Layers>
     </div>
