@@ -55,7 +55,8 @@ class OrderQrcode extends React.Component{
           {wallet.unlockType === 'imToken' &&
             <div className="pt25 pb10 center-center">
               <img className="h-40" src={require('../assets/images/up-logo-notext.png')} alt=""/>
-              <img className="h-40 ml15" src={require('../assets/images/imtoken-white.png')} alt=""/>{intl.get('place_order_by_imtoken.share_with_imtoken')}
+              <span className="fs18 font-weight-bold ml10 text-primary">Circulr DEX</span>
+              <img hidden className="h-50 ml15 bg-primary" src={require('../assets/images/imtoken-white.png')} alt=""/>
             </div>
           }
           {wallet.unlockType !== 'imToken' &&
