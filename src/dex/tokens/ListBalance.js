@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'antd-mobile'
-import { Icon as WebIcon } from 'antd'
+import { Icon as WebIcon,Spin } from 'antd'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
 import { toFixed } from 'LoopringJS/common/formatter'
@@ -33,7 +33,7 @@ const TokenListComp = (props)=>{
   }
 
   return (
-    <div className="fs20">
+    <Spin spinning={balance.loading} className="fs20">
       <table className="w-100 fs14">
         <thead>
           <tr className="">
@@ -75,7 +75,7 @@ const TokenListComp = (props)=>{
             }
         </tbody>
       </table>
-    </div>
+    </Spin>
   )
 }
 export default connect(({

@@ -1,14 +1,18 @@
 import p2p from './p2p'
+import home from './home'
 
 export default {
   common: {
     ...p2p.common,
+    ...home.common,
   },
-  types: {
-    ...p2p.types,
+  pages:{
+  	...p2p.pages,
+  	...home.pages,
   },
-  pages: {
-    ...p2p.pages,
+  types:{
+		...p2p.types,
+		...home.types,
   },
 }
 

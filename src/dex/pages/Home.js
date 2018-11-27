@@ -25,13 +25,13 @@ class Home extends React.Component {
                 <span  key="1" className="text-primary" onClick={()=>{}}><Icon type="scan" /></span>
               ]}
             >
-            Home
+            {intl.get('dex_home.title')}
             </NavBar>
             <div className="divider 1px zb-b-t"></div>
              <div className="pt25 pb25 zb-b-b text-center bg-white">
                <img className="circle-50" src={require('../../assets/images/loopr.png')} alt=""/>
                <div className="fs20 color-black-1 mt10">LoopringDEX</div>
-               <div className="fs12 color-black-2">A New Version is Coming Soon</div>
+               <div hidden className="fs12 color-black-2">A New Version is Coming Soon</div>
              </div>
              <div className=""><div className="1px divider zb-b-b"></div></div>
              <div className="">
@@ -43,11 +43,11 @@ class Home extends React.Component {
                           <div className="circle-45 center-center bg-primary color-white mr10 fs20"><Icon type="line-chart" /></div>
                         </div>
                         <div className="col">
-                          <div className="fs16 color-black-1">Market Trade</div>
-                          <div className="fs12 color-black-2 lh15">Public trade with everyone </div>
+                          <div className="fs16 color-black-1">{intl.get('dex_home.market_trade')}</div>
+                          <div className="fs12 color-black-2 lh15">{intl.get('dex_home.market_trade_description')}</div>
                         </div>
                         <div className="col-auto">
-                          <Button  className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">Trade</Button>
+                          <Button  className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">{intl.get('common.trade')}</Button>
                         </div>
                       </div>
                     </div>
@@ -59,11 +59,11 @@ class Home extends React.Component {
                           <div className="circle-45 center-center bg-primary color-white mr10 fs20"><Icon type="team" /></div>
                         </div>
                         <div className="col">
-                          <div className="fs16 color-black-1">P2P Trade</div>
-                          <div className="fs12 color-black-2 lh15">Privacy trade between friends</div>
+                          <div className="fs16 color-black-1">{intl.get('dex_home.p2p_trade')}</div>
+                          <div className="fs12 color-black-2 lh15">{intl.get('dex_home.p2p_trade_description')}</div>
                         </div>
                         <div className="col-auto">
-                          <Button className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">Trade</Button>
+                          <Button className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">{intl.get('common.trade')}</Button>
                         </div>
                       </div>
                     </div>
@@ -75,11 +75,11 @@ class Home extends React.Component {
                           <div className="circle-45 center-center bg-primary color-white mr10 fs20"><Icon type="scan" /></div>
                         </div>
                         <div className="col">
-                          <div className="fs16 color-black-1">QRcode Trade</div>
-                          <div className="fs12 color-black-2 lh15">Trade evrerywhere by scanning simplely</div>
+                          <div className="fs16 color-black-1">{intl.get('dex_home.qrcode_trade')}</div>
+                          <div className="fs12 color-black-2 lh15">{intl.get('dex_home.qrcode_trade_description')}</div>
                         </div>
                         <div className="col-auto">
-                          <Button className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">Trade</Button>
+                          <Button className="h-25 lh-25 fs12 bg-primary-light text-primary border-none" type="primary" size="small">{intl.get('common.trade')}</Button>
                         </div>
                       </div>
                     </div>
