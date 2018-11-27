@@ -306,6 +306,7 @@ export default {
     instruction_scan: '打开您的UpWallet，扫描二维码，确认信息完成签名，并提交订单',
     instruction_warn: '二维码有效时间24小时，请尽快完成扫码操作，过期后请重新下单生成二维码',
     waiting_sign: '等待手机对订单进行签名提交',
+    share_with_upwallet: '请分享给 UP Wallet 用户来吃单'
   },
   place_order_by_imtoken: {
     title: '使用imToken手机版签名',

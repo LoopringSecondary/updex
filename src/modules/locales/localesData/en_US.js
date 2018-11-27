@@ -298,6 +298,7 @@ export default {
     instruction_scan: 'Open your UpWallet, scan the QRcode and submit',
     instruction_warn: 'The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
     waiting_sign: 'Waiting for your operations on UpWallet to sign and submit',
+    share_with_upwallet: 'Share with UP Wallet user to scan'
   },
   place_order_by_imtoken: {
     title: 'Sign With ImToken',

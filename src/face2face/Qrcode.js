@@ -52,8 +52,13 @@ class OrderQrcode extends React.Component{
           <Icon className="text-primary primary fs12 ml15 cursor-pointer" onClick={()=>hideLayer({id:'orderQrcode'})} key="1" type="close"/>
         </div>
         <div className="text-center bg-white-light ml25 mr25 pl15 pr15 pb15">
-          {
-            true &&
+          {wallet.unlockType === 'imToken' &&
+            <div className="pt25 pb10 center-center">
+              <img className="h-40" src={require('../assets/images/up-logo-notext.png')} alt=""/>
+              <img className="h-40 ml15" src={require('../assets/images/imtoken-white.png')} alt=""/>{intl.get('place_order_by_imtoken.share_with_imtoken')}
+            </div>
+          }
+          {wallet.unlockType !== 'imToken' &&
             <div className="pt25 pb10 center-center">
               <img className="h-40" src={require('../assets/images/up-logo-notext.png')} alt=""/>
               <span className="fs18 font-weight-bold ml10 text-primary">Circulr DEX</span>
@@ -79,6 +84,11 @@ class OrderQrcode extends React.Component{
             {wallet.unlockType === 'imToken' &&
             <div className="mt15 border-none bg-primary color-white fs12 d-block circle h-30 lh-30 center-center">
               <img className="h-15 mr10" src={require('../assets/images/imtoken-white.png')} alt=""/>{intl.get('place_order_by_imtoken.share_with_imtoken')}
+            </div>
+            }
+            {wallet.unlockType !== 'imToken' &&
+            <div className="mt15 border-none bg-primary color-white fs12 d-block circle h-30 lh-30 center-center">
+              {intl.get('place_order_by_upwallet.share_with_upwallet')}
             </div>
             }
           </div>
