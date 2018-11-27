@@ -7,6 +7,7 @@ const PopupsWrapper = (props)=>{
     children,id,
     width,mask,closable=true,maskClosable=true,apisOnly=false,wrapClassName="",className="",
     style,
+    zIndex=1002,
     ...rest
   } = props
   const {[id]:module={}} = props
@@ -17,7 +18,7 @@ const PopupsWrapper = (props)=>{
     visible:module.visible,
     onClose:module.hideLayer && module.hideLayer.bind(this),
     animationType:"slide-up",
-    zIndex:'1002',
+    zIndex,
   }
   const childProps = {...rest}
   return (

@@ -269,7 +269,7 @@ class PlaceOrderSign extends React.Component {
               return (
                 <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
                   <div className="col text-left">
-                    <div className="color-black-1">
+                    <div className="color-black-1 fs16">
                       {index+1}.&nbsp;&nbsp;<Description tx={item}/>
                     </div>
                   </div>
@@ -283,11 +283,11 @@ class PlaceOrderSign extends React.Component {
                     <div className="">
                       {
                         item.type === 'submitRing' &&
-                        <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" disabled={!this.state.enableSubmitRing} onClick={sign.bind(this, item, index)}>{intl.get('sign.sign_and_submit')}</Button>
+                        <Button className="cursor-pointer fs12 h-35 center-center pl15 pr15" type="primary" size="small" disabled={!this.state.enableSubmitRing} onClick={sign.bind(this, item, index)}>{intl.get('sign.sign_and_submit')}</Button>
                       }
                       {
                         item.type !== 'submitRing' &&
-                        <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={sign.bind(this, item, index)}>{intl.get('sign.unsigned')}</Button>
+                        <Button className="cursor-pointer fs12 h-35 center-center pl15 pr15" type="primary" size="small" onClick={sign.bind(this, item, index)}>{intl.get('sign.unsigned')}</Button>
                       }
                     </div>
                     }
