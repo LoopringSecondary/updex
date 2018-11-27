@@ -384,7 +384,8 @@ export default {
     p2p_submit_success: 'Generate P2P Order Successfully',
     p2p_submit_failed: 'Generate P2P Order Failed',
     submitting:"Submitting...",
-    sign_and_submit:'Sign and Submit'
+    sign_and_submit:'Sign and Submit',
+    you_need_to_do: 'Steps You Need To Do'
   },
   // -----------
   // transaction

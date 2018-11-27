@@ -147,6 +147,8 @@ class PlaceOrderSign extends React.Component {
                       Toast.hide();
                       Toast.success(intl.get('notifications.title.submit_ring_suc'), 3, null, false)
                       dispatch({type: 'layers/hideLayer', payload: {id: 'helperOfSign'}})
+                      dispatch({type: 'layers/hideLayer',payload: {id:'takerConfirm'}})
+                      dispatch({type: 'p2pOrder/setFetchOrder', payload: {fetchOrder: true}});
                       window.RELAY.account.notifyTransactionSubmitted({
                         txHash: submitRing.result,
                         rawTx: takerOrderSigned.data,
@@ -263,7 +265,7 @@ class PlaceOrderSign extends React.Component {
     return (
       <div className="">
         <div className="bg-white-light p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>
-          <div className="color-black-3 fs14 pb10 zb-b-b">You Need To Do </div>
+          <div className="color-black-3 fs14 pb10 zb-b-b">{intl.get('sign.you_need_to_do')}</div>
           {
             unsign && unsign.map((item, index)=>{
               return (
