@@ -56,8 +56,6 @@ export default {
         ...state,
         amountS: '',
         amountB: '',
-        validSince: null,
-        validUntil: null,
         loading: false,
         qrcode: '',
         fetchOrder:false,
