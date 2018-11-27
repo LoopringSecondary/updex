@@ -12,7 +12,7 @@ import PlaceOrder from './orders/PlaceOrderPage'
 import UserCenter from './account/UserCenter'
 import Notifications from './notifications/Notifications'
 import ListTodos from './notifications/ListTodos'
-import CommonModals from '../components/Modals'
+import SettingsModals from './settings/Modals'
 import SignModals from './sign/Modals'
 import storage from 'modules/storage'
 import ScanQrcode from './scan/ScanContainer'
@@ -47,7 +47,7 @@ const Logged = (props)=>{
           <Route path={`/dex/todos`} exact component={ListTodos} />
           <Redirect from="/dex" to= {`/dex/home`} />
         </Switch>
-        <CommonModals />
+        <SettingsModals />
         <Orders.Modals />
         <Tokens.Modals />
         <Account.Modals />

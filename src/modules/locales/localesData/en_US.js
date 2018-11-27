@@ -1,6 +1,7 @@
 import modules from './en_US/index.js'
 const words = {
   all: 'All',
+  home: 'Home',
   time: 'Time',
   status: 'Status',
   statuses: 'Statuses',

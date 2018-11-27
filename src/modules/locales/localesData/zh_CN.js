@@ -1,6 +1,7 @@
 import modules from './zh_CN/index.js'
 const words = {
   all: '全部',
+  home: '首页',
   time: '时间',
   status: '状态',
   statuses: '状态',
