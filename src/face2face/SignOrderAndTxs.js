@@ -1,6 +1,6 @@
 import React from 'react';
 import {Collapse, Form, Icon, Input} from 'antd'
-import {Button, Toast} from 'antd-mobile'
+import {Button, Toast,NavBar} from 'antd-mobile'
 import intl from 'react-intl-universal'
 import {connect} from 'dva'
 import Notification from 'LoopringUI/components/Notification'
@@ -218,54 +218,21 @@ class PlaceOrderSign extends React.Component {
       }
 
     };
-    const TxContent = ({tx,index})=>{
-      return (
-        <div className="row p5 zb-b-t">
-          <div className="col-6 pr5">
-            <div className="fs12 color-black-2 mt5">{intl.get('place_order_sign.unsigned_tx')}</div>
-            <Input.TextArea disabled placeholder="" className="fs12 lh20 border-none" autosize={{ minRows: 6, maxRows: 10 }} value={JSON.stringify(unsign[index])}/>
-          </div>
-          <div className="col-6 pl5">
-            <div className="fs12 color-black-2 mt5">{intl.get('place_order_sign.signed_tx')}</div>
-            <Input.TextArea disabled placeholder="" className="fs12 lh20 border-none" autosize={{ minRows: 6, maxRows: 10 }} value={signed && signed[index] ? JSON.stringify(signed[index]) : ''}/>
-          </div>
-        </div>
-      )
-    }
-    const TxHeader = ({tx,index})=>{
-      return (
-        <div className="row pt15 pb15 zb-b-b ml0 mr0 no-gutters align-items-center fs14">
-          <div className="col text-left">
-            <div className="color-black-1">
-              {index+1}.&nbsp;&nbsp;<Description tx={tx}/>
-            </div>
-          </div>
-          <div className="col-auto ">
-            {signed[index] &&
-            <div className="color-success">
-              <Icon className="mr5" type="check-circle" theme="filled"  />{intl.get('sign.signed')}
-            </div>
-            }
-            {!signed[index] &&
-            <div className="">
-              {
-                tx.type === 'submitRing' &&
-                <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" disabled={!submitRingRawTx.data} onClick={sign.bind(this, tx, index)}>{intl.get('actions.submit')}</Button>
-              }
-              {
-                tx.type !== 'submitRing' &&
-                <Button className="cursor-pointer fs12 h-25 lh-25" type="primary" size="small" onClick={sign.bind(this, tx, index)}>{intl.get('sign.unsigned')}</Button>
-              }
-            </div>
-            }
-          </div>
-        </div>
-      )
-    }
     return (
-      <div className="">
-        <div className="bg-white-light p15" style={{minHeight:'10rem',borderRadius:'0rem'}}>
-          <div className="color-black-3 fs14 pb10 zb-b-b">{intl.get('sign.you_need_to_do')}</div>
+      <div className="bg-white">
+        <NavBar
+          className="bg-white"
+          mode="light"
+          onLeftClick={() =>  dispatch({type: 'layers/hideLayer', payload: {id: 'helperOfSign'}}) }
+          leftContent={[
+            <span className="text-primary center-center fs14" key="1"><Icon type="close" /></span>,
+          ]}
+          rightContent={[]}
+        >
+          {intl.get('sign.title')}
+        </NavBar>
+        <div className="divider 1px zb-b-b"></div>
+        <div className="bg-white-light p15" style={{minHeight:'35vh',borderRadius:'0rem'}}>
           {
             unsign && unsign.map((item, index)=>{
               return (

@@ -16,13 +16,13 @@ class AuthByImtoken extends React.Component {
     const res = {}
     const result = {}
     const value = {}
-    value.hash = '0x77db2d6d0752a077a51923b06daf8fe210cd6dfa7c916868af30a8af59b295fd'
-    value.auth = 'e0bf19a891e6e782e8439890d3b0a34aa26142a23c5597a047937ffa165d9dc0'
+    value.hash = '0xbb08ab17044be663171260ee5a2820b3a4f72c5c0c303e78bd05d93fe50a560d'
+    value.auth = '7a5a14fcbf1656a59a6afc035f8c29e84184b758498b33699114b2ee3bbc8ee6'
     value.count = 1
     result.value = value
     result.type = "P2P"
     res.result = JSON.stringify(result)
-    //window.handleP2POrder(res);
+    // window.handleP2POrder(res);
   }
 
   goToDex = () => {

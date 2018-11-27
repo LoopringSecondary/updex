@@ -33,7 +33,7 @@ function Modals(props) {
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="takerConfirm">
-        <UiContainers.Popups id="takerConfirm" className="h-100" style={{height:'100%'}} >
+        <UiContainers.Popups id="takerConfirm" zIndex={1001} className="h-100" style={{height:'100%'}} >
           <TakerConfirm />
         </UiContainers.Popups>
       </Containers.Layers>
@@ -43,12 +43,12 @@ function Modals(props) {
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfTTL">
-        <UiContainers.Popups id="helperOfTTL" className="" style={{}}>
+        <UiContainers.Popups id="helperOfTTL" zIndex={1003} className="" style={{}}>
           <HelperOfTTL />
         </UiContainers.Popups>
       </Containers.Layers>
       <Containers.Layers id="helperOfMiniFill">
-        <UiContainers.Popups id="helperOfMiniFill" className="" style={{}}>
+        <UiContainers.Popups id="helperOfMiniFill" zIndex={1003} className="" style={{}}>
           <HelperOfMiniFill />
         </UiContainers.Popups>
       </Containers.Layers>
