@@ -74,12 +74,13 @@ class OrderQrcode extends React.Component{
           
           <div className="pt15 d-inline-block" >
             <div className="p5" style={{background:'#fff'}}>
-              
               <QRCode value={qrcode} size={220} level='H'/>
             </div>
+            {wallet.unlockType === 'imToken' &&
             <div className="mt15 border-none bg-primary color-white fs12 d-block circle h-30 lh-30 center-center">
-              <img className="h-15 mr10" src={require('../assets/images/imtoken-white.png')} alt=""/>请分享给 imToken 用户来吃单
+              <img className="h-15 mr10" src={require('../assets/images/imtoken-white.png')} alt=""/>{intl.get('place_order_by_imtoken.share_with_imtoken')}
             </div>
+            }
           </div>
         </div>
         <div className="zb-b-t pt15 pb15 ml25 mr25 text-center bg-white-light">

@@ -308,6 +308,7 @@ export default {
     instruction_scan: 'Open your imToken, scan the QRcode and submit',
     instruction_warn: 'The QRcode is valid for 24 hours, please scan as soon as possible. When expired, please place an new order to generate new QRcode',
     waiting_sign: 'Waiting for your operations on imToken to sign and submit',
+    share_with_imtoken: 'Share with imToken user to scan'
   },
   place_order_by_ledger: {
     title: 'Sign With Ledger',
