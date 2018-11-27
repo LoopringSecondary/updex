@@ -18,7 +18,7 @@ class ChooseLedgerAddress extends React.Component {
   }
 
   render () {
-    const {dispatch, pageNum, dpath, customPath, addresses, unlockByLedger} = this.props
+    const {dispatch, pageNum, dpath,pageSize, customPath, addresses, unlockByLedger} = this.props
     const showLayer = (payload = {}) => {
       dispatch({
         type: 'layers/showLayer',
@@ -84,7 +84,7 @@ class ChooseLedgerAddress extends React.Component {
         // return;
       }
       if (chooseAddress) {
-        chooseAddress(dpath.concat(`/${index}`))
+        chooseAddress(dpath.concat(`/${pageSize*pageNum + index}`))
       }
       dispatch({type: 'layers/hideLayer', payload: {id: 'unlockByLedger'}});
       dispatch({type: 'determineWallet/reset'})
