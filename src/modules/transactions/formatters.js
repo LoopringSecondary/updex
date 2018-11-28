@@ -100,7 +100,9 @@ export class TxFm{
   getTo(){
     return this.tx.to
   }
-
+  getTxHash(){
+    return this.tx.hash
+  }
   getConfirmTime(){
     return this.tx.updateTime && commonFm.getFormatTime(toNumber(this.tx.updateTime) * 1e3)
   }
