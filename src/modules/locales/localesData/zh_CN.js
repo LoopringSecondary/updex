@@ -739,6 +739,9 @@ no_open_orders: '{market}暂无有效订单',
       again:"继续扫码"
     }
   },
+  face2face_share:{
+    share_to_imtoken:'Share with imToken user to scan',
+  },
   ...modules.pages,
   ...modules.types,
 }

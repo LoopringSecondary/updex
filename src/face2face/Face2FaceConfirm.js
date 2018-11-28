@@ -308,6 +308,9 @@ function PlaceOrderSteps(props) {
               <div className="p15 d-inline-block" style={{background: '#fff'}}>
                 <QRCode value={p2pOrder.qrcode} size={240} level='H'/>
               </div>
+              <div className="mt15 border-none bg-primary color-white fs12 d-block circle h-30 lh-30 center-center">
+                {intl.get('face2face_share.share_to_imtoken')}
+              </div>
             </div>
             <div className="zb-b-t p15 mt15">
               <OrderMetaItem label={intl.get('common.buy')} value={`${amountB} ${tokenB}`}/>

@@ -735,6 +735,9 @@ export default {
       again:"Continue to scan"
     }
   },
+  face2face_share:{
+    share_to_imtoken:'请分享给 imToken 用户来吃单',
+  },
   ...modules.pages,
   ...modules.types,
 }
