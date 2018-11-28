@@ -86,7 +86,7 @@ function TxDetail(props) {
             <Icon key="1" type="question-circle-o"/>,
           ]}
         >
-          <div className="color-black">{intl.get('common.order')}</div>
+          <div className="color-black">{intl.get('tx_detail.page_title')}</div>
         </NavBar>
         <div className="divider 1px zb-b-t"></div>
       </div>
