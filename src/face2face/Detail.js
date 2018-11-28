@@ -92,8 +92,8 @@ function OrderDetail(props) {
           leftContent={[
             <span key='1' className=""><Icon type="close"/></span>,
           ]}
-          rightContent={null && [
-            <Icon key="1" type="question-circle-o"/>,
+          rightContent={[
+            <Icon key="1" onClick={()=>showLayer({id:'txDetail'})} type="question-circle-o"/>,
           ]}
         >
           <div className="color-black">{intl.get('order_detail.page_title')}</div>

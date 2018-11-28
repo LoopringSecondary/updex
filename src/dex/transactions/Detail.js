@@ -4,13 +4,12 @@ import { NavBar, NoticeBar } from 'antd-mobile'
 import intl from 'react-intl-universal'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
-import { OrderFm } from 'modules/orders/OrderFm'
 import Worth from 'modules/settings/Worth'
 
 const MetaItem = (props) => {
   const {label, value} = props
   return (
-    <div className="row ml0 mr0 pt10 pb10 pl15 pr15 zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
+    <div className="row ml0 mr0 pl15 pr15 pt10 pb10 zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
       <div className="col">
         <div className="fs14 color-black-2 text-left">{label}</div>
       </div>
@@ -22,13 +21,10 @@ const MetaItem = (props) => {
 }
 
 function TxDetail(props) {
-  const {txDetail,dispatch} = props
-  const {order} = txDetail;
-  if(!order){
-    return null
-  }
-  const orderFm = new OrderFm(order);
-
+  const {dispatch} = props
+  // if(!order){
+  //   return null
+  // }
   const showLayer = (payload={})=>{
     dispatch({
       type:'layers/showLayer',
@@ -45,68 +41,56 @@ function TxDetail(props) {
       }
     })
   }
-  const orderStatus = (item) => {
-    if (item.status === 'ORDER_OPENED') {
-      return intl.get("order_status.opened")
-    }
-    if (item.status === 'ORDER_FINISHED') {
-      return intl.get("order_status.completed")
-    }
-    if (item.status === 'ORDER_CANCELLED') {
-      return intl.get("order_status.canceled")
-    }
-    if (item.status === 'ORDER_CUTOFF') {
-      return intl.get("order_status.canceled")
-    }
-    if (item.status === 'ORDER_EXPIRE') {
-      return intl.get("order_status.expired")
-    }
-    if (item.status === 'ORDER_PENDING') {
-      return intl.get("order_status.pending")
-    }
-    if (item.status === 'ORDER_CANCELLING') {
-      return intl.get("order_status.canceling")
-    }
-    if (item.status === 'ORDER_WAIT_SUBMIT_RING') {
-      return intl.get("order_status.waiting")
-    }
+  const renderType = ()=>{
+
   }
-  const tokens = orderFm.getTokens()
-  return (
-    <div className="bg-fill position-relative" style={{height:"100%"}}>
-      <div className="position-absolute w-100" style={{zIndex:'1000'}}>
-        <NavBar
-          className="bg-white"
-          mode="light"
-          onLeftClick={()=>hideLayer({id:'txDetail'})}
-          leftContent={[
-            <span key='1' className=""><Icon type="close"/></span>,
-          ]}
-          rightContent={null && [
-            <Icon key="1" type="question-circle-o"/>,
-          ]}
-        >
-          <div className="color-black">{intl.get('tx_detail.page_title')}</div>
-        </NavBar>
-        <div className="divider 1px zb-b-t"></div>
+  const renderStatus = ()=>{
+
+  }
+  const renderGas = ()=>{
+    return (
+      <div className="mr15">
+        <div className="row justify-content-end">{`00  ETH`}</div>
+        <div className="row justify-content-end fs14 color-black-3">{`Gas( 00 ) * Gas Price( 00 Gwei)`}</div>
       </div>
-      <div style={{overflow:'auto',paddingTop:'4.5rem',paddingBottom:'3rem',height:'100%'}}>
-        <div className="mb10 mt10 bg-white">
-          <div className="fs16 color-black text-left pt10 pb10 pl15 zb-b-b">{intl.get('order_detail.tabs_basic')}</div>
-          <div className="" style={{borderRadius:'0rem'}}>
-            <MetaItem label={intl.get('order.status')} value={orderStatus(order)}/>
-            <MetaItem label={intl.get('order.filled')} value={`${orderFm.getFilledPercent()}%`}/>
-            <MetaItem label={intl.get('order.price')} value={
-              <div>
-                <span className="color-black-4 pr5"><Worth amount={orderFm.getPrice()} symbol={tokens.right}/></span> {orderFm.getPrice()} { tokens.right }
-              </div>
-            }/>
-            <MetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>
-            <MetaItem label={intl.get('common.buy')} value={orderFm.getBuy()}/>
-            <MetaItem label={intl.get('order.LRCFee')} value={orderFm.getLRCFee()}/>
-            <MetaItem label={intl.get('common.ttl')} value={orderFm.getValidTime()}/>
-          </div>
+    )
+  }
+
+  return (
+    <div className="bg-fill d-flex-column" style={{height:"100%"}}>
+      <NavBar
+        className="bg-white"
+        mode="light"
+        onLeftClick={()=>hideLayer({id:'txDetail'})}
+        leftContent={[
+          <span key='1' className=""><Icon type="close"/></span>,
+        ]}
+        rightContent={null && [
+          <Icon key="1" type="question-circle-o"/>,
+        ]}
+      >
+        <div className="color-black">{intl.get('tx_detail.detail_title')}</div>
+      </NavBar>
+      <div className="bg-white"><div className="divider 1px zb-b-t"></div> </div>
+      <div style={{flex:1}}>
+        <div className="bg-white mt10">
+          <MetaItem label={intl.get('tx.type')} value={'xxx'}/>
+          <MetaItem label={intl.get('tx.status')} value={'xxx'}/>
+          <MetaItem label={intl.get('tx.txHash')} value={'xxx'}/>
+          <MetaItem label={intl.get('tx.to')} value={'xxx'}/>
+          <MetaItem label={intl.get('tx.value')} value={'xx'} />
+          <MetaItem label={intl.get('tx.gas')} value={'xx'}/>
+          <MetaItem label={intl.get('tx.confirm_time')} value={'xx'}/>
+          { false && <MetaItem label={intl.get('tx.block')} value={'xx'} render={'xx'}/> }
+          { false && <MetaItem label={intl.get('tx.nonce')} value={'xx'}/> }
         </div>
+        {
+          false &&
+          <div className="bg-white mt10">
+            <MetaItem label={intl.get('common.sell')} value={'xxx'}/>
+            <MetaItem label={intl.get('common.buy')} value={'xxx'}/>
+          </div>
+        }
       </div>
     </div>
   )
