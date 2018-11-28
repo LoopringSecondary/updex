@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, Toast,List,InputItem } from 'antd-mobile'
 import { Icon as WebIcon, Input } from 'antd'
 import { connect } from 'dva'
-import { getBalanceBySymbol, isValidNumber } from 'modules/tokens/TokenFm'
+import TokenFm,{ getBalanceBySymbol, isValidNumber } from 'modules/tokens/TokenFm'
 import { getDisplaySymbol, toBig, toFixed, toHex ,toNumber} from 'LoopringJS/common/formatter'
 import intl from 'react-intl-universal'
 import Worth from 'modules/settings/Worth'
@@ -11,13 +11,23 @@ import moment from 'moment'
 
 class Face2FaceForm extends React.Component {
   state = {
-    submitLoading:false
+    submitLoading:false,
+    amountbChanged:false
   }
 
   render() {
-    const {balance, p2pOrder, pendingTx, gas, dispatch} = this.props
+    const {balance, p2pOrder, pendingTx, gas,marketcp, dispatch} = this.props
     const {amountB,amountS,tokenS,tokenB} = p2pOrder
     const gasPrice = toHex(toBig(gas.tabSelected === 'estimate' ? gas.gasPrice.estimate : gas.gasPrice.current))
+    let marketPrice = null;
+    if(marketcp && marketcp.length>0){
+      const priceB= marketcp.find(item => item.symbol.toLowerCase() === tokenB.toLowerCase())
+      const priceS = marketcp.find(item => item.symbol.toLowerCase() === tokenS.toLowerCase())
+       if(priceB && priceS){
+         marketPrice = toNumber(priceS.price)/toNumber(priceB.price)
+       }
+    }
+
     const showLayer = (payload={})=>{
       dispatch({
         type:'layers/showLayer',
@@ -34,6 +44,7 @@ class Face2FaceForm extends React.Component {
         }
       })
     }
+
     function validateAmountS(value) {
       if(p2pOrder.tokenS) {
         const tokenBalance = getBalanceBySymbol({balances:balance, symbol:p2pOrder.tokenS, toUnit:true})
@@ -49,6 +60,7 @@ class Face2FaceForm extends React.Component {
           Toast.info(intl.get('notifications.title.invalid_number'), 3, null, false);
           return;
         }
+        this.setState({amountbChanged:true})
         dispatch({type:'p2pOrder/amountChange', payload:{'amountB':value}})
       } else {
         if(value && !isValidNumber(value)) {
@@ -58,6 +70,11 @@ class Face2FaceForm extends React.Component {
         if(value && !validateAmountS(value)){
           Toast.info(intl.get('todo_list.title_balance_not_enough',{symbol:p2pOrder.tokenS}), 3, null, false);
           return
+        }
+        if(marketPrice && ! this.state.amountbChanged){
+          const tokenfm = new TokenFm({symbol:tokenB})
+          const amountB = tokenfm.toPricisionFixed(toNumber(value) * marketPrice)
+          dispatch({type:'p2pOrder/amountChange', payload:{'amountB':amountB}})
         }
         dispatch({type:'p2pOrder/amountChange', payload:{'amountS':value}})
       }
@@ -208,6 +225,7 @@ export default connect(({
   gas
 }) => ({
   p2pOrder:p2pOrder,
+  marketcp:sockets.marketcap.items,
   balance:sockets.balance.items,
   pendingTx:pendingTx,
   gas:gas,
