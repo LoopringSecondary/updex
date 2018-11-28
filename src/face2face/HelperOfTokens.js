@@ -44,6 +44,7 @@ class HelperOfTokens extends React.Component {
       } else {
         dispatch({type: 'p2pOrder/tokenChange', payload: {'tokenS': token}})
       }
+      dispatch({type: 'p2pOrder/reset'})
       hideLayer({id: 'helperOfTokens'})
     }
 
