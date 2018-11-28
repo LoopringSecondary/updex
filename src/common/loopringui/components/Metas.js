@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-
+import React from 'react';
+import {Icon} from 'antd';
 
 export const MetaItem = (props) => {
   const {label, value,render,showArrow=false,onClick=()=>{},className="",style={}} = props
@@ -20,17 +20,10 @@ export const MetaItem = (props) => {
           </div>
         </div>
       }
-
     </div>
   )
 }
-
-export const MetaHeader = (props)=>(
-  <ul className="list list-label list-dark list-justify-space-between divided">
-    {props.children}
-  </ul>
-)
-export const DetailHeader = (props)=>{
+export const MetaHeader = (props)=>{
   if(props.title){
     return <div className="modal-header text-dark"><h3>{props.title}</h3></div>
   }else{
@@ -38,9 +31,7 @@ export const DetailHeader = (props)=>{
   }
 }
 
-
 export default {
-  DetailHeader,
   MetaItem,
   MetaHeader,
 }
