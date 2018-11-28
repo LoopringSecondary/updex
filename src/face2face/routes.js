@@ -6,6 +6,7 @@ import Face2FaceModals from './Modals'
 import TokenModals from '../dex/tokens/Modals'
 import CommonModals from '../components/Modals'
 import NotificationsModals from '../dex/notifications/Modals'
+import TxsModals from '../dex/transactions/Modals'
 
 const Logged = (props)=>{
   const isLogged = !!(storage.wallet.getUnlockedAddress())
@@ -19,6 +20,7 @@ const Logged = (props)=>{
         <TokenModals />
         <CommonModals />
         <NotificationsModals />
+        <TxsModals />
       </div>
     )
   }else{
