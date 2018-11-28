@@ -7,13 +7,22 @@ const handleCopy = (value, e) => {
 };
 
 export const getTxHash = (txHash)=>{
-  return <a href={`https://etherscan.io/tx/${txHash}`}>{commonFm.getShortAddress(txHash)}</a>
+  return <span>{commonFm.getShortAddress(txHash)}</span>
 }
 export const getTo = (to)=>{
   return <span>{commonFm.getShortAddress(to)}</span>
+}
+export const getGas = (to)=>{
+  return (
+    <div className="mr15">
+      <div className="text-right fs14 color-black-1">{`00  ETH`}</div>
+      <div className="text-right fs12 color-black-3">{`Gas( 00 ) * Gas Price( 00 Gwei)`}</div>
+    </div>
+  )
 }
 
 export const TxRender = {
   getTxHash,
   getTo,
+  getGas,
 }

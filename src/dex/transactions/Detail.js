@@ -1,6 +1,6 @@
 import React from 'react'
 import { Icon } from 'antd'
-import { NavBar, NoticeBar } from 'antd-mobile'
+import { NavBar, Button } from 'antd-mobile'
 import intl from 'react-intl-universal'
 import { connect } from 'dva'
 import routeActions from 'common/utils/routeActions'
@@ -13,10 +13,10 @@ const MetaItem = (props) => {
   return (
     <div className="row ml0 mr0 pl15 pr15 pt10 pb10 zb-b-b no-gutters align-items-center" style={{padding:'7px 0px'}}>
       <div className="col">
-        <div className="fs14 color-black-2 text-left">{label}</div>
+        <div className="fs12 color-black-2 text-left">{label}</div>
       </div>
-      <div className="col-auto text-right">
-        <div className="fs14 color-black-2 text-wrap text-left">{value}</div>
+      <div className="col-auto">
+        <div className="fs12 color-black-2 text-wrap center-center">{value}</div>
       </div>
     </div>
   )
@@ -43,20 +43,7 @@ function TxDetail(props) {
       }
     })
   }
-  const renderType = ()=>{
-
-  }
-  const renderStatus = ()=>{
-
-  }
-  const renderGas = ()=>{
-    return (
-      <div className="mr15">
-        <div className="row justify-content-end">{`00  ETH`}</div>
-        <div className="row justify-content-end fs14 color-black-3">{`Gas( 00 ) * Gas Price( 00 Gwei)`}</div>
-      </div>
-    )
-  }
+  
   const txDetail = {
     "blockHash": "0x6f707a0951e9543f9ad1980e153569a08a8b8acce64a64716afdfc24f3259cfc",
     "blockNumber": "0x678b16",
@@ -90,15 +77,37 @@ function TxDetail(props) {
         <div className="color-black">{intl.get('tx_detail.detail_title')}</div>
       </NavBar>
       <div className="bg-white"><div className="divider 1px zb-b-t"></div> </div>
-      <div style={{flex:1}}>
+      <div style={{flex:1,overflow:'auto'}}>
         <div className="bg-white mt10">
+          <div className="fs14 color-black-1 pl15 pr15 pt10 pb10 text-left zb-b-b">{intl.get('tx.status')}</div>
+          <MetaItem label={intl.get('tx.status')} value={
+            <div className="text-nowrap d-flex align-items-center">
+              <span className="mr10">
+                <Button className="d-inline-block h-25 center-center fs12" size="small" type="primary">Resend</Button>
+              </span>
+              <span className="color-black-1">Pending</span>
+            </div>
+          }/>
+          <MetaItem label={intl.get('tx.created')} value={
+            <div>
+              <span className="color-black-3 fs12 mr10">(1小时前{txFm.getFromNow()})</span>
+              <span className="color-black-1 fs12">2018-10-10 10:00:00{txFm.getCreateTime()}</span>
+            </div>
+          }/>
+          <MetaItem label={"Confirmations"} value={
+            <div>
+              <span className="color-black-1 fs12">0</span>
+            </div>
+          }/>
+        </div>
+        <div className="bg-white mt10">
+          <div className="fs14 color-black-1 pl15 pr15 pt10 pb10 text-left zb-b-b">Basic</div>
           <MetaItem label={intl.get('tx.type')} value={txFm.getType()}/>
-          <MetaItem label={intl.get('tx.status')} value={'xx'}/>
           <MetaItem label={intl.get('tx.txHash')} value={TxRender.getTxHash(txFm.getTxHash())}/>
           <MetaItem label={intl.get('tx.to')} value={TxRender.getTo(txFm.getTo())}/>
           <MetaItem label={intl.get('tx.value')} value={txFm.getValue() + ' ETH'} />
           <MetaItem label={intl.get('tx.gas')} value={txFm.getGas()}/>
-          <MetaItem label={intl.get('tx.confirm_time')} value={txFm.getConfirmTime()}/>
+          {false && <MetaItem label={intl.get('tx.confirm_time')} value={txFm.getConfirmTime()}/> }
           { false && <MetaItem label={intl.get('tx.block')} value={txFm.getBlockNum()}/> }
           { false && <MetaItem label={intl.get('tx.nonce')} value={txFm.getNonce()}/> }
         </div>
@@ -109,6 +118,14 @@ function TxDetail(props) {
             <MetaItem label={intl.get('common.buy')} value={'xxx'}/>
           </div>
         }
+      </div>
+      <div className="row no-gutters p15 m0">
+        <div className="col-6 pr10">
+          <Button className="fs14" size="" type="primary" className="text-normal fs14">Copy TxHash</Button>
+        </div>
+        <div className="col-6">
+          <Button className="fs14" size="" type="primary" className="text-normal fs14">Etherscan.io</Button>
+        </div>
       </div>
     </div>
   )

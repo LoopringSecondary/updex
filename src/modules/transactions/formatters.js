@@ -109,7 +109,7 @@ export class TxFm{
   getCreateTime(){
     return this.tx.createTime && commonFm.getFormattedTime(this.tx.createTime,'YY-MM-DD HH:mm')
   }
-  fromNow(){
+  getFromNow(){
     console.log('fromNow')
     return this.tx.createTime && commonFm.fromNow(this.tx.createTime)
   }
