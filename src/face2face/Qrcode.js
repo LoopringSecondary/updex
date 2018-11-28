@@ -90,6 +90,9 @@ class OrderQrcode extends React.Component {
           <div className="p15 d-inline-block" style={{background: '#fff'}}>
             <QRCode  value={qrcodeContent} size={240} level='H'/>
           </div>
+          <div className="ml15 mr15 border-none bg-primary color-white fs13 d-block circle h-30 lh-30 center-center">
+            {intl.get('face2face_share.share_to_imtoken')}
+          </div>
         </div>
         <div className="m15 zb-b-t p15 text-center">
           <OrderMetaItem label={intl.get('common.sell')} value={orderFm.getSell()}/>

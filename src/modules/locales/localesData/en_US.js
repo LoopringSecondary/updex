@@ -735,6 +735,9 @@ export default {
       again:"Continue to scan"
     }
   },
+  face2face_share:{
+    share_to_imtoken:'Share with imToken user to scan',
+  },
   ...modules.pages,
   ...modules.types,
 }
