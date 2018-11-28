@@ -23,7 +23,7 @@ class Face2FaceForm extends React.Component {
     if(marketcp && marketcp.length>0){
       const priceB= marketcp.find(item => item.symbol.toLowerCase() === tokenB.toLowerCase())
       const priceS = marketcp.find(item => item.symbol.toLowerCase() === tokenS.toLowerCase())
-       if(priceB && priceS){
+       if(priceB && priceS && Number(priceB.price) && Number(priceS.price)){
          marketPrice = toNumber(priceS.price)/toNumber(priceB.price)
        }
     }
