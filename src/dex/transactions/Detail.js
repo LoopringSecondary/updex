@@ -68,21 +68,21 @@ function TxDetail(props) {
       <div style={{flex:1,overflow:'auto'}}>
         <div className="bg-white mt10">
           <div className="fs14 color-black-1 pl15 pr15 pt10 pb10 text-left zb-b-b">{intl.get('tx.status')}</div>
-          <MetaItem label={intl.get('tx.status')} value={
+          <MetaItem className="fs12" label={intl.get('tx.status')} value={
             <div className="text-nowrap d-flex align-items-center">
               <span className="mr10">
-                <Button className="d-inline-block h-25 center-center fs12" size="small" type="primary">Resend</Button>
+                <Button onClick={()=>showLayer({id:'resend'})} className="d-inline-block h-25 center-center fs12" size="small" type="primary">Resend</Button>
               </span>
               <span className="color-black-1">Pending</span>
             </div>
           }/>
-          <MetaItem label={intl.get('tx.created')} value={
+          <MetaItem className="fs12" label={intl.get('tx.created')} value={
             <div>
               <span className="color-black-2 fs12 mr10">(1小时前{txFm.getFromNow()})</span>
               <span className="color-black-1 fs12">2018-10-10 10:00:00{txFm.getCreateTime()}</span>
             </div>
           }/>
-          <MetaItem label={"Confirmations"} value={
+          <MetaItem className="fs12" label={"Confirmations"} value={
             <div>
               <span className="color-black-1 fs12">0</span>
             </div>
@@ -90,24 +90,24 @@ function TxDetail(props) {
         </div>
         <div className="bg-white mt10">
           <div className="fs14 color-black-1 pl15 pr15 pt10 pb10 text-left zb-b-b">Basic</div>
-          <MetaItem label={intl.get('tx.type')} value={txFm.getType()}/>
-          <MetaItem label={intl.get('tx.txHash')} value={getShortAddress(txFm.getTxHash())}/>
-          <MetaItem label={intl.get('tx.to')} value={getShortAddress(txFm.getTo())}/>
-          <MetaItem label={intl.get('tx.value')} value={txFm.getValue() + ' ETH'} />
-          <MetaItem label={intl.get('tx.gas')} value={txFm.getGas()}/>
-          {false && <MetaItem label={intl.get('tx.confirm_time')} value={txFm.getConfirmTime()}/> }
-          { false && <MetaItem label={intl.get('tx.block')} value={txFm.getBlockNum()}/> }
-          { false && <MetaItem label={intl.get('tx.nonce')} value={txFm.getNonce()}/> }
+          <MetaItem className="fs12" label={intl.get('tx.type')} value={txFm.getType()}/>
+          <MetaItem className="fs12" label={intl.get('tx.txHash')} value={getShortAddress(txFm.getTxHash())}/>
+          <MetaItem className="fs12" label={intl.get('tx.to')} value={getShortAddress(txFm.getTo())}/>
+          <MetaItem className="fs12" label={intl.get('tx.value')} value={txFm.getValue() + ' ETH'} />
+          <MetaItem className="fs12" label={intl.get('tx.gas')} value={txFm.getGas()}/>
+          {false && <MetaItem className="fs12" label={intl.get('tx.confirm_time')} value={txFm.getConfirmTime()}/> }
+          { false && <MetaItem className="fs12" label={intl.get('tx.block')} value={txFm.getBlockNum()}/> }
+          { false && <MetaItem className="fs12" label={intl.get('tx.nonce')} value={txFm.getNonce()}/> }
         </div>
         {
           false &&
           <div className="bg-white mt10">
-            <MetaItem label={intl.get('common.sell')} value={'xxx'}/>
-            <MetaItem label={intl.get('common.buy')} value={'xxx'}/>
+            <MetaItem className="fs12" label={intl.get('common.sell')} value={'xxx'}/>
+            <MetaItem className="fs12" label={intl.get('common.buy')} value={'xxx'}/>
           </div>
         }
       </div>
-      <div className="row no-gutters p15 m0">
+      <div className="row no-gutters p15 mt10 bg-white">
         <div className="col-6 pr10">
           <Button className="fs14" size="" type="primary" className="text-normal fs14">Copy TxHash</Button>
         </div>

@@ -4,18 +4,18 @@ import {Icon} from 'antd';
 export const MetaItem = (props) => {
   const {label, value,render,showArrow=false,onClick=()=>{},className="",style={}} = props
   return (
-    <div onClick={onClick} className={`row ml0 mr0 pl0 pr0 zb-b-t no-gutters className`} style={{...style}}>
+    <div onClick={onClick} className={`row ml0 mr0 pl15 pr15 pt10 pb10 zb-b-b no-gutters align-items-center ${className}`} style={{...style}}>
       <div className="col">
-        <div className="color-black-1 lh30 text-left">{label}</div>
+        <div className="color-black-1 text-left">{label}</div>
       </div>
       <div className="col-auto text-right">
-        {value && <div className="color-black-1 text-wrap lh30 text-right">{value}</div> }
+        {value && <div className="color-black-1 text-nowrap text-right">{value}</div> }
         {render && render() }
       </div>
       {
         !!showArrow &&
         <div className="col-auto text-right">
-          <div className="fs14 text-primary text-wrap lh30 text-left ml5">
+          <div className="text-primary text-nowrap text-left ml5">
             <Icon type="right" />
           </div>
         </div>
