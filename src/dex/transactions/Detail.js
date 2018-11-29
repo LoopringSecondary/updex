@@ -50,7 +50,7 @@ function TxDetail(props) {
   }
   const txFm = new TxFm(txDetail)
   return (
-    <div className="bg-fill d-flex-column" style={{height:"100%"}}>
+    <div className="bg-fill d-flex flex-column" style={{height:"100%"}}>
       <NavBar
         className="bg-white"
         mode="light"
@@ -95,8 +95,8 @@ function TxDetail(props) {
           <MetaItem className="fs12" label={intl.get('tx.to')} value={getShortAddress(txFm.getTo())}/>
           <MetaItem className="fs12" label={intl.get('tx.value')} value={txFm.getValue() + ' ETH'} />
           <MetaItem className="fs12" label={intl.get('tx.gas')} value={txFm.getGas()}/>
-          {false && <MetaItem className="fs12" label={intl.get('tx.confirm_time')} value={txFm.getConfirmTime()}/> }
-          { false && <MetaItem className="fs12" label={intl.get('tx.block')} value={txFm.getBlockNum()}/> }
+          <MetaItem className="fs12" label={intl.get('tx.confirm_time')} value={txFm.getConfirmTime()}/>
+          <MetaItem className="fs12" label={intl.get('tx.block')} value={txFm.getBlockNum()}/>
           { false && <MetaItem className="fs12" label={intl.get('tx.nonce')} value={txFm.getNonce()}/> }
         </div>
         {
@@ -107,12 +107,12 @@ function TxDetail(props) {
           </div>
         }
       </div>
-      <div className="row no-gutters p15 mt10 bg-white">
+      <div className="row no-gutters pt10 pb10 pl15 pr15 bg-white">
         <div className="col-6 pr10">
           <Button className="fs14" size="" type="primary" className="text-normal fs14">Copy TxHash</Button>
         </div>
         <div className="col-6">
-          <Button className="fs14" size="" type="primary" className="text-normal fs14">Etherscan.io</Button>
+          <Button onClick={()=>{}} className="fs14" size="" type="primary" className="text-normal fs14">Etherscan.io</Button>
         </div>
       </div>
     </div>

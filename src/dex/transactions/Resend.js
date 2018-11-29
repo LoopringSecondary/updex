@@ -3,12 +3,7 @@ import { Icon } from 'antd'
 import { NavBar, Button } from 'antd-mobile'
 import intl from 'react-intl-universal'
 import { connect } from 'dva'
-import routeActions from 'common/utils/routeActions'
-import Worth from 'modules/settings/Worth'
-import { TxFm } from "modules/transactions/formatters";
-import {getShortAddress} from 'modules/formatter/common'
 import {MetaItem} from 'LoopringUI/components/Metas'
-
 
 function Resend(props) {
   const {dispatch} = props
@@ -55,7 +50,10 @@ function Resend(props) {
           />
         </div>
       </div>
-      <Button className="fs14 m15" size="" type="primary" className="text-normal fs14">Send Tx</Button>
+      <div className="p15">
+        <Button className="fs14" size="" type="primary" className="text-normal fs14">Send Tx</Button>
+      </div>
+      
     </div>
   )
 }

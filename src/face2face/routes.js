@@ -4,9 +4,9 @@ import storage from 'modules/storage'
 import Face2FacePage from './Face2FacePage'
 import Face2FaceModals from './Modals'
 import TokenModals from '../dex/tokens/Modals'
-import CommonModals from '../components/Modals'
 import NotificationsModals from '../dex/notifications/Modals'
 import TxsModals from '../dex/transactions/Modals'
+import SettingsModals from '../dex/settings/Modals'
 
 const Logged = (props)=>{
   const isLogged = !!(storage.wallet.getUnlockedAddress())
@@ -18,7 +18,7 @@ const Logged = (props)=>{
         </Switch>
         <Face2FaceModals />
         <TokenModals />
-        <CommonModals />
+        <SettingsModals />
         <NotificationsModals />
         <TxsModals />
       </div>
