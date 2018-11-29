@@ -738,6 +738,10 @@ export default {
   face2face_share:{
     share_to_imtoken:'Share with imToken user to scan',
   },
+  tx_resend:{
+    page_title:'Resend Transaction',
+    actions_send:'Send',
+  },
   ...modules.pages,
   ...modules.types,
 }

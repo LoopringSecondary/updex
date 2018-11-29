@@ -742,6 +742,10 @@ no_open_orders: '{market}暂无有效订单',
   face2face_share:{
     share_to_imtoken:'请分享给 imToken 用户来吃单',
   },
+  tx_resend:{
+    page_title:'交易重发',
+    actions_send:'发送',
+  },
   ...modules.pages,
   ...modules.types,
 }

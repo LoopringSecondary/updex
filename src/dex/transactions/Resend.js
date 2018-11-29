@@ -39,7 +39,7 @@ function Resend(props) {
           <Icon key="1" type="question-circle-o"/>,
         ]}
       >
-        <div className="color-black">Resend Tx</div>
+        <div className="color-black">{intl.get('tx_resend.page_title')}</div>
       </NavBar>
       <div className="bg-white"><div className="divider 1px zb-b-t"></div> </div>
       <div style={{flex:1,overflow:'auto',minHeight:'30vh'}}>
@@ -51,7 +51,7 @@ function Resend(props) {
         </div>
       </div>
       <div className="p15">
-        <Button className="fs14" size="" type="primary" className="text-normal fs14">Send Tx</Button>
+        <Button size="" type="primary" className="text-normal">{intl.get('tx_resend.actions_send')}</Button>
       </div>
       
     </div>
